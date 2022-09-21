@@ -1,0 +1,139 @@
+<div id="header">
+
+# Configuring WAN Gateways
+
+</div>
+
+<div id="content">
+
+<div id="preamble">
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+WAN Gateways provides a way to synchronize {data-store-name} Distributed
+Systems across geographic locations. {sdg-name} provides XML namespace
+support for configuring WAN Gateways as illustrated in the following
+examples.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## WAN Configuration in {data-store-name} 7.0
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+In the following example, `GatewaySenders` are configured for a
+`PARTITION` Region by adding child elements (`gateway-sender` and
+`gateway-sender-ref`) to the Region. A `GatewaySender` may register
+`EventFilters` and `TransportFilters`.
+
+</div>
+
+<div class="paragraph">
+
+The following example also shows a sample configuration of an
+`AsyncEventQueue`, which must also be auto-wired into a Region (not
+shown):
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="region-with-inner-gateway-sender" >
+    <gfe:gateway-sender remote-distributed-system-id="1">
+        <gfe:event-filter>
+            <bean class="org.springframework.data.gemfire.example.SomeEventFilter"/>
+        </gfe:event-filter>
+        <gfe:transport-filter>
+            <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
+        </gfe:transport-filter>
+    </gfe:gateway-sender>
+    <gfe:gateway-sender-ref bean="gateway-sender"/>
+</gfe:partitioned-region>
+
+<gfe:async-event-queue id="async-event-queue" batch-size="10" persistent="true" disk-store-ref="diskstore"
+        maximum-queue-memory="50">
+    <gfe:async-event-listener>
+        <bean class="example.AsyncEventListener"/>
+    </gfe:async-event-listener>
+</gfe:async-event-queue>
+
+<gfe:gateway-sender id="gateway-sender" remote-distributed-system-id="2">
+    <gfe:event-filter>
+        <ref bean="event-filter"/>
+        <bean class="org.springframework.data.gemfire.example.SomeEventFilter"/>
+    </gfe:event-filter>
+    <gfe:transport-filter>
+        <ref bean="transport-filter"/>
+        <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
+    </gfe:transport-filter>
+</gfe:gateway-sender>
+
+<bean id="event-filter" class="org.springframework.data.gemfire.example.AnotherEventFilter"/>
+<bean id="transport-filter" class="org.springframework.data.gemfire.example.AnotherTransportFilter"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+On the other end of a `GatewaySender` is a corresponding
+`GatewayReceiver` to receive Gateway events. The `GatewayReceiver` may
+also be configured with `EventFilters` and `TransportFilters`, as
+follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
+    <gfe:transport-filter>
+        <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
+    </gfe:transport-filter>
+</gfe:gateway-receiver>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+See the {data-store-name}
+{x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
+for a detailed explanation of all the configuration options.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+
+<div id="footer-text">
+
+Last updated 2022-09-20 10:33:13 -0700
+
+</div>
+
+</div>

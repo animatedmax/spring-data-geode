@@ -1,5 +1,6 @@
 = Spring Data for {data-store-name} Reference Guide
 Costin Leau; David Turanski; John Blum; Oliver Gierke; Jay Bryant
+:basedocdir: /Users/animatedmax/workspace/animatedmax-branches/spring-data-geode/src/main/asciidoc
 :revdate: {localdate}
 :revnumber: {version}
 :toclevels: 2

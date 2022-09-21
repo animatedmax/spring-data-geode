@@ -1,0 +1,341 @@
+<div id="header">
+
+# Continuous Query (CQ)
+
+</div>
+
+<div id="content">
+
+<div id="preamble">
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+A powerful functionality offered by {data-store-name} is
+{x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[Continuous
+Query\] (or CQ).
+
+</div>
+
+<div class="paragraph">
+
+In short, CQ allows a developer to create and register an OQL query, and
+then automatically be notified when new data that gets added to
+{data-store-name} matches the query predicate. {sdg-name} provides
+dedicated support for CQs through the
+`org.springframework.data.gemfire.listener` package and its **listener
+container**; very similar in functionality and naming to the JMS
+integration in the *Spring Framework*; in fact, users familiar with the
+JMS support in Spring, should feel right at home.
+
+</div>
+
+<div class="paragraph">
+
+Basically {sdg-name} allows methods on POJOs to become end-points for
+CQ. Simply define the query and indicate the method that should be
+called to be notified when there is a match. {sdg-name} takes care of
+the rest. This is very similar to Java EE’s message-driven bean style,
+but without any requirement for base class or interface implementations,
+based on {data-store-name}.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Currently, Continuous Query is only supported in
+{data-store-name}'s client/server topology. Additionally, the client
+Pool used is required to have the subscription enabled. Please refer to
+the {data-store-name}
+{x-data-store-docs}/developing/continuous_querying/implementing_continuous_querying.html[documentation]
+for more information.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Continuous Query Listener Container
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} simplifies creation, registration, life-cycle and dispatch of
+CQ events by taking care of the infrastructure around CQ with the use of
+SDG’s `ContinuousQueryListenerContainer`, which does all the heavy
+lifting on behalf of the user. Users familiar with EJB and JMS should
+find the concepts familiar as it is designed as close as possible to the
+support provided in the *Spring Framework* with its Message-driven POJOs
+(MDPs).
+
+</div>
+
+<div class="paragraph">
+
+The SDG `ContinuousQueryListenerContainer` acts as an event (or message)
+listener container; it is used to receive the events from the registered
+CQs and invoke the POJOs that are injected into it. The listener
+container is responsible for all threading of message reception and
+dispatches into the listener for processing. It acts as the intermediary
+between an EDP (Event-driven POJO) and the event provider and takes care
+of creation and registration of CQs (to receive events), resource
+acquisition and release, exception conversion and the like. This allows
+you, as an application developer, to write the (possibly complex)
+business logic associated with receiving an event (and reacting to it),
+and delegate the boilerplate {data-store-name} infrastructure concerns
+to the framework.
+
+</div>
+
+<div class="paragraph">
+
+The listener container is fully customizable. A developer can chose
+either to use the CQ thread to perform the dispatch (synchronous
+delivery) or a new thread (from an existing pool) for an asynchronous
+approach by defining the suitable `java.util.concurrent.Executor` (or
+Spring’s `TaskExecutor`). Depending on the load, the number of listeners
+or the runtime environment, the developer should change or tweak the
+executor to better serve her needs. In particular, in managed
+environments (such as app servers), it is highly recommended to pick a
+proper `TaskExecutor` to take advantage of its runtime.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## The `ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+The `ContinuousQueryListenerAdapter` class is the final component in
+{sdg-name} CQ support. In a nutshell, class allows you to expose almost
+**any** implementing class as an EDP with minimal constraints.
+`ContinuousQueryListenerAdapter` implements the
+`ContinuousQueryListener` interface, a simple listener interface similar
+to {data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/query/CqListener.html\[CqListener\].
+
+</div>
+
+<div class="paragraph">
+
+Consider the following interface definition. Notice the various event
+handling methods and their parameters:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+public interface EventDelegate {
+     void handleEvent(CqEvent event);
+     void handleEvent(Operation baseOp);
+     void handleEvent(Object key);
+     void handleEvent(Object key, Object newValue);
+     void handleEvent(Throwable throwable);
+     void handleQuery(CqQuery cq);
+     void handleEvent(CqEvent event, Operation baseOp, byte[] deltaValue);
+     void handleEvent(CqEvent event, Operation baseOp, Operation queryOp, Object key, Object newValue);
+}
+```
+
+</div>
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+package example;
+
+class DefaultEventDelegate implements EventDelegate {
+    // implementation elided for clarity...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In particular, note how the above implementation of the `EventDelegate`
+interface has **no** {data-store-name} dependencies at all. It truly is
+a POJO that we can and will make into an EDP via the following
+configuration.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">the class does not have to implement an interface;
+an interface is only used to better showcase the decoupling between the
+contract and the implementation.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:gfe="{spring-data-schema-namespace}"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    {spring-data-schema-namespace} {spring-data-schema-location}
+">
+
+    <gfe:client-cache/>
+
+    <gfe:pool subscription-enabled="true">
+       <gfe:server host="localhost" port="40404"/>
+    </gfe:pool>
+
+    <gfe:cq-listener-container>
+       <!-- default handle method -->
+       <gfe:listener ref="listener" query="SELECT * FROM /SomeRegion"/>
+       <gfe:listener ref="another-listener" query="SELECT * FROM /AnotherRegion" name="myQuery" method="handleQuery"/>
+    </gfe:cq-listener-container>
+
+    <bean id="listener" class="example.DefaultMessageDelegate"/>
+    <bean id="another-listener" class="example.DefaultMessageDelegate"/>
+  ...
+<beans>
+```
+
+</div>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">The example above shows a few of the various forms
+that a listener can have; at its minimum, the listener reference and the
+actual query definition are required. It’s possible, however, to specify
+a name for the resulting Continuous Query (useful for monitoring) but
+also the name of the method (the default is <code>handleEvent</code>).
+The specified method can have various argument types, the
+<code>EventDelegate</code> interface lists the allowed types.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+The example above uses the {sdg-name} namespace to declare the event
+listener container and automatically register the listeners. The full
+blown, **beans** definition is displayed below:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<!-- this is the Event Driven POJO (MDP) -->
+<bean id="eventListener" class="org.springframework.data.gemfire.listener.adapter.ContinuousQueryListenerAdapter">
+    <constructor-arg>
+        <bean class="gemfireexample.DefaultEventDelegate"/>
+    </constructor-arg>
+</bean>
+
+<!-- and this is the event listener container... -->
+<bean id="gemfireListenerContainer" class="org.springframework.data.gemfire.listener.ContinuousQueryListenerContainer">
+    <property name="cache" ref="gemfireCache"/>
+    <property name="queryListeners">
+      <!-- set of CQ listeners -->
+      <set>
+        <bean class="org.springframework.data.gemfire.listener.ContinuousQueryDefinition" >
+               <constructor-arg value="SELECT * FROM /SomeRegion" />
+               <constructor-arg ref="eventListener"/>
+        </bean>
+      </set>
+    </property>
+</bean>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Each time an event is received, the adapter automatically performs type
+translation between the {data-store-name} event and the required method
+argument(s) transparently. Any exception caused by the method invocation
+is caught and handled by the container (by default, being logged).
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+
+<div id="footer-text">
+
+Last updated 2022-09-20 10:33:13 -0700
+
+</div>
+
+</div>

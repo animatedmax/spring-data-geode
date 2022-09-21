@@ -1,0 +1,1225 @@
+<div id="header">
+
+# {sdg-name} Repositories
+
+</div>
+
+<div id="content">
+
+<div id="preamble">
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} provides support for using the Spring Data Repository
+abstraction to easily persist entities into {data-store-name} along with
+executing queries. A general introduction to the Repository programming
+model is provided
+[here](https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#repositories).
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Spring XML Configuration
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+To bootstrap Spring Data Repositories, use the `<repositories/>` element
+from the {sdg-name} Data namespace, as the following example shows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 1. Bootstrap {sdg-name} Repositories in XML
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:gfe-data="{spring-data-access-schema-namespace}"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    {spring-data-access-schema-namespace} {spring-data-access-schema-location}
+">
+
+  <gfe-data:repositories base-package="com.example.acme.repository"/>
+
+</beans>
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The preceding configuration snippet looks for interfaces below the
+configured base package and creates Repository instances for those
+interfaces backed by a
+[`SimpleGemFireRepository`](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.html).
+
+</div>
+
+<div class="admonitionblock important">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Important
+</div></td>
+<td class="content">The bootstrap process fails unless you have your
+application domain classes correctly mapped to configured Regions.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Spring Java-based Configuration
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+Alternatively, many developers prefer to use Spring’s
+{spring-framework-docs}/core.html#beans-java\[Java-based container
+configuration\].
+
+</div>
+
+<div class="paragraph">
+
+Using this approach, you can bootstrap Spring Data Repositories by using
+the {sdg-acronym} `@EnableGemfireRepositories` annotation, as the
+following example shows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 2. Bootstrap {sdg-name} Repositories with
+`@EnableGemfireRepositories`
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@SpringBootApplication
+@EnableGemfireRepositories(basePackages = "com.example.acme.repository")
+class SpringDataApplication {
+  ...
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Rather than use the `basePackages` attribute, you may prefer to use the
+type-safe `basePackageClasses` attribute instead. The
+`basePackageClasses` lets you specify the package that contains all your
+application Repository classes by specifying only one of your
+application Repository interface types. Consider creating a special
+no-op marker class or interface in each package that serves no purpose
+other than to identify the location of application Repositories
+referenced by this attribute.
+
+</div>
+
+<div class="paragraph">
+
+In addition to the `basePackages and basePackageClasses` attributes,
+like Spring’s
+{spring-framework-javadoc}/org/springframework/context/annotation/ComponentScan.html\[`@ComponentScan`\]
+annotation, the `@EnableGemfireRepositories` annotation provides include
+and exclude filters, based on Spring’s
+{spring-framework-javadoc}/org/springframework/context/annotation/ComponentScan.Filter.html\[`ComponentScan.Filter`\]
+type. You can use the `filterType` attribute to filter by different
+aspects, such as whether an application Repository type is annotated
+with a particular annotation or extends a particular class type and so
+on. See the
+{spring-framework-javadoc}/org/springframework/context/annotation/FilterType.html\[`FilterType`
+Javadoc\] for more details.
+
+</div>
+
+<div class="paragraph">
+
+The `@EnableGemfireRepositories` annotation also lets you specify the
+location of named OQL queries, which reside in a Java `Properties` file,
+by using the `namedQueriesLocation` attribute. The property name must
+match the name of a Repository query method and the property value is
+the OQL query you want executed when the Repository query method is
+called.
+
+</div>
+
+<div class="paragraph">
+
+The `repositoryImplementationPostfix` attribute can be set to an
+alternate value (defaults to `Impl`) if your application requires one or
+more
+{spring-data-commons-docs-html}/#repositories.custom-implementations\[custom
+repository implementations\]. This feature is commonly used to extend
+the Spring Data Repository infrastructure to implement a feature not
+provided by the data store (for example, {sdg-acronym}).
+
+</div>
+
+<div class="paragraph">
+
+One example of where custom repository implementations are needed with
+{data-store-name} is when performing joins. Joins are not supported by
+{sdg-acronym} Repositories. With a {data-store-name} `PARTITION` Region,
+the join must be performed on collocated `PARTITION` Regions, since
+{data-store-name} does not support “distributed” joins. In addition, the
+Equi-Join OQL Query must be performed inside a {data-store-name}
+Function. See
+[here](https://gemfire91.docs.pivotal.io/geode/developing/partitioned_regions/join_query_partitioned_regions.html)
+for more details on {data-store-name} *Equi-Join Queries*.
+
+</div>
+
+<div class="paragraph">
+
+Many other aspects of the {sdg-acronym}'s Repository infrastructure
+extension may be customized as well. See the
+[`@EnableGemfireRepositories`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html)
+Javadoc for more details on all configuration settings.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Executing OQL Queries
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} Repositories enable the definition of query methods to easily
+execute {data-store-name} OQL queries against the Region the managed
+entity maps to, as the following example shows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 3. Sample Repository
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@Region("People")
+public class Person { … }
+```
+
+</div>
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+public interface PersonRepository extends CrudRepository<Person, Long> {
+
+  Person findByEmailAddress(String emailAddress);
+
+  Collection<Person> findByFirstname(String firstname);
+
+  @Query("SELECT * FROM /People p WHERE p.firstname = $1")
+  Collection<Person> findByFirstnameAnnotated(String firstname);
+
+  @Query("SELECT * FROM /People p WHERE p.firstname IN SET $1")
+  Collection<Person> findByFirstnamesAnnotated(Collection<String> firstnames);
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The first query method listed in the preceding example causes the
+following OQL query to be derived:
+`SELECT x FROM /People x WHERE x.emailAddress = $1`. The second query
+method works the same way except it returns all entities found, whereas
+the first query method expects a single result to be found.
+
+</div>
+
+<div class="paragraph">
+
+If the supported keywords are not sufficient to declare and express your
+OQL query, or the method name becomes too verbose, then you can annotate
+the query methods with `@Query` as shown on the third and fourth
+methods.
+
+</div>
+
+<div class="paragraph">
+
+The following table gives brief samples of the supported keywords that
+you can use in query methods:
+
+</div>
+
+<table class="tableblock frame-all grid-all stretch">
+<caption>Table 1. Supported keywords for query methods</caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tableblock halign-left valign-top">Keyword</th>
+<th class="tableblock halign-left valign-top">Sample</th>
+<th class="tableblock halign-left valign-top">Logical result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>GreaterThan</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByAgeGreaterThan(int age)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.age &gt; $1</code></p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p><code>GreaterThanEqual</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByAgeGreaterThanEqual(int age)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.age &gt;= $1</code></p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>LessThan</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByAgeLessThan(int age)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.age &lt; $1</code></p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p><code>LessThanEqual</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByAgeLessThanEqual(int age)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.age ⇐ $1</code></p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p><code>IsNotNull</code>,
+<code>NotNull</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameNotNull()</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname =! NULL</code></p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p><code>IsNull</code>,
+<code>Null</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameNull()</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname = NULL</code></p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>In</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameIn(Collection&lt;String&gt; x)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname IN SET $1</code></p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p><code>NotIn</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameNotIn(Collection&lt;String&gt; x)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname NOT IN SET $1</code></p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>IgnoreCase</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameIgnoreCase(String firstName)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname.equalsIgnoreCase($1)</code></p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>(No keyword)</p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstname(String name)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname = $1</code></p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>Like</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameLike(String name)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname LIKE $1</code></p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p><code>Not</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByFirstnameNot(String name)</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.firstname != $1</code></p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p><code>IsTrue</code>,
+<code>True</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByActiveIsTrue()</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.active = true</code></p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p><code>IsFalse</code>,
+<code>False</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>findByActiveIsFalse()</code></p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>x.active = false</code></p></td>
+</tr>
+</tbody>
+</table>
+
+Table 1. Supported keywords for query methods
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## OQL Query Extensions Using Annotations
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+Many query languages, such as {data-store-name}'s OQL (Object Query
+Language), have extensions that are not directly supported by Spring
+Data Commons' Repository infrastructure.
+
+</div>
+
+<div class="paragraph">
+
+One of Spring Data Commons' Repository infrastructure goals is to
+function as the lowest common denominator to maintain support for and
+portability across the widest array of data stores available and in use
+for application development today. Technically, this means developers
+can access multiple different data stores supported by Spring Data
+Commons within their applications by reusing their existing
+application-specific Repository interfaces — a convenient and powerful
+abstraction.
+
+</div>
+
+<div class="paragraph">
+
+To support {data-store-name}'s OQL Query language extensions and
+preserve portability across different data stores, {sdg-name} adds
+support for OQL Query extensions by using Java annotations. These
+annotations are ignored by other Spring Data Repository implementations
+(such as Spring Data JPA or Spring Data Redis) that do not have similar
+query language features.
+
+</div>
+
+<div class="paragraph">
+
+For instance, many data stores most likely do not implement
+{data-store-name}'s OQL `IMPORT` keyword. Implementing `IMPORT` as an
+annotation (that is, `@Import`) rather than as part of the query method
+signature (specifically, the method 'name') does not interfere with the
+parsing infrastructure when evaluating the query method name to
+construct another data store language appropriate query.
+
+</div>
+
+<div class="paragraph">
+
+Currently, the set of {data-store-name} OQL Query language extensions
+that are supported by {sdg-name} include:
+
+</div>
+
+<table class="tableblock frame-all grid-all stretch">
+<caption>Table 2. Supported {data-store-name} OQL extensions for
+Repository query methods</caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 28%" />
+<col style="width: 28%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tableblock halign-left valign-top">Keyword</th>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p>{x-data-store-docs}/developing/query_index/query_index_hints.html#topic_cfb_mxn_jq[HINT]</p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>@Hint</code></p></td>
+<td class="tableblock halign-left valign-top"><p>OQL query index
+hints</p></td>
+<td class="tableblock halign-left valign-top"><p><code>String[]</code>
+(e.g. @Hint({ "IdIdx", "TxDateIdx" }))</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>{x-data-store-docs}/developing/query_select/the_import_statement.html#concept_2E9F15B2FE9041238B54736103396BF7[IMPORT]</p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>@Import</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Qualify
+application-specific types.</p></td>
+<td class="tableblock halign-left valign-top"><p><code>String</code>
+(e.g. @Import("org.example.app.domain.Type"))</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p>{x-data-store-docs}/developing/query_select/the_select_statement.html#concept_85AE7D6B1E2941ED8BD2A8310A81753E__section_25D7055B33EC47B19B1B70264B39212F[LIMIT]</p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>@Limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Limit the returned
+query result set.</p></td>
+<td class="tableblock halign-left valign-top"><p><code>Integer</code>
+(e.g. @Limit(10); default is Integer.MAX_VALUE)</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>{x-data-store-docs}/developing/query_additional/query_debugging.html#concept_2D557E24AAB24044A3DB36B3124F6748[TRACE]</p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>@Trace</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Enable OQL
+query-specific debugging.</p></td>
+<td class="tableblock halign-left valign-top"><p>NA</p></td>
+</tr>
+</tbody>
+</table>
+
+Table 2. Supported {data-store-name} OQL extensions for Repository query
+methods
+
+<div class="paragraph">
+
+As an example, suppose you have a `Customers` application domain class
+and corresponding {data-store-name} Region along with a
+`CustomerRepository` and a query method to lookup `Customers` by last
+name, as follows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 4. Sample Customers Repository
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+package ...;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.gemfire.mapping.annotation.Region;
+...
+
+@Region("Customers")
+public class Customer ... {
+
+  @Id
+  private Long id;
+
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+package ...;
+
+import org.springframework.data.gemfire.repository.GemfireRepository;
+...
+
+public interface CustomerRepository extends GemfireRepository<Customer, Long> {
+
+  @Trace
+  @Limit(10)
+  @Hint("LastNameIdx")
+  @Import("org.example.app.domain.Customer")
+  List<Customer> findByLastName(String lastName);
+
+  ...
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The preceding example results in the following OQL Query:
+
+</div>
+
+<div class="paragraph">
+
+`<TRACE> <HINT 'LastNameIdx'> IMPORT org.example.app.domain.Customer; SELECT * FROM /Customers x WHERE x.lastName = $1 LIMIT 10`
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name}'s Repository extension is careful not to create conflicting
+declarations when the OQL annotation extensions are used in combination
+with the `@Query` annotation.
+
+</div>
+
+<div class="paragraph">
+
+As another example, suppose you have a raw `@Query` annotated query
+method defined in your `CustomerRepository`, as follows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 5. CustomerRepository
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+public interface CustomerRepository extends GemfireRepository<Customer, Long> {
+
+  @Trace
+  @Limit(10)
+  @Hint("CustomerIdx")
+  @Import("org.example.app.domain.Customer")
+  @Query("<TRACE> <HINT 'ReputationIdx'> SELECT DISTINCT * FROM /Customers c WHERE c.reputation > $1 ORDER BY c.reputation DESC LIMIT 5")
+  List<Customer> findDistinctCustomersByReputationGreaterThanOrderByReputationDesc(Integer reputation);
+
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The preceding query method results in the following OQL query:
+
+</div>
+
+<div class="paragraph">
+
+`IMPORT org.example.app.domain.Customer; <TRACE> <HINT 'ReputationIdx'> SELECT DISTINCT * FROM /Customers x WHERE x.reputation > $1 ORDER BY c.reputation DESC LIMIT 5`
+
+</div>
+
+<div class="paragraph">
+
+The `@Limit(10)` annotation does not override the `LIMIT` explicitly
+defined in the raw query. Also, the `@Hint("CustomerIdx")` annotation
+does not override the `HINT` explicitly defined in the raw query.
+Finally, the `@Trace` annotation is redundant and has no additional
+effect.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content"><div class="paragraph">
+<p>The <code>ReputationIdx</code> index is probably not the most
+sensible index, given the number of customers who may possibly have the
+same value for their reputation, which reduces the effectiveness of the
+index. Please choose indexes and other optimizations wisely, as an
+improper or poorly chosen index can have the opposite effect on your
+performance because of the overhead in maintaining the index. The
+<code>ReputationIdx</code> was used only to serve the purpose of the
+example.</p>
+</div></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Query Post Processing
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+Thanks to using the Spring Data Repository abstraction, the query method
+convention for defining data store specific queries (e.g. OQL) is easy
+and convenient. However, it is sometimes desirable to still want to
+inspect or even possibly modify the query generated from the Repository
+query method.
+
+</div>
+
+<div class="paragraph">
+
+Since 2.0.x, {sdg-name} includes the
+`o.s.d.gemfire.repository.query.QueryPostProcessor` functional
+interface. The interface is loosely defined as follows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 6. QueryPostProcessor
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+package org.springframework.data.gemfire.repository.query;
+
+import org.springframework.core.Ordered;
+import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.QueryMethod;
+import ...;
+
+@FunctionalInterface
+interface QueryPostProcessor<T extends Repository, QUERY> extends Ordered {
+
+  QUERY postProcess(QueryMethod queryMethod, QUERY query, Object... arguments);
+
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+There are additional default methods provided that let you compose
+instances of `QueryPostProcessor` similar to how
+[java.util.function.Function.andThen(:Function)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html#compose-java.util.function.Function-)
+and
+[java.util.function.Function.compose(:Function)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html#compose-java.util.function.Function-)
+work.
+
+</div>
+
+<div class="paragraph">
+
+Additionally, the `QueryPostProcessor` interface implements the
+{spring-framework-javadoc}/org/springframework/core/Ordered.html\[`org.springframework.core.Ordered`\]
+interface, which is useful when multiple `QueryPostProcessors` are
+declared and registered in the Spring container and used to create a
+pipeline of processing for a group of generated query method queries.
+
+</div>
+
+<div class="paragraph">
+
+Finally, the `QueryPostProcessor` accepts type arguments corresponding
+to the type parameters, `T` and `QUERY`, respectively. Type `T` extends
+the Spring Data Commons marker interface,
+{spring-data-commons-javadoc}/org/springframework/data/repository/Repository.html\[`org.springframework.data.repository.Repository`\].
+We discuss this further later in this section. All `QUERY` type
+parameter arguments in {sdg-name}'s case are of type `java.lang.String`.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">It is useful to define the query as type
+<code>QUERY</code>, since this <code>QueryPostProcessor</code> interface
+may be ported to Spring Data Commons and therefore must handle all forms
+of queries by different data stores (such as JPA, MongoDB, or
+Redis).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+You can implement this interface to receive a callback with the query
+that was generated from the application `Repository` interface method
+when the method is called.
+
+</div>
+
+<div class="paragraph">
+
+For example, you might want to log all queries from all application
+Repository interface definitions. You could do so by using the following
+`QueryPostProcessor` implementation:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 7. LoggingQueryPostProcessor
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+package example;
+
+import ...;
+
+class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
+
+  private Logger logger = Logger.getLogger("someLoggerName");
+
+  @Override
+  public String postProcess(QueryMethod queryMethod, String query, Object... arguments) {
+
+      String message = String.format("Executing query [%s] with arguments [%s]", query, Arrays.toString(arguments));
+
+      this.logger.info(message);
+  }
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The `LoggingQueryPostProcessor` was typed to the Spring Data
+`org.springframework.data.repository.Repository` marker interface, and,
+therefore, logs all application Repository interface query method
+generated queries.
+
+</div>
+
+<div class="paragraph">
+
+You could limit the scope of this logging to queries only from certain
+types of application Repository interfaces, such as, say, a
+`CustomerRepository`, as the following example shows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 8. CustomerRepository
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+interface CustomerRepository extends CrudRepository<Customer, Long> {
+
+  Customer findByAccountNumber(String accountNumber);
+
+  List<Customer> findByLastNameLike(String lastName);
+
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Then you could have typed the `LoggingQueryPostProcessor` specifically
+to the `CustomerRepository`, as follows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 9. CustomerLoggingQueryPostProcessor
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+class LoggingQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> { .. }
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+As a result, only queries defined in the `CustomerRepository` interface,
+such as `findByAccountNumber`, are logged.
+
+</div>
+
+<div class="paragraph">
+
+You might want to create a `QueryPostProcessor` for a specific query
+defined by a Repository query method. For example, suppose you want to
+limit the OQL query generated from the
+`CustomerRepository.findByLastNameLike(:String)` query method to only
+return five results along with ordering the `Customers` by `firstName`,
+in ascending order . To do so, you can define a custom
+`QueryPostProcessor`, as the following example shows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 10. OrderedLimitedCustomerByLastNameQueryPostProcessor
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
+
+  private final int limit;
+
+  public OrderedLimitedCustomerByLastNameQueryPostProcessor(int limit) {
+    this.limit = limit;
+  }
+
+  @Override
+  public String postProcess(QueryMethod queryMethod, String query, Object... arguments) {
+
+    return "findByLastNameLike".equals(queryMethod.getName())
+      ? query.trim()
+          .replace("SELECT", "SELECT DISTINCT")
+          .concat(" ORDER BY firstName ASC")
+          .concat(String.format(" LIMIT %d", this.limit))
+      : query;
+  }
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+While the preceding example works, you can achieve the same effect by
+using the Spring Data Repository convention provided by {sdg-name}. For
+instance, the same query could be defined as follows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 11. CustomerRepository using the convention
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+interface CustomerRepository extends CrudRepository<Customer, Long> {
+
+  @Limit(5)
+  List<Customer> findDistinctByLastNameLikeOrderByFirstNameDesc(String lastName);
+
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+However, if you do not have control over the application
+`CustomerRepository` interface definition, then the `QueryPostProcessor`
+(that is, `OrderedLimitedCustomerByLastNameQueryPostProcessor`) is
+convenient.
+
+</div>
+
+<div class="paragraph">
+
+If you want to ensure that the `LoggingQueryPostProcessor` always comes
+after the other application-defined `QueryPostProcessors` that may have
+bean declared and registered in the Spring `ApplicationContext`, you can
+set the `order` property by overriding the `o.s.core.Ordered.getOrder()`
+method, as the following example shows:
+
+</div>
+
+<div class="exampleblock">
+
+<div class="title">
+
+Example 12. Defining the `order` property
+
+</div>
+
+<div class="content">
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
+
+  @Override
+  int getOrder() {
+    return 1;
+  }
+}
+
+class CustomerQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
+
+  @Override
+  int getOrder() {
+    return 0;
+  }
+}
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+This ensures that you always see the effects of the post processing
+applied by other `QueryPostProcessors` before the
+`LoggingQueryPostProcessor` logs the query.
+
+</div>
+
+<div class="paragraph">
+
+You can define as many `QueryPostProcessors` in the Spring
+`ApplicationContext` as you like and apply them in any order, to all or
+specific application Repository interfaces, and be as granular as you
+like by using the provided arguments to the `postProcess(..)` method
+callback.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+
+<div id="footer-text">
+
+Last updated 2022-09-20 10:33:13 -0700
+
+</div>
+
+</div>

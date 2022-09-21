@@ -1,0 +1,5583 @@
+<div id="header">
+
+# Bootstrapping {data-store-name} with the Spring Container
+
+</div>
+
+<div id="content">
+
+<div id="preamble">
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} provides full configuration and initialization of the
+{data-store-name} In-Memory Data Grid (IMDG) using the Spring IoC
+container. The framework includes several classes to help simplify the
+configuration of {data-store-name} components, including: Caches,
+Regions, Indexes, DiskStores, Functions, WAN Gateways, persistence
+backup, and several other Distributed System components to support a
+variety of application use cases with minimal effort.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">This section assumes basic familiarity with
+{data-store-name}. For more information, see the {data-store-name}
+{x-data-store-docs}/gemfire/about_gemfire.html[product
+documentation].</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Advantages of using Spring over {data-store-name} `cache.xml`
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name}'s XML namespace supports full configuration of the
+{data-store-name} In-Memory Data Grid (IMDG). The XML namespace is one
+of two ways to configure {data-store-name} in a Spring context in order
+to properly manage {data-store-name}'s lifecycle inside the Spring
+container. The other way to configure {data-store-name} in a Spring
+context is by using [annotation-based
+configuration](#bootstrap-annotation-config).
+
+</div>
+
+<div class="paragraph">
+
+While support for {data-store-name}'s native `cache.xml` persists for
+legacy reasons, {data-store-name} application developers who use XML
+configuration are encouraged to do everything in Spring XML to take
+advantage of the many wonderful things Spring has to offer, such as
+modular XML configuration, property placeholders and overrides, SpEL
+({spring-framework-docs}/core.html#expressions\[Spring Expression
+Language\]), and environment profiles. Behind the XML namespace,
+{sdg-name} makes extensive use of Spring’s `FactoryBean` pattern to
+simplify the creation, configuration, and initialization of
+{data-store-name} components.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} provides several callback interfaces, such as
+`CacheListener`, `CacheLoader`, and `CacheWriter`, that let developers
+add custom event handlers. Using Spring’s IoC container, you can
+configure these callbacks as normal Spring beans and inject them into
+{data-store-name} components. This is a significant improvement over
+native `cache.xml`, which provides relatively limited configuration
+options and requires callbacks to implement {data-store-name}'s
+`Declarable` interface (see [\[apis:declarable\]](#apis:declarable) to
+see how you can still use `Declarables` within Spring’s container).
+
+</div>
+
+<div class="paragraph">
+
+In addition, IDEs, such as the Spring Tool Suite (STS), provide
+excellent support for Spring XML namespaces, including code completion,
+pop-up annotations, and real time validation.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Using the Core Namespace
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+To simplify configuration, {sdg-name} provides a dedicated XML namespace
+for configuring core {data-store-name} components. It is possible to
+configure beans directly by using Spring’s standard `<bean>` definition.
+However, all bean properties are exposed through the XML namespace, so
+there is little benefit to using raw bean definitions.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">For more information about XML Schema-based
+configuration in Spring, see the
+{spring-framework-docs}/core.html#appendix[appendix] in the Spring
+Framework reference documentation.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Spring Data Repository support uses a separate XML
+namespace. See <a
+href="#gemfire-repositories">[gemfire-repositories]</a> for more
+information on how to configure {sdg-name} Repositories.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+To use the {sdg-name} XML namespace, declare it in your Spring XML
+configuration meta-data, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:gfe="{spring-data-schema-namespace}" <!--(1)--><!--(2)-->
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    {spring-data-schema-namespace} {spring-data-schema-location} <!--(3)-->
+">
+
+  <bean id ... >
+
+  <gfe:cache ...> <!--(4)-->
+
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="colist arabic">
+
+1.  {sdg-name} XML namespace prefix. Any name works, but, throughout
+    this reference documentation, `gfe` is used.
+
+2.  The XML namespace prefix is mapped to the URI.
+
+3.  The XML namespace URI location. Note that, even though the location
+    points to an external address (which does exist and is valid),
+    Spring resolves the schema locally, as it is included in the
+    {sdg-name} library.
+
+4.  Example declaration using the XML namespace with the `gfe` prefix.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content"><div class="paragraph">
+<p>You can change the default namespace from <code>beans</code> to
+<code>gfe</code>. This is useful for XML configuration composed mainly
+of {data-store-name} components, as it avoids declaring the prefix. To
+do so, swap the namespace prefix declaration shown earlier, as the
+following example shows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;{spring-data-schema-namespace}&quot; &lt;!--(1)--&gt;
+       xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot; &lt;!--(2)--&gt;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    {spring-data-schema-namespace} {spring-data-schema-location}
+&quot;&gt;
+
+  &lt;beans:bean id ... &gt; &lt;!--(3)--&gt;
+
+  &lt;cache ...&gt; &lt;!--(4)--&gt;
+
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li><p>The default namespace declaration for this XML document points to
+the {sdg-name} XML namespace.</p></li>
+<li><p>The <code>beans</code> namespace prefix declaration for Spring’s
+raw bean definitions.</p></li>
+<li><p>Bean declaration using the <code>beans</code> namespace. Notice
+the prefix.</p></li>
+<li><p>Bean declaration using the <code>gfe</code> namespace. Notice the
+lack of prefix since <code>gfe</code> is the default namespace.</p></li>
+</ol>
+</div></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Using the Data Access Namespace
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+In addition to the core XML namespace (`gfe`), {sdg-name} provides a
+data access XML namespace (`gfe-data`), which is primarily intended to
+simplify the development of {data-store-name} client applications. This
+namespace currently contains support for {data-store-name}
+[Repositories](#gemfire-repositories) and Function
+[execution](#function-execution), as well as a `<datasource>` tag that
+offers a convenient way to connect to a {data-store-name} cluster.
+
+</div>
+
+<div class="sect2">
+
+### An Easy Way to Connect to {data-store-name}
+
+<div class="paragraph">
+
+For many applications, a basic connection to a {data-store-name} data
+grid using default values is sufficient. {sdg-name}'s `<datasource>` tag
+provides a simple way to access data. The data source creates a
+`ClientCache` and connection `Pool`. In addition, it queries the cluster
+servers for all existing root Regions and creates an (empty) client
+Region proxy for each one.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe-data:datasource>
+  <locator host="remotehost" port="1234"/>
+</gfe-data:datasource>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The `<datasource>` tag is syntactically similar to `<gfe:pool>`. It may
+be configured with one or more nested `locator` or `server` elements to
+connect to an existing data grid. Additionally, all attributes available
+to configure a Pool are supported. This configuration automatically
+creates client Region beans for each Region defined on cluster members
+connected to the Locator, so they can be seamlessly referenced by Spring
+Data mapping annotations (`GemfireTemplate`) and autowired into
+application classes.
+
+</div>
+
+<div class="paragraph">
+
+Of course, you can explicitly configure client Regions. For example, if
+you want to cache data in local memory, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe-data:datasource>
+  <locator host="remotehost" port="1234"/>
+</gfe-data:datasource>
+
+<gfe:client-region id="Example" shortcut="CACHING_PROXY"/>
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring a Cache
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+To use {data-store-name}, you need to either create a new cache or
+connect to an existing one. With the current version of
+{data-store-name}, you can have only one open cache per VM (more
+strictly speaking, per `ClassLoader`). In most cases, the cache should
+only be created once.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">This section describes the creation and
+configuration of a peer <code>Cache</code> member, appropriate in
+peer-to-peer (P2P) topologies and cache servers. A <code>Cache</code>
+member can also be used in stand-alone applications and integration
+tests. However, in typical production systems, most application
+processes act as cache clients, creating a <code>ClientCache</code>
+instance instead. This is described in the <a
+href="#bootstrap:cache:client">Configuring a {data-store-name}
+ClientCache</a> and <a href="#bootstrap:region:client">Client Region</a>
+sections.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+A peer `Cache` with default configuration can be created with the
+following simple declaration:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+During Spring container initialization, any `ApplicationContext`
+containing this cache definition registers a `CacheFactoryBean` that
+creates a Spring bean named `gemfireCache`, which references a
+{data-store-name} `Cache` instance. This bean refers to either an
+existing `Cache` or, if one does not already exist, a newly created one.
+Since no additional properties were specified, a newly created `Cache`
+applies the default cache configuration.
+
+</div>
+
+<div class="paragraph">
+
+All {sdg-name} components that depend on the `Cache` respect this naming
+convention, so you need not explicitly declare the `Cache` dependency.
+If you prefer, you can make the dependency explicit by using the
+`cache-ref` attribute provided by various {sdg-acronym} XML namespace
+elements. Also, you can override the cache’s bean name using the `id`
+attribute, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache id="myCache"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+A {data-store-name} `Cache` can be fully configured using Spring.
+However, {data-store-name}'s native XML configuration file, `cache.xml`,
+is also supported. For situations where the {data-store-name} cache
+needs to be configured natively, you can provide a reference to the
+{data-store-name} XML configuration file by using the
+`cache-xml-location` attribute, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache id="cacheConfiguredWithNativeCacheXml" cache-xml-location="classpath:cache.xml"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In this example, if a cache needs to be created, it uses a file named
+`cache.xml` located in the classpath root to configure it.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">The configuration makes use of Spring’s <a
+href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#resources"><code>Resource</code></a>
+abstraction to locate the file. The <code>Resource</code> abstraction
+lets various search patterns be used, depending on the runtime
+environment or the prefix specified (if any) in the resource
+location.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+In addition to referencing an external XML configuration file, you can
+also specify {data-store-name} System
+{x-data-store-docs}/reference/topics/gemfire_properties.html\[properties\]
+that use any of Spring’s `Properties` support features.
+
+</div>
+
+<div class="paragraph">
+
+For example, you can use the `properties` element defined in the `util`
+namespace to define `Properties` directly or load properties from a
+properties file, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:gfe="{spring-data-schema-namespace}"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    {spring-data-schema-namespace} {spring-data-schema-location}
+    http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
+">
+
+  <util:properties id="gemfireProperties" location="file:/path/to/gemfire.properties"/>
+
+  <gfe:cache properties-ref="gemfireProperties"/>
+
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Using a properties file is recommended for externalizing
+environment-specific settings outside the application configuration.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Cache settings apply only when a new cache needs to
+be created. If an open cache already exists in the VM, these settings
+are ignored.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="sect2">
+
+### Advanced Cache Configuration
+
+<div class="paragraph">
+
+For advanced cache configuration, the `cache` element provides a number
+of configuration options exposed as attributes or child elements, as the
+following listing shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<!--(1)-->
+<gfe:cache
+    cache-xml-location=".."
+    properties-ref=".."
+    close="false"
+    copy-on-read="true"
+    critical-heap-percentage="90"
+    eviction-heap-percentage="70"
+    enable-auto-reconnect="false" <!--(2)-->
+    lock-lease="120"
+    lock-timeout="60"
+    message-sync-interval="1"
+    pdx-serializer-ref="myPdxSerializer"
+    pdx-persistent="true"
+    pdx-disk-store="diskStore"
+    pdx-read-serialized="false"
+    pdx-ignore-unread-fields="true"
+    search-timeout="300"
+    use-bean-factory-locator="true" <!--(3)-->
+    use-cluster-configuration="false" <!--(4)-->
+>
+
+  <gfe:transaction-listener ref="myTransactionListener"/> <!--(5)-->
+
+  <gfe:transaction-writer> <!--(6)-->
+    <bean class="org.example.app.gemfire.transaction.TransactionWriter"/>
+  </gfe:transaction-writer>
+
+  <gfe:gateway-conflict-resolver ref="myGatewayConflictResolver"/> <!--(7)-->
+
+  <gfe:jndi-binding jndi-name="myDataSource" type="ManagedDataSource"/> <!--(8)-->
+
+</gfe:cache>
+```
+
+</div>
+
+</div>
+
+<div class="colist arabic">
+
+1.  Attributes support various cache options. For further information
+    regarding anything shown in this example, see the {data-store-name}
+    [product documentation](https://docs.pivotal.io/gemfire). The
+    `close` attribute determines whether the cache should be closed when
+    the Spring application context is closed. The default is `true`.
+    However, for use cases in which multiple application contexts use
+    the cache (common in web applications), set this value to `false`.
+
+2.  Setting the `enable-auto-reconnect` attribute to `true` (the default
+    is `false`) lets a disconnected {data-store-name} member
+    automatically reconnect and rejoin the {data-store-name} cluster.
+    See the {data-store-name}
+    {x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
+    documentation\] for more details.
+
+3.  Setting the `use-bean-factory-locator` attribute to `true` (it
+    defaults to `false`) applies only when both Spring (XML)
+    configuration metadata and {data-store-name} `cache.xml` is used to
+    configure the {data-store-name} cache node (whether client or peer).
+    This option lets {data-store-name} components (such as
+    `CacheLoader`) expressed in `cache.xml` be auto-wired with beans
+    (such as `DataSource`) defined in the Spring application context.
+    This option is typically used in conjunction with
+    `cache-xml-location`.
+
+4.  Setting the `use-cluster-configuration` attribute to `true` (the
+    default is `false`) enables a {data-store-name} member to retrieve
+    the common, shared Cluster-based configuration from a Locator. See
+    the {data-store-name}
+    {x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
+    documentation\] for more details.
+
+5.  Example of a `TransactionListener` callback declaration that uses a
+    bean reference. The referenced bean must implement
+    {x-data-store-javadoc}/org/apache/geode/cache/TransactionListener.html\[TransactionListener\].
+    A `TransactionListener` can be implemented to handle transaction
+    related events (such as afterCommit and afterRollback).
+
+6.  Example of a `TransactionWriter` callback declaration using an inner
+    bean declaration. The bean must implement
+    {x-data-store-javadoc}/org/apache/geode/cache/TransactionWriter.html\[TransactionWriter\].
+    The `TransactionWriter` is a callback that can veto a transaction.
+
+7.  Example of a `GatewayConflictResolver` callback declaration using a
+    bean reference. The referenced bean must implement
+    {x-data-store-javadoc}/org/apache/geode/cache/util/GatewayConflictResolver.html
+    \[GatewayConflictResolver\]. A `GatewayConflictResolver` is a
+    `Cache`-level plugin that is called upon to decide what to do with
+    events that originate in other systems and arrive through the WAN
+    Gateway. which provides a distributed Region creation service.
+
+8.  Declares a JNDI binding to enlist an external DataSource in a
+    {data-store-name} transaction.
+
+</div>
+
+<div class="sect3">
+
+#### Enabling PDX Serialization
+
+<div class="paragraph">
+
+The preceding example includes a number of attributes related to
+{data-store-name}'s enhanced serialization framework, PDX. While a
+complete discussion of PDX is beyond the scope of this reference guide,
+it is important to note that PDX is enabled by registering a
+`PdxSerializer`, which is specified by setting the `pdx-serializer`
+attribute.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} provides an implementing class
+(`org.apache.geode.pdx.ReflectionBasedAutoSerializer`) that uses Java
+Reflection. However, it is common for developers to provide their own
+implementation. The value of the attribute is simply a reference to a
+Spring bean that implements the `PdxSerializer` interface.
+
+</div>
+
+<div class="paragraph">
+
+More information on serialization support can be found in
+[\[serialization\]](#serialization).
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### Enabling Auto-reconnect
+
+<div class="paragraph">
+
+You should be careful when setting the
+`<gfe:cache enable-auto-reconnect="[true|false*]>` attribute to `true`.
+
+</div>
+
+<div class="paragraph">
+
+Generally, 'auto-reconnect' should only be enabled in cases where
+{sdg-name}'s XML namespace is used to configure and bootstrap a new,
+non-application {data-store-name} server added to a cluster. In other
+words, 'auto-reconnect' should not be enabled when {sdg-name} is used to
+develop and build a {data-store-name} application that also happens to
+be a peer `Cache` member of the {data-store-name} cluster.
+
+</div>
+
+<div class="paragraph">
+
+The main reason for this restriction is that most {data-store-name}
+applications use references to the {data-store-name} `Cache` or Regions
+in order to perform data access operations. These references are
+“injected” by the Spring container into application components (such as
+Repositories) for use by the application. When a peer member is
+forcefully disconnected from the rest of the cluster, presumably because
+the peer member has become unresponsive or a network partition separates
+one or more peer members into a group too small to function as an
+independent distributed system, the peer member shuts down and all
+{data-store-name} component references (caches, Regions, and others)
+become invalid.
+
+</div>
+
+<div class="paragraph">
+
+Essentially, the current forced disconnect processing logic in each peer
+member dismantles the system from the ground up. The JGroups stack shuts
+down, the distributed system is put in a shutdown state and, finally,
+the cache is closed. Effectively, all memory references become stale and
+are lost.
+
+</div>
+
+<div class="paragraph">
+
+After being disconnected from the distributed system, a peer member
+enters a “reconnecting” state and periodically attempts to rejoin the
+distributed system. If the peer member succeeds in reconnecting, the
+member rebuilds its “view” of the distributed system from existing
+members and receives a new distributed system ID. Additionally, all
+caches, Regions, and other {data-store-name} components are
+reconstructed. Therefore, all old references, which may have been
+injected into application by the Spring container, are now stale and no
+longer valid.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} makes no guarantee (even when using the
+{data-store-name} public Java API) that application cache, Regions, or
+other component references are automatically refreshed by the reconnect
+operation. As such, {data-store-name} applications must take care to
+refresh their own references.
+
+</div>
+
+<div class="paragraph">
+
+Unfortunately, there is no way to be notified of a disconnect event and,
+subsequently, a reconnect event either. If that were the case, you would
+have a clean way to know when to call
+`ConfigurableApplicationContext.refresh()`, if it were even applicable
+for an application to do so, which is why this “feature” of
+{data-store-name} is not recommended for peer `Cache` applications.
+
+</div>
+
+<div class="paragraph">
+
+For more information about 'auto-reconnect', see {data-store-name}'s
+{x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
+documentation\].
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### Using Cluster-based Configuration
+
+<div class="paragraph">
+
+{data-store-name}'s Cluster Configuration Service is a convenient way
+for any peer member joining the cluster to get a “consistent view” of
+the cluster by using the shared, persistent configuration maintained by
+a Locator. Using the cluster-based configuration ensures the peer
+member’s configuration is compatible with the {data-store-name}
+Distributed System when the member joins.
+
+</div>
+
+<div class="paragraph">
+
+This feature of {sdg-name} (setting the `use-cluster-configuration`
+attribute to `true`) works in the same way as the `cache-xml-location`
+attribute, except the source of the {data-store-name} configuration
+meta-data comes from the network through a Locator, as opposed to a
+native `cache.xml` file residing in the local file system.
+
+</div>
+
+<div class="paragraph">
+
+All {data-store-name} native configuration metadata, whether from
+`cache.xml` or from the Cluster Configuration Service, gets applied
+before any Spring (XML) configuration metadata. As a result, Spring’s
+config serves to “augment” the native {data-store-name} configuration
+metadata and would most likely be specific to the application.
+
+</div>
+
+<div class="paragraph">
+
+Again, to enable this feature, specify the following in the Spring XML
+config:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache use-cluster-configuration="true"/>
+```
+
+</div>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">While certain {data-store-name} tools, such as
+<em>Gfsh</em>, have their actions “recorded” when schema-like changes
+are made (for example,
+<code>gfsh&gt;create region --name=Example --type=PARTITION</code>),
+{sdg-name}'s configuration metadata is not recorded. The same is true
+when using {data-store-name}'s public Java API directly. It, too, is not
+recorded.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+For more information on {data-store-name}'s Cluster Configuration
+Service, see the
+{x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
+documentation\].
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Configuring a {data-store-name} CacheServer
+
+<div class="paragraph">
+
+{sdg-name} includes dedicated support for configuring a
+{x-data-store-javadoc}/org/apache/geode/cache/server/CacheServer.html\[CacheServer\],
+allowing complete configuration through the Spring container, as the
+following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gfe="{spring-data-schema-namespace}"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+    {spring-data-schema-namespace} {spring-data-schema-location}
+">
+
+  <gfe:cache/>
+
+  <!-- Example depicting serveral {data-store-name} CacheServer configuration options -->
+  <gfe:cache-server id="advanced-config" auto-startup="true"
+       bind-address="localhost" host-name-for-clients="localhost" port="${gemfire.cache.server.port}"
+       load-poll-interval="2000" max-connections="22" max-message-count="1000" max-threads="16"
+       max-time-between-pings="30000" groups="test-server">
+
+    <gfe:subscription-config eviction-type="ENTRY" capacity="1000" disk-store="file://${java.io.tmpdir}"/>
+
+  </gfe:cache-server>
+
+  <context:property-placeholder location="classpath:cache-server.properties"/>
+
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The preceding configuration shows the `cache-server` element and the
+many available options.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Rather than hard-coding the port, this configuration
+uses Spring’s <a
+href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#xsd-config-body-schemas-context">context</a>
+namespace to declare a <code>property-placeholder</code>. A <a
+href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-placeholderconfigurer">property
+placeholder</a> reads one or more properties files and then replaces
+property placeholders with values at runtime. Doing so lets
+administrators change values without having to touch the main
+application configuration. Spring also provides <a
+href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#expressions">SpEL</a>
+and an <a
+href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-environment">environment
+abstraction</a> to support externalization of environment-specific
+properties from the main codebase, easing deployment across multiple
+machines.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">To avoid initialization problems, the
+<code>CacheServer</code> started by {sdg-name} starts
+<strong>after</strong> the Spring container has been fully initialized.
+Doing so lets potential Regions, listeners, writers or instantiators
+that are defined declaratively to be fully initialized and registered
+before the server starts accepting connections. Keep this in mind when
+programmatically configuring these elements, as the server might start
+before your components and thus not be seen by the clients connecting
+right away.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Configuring a {data-store-name} ClientCache
+
+<div class="paragraph">
+
+In addition to defining a {data-store-name} peer
+{x-data-store-javadoc}/org/apache/geode/cache/Cache.html\[`Cache`\],
+{sdg-name} also supports the definition of a {data-store-name}
+{x-data-store-javadoc}/org/apache/geode/cache/client/ClientCache.html\[`ClientCache`\]
+in a Spring container. A `ClientCache` definition is similar in
+configuration and use to the {data-store-name} peer
+[Cache](#bootstrap:cache) and is supported by the
+`org.springframework.data.gemfire.client.ClientCacheFactoryBean`.
+
+</div>
+
+<div class="paragraph">
+
+The simplest definition of a {data-store-name} cache client using
+default configuration follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:client-cache/>
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+`client-cache` supports many of the same options as the
+[Cache](#bootstrap:cache:advanced) element. However, as opposed to a
+full-fledged peer `Cache` member, a cache client connects to a remote
+cache server through a Pool. By default, a Pool is created to connect to
+a server running on `localhost` and listening to port `40404`. The
+default Pool is used by all client Regions unless the Region is
+configured to use a specific Pool.
+
+</div>
+
+<div class="paragraph">
+
+Pools can be defined with the `pool` element. This client-side Pool can
+be used to configure connectivity directly to a server for individual
+entities or for the entire cache through one or more Locators.
+
+</div>
+
+<div class="paragraph">
+
+For example, to customize the default Pool used by the `client-cache`,
+the developer needs to define a Pool and wire it to the cache
+definition, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:client-cache id="myCache" pool-name="myPool"/>
+
+  <gfe:pool id="myPool" subscription-enabled="true">
+    <gfe:locator host="${gemfire.locator.host}" port="${gemfire.locator.port}"/>
+  </gfe:pool>
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The `<client-cache>` element also has a `ready-for-events` attribute. If
+the attribute is set to `true`, the client cache initialization includes
+a call to
+{x-data-store-javadoc}/org/apache/geode/cache/client/ClientCache.html#readyForEvents\[`ClientCache.readyForEvents()`\].
+
+</div>
+
+<div class="paragraph">
+
+[Client Region](#bootstrap:region:client) covers client-side
+configuration in more detail.
+
+</div>
+
+<div class="sect3">
+
+#### {data-store-name}'s DEFAULT Pool and {sdg-name} Pool Definitions
+
+<div class="paragraph">
+
+If a {data-store-name} `ClientCache` is local-only, then no Pool
+definition is required. For instance, you can define the following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:client-cache/>
+
+<gfe:client-region id="Example" shortcut="LOCAL"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In this case, the “Example” Region is `LOCAL` and no data is distributed
+between the client and a server. Therefore, no Pool is necessary. This
+is true for any client-side, local-only Region, as defined by the
+{data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/client/ClientRegionShortcut.html\[`ClientRegionShortcut`\]
+(all `LOCAL_*` shortcuts).
+
+</div>
+
+<div class="paragraph">
+
+However, if a client Region is a (caching) proxy to a server-side
+Region, a Pool is required. In that case, there are several ways to
+define and use a Pool.
+
+</div>
+
+<div class="paragraph">
+
+When a `ClientCache`, a Pool, and a proxy-based Region are all defined
+but not explicitly identified, {sdg-name} resolves the references
+automatically, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:client-cache/>
+
+<gfe:pool>
+  <gfe:locator host="${geode.locator.host}" port="${geode.locator.port}"/>
+</gfe:pool>
+
+<gfe:client-region id="Example" shortcut="PROXY"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In the preceding example, the `ClientCache` is identified as
+`gemfireCache`, the Pool as `gemfirePool`, and the client Region as
+“Example”. However, the `ClientCache` initializes {data-store-name}'s
+`DEFAULT` Pool from `gemfirePool`, and the client Region uses the
+`gemfirePool` when distributing data between the client and the server.
+
+</div>
+
+<div class="paragraph">
+
+Basically, {sdg-name} resolves the preceding configuration to the
+following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:client-cache id="gemfireCache" pool-name="gemfirePool"/>
+
+<gfe:pool id="gemfirePool">
+  <gfe:locator host="${geode.locator.host}" port="${geode.locator.port}"/>
+</gfe:pool>
+
+<gfe:client-region id="Example" cache-ref="gemfireCache" pool-name="gemfirePool" shortcut="PROXY"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} still creates a Pool called `DEFAULT`. {sdg-name}
+causes the `DEFAULT` Pool to be initialized from the `gemfirePool`.
+Doing so is useful in situations where multiple Pools are defined and
+client Regions are using separate Pools, or do not declare a Pool at
+all.
+
+</div>
+
+<div class="paragraph">
+
+Consider the following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:client-cache pool-name="locatorPool"/>
+
+<gfe:pool id="locatorPool">
+  <gfe:locator host="${geode.locator.host}" port="${geode.locator.port}"/>
+</gfe:pool>
+
+<gfe:pool id="serverPool">
+  <gfe:server host="${geode.server.host}" port="${geode.server.port}"/>
+</gfe:pool>
+
+<gfe:client-region id="Example" pool-name="serverPool" shortcut="PROXY"/>
+
+<gfe:client-region id="AnotherExample" shortcut="CACHING_PROXY"/>
+
+<gfe:client-region id="YetAnotherExample" shortcut="LOCAL"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In this setup, the {data-store-name} `client-cache` `DEFAULT` pool is
+initialized from `locatorPool`, as specified by the `pool-name`
+attribute. There is no {sdg-name}-defined `gemfirePool`, since both
+Pools were explicitly identified (named) — `locatorPool` and
+`serverPool`, respectively.
+
+</div>
+
+<div class="paragraph">
+
+The “Example” Region explicitly refers to and exclusively uses the
+`serverPool`. The `AnotherExample` Region uses {data-store-name}'s
+`DEFAULT` Pool, which, again, was configured from the `locatorPool`
+based on the client cache bean definition’s `pool-name` attribute.
+
+</div>
+
+<div class="paragraph">
+
+Finally, the `YetAnotherExample` Region does not use a Pool, because it
+is `LOCAL`.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">The <code>AnotherExample</code> Region would first
+look for a Pool bean named <code>gemfirePool</code>, but that would
+require the definition of an anonymous Pool bean (that is,
+<code>&lt;gfe:pool/&gt;</code>) or a Pool bean explicitly named
+<code>gemfirePool</code> (for example,
+<code>&lt;gfe:pool id="gemfirePool"/&gt;</code>).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">If we either changed the name of
+<code>locatorPool</code> to <code>gemfirePool</code> or made the Pool
+bean definition be anonymous, it would have the same effect as the
+preceding configuration.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring a Region
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+A Region is required to store and retrieve data from the cache.
+`org.apache.geode.cache.Region` is an interface extending
+`java.util.Map` and enables basic data access using familiar key-value
+semantics. The `Region` interface is wired into application classes that
+require it so the actual Region type is decoupled from the programming
+model. Typically, each Region is associated with one domain object,
+similar to a table in a relational database.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} implements the following types of Regions:
+
+</div>
+
+<div class="ulist">
+
+- **REPLICATE** - Data is replicated across all cache members in the
+  cluster that define the Region. This provides very high read
+  performance but writes take longer to perform the replication.
+
+- **PARTITION** - Data is partitioned into buckets (sharded) among many
+  cache members in the cluster that define the Region. This provides
+  high read and write performance and is suitable for large data sets
+  that are too big for a single node.
+
+- **LOCAL** - Data only exists on the local node.
+
+- **Client** - Technically, a client Region is a LOCAL Region that acts
+  as a PROXY to a REPLICATE or PARTITION Region hosted on cache servers
+  in a cluster. It may hold data created or fetched locally.
+  Alternately, it can be empty. Local updates are synchronized to the
+  cache server. Also, a client Region may subscribe to events in order
+  to stay up-to-date (synchronized) with changes originating from remote
+  processes that access the same server Region.
+
+</div>
+
+<div class="paragraph">
+
+For more information about the various Region types and their
+capabilities as well as configuration options, please refer to
+{data-store-name}'s documentation on
+{x-data-store-docs}/developing/region_options/region_types.html\[Region
+Types\].
+
+</div>
+
+<div class="sect2">
+
+### Using an externally configured Region
+
+<div class="paragraph">
+
+To reference Regions already configured in a {data-store-name} native
+`cache.xml` file, use the `lookup-region` element. Simply declare the
+target Region name with the `name` attribute. For example, to declare a
+bean definition identified as `ordersRegion` for an existing Region
+named `Orders`, you can use the following bean definition:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:lookup-region id="ordersRegion" name="Orders"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+If `name` is not specified, the bean’s `id` will be used as the name of
+the Region. The example above becomes:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<!-- lookup for a Region called 'Orders' -->
+<gfe:lookup-region id="Orders"/>
+```
+
+</div>
+
+</div>
+
+<div class="admonitionblock caution">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Caution
+</div></td>
+<td class="content">If the Region does not exist, an initialization
+exception will be thrown. To configure new Regions, proceed to the
+appropriate sections below.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+In the previous examples, since no cache name was explicitly defined,
+the default naming convention (`gemfireCache`) was used. Alternately,
+one can reference the cache bean with the `cache-ref` attribute:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache id="myCache"/>
+<gfe:lookup-region id="ordersRegion" name="Orders" cache-ref="myCache"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+`lookup-region` lets you retrieve existing, pre-configured Regions
+without exposing the Region semantics or setup infrastructure.
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Auto Region Lookup
+
+<div class="paragraph">
+
+`auto-region-lookup` lets you import all Regions defined in a
+{data-store-name} native `cache.xml` file into a Spring
+`ApplicationContext` when you use the `cache-xml-location` attribute on
+the `<gfe:cache>` element.
+
+</div>
+
+<div class="paragraph">
+
+For instance, consider the following `cache.xml` file:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<cache xmlns="https://geode.apache.org/schema/cache"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://geode.apache.org/schema/cache https://geode.apache.org/schema/cache/cache-1.0.xsd"
+       version="1.0">
+
+  <region name="Parent" refid="REPLICATE">
+    <region name="Child" refid="REPLICATE"/>
+  </region>
+
+</cache>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can import the preceding `cache.xml` file as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache cache-xml-location="cache.xml"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can then use the `<gfe:lookup-region>` element (for example,
+`<gfe:lookup-region id="Parent"/>`) to reference specific Regions as
+beans in the Spring container, or you can choose to import all Regions
+defined in `cache.xml` by using the following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:auto-region-lookup/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} automatically creates beans for all {data-store-name} Regions
+defined in `cache.xml` that have not been explicitly added to the Spring
+container with explicit `<gfe:lookup-region>` bean declarations.
+
+</div>
+
+<div class="paragraph">
+
+It is important to realize that {sdg-name} uses a Spring
+{spring-framework-javadoc}/org/springframework/beans/factory/config/BeanPostProcessor.html\[BeanPostProcessor\]
+to post-process the cache after it is both created and initialized to
+determine the Regions defined in {data-store-name} to add as beans in
+the Spring `ApplicationContext`.
+
+</div>
+
+<div class="paragraph">
+
+You may inject these "auto-looked-up" Regions as you would any other
+bean defined in the Spring `ApplicationContext`, with one exception: You
+may need to define a `depends-on` association with the ‘gemfireCache’
+bean, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+package example;
+
+import ...
+
+@Repository("appDao")
+@DependsOn("gemfireCache")
+public class ApplicationDao extends DaoSupport {
+
+    @Resource(name = "Parent")
+    private Region<?, ?> parent;
+
+    @Resource(name = "/Parent/Child")
+    private Region<?, ?> child;
+
+    ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The preceding example only applies when you use Spring’s
+`component-scan` functionality.
+
+</div>
+
+<div class="paragraph">
+
+If you declare your components by using Spring XML config, then you
+would do the following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<bean class="example.ApplicationDao" depends-on="gemfireCache"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Doing so ensures that the {data-store-name} cache and all the Regions
+defined in `cache.xml` get created before any components with auto-wire
+references when using the `<gfe:auto-region-lookup>` element.
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Configuring Regions
+
+<div class="paragraph">
+
+{sdg-name} provides comprehensive support for configuring any type of
+Region through the following elements:
+
+</div>
+
+<div class="ulist">
+
+- LOCAL Region: `<local-region>`
+
+- PARTITION Region: `<partitioned-region>`
+
+- REPLICATE Region: `<replicated-region>`
+
+- Client Region: `<client-region>`
+
+</div>
+
+<div class="paragraph">
+
+See the {data-store-name} documentation for a comprehensive description
+of
+{x-data-store-docs}/developing/region_options/region_types.html\[Region
+Types\].
+
+</div>
+
+<div class="sect3">
+
+#### Common Region Attributes
+
+<div class="paragraph">
+
+The following table lists the attributes available for all Region types:
+
+</div>
+
+<table class="tableblock frame-all grid-all stretch">
+<caption>Table 1. Common Region Attributes</caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Values</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>cache-ref</p></td>
+<td class="tableblock halign-left valign-top"><p>{data-store-name} Cache
+bean reference</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of the bean
+defining the {data-store-name} Cache (by default,
+'gemfireCache').</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>cloning-enabled</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>When <code>true</code>,
+the updates are applied to a clone of the value and then the clone is
+saved to the cache. When <code>false</code>, the value is modified in
+place in the cache.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>close</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether the
+region should be closed at shutdown.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>concurrency-checks-enabled</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>true</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether
+members perform checks to provide consistent handling for concurrent or
+out-of-order updates to distributed regions.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>data-policy</p></td>
+<td class="tableblock halign-left valign-top"><p>See {data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html[data
+policy].</p></td>
+<td class="tableblock halign-left valign-top"><p>The region’s data
+policy. Note that not all data policies are supported for every Region
+type.</p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>destroy</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether the
+region should be destroyed at shutdown.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>disk-store-ref</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of a
+configured disk store.</p></td>
+<td class="tableblock halign-left valign-top"><p>A reference to a bean
+created through the <code>disk-store</code> element.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>disk-synchronous</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>true</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether disk
+store writes are synchronous.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>id</p></td>
+<td class="tableblock halign-left valign-top"><p>Any valid bean
+name.</p></td>
+<td class="tableblock halign-left valign-top"><p>The default region name
+if no <code>name</code> attribute is specified.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>ignore-if-exists</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Ignores this bean
+definition if the region already exists in the cache, resulting in a
+lookup instead.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>ignore-jta</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether this
+Region participates in JTA (Java Transaction API) transactions.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>index-update-type</p></td>
+<td
+class="tableblock halign-left valign-top"><p><code>synchronous</code> or
+<code>asynchronous</code> (default: <code>synchronous</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether
+Indices are updated synchronously or asynchronously on entry
+creation.</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p>initial-capacity</p></td>
+<td class="tableblock halign-left valign-top"><p>integer (default:
+16)</p></td>
+<td class="tableblock halign-left valign-top"><p>The initial memory
+allocation for the number of Region entries.</p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>key-constraint</p></td>
+<td class="tableblock halign-left valign-top"><p>Any valid,
+fully-qualified Java class name.</p></td>
+<td class="tableblock halign-left valign-top"><p>Expected key
+type.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>load-factor</p></td>
+<td class="tableblock halign-left valign-top"><p>float (default:
+.75)</p></td>
+<td class="tableblock halign-left valign-top"><p>Sets the initial
+parameters on the underlying <code>java.util.ConcurrentHashMap</code>
+used for storing region entries.</p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>name</p></td>
+<td class="tableblock halign-left valign-top"><p>Any valid region
+name.</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of the region.
+If not specified, it assumes the value of the <code>id</code> attribute
+(that is, the bean name).</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>persistent</p></td>
+<td class="tableblock halign-left valign-top"><p>*boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether the
+region persists entries to local disk (disk store).</p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>shortcut</p></td>
+<td class="tableblock halign-left valign-top"><p>See
+{x-data-store-javadoc}/org/apache/geode/cache/RegionShortcut.html</p></td>
+<td class="tableblock halign-left valign-top"><p>The
+<code>RegionShortcut</code> for this region. Allows easy initialization
+of the region based on pre-defined defaults.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>statistics</p></td>
+<td class="tableblock halign-left valign-top"><p>boolean (default:
+<code>false</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p>Determines whether the
+region reports statistics.</p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>template</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of a region
+template.</p></td>
+<td class="tableblock halign-left valign-top"><p>A reference to a bean
+created through one of the <code>*region-template</code>
+elements.</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p>value-constraint</p></td>
+<td class="tableblock halign-left valign-top"><p>Any valid,
+fully-qualified Java class name.</p></td>
+<td class="tableblock halign-left valign-top"><p>Expected value
+type.</p></td>
+</tr>
+</tbody>
+</table>
+
+Table 1. Common Region Attributes
+
+</div>
+
+<div class="sect3">
+
+#### `CacheListener` instances
+
+<div class="paragraph">
+
+`CacheListener` instances are registered with a Region to handle Region
+events, such as when entries are created, updated, destroyed, and so on.
+A `CacheListener` can be any bean that implements the
+{x-data-store-javadoc}/org/apache/geode/cache/CacheListener.html\[`CacheListener`\]
+interface. A Region may have multiple listeners, declared with the
+`cache-listener` element nested in the containing `*-region` element.
+
+</div>
+
+<div class="paragraph">
+
+The following example has two declared `CacheListener’s`. The first
+references a named, top-level Spring bean. The second is an anonymous
+inner bean definition.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<bean id="myListener" class="org.example.app.geode.cache.SimpleCacheListener"/>
+
+<gfe:replicated-region id="regionWithListeners">
+  <gfe:cache-listener>
+    <!-- nested CacheListener bean reference -->
+    <ref bean="myListener"/>
+    <!-- nested CacheListener bean definition -->
+    <bean class="org.example.app.geode.cache.AnotherSimpleCacheListener"/>
+  </gfe:cache-listener>
+</gfe:replicated-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The following example uses an alternate form of the `cache-listener`
+element with the `ref` attribute. Doing so allows for more concise
+configuration when defining a single `CacheListener`.
+
+</div>
+
+<div class="paragraph">
+
+Note: The XML namespace allows only a single `cache-listener` element,
+so either the style shown in the preceding example or the style in the
+following example must be used.
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:replicated-region id="exampleReplicateRegionWithCacheListener">
+    <gfe:cache-listener ref="myListener"/>
+  </gfe:replicated-region>
+
+  <bean id="myListener" class="example.CacheListener"/>
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="admonitionblock warning">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Warning
+</div></td>
+<td class="content">Using <code>ref</code> and a nested declaration in
+the <code>cache-listener</code> element is illegal. The two options are
+mutually exclusive and using both in the same element results in an
+exception.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content"><div class="title">
+Bean Reference Conventions
+</div>
+<div class="paragraph">
+<p>The <code>cache-listener</code> element is an example of a common
+pattern used in the XML namespace anywhere {data-store-name} provides a
+callback interface to be implemented in order to invoke custom code in
+response to cache or Region events. When you use Spring’s IoC container,
+the implementation is a standard Spring bean. In order to simplify the
+configuration, the schema allows a single occurrence of the
+<code>cache-listener</code> element, but, if multiple instances are
+permitted, it may contain nested bean references and inner bean
+definitions in any combination. The convention is to use the singular
+form (that is, <code>cache-listener</code> vs
+<code>cache-listeners</code>), reflecting that the most common scenario
+is, in fact, a single instance. We have already seen examples of this
+pattern in the <a href="#bootstrap:cache:advanced">advanced cache</a>
+configuration example.</p>
+</div></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### CacheLoaders and CacheWriters
+
+<div class="paragraph">
+
+Similar to `cache-listener`, the XML namespace provides `cache-loader`
+and `cache-writer` elements to register these {data-store-name}
+components for a Region.
+
+</div>
+
+<div class="paragraph">
+
+A `CacheLoader` is invoked on a cache miss to let an entry be loaded
+from an external data source, such as a database. A `CacheWriter` is
+invoked before an entry is created or updated, to allow the entry to be
+synchronized to an external data source. The main difference is that
+{data-store-name} supports, at most, a single instance of `CacheLoader`
+and `CacheWriter` per Region. However, either declaration style may be
+used.
+
+</div>
+
+<div class="paragraph">
+
+The following example declares a Region with both a `CacheLoader` and a
+`CacheWriter`:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:replicated-region id="exampleReplicateRegionWithCacheLoaderAndCacheWriter">
+    <gfe:cache-loader ref="myLoader"/>
+    <gfe:cache-writer>
+      <bean class="example.CacheWriter"/>
+    </gfe:cache-writer>
+  </gfe:replicated-region>
+
+  <bean id="myLoader" class="example.CacheLoader">
+    <property name="dataSource" ref="mySqlDataSource"/>
+  </bean>
+
+  <!-- DataSource bean definition -->
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+See
+{x-data-store-javadoc}/org/apache/geode/cache/CacheLoader.html\[`CacheLoader`\]
+and
+{x-data-store-javadoc}/org/apache/geode/cache/CacheWriter.html\[`CacheWriter`\]
+in the {data-store-name} documentation for more details.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Compression
+
+<div class="paragraph">
+
+{data-store-name} Regions may also be compressed in order to reduce JVM
+memory consumption and pressure to possibly avoid global GCs. When you
+enable compression for a Region, all values stored in memory for the
+Region are compressed, while keys and indexes remain uncompressed. New
+values are compressed when put into the Region and all values are
+decompressed automatically when read back from the Region. Values are
+not compressed when persisted to disk or when sent over the wire to
+other peer members or clients.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows a Region with compression enabled:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:replicated-region id="exampleReplicateRegionWithCompression">
+    <gfe:compressor>
+      <bean class="org.apache.geode.compression.SnappyCompressor"/>
+    </gfe:compressor>
+  </gfe:replicated-region>
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s documentation for more information on
+{x-data-store-docs}/managing/region_compression/region_compression.html\[Region
+Compression\].
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Off-Heap
+
+<div class="paragraph">
+
+{data-store-name} Regions may also be configured to store Region values
+in off-heap memory, which is a portion of JVM memory that is not subject
+to Garbage Collection (GC). By avoid expensive GC cycles, your
+application can spend more of its time on things that matter, like
+processing requests.
+
+</div>
+
+<div class="paragraph">
+
+Using off-heap memory is as simple as declaring the amount of memory to
+use and then enabling your Regions to use off-heap memory, as shown in
+the following configuration:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<util:properties id="gemfireProperties">
+    <prop key="off-heap-memory-size">200G</prop>
+</util:properties>
+
+<gfe:cache properties-ref="gemfireProperties"/>
+
+<gfe:partitioned-region id="ExampleOffHeapRegion" off-heap="true"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can control other aspects of off-heap memory management by setting
+the following {data-store-name} configuration properties using the
+`<gfe:cache>` element:s
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache critical-off-heap-percentage="90" eviction-off-heap-percentage"80"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name}'s `ResourceManager` will use these two threshold
+values (`critical-off-heap-percentage` & `eviction-off-heap-percentage`)
+to more effectively manage the off-heap memory in much the same way as
+the JVM does when managing heap memory. {data-store-name}
+`ResourceManager` will prevent the cache from consuming too much
+off-heap memory by evicting old data. If the off-heap manager is unable
+to keep up, then the `ResourceManager` refuses additions to the cache
+until the off-heap memory manager has freed up an adequate amount of
+memory.
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s documentation for more information on
+{x-data-store-docs}/managing/heap_use/heap_management.html\[Managing
+Heap and Off-Heap Memory\].
+
+</div>
+
+<div class="paragraph">
+
+Specifically, read the section,
+{x-data-store-docs}/managing/heap_use/off_heap_management.html\[Managing
+Off-Heap Memory\].
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Subregions
+
+<div class="paragraph">
+
+{sdg-name} also supports Sub-Regions, allowing Regions to be arranged in
+a hierarchical relationship.
+
+</div>
+
+<div class="paragraph">
+
+For example, {data-store-name} allows for a `/Customer/Address` Region
+and a different `/Employee/Address` Region. Additionally, a Sub-Region
+may have its own Sub-Regions and configuration. A Sub-Region does not
+inherit attributes from its parent Region. Regions types may be mixed
+and matched subject to {data-store-name} constraints. A Sub-Region is
+naturally declared as a child element of a Region. The Sub-Region’s
+`name` attribute is the simple name. The preceding example might be
+configured as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:replicated-region name="Customer">
+    <gfe:replicated-region name="Address"/>
+  </gfe:replicated-region>
+
+  <gfe:replicated-region name="Employee">
+    <gfe:replicated-region name="Address"/>
+  </gfe:replicated-region>
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Note that the `Monospaced ([id])` attribute is not permitted for a
+Sub-Region. Sub-Regions are created with bean names (/Customer/Address
+and /Employee/Address, respectively, in this case). So they may be
+injected into other application beans, such as a `GemfireTemplate`, that
+need them by using the full path name of the Region. The full pathname
+of the Region should also be used in OQL query strings.
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Region Templates
+
+<div class="paragraph">
+
+{sdg-name} also supports Region templates.
+
+</div>
+
+<div class="paragraph">
+
+This feature allows developers to define common Region configuration and
+attributes once and reuse the configuration among many Region bean
+definitions declared in the Spring `ApplicationContext`.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} includes five Region template tags in its namespace:
+
+</div>
+
+<table class="tableblock frame-all grid-all stretch">
+<caption>Table 2. Region Template Tags</caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tableblock halign-left valign-top">Tag Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>&lt;gfe:region-template&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Defines common generic
+Region attributes. Extends <code>regionType</code> in the XML
+namespace.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p><code>&lt;gfe:local-region-template&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Defines common 'Local'
+Region attributes. Extends <code>localRegionType</code> in the XML
+namespace.</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>&lt;gfe:partitioned-region-template&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Defines common
+'PARTITION' Region attributes. Extends
+<code>partitionedRegionType</code> in the XML namespace.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p><code>&lt;gfe:replicated-region-template&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Defines common
+'REPLICATE' Region attributes. Extends <code>replicatedRegionType</code>
+in the XML namespace.</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p><code>&lt;gfe:client-region-template&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p>Defines common 'Client'
+Region attributes. Extends <code>clientRegionType</code> in the XML
+namespace.</p></td>
+</tr>
+</tbody>
+</table>
+
+Table 2. Region Template Tags
+
+<div class="paragraph">
+
+In addition to the tags, concrete `<gfe:*-region>` elements (along with
+the abstract `<gfe:*-region-template>` elements) have a `template`
+attribute used to define the Region template from which the Region
+inherits its configuration. Region templates may even inherit from other
+Region templates.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows one possible configuration:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<beans>
+  <gfe:async-event-queue id="AEQ" persistent="false" parallel="false" dispatcher-threads="4">
+    <gfe:async-event-listener>
+      <bean class="example.AeqListener"/>
+    </gfe:async-event-listener>
+  </gfe:async-event-queue>
+
+  <gfe:region-template id="BaseRegionTemplate" initial-capacity="51" load-factor="0.85" persistent="false" statistics="true"
+      key-constraint="java.lang.Long" value-constraint="java.lang.String">
+    <gfe:cache-listener>
+      <bean class="example.CacheListenerOne"/>
+      <bean class="example.CacheListenerTwo"/>
+    </gfe:cache-listener>
+    <gfe:entry-ttl timeout="600" action="DESTROY"/>
+    <gfe:entry-tti timeout="300 action="INVLIDATE"/>
+  </gfe:region-template>
+
+  <gfe:region-template id="ExtendedRegionTemplate" template="BaseRegionTemplate" load-factor="0.55">
+    <gfe:cache-loader>
+      <bean class="example.CacheLoader"/>
+    </gfe:cache-loader>
+    <gfe:cache-writer>
+      <bean class="example.CacheWriter"/>
+    </gfe:cache-writer>
+    <gfe:async-event-queue-ref bean="AEQ"/>
+  </gfe:region-template>
+
+  <gfe:partitioned-region-template id="PartitionRegionTemplate" template="ExtendedRegionTemplate"
+      copies="1" load-factor="0.70" local-max-memory="1024" total-max-memory="16384" value-constraint="java.lang.Object">
+    <gfe:partition-resolver>
+      <bean class="example.PartitionResolver"/>
+    </gfe:partition-resolver>
+    <gfe:eviction type="ENTRY_COUNT" threshold="8192000" action="OVERFLOW_TO_DISK"/>
+  </gfe:partitioned-region-template>
+
+  <gfe:partitioned-region id="TemplateBasedPartitionRegion" template="PartitionRegionTemplate"
+      copies="2" local-max-memory="8192" persistent="true" total-buckets="91"/>
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Region templates work for Sub-Regions as well. Notice that
+'TemplateBasedPartitionRegion' extends 'PartitionRegionTemplate', which
+extends 'ExtendedRegionTemplate', which extends 'BaseRegionTemplate'.
+Attributes and sub-elements defined in subsequent, inherited Region bean
+definitions override what is in the parent.
+
+</div>
+
+<div class="sect3">
+
+#### How Templating Works
+
+<div class="paragraph">
+
+{sdg-name} applies Region templates when the Spring `ApplicationContext`
+configuration metadata is parsed, and therefore, Region templates must
+be declared in the order of inheritance. In other words, parent
+templates must be defined before child templates. Doing so ensures that
+the proper configuration is applied, especially when element attributes
+or sub-elements are overridden.
+
+</div>
+
+<div class="admonitionblock important">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Important
+</div></td>
+<td class="content">It is equally important to remember that the Region
+types must only inherit from other similarly typed Regions. For
+instance, it is not possible for a
+<code>&lt;gfe:replicated-region&gt;</code> to inherit from a
+<code>&lt;gfe:partitioned-region-template&gt;</code>.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Region templates are single-inheritance.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### Caution concerning Regions, Sub-Regions and Lookups
+
+<div class="paragraph">
+
+Previously, one of the underlying properties of the `replicated-region`,
+`partitioned-region`, `local-region`, and `client-region` elements in
+the {sdg-name} XML namespace was to perform a lookup first before
+attempting to create a Region. This was done in case the Region already
+existed, which would be the case if the Region was defined in an
+imported {data-store-name} native `cache.xml` configuration file.
+Therefore, the lookup was performed first to avoid any errors. This was
+by design and subject to change.
+
+</div>
+
+<div class="paragraph">
+
+This behavior has been altered and the default behavior is now to create
+the Region first. If the Region already exists, then the creation logic
+fails-fast and an appropriate exception is thrown. However, much like
+the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the {sdg-name}
+`<gfe:*-region>` XML namespace elements now include a `ignore-if-exists`
+attribute, which reinstates the old behavior by first performing a
+lookup of an existing Region identified by name before attempting to
+create the Region. If an existing Region is found by name and
+`ignore-if-exists` is set to `true`, then the Region bean definition
+defined in Spring configuration is ignored.
+
+</div>
+
+<div class="admonitionblock warning">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Warning
+</div></td>
+<td class="content">The Spring team highly recommends that the
+<code>replicated-region</code>, <code>partitioned-region</code>,
+<code>local-region</code>, and <code>client-region</code> XML namespace
+elements be strictly used for defining new Regions only. One problem
+that could arise when the Regions defined by these elements already
+exist and the Region elements perform a lookup first is, if you defined
+different Region semantics and behaviors for eviction, expiration,
+subscription, and so on in your application config, then the Region
+definition might not match and could exhibit contrary behaviors to those
+required by the application. Even worse, you might want to define the
+Region as a distributed Region (for example, <code>PARTITION</code>)
+when, in fact, the existing Region definition is local only.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock important">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Important
+</div></td>
+<td class="content">Recommended Practice - Use only
+<code>replicated-region</code>, <code>partitioned-region</code>,
+<code>local-region</code>, and <code>client-region</code> XML namespace
+elements to define new Regions.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+Consider the following native {data-store-name} `cache.xml`
+configuration file:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<cache xmlns="https://geode.apache.org/schema/cache"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://geode.apache.org/schema/cache https://geode.apache.org/schema/cache/cache-1.0.xsd"
+       version="1.0">
+
+  <region name="Customers" refid="REPLICATE">
+    <region name="Accounts" refid="REPLICATE">
+      <region name="Orders" refid="REPLICATE">
+        <region name="Items" refid="REPLICATE"/>
+      </region>
+    </region>
+  </region>
+
+</cache>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Further, consider that you may have defined an application DAO as
+follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+public class CustomerAccountDao extends GemDaoSupport {
+
+    @Resource(name = "Customers/Accounts")
+    private Region customersAccounts;
+
+    ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Here, we inject a reference to the `Customers/Accounts` Region in our
+application DAO. Consequently, it is not uncommon for a developer to
+define beans for some or all of these Regions in Spring XML
+configuration metadata as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:gfe="{spring-data-schema-namespace}"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+    {spring-data-schema-namespace} {spring-data-schema-location}
+">
+
+  <gfe:cache cache-xml-location="classpath:cache.xml"/>
+
+  <gfe:lookup-region name="Customers/Accounts"/>
+  <gfe:lookup-region name="Customers/Accounts/Orders"/>
+
+</beans>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The `Customers/Accounts` and `Customers/Accounts/Orders` Regions are
+referenced as beans in the Spring container as `Customers/Accounts` and
+`Customers/Accounts/Orders`, respectively. The nice thing about using
+the `lookup-region` element and the corresponding syntax (described
+earlier) is that it lets you reference a Sub-Region directly without
+unnecessarily defining a bean for the parent Region (`Customers`, in
+this case).
+
+</div>
+
+<div class="paragraph">
+
+Consider the following bad example, which changes the configuration
+metadata syntax to use the nested format:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:lookup-region name="Customers">
+  <gfe:lookup-region name="Accounts">
+    <gfe:lookup-region name="Orders"/>
+  </gfe:lookup-region>
+</gfe:lookup-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Now consider another bad example which uses the top-level
+`replicated-region` element along with the `ignore-if-exists` attribute
+set to perform a lookup first:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:replicated-region name="Customers" persistent="true" ignore-if-exists="true">
+  <gfe:replicated-region name="Accounts" persistent="true" ignore-if-exists="true">
+    <gfe:replicated-region name="Orders" persistent="true" ignore-if-exists="true"/>
+  </gfe:replicated-region>
+</gfe:replicated-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The Region beans defined in the Spring `ApplicationContext` consist of
+the following:
+`{ "Customers", "/Customers/Accounts", "/Customers/Accounts/Orders" }.`
+This means the dependency injected reference shown in the earlier
+example (that is, `@Resource(name = "Customers/Accounts")`) is now
+broken, since no bean with name `Customers/Accounts` is actually
+defined. For this reason, you should not configure Regions as shown in
+the two preceding examples.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} is flexible in referencing both parent Regions and
+Sub-Regions with or without the leading forward slash. For example, the
+parent can be referenced as `/Customers` or `Customers` and the child as
+`/Customers/Accounts` or `Customers/Accounts`. However, {sdg-name} is
+very specific when it comes to naming beans after Regions. It always
+uses the forward slash (/) to represent Sub-Regions (for example,
+`/Customers/Accounts`).
+
+</div>
+
+<div class="paragraph">
+
+Therefore, you should use the non-nested `lookup-region` syntax shown
+earlier or define direct references with a leading forward slash (/), as
+follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:lookup-region name="/Customers/Accounts"/>
+<gfe:lookup-region name="/Customers/Accounts/Orders"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The earlier example, where the nested `replicated-region` elements were
+used to reference the Sub-Regions, shows the problem stated earlier. Are
+the Customers, Accounts and Orders Regions and Sub-Regions persistent or
+not? They are not persistent, because the Regions were defined in the
+native {data-store-name} `cache.xml` configuration file as `REPLICATE`
+and exist before the cache bean is initialized (once the `<gfe:cache>`
+element is processed).
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Data Eviction (with Overflow)
+
+<div class="paragraph">
+
+Based on various constraints, each Region can have an eviction policy in
+place for evicting data from memory. Currently, in {data-store-name},
+eviction applies to the Least Recently Used entry (also known as
+[LRU](https://en.wikipedia.org/wiki/Cache_algorithms#Least_Recently_Used)).
+Evicted entries are either destroyed or paged to disk (referred to as
+“overflow to disk”).
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} supports all eviction policies (entry count, memory, and heap
+usage) for PARTITION Regions, REPLICATE Regions, and client, local
+Regions by using the nested `eviction` element.
+
+</div>
+
+<div class="paragraph">
+
+For example, to configure a PARTITION Region to overflow to disk if the
+memory size exceeds more than 512 MB, you can specify the following
+configuration:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="examplePartitionRegionWithEviction">
+  <gfe:eviction type="MEMORY_SIZE" threshold="512" action="OVERFLOW_TO_DISK"/>
+</gfe:partitioned-region>
+```
+
+</div>
+
+</div>
+
+<div class="admonitionblock important">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Important
+</div></td>
+<td class="content">Replicas cannot use <code>local destroy</code>
+eviction since that would invalidate them. See the {data-store-name}
+docs for more information.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+When configuring Regions for overflow, you should configure the storage
+through the `disk-store` element for maximum efficiency.
+
+</div>
+
+<div class="paragraph">
+
+For a detailed description of eviction policies, see the
+{data-store-name} documentation on
+{x-data-store-docs}/developing/eviction/chapter_overview.html\[Eviction\].
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Data Expiration
+
+<div class="paragraph">
+
+{data-store-name} lets you control how long entries exist in the cache.
+Expiration is driven by elapsed time, as opposed to eviction, which is
+driven by the entry count or heap or memory usage. Once an entry
+expires, it may no longer be accessed from the cache.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} supports the following expiration types:
+
+</div>
+
+<div class="ulist">
+
+- **Time-to-Live (TTL)**: The amount of time in seconds that an object
+  may remain in the cache after the last creation or update. For
+  entries, the counter is set to zero for create and put operations.
+  Region counters are reset when the Region is created and when an entry
+  has its counter reset.
+
+- **Idle Timeout (TTI)**: The amount of time in seconds that an object
+  may remain in the cache after the last access. The Idle Timeout
+  counter for an object is reset any time its TTL counter is reset. In
+  addition, an entry’s Idle Timeout counter is reset any time the entry
+  is accessed through a get operation or a `netSearch`. The Idle Timeout
+  counter for a Region is reset whenever the Idle Timeout is reset for
+  one of its entries.
+
+</div>
+
+<div class="paragraph">
+
+Each of these may be applied to the Region itself or to entries in the
+Region. {sdg-name} provides `<region-ttl>`, `<region-tti>`,
+`<entry-ttl>`, and `<entry-tti>` Region child elements to specify
+timeout values and expiration actions.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows a `PARTITION` Region with expiration values
+set:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="examplePartitionRegionWithExpiration">
+  <gfe:region-ttl timeout="30000" action="INVALIDATE"/>
+  <gfe:entry-tti timeout="600" action="LOCAL_DESTROY"/>
+</gfe:replicated-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+For a detailed description of expiration policies, see the
+{data-store-name} documentation on
+{x-data-store-docs}/developing/expiration/chapter_overview.html\[expiration\].
+
+</div>
+
+<div class="sect3">
+
+#### Annotation-based Data Expiration
+
+<div class="paragraph">
+
+With {sdg-name}, you can define expiration policies and settings on
+individual Region entry values (or, to put it differently, directly on
+application domain objects). For instance, you can define expiration
+policies on a Session-based application domain object as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@Expiration(timeout = "1800", action = "INVALIDATE")
+public class SessionBasedApplicationDomainObject {
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can also specify expiration type specific settings on Region entries
+by using the `@IdleTimeoutExpiration` and `@TimeToLiveExpiration`
+annotations for Idle Timeout (TTI) and Time-to-Live (TTL) expiration,
+respectively, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@TimeToLiveExpiration(timeout = "3600", action = "LOCAL_DESTROY")
+@IdleTimeoutExpiration(timeout = "1800", action = "LOCAL_INVALIDATE")
+@Expiration(timeout = "1800", action = "INVALIDATE")
+public class AnotherSessionBasedApplicationDomainObject {
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Both `@IdleTimeoutExpiration` and `@TimeToLiveExpiration` take
+precedence over the generic `@Expiration` annotation when more than one
+expiration annotation type is specified, as shown in the preceding
+example. Neither `@IdleTimeoutExpiration` nor `@TimeToLiveExpiration`
+overrides the other. Rather, they compliment each other when different
+Region entry expiration policies, such as TTL and TTI, are configured.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content"><div class="paragraph">
+<p>All <code>@Expiration</code>-based annotations apply only to Region
+entry values. Expiration for a Region is not covered by {sdg-name}'s
+expiration annotation support. However, {data-store-name} and {sdg-name}
+do let you set Region expiration by using the {sdg-acronym} XML
+namespace, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>&lt;gfe:*-region id=&quot;Example&quot; persistent=&quot;false&quot;&gt;
+  &lt;gfe:region-ttl timeout=&quot;600&quot; action=&quot;DESTROY&quot;/&gt;
+  &lt;gfe:region-tti timeout=&quot;300&quot; action=&quot;INVALIDATE&quot;/&gt;
+&lt;/gfe:*-region&gt;</code></pre>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name}'s `@Expiration` annotation support is implemented with
+{data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/CustomExpiry.html\[`CustomExpiry`\]
+interface. See {data-store-name}'s documentation on
+{x-data-store-docs}/developing/expiration/configuring_data_expiration.html\[configuring
+data expiration\] for more details
+
+</div>
+
+<div class="paragraph">
+
+The {sdg-name} `AnnotationBasedExpiration` class (and `CustomExpiry`
+implementation) is responsible for processing the {sdg-acronym}
+`@Expiration` annotations and applying the expiration policy
+configuration appropriately for Region entry expiration on request.
+
+</div>
+
+<div class="paragraph">
+
+To use {sdg-name} to configure specific {data-store-name} Regions to
+appropriately apply the expiration policy to your application domain
+objects annotated with `@Expiration`-based annotations, you must:
+
+</div>
+
+<div class="olist arabic">
+
+1.  Define a bean in the Spring `ApplicationContext` of type
+    `AnnotationBasedExpiration` by using the appropriate constructor or
+    one of the convenient factory methods. When configuring expiration
+    for a specific expiration type, such as Idle Timeout (TTI) or
+    Time-to-Live (TTL), you should use one of the factory methods in the
+    `AnnotationBasedExpiration` class, as follows:
+
+    <div class="listingblock">
+
+    <div class="content">
+
+    ``` highlight
+    <bean id="ttlExpiration" class="org.springframework.data.gemfire.expiration.AnnotationBasedExpiration"
+          factory-method="forTimeToLive"/>
+
+    <gfe:partitioned-region id="Example" persistent="false">
+        <gfe:custom-entry-ttl ref="ttlExpiration"/>
+    </gfe:partitioned-region>
+    ```
+
+    </div>
+
+    </div>
+
+    <div class="admonitionblock note">
+
+    <table>
+    <colgroup>
+    <col style="width: 50%" />
+    <col style="width: 50%" />
+    </colgroup>
+    <tbody>
+    <tr class="odd">
+    <td class="icon"><div class="title">
+    Note
+    </div></td>
+    <td class="content"><div class="paragraph">
+    <p>To configure Idle Timeout (TTI) Expiration instead, use the
+    <code>forIdleTimeout</code> factory method along with the
+    <code>&lt;gfe:custom-entry-tti ref="ttiExpiration"/&gt;</code> element
+    to set TTI.</p>
+    </div></td>
+    </tr>
+    </tbody>
+    </table>
+
+    </div>
+
+2.  (optional) Annotate your application domain objects that are stored
+    in the Region with expiration policies and custom settings by using
+    one of {sdg-name}'s `@Expiration` annotations: `@Expiration`,
+    `@IdleTimeoutExpiration`, or `@TimeToLiveExpiration`
+
+3.  (optional) In cases where particular application domain objects have
+    not been annotated with {sdg-name}'s `@Expiration` annotations at
+    all, but the {data-store-name} Region is configured to use
+    {sdg-acronym}'s custom `AnnotationBasedExpiration` class to
+    determine the expiration policy and settings for objects stored in
+    the Region, you can set “default” expiration attributes on the
+    `AnnotationBasedExpiration` bean by doing the following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<bean id="defaultExpirationAttributes" class="org.apache.geode.cache.ExpirationAttributes">
+    <constructor-arg value="600"/>
+    <constructor-arg value="#{T(org.apache.geode.cache.ExpirationAction).DESTROY}"/>
+</bean>
+
+<bean id="ttiExpiration" class="org.springframework.data.gemfire.expiration.AnnotationBasedExpiration"
+      factory-method="forIdleTimeout">
+    <constructor-arg ref="defaultExpirationAttributes"/>
+</bean>
+
+<gfe:partitioned-region id="Example" persistent="false">
+    <gfe:custom-entry-tti ref="ttiExpiration"/>
+</gfe:partitioned-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You may have noticed that {sdg-name}'s `@Expiration` annotations use a
+`String` as the attribute type rather than, and perhaps more
+appropriately, being strongly typed — for example, `int` for 'timeout'
+and {sdg-acronym}'s `ExpirationActionType` for 'action'. Why is that?
+
+</div>
+
+<div class="paragraph">
+
+Well, enter one of {sdg-name}'s other features, leveraging Spring’s core
+infrastructure for configuration convenience: property placeholders and
+Spring Expression Language (SpEL) expressions.
+
+</div>
+
+<div class="paragraph">
+
+For instance, a developer can specify both the expiration 'timeout' and
+'action' by using property placeholders in the `@Expiration` annotation
+attributes, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@TimeToLiveExpiration(timeout = "${geode.region.entry.expiration.ttl.timeout}"
+    action = "${geode.region.entry.expiration.ttl.action}")
+public class ExampleApplicationDomainObject {
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Then, in your Spring XML config or in JavaConfig, you can declare the
+following beans:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<util:properties id="expirationSettings">
+  <prop key="geode.region.entry.expiration.ttl.timeout">600</prop>
+  <prop key="geode.region.entry.expiration.ttl.action">INVALIDATE</prop>
+  ...
+</util:properties>
+
+<context:property-placeholder properties-ref="expirationProperties"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+This is convenient both when multiple application domain objects might
+share similar expiration policies and when you wish to externalize the
+configuration.
+
+</div>
+
+<div class="paragraph">
+
+However, you may want more dynamic expiration configuration determined
+by the state of the running system. This is where the power of SpEL
+comes into play and is the recommended approach, actually. Not only can
+you refer to beans in the Spring container and access bean properties,
+invoke methods, and so on, but the values for expiration 'timeout' and
+'action' can be strongly typed. Consider the following example (which
+builds on the preceding example):
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<util:properties id="expirationSettings">
+  <prop key="geode.region.entry.expiration.ttl.timeout">600</prop>
+  <prop key="geode.region.entry.expiration.ttl.action">#{T(org.springframework.data.gemfire.expiration.ExpirationActionType).DESTROY}</prop>
+  <prop key="geode.region.entry.expiration.tti.action">#{T(org.apache.geode.cache.ExpirationAction).INVALIDATE}</prop>
+  ...
+</util:properties>
+
+<context:property-placeholder properties-ref="expirationProperties"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Then, on your application domain object, you can define a timeout and an
+action as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@TimeToLiveExpiration(timeout = "@expirationSettings['geode.region.entry.expiration.ttl.timeout']"
+    action = "@expirationSetting['geode.region.entry.expiration.ttl.action']")
+public class ExampleApplicationDomainObject {
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can imagine that the 'expirationSettings' bean could be a more
+interesting and useful object than a simple instance of
+`java.util.Properties`. In the preceding example, the `properties`
+element (`expirationSettings`) uses SpEL to base the action value on the
+actual `ExpirationAction` enumerated type, quickly leading to identified
+failures if the enumerated type ever changes.
+
+</div>
+
+<div class="paragraph">
+
+As an example, all of this has been demonstrated and tested in the
+{sdg-name} test suite. See the
+[source](https://github.com/spring-projects/spring-data-geode) for
+further details.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Data Persistence
+
+<div class="paragraph">
+
+Regions can be persistent. {data-store-name} ensures that all the data
+you put into a Region that is configured for persistence is written to
+disk in a way that is recoverable the next time you recreate the Region.
+Doing so lets data be recovered after machine or process failure or even
+after an orderly shutdown and subsequent restart of the
+{data-store-name} data node.
+
+</div>
+
+<div class="paragraph">
+
+To enable persistence with {sdg-name}, set the `persistent` attribute to
+`true` on any of the `<*-region>` elements, as the following example
+shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="examplePersitentPartitionRegion" persistent="true"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Persistence may also be configured by setting the `data-policy`
+attribute. To do so, set the attribute’s value to one of
+{x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html\[{data-store-name}'s
+DataPolicy settings\], as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="anotherExamplePersistentPartitionRegion" data-policy="PERSISTENT_PARTITION"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The `DataPolicy` must match the Region type and must also agree with the
+`persistent` attribute if it is also explicitly set. If the `persistent`
+attribute is set to `false` but a persistent `DataPolicy` was specified
+(such as `PERSISTENT_REPLICATE` or `PERSISTENT_PARTITION`), an
+initialization exception is thrown.
+
+</div>
+
+<div class="paragraph">
+
+For maximum efficiency when persisting Regions, you should configure the
+storage through the `disk-store` element. The `DiskStore` is referenced
+by using the `disk-store-ref` attribute. Additionally, the Region may
+perform disk writes synchronously or asynchronously. The following
+example shows a synchronous `DiskStore`:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="yetAnotherExamplePersistentPartitionRegion" persistent="true"
+    disk-store-ref="myDiskStore" disk-synchronous="true"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+This is discussed further in [Configuring a
+DiskStore](#bootstrap:diskstore).
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Subscription Policy
+
+<div class="paragraph">
+
+{data-store-name} allows configuration of
+{x-data-store-docs}/developing/events/configure_p2p_event_messaging.html\[peer-to-peer
+(P2P) event messaging\] to control the entry events that the Region
+receives. {sdg-name} provides the `<gfe:subscription/>` sub-element to
+set the subscription policy on `REPLICATE` and `PARTITION` Regions to
+either `ALL` or `CACHE_CONTENT`. The following example shows a region
+with its subscription policy set to `CACHE_CONTENT`:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="examplePartitionRegionWithCustomSubscription">
+  <gfe:subscription type="CACHE_CONTENT"/>
+</gfe:partitioned-region>
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Local Region
+
+<div class="paragraph">
+
+{sdg-name} offers a dedicated `local-region` element for creating local
+Regions. Local Regions, as the name implies, are standalone, meaning
+that they do not share data with any other distributed system member.
+Other than that, all common Region configuration options apply.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows a minimal declaration (again, the example
+relies on the {sdg-name} XML namespace naming conventions to wire the
+cache):
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:local-region id="exampleLocalRegion"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In the preceding example, a local Region is created (if a Region by the
+same name does not already exist). The name of the Region is the same as
+the bean ID (`exampleLocalRegion`), and the bean assumes the existence
+of a {data-store-name} cache named `gemfireCache`.
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Replicated Region
+
+<div class="paragraph">
+
+One of the common Region types is a `REPLICATE` Region or “replica”. In
+short, when a Region is configured to be a `REPLICATE`, every member
+that hosts the Region stores a copy of the Region’s entries locally. Any
+update to a `REPLICATE` Region is distributed to all copies of the
+Region. When a replica is created, it goes through an initialization
+stage, in which it discovers other replicas and automatically copies all
+the entries. While one replica is initializing, you can still continue
+to use the other replicas.
+
+</div>
+
+<div class="paragraph">
+
+All common configuration options are available for REPLICATE Regions.
+{sdg-name} offers a `replicated-region` element. The following example
+shows a minimal declaration:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:replicated-region id="exampleReplica"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s documentation on
+{x-data-store-docs}/developing/distributed_regions/chapter_overview.html\[Distributed
+and Replicated Regions\] for more details.
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Partitioned Region
+
+<div class="paragraph">
+
+The {sdg-name} XML namespace also supports `PARTITION` Regions.
+
+</div>
+
+<div class="paragraph">
+
+To quote the {data-store-name} docs:
+
+</div>
+
+<div class="paragraph">
+
+“A partitioned region is a region where data is divided between peer
+servers hosting the region so that each peer stores a subset of the
+data. When using a partitioned region, applications are presented with a
+logical view of the region that looks like a single map containing all
+of the data in the region. Reads or writes to this map are transparently
+routed to the peer that hosts the entry that is the target of the
+operation. {data-store-name} divides the domain of hashcodes into
+buckets. Each bucket is assigned to a specific peer, but may be
+relocated at any time to another peer in order to improve the
+utilization of resources across the cluster.”
+
+</div>
+
+<div class="paragraph">
+
+A `PARTITION` Region is created by using the `partitioned-region`
+element. Its configuration options are similar to that of the
+`replicated-region` with the addition of partition-specific features,
+such as the number of redundant copies, total maximum memory, number of
+buckets, partition resolver, and so on.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows how to set up a `PARTITION` Region with two
+redundant copies:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="examplePartitionRegion" copies="2" total-buckets="17">
+  <gfe:partition-resolver>
+    <bean class="example.PartitionResolver"/>
+  </gfe:partition-resolver>
+</gfe:partitioned-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s documentation on
+{x-data-store-docs}/developing/partitioned_regions/chapter_overview.html\[Partitioned
+Regions\] for more details.
+
+</div>
+
+<div class="sect3">
+
+#### Partitioned Region Attributes
+
+<div class="paragraph">
+
+The following table offers a quick overview of configuration options
+specific to `PARTITION` Regions. These options are in addition to the
+common Region configuration options described
+[earlier](#bootstrap:region:attributes).
+
+</div>
+
+<table class="tableblock frame-all grid-all stretch">
+<caption>Table 3. partitioned-region attributes</caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Values</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>copies</p></td>
+<td class="tableblock halign-left valign-top"><p>0..4</p></td>
+<td class="tableblock halign-left valign-top"><p>The number of copies
+for each partition for high-availability. By default, no copies are
+created, meaning there is no redundancy. Each copy provides extra backup
+at the expense of extra storage.</p></td>
+</tr>
+<tr class="even">
+<td class="tableblock halign-left valign-top"><p>colocated-with</p></td>
+<td class="tableblock halign-left valign-top"><p>valid region
+name</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of the
+<code>PARTITION</code> region with which this newly created
+<code>PARTITION</code> Region is collocated.</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p>local-max-memory</p></td>
+<td class="tableblock halign-left valign-top"><p>positive
+integer</p></td>
+<td class="tableblock halign-left valign-top"><p>The maximum amount of
+memory (in megabytes) used by the region in <strong>this</strong>
+process.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>total-max-memory</p></td>
+<td class="tableblock halign-left valign-top"><p>any integer
+value</p></td>
+<td class="tableblock halign-left valign-top"><p>The maximum amount of
+memory (in megabytes) used by the region in <strong>all</strong>
+processes.</p></td>
+</tr>
+<tr class="odd">
+<td
+class="tableblock halign-left valign-top"><p>partition-listener</p></td>
+<td class="tableblock halign-left valign-top"><p>bean name</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of the
+<code>PartitionListener</code> used by this region for handling
+partition events.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>partition-resolver</p></td>
+<td class="tableblock halign-left valign-top"><p>bean name</p></td>
+<td class="tableblock halign-left valign-top"><p>The name of the
+<code>PartitionResolver</code> used by this region for custom
+partitioning.</p></td>
+</tr>
+<tr class="odd">
+<td class="tableblock halign-left valign-top"><p>recovery-delay</p></td>
+<td class="tableblock halign-left valign-top"><p>any long value</p></td>
+<td class="tableblock halign-left valign-top"><p>The delay in
+milliseconds that existing members wait before satisfying redundancy
+after another member crashes. -1 (the default) indicates that redundancy
+is not recovered after a failure.</p></td>
+</tr>
+<tr class="even">
+<td
+class="tableblock halign-left valign-top"><p>startup-recovery-delay</p></td>
+<td class="tableblock halign-left valign-top"><p>any long value</p></td>
+<td class="tableblock halign-left valign-top"><p>The delay in
+milliseconds that new members wait before satisfying redundancy. -1
+indicates that adding new members does not trigger redundancy recovery.
+The default is to recover redundancy immediately when a new member is
+added.</p></td>
+</tr>
+</tbody>
+</table>
+
+Table 3. partitioned-region attributes
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Client Region
+
+<div class="paragraph">
+
+{data-store-name} supports various deployment topologies for managing
+and distributing data. The topic of {data-store-name} topologies is
+beyond the scope of this documentation. However, to quickly recap,
+{data-store-name}'s supported topologies can be classified as:
+peer-to-peer (p2p), client-server, and wide area network (WAN). In the
+last two configurations, it is common to declare client Regions that
+connect to a cache server.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} offers dedicated support for each configuration through its
+[client-cache](#bootstrap:cache:client) elements: `client-region` and
+`pool`. As the names imply, `client-region` defines a client Region,
+while `pool` defines a Pool of connections used and shared by the
+various client Regions.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows a typical client Region configuration:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<bean id="myListener" class="example.CacheListener"/>
+
+<!-- client Region using the default SDG gemfirePool Pool -->
+<gfe:client-region id="Example">
+  <gfe:cache-listener ref="myListener"/>
+</gfe:client-region>
+
+<!-- client Region using its own dedicated Pool -->
+<gfe:client-region id="AnotherExample" pool-name="myPool">
+  <gfe:cache-listener ref="myListener"/>
+</gfe:client-region>
+
+<!-- Pool definition -->
+<gfe:pool id="myPool" subscription-enabled="true">
+  <gfe:locator host="remoteHost" port="12345"/>
+</gfe:pool>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+As with the other Region types, `client-region` supports `CacheListener`
+instances as well as a `CacheLoader` and a `CacheWriter`. It also
+requires a connection `Pool` for connecting to a set of either Locators
+or servers. Each client Region can have its own `Pool`, or they can
+share the same one. If a Pool is not specified, then the "DEFAULT" Pool
+will be used.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">In the preceding example, the <code>Pool</code> is
+configured with a Locator. A Locator is a separate process used to
+discover cache servers and peer data members in the distributed system
+and is recommended for production systems. It is also possible to
+configure the <code>Pool</code> to connect directly to one or more cache
+servers by using the <code>server</code> element.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+For a full list of options to set on the client and especially on the
+`Pool`, see the {sdg-name} schema
+(“[\[appendix-schema\]](#appendix-schema)”) and {data-store-name}'s
+documentation on
+{x-data-store-docs}/topologies_and_comm/cs_configuration/chapter_overview.html\[Client-Server
+Configuration\].
+
+</div>
+
+<div class="sect3">
+
+#### Client Interests
+
+<div class="paragraph">
+
+To minimize network traffic, each client can separately define its own
+'interests' policies, indicating to {data-store-name} the data it
+actually requires. In {sdg-name}, 'interests' can be defined for each
+client Region separately. Both key-based and regular expression-based
+interest types are supported.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows both key-based and regular expression-based
+`interest` types:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:client-region id="Example" pool-name="myPool">
+    <gfe:key-interest durable="true" result-policy="KEYS">
+        <bean id="key" class="java.lang.String">
+             <constructor-arg value="someKey"/>
+        </bean>
+    </gfe:key-interest>
+    <gfe:regex-interest pattern=".*" receive-values="false"/>
+</gfe:client-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+A special key, `ALL_KEYS`, means 'interest' is registered for all keys.
+The same can be accomplished by using the regular expression, `".\*"`.
+
+</div>
+
+<div class="paragraph">
+
+The `<gfe:*-interest>` key and regular expression elements support three
+attributes: `durable`, `receive-values`, and `result-policy`.
+
+</div>
+
+<div class="paragraph">
+
+`durable` indicates whether the 'interest' policy and subscription queue
+created for the client when the client connects to one or more servers
+in the cluster is maintained across client sessions. If the client goes
+away and comes back, a `durable` subscription queue on the servers for
+the client is maintained while the client is disconnected. When the
+client reconnects, the client receives any events that occurred while
+the client was disconnected from the servers in the cluster.
+
+</div>
+
+<div class="paragraph">
+
+A subscription queue on the servers in the cluster is maintained for
+each `Pool` of connections defined in the client where a subscription
+has also been “enabled” for that `Pool`. The subscription queue is used
+to store (and possibly conflate) events sent to the client. If the
+subscription queue is durable, it persists between client sessions (that
+is, connections), potentially up to a specified timeout. If the client
+does not return within a given time frame the client Pool subscription
+queue is destroyed in order to reduce resource consumption on servers in
+the cluster. If the subscription queue is not `durable`, it is destroyed
+immediately when the client disconnects. You need to decide whether your
+client should receive events that came while it was disconnected or if
+it needs to receive only the latest events after it reconnects.
+
+</div>
+
+<div class="paragraph">
+
+The `receive-values` attribute indicates whether or not the entry values
+are received for create and update events. If `true`, values are
+received. If `false`, only invalidation events are received.
+
+</div>
+
+<div class="paragraph">
+
+And finally, the 'result-policy\` is an enumeration of: `KEYS`,
+`KEYS_VALUE`, and `NONE`. The default is `KEYS_VALUES`. The
+`result-policy` controls the initial dump when the client first connects
+to initialize the local cache, essentially seeding the client with
+events for all the entries that match the interest policy.
+
+</div>
+
+<div class="paragraph">
+
+Client-side interest registration does not do much good without enabling
+subscription on the `Pool`, as mentioned earlier. In fact, it is an
+error to attempt interest registration without subscription enabled. The
+following example shows how to do so:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:pool ... subscription-enabled="true">
+  ...
+</gfe:pool>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In addition to `subscription-enabled`, can you also set
+`subscription-ack-interval`, `subscription-message-tracking-timeout`,
+and `subscription-redundancy`. `subscription-redundancy` is used to
+control how many copies of the subscription queue should be maintained
+by the servers in the cluster. If redundancy is greater than one, and
+the “primary” subscription queue (that is, the server) goes down, then a
+“secondary” subscription queue takes over, keeping the client from
+missing events in a HA scenario.
+
+</div>
+
+<div class="paragraph">
+
+In addition to the `Pool` settings, the server-side Regions use an
+additional attribute, `enable-subscription-conflation`, to control the
+conflation of events that are sent to the clients. This can also help
+further minimize network traffic and is useful in situations where the
+application only cares about the latest value of an entry. However, when
+the application keeps a time series of events that occurred, conflation
+is going to hinder that use case. The default value is `false`. The
+following example shows a Region configuration on the server, for which
+the client contains a corresponding client `[CACHING_]PROXY` Region with
+interests in keys in this server Region:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region name="ServerSideRegion" enable-subscription-conflation="true">
+  ...
+</gfe:partitioned-region>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+To control the amount of time (in seconds) that a “durable” subscription
+queue is maintained after a client is disconnected from the servers in
+the cluster, set the `durable-client-timeout` attribute on the
+`<gfe:client-cache>` element as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:client-cache durable-client-timeout="600">
+  ...
+</gfe:client-cache>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+A full, in-depth discussion of how client interests work and
+capabilities is beyond the scope of this document.
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s documentation on
+{x-data-store-docs}/developing/events/how_client_server_distribution_works.html\[Client-to-Server
+Event Distribution\] for more details.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### JSON Support
+
+<div class="paragraph">
+
+{data-store-name} has support for caching JSON documents in Regions,
+along with the ability to query stored JSON documents using the
+{data-store-name} OQL (Object Query Language). JSON documents are stored
+internally as
+{x-data-store-javadoc}/org/apache/geode/pdx/PdxInstance.html\[PdxInstance\]
+types by using the
+{x-data-store-javadoc}/org/apache/geode/pdx/JSONFormatter.html\[JSONFormatter\]
+class to perform conversion to and from JSON documents (as a `String`).
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} provides the `<gfe-data:json-region-autoproxy/>` element to
+enable an {spring-framework-docs}/#aop-introduction\[AOP\] component to
+advise appropriate, proxied Region operations, which effectively
+encapsulates the `JSONFormatter`, thereby letting your applications work
+directly with JSON Strings.
+
+</div>
+
+<div class="paragraph">
+
+In addition, Java objects written to JSON configured Regions are
+automatically converted to JSON using Jackson’s `ObjectMapper`. When
+these values are read back, they are returned as a JSON String.
+
+</div>
+
+<div class="paragraph">
+
+By default, `<gfe-data:json-region-autoproxy/>` performs the conversion
+for all Regions. To apply this feature to selected Regions, provide a
+comma-delimited list of Region bean IDs in the `region-refs` attribute.
+Other attributes include a `pretty-print` flag (defaults to `false`) and
+`convert-returned-collections`.
+
+</div>
+
+<div class="paragraph">
+
+Also, by default, the results of the `getAll()` and `values()` Region
+operations are converted for configured Regions. This is done by
+creating a parallel data structure in local memory. This can incur
+significant overhead for large collections, so set the
+`convert-returned-collections` to `false` if you would like to disable
+automatic conversion for these Region operations.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Certain Region operations (specifically those that
+use {data-store-name}'s proprietary <code>Region.Entry</code>, such as:
+<code>entries(boolean)</code>, <code>entrySet(boolean)</code> and
+<code>getEntry()</code> type) are not targeted for AOP advice. In
+addition, the <code>entrySet()</code> method (which returns a
+<code>Set&lt;java.util.Map.Entry&lt;?, ?&gt;&gt;</code>) is also not
+affected.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+The following example configuration shows how to set the `pretty-print`
+and `convert-returned-collections` attributes:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe-data:json-region-autoproxy region-refs="myJsonRegion" pretty-print="true" convert-returned-collections="false"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+This feature also works seamlessly with `GemfireTemplate` operations,
+provided that the template is declared as a Spring bean. Currently, the
+native `QueryService` operations are not supported.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring an Index
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{data-store-name} allows indexes (also sometimes pluralized as indices)
+to be created on Region data to improve the performance of OQL (Object
+Query Language) queries.
+
+</div>
+
+<div class="paragraph">
+
+In {sdg-name}, indexes are declared with the `index` element, as the
+following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In {sdg-name}'s XML schema (also called the {sdg-acronym} XML
+namespace), `index` bean declarations are not bound to a Region, unlike
+{data-store-name}'s native `cache.xml`. Rather, they are top-level
+elements similar to `<gfe:cache>` element. This lets you declare any
+number of indexes on any Region, whether they were just created or
+already exist — a significant improvement over {data-store-name}'s
+native `cache.xml` format.
+
+</div>
+
+<div class="paragraph">
+
+An `Index` must have a name. You can give the `Index` an explicit name
+by using the `name` attribute. Otherwise, the bean name (that is, the
+value of the `id` attribute) of the `index` bean definition is used as
+the `Index` name.
+
+</div>
+
+<div class="paragraph">
+
+The `expression` and `from` clause form the main components of an
+`Index`, identifying the data to index (that is, the Region identified
+in the `from` clause) along with what criteria (that is, `expression`)
+is used to index the data. The `expression` should be based on what
+application domain object fields are used in the predicate of
+application-defined OQL queries used to query and look up the objects
+stored in the Region.
+
+</div>
+
+<div class="paragraph">
+
+Consider the following example, which has a `lastName` property:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@Region("Customers")
+class Customer {
+
+  @Id
+  Long id;
+
+  String lastName;
+  String firstName;
+
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Now consider the following example, which has an application-defined
+{sdg-acronym} Repository to query for `Customer` objects:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+interface CustomerRepository extends GemfireRepository<Customer, Long> {
+
+  Customer findByLastName(String lastName);
+
+  ...
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The {sdg-acronym} Repository finder/query method results in the
+following OQL statement being generated and ran:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+SELECT * FROM /Customers c WHERE c.lastName = '$1'
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+Therefore, you might want to create an `Index` with a statement similar
+to the following:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:index id="myIndex" name="CustomersLastNameIndex" expression="lastName" from="/Customers" type="HASH"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+The `from` clause must refer to a valid, existing Region and is how an
+`Index` gets applied to a Region. This is not specific to {sdg-name}. It
+is a feature of {data-store-name}.
+
+</div>
+
+<div class="paragraph">
+
+The `Index` `type` may be one of three enumerated values defined by
+{sdg-name}'s
+{sdg-javadoc}/org/springframework/data/gemfire/IndexType.html\[`IndexType`\]
+enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
+
+</div>
+
+<div class="paragraph">
+
+Each of the enumerated values corresponds to one of the
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html\[`QueryService`\]
+`create[|Key|Hash]Index` methods invoked when the actual `Index` is to
+be created (or “defined” — you can find more on “defining” indexes in
+the next section). For instance, if the `IndexType` is `PRIMARY_KEY`,
+then the
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createKeyIndex-java.lang.String-java.lang.String-java.lang.String-\[QueryService.createKeyIndex(..)\]
+is invoked to create a `KEY` `Index`.
+
+</div>
+
+<div class="paragraph">
+
+The default is `FUNCTIONAL` and results in one of the
+`QueryService.createIndex(..)` methods being invoked. See the {sdg-name}
+XML schema for a full set of options.
+
+</div>
+
+<div class="paragraph">
+
+For more information on indexing in {data-store-name}, see “[Working
+with
+Indexes](https://gemfire90.docs.pivotal.io/geode/developing/query_index/query_index.html)”
+in {data-store-name}'s User Guide.
+
+</div>
+
+<div class="sect2">
+
+### Defining Indexes
+
+<div class="paragraph">
+
+In addition to creating indexes up front as `Index` bean definitions are
+processed by {sdg-name} on Spring container initialization, you may also
+define all of your application indexes prior to creating them by using
+the `define` attribute, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+When `define` is set to `true` (it defaults to `false`), it does not
+actually create the `Index` at that moment. All “defined” Indexes are
+created all at once, when the Spring `ApplicationContext` is “refreshed”
+or, to put it differently, when a `ContextRefreshedEvent` is published
+by the Spring container. {sdg-name} registers itself as an
+`ApplicationListener` listening for the `ContextRefreshedEvent`. When
+fired, {sdg-name} calls
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes\[`QueryService.createDefinedIndexes()`\].
+
+</div>
+
+<div class="paragraph">
+
+Defining indexes and creating them all at once boosts speed and
+efficiency when creating indexes.
+
+</div>
+
+<div class="paragraph">
+
+See “[Creating Multiple Indexes at
+Once](https://gemfire90.docs.pivotal.io/geode/developing/query_index/create_multiple_indexes.html)”
+for more details.
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### `IgnoreIfExists` and `Override`
+
+<div class="paragraph">
+
+Two {sdg-name} `Index` configuration options warrant special mention:
+`ignoreIfExists` and `override`.
+
+</div>
+
+<div class="paragraph">
+
+These options correspond to the `ignore-if-exists` and `override`
+attributes on the `<gfe:index>` element in {sdg-name}'s XML namespace,
+respectively.
+
+</div>
+
+<div class="admonitionblock warning">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Warning
+</div></td>
+<td class="content">Make sure you absolutely understand what you are
+doing before using either of these options. These options can affect the
+performance and resources (such as memory) consumed by your application
+at runtime. As a result, both of these options are disabled (set to
+<code>false</code>) in {sdg-acronym} by default.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">These options are only available in {sdg-name} and
+exist to workaround known limitations with {data-store-name}.
+{data-store-name} has no equivalent options or functionality.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+Each option significantly differs in behavior and entirely depends on
+the type of {data-store-name} `Index` exception thrown. This also means
+that neither option has any effect if a {data-store-name} Index-type
+exception is not thrown. These options are meant to specifically handle
+{data-store-name} `IndexExistsException` and
+`IndexNameConflictException` instances, which can occur for various,
+sometimes obscure reasons. The exceptions have the following causes:
+
+</div>
+
+<div class="ulist">
+
+- An
+  {x-data-store-javadoc}/org/apache/geode/cache/query/IndexExistsException.html\[`IndexExistsException`\]
+  is thrown when there exists another `Index` with the same definition
+  but a different name when attempting to create an `Index`.
+
+- An
+  {x-data-store-javadoc}/org/apache/geode/cache/query/IndexNameConflictException.html\[`IndexNameConflictException`\]
+  is thrown when there exists another `Index` with the same name but
+  possibly different definition when attempting to create an `Index`.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name}'s default behavior is to fail-fast, always. So, neither
+`Index` *Exception* are “handled” by default. These `Index` exceptions
+are wrapped in a {sdg-acronym} `GemfireIndexException` and rethrown. If
+you wish for {sdg-name} to handle them for you, you can set either of
+these `Index` bean definition options to `true`.
+
+</div>
+
+<div class="paragraph">
+
+`IgnoreIfExists` always takes precedence over `Override`, primarily
+because it uses fewer resources, simply because it returns the
+“existing” `Index` in both exceptional cases.
+
+</div>
+
+<div class="sect3">
+
+#### `IgnoreIfExists` Behavior
+
+<div class="paragraph">
+
+When an `IndexExistsException` is thrown and `ignoreIfExists` is set to
+`true` (or `<gfe:index ignore-if-exists="true">`), then the `Index` that
+would have been created by this `index` bean definition or declaration
+is simply ignored, and the existing `Index` is returned.
+
+</div>
+
+<div class="paragraph">
+
+There is little consequence in returning the existing `Index`, since the
+`index` bean definition is the same, as determined by {data-store-name}
+itself, not {sdg-acronym}.
+
+</div>
+
+<div class="paragraph">
+
+However, this also means that no `Index` with the “name” specified in
+your `index` bean definition or declaration actually exists from
+{data-store-name}'s perspective (that is, with
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]).
+Therefore, you should be careful when writing OQL query statements that
+use query hints, especially query hints that refer to the application
+`Index` being ignored. Those query hints need to be changed.
+
+</div>
+
+<div class="paragraph">
+
+When an `IndexNameConflictException` is thrown and `ignoreIfExists` is
+set to `true` (or `<gfe:index ignore-if-exists="true">`), the `Index`
+that would have been created by this `index` bean definition or
+declaration is also ignored, and the "existing" `Index` is again
+returned, as when an `IndexExistsException` is thrown.
+
+</div>
+
+<div class="paragraph">
+
+However, there is more risk in returning the existing `Index` and
+ignoring the application’s definition of the `Index` when an
+`IndexNameConflictException` is thrown. For a
+`IndexNameConflictException`, while the names of the conflicting indexes
+are the same, the definitions could be different. This situation could
+have implications for OQL queries specific to the application, where you
+would presume the indexes were defined specifically with the application
+data access patterns and queries in mind. However, if like-named indexes
+differ in definition, this might not be the case. Consequently, you
+should verify your `Index` names.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">{sdg-acronym} makes a best effort to inform the user
+when the <code>Index</code> being ignored is significantly different in
+its definition from the existing <code>Index</code>. However, in order
+for {sdg-acronym} to accomplish this, it must be able to find the
+existing <code>Index</code>, which is looked up by using the
+{data-store-name} API (the only means available).</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### `Override` Behavior
+
+<div class="paragraph">
+
+When an `IndexExistsException` is thrown and `override` is set to `true`
+(or `<gfe:index override="true">`), the `Index` is effectively renamed.
+Remember, `IndexExistsExceptions` are thrown when multiple indexes exist
+that have the same definition but different names.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} can only accomplish this by using {data-store-name}'s API, by
+first removing the existing `Index` and then recreating the `Index` with
+the new name. It is possible that either the remove or subsequent create
+invocation could fail. There is no way to execute both actions
+atomically and rollback this joint operation if either fails.
+
+</div>
+
+<div class="paragraph">
+
+However, if it succeeds, then you have the same problem as before with
+the `ignoreIfExists` option. Any existing OQL query statement using
+query hints that refer to the old `Index` by name must be changed.
+
+</div>
+
+<div class="paragraph">
+
+When an `IndexNameConflictException` is thrown and `override` is set to
+`true` (or `<gfe:index override="true">`), the existing `Index` can
+potentially be re-defined. We say “potentially” because it is possible
+for the like-named, existing `Index` to have exactly the same definition
+and name when an `IndexNameConflictException` is thrown.
+
+</div>
+
+<div class="paragraph">
+
+If so, {sdg-acronym} is smart and returns the existing `Index` as is,
+even on `override`. There is no harm in this behavior, since both the
+name and the definition are exactly the same. Of course, {sdg-acronym}
+can only accomplish this when {sdg-acronym} is able to find the existing
+`Index`, which is dependent on {data-store-name}'s APIs. If it cannot be
+found, nothing happens and a {sdg-acronym} `GemfireIndexException` is
+thrown that wraps the `IndexNameConflictException`.
+
+</div>
+
+<div class="paragraph">
+
+However, when the definition of the existing `Index` is different,
+{sdg-acronym} attempts to re-create the `Index` by using the `Index`
+definition specified in the `index` bean definition. Make sure this is
+what you want and make sure the `index` bean definition matches your
+expectations and application requirements.
+
+</div>
+
+</div>
+
+<div class="sect3">
+
+#### How Does `IndexNameConflictExceptions` Actually Happen?
+
+<div class="paragraph">
+
+It is probably not all that uncommon for `IndexExistsExceptions` to be
+thrown, especially when multiple configuration sources are used to
+configure {data-store-name} ({sdg-name}, {data-store-name} Cluster
+Config, {data-store-name} native `cache.xml`, the API, and so on). You
+should definitely prefer one configuration method and stick with it.
+
+</div>
+
+<div class="paragraph">
+
+However, when does an `IndexNameConflictException` get thrown?
+
+</div>
+
+<div class="paragraph">
+
+One particular case is an `Index` defined on a `PARTITION` Region (PR).
+When an `Index` is defined on a `PARTITION` Region (for example, `X`),
+{data-store-name} distributes the `Index` definition (and name) to other
+peer members in the cluster that also host the same `PARTITION` Region
+(that is, "X"). The distribution of this `Index` definition to, and
+subsequent creation of, this `Index` by peer members is on a
+need-to-know basis (that is, by peer member hosting the same PR) is
+performed asynchronously.
+
+</div>
+
+<div class="paragraph">
+
+During this window of time, it is possible that these pending PR
+`Indexes` cannot be identified by {data-store-name} — such as with a
+call to
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]
+with
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes-org.apache.geode.cache.Region\[`QueryService.getIndexes(:Region)`\],
+or even with
+{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndex-org.apache.geode.cache.Region-java.lang.String\[`QueryService.getIndex(:Region, indexName:String)`\].
+
+</div>
+
+<div class="paragraph">
+
+As a result, the only way for {sdg-acronym} or other {data-store-name}
+cache client applications (not involving Spring) to know for sure is to
+attempt to create the `Index`. If it fails with either an
+`IndexNameConflictException` or even an `IndexExistsException`, the
+application knows there is a problem. This is because the `QueryService`
+`Index` creation waits on pending `Index` definitions, whereas the other
+{data-store-name} API calls do not.
+
+</div>
+
+<div class="paragraph">
+
+In any case, {sdg-acronym} makes a best effort and attempts to inform
+you what has happened or is happening and tell you the corrective
+action. Given that all {data-store-name} `QueryService.createIndex(..)`
+methods are synchronous, blocking operations, the state of
+{data-store-name} should be consistent and accessible after either of
+these index-type exceptions are thrown. Consequently, {sdg-acronym} can
+inspect the state of the system and act accordingly, based on your
+configuration.
+
+</div>
+
+<div class="paragraph">
+
+In all other cases, {sdg-acronym} embraces a fail-fast strategy.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring a DiskStore
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} supports `DiskStore` configuration and creation through the
+`disk-store` element, as the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:disk-store id="Example" auto-compact="true" max-oplog-size="10"
+                queue-size="50" time-interval="9999">
+    <gfe:disk-dir location="/disk/location/one" max-size="20"/>
+    <gfe:disk-dir location="/disk/location/two" max-size="20"/>
+</gfe:disk-store>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+`DiskStore` instances are used by Regions for file system persistent
+backup and overflow of evicted entries as well as persistent backup for
+WAN Gateways. Multiple {data-store-name} components may share the same
+`DiskStore`. Additionally, multiple file system directories may be
+defined for a single `DiskStore`, as shown in the preceding example.
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s documentation for a complete explanation of
+{x-data-store-docs}/developing/storing_data_on_disk/chapter_overview.html\[Persistence
+and Overflow\] and configuration options on `DiskStore` instances.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring the Snapshot Service
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} supports cache and Region snapshots by using
+{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[{data-store-name}'s
+Snapshot Service\]. The out-of-the-box Snapshot Service support offers
+several convenient features to simplify the use of {data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html\[Cache\]
+and
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[Region\]
+Snapshot Service APIs.
+
+</div>
+
+<div class="paragraph">
+
+As the
+{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[{data-store-name}
+documentation\] explains, snapshots let you save and subsequently reload
+the cached data later, which can be useful for moving data between
+environments, such as from production to a staging or test environment
+in order to reproduce data-related issues in a controlled context. You
+can combine {sdg-name}'s Snapshot Service support with [Spring’s bean
+definition
+profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
+to load snapshot data specific to the environment as necessary.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name}'s support for {data-store-name}'s Snapshot Service begins
+with the `<gfe-data:snapshot-service>` element from the `<gfe-data>` XML
+namespace.
+
+</div>
+
+<div class="paragraph">
+
+For example, you can define cache-wide snapshots to be loaded as well as
+saved by using a couple of snapshot imports and a data export
+definition, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe-data:snapshot-service id="gemfireCacheSnapshotService">
+  <gfe-data:snapshot-import location="/absolute/filesystem/path/to/import/fileOne.snapshot"/>
+  <gfe-data:snapshot-import location="relative/filesystem/path/to/import/fileTwo.snapshot"/>
+  <gfe-data:snapshot-export
+      location="/absolute/or/relative/filesystem/path/to/export/directory"/>
+</gfe-data:snapshot-service>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can define as many imports and exports as you like. You can define
+only imports or only exports. The file locations and directory paths can
+be absolute or relative to the {sdg-name} application, which is the JVM
+process’s working directory.
+
+</div>
+
+<div class="paragraph">
+
+The preceding example is pretty simple, and the Snapshot Service defined
+in this case refers to the {data-store-name} cache instance with the
+default name of `gemfireCache` (as described in [Configuring a
+Cache](#bootstrap:cache)). If you name your cache bean definition
+something other than the default, you can use the `cache-ref` attribute
+to refer to the cache bean by name, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache id="myCache"/>
+...
+<gfe-data:snapshot-service id="mySnapshotService" cache-ref="myCache">
+  ...
+</gfe-data:snapshot-service>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You can also define a Snapshot Service for a particular Region by
+specifying the `region-ref` attribute, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="Example" persistent="false" .../>
+...
+<gfe-data:snapshot-service id="gemfireCacheRegionSnapshotService" region-ref="Example">
+  <gfe-data:snapshot-import location="relative/path/to/import/example.snapshot/>
+  <gfe-data:snapshot-export location="/absolute/path/to/export/example.snapshot/>
+</gfe-data:snapshot-service>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+When the `region-ref` attribute is specified, {sdg-name}'s
+`SnapshotServiceFactoryBean` resolves the `region-ref` attribute value
+to a Region bean defined in the Spring container and creates a
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[`RegionSnapshotService`\].
+The snapshot import and export definitions function the same way.
+However, the `location` must refer to a file on an export.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">{data-store-name} is strict about imported snapshot
+files actually existing before they are referenced. For exports,
+{data-store-name} creates the snapshot file. If the snapshot file for
+export already exists, the data is overwritten.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="admonitionblock tip">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Tip
+</div></td>
+<td class="content">{sdg-name} includes a
+<code>suppress-import-on-init</code> attribute on the
+<code>&lt;gfe-data:snapshot-service&gt;</code> element to suppress the
+configured Snapshot Service from trying to import data into the cache or
+Region on initialization. Doing so is useful, for example, when data
+exported from one Region is used to feed the import of another
+Region.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="sect2">
+
+### Snapshot Location
+
+<div class="paragraph">
+
+With the cache-based Snapshot Service (that is, a
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html\[`CacheSnapshotService`\])
+you would typically pass it a directory containing all the snapshot
+files to load rather than individual snapshot files, as the overloaded
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html#load-java.io.File-org.apache.geode.cache.snapshot.SnapshotOptions.SnapshotFormat\[`load`\]
+method in the `CacheSnapshotService` API indicates.
+
+</div>
+
+<div class="admonitionblock note">
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="icon"><div class="title">
+Note
+</div></td>
+<td class="content">Of course, you can use the overloaded
+<code>load(:File[], :SnapshotFormat, :SnapshotOptions)</code> method to
+get specific about which snapshot files to load into the
+{data-store-name} cache.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="paragraph">
+
+However, {sdg-name} recognizes that a typical developer workflow might
+be to extract and export data from one environment into several snapshot
+files, zip all of them up, and then conveniently move the zip file to
+another environment for import.
+
+</div>
+
+<div class="paragraph">
+
+Therefore, {sdg-name} lets you specify a jar or zip file on import for a
+`cache`-based Snapshot Service, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+  <gfe-data:snapshot-service id="cacheBasedSnapshotService" cache-ref="gemfireCache">
+    <gfe-data:snapshot-import location="/path/to/snapshots.zip"/>
+  </gfe-data:snapshot-service>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} conveniently extracts the provided zip file and treats it as
+a directory import (load).
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Snapshot Filters
+
+<div class="paragraph">
+
+The real power of defining multiple snapshot imports and exports is
+realized through the use of snapshot filters. Snapshot filters implement
+{data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[`SnapshotFilter`\]
+interface and are used to filter Region entries for inclusion into the
+Region on import and for inclusion into the snapshot on export.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} lets you use snapshot filters on import and export by using
+the `filter-ref` attribute or an anonymous, nested bean definition, as
+the following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:cache/>
+
+<gfe:partitioned-region id="Admins" persistent="false"/>
+<gfe:partitioned-region id="Guests" persistent="false"/>
+
+<bean id="activeUsersFilter" class="example.gemfire.snapshot.filter.ActiveUsersFilter/>
+
+<gfe-data:snapshot-service id="adminsSnapshotService" region-ref="Admins">
+  <gfe-data:snapshot-import location="/path/to/import/users.snapshot">
+    <bean class="example.gemfire.snapshot.filter.AdminsFilter/>
+  </gfe-data:snapshot-import>
+  <gfe-data:snapshot-export location="/path/to/export/active/admins.snapshot" filter-ref="activeUsersFilter"/>
+</gfe-data:snapshot-service>
+
+<gfe-data:snapshot-service id="guestsSnapshotService" region-ref="Guests">
+  <gfe-data:snapshot-import location="/path/to/import/users.snapshot">
+    <bean class="example.gemfire.snapshot.filter.GuestsFilter/>
+  </gfe-data:snapshot-import>
+  <gfe-data:snapshot-export location="/path/to/export/active/guests.snapshot" filter-ref="activeUsersFilter"/>
+</gfe-data:snapshot-service>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In addition, you can express more complex snapshot filters by using the
+`ComposableSnapshotFilter` class. This class implements
+{data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[SnapshotFilter\]
+interface as well as the
+[Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
+design pattern.
+
+</div>
+
+<div class="paragraph">
+
+In a nutshell, the
+[Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
+design pattern lets you compose multiple objects of the same type and
+treat the aggregate as single instance of the object type — a powerful
+and useful abstraction.
+
+</div>
+
+<div class="paragraph">
+
+`ComposableSnapshotFilter` has two factory methods, `and` and `or`. They
+let you logically combine individual snapshot filters using the AND and
+OR logical operators, respectively. The factory methods take a list of
+`SnapshotFilters`.
+
+</div>
+
+<div class="paragraph">
+
+The following example shows a definition for a
+`ComposableSnapshotFilter`:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<bean id="activeUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
+      factory-method="and">
+  <constructor-arg index="0">
+    <list>
+      <bean class="org.example.app.gemfire.snapshot.filter.ActiveUsersFilter"/>
+      <bean class="org.example.app.gemfire.snapshot.filter.UsersSinceFilter"
+            p:since="2015-01-01"/>
+    </list>
+  </constructor-arg>
+</bean>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+You could then go on to combine the `activesUsersSinceFilter` with
+another filter by using `or`, as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<bean id="covertOrActiveUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
+      factory-method="or">
+  <constructor-arg index="0">
+    <list>
+      <ref bean="activeUsersSinceFilter"/>
+      <bean class="example.gemfire.snapshot.filter.CovertUsersFilter"/>
+    </list>
+  </constructor-arg>
+</bean>
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect2">
+
+### Snapshot Events
+
+<div class="paragraph">
+
+By default, {sdg-name} uses {data-store-name}'s Snapshot Services on
+startup to import data and on shutdown to export data. However, you may
+want to trigger periodic, event-based snapshots, for either import or
+export, from within your Spring application.
+
+</div>
+
+<div class="paragraph">
+
+For this purpose, {sdg-name} defines two additional Spring application
+events, extending Spring’s
+[`ApplicationEvent`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html)
+class for imports and exports, respectively:
+`ImportSnapshotApplicationEvent` and `ExportSnapshotApplicationEvent`.
+
+</div>
+
+<div class="paragraph">
+
+The two application events can be targeted for the entire
+{data-store-name} cache or for individual {data-store-name} Regions. The
+constructors in these classes accept an optional Region pathname (such
+as `/Example`) as well as zero or more `SnapshotMetadata` instances.
+
+</div>
+
+<div class="paragraph">
+
+The array of `SnapshotMetadata` overrides the snapshot metadata defined
+by `<gfe-data:snapshot-import>` and `<gfe-data:snapshot-export>`
+sub-elements, which are used in cases where snapshot application events
+do not explicitly provide `SnapshotMetadata`. Each individual
+`SnapshotMetadata` instance can define its own `location` and `filters`
+properties.
+
+</div>
+
+<div class="paragraph">
+
+All snapshot service beans defined in the Spring `ApplicationContext`
+receive import and export snapshot application events. However, only
+matching Snapshot Service beans process import and export events.
+
+</div>
+
+<div class="paragraph">
+
+A Region-based `[Import|Export]SnapshotApplicationEvent` matches if the
+Snapshot Service bean defined is a `RegionSnapshotService` and its
+Region reference (as determined by the `region-ref` attribute) matches
+the Region’s pathname, as specified by the snapshot application event.
+
+</div>
+
+<div class="paragraph">
+
+A Cache-based `[Import|Export]SnapshotApplicationEvent` (that is, a
+snapshot application event without a Region pathname) triggers all
+Snapshot Service beans, including any `RegionSnapshotService` beans, to
+perform either an import or export, respectively.
+
+</div>
+
+<div class="paragraph">
+
+You can use Spring’s
+{spring-framework-javadoc}/org/springframework/context/ApplicationEventPublisher.html\[`ApplicationEventPublisher`\]
+interface to fire import and export snapshot application events from
+your application as follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+@Component
+public class ExampleApplicationComponent {
+
+  @Autowired
+  private ApplicationEventPublisher eventPublisher;
+
+  @Resource(name = "Example")
+  private Region<?, ?> example;
+
+  public void someMethod() {
+
+    ...
+
+    File dataSnapshot = new File(System.getProperty("user.dir"), "/path/to/export/data.snapshot");
+
+    SnapshotFilter myFilter = ...;
+
+    SnapshotMetadata exportSnapshotMetadata =
+        new SnapshotMetadata(dataSnapshot, myFilter, null);
+
+    ExportSnapshotApplicationEvent exportSnapshotEvent =
+        new ExportSnapshotApplicationEvent(this, example.getFullPath(), exportSnapshotMetadata)
+
+    eventPublisher.publishEvent(exportSnapshotEvent);
+
+    ...
+  }
+}
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+In the preceding example, only the `/Example` Region’s Snapshot Service
+bean picks up and handles the export event, saving the filtered,
+“/Example” Region’s data to the `data.snapshot` file in a sub-directory
+of the application’s working directory.
+
+</div>
+
+<div class="paragraph">
+
+Using the Spring application events and messaging subsystem is a good
+way to keep your application loosely coupled. You can also use Spring’s
+{spring-framework-docs}/#scheduling-task-scheduler\[Scheduling\]
+services to fire snapshot application events on a periodic basis.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring the Function Service
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+{sdg-name} provides [annotation](#function-annotations) support for
+implementing, registering and executing {data-store-name} Functions.
+
+</div>
+
+<div class="paragraph">
+
+{sdg-name} also provides XML namespace support for registering
+{data-store-name}
+{x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[Functions\]
+for remote function execution.
+
+</div>
+
+<div class="paragraph">
+
+See {data-store-name}'s
+{x-data-store-docs}/developing/function_exec/chapter_overview.html\[documentation\]
+for more information on the Function execution framework.
+
+</div>
+
+<div class="paragraph">
+
+{data-store-name} Functions are declared as Spring beans and must
+implement the `org.apache.geode.cache.execute.Function` interface or
+extend `org.apache.geode.cache.execute.FunctionAdapter`.
+
+</div>
+
+<div class="paragraph">
+
+The namespace uses a familiar pattern to declare Functions, as the
+following example shows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:function-service>
+  <gfe:function>
+      <bean class="example.FunctionOne"/>
+      <ref bean="function2"/>
+  </gfe:function>
+</gfe:function-service>
+
+<bean id="function2" class="example.FunctionTwo"/>
+```
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sect1">
+
+## Configuring WAN Gateways
+
+<div class="sectionbody">
+
+<div class="paragraph">
+
+WAN Gateways provides a way to synchronize {data-store-name} Distributed
+Systems across geographic locations. {sdg-name} provides XML namespace
+support for configuring WAN Gateways as illustrated in the following
+examples.
+
+</div>
+
+<div class="sect2">
+
+### WAN Configuration in {data-store-name} 7.0
+
+<div class="paragraph">
+
+In the following example, `GatewaySenders` are configured for a
+`PARTITION` Region by adding child elements (`gateway-sender` and
+`gateway-sender-ref`) to the Region. A `GatewaySender` may register
+`EventFilters` and `TransportFilters`.
+
+</div>
+
+<div class="paragraph">
+
+The following example also shows a sample configuration of an
+`AsyncEventQueue`, which must also be auto-wired into a Region (not
+shown):
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:partitioned-region id="region-with-inner-gateway-sender" >
+    <gfe:gateway-sender remote-distributed-system-id="1">
+        <gfe:event-filter>
+            <bean class="org.springframework.data.gemfire.example.SomeEventFilter"/>
+        </gfe:event-filter>
+        <gfe:transport-filter>
+            <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
+        </gfe:transport-filter>
+    </gfe:gateway-sender>
+    <gfe:gateway-sender-ref bean="gateway-sender"/>
+</gfe:partitioned-region>
+
+<gfe:async-event-queue id="async-event-queue" batch-size="10" persistent="true" disk-store-ref="diskstore"
+        maximum-queue-memory="50">
+    <gfe:async-event-listener>
+        <bean class="example.AsyncEventListener"/>
+    </gfe:async-event-listener>
+</gfe:async-event-queue>
+
+<gfe:gateway-sender id="gateway-sender" remote-distributed-system-id="2">
+    <gfe:event-filter>
+        <ref bean="event-filter"/>
+        <bean class="org.springframework.data.gemfire.example.SomeEventFilter"/>
+    </gfe:event-filter>
+    <gfe:transport-filter>
+        <ref bean="transport-filter"/>
+        <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
+    </gfe:transport-filter>
+</gfe:gateway-sender>
+
+<bean id="event-filter" class="org.springframework.data.gemfire.example.AnotherEventFilter"/>
+<bean id="transport-filter" class="org.springframework.data.gemfire.example.AnotherTransportFilter"/>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+On the other end of a `GatewaySender` is a corresponding
+`GatewayReceiver` to receive Gateway events. The `GatewayReceiver` may
+also be configured with `EventFilters` and `TransportFilters`, as
+follows:
+
+</div>
+
+<div class="listingblock">
+
+<div class="content">
+
+``` highlight
+<gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
+    <gfe:transport-filter>
+        <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
+    </gfe:transport-filter>
+</gfe:gateway-receiver>
+```
+
+</div>
+
+</div>
+
+<div class="paragraph">
+
+See the {data-store-name}
+{x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
+for a detailed explanation of all the configuration options.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+
+<div id="footer-text">
+
+Last updated 2022-09-21 12:47:45 -0700
+
+</div>
+
+</div>
