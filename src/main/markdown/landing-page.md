@@ -91,7 +91,7 @@ Spring Data for GemFire focuses on integrating the Spring Framework's powerful, 
 
 ## <a id="setup"></a>Setup
 
-Spring Data for GemFire (SDGem) and Spring Boot Data for GemFire (SBDGem) are the Spring dependencies to use when developing applications for GemFire. This guide is intended to help you set up and start using SDGem and SBDGem.
+Spring Data for GemFire and Spring Boot Data for GemFire are the Spring dependencies to use when developing applications for GemFire. This guide is intended to help you set up and start using Spring Data for GemFire and Spring Boot Data for GemFire.
 
 The Spring Data for GemFire dependencies are available from the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth). Access to the Pivotal Commercial Maven Repository requires a one-time registration step to create an account.
 
@@ -137,7 +137,7 @@ The Spring Data for GemFire dependencies are available from the [Pivotal Commerc
 
     * **Maven**
 
-        Add the following to the .m2/settings.xml file:
+        Add the following to the `.m2/settings.xml` file:
         ```
         <settings>
             <servers>
@@ -153,7 +153,7 @@ The Spring Data for GemFire dependencies are available from the [Pivotal Commerc
 
     * **Gradle**
 
-        Add the following to the local (.gradle/gradle.properties) or project gradle.properties file:
+        Add the following to the local (`.gradle/gradle.properties`) or project `gradle.properties` file:
         ```
         gemfireRepoUsername=MY-USERNAME@example.com
         gemfireRepoPassword=MY-DECRYPTED-PASSWORD
