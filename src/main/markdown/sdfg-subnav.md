@@ -1,7 +1,8 @@
 # Spring Data for GemFire Documentation
 
-*   [Preface](preface.html)
+*   [Landing Page](landing-page.html)
 *   [Index](index.html)
+*   [Preface](preface.html)
 *   [Links](links.html)
 *   [Spring Data for GemFire Schema](appendix/appendix-schema.md)
 *   [Introduction](introduction/introduction.html)
