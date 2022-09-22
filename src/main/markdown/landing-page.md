@@ -37,58 +37,6 @@ limitations under the License.
 
 Spring Data for GemFire focuses on integrating the Spring Framework's powerful, non-invasive programming model and concepts with GemFire to simplify configuration and development of Java applications when using GemFire as your data management solution.
 
-## <a id="release-notes"></a>Spring Data for Apache GemFire Release Notes 
-
-### <a id="release-2-2"></a>v2.2 Release Notes 
-
-* Upgraded to Apache Geode 1.9.0.
-
-* Upgraded to Spring Framework 5.2.0.RELEASE.
-
-* Upgraded to Spring Data Commons 2.2.0.RELEASE.
-
-* Added Annotation configuration support to configure and bootstrap Apache Geode Locator applications using @LocatorApplication.
-
-* Added Annotation configuration support for GatewayReceivers and GatewaySenders.
-
-### <a id="release-2-1"></a>v2.1 Release Notes 
-
-* Upgraded to Apache Geode 1.9.0.
-
-* Upgraded to Spring Framework 5.1.0.RELEASE.
-
-* Upgraded to Spring Data Commons 2.1.0.RELEASE.
-
-* Added support for parallel cache/Region snapshots along with invoking callbacks when loading snapshots.
-
-* Added support for registering QueryPostProcessors to customize the OQL generated fro Repository query methods.
-
-* Added support for include/exclude TypeFilters in o.s.d.g.mapping.MappingPdxSerializer.
-
-### <a id="release-2-0"></a>v2.0 Release Notes 
-
-* Upgraded to Apache Geode 9.1.1.
-
-* Upgraded to Spring Data Commons 2.0.8.RELEASE.
-
-* Upgraded to Spring Framework 5.0.7.RELEASE.
-
-* Reorganized the SDG codebase by packaging different classes and components by concern.
-
-* Added extensive support for Java 8 types, particularly in the SD Repository abstraction.
-
-* Changed to the Repository interface and abstraction. For example, IDs are no longer required to be java.io.Serializable.
-
-* Set @EnableEntityDefinedRegions annotation ignoreIfExists attribute to true by default.
-
-* Set @Indexed annotation override attribute to false by default.
-
-* Renamed @EnableIndexes to @EnableIndexing.
-
-* Introduced an InterestsBuilder class to express Interests in keys and values between client and server when using JavaConfig.
-
-* Added support in the Annotation configuration model for Off-Heap, Redis Adapter, and Apache Geode’s new Security framework.
-
 ## <a id="setup"></a>Setup
 
 Spring Data for GemFire and Spring Boot Data for GemFire are the Spring dependencies to use when developing applications for GemFire. This guide is intended to help you set up and start using Spring Data for GemFire and Spring Boot Data for GemFire.
@@ -203,3 +151,56 @@ Your application is now ready to connect with your GemFire instance.
 ## <a id="reference-guide"></a>Reference Guide
 
 All reference documentation currently corresponds with the reference documentation for [Spring Data Geode](https://spring.io/projects/spring-data-geode#learn) and [Spring Boot Data Geode](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/).
+
+## <a id="release-notes"></a>Spring Data for Apache GemFire Release Notes 
+
+### <a id="release-2-2"></a>v2.2 Release Notes 
+
+* Upgraded to Apache Geode 1.9.0.
+
+* Upgraded to Spring Framework 5.2.0.RELEASE.
+
+* Upgraded to Spring Data Commons 2.2.0.RELEASE.
+
+* Added Annotation configuration support to configure and bootstrap Apache Geode Locator applications using @LocatorApplication.
+
+* Added Annotation configuration support for GatewayReceivers and GatewaySenders.
+
+### <a id="release-2-1"></a>v2.1 Release Notes 
+
+* Upgraded to Apache Geode 1.9.0.
+
+* Upgraded to Spring Framework 5.1.0.RELEASE.
+
+* Upgraded to Spring Data Commons 2.1.0.RELEASE.
+
+* Added support for parallel cache/Region snapshots along with invoking callbacks when loading snapshots.
+
+* Added support for registering QueryPostProcessors to customize the OQL generated fro Repository query methods.
+
+* Added support for include/exclude TypeFilters in o.s.d.g.mapping.MappingPdxSerializer.
+
+### <a id="release-2-0"></a>v2.0 Release Notes 
+
+* Upgraded to Apache Geode 9.1.1.
+
+* Upgraded to Spring Data Commons 2.0.8.RELEASE.
+
+* Upgraded to Spring Framework 5.0.7.RELEASE.
+
+* Reorganized the SDG codebase by packaging different classes and components by concern.
+
+* Added extensive support for Java 8 types, particularly in the SD Repository abstraction.
+
+* Changed to the Repository interface and abstraction. For example, IDs are no longer required to be java.io.Serializable.
+
+* Set @EnableEntityDefinedRegions annotation ignoreIfExists attribute to true by default.
+
+* Set @Indexed annotation override attribute to false by default.
+
+* Renamed @EnableIndexes to @EnableIndexing.
+
+* Introduced an InterestsBuilder class to express Interests in keys and values between client and server when using JavaConfig.
+
+* Added support in the Annotation configuration model for Off-Heap, Redis Adapter, and Apache Geode’s new Security framework.
+
