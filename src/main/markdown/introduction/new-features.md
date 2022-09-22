@@ -23,9 +23,9 @@
 Note
 </div></td>
 <td class="content">As of the 1.2.0.RELEASE, this project, formerly
-known as Spring GemFire, has been renamed to Spring Data for GemFire to reflect that
+known as Spring GemFire, has been renamed to {sdg-name} to reflect that
 it is now a module of the {spring-data-website}[Spring Data] project and
-built on {x-data-store-website}[GemFire].</td>
+built on {x-data-store-website}[{data-store-name}].</td>
 </tr>
 </tbody>
 </table>
@@ -44,7 +44,7 @@ built on {x-data-store-website}[GemFire].</td>
 
 <div class="ulist">
 
-- Upgraded to GemFire 9.1.1.
+- Upgraded to {data-store-name} 9.1.1.
 
 - Upgraded to Spring Data Commons 2.0.8.RELEASE.
 
@@ -71,7 +71,7 @@ built on {x-data-store-website}[GemFire].</td>
   using JavaConfig.
 
 - Added support in the Annotation configuration model for Off-Heap,
-  Redis Adapter, and GemFire's new Security framework.
+  Redis Adapter, and {data-store-name}'s new Security framework.
 
 </div>
 
@@ -87,7 +87,7 @@ built on {x-data-store-website}[GemFire].</td>
 
 <div class="ulist">
 
-- Upgraded to GemFire {data-store-version}.
+- Upgraded to {data-store-name} {data-store-version}.
 
 - Upgraded to Spring Framework 5.1.0.RELEASE.
 
@@ -118,14 +118,14 @@ built on {x-data-store-website}[GemFire].</td>
 
 <div class="ulist">
 
-- Upgraded to GemFire {data-store-version}.
+- Upgraded to {data-store-name} {data-store-version}.
 
 - Upgraded to Spring Framework 5.2.0.RELEASE.
 
 - Upgraded to Spring Data Commons 2.2.0.RELEASE.
 
 - Add Annotation configuration support to configure and bootstrap
-  GemFire Locator applications using `@LocatorApplication`.
+  {data-store-name} Locator applications using `@LocatorApplication`.
 
 - Added Annotation configuration support for GatewayReceivers and
   GatewaySenders.
@@ -144,7 +144,7 @@ built on {x-data-store-website}[GemFire].</td>
 
 <div id="footer-text">
 
-Last updated 2022-09-20 10:33:13 -0700
+Last updated 2022-09-21 15:45:31 -0700
 
 </div>
 
