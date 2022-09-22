@@ -35,6 +35,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+Spring Data for GemFire focuses on integrating the Spring Framework's powerful, non-invasive programming model and concepts with GemFire to simplify configuration and development of Java applications when using GemFire as your data management solution.
+
 ## <a id="release-notes"></a>Spring Data for Apache GemFire Release Notes 
 
 ### <a id="release-2-2"></a>v2.2 Release Notes 
@@ -86,12 +88,6 @@ limitations under the License.
 * Introduced an InterestsBuilder class to express Interests in keys and values between client and server when using JavaConfig.
 
 * Added support in the Annotation configuration model for Off-Heap, Redis Adapter, and Apache Geode’s new Security framework.
-
-## <a id="versions"></a>Versions
-
-Spring Data for GemFire - 9.15.xxx
-Spring Boot Data for GemFire - 
-Spring Session Data GemFire - 
 
 ## <a id="setup"></a>Setup
 
