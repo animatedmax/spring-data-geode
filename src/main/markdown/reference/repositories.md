@@ -1,6 +1,6 @@
 <div id="header">
 
-# {sdg-name} Repositories
+# Spring Data for GemFire Repositories
 
 </div>
 
@@ -12,8 +12,8 @@
 
 <div class="paragraph">
 
-{sdg-name} provides support for using the Spring Data Repository
-abstraction to easily persist entities into {data-store-name} along with
+Spring Data for GemFire provides support for using the Spring Data Repository
+abstraction to easily persist entities into GemFire along with
 executing queries. A general introduction to the Repository programming
 model is provided
 [here](https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#repositories).
@@ -33,7 +33,7 @@ model is provided
 <div class="paragraph">
 
 To bootstrap Spring Data Repositories, use the `<repositories/>` element
-from the {sdg-name} Data namespace, as the following example shows:
+from the Spring Data for GemFire Data namespace, as the following example shows:
 
 </div>
 
@@ -41,7 +41,7 @@ from the {sdg-name} Data namespace, as the following example shows:
 
 <div class="title">
 
-Example 1. Bootstrap {sdg-name} Repositories in XML
+Example 1. Bootstrap Spring Data for GemFire Repositories in XML
 
 </div>
 
@@ -132,7 +132,7 @@ following example shows:
 
 <div class="title">
 
-Example 2. Bootstrap {sdg-name} Repositories with
+Example 2. Bootstrap Spring Data for GemFire Repositories with
 `@EnableGemfireRepositories`
 
 </div>
@@ -215,14 +215,14 @@ provided by the data store (for example, {sdg-acronym}).
 <div class="paragraph">
 
 One example of where custom repository implementations are needed with
-{data-store-name} is when performing joins. Joins are not supported by
-{sdg-acronym} Repositories. With a {data-store-name} `PARTITION` Region,
+GemFire is when performing joins. Joins are not supported by
+{sdg-acronym} Repositories. With a GemFire `PARTITION` Region,
 the join must be performed on collocated `PARTITION` Regions, since
-{data-store-name} does not support “distributed” joins. In addition, the
-Equi-Join OQL Query must be performed inside a {data-store-name}
+GemFire does not support “distributed” joins. In addition, the
+Equi-Join OQL Query must be performed inside a GemFire
 Function. See
 [here](https://gemfire91.docs.pivotal.io/geode/developing/partitioned_regions/join_query_partitioned_regions.html)
-for more details on {data-store-name} *Equi-Join Queries*.
+for more details on GemFire *Equi-Join Queries*.
 
 </div>
 
@@ -247,8 +247,8 @@ Javadoc for more details on all configuration settings.
 
 <div class="paragraph">
 
-{sdg-name} Repositories enable the definition of query methods to easily
-execute {data-store-name} OQL queries against the Region the managed
+Spring Data for GemFire Repositories enable the definition of query methods to easily
+execute GemFire OQL queries against the Region the managed
 entity maps to, as the following example shows:
 
 </div>
@@ -472,7 +472,7 @@ Table 1. Supported keywords for query methods
 
 <div class="paragraph">
 
-Many query languages, such as {data-store-name}'s OQL (Object Query
+Many query languages, such as GemFire's OQL (Object Query
 Language), have extensions that are not directly supported by Spring
 Data Commons' Repository infrastructure.
 
@@ -493,8 +493,8 @@ abstraction.
 
 <div class="paragraph">
 
-To support {data-store-name}'s OQL Query language extensions and
-preserve portability across different data stores, {sdg-name} adds
+To support GemFire's OQL Query language extensions and
+preserve portability across different data stores, Spring Data for GemFire adds
 support for OQL Query extensions by using Java annotations. These
 annotations are ignored by other Spring Data Repository implementations
 (such as Spring Data JPA or Spring Data Redis) that do not have similar
@@ -505,7 +505,7 @@ query language features.
 <div class="paragraph">
 
 For instance, many data stores most likely do not implement
-{data-store-name}'s OQL `IMPORT` keyword. Implementing `IMPORT` as an
+GemFire's OQL `IMPORT` keyword. Implementing `IMPORT` as an
 annotation (that is, `@Import`) rather than as part of the query method
 signature (specifically, the method 'name') does not interfere with the
 parsing infrastructure when evaluating the query method name to
@@ -515,13 +515,13 @@ construct another data store language appropriate query.
 
 <div class="paragraph">
 
-Currently, the set of {data-store-name} OQL Query language extensions
-that are supported by {sdg-name} include:
+Currently, the set of GemFire OQL Query language extensions
+that are supported by Spring Data for GemFire include:
 
 </div>
 
 <table class="tableblock frame-all grid-all stretch">
-<caption>Table 2. Supported {data-store-name} OQL extensions for
+<caption>Table 2. Supported GemFire OQL extensions for
 Repository query methods</caption>
 <colgroup>
 <col style="width: 14%" />
@@ -580,13 +580,13 @@ query-specific debugging.</p></td>
 </tbody>
 </table>
 
-Table 2. Supported {data-store-name} OQL extensions for Repository query
+Table 2. Supported GemFire OQL extensions for Repository query
 methods
 
 <div class="paragraph">
 
 As an example, suppose you have a `Customers` application domain class
-and corresponding {data-store-name} Region along with a
+and corresponding GemFire Region along with a
 `CustomerRepository` and a query method to lookup `Customers` by last
 name, as follows:
 
@@ -671,7 +671,7 @@ The preceding example results in the following OQL Query:
 
 <div class="paragraph">
 
-{sdg-name}'s Repository extension is careful not to create conflicting
+Spring Data for GemFire's Repository extension is careful not to create conflicting
 declarations when the OQL annotation extensions are used in combination
 with the `@Query` annotation.
 
@@ -791,7 +791,7 @@ query method.
 
 <div class="paragraph">
 
-Since 2.0.x, {sdg-name} includes the
+Since 2.0.x, Spring Data for GemFire includes the
 `o.s.d.gemfire.repository.query.QueryPostProcessor` functional
 interface. The interface is loosely defined as follows:
 
@@ -863,7 +863,7 @@ to the type parameters, `T` and `QUERY`, respectively. Type `T` extends
 the Spring Data Commons marker interface,
 {spring-data-commons-javadoc}/org/springframework/data/repository/Repository.html\[`org.springframework.data.repository.Repository`\].
 We discuss this further later in this section. All `QUERY` type
-parameter arguments in {sdg-name}'s case are of type `java.lang.String`.
+parameter arguments in Spring Data for GemFire's case are of type `java.lang.String`.
 
 </div>
 
@@ -1095,7 +1095,7 @@ class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostPro
 <div class="paragraph">
 
 While the preceding example works, you can achieve the same effect by
-using the Spring Data Repository convention provided by {sdg-name}. For
+using the Spring Data Repository convention provided by Spring Data for GemFire. For
 instance, the same query could be defined as follows:
 
 </div>

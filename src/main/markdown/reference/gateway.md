@@ -12,8 +12,8 @@
 
 <div class="paragraph">
 
-WAN Gateways provides a way to synchronize {data-store-name} Distributed
-Systems across geographic locations. {sdg-name} provides XML namespace
+WAN Gateways provides a way to synchronize GemFire Distributed
+Systems across geographic locations. Spring Data for GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 
@@ -25,7 +25,7 @@ examples.
 
 <div class="sect1">
 
-## WAN Configuration in {data-store-name} 7.0
+## WAN Configuration in GemFire 7.0
 
 <div class="sectionbody">
 
@@ -116,7 +116,7 @@ follows:
 
 <div class="paragraph">
 
-See the {data-store-name}
+See the GemFire
 {x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
 for a detailed explanation of all the configuration options.
 

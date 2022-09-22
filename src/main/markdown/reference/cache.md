@@ -12,9 +12,9 @@
 
 <div class="paragraph">
 
-To use {data-store-name}, you need to either create a new cache or
+To use GemFire, you need to either create a new cache or
 connect to an existing one. With the current version of
-{data-store-name}, you can have only one open cache per VM (more
+GemFire, you can have only one open cache per VM (more
 strictly speaking, per `ClassLoader`). In most cases, the cache should
 only be created once.
 
@@ -39,7 +39,7 @@ member can also be used in stand-alone applications and integration
 tests. However, in typical production systems, most application
 processes act as cache clients, creating a <code>ClientCache</code>
 instance instead. This is described in the <a
-href="#bootstrap:cache:client">Configuring a {data-store-name}
+href="#bootstrap:cache:client">Configuring a GemFire
 ClientCache</a> and <a
 href="#bootstrap:region:client">[bootstrap:region:client]</a>
 sections.</td>
@@ -73,7 +73,7 @@ following simple declaration:
 During Spring container initialization, any `ApplicationContext`
 containing this cache definition registers a `CacheFactoryBean` that
 creates a Spring bean named `gemfireCache`, which references a
-{data-store-name} `Cache` instance. This bean refers to either an
+GemFire `Cache` instance. This bean refers to either an
 existing `Cache` or, if one does not already exist, a newly created one.
 Since no additional properties were specified, a newly created `Cache`
 applies the default cache configuration.
@@ -82,7 +82,7 @@ applies the default cache configuration.
 
 <div class="paragraph">
 
-All {sdg-name} components that depend on the `Cache` respect this naming
+All Spring Data for GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
 If you prefer, you can make the dependency explicit by using the
 `cache-ref` attribute provided by various {sdg-acronym} XML namespace
@@ -105,11 +105,11 @@ attribute, as follows:
 
 <div class="paragraph">
 
-A {data-store-name} `Cache` can be fully configured using Spring.
-However, {data-store-name}'s native XML configuration file, `cache.xml`,
-is also supported. For situations where the {data-store-name} cache
+A GemFire `Cache` can be fully configured using Spring.
+However, GemFire's native XML configuration file, `cache.xml`,
+is also supported. For situations where the GemFire cache
 needs to be configured natively, you can provide a reference to the
-{data-store-name} XML configuration file by using the
+GemFire XML configuration file by using the
 `cache-xml-location` attribute, as follows:
 
 </div>
@@ -160,7 +160,7 @@ location.</td>
 <div class="paragraph">
 
 In addition to referencing an external XML configuration file, you can
-also specify {data-store-name} System
+also specify GemFire System
 {x-data-store-docs}/reference/topics/gemfire_properties.html\[properties\]
 that use any of Spring’s `Properties` support features.
 
@@ -294,7 +294,7 @@ following listing shows:
 <div class="colist arabic">
 
 1.  Attributes support various cache options. For further information
-    regarding anything shown in this example, see the {data-store-name}
+    regarding anything shown in this example, see the GemFire
     [product documentation](https://docs.pivotal.io/gemfire). The
     `close` attribute determines whether the cache should be closed when
     the Spring application context is closed. The default is `true`.
@@ -302,26 +302,26 @@ following listing shows:
     the cache (common in web applications), set this value to `false`.
 
 2.  Setting the `enable-auto-reconnect` attribute to `true` (the default
-    is `false`) lets a disconnected {data-store-name} member
-    automatically reconnect and rejoin the {data-store-name} cluster.
-    See the {data-store-name}
+    is `false`) lets a disconnected GemFire member
+    automatically reconnect and rejoin the GemFire cluster.
+    See the GemFire
     {x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
     documentation\] for more details.
 
 3.  Setting the `use-bean-factory-locator` attribute to `true` (it
     defaults to `false`) applies only when both Spring (XML)
-    configuration metadata and {data-store-name} `cache.xml` is used to
-    configure the {data-store-name} cache node (whether client or peer).
-    This option lets {data-store-name} components (such as
+    configuration metadata and GemFire `cache.xml` is used to
+    configure the GemFire cache node (whether client or peer).
+    This option lets GemFire components (such as
     `CacheLoader`) expressed in `cache.xml` be auto-wired with beans
     (such as `DataSource`) defined in the Spring application context.
     This option is typically used in conjunction with
     `cache-xml-location`.
 
 4.  Setting the `use-cluster-configuration` attribute to `true` (the
-    default is `false`) enables a {data-store-name} member to retrieve
+    default is `false`) enables a GemFire member to retrieve
     the common, shared Cluster-based configuration from a Locator. See
-    the {data-store-name}
+    the GemFire
     {x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
     documentation\] for more details.
 
@@ -345,7 +345,7 @@ following listing shows:
     Gateway. which provides a distributed Region creation service.
 
 8.  Declares a JNDI binding to enlist an external DataSource in a
-    {data-store-name} transaction.
+    GemFire transaction.
 
 </div>
 
@@ -356,7 +356,7 @@ following listing shows:
 <div class="paragraph">
 
 The preceding example includes a number of attributes related to
-{data-store-name}'s enhanced serialization framework, PDX. While a
+GemFire's enhanced serialization framework, PDX. While a
 complete discussion of PDX is beyond the scope of this reference guide,
 it is important to note that PDX is enabled by registering a
 `PdxSerializer`, which is specified by setting the `pdx-serializer`
@@ -366,7 +366,7 @@ attribute.
 
 <div class="paragraph">
 
-{data-store-name} provides an implementing class
+GemFire provides an implementing class
 (`org.apache.geode.pdx.ReflectionBasedAutoSerializer`) that uses Java
 Reflection. However, it is common for developers to provide their own
 implementation. The value of the attribute is simply a reference to a
@@ -397,18 +397,18 @@ You should be careful when setting the
 <div class="paragraph">
 
 Generally, 'auto-reconnect' should only be enabled in cases where
-{sdg-name}'s XML namespace is used to configure and bootstrap a new,
-non-application {data-store-name} server added to a cluster. In other
-words, 'auto-reconnect' should not be enabled when {sdg-name} is used to
-develop and build a {data-store-name} application that also happens to
-be a peer `Cache` member of the {data-store-name} cluster.
+Spring Data for GemFire's XML namespace is used to configure and bootstrap a new,
+non-application GemFire server added to a cluster. In other
+words, 'auto-reconnect' should not be enabled when Spring Data for GemFire is used to
+develop and build a GemFire application that also happens to
+be a peer `Cache` member of the GemFire cluster.
 
 </div>
 
 <div class="paragraph">
 
-The main reason for this restriction is that most {data-store-name}
-applications use references to the {data-store-name} `Cache` or Regions
+The main reason for this restriction is that most GemFire
+applications use references to the GemFire `Cache` or Regions
 in order to perform data access operations. These references are
 “injected” by the Spring container into application components (such as
 Repositories) for use by the application. When a peer member is
@@ -416,7 +416,7 @@ forcefully disconnected from the rest of the cluster, presumably because
 the peer member has become unresponsive or a network partition separates
 one or more peer members into a group too small to function as an
 independent distributed system, the peer member shuts down and all
-{data-store-name} component references (caches, Regions, and others)
+GemFire component references (caches, Regions, and others)
 become invalid.
 
 </div>
@@ -438,7 +438,7 @@ enters a “reconnecting” state and periodically attempts to rejoin the
 distributed system. If the peer member succeeds in reconnecting, the
 member rebuilds its “view” of the distributed system from existing
 members and receives a new distributed system ID. Additionally, all
-caches, Regions, and other {data-store-name} components are
+caches, Regions, and other GemFire components are
 reconstructed. Therefore, all old references, which may have been
 injected into application by the Spring container, are now stale and no
 longer valid.
@@ -447,10 +447,10 @@ longer valid.
 
 <div class="paragraph">
 
-{data-store-name} makes no guarantee (even when using the
-{data-store-name} public Java API) that application cache, Regions, or
+GemFire makes no guarantee (even when using the
+GemFire public Java API) that application cache, Regions, or
 other component references are automatically refreshed by the reconnect
-operation. As such, {data-store-name} applications must take care to
+operation. As such, GemFire applications must take care to
 refresh their own references.
 
 </div>
@@ -462,13 +462,13 @@ subsequently, a reconnect event either. If that were the case, you would
 have a clean way to know when to call
 `ConfigurableApplicationContext.refresh()`, if it were even applicable
 for an application to do so, which is why this “feature” of
-{data-store-name} is not recommended for peer `Cache` applications.
+GemFire is not recommended for peer `Cache` applications.
 
 </div>
 
 <div class="paragraph">
 
-For more information about 'auto-reconnect', see {data-store-name}'s
+For more information about 'auto-reconnect', see GemFire's
 {x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
 documentation\].
 
@@ -482,20 +482,20 @@ documentation\].
 
 <div class="paragraph">
 
-{data-store-name}'s Cluster Configuration Service is a convenient way
+GemFire's Cluster Configuration Service is a convenient way
 for any peer member joining the cluster to get a “consistent view” of
 the cluster by using the shared, persistent configuration maintained by
 a Locator. Using the cluster-based configuration ensures the peer
-member’s configuration is compatible with the {data-store-name}
+member’s configuration is compatible with the GemFire
 Distributed System when the member joins.
 
 </div>
 
 <div class="paragraph">
 
-This feature of {sdg-name} (setting the `use-cluster-configuration`
+This feature of Spring Data for GemFire (setting the `use-cluster-configuration`
 attribute to `true`) works in the same way as the `cache-xml-location`
-attribute, except the source of the {data-store-name} configuration
+attribute, except the source of the GemFire configuration
 meta-data comes from the network through a Locator, as opposed to a
 native `cache.xml` file residing in the local file system.
 
@@ -503,10 +503,10 @@ native `cache.xml` file residing in the local file system.
 
 <div class="paragraph">
 
-All {data-store-name} native configuration metadata, whether from
+All GemFire native configuration metadata, whether from
 `cache.xml` or from the Cluster Configuration Service, gets applied
 before any Spring (XML) configuration metadata. As a result, Spring’s
-config serves to “augment” the native {data-store-name} configuration
+config serves to “augment” the native GemFire configuration
 metadata and would most likely be specific to the application.
 
 </div>
@@ -542,12 +542,12 @@ config:
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">While certain {data-store-name} tools, such as
+<td class="content">While certain GemFire tools, such as
 <em>Gfsh</em>, have their actions “recorded” when schema-like changes
 are made (for example,
 <code>gfsh&gt;create region --name=Example --type=PARTITION</code>),
-{sdg-name}'s configuration metadata is not recorded. The same is true
-when using {data-store-name}'s public Java API directly. It, too, is not
+Spring Data for GemFire's configuration metadata is not recorded. The same is true
+when using GemFire's public Java API directly. It, too, is not
 recorded.</td>
 </tr>
 </tbody>
@@ -557,7 +557,7 @@ recorded.</td>
 
 <div class="paragraph">
 
-For more information on {data-store-name}'s Cluster Configuration
+For more information on GemFire's Cluster Configuration
 Service, see the
 {x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
 documentation\].
@@ -572,13 +572,13 @@ documentation\].
 
 <div class="sect1">
 
-## Configuring a {data-store-name} CacheServer
+## Configuring a GemFire CacheServer
 
 <div class="sectionbody">
 
 <div class="paragraph">
 
-{sdg-name} includes dedicated support for configuring a
+Spring Data for GemFire includes dedicated support for configuring a
 {x-data-store-javadoc}/org/apache/geode/cache/server/CacheServer.html\[CacheServer\],
 allowing complete configuration through the Spring container, as the
 following example shows:
@@ -603,7 +603,7 @@ following example shows:
 
   <gfe:cache/>
 
-  <!-- Example depicting serveral {data-store-name} CacheServer configuration options -->
+  <!-- Example depicting serveral GemFire CacheServer configuration options -->
   <gfe:cache-server id="advanced-config" auto-startup="true"
        bind-address="localhost" host-name-for-clients="localhost" port="${gemfire.cache.server.port}"
        load-poll-interval="2000" max-connections="22" max-message-count="1000" max-threads="16"
@@ -675,7 +675,7 @@ machines.</td>
 Note
 </div></td>
 <td class="content">To avoid initialization problems, the
-<code>CacheServer</code> started by {sdg-name} starts
+<code>CacheServer</code> started by Spring Data for GemFire starts
 <strong>after</strong> the Spring container has been fully initialized.
 Doing so lets potential Regions, listeners, writers or instantiators
 that are defined declaratively to be fully initialized and registered
@@ -695,18 +695,18 @@ right away.</td>
 
 <div class="sect1">
 
-## Configuring a {data-store-name} ClientCache
+## Configuring a GemFire ClientCache
 
 <div class="sectionbody">
 
 <div class="paragraph">
 
-In addition to defining a {data-store-name} peer
+In addition to defining a GemFire peer
 {x-data-store-javadoc}/org/apache/geode/cache/Cache.html\[`Cache`\],
-{sdg-name} also supports the definition of a {data-store-name}
+Spring Data for GemFire also supports the definition of a GemFire
 {x-data-store-javadoc}/org/apache/geode/cache/client/ClientCache.html\[`ClientCache`\]
 in a Spring container. A `ClientCache` definition is similar in
-configuration and use to the {data-store-name} peer
+configuration and use to the GemFire peer
 [Cache](#bootstrap:cache) and is supported by the
 `org.springframework.data.gemfire.client.ClientCacheFactoryBean`.
 
@@ -714,7 +714,7 @@ configuration and use to the {data-store-name} peer
 
 <div class="paragraph">
 
-The simplest definition of a {data-store-name} cache client using
+The simplest definition of a GemFire cache client using
 default configuration follows:
 
 </div>
@@ -797,11 +797,11 @@ client-side configuration in more detail.
 
 <div class="sect2">
 
-### {data-store-name}'s DEFAULT Pool and {sdg-name} Pool Definitions
+### GemFire's DEFAULT Pool and Spring Data for GemFire Pool Definitions
 
 <div class="paragraph">
 
-If a {data-store-name} `ClientCache` is local-only, then no Pool
+If a GemFire `ClientCache` is local-only, then no Pool
 definition is required. For instance, you can define the following:
 
 </div>
@@ -825,7 +825,7 @@ definition is required. For instance, you can define the following:
 In this case, the “Example” Region is `LOCAL` and no data is distributed
 between the client and a server. Therefore, no Pool is necessary. This
 is true for any client-side, local-only Region, as defined by the
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/client/ClientRegionShortcut.html\[`ClientRegionShortcut`\]
 (all `LOCAL_*` shortcuts).
 
@@ -842,7 +842,7 @@ define and use a Pool.
 <div class="paragraph">
 
 When a `ClientCache`, a Pool, and a proxy-based Region are all defined
-but not explicitly identified, {sdg-name} resolves the references
+but not explicitly identified, Spring Data for GemFire resolves the references
 automatically, as the following example shows:
 
 </div>
@@ -869,7 +869,7 @@ automatically, as the following example shows:
 
 In the preceding example, the `ClientCache` is identified as
 `gemfireCache`, the Pool as `gemfirePool`, and the client Region as
-“Example”. However, the `ClientCache` initializes {data-store-name}'s
+“Example”. However, the `ClientCache` initializes GemFire's
 `DEFAULT` Pool from `gemfirePool`, and the client Region uses the
 `gemfirePool` when distributing data between the client and the server.
 
@@ -877,7 +877,7 @@ In the preceding example, the `ClientCache` is identified as
 
 <div class="paragraph">
 
-Basically, {sdg-name} resolves the preceding configuration to the
+Basically, Spring Data for GemFire resolves the preceding configuration to the
 following:
 
 </div>
@@ -902,7 +902,7 @@ following:
 
 <div class="paragraph">
 
-{data-store-name} still creates a Pool called `DEFAULT`. {sdg-name}
+GemFire still creates a Pool called `DEFAULT`. Spring Data for GemFire
 causes the `DEFAULT` Pool to be initialized from the `gemfirePool`.
 Doing so is useful in situations where multiple Pools are defined and
 client Regions are using separate Pools, or do not declare a Pool at
@@ -944,9 +944,9 @@ Consider the following:
 
 <div class="paragraph">
 
-In this setup, the {data-store-name} `client-cache` `DEFAULT` pool is
+In this setup, the GemFire `client-cache` `DEFAULT` pool is
 initialized from `locatorPool`, as specified by the `pool-name`
-attribute. There is no {sdg-name}-defined `gemfirePool`, since both
+attribute. There is no Spring Data for GemFire-defined `gemfirePool`, since both
 Pools were explicitly identified (named) — `locatorPool` and
 `serverPool`, respectively.
 
@@ -955,7 +955,7 @@ Pools were explicitly identified (named) — `locatorPool` and
 <div class="paragraph">
 
 The “Example” Region explicitly refers to and exclusively uses the
-`serverPool`. The `AnotherExample` Region uses {data-store-name}'s
+`serverPool`. The `AnotherExample` Region uses GemFire's
 `DEFAULT` Pool, which, again, was configured from the `locatorPool`
 based on the client cache bean definition’s `pool-name` attribute.
 

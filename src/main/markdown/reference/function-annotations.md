@@ -12,8 +12,8 @@
 
 <div class="paragraph">
 
-{sdg-name} includes annotation support to simplify working with
-{data-store-name}
+Spring Data for GemFire includes annotation support to simplify working with
+GemFire
 {x-data-store-docs}/developing/function_exec/chapter_overview.html\[Function
 execution\].
 
@@ -21,10 +21,10 @@ execution\].
 
 <div class="paragraph">
 
-Under the hood, the {data-store-name} API provides classes to implement
-and register {data-store-name}
+Under the hood, the GemFire API provides classes to implement
+and register GemFire
 {x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[Functions\]
-that are deployed on {data-store-name} servers, which may then be
+that are deployed on GemFire servers, which may then be
 invoked by other peer member applications or remotely from cache
 clients.
 
@@ -33,9 +33,9 @@ clients.
 <div class="paragraph">
 
 Functions can execute in parallel, distributed among multiple
-{data-store-name} servers in the cluster, aggregating the results using
+GemFire servers in the cluster, aggregating the results using
 the map-reduce pattern and sent back to the caller. Functions can also
-be targeted to run on a single server or Region. The {data-store-name}
+be targeted to run on a single server or Region. The GemFire
 API supports remote execution of Functions targeted by using various
 predefined scopes: on Region, on members (in groups), on servers, and
 others. The implementation and execution of remote Functions, as with
@@ -45,11 +45,11 @@ any RPC protocol, requires some boilerplate code.
 
 <div class="paragraph">
 
-{sdg-name}, true to Spring’s core value proposition, aims to hide the
+Spring Data for GemFire, true to Spring’s core value proposition, aims to hide the
 mechanics of remote Function execution and let you focus on core POJO
-programming and business logic. To this end, {sdg-name} introduces
+programming and business logic. To this end, Spring Data for GemFire introduces
 annotations to declaratively register the public methods of a POJO class
-as {data-store-name} Functions along with the ability to invoke
+as GemFire Functions along with the ability to invoke
 registered Functions (including remotely) by using annotated interfaces.
 
 </div>
@@ -115,9 +115,9 @@ Note
 </div></td>
 <td class="content">'Client' and 'Server' are used here in the context
 of Function execution, which may have a different meaning than client
-and server in {data-store-name}'s client-server topology. While it is
+and server in GemFire's client-server topology. While it is
 common for an application using a <code>ClientCache</code> instance to
-invoke a Function on one or more {data-store-name} servers in a cluster,
+invoke a Function on one or more GemFire servers in a cluster,
 it is also possible to execute Functions in a peer-to-peer (P2P)
 configuration, where the application is a member of the cluster hosting
 a peer <code>Cache</code> instance. Keep in mind that a peer member
@@ -141,7 +141,7 @@ member of the cluster.</td>
 
 <div class="paragraph">
 
-Using {data-store-name} APIs, the `FunctionContext` provides a runtime
+Using GemFire APIs, the `FunctionContext` provides a runtime
 invocation context that includes the client’s calling arguments and a
 `ResultSender` implementation to send results back to the client.
 Additionally, if the Function is executed on a Region, the
@@ -247,7 +247,7 @@ are returned to the client.
 <div class="paragraph">
 
 The following example shows how {sdg-acronym}'s Function annotations are
-used to expose POJO methods as {data-store-name} Functions:
+used to expose POJO methods as GemFire Functions:
 
 </div>
 
@@ -278,7 +278,7 @@ public class ApplicationFunctions {
 <div class="paragraph">
 
 Note that the class itself must be registered as a Spring bean and each
-{data-store-name} Function is annotated with `@GemfireFunction`. In the
+GemFire Function is annotated with `@GemfireFunction`. In the
 preceding example, Spring’s `@Component` annotation was used, but you
 can register the bean by using any method supported by Spring (such as
 XML configuration or with a Java configuration class when using Spring
@@ -305,7 +305,7 @@ Tip
 </div></td>
 <td class="content">The fact that the POJO Function class is a Spring
 bean may offer other benefits. Since it shares the
-<code>ApplicationContext</code> with {data-store-name} components, such
+<code>ApplicationContext</code> with GemFire components, such
 as the cache and Regions, these may be injected into the class if
 necessary.</td>
 </tr>
@@ -317,7 +317,7 @@ necessary.</td>
 <div class="paragraph">
 
 Spring creates the wrapper class and registers the Functions with
-{data-store-name}'s `FunctionService`. The Function ID used to register
+GemFire's `FunctionService`. The Function ID used to register
 each Function must be unique. By using convention, it defaults to the
 simple (unqualified) method name. The name can be explicitly defined by
 using the `id` attribute of the `@GemfireFunction` annotation.
@@ -328,7 +328,7 @@ using the `id` attribute of the `@GemfireFunction` annotation.
 
 The `@GemfireFunction` annotation also provides other configuration
 attributes: `HA` and `optimizedForWrite`, which correspond to properties
-defined by {data-store-name}'s
+defined by GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[`Function`\]
 interface.
 
@@ -375,7 +375,7 @@ enumerated values. And finally, optionally, `Key` is a valid Key in the
 
 <div class="paragraph">
 
-The `PojoFunctionWrapper` implements {data-store-name}'s `Function`
+The `PojoFunctionWrapper` implements GemFire's `Function`
 interface, binds method parameters, and invokes the target method in its
 `execute()` method. It also sends the method’s return value back to the
 caller by using the `ResultSender`.
@@ -488,11 +488,11 @@ class ApplicationConfiguration { ... }
 A process that invokes a remote Function needs to provide the Function’s
 ID, calling arguments, the execution target (`onRegion`, `onServers`,
 `onServer`, `onMember`, or `onMembers`) and (optionally) a filter set.
-By using {sdg-name}, all you need do is define an interface supported by
+By using Spring Data for GemFire, all you need do is define an interface supported by
 annotations. Spring creates a dynamic proxy for the interface, which
 uses the `FunctionService` to create an `Execution`, invoke the
 `Execution`, and (if necessary) coerce the results to the defined return
-type. This technique is similar to the way {sdg-name}'s Repository
+type. This technique is similar to the way Spring Data for GemFire's Repository
 extension works. Thus, some of the configuration and concepts should be
 familiar.
 
@@ -515,7 +515,7 @@ To support client-side Function execution, the following {sdg-acronym}
 Function annotations are provided: `@OnRegion`, `@OnServer`,
 `@OnServers`, `@OnMember`, and `@OnMembers`. These annotations
 correspond to the `Execution` implementations provided by
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/execute/FunctionService.html\[`FunctionService`\]
 class.
 
@@ -744,8 +744,8 @@ arguments are a variable argument `List`.
 
 <div class="paragraph">
 
-When using {sdg-name}'s Function annotation support combined with
-{data-store-name}'s
+When using Spring Data for GemFire's Function annotation support combined with
+GemFire's
 {x-data-store-docs}/developing/data_serialization/gemfire_pdx_serialization.html\[PDX
 Serialization\], there are a few logistical things to keep in mind.
 
@@ -754,8 +754,8 @@ Serialization\], there are a few logistical things to keep in mind.
 <div class="paragraph">
 
 As explained earlier in this section, and by way of example, you should
-typically define {data-store-name} Functions by using POJO classes
-annotated with {sdg-name} [Function
+typically define GemFire Functions by using POJO classes
+annotated with Spring Data for GemFire [Function
 annotations](https://docs.spring.io/spring-data-gemfire/docs/current/api/org/springframework/data/gemfire/function/annotation/package-summary.html),
 as follows:
 
@@ -838,7 +838,7 @@ public enum OrderSource {
 <div class="paragraph">
 
 Of course, you can define a Function `Execution` interface to call the
-'process' {data-store-name} server Function, as follows:
+'process' GemFire server Function, as follows:
 
 </div>
 
@@ -871,10 +871,10 @@ server (or peers) to be serialized.
 
 <div class="paragraph">
 
-Now, if you have configured {data-store-name} to use PDX for
+Now, if you have configured GemFire to use PDX for
 serialization (instead of Java serialization, for instance) you can also
 set the `pdx-read-serialized` attribute to `true` in your configuration
-of the {data-store-name} server(s), as follows:
+of the GemFire server(s), as follows:
 
 </div>
 
@@ -893,7 +893,7 @@ of the {data-store-name} server(s), as follows:
 <div class="paragraph">
 
 Alternatively, you can set the `pdx-read-serialized` attribute to `true`
-for a {data-store-name} cache client application, as follows:
+for a GemFire cache client application, as follows:
 
 </div>
 
@@ -920,14 +920,14 @@ arguments.
 
 <div class="paragraph">
 
-{data-store-name} serializes only application domain object types that
+GemFire serializes only application domain object types that
 you have specifically configured (registered) either by using
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html\[`ReflectionBasedAutoSerializer`\],
-or specifically (and recommended) by using a “custom” {data-store-name}
+or specifically (and recommended) by using a “custom” GemFire
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxSerializer.html\[`PdxSerializer`\].
-If you use {sdg-name}'s Repository extension, you might even want to
-consider using {sdg-name}'s
+If you use Spring Data for GemFire's Repository extension, you might even want to
+consider using Spring Data for GemFire's
 {sdg-javadoc}/org/springframework/data/gemfire/mapping/MappingPdxSerializer.html\[`MappingPdxSerializer`\],
 which uses an entity’s mapping metadata to determine data from the
 application domain object that is serialized to the PDX instance.
@@ -936,11 +936,11 @@ application domain object that is serialized to the PDX instance.
 
 <div class="paragraph">
 
-What is less than apparent, though, is that {data-store-name}
+What is less than apparent, though, is that GemFire
 automatically handles Java `Enum` types regardless of whether they are
 explicitly configured (that is, registered with a
 `ReflectionBasedAutoSerializer`, using a regex pattern and the `classes`
-parameter or are handled by a “custom” {data-store-name}
+parameter or are handled by a “custom” GemFire
 `PdxSerializer`), despite the fact that Java enumerations implement
 `java.io.Serializable`.
 
@@ -948,8 +948,8 @@ parameter or are handled by a “custom” {data-store-name}
 
 <div class="paragraph">
 
-So, when you set `pdx-read-serialized` to `true` on {data-store-name}
-servers where the {data-store-name} Functions (including {sdg-name}
+So, when you set `pdx-read-serialized` to `true` on GemFire
+servers where the GemFire Functions (including Spring Data for GemFire
 Function-annotated POJO classes) are registered, then you may encounter
 surprising behavior when invoking the Function `Execution`.
 
@@ -975,7 +975,7 @@ orderProcessingFunctions.process(new Order(123, customer, LocalDateTime.now(), i
 
 <div class="paragraph">
 
-However, the {data-store-name} Function on the server gets the
+However, the GemFire Function on the server gets the
 following:
 
 </div>
@@ -998,7 +998,7 @@ The `Order` and `OrderSource` have been passed to the Function as
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxInstance.html\[PDX
 instances\]. Again, this all happens because `pdx-read-serialized` is
 set to `true`, which may be necessary in cases where the
-{data-store-name} servers interact with multiple different clients (for
+GemFire servers interact with multiple different clients (for
 example, a combination of Java clients and native clients, such as
 C/C++, C#, and others).
 
@@ -1006,7 +1006,7 @@ C/C++, C#, and others).
 
 <div class="paragraph">
 
-This flies in the face of {sdg-name}'s strongly-typed Function-annotated
+This flies in the face of Spring Data for GemFire's strongly-typed Function-annotated
 POJO class method signatures, where you would reasonably expect
 application domain object types instead, not PDX serialized instances.
 
@@ -1014,7 +1014,7 @@ application domain object types instead, not PDX serialized instances.
 
 <div class="paragraph">
 
-Consequently, {sdg-name} includes enhanced Function support to
+Consequently, Spring Data for GemFire includes enhanced Function support to
 automatically convert PDX typed method arguments to the desired
 application domain object types defined by the Function method’s
 signature (parameter types).
@@ -1024,8 +1024,8 @@ signature (parameter types).
 <div class="paragraph">
 
 However, this also requires you to explicitly register a
-{data-store-name} `PdxSerializer` on {data-store-name} servers where
-{sdg-name} Function-annotated POJOs are registered and used, as the
+GemFire `PdxSerializer` on GemFire servers where
+Spring Data for GemFire Function-annotated POJOs are registered and used, as the
 following example shows:
 
 </div>
@@ -1046,7 +1046,7 @@ following example shows:
 
 <div class="paragraph">
 
-Alternatively, you can use {data-store-name}'s
+Alternatively, you can use GemFire's
 {x-data-store-javadoc}/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html\[`ReflectionBasedAutoSerializer`\]
 for convenience. Of course, we recommend that, where possible, you use a
 custom `PdxSerializer` to maintain finer-grained control over your
@@ -1056,9 +1056,9 @@ serialization strategy.
 
 <div class="paragraph">
 
-Finally, {sdg-name} is careful not to convert your Function arguments if
+Finally, Spring Data for GemFire is careful not to convert your Function arguments if
 you treat your Function arguments generically or as one of
-{data-store-name}'s PDX types, as follows:
+GemFire's PDX types, as follows:
 
 </div>
 
@@ -1079,7 +1079,7 @@ public Object genericFunction(String value, Object domainObject, PdxInstanceEnum
 
 <div class="paragraph">
 
-{sdg-name} converts PDX typed data to the corresponding application
+Spring Data for GemFire converts PDX typed data to the corresponding application
 domain types if and only if the corresponding application domain types
 are on the classpath and the Function-annotated POJO method expects it.
 
@@ -1088,8 +1088,8 @@ are on the classpath and the Function-annotated POJO method expects it.
 <div class="paragraph">
 
 For a good example of custom, composed application-specific
-{data-store-name} `PdxSerializers` as well as appropriate POJO Function
-parameter type handling based on the method signatures, see {sdg-name}'s
+GemFire `PdxSerializers` as well as appropriate POJO Function
+parameter type handling based on the method signatures, see Spring Data for GemFire's
 [`ClientCacheFunctionExecutionWithPdxIntegrationTest`](https://github.com/spring-projects/spring-data-gemfire/blob/%7Brevnumber%7D/src/test/java/org/springframework/data/gemfire/function/ClientCacheFunctionExecutionWithPdxIntegrationTest.java)
 class.
 

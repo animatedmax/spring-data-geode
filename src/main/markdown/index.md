@@ -9,7 +9,7 @@
 <span id="author3" class="author">John Blum</span>  
 <span id="author4" class="author">Oliver Gierke</span>  
 <span id="author5" class="author">Jay Bryant</span>  
-<span id="revnumber">version {version},</span> <span
+<span id="revnumber">version 2.3.9,</span> <span
 id="revdate">2022-09-20</span>
 
 </div>
@@ -7532,7 +7532,7 @@ $ gfsh
  / /__/ / ____/  _____/ / /    / /
 /______/_/      /______/_/    /_/    1.2.1
 
-Monitor and Manage {data-store-name}
+Monitor and Manage GemFire
 
 gfsh>connect
 Connecting to Locator at [host=localhost, port=10334] ..
@@ -14361,8 +14361,8 @@ Transaction Log Output
 ``` highlight
 2017-Jun-22 11:11:37 TRACE TransactionInterceptor - Getting transaction for [example.app.service.MessageService.send]
 
-2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionAcquiringAspect - Acquiring {data-store-name} Connection
-from {data-store-name} JCA ResourceAdapter registered at [gfe/jca]
+2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionAcquiringAspect - Acquiring GemFire Connection
+from GemFire JCA ResourceAdapter registered at [gfe/jca]
 
 2017-Jun-22 11:11:37 TRACE MessageService - PRODUCER [ Message :
 [{ @type = example.app.domain.Message, id= MSG0000000000, message = SENT }],
@@ -14370,7 +14370,7 @@ JSON : [{"id":"MSG0000000000","message":"SENT"}] ]
 
 2017-Jun-22 11:11:37 TRACE TransactionInterceptor - Completing transaction for [example.app.service.MessageService.send]
 
-2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionClosingAspect - Closed {data-store-name} Connection @ [Reference [...]]
+2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionClosingAspect - Closed GemFire Connection @ [Reference [...]]
 ```
 
 </div>
@@ -21104,7 +21104,7 @@ commands against it. The output should resemble the following:
 <div class="content">
 
 ``` highlight
-INFO: Created {data-store-name} Cache [Spring {data-store-name} World] v. X.Y.Z
+INFO: Created GemFire Cache [Spring GemFire World] v. X.Y.Z
 INFO: Created new cache region [myWorld]
 INFO: Member xxxxxx:50694/51611 connecting to region [myWorld]
 Hello World!
@@ -21165,7 +21165,7 @@ following example shows:
 <div class="content">
 
 ``` highlight
-INFO: Connected to Distributed System ['Spring {data-store-name} World'=xxxx:56218/49320@yyyyy]
+INFO: Connected to Distributed System ['Spring GemFire World'=xxxx:56218/49320@yyyyy]
 Hello World!
 ...
 
@@ -22063,7 +22063,7 @@ Table 11. Query return types
 
 <div id="footer-text">
 
-Version {version}  
+Version 2.3.9  
 Last updated 2022-09-20 12:54:33 -0700
 
 </div>

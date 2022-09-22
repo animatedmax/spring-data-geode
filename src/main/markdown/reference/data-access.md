@@ -12,13 +12,13 @@
 
 <div class="paragraph">
 
-In addition to the core XML namespace (`gfe`), {sdg-name} provides a
+In addition to the core XML namespace (`gfe`), Spring Data for GemFire provides a
 data access XML namespace (`gfe-data`), which is primarily intended to
-simplify the development of {data-store-name} client applications. This
-namespace currently contains support for {data-store-name}
+simplify the development of GemFire client applications. This
+namespace currently contains support for GemFire
 [Repositories](#gemfire-repositories) and Function
 [execution](#function-execution), as well as a `<datasource>` tag that
-offers a convenient way to connect to a {data-store-name} cluster.
+offers a convenient way to connect to a GemFire cluster.
 
 </div>
 
@@ -28,14 +28,14 @@ offers a convenient way to connect to a {data-store-name} cluster.
 
 <div class="sect1">
 
-## An Easy Way to Connect to {data-store-name}
+## An Easy Way to Connect to GemFire
 
 <div class="sectionbody">
 
 <div class="paragraph">
 
-For many applications, a basic connection to a {data-store-name} data
-grid using default values is sufficient. {sdg-name}'s `<datasource>` tag
+For many applications, a basic connection to a GemFire data
+grid using default values is sufficient. Spring Data for GemFire's `<datasource>` tag
 provides a simple way to access data. The data source creates a
 `ClientCache` and connection `Pool`. In addition, it queries the cluster
 servers for all existing root Regions and creates an (empty) client

@@ -8,17 +8,17 @@
 
 <div class="paragraph">
 
-{sdg-name} focuses on integrating the Spring Framework’s powerful,
-non-invasive programming model and concepts with {data-store-name} to
+Spring Data for GemFire focuses on integrating the Spring Framework’s powerful,
+non-invasive programming model and concepts with GemFire to
 simplify configuration and development of Java applications when using
-{data-store-name} as you data management solution.
+GemFire as you data management solution.
 
 </div>
 
 <div class="paragraph">
 
 This document assumes you already have a basic understanding of, and
-some familiarity with, the core Spring Framework and {data-store-name}
+some familiarity with, the core Spring Framework and GemFire
 concepts.
 
 </div>

@@ -8,7 +8,7 @@
 
 <div class="paragraph">
 
-{sdg-name} supports `DiskStore` configuration and creation through the
+Spring Data for GemFire supports `DiskStore` configuration and creation through the
 `disk-store` element, as the following example shows:
 
 </div>
@@ -33,7 +33,7 @@
 
 `DiskStore` instances are used by Regions for file system persistent
 backup and overflow of evicted entries as well as persistent backup for
-WAN Gateways. Multiple {data-store-name} components may share the same
+WAN Gateways. Multiple GemFire components may share the same
 `DiskStore`. Additionally, multiple file system directories may be
 defined for a single `DiskStore`, as shown in the preceding example.
 
@@ -41,7 +41,7 @@ defined for a single `DiskStore`, as shown in the preceding example.
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation for a complete explanation of
+See GemFire's documentation for a complete explanation of
 {x-data-store-docs}/developing/storing_data_on_disk/chapter_overview.html\[Persistence
 and Overflow\] and configuration options on `DiskStore` instances.
 

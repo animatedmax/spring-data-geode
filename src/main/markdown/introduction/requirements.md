@@ -8,8 +8,8 @@
 
 <div class="paragraph">
 
-{sdg-name} requires Java 8.0, {spring-framework-website}\[Spring
-Framework\] 5 and {x-data-store-website}\[{data-store-name}\]
+Spring Data for GemFire requires Java 8.0, {spring-framework-website}\[Spring
+Framework\] 5 and {x-data-store-website}\[GemFire\]
 {data-store-version}.
 
 </div>

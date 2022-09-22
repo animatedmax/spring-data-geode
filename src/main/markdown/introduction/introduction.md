@@ -8,8 +8,8 @@
 
 <div class="paragraph">
 
-The {sdg-name} reference guide explains how to use the Spring Framework
-to configure and develop applications with {data-store-name}. It
+The Spring Data for GemFire reference guide explains how to use the Spring Framework
+to configure and develop applications with GemFire. It
 presents the basic concepts and provides numerous examples to help you
 get started quickly.
 

@@ -12,16 +12,16 @@
 
 <div class="paragraph">
 
-{x-data-store-website}\[{data-store-name}\] integrates with [Apache
+{x-data-store-website}\[GemFire\] integrates with [Apache
 Lucene](https://lucene.apache.org/) to let you index and search on data
-stored in {data-store-name} by using Lucene queries. Search-based
+stored in GemFire by using Lucene queries. Search-based
 queries also include the ability to page through query results.
 
 </div>
 
 <div class="paragraph">
 
-Additionally, {sdg-name} adds support for query projections based on the
+Additionally, Spring Data for GemFire adds support for query projections based on the
 Spring Data Commons projection infrastructure. This feature lets the
 query results be projected into first-class application domain types as
 needed by the application.
@@ -32,7 +32,7 @@ needed by the application.
 
 A Lucene `Index` must be created before any Lucene search-based query
 can be run. A `LuceneIndex` can be created in Spring (Data for
-{data-store-name}) XML config as follows:
+GemFire) XML config as follows:
 
 </div>
 
@@ -90,7 +90,7 @@ element, as follows:
 
 <div class="paragraph">
 
-{sdg-name}'s `LuceneIndexFactoryBean` API and {sdg-acronym}'s XML
+Spring Data for GemFire's `LuceneIndexFactoryBean` API and {sdg-acronym}'s XML
 namespace also lets a
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/LuceneSerializer.html\[`org.apache.geode.cache.lucene.LuceneSerializer`\]
 be specified when you create the `LuceneIndex`. The `LuceneSerializer`
@@ -197,14 +197,14 @@ CustomLuceneSerializer myLuceneSerialier() {
 
 <div class="paragraph">
 
-There are a few limitations of {data-store-name}'s, Apache Lucene
+There are a few limitations of GemFire's, Apache Lucene
 integration and support.
 
 </div>
 
 <div class="paragraph">
 
-First, a `LuceneIndex` can only be created on a {data-store-name}
+First, a `LuceneIndex` can only be created on a GemFire
 `PARTITION` Region.
 
 </div>
@@ -249,7 +249,7 @@ Spring’s <code>BeanFactoryPostProcessors</code> can be found
 
 <div class="paragraph">
 
-It is possible that these {data-store-name} restrictions will not apply
+It is possible that these GemFire restrictions will not apply
 in a future release which is why the {sdg-acronym}
 `LuceneIndexFactoryBean` API takes a reference to the Region directly as
 well, rather than just the Region path.
@@ -311,7 +311,7 @@ access operations, such as queries.
 
 <div class="paragraph">
 
-{sdg-name} provides two primary templates for Lucene data access
+Spring Data for GemFire provides two primary templates for Lucene data access
 operations, depending on how low of a level your application is prepared
 to deal with.
 
@@ -320,7 +320,7 @@ to deal with.
 <div class="paragraph">
 
 The `LuceneOperations` interface defines query operations by using
-{data-store-name}
+GemFire
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/package-summary.html\[Lucene
 types\], which are defined in the following interface definition:
 
@@ -382,10 +382,10 @@ the <code>resultLimit</code> parameter is optional.</td>
 <div class="paragraph">
 
 The operations in the `LuceneOperations` interface match the operations
-provided by the {data-store-name}'s
+provided by the GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/LuceneQuery.html\[LuceneQuery\]
 interface. However, {sdg-acronym} has the added value of translating
-proprietary {data-store-name} or Apache Lucene `Exceptions` into
+proprietary GemFire or Apache Lucene `Exceptions` into
 Spring’s highly consistent and expressive DAO [exception
 hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#dao-exceptions),
 particularly as many modern data access operations involve more than one
@@ -397,15 +397,15 @@ store or repository.
 
 Additionally, {sdg-acronym}'s `LuceneOperations` interface can shield
 your application from interface-breaking changes introduced by the
-underlying {data-store-name} or Apache Lucene APIs when they occur.
+underlying GemFire or Apache Lucene APIs when they occur.
 
 </div>
 
 <div class="paragraph">
 
 However, it would be sad to offer a Lucene Data Access Object (DAO) that
-only uses {data-store-name} and Apache Lucene data types (such as
-{data-store-name}'s `LuceneResultStruct`). Therefore, {sdg-acronym}
+only uses GemFire and Apache Lucene data types (such as
+GemFire's `LuceneResultStruct`). Therefore, {sdg-acronym}
 gives you the `ProjectingLuceneOperations` interface to remedy these
 important application concerns. The following listing shows the
 `ProjectingLuceneOperations` interface definition:
@@ -631,7 +631,7 @@ You can use `setProjectionFactory(:ProjectionFactory)` to set a custom
 
 <div class="paragraph">
 
-Finally, {sdg-name} provides annotation configuration support for
+Finally, Spring Data for GemFire provides annotation configuration support for
 `LuceneIndexes`.
 
 </div>
@@ -639,7 +639,7 @@ Finally, {sdg-name} provides annotation configuration support for
 <div class="paragraph">
 
 Eventually, the {sdg-acronym} Lucene support will finds its way into the
-Repository infrastructure extension for {data-store-name} so that Lucene
+Repository infrastructure extension for GemFire so that Lucene
 queries can be expressed as methods on an application `Repository`
 interface, in much the same way as the [OQL
 support](#gemfire-repositories.queries.executing) works today.
@@ -719,7 +719,7 @@ class ApplicationConfiguration {
 Note
 </div></td>
 <td class="content"><code>LuceneIndexes</code> can only be created on
-{data-store-name} servers since <code>LuceneIndexes</code> only apply to
+GemFire servers since <code>LuceneIndexes</code> only apply to
 <code>PARTITION</code> Regions.</td>
 </tr>
 </tbody>

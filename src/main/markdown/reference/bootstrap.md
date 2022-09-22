@@ -1,6 +1,6 @@
 <div id="header">
 
-# Bootstrapping {data-store-name} with the Spring Container
+# Bootstrapping GemFire with the Spring Container
 
 </div>
 
@@ -12,10 +12,10 @@
 
 <div class="paragraph">
 
-{sdg-name} provides full configuration and initialization of the
-{data-store-name} In-Memory Data Grid (IMDG) using the Spring IoC
+Spring Data for GemFire provides full configuration and initialization of the
+GemFire In-Memory Data Grid (IMDG) using the Spring IoC
 container. The framework includes several classes to help simplify the
-configuration of {data-store-name} components, including: Caches,
+configuration of GemFire components, including: Caches,
 Regions, Indexes, DiskStores, Functions, WAN Gateways, persistence
 backup, and several other Distributed System components to support a
 variety of application use cases with minimal effort.
@@ -35,7 +35,7 @@ variety of application use cases with minimal effort.
 Note
 </div></td>
 <td class="content">This section assumes basic familiarity with
-{data-store-name}. For more information, see the {data-store-name}
+GemFire. For more information, see the GemFire
 {x-data-store-docs}/gemfire/about_gemfire.html[product
 documentation].</td>
 </tr>
@@ -50,17 +50,17 @@ documentation].</td>
 
 <div class="sect1">
 
-## Advantages of using Spring over {data-store-name} `cache.xml`
+## Advantages of using Spring over GemFire `cache.xml`
 
 <div class="sectionbody">
 
 <div class="paragraph">
 
-{sdg-name}'s XML namespace supports full configuration of the
-{data-store-name} In-Memory Data Grid (IMDG). The XML namespace is one
-of two ways to configure {data-store-name} in a Spring context in order
-to properly manage {data-store-name}'s lifecycle inside the Spring
-container. The other way to configure {data-store-name} in a Spring
+Spring Data for GemFire's XML namespace supports full configuration of the
+GemFire In-Memory Data Grid (IMDG). The XML namespace is one
+of two ways to configure GemFire in a Spring context in order
+to properly manage GemFire's lifecycle inside the Spring
+container. The other way to configure GemFire in a Spring
 context is by using [annotation-based
 configuration](#bootstrap-annotation-config).
 
@@ -68,28 +68,28 @@ configuration](#bootstrap-annotation-config).
 
 <div class="paragraph">
 
-While support for {data-store-name}'s native `cache.xml` persists for
-legacy reasons, {data-store-name} application developers who use XML
+While support for GemFire's native `cache.xml` persists for
+legacy reasons, GemFire application developers who use XML
 configuration are encouraged to do everything in Spring XML to take
 advantage of the many wonderful things Spring has to offer, such as
 modular XML configuration, property placeholders and overrides, SpEL
 ({spring-framework-docs}/core.html#expressions\[Spring Expression
 Language\]), and environment profiles. Behind the XML namespace,
-{sdg-name} makes extensive use of Spring’s `FactoryBean` pattern to
+Spring Data for GemFire makes extensive use of Spring’s `FactoryBean` pattern to
 simplify the creation, configuration, and initialization of
-{data-store-name} components.
+GemFire components.
 
 </div>
 
 <div class="paragraph">
 
-{data-store-name} provides several callback interfaces, such as
+GemFire provides several callback interfaces, such as
 `CacheListener`, `CacheLoader`, and `CacheWriter`, that let developers
 add custom event handlers. Using Spring’s IoC container, you can
 configure these callbacks as normal Spring beans and inject them into
-{data-store-name} components. This is a significant improvement over
+GemFire components. This is a significant improvement over
 native `cache.xml`, which provides relatively limited configuration
-options and requires callbacks to implement {data-store-name}'s
+options and requires callbacks to implement GemFire's
 `Declarable` interface (see [\[apis:declarable\]](#apis:declarable) to
 see how you can still use `Declarables` within Spring’s container).
 
@@ -115,8 +115,8 @@ pop-up annotations, and real time validation.
 
 <div class="paragraph">
 
-To simplify configuration, {sdg-name} provides a dedicated XML namespace
-for configuring core {data-store-name} components. It is possible to
+To simplify configuration, Spring Data for GemFire provides a dedicated XML namespace
+for configuring core GemFire components. It is possible to
 configure beans directly by using Spring’s standard `<bean>` definition.
 However, all bean properties are exposed through the XML namespace, so
 there is little benefit to using raw bean definitions.
@@ -160,7 +160,7 @@ Note
 <td class="content">Spring Data Repository support uses a separate XML
 namespace. See <a
 href="#gemfire-repositories">[gemfire-repositories]</a> for more
-information on how to configure {sdg-name} Repositories.</td>
+information on how to configure Spring Data for GemFire Repositories.</td>
 </tr>
 </tbody>
 </table>
@@ -169,7 +169,7 @@ information on how to configure {sdg-name} Repositories.</td>
 
 <div class="paragraph">
 
-To use the {sdg-name} XML namespace, declare it in your Spring XML
+To use the Spring Data for GemFire XML namespace, declare it in your Spring XML
 configuration meta-data, as the following example shows:
 
 </div>
@@ -201,7 +201,7 @@ configuration meta-data, as the following example shows:
 
 <div class="colist arabic">
 
-1.  {sdg-name} XML namespace prefix. Any name works, but, throughout
+1.  Spring Data for GemFire XML namespace prefix. Any name works, but, throughout
     this reference documentation, `gfe` is used.
 
 2.  The XML namespace prefix is mapped to the URI.
@@ -209,7 +209,7 @@ configuration meta-data, as the following example shows:
 3.  The XML namespace URI location. Note that, even though the location
     points to an external address (which does exist and is valid),
     Spring resolves the schema locally, as it is included in the
-    {sdg-name} library.
+    Spring Data for GemFire library.
 
 4.  Example declaration using the XML namespace with the `gfe` prefix.
 
@@ -230,7 +230,7 @@ Note
 <td class="content"><div class="paragraph">
 <p>You can change the default namespace from <code>beans</code> to
 <code>gfe</code>. This is useful for XML configuration composed mainly
-of {data-store-name} components, as it avoids declaring the prefix. To
+of GemFire components, as it avoids declaring the prefix. To
 do so, swap the namespace prefix declaration shown earlier, as the
 following example shows:</p>
 </div>
@@ -255,7 +255,7 @@ following example shows:</p>
 <div class="colist arabic">
 <ol>
 <li><p>The default namespace declaration for this XML document points to
-the {sdg-name} XML namespace.</p></li>
+the Spring Data for GemFire XML namespace.</p></li>
 <li><p>The <code>beans</code> namespace prefix declaration for Spring’s
 raw bean definitions.</p></li>
 <li><p>Bean declaration using the <code>beans</code> namespace. Notice
@@ -282,24 +282,24 @@ lack of prefix since <code>gfe</code> is the default namespace.</p></li>
 
 <div class="paragraph">
 
-In addition to the core XML namespace (`gfe`), {sdg-name} provides a
+In addition to the core XML namespace (`gfe`), Spring Data for GemFire provides a
 data access XML namespace (`gfe-data`), which is primarily intended to
-simplify the development of {data-store-name} client applications. This
-namespace currently contains support for {data-store-name}
+simplify the development of GemFire client applications. This
+namespace currently contains support for GemFire
 [Repositories](#gemfire-repositories) and Function
 [execution](#function-execution), as well as a `<datasource>` tag that
-offers a convenient way to connect to a {data-store-name} cluster.
+offers a convenient way to connect to a GemFire cluster.
 
 </div>
 
 <div class="sect2">
 
-### An Easy Way to Connect to {data-store-name}
+### An Easy Way to Connect to GemFire
 
 <div class="paragraph">
 
-For many applications, a basic connection to a {data-store-name} data
-grid using default values is sufficient. {sdg-name}'s `<datasource>` tag
+For many applications, a basic connection to a GemFire data
+grid using default values is sufficient. Spring Data for GemFire's `<datasource>` tag
 provides a simple way to access data. The data source creates a
 `ClientCache` and connection `Pool`. In addition, it queries the cluster
 servers for all existing root Regions and creates an (empty) client
@@ -371,9 +371,9 @@ you want to cache data in local memory, as the following example shows:
 
 <div class="paragraph">
 
-To use {data-store-name}, you need to either create a new cache or
+To use GemFire, you need to either create a new cache or
 connect to an existing one. With the current version of
-{data-store-name}, you can have only one open cache per VM (more
+GemFire, you can have only one open cache per VM (more
 strictly speaking, per `ClassLoader`). In most cases, the cache should
 only be created once.
 
@@ -398,7 +398,7 @@ member can also be used in stand-alone applications and integration
 tests. However, in typical production systems, most application
 processes act as cache clients, creating a <code>ClientCache</code>
 instance instead. This is described in the <a
-href="#bootstrap:cache:client">Configuring a {data-store-name}
+href="#bootstrap:cache:client">Configuring a GemFire
 ClientCache</a> and <a href="#bootstrap:region:client">Client Region</a>
 sections.</td>
 </tr>
@@ -431,7 +431,7 @@ following simple declaration:
 During Spring container initialization, any `ApplicationContext`
 containing this cache definition registers a `CacheFactoryBean` that
 creates a Spring bean named `gemfireCache`, which references a
-{data-store-name} `Cache` instance. This bean refers to either an
+GemFire `Cache` instance. This bean refers to either an
 existing `Cache` or, if one does not already exist, a newly created one.
 Since no additional properties were specified, a newly created `Cache`
 applies the default cache configuration.
@@ -440,7 +440,7 @@ applies the default cache configuration.
 
 <div class="paragraph">
 
-All {sdg-name} components that depend on the `Cache` respect this naming
+All Spring Data for GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
 If you prefer, you can make the dependency explicit by using the
 `cache-ref` attribute provided by various {sdg-acronym} XML namespace
@@ -463,11 +463,11 @@ attribute, as follows:
 
 <div class="paragraph">
 
-A {data-store-name} `Cache` can be fully configured using Spring.
-However, {data-store-name}'s native XML configuration file, `cache.xml`,
-is also supported. For situations where the {data-store-name} cache
+A GemFire `Cache` can be fully configured using Spring.
+However, GemFire's native XML configuration file, `cache.xml`,
+is also supported. For situations where the GemFire cache
 needs to be configured natively, you can provide a reference to the
-{data-store-name} XML configuration file by using the
+GemFire XML configuration file by using the
 `cache-xml-location` attribute, as follows:
 
 </div>
@@ -518,7 +518,7 @@ location.</td>
 <div class="paragraph">
 
 In addition to referencing an external XML configuration file, you can
-also specify {data-store-name} System
+also specify GemFire System
 {x-data-store-docs}/reference/topics/gemfire_properties.html\[properties\]
 that use any of Spring’s `Properties` support features.
 
@@ -646,7 +646,7 @@ following listing shows:
 <div class="colist arabic">
 
 1.  Attributes support various cache options. For further information
-    regarding anything shown in this example, see the {data-store-name}
+    regarding anything shown in this example, see the GemFire
     [product documentation](https://docs.pivotal.io/gemfire). The
     `close` attribute determines whether the cache should be closed when
     the Spring application context is closed. The default is `true`.
@@ -654,26 +654,26 @@ following listing shows:
     the cache (common in web applications), set this value to `false`.
 
 2.  Setting the `enable-auto-reconnect` attribute to `true` (the default
-    is `false`) lets a disconnected {data-store-name} member
-    automatically reconnect and rejoin the {data-store-name} cluster.
-    See the {data-store-name}
+    is `false`) lets a disconnected GemFire member
+    automatically reconnect and rejoin the GemFire cluster.
+    See the GemFire
     {x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
     documentation\] for more details.
 
 3.  Setting the `use-bean-factory-locator` attribute to `true` (it
     defaults to `false`) applies only when both Spring (XML)
-    configuration metadata and {data-store-name} `cache.xml` is used to
-    configure the {data-store-name} cache node (whether client or peer).
-    This option lets {data-store-name} components (such as
+    configuration metadata and GemFire `cache.xml` is used to
+    configure the GemFire cache node (whether client or peer).
+    This option lets GemFire components (such as
     `CacheLoader`) expressed in `cache.xml` be auto-wired with beans
     (such as `DataSource`) defined in the Spring application context.
     This option is typically used in conjunction with
     `cache-xml-location`.
 
 4.  Setting the `use-cluster-configuration` attribute to `true` (the
-    default is `false`) enables a {data-store-name} member to retrieve
+    default is `false`) enables a GemFire member to retrieve
     the common, shared Cluster-based configuration from a Locator. See
-    the {data-store-name}
+    the GemFire
     {x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
     documentation\] for more details.
 
@@ -697,7 +697,7 @@ following listing shows:
     Gateway. which provides a distributed Region creation service.
 
 8.  Declares a JNDI binding to enlist an external DataSource in a
-    {data-store-name} transaction.
+    GemFire transaction.
 
 </div>
 
@@ -708,7 +708,7 @@ following listing shows:
 <div class="paragraph">
 
 The preceding example includes a number of attributes related to
-{data-store-name}'s enhanced serialization framework, PDX. While a
+GemFire's enhanced serialization framework, PDX. While a
 complete discussion of PDX is beyond the scope of this reference guide,
 it is important to note that PDX is enabled by registering a
 `PdxSerializer`, which is specified by setting the `pdx-serializer`
@@ -718,7 +718,7 @@ attribute.
 
 <div class="paragraph">
 
-{data-store-name} provides an implementing class
+GemFire provides an implementing class
 (`org.apache.geode.pdx.ReflectionBasedAutoSerializer`) that uses Java
 Reflection. However, it is common for developers to provide their own
 implementation. The value of the attribute is simply a reference to a
@@ -749,18 +749,18 @@ You should be careful when setting the
 <div class="paragraph">
 
 Generally, 'auto-reconnect' should only be enabled in cases where
-{sdg-name}'s XML namespace is used to configure and bootstrap a new,
-non-application {data-store-name} server added to a cluster. In other
-words, 'auto-reconnect' should not be enabled when {sdg-name} is used to
-develop and build a {data-store-name} application that also happens to
-be a peer `Cache` member of the {data-store-name} cluster.
+Spring Data for GemFire's XML namespace is used to configure and bootstrap a new,
+non-application GemFire server added to a cluster. In other
+words, 'auto-reconnect' should not be enabled when Spring Data for GemFire is used to
+develop and build a GemFire application that also happens to
+be a peer `Cache` member of the GemFire cluster.
 
 </div>
 
 <div class="paragraph">
 
-The main reason for this restriction is that most {data-store-name}
-applications use references to the {data-store-name} `Cache` or Regions
+The main reason for this restriction is that most GemFire
+applications use references to the GemFire `Cache` or Regions
 in order to perform data access operations. These references are
 “injected” by the Spring container into application components (such as
 Repositories) for use by the application. When a peer member is
@@ -768,7 +768,7 @@ forcefully disconnected from the rest of the cluster, presumably because
 the peer member has become unresponsive or a network partition separates
 one or more peer members into a group too small to function as an
 independent distributed system, the peer member shuts down and all
-{data-store-name} component references (caches, Regions, and others)
+GemFire component references (caches, Regions, and others)
 become invalid.
 
 </div>
@@ -790,7 +790,7 @@ enters a “reconnecting” state and periodically attempts to rejoin the
 distributed system. If the peer member succeeds in reconnecting, the
 member rebuilds its “view” of the distributed system from existing
 members and receives a new distributed system ID. Additionally, all
-caches, Regions, and other {data-store-name} components are
+caches, Regions, and other GemFire components are
 reconstructed. Therefore, all old references, which may have been
 injected into application by the Spring container, are now stale and no
 longer valid.
@@ -799,10 +799,10 @@ longer valid.
 
 <div class="paragraph">
 
-{data-store-name} makes no guarantee (even when using the
-{data-store-name} public Java API) that application cache, Regions, or
+GemFire makes no guarantee (even when using the
+GemFire public Java API) that application cache, Regions, or
 other component references are automatically refreshed by the reconnect
-operation. As such, {data-store-name} applications must take care to
+operation. As such, GemFire applications must take care to
 refresh their own references.
 
 </div>
@@ -814,13 +814,13 @@ subsequently, a reconnect event either. If that were the case, you would
 have a clean way to know when to call
 `ConfigurableApplicationContext.refresh()`, if it were even applicable
 for an application to do so, which is why this “feature” of
-{data-store-name} is not recommended for peer `Cache` applications.
+GemFire is not recommended for peer `Cache` applications.
 
 </div>
 
 <div class="paragraph">
 
-For more information about 'auto-reconnect', see {data-store-name}'s
+For more information about 'auto-reconnect', see GemFire's
 {x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
 documentation\].
 
@@ -834,20 +834,20 @@ documentation\].
 
 <div class="paragraph">
 
-{data-store-name}'s Cluster Configuration Service is a convenient way
+GemFire's Cluster Configuration Service is a convenient way
 for any peer member joining the cluster to get a “consistent view” of
 the cluster by using the shared, persistent configuration maintained by
 a Locator. Using the cluster-based configuration ensures the peer
-member’s configuration is compatible with the {data-store-name}
+member’s configuration is compatible with the GemFire
 Distributed System when the member joins.
 
 </div>
 
 <div class="paragraph">
 
-This feature of {sdg-name} (setting the `use-cluster-configuration`
+This feature of Spring Data for GemFire (setting the `use-cluster-configuration`
 attribute to `true`) works in the same way as the `cache-xml-location`
-attribute, except the source of the {data-store-name} configuration
+attribute, except the source of the GemFire configuration
 meta-data comes from the network through a Locator, as opposed to a
 native `cache.xml` file residing in the local file system.
 
@@ -855,10 +855,10 @@ native `cache.xml` file residing in the local file system.
 
 <div class="paragraph">
 
-All {data-store-name} native configuration metadata, whether from
+All GemFire native configuration metadata, whether from
 `cache.xml` or from the Cluster Configuration Service, gets applied
 before any Spring (XML) configuration metadata. As a result, Spring’s
-config serves to “augment” the native {data-store-name} configuration
+config serves to “augment” the native GemFire configuration
 metadata and would most likely be specific to the application.
 
 </div>
@@ -894,12 +894,12 @@ config:
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">While certain {data-store-name} tools, such as
+<td class="content">While certain GemFire tools, such as
 <em>Gfsh</em>, have their actions “recorded” when schema-like changes
 are made (for example,
 <code>gfsh&gt;create region --name=Example --type=PARTITION</code>),
-{sdg-name}'s configuration metadata is not recorded. The same is true
-when using {data-store-name}'s public Java API directly. It, too, is not
+Spring Data for GemFire's configuration metadata is not recorded. The same is true
+when using GemFire's public Java API directly. It, too, is not
 recorded.</td>
 </tr>
 </tbody>
@@ -909,7 +909,7 @@ recorded.</td>
 
 <div class="paragraph">
 
-For more information on {data-store-name}'s Cluster Configuration
+For more information on GemFire's Cluster Configuration
 Service, see the
 {x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
 documentation\].
@@ -922,11 +922,11 @@ documentation\].
 
 <div class="sect2">
 
-### Configuring a {data-store-name} CacheServer
+### Configuring a GemFire CacheServer
 
 <div class="paragraph">
 
-{sdg-name} includes dedicated support for configuring a
+Spring Data for GemFire includes dedicated support for configuring a
 {x-data-store-javadoc}/org/apache/geode/cache/server/CacheServer.html\[CacheServer\],
 allowing complete configuration through the Spring container, as the
 following example shows:
@@ -951,7 +951,7 @@ following example shows:
 
   <gfe:cache/>
 
-  <!-- Example depicting serveral {data-store-name} CacheServer configuration options -->
+  <!-- Example depicting serveral GemFire CacheServer configuration options -->
   <gfe:cache-server id="advanced-config" auto-startup="true"
        bind-address="localhost" host-name-for-clients="localhost" port="${gemfire.cache.server.port}"
        load-poll-interval="2000" max-connections="22" max-message-count="1000" max-threads="16"
@@ -1023,7 +1023,7 @@ machines.</td>
 Note
 </div></td>
 <td class="content">To avoid initialization problems, the
-<code>CacheServer</code> started by {sdg-name} starts
+<code>CacheServer</code> started by Spring Data for GemFire starts
 <strong>after</strong> the Spring container has been fully initialized.
 Doing so lets potential Regions, listeners, writers or instantiators
 that are defined declaratively to be fully initialized and registered
@@ -1041,16 +1041,16 @@ right away.</td>
 
 <div class="sect2">
 
-### Configuring a {data-store-name} ClientCache
+### Configuring a GemFire ClientCache
 
 <div class="paragraph">
 
-In addition to defining a {data-store-name} peer
+In addition to defining a GemFire peer
 {x-data-store-javadoc}/org/apache/geode/cache/Cache.html\[`Cache`\],
-{sdg-name} also supports the definition of a {data-store-name}
+Spring Data for GemFire also supports the definition of a GemFire
 {x-data-store-javadoc}/org/apache/geode/cache/client/ClientCache.html\[`ClientCache`\]
 in a Spring container. A `ClientCache` definition is similar in
-configuration and use to the {data-store-name} peer
+configuration and use to the GemFire peer
 [Cache](#bootstrap:cache) and is supported by the
 `org.springframework.data.gemfire.client.ClientCacheFactoryBean`.
 
@@ -1058,7 +1058,7 @@ configuration and use to the {data-store-name} peer
 
 <div class="paragraph">
 
-The simplest definition of a {data-store-name} cache client using
+The simplest definition of a GemFire cache client using
 default configuration follows:
 
 </div>
@@ -1141,11 +1141,11 @@ configuration in more detail.
 
 <div class="sect3">
 
-#### {data-store-name}'s DEFAULT Pool and {sdg-name} Pool Definitions
+#### GemFire's DEFAULT Pool and Spring Data for GemFire Pool Definitions
 
 <div class="paragraph">
 
-If a {data-store-name} `ClientCache` is local-only, then no Pool
+If a GemFire `ClientCache` is local-only, then no Pool
 definition is required. For instance, you can define the following:
 
 </div>
@@ -1169,7 +1169,7 @@ definition is required. For instance, you can define the following:
 In this case, the “Example” Region is `LOCAL` and no data is distributed
 between the client and a server. Therefore, no Pool is necessary. This
 is true for any client-side, local-only Region, as defined by the
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/client/ClientRegionShortcut.html\[`ClientRegionShortcut`\]
 (all `LOCAL_*` shortcuts).
 
@@ -1186,7 +1186,7 @@ define and use a Pool.
 <div class="paragraph">
 
 When a `ClientCache`, a Pool, and a proxy-based Region are all defined
-but not explicitly identified, {sdg-name} resolves the references
+but not explicitly identified, Spring Data for GemFire resolves the references
 automatically, as the following example shows:
 
 </div>
@@ -1213,7 +1213,7 @@ automatically, as the following example shows:
 
 In the preceding example, the `ClientCache` is identified as
 `gemfireCache`, the Pool as `gemfirePool`, and the client Region as
-“Example”. However, the `ClientCache` initializes {data-store-name}'s
+“Example”. However, the `ClientCache` initializes GemFire's
 `DEFAULT` Pool from `gemfirePool`, and the client Region uses the
 `gemfirePool` when distributing data between the client and the server.
 
@@ -1221,7 +1221,7 @@ In the preceding example, the `ClientCache` is identified as
 
 <div class="paragraph">
 
-Basically, {sdg-name} resolves the preceding configuration to the
+Basically, Spring Data for GemFire resolves the preceding configuration to the
 following:
 
 </div>
@@ -1246,7 +1246,7 @@ following:
 
 <div class="paragraph">
 
-{data-store-name} still creates a Pool called `DEFAULT`. {sdg-name}
+GemFire still creates a Pool called `DEFAULT`. Spring Data for GemFire
 causes the `DEFAULT` Pool to be initialized from the `gemfirePool`.
 Doing so is useful in situations where multiple Pools are defined and
 client Regions are using separate Pools, or do not declare a Pool at
@@ -1288,9 +1288,9 @@ Consider the following:
 
 <div class="paragraph">
 
-In this setup, the {data-store-name} `client-cache` `DEFAULT` pool is
+In this setup, the GemFire `client-cache` `DEFAULT` pool is
 initialized from `locatorPool`, as specified by the `pool-name`
-attribute. There is no {sdg-name}-defined `gemfirePool`, since both
+attribute. There is no Spring Data for GemFire-defined `gemfirePool`, since both
 Pools were explicitly identified (named) — `locatorPool` and
 `serverPool`, respectively.
 
@@ -1299,7 +1299,7 @@ Pools were explicitly identified (named) — `locatorPool` and
 <div class="paragraph">
 
 The “Example” Region explicitly refers to and exclusively uses the
-`serverPool`. The `AnotherExample` Region uses {data-store-name}'s
+`serverPool`. The `AnotherExample` Region uses GemFire's
 `DEFAULT` Pool, which, again, was configured from the `locatorPool`
 based on the client cache bean definition’s `pool-name` attribute.
 
@@ -1386,7 +1386,7 @@ similar to a table in a relational database.
 
 <div class="paragraph">
 
-{data-store-name} implements the following types of Regions:
+GemFire implements the following types of Regions:
 
 </div>
 
@@ -1417,7 +1417,7 @@ similar to a table in a relational database.
 
 For more information about the various Region types and their
 capabilities as well as configuration options, please refer to
-{data-store-name}'s documentation on
+GemFire's documentation on
 {x-data-store-docs}/developing/region_options/region_types.html\[Region
 Types\].
 
@@ -1429,7 +1429,7 @@ Types\].
 
 <div class="paragraph">
 
-To reference Regions already configured in a {data-store-name} native
+To reference Regions already configured in a GemFire native
 `cache.xml` file, use the `lookup-region` element. Simply declare the
 target Region name with the `name` attribute. For example, to declare a
 bean definition identified as `ordersRegion` for an existing Region
@@ -1527,7 +1527,7 @@ without exposing the Region semantics or setup infrastructure.
 <div class="paragraph">
 
 `auto-region-lookup` lets you import all Regions defined in a
-{data-store-name} native `cache.xml` file into a Spring
+GemFire native `cache.xml` file into a Spring
 `ApplicationContext` when you use the `cache-xml-location` attribute on
 the `<gfe:cache>` element.
 
@@ -1602,7 +1602,7 @@ defined in `cache.xml` by using the following:
 
 <div class="paragraph">
 
-{sdg-name} automatically creates beans for all {data-store-name} Regions
+Spring Data for GemFire automatically creates beans for all GemFire Regions
 defined in `cache.xml` that have not been explicitly added to the Spring
 container with explicit `<gfe:lookup-region>` bean declarations.
 
@@ -1610,10 +1610,10 @@ container with explicit `<gfe:lookup-region>` bean declarations.
 
 <div class="paragraph">
 
-It is important to realize that {sdg-name} uses a Spring
+It is important to realize that Spring Data for GemFire uses a Spring
 {spring-framework-javadoc}/org/springframework/beans/factory/config/BeanPostProcessor.html\[BeanPostProcessor\]
 to post-process the cache after it is both created and initialized to
-determine the Regions defined in {data-store-name} to add as beans in
+determine the Regions defined in GemFire to add as beans in
 the Spring `ApplicationContext`.
 
 </div>
@@ -1682,7 +1682,7 @@ would do the following:
 
 <div class="paragraph">
 
-Doing so ensures that the {data-store-name} cache and all the Regions
+Doing so ensures that the GemFire cache and all the Regions
 defined in `cache.xml` get created before any components with auto-wire
 references when using the `<gfe:auto-region-lookup>` element.
 
@@ -1696,7 +1696,7 @@ references when using the `<gfe:auto-region-lookup>` element.
 
 <div class="paragraph">
 
-{sdg-name} provides comprehensive support for configuring any type of
+Spring Data for GemFire provides comprehensive support for configuring any type of
 Region through the following elements:
 
 </div>
@@ -1715,7 +1715,7 @@ Region through the following elements:
 
 <div class="paragraph">
 
-See the {data-store-name} documentation for a comprehensive description
+See the GemFire documentation for a comprehensive description
 of
 {x-data-store-docs}/developing/region_options/region_types.html\[Region
 Types\].
@@ -1749,10 +1749,10 @@ The following table lists the attributes available for all Region types:
 <tbody>
 <tr class="odd">
 <td class="tableblock halign-left valign-top"><p>cache-ref</p></td>
-<td class="tableblock halign-left valign-top"><p>{data-store-name} Cache
+<td class="tableblock halign-left valign-top"><p>GemFire Cache
 bean reference</p></td>
 <td class="tableblock halign-left valign-top"><p>The name of the bean
-defining the {data-store-name} Cache (by default,
+defining the GemFire Cache (by default,
 'gemfireCache').</p></td>
 </tr>
 <tr class="even">
@@ -1783,7 +1783,7 @@ out-of-order updates to distributed regions.</p></td>
 </tr>
 <tr class="odd">
 <td class="tableblock halign-left valign-top"><p>data-policy</p></td>
-<td class="tableblock halign-left valign-top"><p>See {data-store-name}'s
+<td class="tableblock halign-left valign-top"><p>See GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html[data
 policy].</p></td>
 <td class="tableblock halign-left valign-top"><p>The region’s data
@@ -2038,7 +2038,7 @@ Bean Reference Conventions
 </div>
 <div class="paragraph">
 <p>The <code>cache-listener</code> element is an example of a common
-pattern used in the XML namespace anywhere {data-store-name} provides a
+pattern used in the XML namespace anywhere GemFire provides a
 callback interface to be implemented in order to invoke custom code in
 response to cache or Region events. When you use Spring’s IoC container,
 the implementation is a standard Spring bean. In order to simplify the
@@ -2067,7 +2067,7 @@ configuration example.</p>
 <div class="paragraph">
 
 Similar to `cache-listener`, the XML namespace provides `cache-loader`
-and `cache-writer` elements to register these {data-store-name}
+and `cache-writer` elements to register these GemFire
 components for a Region.
 
 </div>
@@ -2078,7 +2078,7 @@ A `CacheLoader` is invoked on a cache miss to let an entry be loaded
 from an external data source, such as a database. A `CacheWriter` is
 invoked before an entry is created or updated, to allow the entry to be
 synchronized to an external data source. The main difference is that
-{data-store-name} supports, at most, a single instance of `CacheLoader`
+GemFire supports, at most, a single instance of `CacheLoader`
 and `CacheWriter` per Region. However, either declaration style may be
 used.
 
@@ -2122,7 +2122,7 @@ See
 {x-data-store-javadoc}/org/apache/geode/cache/CacheLoader.html\[`CacheLoader`\]
 and
 {x-data-store-javadoc}/org/apache/geode/cache/CacheWriter.html\[`CacheWriter`\]
-in the {data-store-name} documentation for more details.
+in the GemFire documentation for more details.
 
 </div>
 
@@ -2136,7 +2136,7 @@ in the {data-store-name} documentation for more details.
 
 <div class="paragraph">
 
-{data-store-name} Regions may also be compressed in order to reduce JVM
+GemFire Regions may also be compressed in order to reduce JVM
 memory consumption and pressure to possibly avoid global GCs. When you
 enable compression for a Region, all values stored in memory for the
 Region are compressed, while keys and indexes remain uncompressed. New
@@ -2173,7 +2173,7 @@ The following example shows a Region with compression enabled:
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation for more information on
+See GemFire's documentation for more information on
 {x-data-store-docs}/managing/region_compression/region_compression.html\[Region
 Compression\].
 
@@ -2187,7 +2187,7 @@ Compression\].
 
 <div class="paragraph">
 
-{data-store-name} Regions may also be configured to store Region values
+GemFire Regions may also be configured to store Region values
 in off-heap memory, which is a portion of JVM memory that is not subject
 to Garbage Collection (GC). By avoid expensive GC cycles, your
 application can spend more of its time on things that matter, like
@@ -2224,7 +2224,7 @@ the following configuration:
 <div class="paragraph">
 
 You can control other aspects of off-heap memory management by setting
-the following {data-store-name} configuration properties using the
+the following GemFire configuration properties using the
 `<gfe:cache>` element:s
 
 </div>
@@ -2243,10 +2243,10 @@ the following {data-store-name} configuration properties using the
 
 <div class="paragraph">
 
-{data-store-name}'s `ResourceManager` will use these two threshold
+GemFire's `ResourceManager` will use these two threshold
 values (`critical-off-heap-percentage` & `eviction-off-heap-percentage`)
 to more effectively manage the off-heap memory in much the same way as
-the JVM does when managing heap memory. {data-store-name}
+the JVM does when managing heap memory. GemFire
 `ResourceManager` will prevent the cache from consuming too much
 off-heap memory by evicting old data. If the off-heap manager is unable
 to keep up, then the `ResourceManager` refuses additions to the cache
@@ -2257,7 +2257,7 @@ memory.
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation for more information on
+See GemFire's documentation for more information on
 {x-data-store-docs}/managing/heap_use/heap_management.html\[Managing
 Heap and Off-Heap Memory\].
 
@@ -2279,18 +2279,18 @@ Off-Heap Memory\].
 
 <div class="paragraph">
 
-{sdg-name} also supports Sub-Regions, allowing Regions to be arranged in
+Spring Data for GemFire also supports Sub-Regions, allowing Regions to be arranged in
 a hierarchical relationship.
 
 </div>
 
 <div class="paragraph">
 
-For example, {data-store-name} allows for a `/Customer/Address` Region
+For example, GemFire allows for a `/Customer/Address` Region
 and a different `/Employee/Address` Region. Additionally, a Sub-Region
 may have its own Sub-Regions and configuration. A Sub-Region does not
 inherit attributes from its parent Region. Regions types may be mixed
-and matched subject to {data-store-name} constraints. A Sub-Region is
+and matched subject to GemFire constraints. A Sub-Region is
 naturally declared as a child element of a Region. The Sub-Region’s
 `name` attribute is the simple name. The preceding example might be
 configured as follows:
@@ -2336,7 +2336,7 @@ of the Region should also be used in OQL query strings.
 
 <div class="paragraph">
 
-{sdg-name} also supports Region templates.
+Spring Data for GemFire also supports Region templates.
 
 </div>
 
@@ -2350,7 +2350,7 @@ definitions declared in the Spring `ApplicationContext`.
 
 <div class="paragraph">
 
-{sdg-name} includes five Region template tags in its namespace:
+Spring Data for GemFire includes five Region template tags in its namespace:
 
 </div>
 
@@ -2488,7 +2488,7 @@ definitions override what is in the parent.
 
 <div class="paragraph">
 
-{sdg-name} applies Region templates when the Spring `ApplicationContext`
+Spring Data for GemFire applies Region templates when the Spring `ApplicationContext`
 configuration metadata is parsed, and therefore, Region templates must
 be declared in the order of inheritance. In other words, parent
 templates must be defined before child templates. Doing so ensures that
@@ -2549,10 +2549,10 @@ Note
 
 Previously, one of the underlying properties of the `replicated-region`,
 `partitioned-region`, `local-region`, and `client-region` elements in
-the {sdg-name} XML namespace was to perform a lookup first before
+the Spring Data for GemFire XML namespace was to perform a lookup first before
 attempting to create a Region. This was done in case the Region already
 existed, which would be the case if the Region was defined in an
-imported {data-store-name} native `cache.xml` configuration file.
+imported GemFire native `cache.xml` configuration file.
 Therefore, the lookup was performed first to avoid any errors. This was
 by design and subject to change.
 
@@ -2563,7 +2563,7 @@ by design and subject to change.
 This behavior has been altered and the default behavior is now to create
 the Region first. If the Region already exists, then the creation logic
 fails-fast and an appropriate exception is thrown. However, much like
-the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the {sdg-name}
+the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the Spring Data for GemFire
 `<gfe:*-region>` XML namespace elements now include a `ignore-if-exists`
 attribute, which reinstates the old behavior by first performing a
 lookup of an existing Region identified by name before attempting to
@@ -2627,7 +2627,7 @@ elements to define new Regions.</td>
 
 <div class="paragraph">
 
-Consider the following native {data-store-name} `cache.xml`
+Consider the following native GemFire `cache.xml`
 configuration file:
 
 </div>
@@ -2792,10 +2792,10 @@ the two preceding examples.
 
 <div class="paragraph">
 
-{data-store-name} is flexible in referencing both parent Regions and
+GemFire is flexible in referencing both parent Regions and
 Sub-Regions with or without the leading forward slash. For example, the
 parent can be referenced as `/Customers` or `Customers` and the child as
-`/Customers/Accounts` or `Customers/Accounts`. However, {sdg-name} is
+`/Customers/Accounts` or `Customers/Accounts`. However, Spring Data for GemFire is
 very specific when it comes to naming beans after Regions. It always
 uses the forward slash (/) to represent Sub-Regions (for example,
 `/Customers/Accounts`).
@@ -2829,7 +2829,7 @@ The earlier example, where the nested `replicated-region` elements were
 used to reference the Sub-Regions, shows the problem stated earlier. Are
 the Customers, Accounts and Orders Regions and Sub-Regions persistent or
 not? They are not persistent, because the Regions were defined in the
-native {data-store-name} `cache.xml` configuration file as `REPLICATE`
+native GemFire `cache.xml` configuration file as `REPLICATE`
 and exist before the cache bean is initialized (once the `<gfe:cache>`
 element is processed).
 
@@ -2846,7 +2846,7 @@ element is processed).
 <div class="paragraph">
 
 Based on various constraints, each Region can have an eviction policy in
-place for evicting data from memory. Currently, in {data-store-name},
+place for evicting data from memory. Currently, in GemFire,
 eviction applies to the Least Recently Used entry (also known as
 [LRU](https://en.wikipedia.org/wiki/Cache_algorithms#Least_Recently_Used)).
 Evicted entries are either destroyed or paged to disk (referred to as
@@ -2856,7 +2856,7 @@ Evicted entries are either destroyed or paged to disk (referred to as
 
 <div class="paragraph">
 
-{sdg-name} supports all eviction policies (entry count, memory, and heap
+Spring Data for GemFire supports all eviction policies (entry count, memory, and heap
 usage) for PARTITION Regions, REPLICATE Regions, and client, local
 Regions by using the nested `eviction` element.
 
@@ -2897,7 +2897,7 @@ configuration:
 Important
 </div></td>
 <td class="content">Replicas cannot use <code>local destroy</code>
-eviction since that would invalidate them. See the {data-store-name}
+eviction since that would invalidate them. See the GemFire
 docs for more information.</td>
 </tr>
 </tbody>
@@ -2915,7 +2915,7 @@ through the `disk-store` element for maximum efficiency.
 <div class="paragraph">
 
 For a detailed description of eviction policies, see the
-{data-store-name} documentation on
+GemFire documentation on
 {x-data-store-docs}/developing/eviction/chapter_overview.html\[Eviction\].
 
 </div>
@@ -2928,7 +2928,7 @@ For a detailed description of eviction policies, see the
 
 <div class="paragraph">
 
-{data-store-name} lets you control how long entries exist in the cache.
+GemFire lets you control how long entries exist in the cache.
 Expiration is driven by elapsed time, as opposed to eviction, which is
 driven by the entry count or heap or memory usage. Once an entry
 expires, it may no longer be accessed from the cache.
@@ -2937,7 +2937,7 @@ expires, it may no longer be accessed from the cache.
 
 <div class="paragraph">
 
-{data-store-name} supports the following expiration types:
+GemFire supports the following expiration types:
 
 </div>
 
@@ -2962,7 +2962,7 @@ expires, it may no longer be accessed from the cache.
 <div class="paragraph">
 
 Each of these may be applied to the Region itself or to entries in the
-Region. {sdg-name} provides `<region-ttl>`, `<region-tti>`,
+Region. Spring Data for GemFire provides `<region-ttl>`, `<region-tti>`,
 `<entry-ttl>`, and `<entry-tti>` Region child elements to specify
 timeout values and expiration actions.
 
@@ -2993,7 +2993,7 @@ set:
 <div class="paragraph">
 
 For a detailed description of expiration policies, see the
-{data-store-name} documentation on
+GemFire documentation on
 {x-data-store-docs}/developing/expiration/chapter_overview.html\[expiration\].
 
 </div>
@@ -3004,7 +3004,7 @@ For a detailed description of expiration policies, see the
 
 <div class="paragraph">
 
-With {sdg-name}, you can define expiration policies and settings on
+With Spring Data for GemFire, you can define expiration policies and settings on
 individual Region entry values (or, to put it differently, directly on
 application domain objects). For instance, you can define expiration
 policies on a Session-based application domain object as follows:
@@ -3077,8 +3077,8 @@ Note
 </div></td>
 <td class="content"><div class="paragraph">
 <p>All <code>@Expiration</code>-based annotations apply only to Region
-entry values. Expiration for a Region is not covered by {sdg-name}'s
-expiration annotation support. However, {data-store-name} and {sdg-name}
+entry values. Expiration for a Region is not covered by Spring Data for GemFire's
+expiration annotation support. However, GemFire and Spring Data for GemFire
 do let you set Region expiration by using the {sdg-acronym} XML
 namespace, as follows:</p>
 </div>
@@ -3098,10 +3098,10 @@ namespace, as follows:</p>
 
 <div class="paragraph">
 
-{sdg-name}'s `@Expiration` annotation support is implemented with
-{data-store-name}'s
+Spring Data for GemFire's `@Expiration` annotation support is implemented with
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/CustomExpiry.html\[`CustomExpiry`\]
-interface. See {data-store-name}'s documentation on
+interface. See GemFire's documentation on
 {x-data-store-docs}/developing/expiration/configuring_data_expiration.html\[configuring
 data expiration\] for more details
 
@@ -3109,7 +3109,7 @@ data expiration\] for more details
 
 <div class="paragraph">
 
-The {sdg-name} `AnnotationBasedExpiration` class (and `CustomExpiry`
+The Spring Data for GemFire `AnnotationBasedExpiration` class (and `CustomExpiry`
 implementation) is responsible for processing the {sdg-acronym}
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
@@ -3118,7 +3118,7 @@ configuration appropriately for Region entry expiration on request.
 
 <div class="paragraph">
 
-To use {sdg-name} to configure specific {data-store-name} Regions to
+To use Spring Data for GemFire to configure specific GemFire Regions to
 appropriately apply the expiration policy to your application domain
 objects annotated with `@Expiration`-based annotations, you must:
 
@@ -3176,12 +3176,12 @@ objects annotated with `@Expiration`-based annotations, you must:
 
 2.  (optional) Annotate your application domain objects that are stored
     in the Region with expiration policies and custom settings by using
-    one of {sdg-name}'s `@Expiration` annotations: `@Expiration`,
+    one of Spring Data for GemFire's `@Expiration` annotations: `@Expiration`,
     `@IdleTimeoutExpiration`, or `@TimeToLiveExpiration`
 
 3.  (optional) In cases where particular application domain objects have
-    not been annotated with {sdg-name}'s `@Expiration` annotations at
-    all, but the {data-store-name} Region is configured to use
+    not been annotated with Spring Data for GemFire's `@Expiration` annotations at
+    all, but the GemFire Region is configured to use
     {sdg-acronym}'s custom `AnnotationBasedExpiration` class to
     determine the expiration policy and settings for objects stored in
     the Region, you can set “default” expiration attributes on the
@@ -3215,7 +3215,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 
 <div class="paragraph">
 
-You may have noticed that {sdg-name}'s `@Expiration` annotations use a
+You may have noticed that Spring Data for GemFire's `@Expiration` annotations use a
 `String` as the attribute type rather than, and perhaps more
 appropriately, being strongly typed — for example, `int` for 'timeout'
 and {sdg-acronym}'s `ExpirationActionType` for 'action'. Why is that?
@@ -3224,7 +3224,7 @@ and {sdg-acronym}'s `ExpirationActionType` for 'action'. Why is that?
 
 <div class="paragraph">
 
-Well, enter one of {sdg-name}'s other features, leveraging Spring’s core
+Well, enter one of Spring Data for GemFire's other features, leveraging Spring’s core
 infrastructure for configuration convenience: property placeholders and
 Spring Expression Language (SpEL) expressions.
 
@@ -3355,7 +3355,7 @@ failures if the enumerated type ever changes.
 <div class="paragraph">
 
 As an example, all of this has been demonstrated and tested in the
-{sdg-name} test suite. See the
+Spring Data for GemFire test suite. See the
 [source](https://github.com/spring-projects/spring-data-geode) for
 further details.
 
@@ -3371,18 +3371,18 @@ further details.
 
 <div class="paragraph">
 
-Regions can be persistent. {data-store-name} ensures that all the data
+Regions can be persistent. GemFire ensures that all the data
 you put into a Region that is configured for persistence is written to
 disk in a way that is recoverable the next time you recreate the Region.
 Doing so lets data be recovered after machine or process failure or even
 after an orderly shutdown and subsequent restart of the
-{data-store-name} data node.
+GemFire data node.
 
 </div>
 
 <div class="paragraph">
 
-To enable persistence with {sdg-name}, set the `persistent` attribute to
+To enable persistence with Spring Data for GemFire, set the `persistent` attribute to
 `true` on any of the `<*-region>` elements, as the following example
 shows:
 
@@ -3404,7 +3404,7 @@ shows:
 
 Persistence may also be configured by setting the `data-policy`
 attribute. To do so, set the attribute’s value to one of
-{x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html\[{data-store-name}'s
+{x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html\[GemFire's
 DataPolicy settings\], as the following example shows:
 
 </div>
@@ -3469,10 +3469,10 @@ DiskStore](#bootstrap:diskstore).
 
 <div class="paragraph">
 
-{data-store-name} allows configuration of
+GemFire allows configuration of
 {x-data-store-docs}/developing/events/configure_p2p_event_messaging.html\[peer-to-peer
 (P2P) event messaging\] to control the entry events that the Region
-receives. {sdg-name} provides the `<gfe:subscription/>` sub-element to
+receives. Spring Data for GemFire provides the `<gfe:subscription/>` sub-element to
 set the subscription policy on `REPLICATE` and `PARTITION` Regions to
 either `ALL` or `CACHE_CONTENT`. The following example shows a region
 with its subscription policy set to `CACHE_CONTENT`:
@@ -3501,7 +3501,7 @@ with its subscription policy set to `CACHE_CONTENT`:
 
 <div class="paragraph">
 
-{sdg-name} offers a dedicated `local-region` element for creating local
+Spring Data for GemFire offers a dedicated `local-region` element for creating local
 Regions. Local Regions, as the name implies, are standalone, meaning
 that they do not share data with any other distributed system member.
 Other than that, all common Region configuration options apply.
@@ -3511,7 +3511,7 @@ Other than that, all common Region configuration options apply.
 <div class="paragraph">
 
 The following example shows a minimal declaration (again, the example
-relies on the {sdg-name} XML namespace naming conventions to wire the
+relies on the Spring Data for GemFire XML namespace naming conventions to wire the
 cache):
 
 </div>
@@ -3533,7 +3533,7 @@ cache):
 In the preceding example, a local Region is created (if a Region by the
 same name does not already exist). The name of the Region is the same as
 the bean ID (`exampleLocalRegion`), and the bean assumes the existence
-of a {data-store-name} cache named `gemfireCache`.
+of a GemFire cache named `gemfireCache`.
 
 </div>
 
@@ -3559,7 +3559,7 @@ to use the other replicas.
 <div class="paragraph">
 
 All common configuration options are available for REPLICATE Regions.
-{sdg-name} offers a `replicated-region` element. The following example
+Spring Data for GemFire offers a `replicated-region` element. The following example
 shows a minimal declaration:
 
 </div>
@@ -3578,7 +3578,7 @@ shows a minimal declaration:
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation on
+See GemFire's documentation on
 {x-data-store-docs}/developing/distributed_regions/chapter_overview.html\[Distributed
 and Replicated Regions\] for more details.
 
@@ -3592,13 +3592,13 @@ and Replicated Regions\] for more details.
 
 <div class="paragraph">
 
-The {sdg-name} XML namespace also supports `PARTITION` Regions.
+The Spring Data for GemFire XML namespace also supports `PARTITION` Regions.
 
 </div>
 
 <div class="paragraph">
 
-To quote the {data-store-name} docs:
+To quote the GemFire docs:
 
 </div>
 
@@ -3610,7 +3610,7 @@ data. When using a partitioned region, applications are presented with a
 logical view of the region that looks like a single map containing all
 of the data in the region. Reads or writes to this map are transparently
 routed to the peer that hosts the entry that is the target of the
-operation. {data-store-name} divides the domain of hashcodes into
+operation. GemFire divides the domain of hashcodes into
 buckets. Each bucket is assigned to a specific peer, but may be
 relocated at any time to another peer in order to improve the
 utilization of resources across the cluster.”
@@ -3652,7 +3652,7 @@ redundant copies:
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation on
+See GemFire's documentation on
 {x-data-store-docs}/developing/partitioned_regions/chapter_overview.html\[Partitioned
 Regions\] for more details.
 
@@ -3769,10 +3769,10 @@ Table 3. partitioned-region attributes
 
 <div class="paragraph">
 
-{data-store-name} supports various deployment topologies for managing
-and distributing data. The topic of {data-store-name} topologies is
+GemFire supports various deployment topologies for managing
+and distributing data. The topic of GemFire topologies is
 beyond the scope of this documentation. However, to quickly recap,
-{data-store-name}'s supported topologies can be classified as:
+GemFire's supported topologies can be classified as:
 peer-to-peer (p2p), client-server, and wide area network (WAN). In the
 last two configurations, it is common to declare client Regions that
 connect to a cache server.
@@ -3781,7 +3781,7 @@ connect to a cache server.
 
 <div class="paragraph">
 
-{sdg-name} offers dedicated support for each configuration through its
+Spring Data for GemFire offers dedicated support for each configuration through its
 [client-cache](#bootstrap:cache:client) elements: `client-region` and
 `pool`. As the names imply, `client-region` defines a client Region,
 while `pool` defines a Pool of connections used and shared by the
@@ -3860,8 +3860,8 @@ servers by using the <code>server</code> element.</td>
 <div class="paragraph">
 
 For a full list of options to set on the client and especially on the
-`Pool`, see the {sdg-name} schema
-(“[\[appendix-schema\]](#appendix-schema)”) and {data-store-name}'s
+`Pool`, see the Spring Data for GemFire schema
+(“[\[appendix-schema\]](#appendix-schema)”) and GemFire's
 documentation on
 {x-data-store-docs}/topologies_and_comm/cs_configuration/chapter_overview.html\[Client-Server
 Configuration\].
@@ -3875,8 +3875,8 @@ Configuration\].
 <div class="paragraph">
 
 To minimize network traffic, each client can separately define its own
-'interests' policies, indicating to {data-store-name} the data it
-actually requires. In {sdg-name}, 'interests' can be defined for each
+'interests' policies, indicating to GemFire the data it
+actually requires. In Spring Data for GemFire, 'interests' can be defined for each
 client Region separately. Both key-based and regular expression-based
 interest types are supported.
 
@@ -4066,7 +4066,7 @@ capabilities is beyond the scope of this document.
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation on
+See GemFire's documentation on
 {x-data-store-docs}/developing/events/how_client_server_distribution_works.html\[Client-to-Server
 Event Distribution\] for more details.
 
@@ -4082,9 +4082,9 @@ Event Distribution\] for more details.
 
 <div class="paragraph">
 
-{data-store-name} has support for caching JSON documents in Regions,
+GemFire has support for caching JSON documents in Regions,
 along with the ability to query stored JSON documents using the
-{data-store-name} OQL (Object Query Language). JSON documents are stored
+GemFire OQL (Object Query Language). JSON documents are stored
 internally as
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxInstance.html\[PdxInstance\]
 types by using the
@@ -4095,7 +4095,7 @@ class to perform conversion to and from JSON documents (as a `String`).
 
 <div class="paragraph">
 
-{sdg-name} provides the `<gfe-data:json-region-autoproxy/>` element to
+Spring Data for GemFire provides the `<gfe-data:json-region-autoproxy/>` element to
 enable an {spring-framework-docs}/#aop-introduction\[AOP\] component to
 advise appropriate, proxied Region operations, which effectively
 encapsulates the `JSONFormatter`, thereby letting your applications work
@@ -4145,7 +4145,7 @@ automatic conversion for these Region operations.
 Note
 </div></td>
 <td class="content">Certain Region operations (specifically those that
-use {data-store-name}'s proprietary <code>Region.Entry</code>, such as:
+use GemFire's proprietary <code>Region.Entry</code>, such as:
 <code>entries(boolean)</code>, <code>entrySet(boolean)</code> and
 <code>getEntry()</code> type) are not targeted for AOP advice. In
 addition, the <code>entrySet()</code> method (which returns a
@@ -4198,7 +4198,7 @@ native `QueryService` operations are not supported.
 
 <div class="paragraph">
 
-{data-store-name} allows indexes (also sometimes pluralized as indices)
+GemFire allows indexes (also sometimes pluralized as indices)
 to be created on Region data to improve the performance of OQL (Object
 Query Language) queries.
 
@@ -4206,7 +4206,7 @@ Query Language) queries.
 
 <div class="paragraph">
 
-In {sdg-name}, indexes are declared with the `index` element, as the
+In Spring Data for GemFire, indexes are declared with the `index` element, as the
 following example shows:
 
 </div>
@@ -4225,12 +4225,12 @@ following example shows:
 
 <div class="paragraph">
 
-In {sdg-name}'s XML schema (also called the {sdg-acronym} XML
+In Spring Data for GemFire's XML schema (also called the {sdg-acronym} XML
 namespace), `index` bean declarations are not bound to a Region, unlike
-{data-store-name}'s native `cache.xml`. Rather, they are top-level
+GemFire's native `cache.xml`. Rather, they are top-level
 elements similar to `<gfe:cache>` element. This lets you declare any
 number of indexes on any Region, whether they were just created or
-already exist — a significant improvement over {data-store-name}'s
+already exist — a significant improvement over GemFire's
 native `cache.xml` format.
 
 </div>
@@ -4349,15 +4349,15 @@ to the following:
 <div class="paragraph">
 
 The `from` clause must refer to a valid, existing Region and is how an
-`Index` gets applied to a Region. This is not specific to {sdg-name}. It
-is a feature of {data-store-name}.
+`Index` gets applied to a Region. This is not specific to Spring Data for GemFire. It
+is a feature of GemFire.
 
 </div>
 
 <div class="paragraph">
 
 The `Index` `type` may be one of three enumerated values defined by
-{sdg-name}'s
+Spring Data for GemFire's
 {sdg-javadoc}/org/springframework/data/gemfire/IndexType.html\[`IndexType`\]
 enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
 
@@ -4379,17 +4379,17 @@ is invoked to create a `KEY` `Index`.
 <div class="paragraph">
 
 The default is `FUNCTIONAL` and results in one of the
-`QueryService.createIndex(..)` methods being invoked. See the {sdg-name}
+`QueryService.createIndex(..)` methods being invoked. See the Spring Data for GemFire
 XML schema for a full set of options.
 
 </div>
 
 <div class="paragraph">
 
-For more information on indexing in {data-store-name}, see “[Working
+For more information on indexing in GemFire, see “[Working
 with
 Indexes](https://gemfire90.docs.pivotal.io/geode/developing/query_index/query_index.html)”
-in {data-store-name}'s User Guide.
+in GemFire's User Guide.
 
 </div>
 
@@ -4400,7 +4400,7 @@ in {data-store-name}'s User Guide.
 <div class="paragraph">
 
 In addition to creating indexes up front as `Index` bean definitions are
-processed by {sdg-name} on Spring container initialization, you may also
+processed by Spring Data for GemFire on Spring container initialization, you may also
 define all of your application indexes prior to creating them by using
 the `define` attribute, as follows:
 
@@ -4424,9 +4424,9 @@ When `define` is set to `true` (it defaults to `false`), it does not
 actually create the `Index` at that moment. All “defined” Indexes are
 created all at once, when the Spring `ApplicationContext` is “refreshed”
 or, to put it differently, when a `ContextRefreshedEvent` is published
-by the Spring container. {sdg-name} registers itself as an
+by the Spring container. Spring Data for GemFire registers itself as an
 `ApplicationListener` listening for the `ContextRefreshedEvent`. When
-fired, {sdg-name} calls
+fired, Spring Data for GemFire calls
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes\[`QueryService.createDefinedIndexes()`\].
 
 </div>
@@ -4454,7 +4454,7 @@ for more details.
 
 <div class="paragraph">
 
-Two {sdg-name} `Index` configuration options warrant special mention:
+Two Spring Data for GemFire `Index` configuration options warrant special mention:
 `ignoreIfExists` and `override`.
 
 </div>
@@ -4462,7 +4462,7 @@ Two {sdg-name} `Index` configuration options warrant special mention:
 <div class="paragraph">
 
 These options correspond to the `ignore-if-exists` and `override`
-attributes on the `<gfe:index>` element in {sdg-name}'s XML namespace,
+attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace,
 respectively.
 
 </div>
@@ -4502,9 +4502,9 @@ at runtime. As a result, both of these options are disabled (set to
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">These options are only available in {sdg-name} and
-exist to workaround known limitations with {data-store-name}.
-{data-store-name} has no equivalent options or functionality.</td>
+<td class="content">These options are only available in Spring Data for GemFire and
+exist to workaround known limitations with GemFire.
+GemFire has no equivalent options or functionality.</td>
 </tr>
 </tbody>
 </table>
@@ -4514,10 +4514,10 @@ exist to workaround known limitations with {data-store-name}.
 <div class="paragraph">
 
 Each option significantly differs in behavior and entirely depends on
-the type of {data-store-name} `Index` exception thrown. This also means
-that neither option has any effect if a {data-store-name} Index-type
+the type of GemFire `Index` exception thrown. This also means
+that neither option has any effect if a GemFire Index-type
 exception is not thrown. These options are meant to specifically handle
-{data-store-name} `IndexExistsException` and
+GemFire `IndexExistsException` and
 `IndexNameConflictException` instances, which can occur for various,
 sometimes obscure reasons. The exceptions have the following causes:
 
@@ -4539,10 +4539,10 @@ sometimes obscure reasons. The exceptions have the following causes:
 
 <div class="paragraph">
 
-{sdg-name}'s default behavior is to fail-fast, always. So, neither
+Spring Data for GemFire's default behavior is to fail-fast, always. So, neither
 `Index` *Exception* are “handled” by default. These `Index` exceptions
 are wrapped in a {sdg-acronym} `GemfireIndexException` and rethrown. If
-you wish for {sdg-name} to handle them for you, you can set either of
+you wish for Spring Data for GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
 </div>
@@ -4571,7 +4571,7 @@ is simply ignored, and the existing `Index` is returned.
 <div class="paragraph">
 
 There is little consequence in returning the existing `Index`, since the
-`index` bean definition is the same, as determined by {data-store-name}
+`index` bean definition is the same, as determined by GemFire
 itself, not {sdg-acronym}.
 
 </div>
@@ -4580,7 +4580,7 @@ itself, not {sdg-acronym}.
 
 However, this also means that no `Index` with the “name” specified in
 your `index` bean definition or declaration actually exists from
-{data-store-name}'s perspective (that is, with
+GemFire's perspective (that is, with
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]).
 Therefore, you should be careful when writing OQL query statements that
 use query hints, especially query hints that refer to the application
@@ -4630,7 +4630,7 @@ when the <code>Index</code> being ignored is significantly different in
 its definition from the existing <code>Index</code>. However, in order
 for {sdg-acronym} to accomplish this, it must be able to find the
 existing <code>Index</code>, which is looked up by using the
-{data-store-name} API (the only means available).</td>
+GemFire API (the only means available).</td>
 </tr>
 </tbody>
 </table>
@@ -4654,7 +4654,7 @@ that have the same definition but different names.
 
 <div class="paragraph">
 
-{sdg-name} can only accomplish this by using {data-store-name}'s API, by
+Spring Data for GemFire can only accomplish this by using GemFire's API, by
 first removing the existing `Index` and then recreating the `Index` with
 the new name. It is possible that either the remove or subsequent create
 invocation could fail. There is no way to execute both actions
@@ -4686,7 +4686,7 @@ If so, {sdg-acronym} is smart and returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
 name and the definition are exactly the same. Of course, {sdg-acronym}
 can only accomplish this when {sdg-acronym} is able to find the existing
-`Index`, which is dependent on {data-store-name}'s APIs. If it cannot be
+`Index`, which is dependent on GemFire's APIs. If it cannot be
 found, nothing happens and a {sdg-acronym} `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
@@ -4712,8 +4712,8 @@ expectations and application requirements.
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
-configure {data-store-name} ({sdg-name}, {data-store-name} Cluster
-Config, {data-store-name} native `cache.xml`, the API, and so on). You
+configure GemFire (Spring Data for GemFire, GemFire Cluster
+Config, GemFire native `cache.xml`, the API, and so on). You
 should definitely prefer one configuration method and stick with it.
 
 </div>
@@ -4728,7 +4728,7 @@ However, when does an `IndexNameConflictException` get thrown?
 
 One particular case is an `Index` defined on a `PARTITION` Region (PR).
 When an `Index` is defined on a `PARTITION` Region (for example, `X`),
-{data-store-name} distributes the `Index` definition (and name) to other
+GemFire distributes the `Index` definition (and name) to other
 peer members in the cluster that also host the same `PARTITION` Region
 (that is, "X"). The distribution of this `Index` definition to, and
 subsequent creation of, this `Index` by peer members is on a
@@ -4740,7 +4740,7 @@ performed asynchronously.
 <div class="paragraph">
 
 During this window of time, it is possible that these pending PR
-`Indexes` cannot be identified by {data-store-name} — such as with a
+`Indexes` cannot be identified by GemFire — such as with a
 call to
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]
 with
@@ -4752,13 +4752,13 @@ or even with
 
 <div class="paragraph">
 
-As a result, the only way for {sdg-acronym} or other {data-store-name}
+As a result, the only way for {sdg-acronym} or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
 application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
-{data-store-name} API calls do not.
+GemFire API calls do not.
 
 </div>
 
@@ -4766,9 +4766,9 @@ application knows there is a problem. This is because the `QueryService`
 
 In any case, {sdg-acronym} makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
-action. Given that all {data-store-name} `QueryService.createIndex(..)`
+action. Given that all GemFire `QueryService.createIndex(..)`
 methods are synchronous, blocking operations, the state of
-{data-store-name} should be consistent and accessible after either of
+GemFire should be consistent and accessible after either of
 these index-type exceptions are thrown. Consequently, {sdg-acronym} can
 inspect the state of the system and act accordingly, based on your
 configuration.
@@ -4797,7 +4797,7 @@ In all other cases, {sdg-acronym} embraces a fail-fast strategy.
 
 <div class="paragraph">
 
-{sdg-name} supports `DiskStore` configuration and creation through the
+Spring Data for GemFire supports `DiskStore` configuration and creation through the
 `disk-store` element, as the following example shows:
 
 </div>
@@ -4822,7 +4822,7 @@ In all other cases, {sdg-acronym} embraces a fail-fast strategy.
 
 `DiskStore` instances are used by Regions for file system persistent
 backup and overflow of evicted entries as well as persistent backup for
-WAN Gateways. Multiple {data-store-name} components may share the same
+WAN Gateways. Multiple GemFire components may share the same
 `DiskStore`. Additionally, multiple file system directories may be
 defined for a single `DiskStore`, as shown in the preceding example.
 
@@ -4830,7 +4830,7 @@ defined for a single `DiskStore`, as shown in the preceding example.
 
 <div class="paragraph">
 
-See {data-store-name}'s documentation for a complete explanation of
+See GemFire's documentation for a complete explanation of
 {x-data-store-docs}/developing/storing_data_on_disk/chapter_overview.html\[Persistence
 and Overflow\] and configuration options on `DiskStore` instances.
 
@@ -4848,10 +4848,10 @@ and Overflow\] and configuration options on `DiskStore` instances.
 
 <div class="paragraph">
 
-{sdg-name} supports cache and Region snapshots by using
-{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[{data-store-name}'s
+Spring Data for GemFire supports cache and Region snapshots by using
+{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[GemFire's
 Snapshot Service\]. The out-of-the-box Snapshot Service support offers
-several convenient features to simplify the use of {data-store-name}'s
+several convenient features to simplify the use of GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html\[Cache\]
 and
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[Region\]
@@ -4862,12 +4862,12 @@ Snapshot Service APIs.
 <div class="paragraph">
 
 As the
-{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[{data-store-name}
+{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[GemFire
 documentation\] explains, snapshots let you save and subsequently reload
 the cached data later, which can be useful for moving data between
 environments, such as from production to a staging or test environment
 in order to reproduce data-related issues in a controlled context. You
-can combine {sdg-name}'s Snapshot Service support with [Spring’s bean
+can combine Spring Data for GemFire's Snapshot Service support with [Spring’s bean
 definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
 to load snapshot data specific to the environment as necessary.
@@ -4876,7 +4876,7 @@ to load snapshot data specific to the environment as necessary.
 
 <div class="paragraph">
 
-{sdg-name}'s support for {data-store-name}'s Snapshot Service begins
+Spring Data for GemFire's support for GemFire's Snapshot Service begins
 with the `<gfe-data:snapshot-service>` element from the `<gfe-data>` XML
 namespace.
 
@@ -4911,7 +4911,7 @@ definition, as follows:
 
 You can define as many imports and exports as you like. You can define
 only imports or only exports. The file locations and directory paths can
-be absolute or relative to the {sdg-name} application, which is the JVM
+be absolute or relative to the Spring Data for GemFire application, which is the JVM
 process’s working directory.
 
 </div>
@@ -4919,7 +4919,7 @@ process’s working directory.
 <div class="paragraph">
 
 The preceding example is pretty simple, and the Snapshot Service defined
-in this case refers to the {data-store-name} cache instance with the
+in this case refers to the GemFire cache instance with the
 default name of `gemfireCache` (as described in [Configuring a
 Cache](#bootstrap:cache)). If you name your cache bean definition
 something other than the default, you can use the `cache-ref` attribute
@@ -4969,7 +4969,7 @@ specifying the `region-ref` attribute, as follows:
 
 <div class="paragraph">
 
-When the `region-ref` attribute is specified, {sdg-name}'s
+When the `region-ref` attribute is specified, Spring Data for GemFire's
 `SnapshotServiceFactoryBean` resolves the `region-ref` attribute value
 to a Region bean defined in the Spring container and creates a
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[`RegionSnapshotService`\].
@@ -4990,9 +4990,9 @@ However, the `location` must refer to a file on an export.
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} is strict about imported snapshot
+<td class="content">GemFire is strict about imported snapshot
 files actually existing before they are referenced. For exports,
-{data-store-name} creates the snapshot file. If the snapshot file for
+GemFire creates the snapshot file. If the snapshot file for
 export already exists, the data is overwritten.</td>
 </tr>
 </tbody>
@@ -5012,7 +5012,7 @@ export already exists, the data is overwritten.</td>
 <td class="icon"><div class="title">
 Tip
 </div></td>
-<td class="content">{sdg-name} includes a
+<td class="content">Spring Data for GemFire includes a
 <code>suppress-import-on-init</code> attribute on the
 <code>&lt;gfe-data:snapshot-service&gt;</code> element to suppress the
 configured Snapshot Service from trying to import data into the cache or
@@ -5055,7 +5055,7 @@ Note
 <td class="content">Of course, you can use the overloaded
 <code>load(:File[], :SnapshotFormat, :SnapshotOptions)</code> method to
 get specific about which snapshot files to load into the
-{data-store-name} cache.</td>
+GemFire cache.</td>
 </tr>
 </tbody>
 </table>
@@ -5064,7 +5064,7 @@ get specific about which snapshot files to load into the
 
 <div class="paragraph">
 
-However, {sdg-name} recognizes that a typical developer workflow might
+However, Spring Data for GemFire recognizes that a typical developer workflow might
 be to extract and export data from one environment into several snapshot
 files, zip all of them up, and then conveniently move the zip file to
 another environment for import.
@@ -5073,7 +5073,7 @@ another environment for import.
 
 <div class="paragraph">
 
-Therefore, {sdg-name} lets you specify a jar or zip file on import for a
+Therefore, Spring Data for GemFire lets you specify a jar or zip file on import for a
 `cache`-based Snapshot Service, as follows:
 
 </div>
@@ -5094,7 +5094,7 @@ Therefore, {sdg-name} lets you specify a jar or zip file on import for a
 
 <div class="paragraph">
 
-{sdg-name} conveniently extracts the provided zip file and treats it as
+Spring Data for GemFire conveniently extracts the provided zip file and treats it as
 a directory import (load).
 
 </div>
@@ -5109,7 +5109,7 @@ a directory import (load).
 
 The real power of defining multiple snapshot imports and exports is
 realized through the use of snapshot filters. Snapshot filters implement
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[`SnapshotFilter`\]
 interface and are used to filter Region entries for inclusion into the
 Region on import and for inclusion into the snapshot on export.
@@ -5118,7 +5118,7 @@ Region on import and for inclusion into the snapshot on export.
 
 <div class="paragraph">
 
-{sdg-name} lets you use snapshot filters on import and export by using
+Spring Data for GemFire lets you use snapshot filters on import and export by using
 the `filter-ref` attribute or an anonymous, nested bean definition, as
 the following example shows:
 
@@ -5159,7 +5159,7 @@ the following example shows:
 
 In addition, you can express more complex snapshot filters by using the
 `ComposableSnapshotFilter` class. This class implements
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[SnapshotFilter\]
 interface as well as the
 [Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
@@ -5249,7 +5249,7 @@ another filter by using `or`, as follows:
 
 <div class="paragraph">
 
-By default, {sdg-name} uses {data-store-name}'s Snapshot Services on
+By default, Spring Data for GemFire uses GemFire's Snapshot Services on
 startup to import data and on shutdown to export data. However, you may
 want to trigger periodic, event-based snapshots, for either import or
 export, from within your Spring application.
@@ -5258,7 +5258,7 @@ export, from within your Spring application.
 
 <div class="paragraph">
 
-For this purpose, {sdg-name} defines two additional Spring application
+For this purpose, Spring Data for GemFire defines two additional Spring application
 events, extending Spring’s
 [`ApplicationEvent`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html)
 class for imports and exports, respectively:
@@ -5269,7 +5269,7 @@ class for imports and exports, respectively:
 <div class="paragraph">
 
 The two application events can be targeted for the entire
-{data-store-name} cache or for individual {data-store-name} Regions. The
+GemFire cache or for individual GemFire Regions. The
 constructors in these classes accept an optional Region pathname (such
 as `/Example`) as well as zero or more `SnapshotMetadata` instances.
 
@@ -5392,15 +5392,15 @@ services to fire snapshot application events on a periodic basis.
 
 <div class="paragraph">
 
-{sdg-name} provides [annotation](#function-annotations) support for
-implementing, registering and executing {data-store-name} Functions.
+Spring Data for GemFire provides [annotation](#function-annotations) support for
+implementing, registering and executing GemFire Functions.
 
 </div>
 
 <div class="paragraph">
 
-{sdg-name} also provides XML namespace support for registering
-{data-store-name}
+Spring Data for GemFire also provides XML namespace support for registering
+GemFire
 {x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[Functions\]
 for remote function execution.
 
@@ -5408,7 +5408,7 @@ for remote function execution.
 
 <div class="paragraph">
 
-See {data-store-name}'s
+See GemFire's
 {x-data-store-docs}/developing/function_exec/chapter_overview.html\[documentation\]
 for more information on the Function execution framework.
 
@@ -5416,7 +5416,7 @@ for more information on the Function execution framework.
 
 <div class="paragraph">
 
-{data-store-name} Functions are declared as Spring beans and must
+GemFire Functions are declared as Spring beans and must
 implement the `org.apache.geode.cache.execute.Function` interface or
 extend `org.apache.geode.cache.execute.FunctionAdapter`.
 
@@ -5460,8 +5460,8 @@ following example shows:
 
 <div class="paragraph">
 
-WAN Gateways provides a way to synchronize {data-store-name} Distributed
-Systems across geographic locations. {sdg-name} provides XML namespace
+WAN Gateways provides a way to synchronize GemFire Distributed
+Systems across geographic locations. Spring Data for GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 
@@ -5469,7 +5469,7 @@ examples.
 
 <div class="sect2">
 
-### WAN Configuration in {data-store-name} 7.0
+### WAN Configuration in GemFire 7.0
 
 <div class="paragraph">
 
@@ -5558,7 +5558,7 @@ follows:
 
 <div class="paragraph">
 
-See the {data-store-name}
+See the GemFire
 {x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
 for a detailed explanation of all the configuration options.
 

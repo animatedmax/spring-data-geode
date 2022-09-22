@@ -12,10 +12,10 @@
 
 <div class="paragraph">
 
-{sdg-name} supports cache and Region snapshots by using
-{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[{data-store-name}'s
+Spring Data for GemFire supports cache and Region snapshots by using
+{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[GemFire's
 Snapshot Service\]. The out-of-the-box Snapshot Service support offers
-several convenient features to simplify the use of {data-store-name}'s
+several convenient features to simplify the use of GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html\[Cache\]
 and
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[Region\]
@@ -26,12 +26,12 @@ Snapshot Service APIs.
 <div class="paragraph">
 
 As the
-{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[{data-store-name}
+{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[GemFire
 documentation\] explains, snapshots let you save and subsequently reload
 the cached data later, which can be useful for moving data between
 environments, such as from production to a staging or test environment
 in order to reproduce data-related issues in a controlled context. You
-can combine {sdg-name}'s Snapshot Service support with [Spring’s bean
+can combine Spring Data for GemFire's Snapshot Service support with [Spring’s bean
 definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
 to load snapshot data specific to the environment as necessary.
@@ -40,7 +40,7 @@ to load snapshot data specific to the environment as necessary.
 
 <div class="paragraph">
 
-{sdg-name}'s support for {data-store-name}'s Snapshot Service begins
+Spring Data for GemFire's support for GemFire's Snapshot Service begins
 with the `<gfe-data:snapshot-service>` element from the `<gfe-data>` XML
 namespace.
 
@@ -75,7 +75,7 @@ definition, as follows:
 
 You can define as many imports and exports as you like. You can define
 only imports or only exports. The file locations and directory paths can
-be absolute or relative to the {sdg-name} application, which is the JVM
+be absolute or relative to the Spring Data for GemFire application, which is the JVM
 process’s working directory.
 
 </div>
@@ -83,7 +83,7 @@ process’s working directory.
 <div class="paragraph">
 
 The preceding example is pretty simple, and the Snapshot Service defined
-in this case refers to the {data-store-name} cache instance with the
+in this case refers to the GemFire cache instance with the
 default name of `gemfireCache` (as described in
 [\[bootstrap:cache\]](#bootstrap:cache)). If you name your cache bean
 definition something other than the default, you can use the `cache-ref`
@@ -133,7 +133,7 @@ specifying the `region-ref` attribute, as follows:
 
 <div class="paragraph">
 
-When the `region-ref` attribute is specified, {sdg-name}'s
+When the `region-ref` attribute is specified, Spring Data for GemFire's
 `SnapshotServiceFactoryBean` resolves the `region-ref` attribute value
 to a Region bean defined in the Spring container and creates a
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[`RegionSnapshotService`\].
@@ -154,9 +154,9 @@ However, the `location` must refer to a file on an export.
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} is strict about imported snapshot
+<td class="content">GemFire is strict about imported snapshot
 files actually existing before they are referenced. For exports,
-{data-store-name} creates the snapshot file. If the snapshot file for
+GemFire creates the snapshot file. If the snapshot file for
 export already exists, the data is overwritten.</td>
 </tr>
 </tbody>
@@ -176,7 +176,7 @@ export already exists, the data is overwritten.</td>
 <td class="icon"><div class="title">
 Tip
 </div></td>
-<td class="content">{sdg-name} includes a
+<td class="content">Spring Data for GemFire includes a
 <code>suppress-import-on-init</code> attribute on the
 <code>&lt;gfe-data:snapshot-service&gt;</code> element to suppress the
 configured Snapshot Service from trying to import data into the cache or
@@ -225,7 +225,7 @@ Note
 <td class="content">Of course, you can use the overloaded
 <code>load(:File[], :SnapshotFormat, :SnapshotOptions)</code> method to
 get specific about which snapshot files to load into the
-{data-store-name} cache.</td>
+GemFire cache.</td>
 </tr>
 </tbody>
 </table>
@@ -234,7 +234,7 @@ get specific about which snapshot files to load into the
 
 <div class="paragraph">
 
-However, {sdg-name} recognizes that a typical developer workflow might
+However, Spring Data for GemFire recognizes that a typical developer workflow might
 be to extract and export data from one environment into several snapshot
 files, zip all of them up, and then conveniently move the zip file to
 another environment for import.
@@ -243,7 +243,7 @@ another environment for import.
 
 <div class="paragraph">
 
-Therefore, {sdg-name} lets you specify a jar or zip file on import for a
+Therefore, Spring Data for GemFire lets you specify a jar or zip file on import for a
 `cache`-based Snapshot Service, as follows:
 
 </div>
@@ -264,7 +264,7 @@ Therefore, {sdg-name} lets you specify a jar or zip file on import for a
 
 <div class="paragraph">
 
-{sdg-name} conveniently extracts the provided zip file and treats it as
+Spring Data for GemFire conveniently extracts the provided zip file and treats it as
 a directory import (load).
 
 </div>
@@ -283,7 +283,7 @@ a directory import (load).
 
 The real power of defining multiple snapshot imports and exports is
 realized through the use of snapshot filters. Snapshot filters implement
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[`SnapshotFilter`\]
 interface and are used to filter Region entries for inclusion into the
 Region on import and for inclusion into the snapshot on export.
@@ -292,7 +292,7 @@ Region on import and for inclusion into the snapshot on export.
 
 <div class="paragraph">
 
-{sdg-name} lets you use snapshot filters on import and export by using
+Spring Data for GemFire lets you use snapshot filters on import and export by using
 the `filter-ref` attribute or an anonymous, nested bean definition, as
 the following example shows:
 
@@ -333,7 +333,7 @@ the following example shows:
 
 In addition, you can express more complex snapshot filters by using the
 `ComposableSnapshotFilter` class. This class implements
-{data-store-name}'s
+GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[SnapshotFilter\]
 interface as well as the
 [Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
@@ -427,7 +427,7 @@ another filter by using `or`, as follows:
 
 <div class="paragraph">
 
-By default, {sdg-name} uses {data-store-name}'s Snapshot Services on
+By default, Spring Data for GemFire uses GemFire's Snapshot Services on
 startup to import data and on shutdown to export data. However, you may
 want to trigger periodic, event-based snapshots, for either import or
 export, from within your Spring application.
@@ -436,7 +436,7 @@ export, from within your Spring application.
 
 <div class="paragraph">
 
-For this purpose, {sdg-name} defines two additional Spring application
+For this purpose, Spring Data for GemFire defines two additional Spring application
 events, extending Spring’s
 [`ApplicationEvent`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html)
 class for imports and exports, respectively:
@@ -447,7 +447,7 @@ class for imports and exports, respectively:
 <div class="paragraph">
 
 The two application events can be targeted for the entire
-{data-store-name} cache or for individual {data-store-name} Regions. The
+GemFire cache or for individual GemFire Regions. The
 constructors in these classes accept an optional Region pathname (such
 as `/Example`) as well as zero or more `SnapshotMetadata` instances.
 

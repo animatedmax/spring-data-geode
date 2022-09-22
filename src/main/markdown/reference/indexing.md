@@ -12,7 +12,7 @@
 
 <div class="paragraph">
 
-{data-store-name} allows indexes (also sometimes pluralized as indices)
+GemFire allows indexes (also sometimes pluralized as indices)
 to be created on Region data to improve the performance of OQL (Object
 Query Language) queries.
 
@@ -20,7 +20,7 @@ Query Language) queries.
 
 <div class="paragraph">
 
-In {sdg-name}, indexes are declared with the `index` element, as the
+In Spring Data for GemFire, indexes are declared with the `index` element, as the
 following example shows:
 
 </div>
@@ -39,12 +39,12 @@ following example shows:
 
 <div class="paragraph">
 
-In {sdg-name}'s XML schema (also called the {sdg-acronym} XML
+In Spring Data for GemFire's XML schema (also called the {sdg-acronym} XML
 namespace), `index` bean declarations are not bound to a Region, unlike
-{data-store-name}'s native `cache.xml`. Rather, they are top-level
+GemFire's native `cache.xml`. Rather, they are top-level
 elements similar to `<gfe:cache>` element. This lets you declare any
 number of indexes on any Region, whether they were just created or
-already exist — a significant improvement over {data-store-name}'s
+already exist — a significant improvement over GemFire's
 native `cache.xml` format.
 
 </div>
@@ -163,15 +163,15 @@ to the following:
 <div class="paragraph">
 
 The `from` clause must refer to a valid, existing Region and is how an
-`Index` gets applied to a Region. This is not specific to {sdg-name}. It
-is a feature of {data-store-name}.
+`Index` gets applied to a Region. This is not specific to Spring Data for GemFire. It
+is a feature of GemFire.
 
 </div>
 
 <div class="paragraph">
 
 The `Index` `type` may be one of three enumerated values defined by
-{sdg-name}'s
+Spring Data for GemFire's
 {sdg-javadoc}/org/springframework/data/gemfire/IndexType.html\[`IndexType`\]
 enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
 
@@ -193,17 +193,17 @@ is invoked to create a `KEY` `Index`.
 <div class="paragraph">
 
 The default is `FUNCTIONAL` and results in one of the
-`QueryService.createIndex(..)` methods being invoked. See the {sdg-name}
+`QueryService.createIndex(..)` methods being invoked. See the Spring Data for GemFire
 XML schema for a full set of options.
 
 </div>
 
 <div class="paragraph">
 
-For more information on indexing in {data-store-name}, see “[Working
+For more information on indexing in GemFire, see “[Working
 with
 Indexes](https://gemfire90.docs.pivotal.io/geode/developing/query_index/query_index.html)”
-in {data-store-name}'s User Guide.
+in GemFire's User Guide.
 
 </div>
 
@@ -220,7 +220,7 @@ in {data-store-name}'s User Guide.
 <div class="paragraph">
 
 In addition to creating indexes up front as `Index` bean definitions are
-processed by {sdg-name} on Spring container initialization, you may also
+processed by Spring Data for GemFire on Spring container initialization, you may also
 define all of your application indexes prior to creating them by using
 the `define` attribute, as follows:
 
@@ -244,9 +244,9 @@ When `define` is set to `true` (it defaults to `false`), it does not
 actually create the `Index` at that moment. All “defined” Indexes are
 created all at once, when the Spring `ApplicationContext` is “refreshed”
 or, to put it differently, when a `ContextRefreshedEvent` is published
-by the Spring container. {sdg-name} registers itself as an
+by the Spring container. Spring Data for GemFire registers itself as an
 `ApplicationListener` listening for the `ContextRefreshedEvent`. When
-fired, {sdg-name} calls
+fired, Spring Data for GemFire calls
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes\[`QueryService.createDefinedIndexes()`\].
 
 </div>
@@ -278,7 +278,7 @@ for more details.
 
 <div class="paragraph">
 
-Two {sdg-name} `Index` configuration options warrant special mention:
+Two Spring Data for GemFire `Index` configuration options warrant special mention:
 `ignoreIfExists` and `override`.
 
 </div>
@@ -286,7 +286,7 @@ Two {sdg-name} `Index` configuration options warrant special mention:
 <div class="paragraph">
 
 These options correspond to the `ignore-if-exists` and `override`
-attributes on the `<gfe:index>` element in {sdg-name}'s XML namespace,
+attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace,
 respectively.
 
 </div>
@@ -326,9 +326,9 @@ at runtime. As a result, both of these options are disabled (set to
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">These options are only available in {sdg-name} and
-exist to workaround known limitations with {data-store-name}.
-{data-store-name} has no equivalent options or functionality.</td>
+<td class="content">These options are only available in Spring Data for GemFire and
+exist to workaround known limitations with GemFire.
+GemFire has no equivalent options or functionality.</td>
 </tr>
 </tbody>
 </table>
@@ -338,10 +338,10 @@ exist to workaround known limitations with {data-store-name}.
 <div class="paragraph">
 
 Each option significantly differs in behavior and entirely depends on
-the type of {data-store-name} `Index` exception thrown. This also means
-that neither option has any effect if a {data-store-name} Index-type
+the type of GemFire `Index` exception thrown. This also means
+that neither option has any effect if a GemFire Index-type
 exception is not thrown. These options are meant to specifically handle
-{data-store-name} `IndexExistsException` and
+GemFire `IndexExistsException` and
 `IndexNameConflictException` instances, which can occur for various,
 sometimes obscure reasons. The exceptions have the following causes:
 
@@ -363,10 +363,10 @@ sometimes obscure reasons. The exceptions have the following causes:
 
 <div class="paragraph">
 
-{sdg-name}'s default behavior is to fail-fast, always. So, neither
+Spring Data for GemFire's default behavior is to fail-fast, always. So, neither
 `Index` *Exception* are “handled” by default. These `Index` exceptions
 are wrapped in a {sdg-acronym} `GemfireIndexException` and rethrown. If
-you wish for {sdg-name} to handle them for you, you can set either of
+you wish for Spring Data for GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
 </div>
@@ -395,7 +395,7 @@ is simply ignored, and the existing `Index` is returned.
 <div class="paragraph">
 
 There is little consequence in returning the existing `Index`, since the
-`index` bean definition is the same, as determined by {data-store-name}
+`index` bean definition is the same, as determined by GemFire
 itself, not {sdg-acronym}.
 
 </div>
@@ -404,7 +404,7 @@ itself, not {sdg-acronym}.
 
 However, this also means that no `Index` with the “name” specified in
 your `index` bean definition or declaration actually exists from
-{data-store-name}'s perspective (that is, with
+GemFire's perspective (that is, with
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]).
 Therefore, you should be careful when writing OQL query statements that
 use query hints, especially query hints that refer to the application
@@ -454,7 +454,7 @@ when the <code>Index</code> being ignored is significantly different in
 its definition from the existing <code>Index</code>. However, in order
 for {sdg-acronym} to accomplish this, it must be able to find the
 existing <code>Index</code>, which is looked up by using the
-{data-store-name} API (the only means available).</td>
+GemFire API (the only means available).</td>
 </tr>
 </tbody>
 </table>
@@ -478,7 +478,7 @@ that have the same definition but different names.
 
 <div class="paragraph">
 
-{sdg-name} can only accomplish this by using {data-store-name}'s API, by
+Spring Data for GemFire can only accomplish this by using GemFire's API, by
 first removing the existing `Index` and then recreating the `Index` with
 the new name. It is possible that either the remove or subsequent create
 invocation could fail. There is no way to execute both actions
@@ -510,7 +510,7 @@ If so, {sdg-acronym} is smart and returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
 name and the definition are exactly the same. Of course, {sdg-acronym}
 can only accomplish this when {sdg-acronym} is able to find the existing
-`Index`, which is dependent on {data-store-name}'s APIs. If it cannot be
+`Index`, which is dependent on GemFire's APIs. If it cannot be
 found, nothing happens and a {sdg-acronym} `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
@@ -536,8 +536,8 @@ expectations and application requirements.
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
-configure {data-store-name} ({sdg-name}, {data-store-name} Cluster
-Config, {data-store-name} native `cache.xml`, the API, and so on). You
+configure GemFire (Spring Data for GemFire, GemFire Cluster
+Config, GemFire native `cache.xml`, the API, and so on). You
 should definitely prefer one configuration method and stick with it.
 
 </div>
@@ -552,7 +552,7 @@ However, when does an `IndexNameConflictException` get thrown?
 
 One particular case is an `Index` defined on a `PARTITION` Region (PR).
 When an `Index` is defined on a `PARTITION` Region (for example, `X`),
-{data-store-name} distributes the `Index` definition (and name) to other
+GemFire distributes the `Index` definition (and name) to other
 peer members in the cluster that also host the same `PARTITION` Region
 (that is, "X"). The distribution of this `Index` definition to, and
 subsequent creation of, this `Index` by peer members is on a
@@ -564,7 +564,7 @@ performed asynchronously.
 <div class="paragraph">
 
 During this window of time, it is possible that these pending PR
-`Indexes` cannot be identified by {data-store-name} — such as with a
+`Indexes` cannot be identified by GemFire — such as with a
 call to
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]
 with
@@ -576,13 +576,13 @@ or even with
 
 <div class="paragraph">
 
-As a result, the only way for {sdg-acronym} or other {data-store-name}
+As a result, the only way for {sdg-acronym} or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
 application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
-{data-store-name} API calls do not.
+GemFire API calls do not.
 
 </div>
 
@@ -590,9 +590,9 @@ application knows there is a problem. This is because the `QueryService`
 
 In any case, {sdg-acronym} makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
-action. Given that all {data-store-name} `QueryService.createIndex(..)`
+action. Given that all GemFire `QueryService.createIndex(..)`
 methods are synchronous, blocking operations, the state of
-{data-store-name} should be consistent and accessible after either of
+GemFire should be consistent and accessible after either of
 these index-type exceptions are thrown. Consequently, {sdg-acronym} can
 inspect the state of the system and act accordingly, based on your
 configuration.

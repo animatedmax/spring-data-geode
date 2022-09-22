@@ -1,6 +1,6 @@
 <div id="header">
 
-# {sdg-name} Schema
+# Spring Data for GemFire Schema
 
 </div>
 
@@ -8,10 +8,10 @@
 
 <div class="ulist">
 
-- {spring-data-schema-location}\[{sdg-name} Core Schema (`gfe` XML
+- {spring-data-schema-location}\[Spring Data for GemFire Core Schema (`gfe` XML
   namespace)\]
 
-- {spring-data-access-schema-location}\[{sdg-name} Data Access Schema
+- {spring-data-access-schema-location}\[Spring Data for GemFire Data Access Schema
   (`gfe-data` XML namespace)\]
 
 </div>

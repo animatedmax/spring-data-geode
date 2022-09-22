@@ -24,7 +24,7 @@ Note
 </div></td>
 <td class="content">Sample applications are now maintained in the <a
 href="https://github.com/spring-projects/spring-gemfire-examples">Spring
-{data-store-name} Examples</a> repository.</td>
+GemFire Examples</a> repository.</td>
 </tr>
 </tbody>
 </table>
@@ -33,13 +33,13 @@ href="https://github.com/spring-projects/spring-gemfire-examples">Spring
 
 <div class="paragraph">
 
-The {sdg-name} project also includes one sample application. Named
+The Spring Data for GemFire project also includes one sample application. Named
 “Hello World”, the sample application demonstrates how to configure and
-use {data-store-name} inside a Spring application. At run time, the
+use GemFire inside a Spring application. At run time, the
 sample offers a shell that lets you run various commands against the
 data grid. It provides an excellent starting point for developers who
 are unfamiliar with the essential components or with Spring and
-{data-store-name} concepts.
+GemFire concepts.
 
 </div>
 
@@ -64,7 +64,7 @@ Suite](https://spring.io/tools/sts)) or run them from the command-line.
 <div class="paragraph">
 
 The “Hello World” sample application demonstrates the core functionality
-of the {sdg-name} project. It bootstraps {data-store-name}, configures
+of the Spring Data for GemFire project. It bootstraps GemFire, configures
 it, executes arbitrary commands against the cache, and shuts it down
 when the application exits. Multiple instances of the application can be
 started at the same time and work together, sharing data without any
@@ -87,7 +87,7 @@ Note
 <td class="content"><div class="title">
 Running under Linux
 </div>
-If you experience networking problems when starting {data-store-name} or
+If you experience networking problems when starting GemFire or
 the samples, try adding the following system property
 <code>java.net.preferIPv4Stack=true</code> to the command line (for
 example, <code>-Djava.net.preferIPv4Stack=true</code>). For an
@@ -139,7 +139,7 @@ commands against it. The output should resemble the following:
 <div class="content">
 
 ``` highlight
-INFO: Created {data-store-name} Cache [Spring {data-store-name} World] v. X.Y.Z
+INFO: Created GemFire Cache [Spring GemFire World] v. X.Y.Z
 INFO: Created new cache region [myWorld]
 INFO: Member xxxxxx:50694/51611 connecting to region [myWorld]
 Hello World!
@@ -200,7 +200,7 @@ following example shows:
 <div class="content">
 
 ``` highlight
-INFO: Connected to Distributed System ['Spring {data-store-name} World'=xxxx:56218/49320@yyyyy]
+INFO: Connected to Distributed System ['Spring GemFire World'=xxxx:56218/49320@yyyyy]
 Hello World!
 ...
 
@@ -246,7 +246,7 @@ for Spring
 
 <div class="paragraph">
 
-The cache configuration defines the {data-store-name} cache, a region,
+The cache configuration defines the GemFire cache, a region,
 and for illustrative purposes, a `CacheListener` that acts as a logger.
 
 </div>

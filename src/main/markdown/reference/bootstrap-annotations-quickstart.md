@@ -33,9 +33,9 @@ Note
 attributes along with associated <a
 href="#bootstrap-annotation-config-properties">properties</a> to
 conveniently customize the configuration and behavior of
-{data-store-name} at runtime. However, in general, none of the
+GemFire at runtime. However, in general, none of the
 attributes or associated properties are required to use a particular
-{data-store-name} feature. Simply declare the annotation to enable the
+GemFire feature. Simply declare the annotation to enable the
 feature and you are done. Refer to the individual Javadoc of each
 annotation for more details.</td>
 </tr>
@@ -56,7 +56,7 @@ annotation for more details.</td>
 
 <div class="paragraph">
 
-To configure and bootstrap a {data-store-name} `ClientCache`
+To configure and bootstrap a GemFire `ClientCache`
 application, use the following:
 
 </div>
@@ -108,7 +108,7 @@ for more details.
 
 <div class="paragraph">
 
-To configure and bootstrap a {data-store-name} Peer `Cache` application,
+To configure and bootstrap a GemFire Peer `Cache` application,
 use the following:
 
 </div>
@@ -233,7 +233,7 @@ public class ServerApplication {
 Note
 </div></td>
 <td class="content"><code>@EnableLocator</code> can only be used with
-{data-store-name} server applications.</td>
+GemFire server applications.</td>
 </tr>
 </tbody>
 </table>
@@ -308,7 +308,7 @@ public class ServerApplication {
 Note
 </div></td>
 <td class="content"><code>@EnableManager</code> can only be used with
-{data-store-name} server applications.</td>
+GemFire server applications.</td>
 </tr>
 </tbody>
 </table>
@@ -382,7 +382,7 @@ public class ServerApplication {
 Note
 </div></td>
 <td class="content"><code>@EnableHttpService</code> can only be used
-with {data-store-name} server applications.</td>
+with GemFire server applications.</td>
 </tr>
 </tbody>
 </table>
@@ -457,7 +457,7 @@ public class ServerApplication {
 Note
 </div></td>
 <td class="content"><code>@EnableMemcachedServer</code> can only be used
-with {data-store-name} server applications.</td>
+with GemFire server applications.</td>
 </tr>
 </tbody>
 </table>
@@ -492,8 +492,8 @@ for more details.
 
 <div class="paragraph">
 
-To configure or adjust {data-store-name} logging, annotate your Spring,
-{data-store-name} client or server application class with
+To configure or adjust GemFire logging, annotate your Spring,
+GemFire client or server application class with
 `@EnableLogging`, as follows:
 
 </div>
@@ -532,7 +532,7 @@ Note
 </div></td>
 <td class="content">Default <code>log-level</code> is “config”. Also,
 this annotation will not adjust log levels in your application, only for
-{data-store-name}.</td>
+GemFire.</td>
 </tr>
 </tbody>
 </table>
@@ -567,8 +567,8 @@ for more details.
 
 <div class="paragraph">
 
-To gather {data-store-name} statistics at runtime, annotate your Spring,
-{data-store-name} client or server application class with
+To gather GemFire statistics at runtime, annotate your Spring,
+GemFire client or server application class with
 `@EnableStatistics`, as follows:
 
 </div>
@@ -621,8 +621,8 @@ for more details.
 
 <div class="paragraph">
 
-To enable {data-store-name} PDX serialization, annotate your Spring,
-{data-store-name} client or server application class with `@EnablePdx`,
+To enable GemFire PDX serialization, annotate your Spring,
+GemFire client or server application class with `@EnablePdx`,
 as follows:
 
 </div>
@@ -659,7 +659,7 @@ public class ClientApplication {
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} PDX Serialization is an
+<td class="content">GemFire PDX Serialization is an
 alternative to Java Serialization with many added benefits. For one, it
 makes short work of making all of your application domain model types
 serializable without having to implement
@@ -725,7 +725,7 @@ for more details.
 
 <div class="paragraph">
 
-To enable {data-store-name} SSL, annotate your Spring, {data-store-name}
+To enable GemFire SSL, annotate your Spring, GemFire
 client or server application class with `@EnableSsl`, as follows:
 
 </div>
@@ -762,7 +762,7 @@ public class ClientApplication {
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">Minimally, {data-store-name} requires you to specify
+<td class="content">Minimally, GemFire requires you to specify
 a keystore &amp; truststore using the appropriate configuration
 attributes or properties. Both keystore &amp; truststore configuration
 attributes or properties may refer to the same <code>KeyStore</code>
@@ -786,10 +786,10 @@ access the <code>KeyStore</code> file if the file has been secured.</td>
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} SSL allows you to configure the
+<td class="content">GemFire SSL allows you to configure the
 specific components of the system that require TLS, such as
 client/server, Locators, Gateways, etc. Optionally, you can specify that
-all components of {data-store-name} use SSL with “ALL”.</td>
+all components of GemFire use SSL with “ALL”.</td>
 </tr>
 </tbody>
 </table>
@@ -824,8 +824,8 @@ for more details.
 
 <div class="paragraph">
 
-To enable {data-store-name} security, annotate your Spring,
-{data-store-name} client or server application class with
+To enable GemFire security, annotate your Spring,
+GemFire client or server application class with
 `@EnableSecurity`, as follows:
 
 </div>
@@ -863,7 +863,7 @@ public class ClientApplication {
 Note
 </div></td>
 <td class="content">On the server, you must configure access to the auth
-credentials. You may either implement the {data-store-name}
+credentials. You may either implement the GemFire
 {x-data-store-javadoc}/org/apache/geode/security/SecurityManager.html[<code>SecurityManager</code>]
 interface or declare 1 or more Apache Shiro <code>Realms</code>. See <a
 href="#bootstrap-annotation-config-security-server">[bootstrap-annotation-config-security-server]</a>
@@ -918,15 +918,15 @@ for more details.
 
 <div class="sect1">
 
-## Configure {data-store-name} Properties
+## Configure GemFire Properties
 
 <div class="sectionbody">
 
 <div class="paragraph">
 
-To configure other, low-level {data-store-name} properties not covered
+To configure other, low-level GemFire properties not covered
 by the feature-oriented, {sdg-acronym} configuration annotations,
-annotate your Spring, {data-store-name} client or server application
+annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
 </div>
@@ -968,9 +968,9 @@ public class ServerApplication {
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">Some {data-store-name} properties are client-side
+<td class="content">Some GemFire properties are client-side
 only while others are server-side only. Please review the
-{data-store-name}
+GemFire
 {x-data-store-docs}/reference/topics/gemfire_properties.html[docs] for
 the appropriate use of each property.</td>
 </tr>
@@ -1007,11 +1007,11 @@ for more details.
 
 <div class="paragraph">
 
-To use {data-store-name} as a *caching provider* in Spring’s
+To use GemFire as a *caching provider* in Spring’s
 {spring-framework-docs}/integration.html#cache\[*Cache Abstraction*\],
-and have {sdg-acronym} automatically create {data-store-name} Regions
+and have {sdg-acronym} automatically create GemFire Regions
 for the caches required by your application service components, then
-annotate your Spring, {data-store-name} client or server application
+annotate your Spring, GemFire client or server application
 class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`,
 as follows:
 
@@ -1121,7 +1121,7 @@ for more details.
 
 <div class="paragraph">
 
-To make short work of creating Spring, {data-store-name} persistent
+To make short work of creating Spring, GemFire persistent
 client or server applications, annotate your application class with
 `@EnableEntityDefinedRegions`, `@EnableGemfireRepositories` and
 `@EnableIndexing`, as follows:
@@ -1407,7 +1407,7 @@ for more details.
 
 <div class="paragraph">
 
-{data-store-name} Functions are useful in distributed compute scenarios
+GemFire Functions are useful in distributed compute scenarios
 where a potentially expensive computation requiring data can be
 performed in parallel across the nodes in the cluster. In this case, it
 is more efficient to bring the logic to where the data is located
@@ -1419,7 +1419,7 @@ the computation.
 <div class="paragraph">
 
 Use the `@EnableGemfireFunctions` along with the `@GemfireFunction`
-annotation to enable {data-store-name} Functions definitions implemented
+annotation to enable GemFire Functions definitions implemented
 as methods on POJOs, as follows:
 
 </div>
@@ -1542,7 +1542,7 @@ See [\[function-annotations\]](#function-annotations) for more details.
 
 Real-time, event stream processing is becoming an increasingly important
 task for data-intensive applications, primarily in order to respond to
-user requests in a timely manner. {data-store-name} Continuous Query
+user requests in a timely manner. GemFire Continuous Query
 (CQ) will help you achieve this rather complex task quite easily.
 
 </div>
@@ -1620,7 +1620,7 @@ be called.
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} CQ is a client-side feature
+<td class="content">GemFire CQ is a client-side feature
 only.</td>
 </tr>
 </tbody>
@@ -1664,10 +1664,10 @@ for more details.
 
 <div class="paragraph">
 
-When developing Spring Data applications using {data-store-name} as
-{data-store-name} `ClientCache` applications, it is useful during
+When developing Spring Data applications using GemFire as
+GemFire `ClientCache` applications, it is useful during
 development to configure the server to match the client in a
-client/server topology. In fact, {data-store-name} expects that when you
+client/server topology. In fact, GemFire expects that when you
 have a "/Example" PROXY `Region` on the client, that a matching `Region`
 by name (i.e. "Example") exists in the server.
 
@@ -1678,7 +1678,7 @@ by name (i.e. "Example") exists in the server.
 You could use *Gfsh* to create every Region and Index that your
 application requires, or, you could simply push the configuration
 meta-data already expressed when developing your Spring Data application
-using {data-store-name} when you run it.
+using GemFire when you run it.
 
 </div>
 
@@ -1786,17 +1786,17 @@ for more details.
 
 <div class="paragraph">
 
-The replication of data between different {data-store-name} clusters is
+The replication of data between different GemFire clusters is
 an increasingly important fault-tolerance and high-availability (HA)
-mechanism. {data-store-name} WAN replication is a mechanism that allows
-one {data-store-name} cluster to replicate its data to another
-{data-store-name} cluster in a reliable and fault-tolerant manner.
+mechanism. GemFire WAN replication is a mechanism that allows
+one GemFire cluster to replicate its data to another
+GemFire cluster in a reliable and fault-tolerant manner.
 
 </div>
 
 <div class="paragraph">
 
-{data-store-name} WAN replication requires two components to be
+GemFire WAN replication requires two components to be
 configured:
 
 </div>
@@ -1804,10 +1804,10 @@ configured:
 <div class="ulist">
 
 - `GatewayReceiver` - The WAN replication component that receives data
-  from a remote {data-store-name} cluster’s `GatewaySender`.
+  from a remote GemFire cluster’s `GatewaySender`.
 
 - `GatewaySender` - The WAN replication component that sends data to a
-  remote {data-store-name} cluster’s `GatewayReceiver`.
+  remote GemFire cluster’s `GatewayReceiver`.
 
 </div>
 
@@ -1850,7 +1850,7 @@ class MySpringApplication { .. }
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} <code>GatewayReceiver</code> is a
+<td class="content">GemFire <code>GatewayReceiver</code> is a
 server-side feature only and can only be configured on a
 <code>CacheServer</code> or peer <code>Cache</code> node.</td>
 </tr>
@@ -1926,7 +1926,7 @@ class MySpringApplication { .. }
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">{data-store-name} <code>GatewaySender</code> is a
+<td class="content">GemFire <code>GatewaySender</code> is a
 server-side feature only and can only be configured on a
 <code>CacheServer</code> or a peer <code>Cache</code> node.</td>
 </tr>

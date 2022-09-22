@@ -45,7 +45,7 @@ include::../{spring-data-commons-include}/object-mapping.adoc\[leveloffset=+1\]
 
 <div class="paragraph">
 
-{sdg-name} provides support to map entities that are stored in a Region.
+Spring Data for GemFire provides support to map entities that are stored in a Region.
 The mapping metadata is defined by using annotations on application
 domain classes, as the following example shows:
 
@@ -55,7 +55,7 @@ domain classes, as the following example shows:
 
 <div class="title">
 
-Example 1. Mapping a domain class to a {data-store-name} Region
+Example 1. Mapping a domain class to a GemFire Region
 
 </div>
 
@@ -134,8 +134,8 @@ public class Guest extends User {
 
 <div class="paragraph">
 
-Be sure to use the full path of the {data-store-name} Region, as defined
-with the {sdg-name} XML namespace by using the `id` or `name` attributes
+Be sure to use the full path of the GemFire Region, as defined
+with the Spring Data for GemFire XML namespace by using the `id` or `name` attributes
 of the `<*-region>` element.
 
 </div>
@@ -146,7 +146,7 @@ of the `<*-region>` element.
 
 <div class="paragraph">
 
-In addition to the `@Region` annotation, {sdg-name} also recognizes
+In addition to the `@Region` annotation, Spring Data for GemFire also recognizes
 type-specific Region mapping annotations: `@ClientRegion`,
 `@LocalRegion`, `@PartitionRegion`, and `@ReplicateRegion`.
 
@@ -157,7 +157,7 @@ type-specific Region mapping annotations: `@ClientRegion`,
 Functionally, these annotations are treated exactly the same as the
 generic `@Region` annotation in the {sdg-acronym} mapping
 infrastructure. However, these additional mapping annotations are useful
-in {sdg-name}'s annotation configuration model. When combined with the
+in Spring Data for GemFire's annotation configuration model. When combined with the
 `@EnableEntityDefinedRegions` configuration annotation on a Spring
 `@Configuration` annotated class, it is possible to generate Regions in
 the local cache, whether the application is a client or peer.
@@ -205,7 +205,7 @@ See [\[gemfire-repositories\]](#gemfire-repositories) for more details.
 <div class="paragraph">
 
 However, suppose you want to store a `Person` record in multiple
-{data-store-name} Regions (for example, `People` and `Customers`). Then
+GemFire Regions (for example, `People` and `Customers`). Then
 you can define your corresponding `Repository` interface extensions as
 follows:
 
@@ -234,7 +234,7 @@ public interface CustomerRepository extends GemfireRepository<Person, String> {
 <div class="paragraph">
 
 Then, using each Repository individually, you can store the entity in
-multiple {data-store-name} Regions, as the following example shows:
+multiple GemFire Regions, as the following example shows:
 
 </div>
 
@@ -281,7 +281,7 @@ transaction.
 
 <div class="paragraph">
 
-{sdg-name} provides a custom
+Spring Data for GemFire provides a custom
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxSerializer.html\[`PdxSerializer`\]
 implementation, called `MappingPdxSerializer`, that uses Spring Data
 mapping metadata to customize entity serialization.
@@ -353,14 +353,14 @@ the name “bean”.
 
 In addition to the custom instantiation logic and strategy provided by
 `EntityInstantiators`, the `MappingPdxSerializer` also provides
-capabilities well beyond {data-store-name}'s own
+capabilities well beyond GemFire's own
 {x-data-store-javadoc}/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html\[`ReflectionBasedAutoSerializer`\].
 
 </div>
 
 <div class="paragraph">
 
-While {data-store-name}'s `ReflectionBasedAutoSerializer` conveniently
+While GemFire's `ReflectionBasedAutoSerializer` conveniently
 uses Java Reflection to populate entities and uses regular expressions
 to identify types that should be handled (serialized and deserialized)
 by the serializer, it cannot, unlike `MappingPdxSerializer`, perform the
@@ -570,7 +570,7 @@ as explicit as possible about the semantics of registration.</td>
 
 <div class="paragraph">
 
-Like {data-store-name}'s `ReflectionBasedAutoSerializer`,
+Like GemFire's `ReflectionBasedAutoSerializer`,
 {sdg-acronym}'s `MappingPdxSerializer` is also able to determine the
 identifier of the entity. However, `MappingPdxSerializer` does so by
 using Spring Data’s mapping metadata, specifically by finding the entity
@@ -708,7 +708,7 @@ Likewise, what happens when your entity defines `transient` properties?
 
 You would expect the `transient` fields or properties of your entity not
 to be serialized to PDX when serializing the entity. That is exactly
-what happens, unlike {data-store-name}'s own
+what happens, unlike GemFire's own
 `ReflectionBasedAutoSerializer`, which serializes everything accessible
 from the object through Java Reflection.
 
@@ -777,7 +777,7 @@ are written to PDX.
 
 <div class="paragraph">
 
-Similar to {data-store-name}'s `ReflectionBasedAutoSerializer`,
+Similar to GemFire's `ReflectionBasedAutoSerializer`,
 {sdg-acronym}'s `MappingPdxSerializer` lets you filter the types of
 objects that are serialized and deserialized.
 
@@ -785,7 +785,7 @@ objects that are serialized and deserialized.
 
 <div class="paragraph">
 
-However, unlike {data-store-name}'s `ReflectionBasedAutoSerializer`,
+However, unlike GemFire's `ReflectionBasedAutoSerializer`,
 which uses complex regular expressions to express which types the
 serializer handles, {sdg-acronym}'s `MappingPdxSerializer` uses the much
 more robust

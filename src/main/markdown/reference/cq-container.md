@@ -12,7 +12,7 @@
 
 <div class="paragraph">
 
-A powerful functionality offered by {data-store-name} is
+A powerful functionality offered by GemFire is
 {x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[Continuous
 Query\] (or CQ).
 
@@ -22,7 +22,7 @@ Query\] (or CQ).
 
 In short, CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to
-{data-store-name} matches the query predicate. {sdg-name} provides
+GemFire matches the query predicate. Spring Data for GemFire provides
 dedicated support for CQs through the
 `org.springframework.data.gemfire.listener` package and its **listener
 container**; very similar in functionality and naming to the JMS
@@ -33,12 +33,12 @@ JMS support in Spring, should feel right at home.
 
 <div class="paragraph">
 
-Basically {sdg-name} allows methods on POJOs to become end-points for
+Basically Spring Data for GemFire allows methods on POJOs to become end-points for
 CQ. Simply define the query and indicate the method that should be
-called to be notified when there is a match. {sdg-name} takes care of
+called to be notified when there is a match. Spring Data for GemFire takes care of
 the rest. This is very similar to Java EE’s message-driven bean style,
 but without any requirement for base class or interface implementations,
-based on {data-store-name}.
+based on GemFire.
 
 </div>
 
@@ -55,9 +55,9 @@ based on {data-store-name}.
 Note
 </div></td>
 <td class="content">Currently, Continuous Query is only supported in
-{data-store-name}'s client/server topology. Additionally, the client
+GemFire's client/server topology. Additionally, the client
 Pool used is required to have the subscription enabled. Please refer to
-the {data-store-name}
+the GemFire
 {x-data-store-docs}/developing/continuous_querying/implementing_continuous_querying.html[documentation]
 for more information.</td>
 </tr>
@@ -78,7 +78,7 @@ for more information.</td>
 
 <div class="paragraph">
 
-{sdg-name} simplifies creation, registration, life-cycle and dispatch of
+Spring Data for GemFire simplifies creation, registration, life-cycle and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
 SDG’s `ContinuousQueryListenerContainer`, which does all the heavy
 lifting on behalf of the user. Users familiar with EJB and JMS should
@@ -100,7 +100,7 @@ of creation and registration of CQs (to receive events), resource
 acquisition and release, exception conversion and the like. This allows
 you, as an application developer, to write the (possibly complex)
 business logic associated with receiving an event (and reacting to it),
-and delegate the boilerplate {data-store-name} infrastructure concerns
+and delegate the boilerplate GemFire infrastructure concerns
 to the framework.
 
 </div>
@@ -132,11 +132,11 @@ proper `TaskExecutor` to take advantage of its runtime.
 <div class="paragraph">
 
 The `ContinuousQueryListenerAdapter` class is the final component in
-{sdg-name} CQ support. In a nutshell, class allows you to expose almost
+Spring Data for GemFire CQ support. In a nutshell, class allows you to expose almost
 **any** implementing class as an EDP with minimal constraints.
 `ContinuousQueryListenerAdapter` implements the
 `ContinuousQueryListener` interface, a simple listener interface similar
-to {data-store-name}'s
+to GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/query/CqListener.html\[CqListener\].
 
 </div>
@@ -188,7 +188,7 @@ class DefaultEventDelegate implements EventDelegate {
 <div class="paragraph">
 
 In particular, note how the above implementation of the `EventDelegate`
-interface has **no** {data-store-name} dependencies at all. It truly is
+interface has **no** GemFire dependencies at all. It truly is
 a POJO that we can and will make into an EDP via the following
 configuration.
 
@@ -278,7 +278,7 @@ The specified method can have various argument types, the
 
 <div class="paragraph">
 
-The example above uses the {sdg-name} namespace to declare the event
+The example above uses the Spring Data for GemFire namespace to declare the event
 listener container and automatically register the listeners. The full
 blown, **beans** definition is displayed below:
 
@@ -318,7 +318,7 @@ blown, **beans** definition is displayed below:
 <div class="paragraph">
 
 Each time an event is received, the adapter automatically performs type
-translation between the {data-store-name} event and the required method
+translation between the GemFire event and the required method
 argument(s) transparently. Any exception caused by the method invocation
 is caught and handled by the container (by default, being logged).
 

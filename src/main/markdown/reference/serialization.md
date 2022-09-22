@@ -1,6 +1,6 @@
 <div id="header">
 
-# Working with {data-store-name} Serialization
+# Working with GemFire Serialization
 
 </div>
 
@@ -12,8 +12,8 @@
 
 <div class="paragraph">
 
-To improve overall performance of the {data-store-name} In-memory Data
-Grid, {data-store-name} supports a dedicated serialization protocol,
+To improve overall performance of the GemFire In-memory Data
+Grid, GemFire supports a dedicated serialization protocol,
 called PDX, that is both faster and offers more compact results over
 standard Java serialization in addition to working transparently across
 various language platforms (Java, C++, and .NET).
@@ -32,8 +32,8 @@ Internals\] for more details.
 
 <div class="paragraph">
 
-This chapter discusses the various ways in which {sdg-name} simplifies
-and improves {data-store-name}'s custom serialization in Java.
+This chapter discusses the various ways in which Spring Data for GemFire simplifies
+and improves GemFire's custom serialization in Java.
 
 </div>
 
@@ -54,9 +54,9 @@ Transient data is often dependent on the system or environment where it
 lives at a certain point in time. For instance, a `DataSource` is
 environment specific. Serializing such information is useless and
 potentially even dangerous, since it is local to a certain VM or
-machine. For such cases, {sdg-name} offers a special
+machine. For such cases, Spring Data for GemFire offers a special
 {x-data-store-javadoc}/org/apache/geode/Instantiator.html\[`Instantiator`\]
-that performs wiring for each new instance created by {data-store-name}
+that performs wiring for each new instance created by GemFire
 during deserialization.
 
 </div>
@@ -113,9 +113,9 @@ following example shows:
 <div class="paragraph">
 
 During the Spring container startup, once it has been initialized, the
-`Instantiator`, by default, registers itself with the {data-store-name}
+`Instantiator`, by default, registers itself with the GemFire
 serialization system and performs wiring on all instances of
-`SomeDataSerializableClass` created by {data-store-name} during
+`SomeDataSerializableClass` created by GemFire during
 deserialization.
 
 </div>
@@ -133,10 +133,10 @@ deserialization.
 <div class="paragraph">
 
 For data intensive applications, a large number of instances might be
-created on each machine as data flows in. {data-store-name} uses
+created on each machine as data flows in. GemFire uses
 reflection to create new types, but, for some scenarios, this might
 prove to be expensive. As always, it is good to perform profiling to
-quantify whether this is the case or not. For such cases, {sdg-name}
+quantify whether this is the case or not. For such cases, Spring Data for GemFire
 allows the automatic generation of `Instatiator` classes, which
 instantiate a new type (using the default constructor) without the use
 of reflection. The following example shows how to create an
@@ -167,7 +167,7 @@ instantiator:
 
 The preceding definition automatically generates two `Instantiators` for
 two classes (`CustomTypeA` and `CustomTypeB`) and registers them with
-{data-store-name} under user ID `1025` and `1026`. The two
+GemFire under user ID `1025` and `1026`. The two
 `Instantiators` avoid the use of reflection and create the instances
 directly through Java code.
 

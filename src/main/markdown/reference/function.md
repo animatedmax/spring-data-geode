@@ -8,15 +8,15 @@
 
 <div class="paragraph">
 
-{sdg-name} provides [annotation](#function-annotations) support for
-implementing, registering and executing {data-store-name} Functions.
+Spring Data for GemFire provides [annotation](#function-annotations) support for
+implementing, registering and executing GemFire Functions.
 
 </div>
 
 <div class="paragraph">
 
-{sdg-name} also provides XML namespace support for registering
-{data-store-name}
+Spring Data for GemFire also provides XML namespace support for registering
+GemFire
 {x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[Functions\]
 for remote function execution.
 
@@ -24,7 +24,7 @@ for remote function execution.
 
 <div class="paragraph">
 
-See {data-store-name}'s
+See GemFire's
 {x-data-store-docs}/developing/function_exec/chapter_overview.html\[documentation\]
 for more information on the Function execution framework.
 
@@ -32,7 +32,7 @@ for more information on the Function execution framework.
 
 <div class="paragraph">
 
-{data-store-name} Functions are declared as Spring beans and must
+GemFire Functions are declared as Spring beans and must
 implement the `org.apache.geode.cache.execute.Function` interface or
 extend `org.apache.geode.cache.execute.FunctionAdapter`.
 
