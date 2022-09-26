@@ -152,7 +152,7 @@ Your application is now ready to connect with your GemFire instance.
 
 All reference documentation currently corresponds with the reference documentation for [Spring Data Geode](https://spring.io/projects/spring-data-geode#learn) and [Spring Boot Data Geode](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/).
 
-## <a id="release-notes"></a>Spring Data for Apache GemFire Release Notes 
+## <a id="release-notes"></a>Spring Data for GemFire Release Notes 
 
 ### <a id="release-2-2"></a>v2.2 Release Notes 
 
