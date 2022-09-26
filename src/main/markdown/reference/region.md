@@ -95,7 +95,7 @@ named `Orders`, you can use the following bean definition:
 
 <div class="paragraph">
 
-If `name` is not specified, the bean’s `id` will be used as the name of
+If `name` is not specified, the bean's `id` will be used as the name of
 the Region. The example above becomes:
 
 </div>
@@ -270,7 +270,7 @@ the Spring `ApplicationContext`.
 
 You may inject these "auto-looked-up" Regions as you would any other
 bean defined in the Spring `ApplicationContext`, with one exception: You
-may need to define a `depends-on` association with the ‘gemfireCache’
+may need to define a `depends-on` association with the ‘gemfireCache'
 bean, as follows:
 
 </div>
@@ -304,7 +304,7 @@ public class ApplicationDao extends DaoSupport {
 
 <div class="paragraph">
 
-The preceding example only applies when you use Spring’s
+The preceding example only applies when you use Spring's
 `component-scan` functionality.
 
 </div>
@@ -438,7 +438,7 @@ out-of-order updates to distributed regions.</p></td>
 <td class="tableblock halign-left valign-top"><p>See GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html[data
 policy].</p></td>
-<td class="tableblock halign-left valign-top"><p>The region’s data
+<td class="tableblock halign-left valign-top"><p>The region's data
 policy. Note that not all data policies are supported for every Region
 type.</p></td>
 </tr>
@@ -590,7 +590,7 @@ interface. A Region may have multiple listeners, declared with the
 
 <div class="paragraph">
 
-The following example has two declared `CacheListener’s`. The first
+The following example has two declared `CacheListener's`. The first
 references a named, top-level Spring bean. The second is an anonymous
 inner bean definition.
 
@@ -692,7 +692,7 @@ Bean Reference Conventions
 <p>The <code>cache-listener</code> element is an example of a common
 pattern used in the XML namespace anywhere GemFire provides a
 callback interface to be implemented in order to invoke custom code in
-response to cache or Region events. When you use Spring’s IoC container,
+response to cache or Region events. When you use Spring's IoC container,
 the implementation is a standard Spring bean. In order to simplify the
 configuration, the schema allows a single occurrence of the
 <code>cache-listener</code> element, but, if multiple instances are
@@ -955,7 +955,7 @@ and a different `/Employee/Address` Region. Additionally, a Sub-Region
 may have its own Sub-Regions and configuration. A Sub-Region does not
 inherit attributes from its parent Region. Regions types may be mixed
 and matched subject to GemFire constraints. A Sub-Region is
-naturally declared as a child element of a Region. The Sub-Region’s
+naturally declared as a child element of a Region. The Sub-Region's
 `name` attribute is the simple name. The preceding example might be
 configured as follows:
 
@@ -1522,7 +1522,7 @@ place for evicting data from memory. Currently, in GemFire,
 eviction applies to the Least Recently Used entry (also known as
 [LRU](https://en.wikipedia.org/wiki/Cache_algorithms#Least_Recently_Used)).
 Evicted entries are either destroyed or paged to disk (referred to as
-“overflow to disk”).
+"overflow to disk").
 
 </div>
 
@@ -1628,7 +1628,7 @@ GemFire supports the following expiration types:
 - **Idle Timeout (TTI)**: The amount of time in seconds that an object
   may remain in the cache after the last access. The Idle Timeout
   counter for an object is reset any time its TTL counter is reset. In
-  addition, an entry’s Idle Timeout counter is reset any time the entry
+  addition, an entry's Idle Timeout counter is reset any time the entry
   is accessed through a get operation or a `netSearch`. The Idle Timeout
   counter for a Region is reset whenever the Idle Timeout is reset for
   one of its entries.
@@ -1755,7 +1755,7 @@ Note
 <p>All <code>@Expiration</code>-based annotations apply only to Region
 entry values. Expiration for a Region is not covered by Spring Data for GemFire's
 expiration annotation support. However, GemFire and Spring Data for GemFire
-do let you set Region expiration by using the {sdg-acronym} XML
+do let you set Region expiration by using the SDG XML
 namespace, as follows:</p>
 </div>
 <div class="listingblock">
@@ -1786,7 +1786,7 @@ data expiration\] for more details
 <div class="paragraph">
 
 The Spring Data for GemFire `AnnotationBasedExpiration` class (and `CustomExpiry`
-implementation) is responsible for processing the {sdg-acronym}
+implementation) is responsible for processing the SDG
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
 
@@ -1858,9 +1858,9 @@ objects annotated with `@Expiration`-based annotations, you must:
 3.  (optional) In cases where particular application domain objects have
     not been annotated with Spring Data for GemFire's `@Expiration` annotations at
     all, but the GemFire Region is configured to use
-    {sdg-acronym}'s custom `AnnotationBasedExpiration` class to
+    SDG's custom `AnnotationBasedExpiration` class to
     determine the expiration policy and settings for objects stored in
-    the Region, you can set “default” expiration attributes on the
+    the Region, you can set "default" expiration attributes on the
     `AnnotationBasedExpiration` bean by doing the following:
 
 </div>
@@ -1894,13 +1894,13 @@ objects annotated with `@Expiration`-based annotations, you must:
 You may have noticed that Spring Data for GemFire's `@Expiration` annotations use a
 `String` as the attribute type rather than, and perhaps more
 appropriately, being strongly typed — for example, `int` for 'timeout'
-and {sdg-acronym}'s `ExpirationActionType` for 'action'. Why is that?
+and SDG's `ExpirationActionType` for 'action'. Why is that?
 
 </div>
 
 <div class="paragraph">
 
-Well, enter one of Spring Data for GemFire's other features, leveraging Spring’s core
+Well, enter one of Spring Data for GemFire's other features, leveraging Spring's core
 infrastructure for configuration convenience: property placeholders and
 Spring Expression Language (SpEL) expressions.
 
@@ -2083,7 +2083,7 @@ shows:
 <div class="paragraph">
 
 Persistence may also be configured by setting the `data-policy`
-attribute. To do so, set the attribute’s value to one of
+attribute. To do so, set the attribute's value to one of
 {x-data-store-javadoc}/org/apache/geode/cache/DataPolicy.html\[GemFire's
 DataPolicy settings\], as the following example shows:
 
@@ -2237,9 +2237,9 @@ of a GemFire cache named `gemfireCache`.
 
 <div class="paragraph">
 
-One of the common Region types is a `REPLICATE` Region or “replica”. In
+One of the common Region types is a `REPLICATE` Region or "replica". In
 short, when a Region is configured to be a `REPLICATE`, every member
-that hosts the Region stores a copy of the Region’s entries locally. Any
+that hosts the Region stores a copy of the Region's entries locally. Any
 update to a `REPLICATE` Region is distributed to all copies of the
 Region. When a replica is created, it goes through an initialization
 stage, in which it discovers other replicas and automatically copies all
@@ -2300,7 +2300,7 @@ To quote the GemFire docs:
 
 <div class="paragraph">
 
-“A partitioned region is a region where data is divided between peer
+"A partitioned region is a region where data is divided between peer
 servers hosting the region so that each peer stores a subset of the
 data. When using a partitioned region, applications are presented with a
 logical view of the region that looks like a single map containing all
@@ -2309,7 +2309,7 @@ routed to the peer that hosts the entry that is the target of the
 operation. GemFire divides the domain of hashcodes into
 buckets. Each bucket is assigned to a specific peer, but may be
 relocated at any time to another peer in order to improve the
-utilization of resources across the cluster.”
+utilization of resources across the cluster."
 
 </div>
 
@@ -2561,7 +2561,7 @@ servers by using the <code>server</code> element.</td>
 
 For a full list of options to set on the client and especially on the
 `Pool`, see the Spring Data for GemFire schema
-(“[\[appendix-schema\]](#appendix-schema)”) and GemFire's
+("[\[appendix-schema\]](#appendix-schema)") and GemFire's
 documentation on
 {x-data-store-docs}/topologies_and_comm/cs_configuration/chapter_overview.html\[Client-Server
 Configuration\].
@@ -2638,7 +2638,7 @@ the client was disconnected from the servers in the cluster.
 
 A subscription queue on the servers in the cluster is maintained for
 each `Pool` of connections defined in the client where a subscription
-has also been “enabled” for that `Pool`. The subscription queue is used
+has also been "enabled" for that `Pool`. The subscription queue is used
 to store (and possibly conflate) events sent to the client. If the
 subscription queue is durable, it persists between client sessions (that
 is, connections), potentially up to a specified timeout. If the client
@@ -2699,8 +2699,8 @@ In addition to `subscription-enabled`, can you also set
 and `subscription-redundancy`. `subscription-redundancy` is used to
 control how many copies of the subscription queue should be maintained
 by the servers in the cluster. If redundancy is greater than one, and
-the “primary” subscription queue (that is, the server) goes down, then a
-“secondary” subscription queue takes over, keeping the client from
+the "primary" subscription queue (that is, the server) goes down, then a
+"secondary" subscription queue takes over, keeping the client from
 missing events in a HA scenario.
 
 </div>
@@ -2736,7 +2736,7 @@ interests in keys in this server Region:
 
 <div class="paragraph">
 
-To control the amount of time (in seconds) that a “durable” subscription
+To control the amount of time (in seconds) that a "durable" subscription
 queue is maintained after a client is disconnected from the servers in
 the cluster, set the `durable-client-timeout` attribute on the
 `<gfe:client-cache>` element as follows:
@@ -2810,7 +2810,7 @@ directly with JSON Strings.
 <div class="paragraph">
 
 In addition, Java objects written to JSON configured Regions are
-automatically converted to JSON using Jackson’s `ObjectMapper`. When
+automatically converted to JSON using Jackson's `ObjectMapper`. When
 these values are read back, they are returned as a JSON String.
 
 </div>

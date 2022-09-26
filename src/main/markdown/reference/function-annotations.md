@@ -45,7 +45,7 @@ any RPC protocol, requires some boilerplate code.
 
 <div class="paragraph">
 
-Spring Data for GemFire, true to Spring’s core value proposition, aims to hide the
+Spring Data for GemFire, true to Spring's core value proposition, aims to hide the
 mechanics of remote Function execution and let you focus on core POJO
 programming and business logic. To this end, Spring Data for GemFire introduces
 annotations to declaratively register the public methods of a POJO class
@@ -142,7 +142,7 @@ member of the cluster.</td>
 <div class="paragraph">
 
 Using GemFire APIs, the `FunctionContext` provides a runtime
-invocation context that includes the client’s calling arguments and a
+invocation context that includes the client's calling arguments and a
 `ResultSender` implementation to send results back to the client.
 Additionally, if the Function is executed on a Region, the
 `FunctionContext` is actually an instance of `RegionFunctionContext`,
@@ -157,9 +157,9 @@ to extract the local data set.
 <div class="paragraph">
 
 By using Spring, you can write a simple POJO and use the Spring
-container to bind one or more of your POJO’s public methods to a
+container to bind one or more of your POJO's public methods to a
 Function. The signature for a POJO method intended to be used as a
-Function must generally conform to the client’s execution arguments.
+Function must generally conform to the client's execution arguments.
 However, in the case of a Region execution, the Region data may also be
 provided (presumably the data is held in the local partition if the
 Region is a `PARTITION` Region).
@@ -224,7 +224,7 @@ public void method6(FunctionContest context) { ... }
 The general rule is that once any additional arguments (that is, Region
 data and filter) are resolved, the remaining arguments must correspond
 exactly, in order and type, to the expected Function method parameters.
-The method’s return type must be void or a type that may be serialized
+The method's return type must be void or a type that may be serialized
 (as a `java.io.Serializable`, `DataSerializable`, or `PdxSerializable`).
 The latter is also a requirement for the calling arguments.
 
@@ -246,7 +246,7 @@ are returned to the client.
 
 <div class="paragraph">
 
-The following example shows how {sdg-acronym}'s Function annotations are
+The following example shows how SDG's Function annotations are
 used to expose POJO methods as GemFire Functions:
 
 </div>
@@ -279,7 +279,7 @@ public class ApplicationFunctions {
 
 Note that the class itself must be registered as a Spring bean and each
 GemFire Function is annotated with `@GemfireFunction`. In the
-preceding example, Spring’s `@Component` annotation was used, but you
+preceding example, Spring's `@Component` annotation was used, but you
 can register the bean by using any method supported by Spring (such as
 XML configuration or with a Java configuration class when using Spring
 Boot). This lets the Spring container create an instance of this class
@@ -336,10 +336,10 @@ interface.
 
 <div class="paragraph">
 
-If the POJO Function method’s return type is `void`, then the
+If the POJO Function method's return type is `void`, then the
 `hasResult` attribute is automatically set to `false`. Otherwise, if the
 method returns a value, the `hasResult` attributes is set to `true`.
-Even for `void` method return types, the `GemfireFunction` annotation’s
+Even for `void` method return types, the `GemfireFunction` annotation's
 `hasResult` attribute can be set to `true` to override this convention,
 as shown in the `functionWithContext` method shown previously.
 Presumably, the intention is that you will use the `ResultSender`
@@ -377,7 +377,7 @@ enumerated values. And finally, optionally, `Key` is a valid Key in the
 
 The `PojoFunctionWrapper` implements GemFire's `Function`
 interface, binds method parameters, and invokes the target method in its
-`execute()` method. It also sends the method’s return value back to the
+`execute()` method. It also sends the method's return value back to the
 caller by using the `ResultSender`.
 
 </div>
@@ -485,7 +485,7 @@ class ApplicationConfiguration { ... }
 
 <div class="paragraph">
 
-A process that invokes a remote Function needs to provide the Function’s
+A process that invokes a remote Function needs to provide the Function's
 ID, calling arguments, the execution target (`onRegion`, `onServers`,
 `onServer`, `onMember`, or `onMembers`) and (optionally) a filter set.
 By using Spring Data for GemFire, all you need do is define an interface supported by
@@ -511,7 +511,7 @@ executions, one corresponding to each method defined in the interface.
 
 <div class="paragraph">
 
-To support client-side Function execution, the following {sdg-acronym}
+To support client-side Function execution, the following SDG
 Function annotations are provided: `@OnRegion`, `@OnServer`,
 `@OnServers`, `@OnMember`, and `@OnMembers`. These annotations
 correspond to the `Execution` implementations provided by
@@ -596,7 +596,7 @@ different Function ID.
 
 <div class="paragraph">
 
-The client-side uses Spring’s classpath component scanning capability to
+The client-side uses Spring's classpath component scanning capability to
 discover annotated interfaces. To enable Function execution annotation
 processing in XML, insert the following element in your XML
 configuration:
@@ -924,12 +924,12 @@ GemFire serializes only application domain object types that
 you have specifically configured (registered) either by using
 GemFire's
 {x-data-store-javadoc}/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html\[`ReflectionBasedAutoSerializer`\],
-or specifically (and recommended) by using a “custom” GemFire
+or specifically (and recommended) by using a "custom" GemFire
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxSerializer.html\[`PdxSerializer`\].
 If you use Spring Data for GemFire's Repository extension, you might even want to
 consider using Spring Data for GemFire's
 {sdg-javadoc}/org/springframework/data/gemfire/mapping/MappingPdxSerializer.html\[`MappingPdxSerializer`\],
-which uses an entity’s mapping metadata to determine data from the
+which uses an entity's mapping metadata to determine data from the
 application domain object that is serialized to the PDX instance.
 
 </div>
@@ -940,7 +940,7 @@ What is less than apparent, though, is that GemFire
 automatically handles Java `Enum` types regardless of whether they are
 explicitly configured (that is, registered with a
 `ReflectionBasedAutoSerializer`, using a regex pattern and the `classes`
-parameter or are handled by a “custom” GemFire
+parameter or are handled by a "custom" GemFire
 `PdxSerializer`), despite the fact that Java enumerations implement
 `java.io.Serializable`.
 
@@ -1016,7 +1016,7 @@ application domain object types instead, not PDX serialized instances.
 
 Consequently, Spring Data for GemFire includes enhanced Function support to
 automatically convert PDX typed method arguments to the desired
-application domain object types defined by the Function method’s
+application domain object types defined by the Function method's
 signature (parameter types).
 
 </div>

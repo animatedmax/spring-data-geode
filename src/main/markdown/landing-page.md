@@ -202,5 +202,5 @@ All reference documentation currently corresponds with the reference documentati
 
 * Introduced an InterestsBuilder class to express Interests in keys and values between client and server when using JavaConfig.
 
-* Added support in the Annotation configuration model for Off-Heap, Redis Adapter, and Apache Geode’s new Security framework.
+* Added support in the Annotation configuration model for Off-Heap, Redis Adapter, and Apache Geode's new Security framework.
 

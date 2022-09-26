@@ -90,7 +90,7 @@ element, as follows:
 
 <div class="paragraph">
 
-Spring Data for GemFire's `LuceneIndexFactoryBean` API and {sdg-acronym}'s XML
+Spring Data for GemFire's `LuceneIndexFactoryBean` API and SDG's XML
 namespace also lets a
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/LuceneSerializer.html\[`org.apache.geode.cache.lucene.LuceneSerializer`\]
 be specified when you create the `LuceneIndex`. The `LuceneSerializer`
@@ -230,7 +230,7 @@ Note
 </div></td>
 <td class="content">To help ensure that all declared
 <code>LuceneIndexes</code> defined in a Spring container are created
-before the Regions on which they apply, {sdg-acronym} includes the
+before the Regions on which they apply, SDG includes the
 <code>org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>.
 You may register this Spring
 {spring-framework-javadoc}/org/springframework/beans/factory/config/BeanFactoryPostProcessor.html[<code>BeanFactoryPostProcessor</code>]
@@ -238,8 +238,8 @@ in XML config by using
 <code>&lt;bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>.
 The
 <code>o.s.d.g.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>
-may only be used when using {sdg-acronym} XML config. More details about
-Spring’s <code>BeanFactoryPostProcessors</code> can be found
+may only be used when using SDG XML config. More details about
+Spring's <code>BeanFactoryPostProcessors</code> can be found
 {spring-framework-docs}/core.html#beans-factory-extension-factory-postprocessors[here].</td>
 </tr>
 </tbody>
@@ -250,7 +250,7 @@ Spring’s <code>BeanFactoryPostProcessors</code> can be found
 <div class="paragraph">
 
 It is possible that these GemFire restrictions will not apply
-in a future release which is why the {sdg-acronym}
+in a future release which is why the SDG
 `LuceneIndexFactoryBean` API takes a reference to the Region directly as
 well, rather than just the Region path.
 
@@ -259,8 +259,8 @@ well, rather than just the Region path.
 <div class="paragraph">
 
 This is more ideal when you want to define a `LuceneIndex` on an
-existing Region with data at a later point during the application’s
-lifecycle and as requirements demand. Where possible, {sdg-acronym}
+existing Region with data at a later point during the application's
+lifecycle and as requirements demand. Where possible, SDG
 strives to adhere to strongly-typed objects. However, for the time
 being, you must use the `regionPath` property to specify the Region to
 which the `LuceneIndex` is applied.
@@ -280,7 +280,7 @@ which the `LuceneIndex` is applied.
 Note
 </div></td>
 <td class="content">Additionally, in the preceding example, note the
-presence of Spring’s <code>@DependsOn</code> annotation on the
+presence of Spring's <code>@DependsOn</code> annotation on the
 <code>Books</code> Region bean definition. This creates a dependency
 from the <code>Books</code> Region bean to the
 <code>bookTitleIndex</code> <code>LuceneIndex</code> bean definition,
@@ -384,9 +384,9 @@ the <code>resultLimit</code> parameter is optional.</td>
 The operations in the `LuceneOperations` interface match the operations
 provided by the GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/LuceneQuery.html\[LuceneQuery\]
-interface. However, {sdg-acronym} has the added value of translating
+interface. However, SDG has the added value of translating
 proprietary GemFire or Apache Lucene `Exceptions` into
-Spring’s highly consistent and expressive DAO [exception
+Spring's highly consistent and expressive DAO [exception
 hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#dao-exceptions),
 particularly as many modern data access operations involve more than one
 store or repository.
@@ -395,7 +395,7 @@ store or repository.
 
 <div class="paragraph">
 
-Additionally, {sdg-acronym}'s `LuceneOperations` interface can shield
+Additionally, SDG's `LuceneOperations` interface can shield
 your application from interface-breaking changes introduced by the
 underlying GemFire or Apache Lucene APIs when they occur.
 
@@ -405,7 +405,7 @@ underlying GemFire or Apache Lucene APIs when they occur.
 
 However, it would be sad to offer a Lucene Data Access Object (DAO) that
 only uses GemFire and Apache Lucene data types (such as
-GemFire's `LuceneResultStruct`). Therefore, {sdg-acronym}
+GemFire's `LuceneResultStruct`). Therefore, SDG
 gives you the `ProjectingLuceneOperations` interface to remedy these
 important application concerns. The following listing shows the
 `ProjectingLuceneOperations` interface definition:
@@ -638,7 +638,7 @@ Finally, Spring Data for GemFire provides annotation configuration support for
 
 <div class="paragraph">
 
-Eventually, the {sdg-acronym} Lucene support will finds its way into the
+Eventually, the SDG Lucene support will finds its way into the
 Repository infrastructure extension for GemFire so that Lucene
 queries can be expressed as methods on an application `Repository`
 interface, in much the same way as the [OQL
@@ -682,7 +682,7 @@ class Person {
 
 <div class="paragraph">
 
-To enable this feature, you must use {sdg-acronym}'s annotation
+To enable this feature, you must use SDG's annotation
 configuration support specifically with the `@EnableEntityDefineRegions`
 and `@EnableIndexing` annotations, as follows:
 
@@ -729,10 +729,10 @@ GemFire servers since <code>LuceneIndexes</code> only apply to
 
 <div class="paragraph">
 
-Given our earlier definition of the `Person` class, the {sdg-acronym}
+Given our earlier definition of the `Person` class, the SDG
 annotation configuration support finds the `Person` entity class
 definition and determines that people are stored in a `PARTITION` Region
-called “People” and that the `Person` has an OQL `Index` on `birthDate`
+called "People" and that the `Person` has an OQL `Index` on `birthDate`
 along with a `LuceneIndex` on `lastName`.
 
 </div>

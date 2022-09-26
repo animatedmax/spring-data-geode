@@ -34,7 +34,7 @@ GemFire Examples</a> repository.</td>
 <div class="paragraph">
 
 The Spring Data for GemFire project also includes one sample application. Named
-“Hello World”, the sample application demonstrates how to configure and
+"Hello World", the sample application demonstrates how to configure and
 use GemFire inside a Spring application. At run time, the
 sample offers a shell that lets you run various commands against the
 data grid. It provides an excellent starting point for developers who
@@ -63,7 +63,7 @@ Suite](https://spring.io/tools/sts)) or run them from the command-line.
 
 <div class="paragraph">
 
-The “Hello World” sample application demonstrates the core functionality
+The "Hello World" sample application demonstrates the core functionality
 of the Spring Data for GemFire project. It bootstraps GemFire, configures
 it, executes arbitrary commands against the cache, and shuts it down
 when the application exits. Multiple instances of the application can be
@@ -105,7 +105,7 @@ href="https://jira.spring.io/browse/SGF-28">SGF-28</a>.</td>
 
 <div class="paragraph">
 
-The “Hello World” sample application is designed as a stand-alone Java
+The "Hello World" sample application is designed as a stand-alone Java
 application. It features a `main` class that can be started either from
 your IDE (in Eclipse or STS, through `Run As/Java Application`) or from
 the command line through Maven with `mvn exec:java`. If the classpath is
@@ -234,7 +234,7 @@ completely destroyed.
 
 <div class="paragraph">
 
-The “Hello World” sample uses both Spring XML and annotations for its
+The "Hello World" sample uses both Spring XML and annotations for its
 configuration. The initial bootstrapping configuration is
 `app-context.xml`, which includes the cache configuration defined in the
 `cache-context.xml` file and performs classpath [component

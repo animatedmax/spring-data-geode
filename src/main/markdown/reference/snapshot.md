@@ -31,7 +31,7 @@ documentation\] explains, snapshots let you save and subsequently reload
 the cached data later, which can be useful for moving data between
 environments, such as from production to a staging or test environment
 in order to reproduce data-related issues in a controlled context. You
-can combine Spring Data for GemFire's Snapshot Service support with [Spring’s bean
+can combine Spring Data for GemFire's Snapshot Service support with [Spring's bean
 definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
 to load snapshot data specific to the environment as necessary.
@@ -76,7 +76,7 @@ definition, as follows:
 You can define as many imports and exports as you like. You can define
 only imports or only exports. The file locations and directory paths can
 be absolute or relative to the Spring Data for GemFire application, which is the JVM
-process’s working directory.
+process's working directory.
 
 </div>
 
@@ -437,7 +437,7 @@ export, from within your Spring application.
 <div class="paragraph">
 
 For this purpose, Spring Data for GemFire defines two additional Spring application
-events, extending Spring’s
+events, extending Spring's
 [`ApplicationEvent`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html)
 class for imports and exports, respectively:
 `ImportSnapshotApplicationEvent` and `ExportSnapshotApplicationEvent`.
@@ -477,7 +477,7 @@ matching Snapshot Service beans process import and export events.
 A Region-based `[Import|Export]SnapshotApplicationEvent` matches if the
 Snapshot Service bean defined is a `RegionSnapshotService` and its
 Region reference (as determined by the `region-ref` attribute) matches
-the Region’s pathname, as specified by the snapshot application event.
+the Region's pathname, as specified by the snapshot application event.
 
 </div>
 
@@ -492,7 +492,7 @@ perform either an import or export, respectively.
 
 <div class="paragraph">
 
-You can use Spring’s
+You can use Spring's
 {spring-framework-javadoc}/org/springframework/context/ApplicationEventPublisher.html\[`ApplicationEventPublisher`\]
 interface to fire import and export snapshot application events from
 your application as follows:
@@ -540,17 +540,17 @@ public class ExampleApplicationComponent {
 
 <div class="paragraph">
 
-In the preceding example, only the `/Example` Region’s Snapshot Service
+In the preceding example, only the `/Example` Region's Snapshot Service
 bean picks up and handles the export event, saving the filtered,
-“/Example” Region’s data to the `data.snapshot` file in a sub-directory
-of the application’s working directory.
+"/Example" Region's data to the `data.snapshot` file in a sub-directory
+of the application's working directory.
 
 </div>
 
 <div class="paragraph">
 
 Using the Spring application events and messaging subsystem is a good
-way to keep your application loosely coupled. You can also use Spring’s
+way to keep your application loosely coupled. You can also use Spring's
 {spring-framework-docs}/#scheduling-task-scheduler\[Scheduling\]
 services to fire snapshot application events on a periodic basis.
 

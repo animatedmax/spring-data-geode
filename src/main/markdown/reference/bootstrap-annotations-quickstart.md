@@ -12,7 +12,7 @@
 
 <div class="paragraph">
 
-The following sections provide an overview to the {sdg-acronym}
+The following sections provide an overview to the SDG
 annotations in order to get started quickly.
 
 </div>
@@ -149,7 +149,7 @@ Note
 applications to connect to this server, then simply replace the
 <code>@PeerCacheApplication</code> annotation with the
 <code>@CacheServerApplication</code> annotation. This will start a
-<code>CacheServer</code> running on “localhost”, listening on the
+<code>CacheServer</code> running on "localhost", listening on the
 default <code>CacheServer</code> port of <code>40404</code>.</td>
 </tr>
 </tbody>
@@ -530,7 +530,7 @@ public class ClientApplication {
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">Default <code>log-level</code> is “config”. Also,
+<td class="content">Default <code>log-level</code> is "config". Also,
 this annotation will not adjust log levels in your application, only for
 GemFire.</td>
 </tr>
@@ -682,12 +682,12 @@ serializable without having to implement
 <td class="icon"><div class="title">
 Note
 </div></td>
-<td class="content">By default, {sdg-acronym} configures the
+<td class="content">By default, SDG configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
 out-of-the-box in order to properly identify application domain objects
 that need to be serialized and then perform the serialization since, the
-logic in <code>MappingPdxSerializer</code> is based on Spring Data’s
+logic in <code>MappingPdxSerializer</code> is based on Spring Data's
 mapping infrastructure. See <a
 href="#mapping.pdx-serializer">[mapping.pdx-serializer]</a> for more
 details.</td>
@@ -789,7 +789,7 @@ Note
 <td class="content">GemFire SSL allows you to configure the
 specific components of the system that require TLS, such as
 client/server, Locators, Gateways, etc. Optionally, you can specify that
-all components of GemFire use SSL with “ALL”.</td>
+all components of GemFire use SSL with "ALL".</td>
 </tr>
 </tbody>
 </table>
@@ -925,7 +925,7 @@ for more details.
 <div class="paragraph">
 
 To configure other, low-level GemFire properties not covered
-by the feature-oriented, {sdg-acronym} configuration annotations,
+by the feature-oriented, SDG configuration annotations,
 annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
@@ -1007,9 +1007,9 @@ for more details.
 
 <div class="paragraph">
 
-To use GemFire as a *caching provider* in Spring’s
+To use GemFire as a *caching provider* in Spring's
 {spring-framework-docs}/integration.html#cache\[*Cache Abstraction*\],
-and have {sdg-acronym} automatically create GemFire Regions
+and have SDG automatically create GemFire Regions
 for the caches required by your application service components, then
 annotate your Spring, GemFire client or server application
 class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`,
@@ -1804,10 +1804,10 @@ configured:
 <div class="ulist">
 
 - `GatewayReceiver` - The WAN replication component that receives data
-  from a remote GemFire cluster’s `GatewaySender`.
+  from a remote GemFire cluster's `GatewaySender`.
 
 - `GatewaySender` - The WAN replication component that sends data to a
-  remote GemFire cluster’s `GatewayReceiver`.
+  remote GemFire cluster's `GatewayReceiver`.
 
 </div>
 
@@ -1940,8 +1940,8 @@ server-side feature only and can only be configured on a
 In the above example, the application is configured with 2 Regions,
 `Region1` and `Region2`. In addition, two `GatewaySenders` will be
 configured to service both Regions. `GatewaySender1` will be configured
-to replicate `` Region1’s data and `GatewaySender2 `` will be configured
-to replicate \`Region2’s data.
+to replicate `` Region1's data and `GatewaySender2 `` will be configured
+to replicate \`Region2's data.
 
 </div>
 

@@ -8,7 +8,7 @@
 
 <div class="paragraph">
 
-Spring Data for GemFire focuses on integrating the Spring Framework’s powerful,
+Spring Data for GemFire focuses on integrating the Spring Framework's powerful,
 non-invasive programming model and concepts with GemFire to
 simplify configuration and development of Java applications when using
 GemFire as you data management solution.

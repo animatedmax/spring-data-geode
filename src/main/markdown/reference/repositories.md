@@ -114,7 +114,7 @@ application domain classes correctly mapped to configured Regions.</td>
 
 <div class="paragraph">
 
-Alternatively, many developers prefer to use Spring’s
+Alternatively, many developers prefer to use Spring's
 {spring-framework-docs}/core.html#beans-java\[Java-based container
 configuration\].
 
@@ -123,7 +123,7 @@ configuration\].
 <div class="paragraph">
 
 Using this approach, you can bootstrap Spring Data Repositories by using
-the {sdg-acronym} `@EnableGemfireRepositories` annotation, as the
+the SDG `@EnableGemfireRepositories` annotation, as the
 following example shows:
 
 </div>
@@ -175,10 +175,10 @@ referenced by this attribute.
 <div class="paragraph">
 
 In addition to the `basePackages and basePackageClasses` attributes,
-like Spring’s
+like Spring's
 {spring-framework-javadoc}/org/springframework/context/annotation/ComponentScan.html\[`@ComponentScan`\]
 annotation, the `@EnableGemfireRepositories` annotation provides include
-and exclude filters, based on Spring’s
+and exclude filters, based on Spring's
 {spring-framework-javadoc}/org/springframework/context/annotation/ComponentScan.Filter.html\[`ComponentScan.Filter`\]
 type. You can use the `filterType` attribute to filter by different
 aspects, such as whether an application Repository type is annotated
@@ -208,7 +208,7 @@ more
 {spring-data-commons-docs-html}/#repositories.custom-implementations\[custom
 repository implementations\]. This feature is commonly used to extend
 the Spring Data Repository infrastructure to implement a feature not
-provided by the data store (for example, {sdg-acronym}).
+provided by the data store (for example, SDG).
 
 </div>
 
@@ -216,9 +216,9 @@ provided by the data store (for example, {sdg-acronym}).
 
 One example of where custom repository implementations are needed with
 GemFire is when performing joins. Joins are not supported by
-{sdg-acronym} Repositories. With a GemFire `PARTITION` Region,
+SDG Repositories. With a GemFire `PARTITION` Region,
 the join must be performed on collocated `PARTITION` Regions, since
-GemFire does not support “distributed” joins. In addition, the
+GemFire does not support "distributed" joins. In addition, the
 Equi-Join OQL Query must be performed inside a GemFire
 Function. See
 [here](https://gemfire91.docs.pivotal.io/geode/developing/partitioned_regions/join_query_partitioned_regions.html)
@@ -228,7 +228,7 @@ for more details on GemFire *Equi-Join Queries*.
 
 <div class="paragraph">
 
-Many other aspects of the {sdg-acronym}'s Repository infrastructure
+Many other aspects of the SDG's Repository infrastructure
 extension may be customized as well. See the
 [`@EnableGemfireRepositories`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html)
 Javadoc for more details on all configuration settings.

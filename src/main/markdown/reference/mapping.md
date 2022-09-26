@@ -155,7 +155,7 @@ type-specific Region mapping annotations: `@ClientRegion`,
 <div class="paragraph">
 
 Functionally, these annotations are treated exactly the same as the
-generic `@Region` annotation in the {sdg-acronym} mapping
+generic `@Region` annotation in the SDG mapping
 infrastructure. However, these additional mapping annotations are useful
 in Spring Data for GemFire's annotation configuration model. When combined with the
 `@EnableEntityDefinedRegions` configuration annotation on a Spring
@@ -176,7 +176,7 @@ partition — also known as sharding — versus replicating data).
 <div class="paragraph">
 
 Using these type-specific Region mapping annotations with the
-{sdg-acronym} annotation configuration model saves you from having to
+SDG annotation configuration model saves you from having to
 explicitly define these Regions in configuration.
 
 </div>
@@ -197,7 +197,7 @@ explicitly define these Regions in configuration.
 
 As an alternative to specifying the Region in which the entity is stored
 by using the `@Region` annotation on the entity class, you can also
-specify the `@Region` annotation on the entity’s `Repository` interface.
+specify the `@Region` annotation on the entity's `Repository` interface.
 See [\[gemfire-repositories\]](#gemfire-repositories) for more details.
 
 </div>
@@ -303,7 +303,7 @@ explicitly annotated with `@PersistenceConstructor`.
 
 To provide arguments for constructor parameters, the serializer reads
 fields with the named constructor parameter, explicitly identified by
-using Spring’s `@Value` annotation, from the supplied
+using Spring's `@Value` annotation, from the supplied
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxReader.html\[`PdxReader`\],
 as shown in the following example:
 
@@ -342,10 +342,10 @@ public class Person {
 
 <div class="paragraph">
 
-An entity class annotated in this way has the “thing” field read from
+An entity class annotated in this way has the "thing" field read from
 the `PdxReader` and passed as the argument value for the constructor
 parameter, `firstname`. The value for `lastName` is a Spring bean with
-the name “bean”.
+the name "bean".
 
 </div>
 
@@ -398,7 +398,7 @@ detail.
 <div class="paragraph">
 
 The `MappingPdxSerializer` gives you the ability to register custom
-`PdxSerializers` based on an entity’s field or property names and types.
+`PdxSerializers` based on an entity's field or property names and types.
 
 </div>
 
@@ -432,7 +432,7 @@ public class User {
 
 <div class="paragraph">
 
-While the user’s name probably does not require any special logic to
+While the user's name probably does not require any special logic to
 serialize the value, serializing the password on the other hand might
 require additional logic to handle the sensitive nature of the field or
 property.
@@ -444,7 +444,7 @@ property.
 Perhaps you want to protect the password when sending the value over the
 network, between a client and a server, beyond TLS alone, and you only
 want to store the salted hash. When using the `MappingPdxSerializer`,
-you can register a custom `PdxSerializer` to handle the user’s password,
+you can register a custom `PdxSerializer` to handle the user's password,
 as follows:
 
 </div>
@@ -496,7 +496,7 @@ consult the custom `PdxSerializer` to serialize and deserialize all
 However, suppose you want to customize the serialization of `Passwords`
 only on `User` objects. To do so, you can register the custom
 `PdxSerializer` for the `User` type by specifying the fully qualified
-name of the `Class’s` field or property, as the following example shows:
+name of the `Class's` field or property, as the following example shows:
 
 </div>
 
@@ -571,13 +571,13 @@ as explicit as possible about the semantics of registration.</td>
 <div class="paragraph">
 
 Like GemFire's `ReflectionBasedAutoSerializer`,
-{sdg-acronym}'s `MappingPdxSerializer` is also able to determine the
+SDG's `MappingPdxSerializer` is also able to determine the
 identifier of the entity. However, `MappingPdxSerializer` does so by
-using Spring Data’s mapping metadata, specifically by finding the entity
-property designated as the identifier using Spring Data’s
+using Spring Data's mapping metadata, specifically by finding the entity
+property designated as the identifier using Spring Data's
 {spring-data-commons-javadoc}/org/springframework/data/annotation/Id.html\[`@Id`\]
-annotation. Alternatively, any field or property named “id”, not
-explicitly annotated with `@Id`, is also designated as the entity’s
+annotation. Alternatively, any field or property named "id", not
+explicitly annotated with `@Id`, is also designated as the entity's
 identifier.
 
 </div>
@@ -630,7 +630,7 @@ What happens when your entity defines a read-only property?
 
 <div class="paragraph">
 
-First, it is important to understand what a “read-only” property is. If
+First, it is important to understand what a "read-only" property is. If
 you define a POJO by following the
 [JavaBeans](https://www.oracle.com/technetwork/java/javase/documentation/spec-136004.html)
 specification (as Spring does), you might define a POJO with a read-only
@@ -686,7 +686,7 @@ This is useful in situations where you might be returning a view or
 projection of some entity type and you only want to set state that is
 writable. Perhaps the view or projection of the entity is based on
 authorization or some other criteria. The point is, you can leverage
-this feature as is appropriate for your application’s use cases and
+this feature as is appropriate for your application's use cases and
 requirements. If you want the field or property to always be written,
 simply define a setter method.
 
@@ -717,7 +717,7 @@ from the object through Java Reflection.
 <div class="paragraph">
 
 The `MappingPdxSerializer` will not serialize any fields or properties
-that are qualified as being transient, either by using Java’s own
+that are qualified as being transient, either by using Java's own
 `transient` keyword (in the case of class instance fields) or by using
 the
 {spring-data-commons-javadoc}/org/springframework/data/annotation/Transient.html\[`@Transient`\]
@@ -778,7 +778,7 @@ are written to PDX.
 <div class="paragraph">
 
 Similar to GemFire's `ReflectionBasedAutoSerializer`,
-{sdg-acronym}'s `MappingPdxSerializer` lets you filter the types of
+SDG's `MappingPdxSerializer` lets you filter the types of
 objects that are serialized and deserialized.
 
 </div>
@@ -787,7 +787,7 @@ objects that are serialized and deserialized.
 
 However, unlike GemFire's `ReflectionBasedAutoSerializer`,
 which uses complex regular expressions to express which types the
-serializer handles, {sdg-acronym}'s `MappingPdxSerializer` uses the much
+serializer handles, SDG's `MappingPdxSerializer` uses the much
 more robust
 [`java.util.function.Predicate`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html)
 interface and API to express type-matching criteria.
@@ -807,7 +807,7 @@ interface and API to express type-matching criteria.
 Tip
 </div></td>
 <td class="content">If you like to use regular expressions, you can
-implement a <code>Predicate</code> using Java’s <a
+implement a <code>Predicate</code> using Java's <a
 href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/package-summary.html">regular
 expression support</a>.</td>
 </tr>
@@ -818,7 +818,7 @@ expression support</a>.</td>
 
 <div class="paragraph">
 
-The nice part about Java’s `Predicate` interface is that you can compose
+The nice part about Java's `Predicate` interface is that you can compose
 `Predicates` by using convenient and appropriate API methods, including:
 [`and(:Predicate)`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#and-java.util.function.Predicate-),
 [`or(:Predicate)`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#or-java.util.function.Predicate-),
@@ -876,7 +876,7 @@ Note
 
 <div class="paragraph">
 
-{sdg-acronym}'s `MappingPdxSerializer` includes support for both include
+SDG's `MappingPdxSerializer` includes support for both include
 and exclude class type filters.
 
 </div>
@@ -887,7 +887,7 @@ and exclude class type filters.
 
 <div class="paragraph">
 
-By default, {sdg-acronym}'s `MappingPdxSerializer` registers pre-defined
+By default, SDG's `MappingPdxSerializer` registers pre-defined
 `Predicates` that filter, or exclude types from the folliowing packages:
 
 </div>

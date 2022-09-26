@@ -36,7 +36,7 @@ JMS support in Spring, should feel right at home.
 Basically Spring Data for GemFire allows methods on POJOs to become end-points for
 CQ. Simply define the query and indicate the method that should be
 called to be notified when there is a match. Spring Data for GemFire takes care of
-the rest. This is very similar to Java EE’s message-driven bean style,
+the rest. This is very similar to Java EE's message-driven bean style,
 but without any requirement for base class or interface implementations,
 based on GemFire.
 
@@ -80,7 +80,7 @@ for more information.</td>
 
 Spring Data for GemFire simplifies creation, registration, life-cycle and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
-SDG’s `ContinuousQueryListenerContainer`, which does all the heavy
+SDG's `ContinuousQueryListenerContainer`, which does all the heavy
 lifting on behalf of the user. Users familiar with EJB and JMS should
 find the concepts familiar as it is designed as close as possible to the
 support provided in the *Spring Framework* with its Message-driven POJOs
@@ -111,7 +111,7 @@ The listener container is fully customizable. A developer can chose
 either to use the CQ thread to perform the dispatch (synchronous
 delivery) or a new thread (from an existing pool) for an asynchronous
 approach by defining the suitable `java.util.concurrent.Executor` (or
-Spring’s `TaskExecutor`). Depending on the load, the number of listeners
+Spring's `TaskExecutor`). Depending on the load, the number of listeners
 or the runtime environment, the developer should change or tweak the
 executor to better serve her needs. In particular, in managed
 environments (such as app servers), it is highly recommended to pick a
@@ -265,7 +265,7 @@ Note
 </div></td>
 <td class="content">The example above shows a few of the various forms
 that a listener can have; at its minimum, the listener reference and the
-actual query definition are required. It’s possible, however, to specify
+actual query definition are required. It's possible, however, to specify
 a name for the resulting Continuous Query (useful for monitoring) but
 also the name of the method (the default is <code>handleEvent</code>).
 The specified method can have various argument types, the

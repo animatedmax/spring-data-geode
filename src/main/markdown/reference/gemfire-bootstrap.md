@@ -132,7 +132,7 @@ this class inside GemFire's `cache.xml` file:
 <div class="paragraph">
 
 The `SpringContextBootstrappingInitializer` class follows conventions
-similar to Spring’s `ContextLoaderListener` class, which is used to
+similar to Spring's `ContextLoaderListener` class, which is used to
 bootstrap a Spring `ApplicationContext` inside a web application, where
 `ApplicationContext` configuration files are specified with the
 `contextConfigLocations` Servlet context parameter.
@@ -201,9 +201,9 @@ gfsh>start server --name=ExampleServer --log-level=config ...
 <div class="paragraph">
 
 The `application-context.xml` can be any valid Spring configuration
-metadata, including all of the {sdg-acronym} XML namespace elements. The
+metadata, including all of the SDG XML namespace elements. The
 only limitation with this approach is that a GemFire cache
-cannot be configured by using the {sdg-acronym} XML namespace. In other
+cannot be configured by using the SDG XML namespace. In other
 words, none of the `<gfe:cache/>` element attributes (such as
 `cache-xml-location`, `properties-ref`, `critical-heap-percentage`,
 `pdx-serializer-ref`, `lock-lease`, and others) can be specified. If
@@ -215,7 +215,7 @@ used, these attributes are ignored.
 
 The reason for this is that GemFire itself has already created
 and initialized the cache before the initializer gets invoked. As a
-result, the cache already exists and, since it is a “singleton”, it
+result, the cache already exists and, since it is a "singleton", it
 cannot be re-initialized or have any of its configuration augmented.
 
 </div>
@@ -235,7 +235,7 @@ cannot be re-initialized or have any of its configuration augmented.
 Spring Data for GemFire already provides support for auto-wiring GemFire
 components (such as `CacheListeners`, `CacheLoaders`, `CacheWriters` and
 so on) that are declared and created by GemFire in `cache.xml`
-by using {sdg-acronym}'s `WiringDeclarableSupport` class, as described
+by using SDG's `WiringDeclarableSupport` class, as described
 in [\[apis:declarable:autowiring\]](#apis:declarable:autowiring).
 However, this works only when Spring is the one doing the bootstrapping
 (that is, when Spring bootstraps GemFire).
@@ -322,7 +322,7 @@ CAUTION
 Be careful when mixing the different life-cycles of GemFire
 and the Spring container together in this manner. Not all use cases and
 scenarios are supported. The GemFire `cache.xml` configuration
-would be similar to the following (which comes from {sdg-acronym}'s test
+would be similar to the following (which comes from SDG's test
 suite):
 
 </div>

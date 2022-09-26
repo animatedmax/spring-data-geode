@@ -88,7 +88,7 @@ more details on wiring functionality.
 
 <div class="paragraph">
 
-To use the {sdg-acronym} `Instantiator`, declare it as a bean, as the
+To use the SDG `Instantiator`, declare it as a bean, as the
 following example shows:
 
 </div>
