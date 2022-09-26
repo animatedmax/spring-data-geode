@@ -37,8 +37,6 @@ limitations under the License.
 
 Spring Data for GemFire focuses on integrating the Spring Framework's powerful, non-invasive programming model and concepts with GemFire to simplify configuration and development of Java applications when using GemFire as your data management solution.
 
-<hr>
-
 ## <a id="setup"></a>Setup
 
 Spring Data for GemFire and Spring Boot Data for GemFire are the Spring dependencies to use when developing applications for GemFire. This guide is intended to help you set up and start using Spring Data for GemFire and Spring Boot Data for GemFire.
@@ -150,15 +148,11 @@ The Spring Data for GemFire dependencies are available from the [Pivotal Commerc
  
 Your application is now ready to connect with your GemFire instance.
 
-<hr>
-
 ## <a id="reference-guide"></a>Reference Guide
 
 All reference documentation currently corresponds with the reference documentation for [Spring Data Geode](https://spring.io/projects/spring-data-geode#learn) and [Spring Boot Data Geode](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/).
 
-<hr>
-
-## <a id="release-notes"></a>Spring Data for Apache GemFire Release Notes 
+## <a id="release-notes"></a>Spring Data for GemFire Release Notes 
 
 ### <a id="release-2-2"></a>v2.2 Release Notes 
 
