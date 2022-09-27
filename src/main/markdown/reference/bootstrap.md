@@ -1522,7 +1522,7 @@ For example, to configure a PARTITION Region to overflow to disk if the
 memory size exceeds more than 512 MB, you can specify the following
 configuration:
 
-```highlight
+```
 <gfe:partitioned-region id="examplePartitionRegionWithEviction">
   <gfe:eviction type="MEMORY_SIZE" threshold="512" action="OVERFLOW_TO_DISK"/>
 </gfe:partitioned-region>
