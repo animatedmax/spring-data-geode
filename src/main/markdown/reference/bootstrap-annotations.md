@@ -1953,7 +1953,7 @@ More details on GemFire's Memcached service (called
 
 <div class="paragraph">
 
-Oftentimes, it is necessary to turn up logging in order to understand
+Oftentimes, it is necessary to turn up logging to understand
 exactly what GemFire is doing and when.
 
 </div>
@@ -3365,14 +3365,14 @@ effectively manage your data in memory with GemFire.
 
 Given that GemFire is an In-Memory Data Grid (IMDG), data is
 managed in-memory and distributed to other nodes that participate in a
-cluster in order to minimize latency, maximize throughput and ensure
+cluster to minimize latency, maximize throughput and ensure
 that data is highly available. Since not all of an application's data is
 going to typically fit in memory (even across an entire cluster of
 nodes, much less on a single node), you can increase capacity by adding
 new nodes to the cluster. This is commonly referred to as linear
 scale-out (rather than scaling up, which means adding more memory, more
 CPU, more disk, or more network bandwidth — basically more of every
-system resource in order to handle the load).
+system resource to handle the load).
 
 </div>
 
@@ -6002,7 +6002,7 @@ We hope you will enjoy these new capabilities!
 <div class="paragraph">
 
 The following sections provide an overview to the SDG
-annotations in order to get started quickly.
+annotations to get started quickly.
 
 </div>
 
@@ -6634,7 +6634,7 @@ Note
 <td class="content">By default, SDG configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
-out-of-the-box in order to properly identify application domain objects
+out-of-the-box to properly identify application domain objects
 that need to be serialized and then perform the serialization since, the
 logic in <code>MappingPdxSerializer</code> is based on Spring Data's
 mapping infrastructure. See <a
@@ -7454,7 +7454,7 @@ See [\[function-annotations\]](#function-annotations) for more details.
 <div class="paragraph">
 
 Real-time, event stream processing is becoming an increasingly important
-task for data-intensive applications, primarily in order to respond to
+task for data-intensive applications, primarily to respond to
 user requests in a timely manner. GemFire Continuous Query
 (CQ) will help you achieve this rather complex task quite easily.
 
@@ -7657,7 +7657,7 @@ the server nodes in the cluster consistently.</td>
 <td class="icon"><div class="title">
 Warning
 </div></td>
-<td class="content">In order to use
+<td class="content">to use
 <code>@EnableClusterConfiguration</code> you must declare the
 <code>org.springframework:spring-web</code> dependency in your Spring
 application classpath.</td>

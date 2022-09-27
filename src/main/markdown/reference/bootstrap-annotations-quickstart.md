@@ -13,7 +13,7 @@
 <div class="paragraph">
 
 The following sections provide an overview to the SDG
-annotations in order to get started quickly.
+annotations to get started quickly.
 
 </div>
 
@@ -685,7 +685,7 @@ Note
 <td class="content">By default, SDG configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
-out-of-the-box in order to properly identify application domain objects
+out-of-the-box to properly identify application domain objects
 that need to be serialized and then perform the serialization since, the
 logic in <code>MappingPdxSerializer</code> is based on Spring Data's
 mapping infrastructure. See <a
@@ -1541,7 +1541,7 @@ See [\[function-annotations\]](#function-annotations) for more details.
 <div class="paragraph">
 
 Real-time, event stream processing is becoming an increasingly important
-task for data-intensive applications, primarily in order to respond to
+task for data-intensive applications, primarily to respond to
 user requests in a timely manner. GemFire Continuous Query
 (CQ) will help you achieve this rather complex task quite easily.
 
@@ -1748,7 +1748,7 @@ the server nodes in the cluster consistently.</td>
 <td class="icon"><div class="title">
 Warning
 </div></td>
-<td class="content">In order to use
+<td class="content">to use
 <code>@EnableClusterConfiguration</code> you must declare the
 <code>org.springframework:spring-web</code> dependency in your Spring
 application classpath.</td>

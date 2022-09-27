@@ -67,7 +67,7 @@ GemFire cache configuration is concerned.</td>
 
 <div class="paragraph">
 
-In order to bootstrap a Spring `ApplicationContext` in GemFire
+to bootstrap a Spring `ApplicationContext` in GemFire
 when starting a GemFire server using *Gfsh*, you must use
 GemFire's
 {x-data-store-docs}/basic_config/the_cache/setting_cache_initializer.html\[initalizer\]

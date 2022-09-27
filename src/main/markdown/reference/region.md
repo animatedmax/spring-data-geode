@@ -691,9 +691,9 @@ Bean Reference Conventions
 <div class="paragraph">
 <p>The <code>cache-listener</code> element is an example of a common
 pattern used in the XML namespace anywhere GemFire provides a
-callback interface to be implemented in order to invoke custom code in
+callback interface to be implemented to invoke custom code in
 response to cache or Region events. When you use Spring's IoC container,
-the implementation is a standard Spring bean. In order to simplify the
+the implementation is a standard Spring bean. to simplify the
 configuration, the schema allows a single occurrence of the
 <code>cache-listener</code> element, but, if multiple instances are
 permitted, it may contain nested bean references and inner bean
@@ -792,7 +792,7 @@ in the GemFire documentation for more details.
 
 <div class="paragraph">
 
-GemFire Regions may also be compressed in order to reduce JVM
+GemFire Regions may also be compressed to reduce JVM
 memory consumption and pressure to possibly avoid global GCs. When you
 enable compression for a Region, all values stored in memory for the
 Region are compressed, while keys and indexes remain uncompressed. New
@@ -2308,7 +2308,7 @@ of the data in the region. Reads or writes to this map are transparently
 routed to the peer that hosts the entry that is the target of the
 operation. GemFire divides the domain of hashcodes into
 buckets. Each bucket is assigned to a specific peer, but may be
-relocated at any time to another peer in order to improve the
+relocated at any time to another peer to improve the
 utilization of resources across the cluster."
 
 </div>
@@ -2643,7 +2643,7 @@ to store (and possibly conflate) events sent to the client. If the
 subscription queue is durable, it persists between client sessions (that
 is, connections), potentially up to a specified timeout. If the client
 does not return within a given time frame the client Pool subscription
-queue is destroyed in order to reduce resource consumption on servers in
+queue is destroyed to reduce resource consumption on servers in
 the cluster. If the subscription queue is not `durable`, it is destroyed
 immediately when the client disconnects. You need to decide whether your
 client should receive events that came while it was disconnected or if

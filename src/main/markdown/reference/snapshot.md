@@ -30,7 +30,7 @@ As the
 documentation\] explains, snapshots let you save and subsequently reload
 the cached data later, which can be useful for moving data between
 environments, such as from production to a staging or test environment
-in order to reproduce data-related issues in a controlled context. You
+to reproduce data-related issues in a controlled context. You
 can combine Spring Data for GemFire's Snapshot Service support with [Spring's bean
 definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)

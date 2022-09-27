@@ -2321,9 +2321,9 @@ Bean Reference Conventions
 <div class="paragraph">
 <p>The <code>cache-listener</code> element is an example of a common
 pattern used in the XML namespace anywhere Apache Geode provides a
-callback interface to be implemented in order to invoke custom code in
+callback interface to be implemented to invoke custom code in
 response to cache or Region events. When you use Spring's IoC container,
-the implementation is a standard Spring bean. In order to simplify the
+the implementation is a standard Spring bean. to simplify the
 configuration, the schema allows a single occurrence of the
 <code>cache-listener</code> element, but, if multiple instances are
 permitted, it may contain nested bean references and inner bean
@@ -2417,7 +2417,7 @@ in the Apache Geode documentation for more details.
 
 <div class="paragraph">
 
-Apache Geode Regions may also be compressed in order to reduce JVM
+Apache Geode Regions may also be compressed to reduce JVM
 memory consumption and pressure to possibly avoid global GCs. When you
 enable compression for a Region, all values stored in memory for the
 Region are compressed, while keys and indexes remain uncompressed. New
@@ -3896,7 +3896,7 @@ of the data in the region. Reads or writes to this map are transparently
 routed to the peer that hosts the entry that is the target of the
 operation. Apache Geode divides the domain of hashcodes into buckets.
 Each bucket is assigned to a specific peer, but may be relocated at any
-time to another peer in order to improve the utilization of resources
+time to another peer to improve the utilization of resources
 across the cluster."
 
 </div>
@@ -4226,7 +4226,7 @@ to store (and possibly conflate) events sent to the client. If the
 subscription queue is durable, it persists between client sessions (that
 is, connections), potentially up to a specified timeout. If the client
 does not return within a given time frame the client Pool subscription
-queue is destroyed in order to reduce resource consumption on servers in
+queue is destroyed to reduce resource consumption on servers in
 the cluster. If the subscription queue is not `durable`, it is destroyed
 immediately when the client disconnects. You need to decide whether your
 client should receive events that came while it was disconnected or if
@@ -5136,7 +5136,7 @@ As the [Apache Geode
 documentation](https://geode.apache.org/docs/guide/19/managing/cache_snapshots/chapter_overview.html)
 explains, snapshots let you save and subsequently reload the cached data
 later, which can be useful for moving data between environments, such as
-from production to a staging or test environment in order to reproduce
+from production to a staging or test environment to reproduce
 data-related issues in a controlled context. You can combine Spring Data
 for Apache Geode's Snapshot Service support with [Spring's bean
 definition
@@ -7749,7 +7749,7 @@ can be found
 
 <div class="paragraph">
 
-Oftentimes, it is necessary to turn up logging in order to understand
+Oftentimes, it is necessary to turn up logging to understand
 exactly what Apache Geode is doing and when.
 
 </div>
@@ -9144,14 +9144,14 @@ effectively manage your data in memory with Apache Geode.
 
 Given that Apache Geode is an In-Memory Data Grid (IMDG), data is
 managed in-memory and distributed to other nodes that participate in a
-cluster in order to minimize latency, maximize throughput and ensure
+cluster to minimize latency, maximize throughput and ensure
 that data is highly available. Since not all of an application's data is
 going to typically fit in memory (even across an entire cluster of
 nodes, much less on a single node), you can increase capacity by adding
 new nodes to the cluster. This is commonly referred to as linear
 scale-out (rather than scaling up, which means adding more memory, more
 CPU, more disk, or more network bandwidth — basically more of every
-system resource in order to handle the load).
+system resource to handle the load).
 
 </div>
 
@@ -12368,7 +12368,7 @@ Note
 <td class="content">By default, SDG configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
-out-of-the-box in order to properly identify application domain objects
+out-of-the-box to properly identify application domain objects
 that need to be serialized and then perform the serialization since, the
 logic in <code>MappingPdxSerializer</code> is based on Spring Data's
 mapping infrastructure. See <a
@@ -13170,7 +13170,7 @@ for more details.
 <div class="paragraph">
 
 Real-time, event stream processing is becoming an increasingly important
-task for data-intensive applications, primarily in order to respond to
+task for data-intensive applications, primarily to respond to
 user requests in a timely manner. Apache Geode Continuous Query (CQ)
 will help you achieve this rather complex task quite easily.
 
@@ -13370,7 +13370,7 @@ the server nodes in the cluster consistently.</td>
 <td class="icon"><div class="title">
 Warning
 </div></td>
-<td class="content">In order to use
+<td class="content">to use
 <code>@EnableClusterConfiguration</code> you must declare the
 <code>org.springframework:spring-web</code> dependency in your Spring
 application classpath.</td>
@@ -20673,7 +20673,7 @@ Geode cache configuration is concerned.</td>
 
 <div class="paragraph">
 
-In order to bootstrap a Spring `ApplicationContext` in Apache Geode when
+to bootstrap a Spring `ApplicationContext` in Apache Geode when
 starting a Apache Geode server using *Gfsh*, you must use Apache Geode's
 [initalizer](https://geode.apache.org/docs/guide/19/basic_config/the_cache/setting_cache_initializer.html)
 capability. An initializer block can declare a application callback that

@@ -409,7 +409,7 @@ be a peer `Cache` member of the GemFire cluster.
 
 The main reason for this restriction is that most GemFire
 applications use references to the GemFire `Cache` or Regions
-in order to perform data access operations. These references are
+to perform data access operations. These references are
 "injected" by the Spring container into application components (such as
 Repositories) for use by the application. When a peer member is
 forcefully disconnected from the rest of the cluster, presumably because
