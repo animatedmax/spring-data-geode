@@ -2718,60 +2718,31 @@ public class ExampleApplicationComponent {
 }
 ```
 
-
 In the preceding example, only the `/Example` Region's Snapshot Service
 bean picks up and handles the export event, saving the filtered,
 "/Example" Region's data to the `data.snapshot` file in a sub-directory
 of the application's working directory.
 
-
-
 Using the Spring application events and messaging subsystem is a good
 way to keep your application loosely coupled. You can also use Spring's
-{spring-framework-docs}/#scheduling-task-scheduler\[Scheduling\]
-services to fire snapshot application events on a periodic basis.
-
-
-
-
-
-<div class="sect1">
+[Scheduling](https://docs.spring.io/spring-framework/docs/current/reference/html/#scheduling-task-scheduler) services to fire snapshot application events on a periodic basis.
 
 ## <a id="configuring-function-service">Configuring the Function Service
 
-
-
-Spring Data for GemFire provides [annotation](#function-annotations) support for
+Spring Data for GemFire provides [annotation](index.html#function-annotations) support for
 implementing, registering and executing GemFire Functions.
 
-
-
 Spring Data for GemFire also provides XML namespace support for registering
-GemFire
-{x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[Functions\]
-for remote function execution.
+GemFire [Functions](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/Function.html) for remote function execution.
 
-
-
-See GemFire's
-{x-data-store-docs}/developing/function_exec/chapter_overview.html\[documentation\]
-for more information on the Function execution framework.
-
-
+For more information about the Function execution framework, see [Function Execution](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-function_exec-chapter_overview.html) in the GemFire product documentation.
 
 GemFire Functions are declared as Spring beans and must
 implement the `org.apache.geode.cache.execute.Function` interface or
 extend `org.apache.geode.cache.execute.FunctionAdapter`.
 
-
-
 The namespace uses a familiar pattern to declare Functions, as the
 following example shows:
-
-
-
-
-
 
 ```highlight
 <gfe:function-service>
@@ -2783,42 +2754,23 @@ following example shows:
 
 <bean id="function2" class="example.FunctionTwo"/>
 ```
-
-
-
-
-
-<div class="sect1">
-
 ## <a id="configuring-wan-gateways">Configuring WAN Gateways
-
-
 
 WAN Gateways provides a way to synchronize GemFire Distributed
 Systems across geographic locations. Spring Data for GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 
-
-
 ### <a id="wan-gateway-configuration-7">WAN Configuration in GemFire 7.0
-
 
 In the following example, `GatewaySenders` are configured for a
 `PARTITION` Region by adding child elements (`gateway-sender` and
 `gateway-sender-ref`) to the Region. A `GatewaySender` may register
 `EventFilters` and `TransportFilters`.
 
-
-
 The following example also shows a sample configuration of an
 `AsyncEventQueue`, which must also be auto-wired into a Region (not
 shown):
-
-
-
-
-
 
 ```highlight
 <gfe:partitioned-region id="region-with-inner-gateway-sender" >
@@ -2850,23 +2802,15 @@ shown):
         <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
     </gfe:transport-filter>
 </gfe:gateway-sender>
-
+  
 <bean id="event-filter" class="org.springframework.data.gemfire.example.AnotherEventFilter"/>
 <bean id="transport-filter" class="org.springframework.data.gemfire.example.AnotherTransportFilter"/>
 ```
-
-
-
 
 On the other end of a `GatewaySender` is a corresponding
 `GatewayReceiver` to receive Gateway events. The `GatewayReceiver` may
 also be configured with `EventFilters` and `TransportFilters`, as
 follows:
-
-
-
-
-
 
 ```highlight
 <gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
@@ -2876,16 +2820,4 @@ follows:
 </gfe:gateway-receiver>
 ```
 
-
-
-
-See the GemFire
-{x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
-for a detailed explanation of all the configuration options.
-
-
-
-
-
-
-
+For a detailed explanation of the configuration options. see [Multi-site (WAN) Configuration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-topologies_and_comm-multi_site_configuration-chapter_overview.html) in the GemFire product documentation.
