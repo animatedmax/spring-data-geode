@@ -2729,7 +2729,7 @@ way to keep your application loosely coupled. You can also use Spring's
 
 ## <a id="configuring-function-service">Configuring the Function Service
 
-Spring Data for GemFire provides [annotation](index.html#function-annotations) support for
+Spring Data for GemFire provides [annotation](../index.html#function-annotations) support for
 implementing, registering and executing GemFire Functions.
 
 Spring Data for GemFire also provides XML namespace support for registering
