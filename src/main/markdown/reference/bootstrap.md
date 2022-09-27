@@ -416,7 +416,7 @@ implementation. The value of the attribute is simply a reference to a
 Spring bean that implements the `PdxSerializer` interface.
 
 More information on serialization support can be found in
-[Wiring Deserialized Instances](index.html#wiring-deserialized-instances) in the _Spring Data for GemFire Reference Guide_.
+[Wiring Deserialized Instances](../index.html#wiring-deserialized-instances) in the _Spring Data for GemFire Reference Guide_.
 
 #### Enabling Auto-reconnect
 
