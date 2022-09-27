@@ -727,8 +727,8 @@ is `LOCAL`.
 
 The <code>AnotherExample</code> Region would first
 look for a Pool bean named <code>gemfirePool</code>, but that would
-require the definition of an anonymous Pool bean: <code><gfe:pool/></code>) or a Pool bean explicitly named <code>gemfirePool</code>. For example,
-<code><gfe:pool id="gemfirePool"/></code>).
+require the definition of an anonymous Pool bean: <code><gfe:pool/></code> or a Pool bean explicitly named <code>gemfirePool</code>. For example,
+<code><gfe:pool id="gemfirePool"/></code>.
 
 If we either changed the name of
 <code>locatorPool</code> to <code>gemfirePool</code> or made the Pool
@@ -1013,7 +1013,7 @@ The following table lists the attributes available for all Region types:
     </tr>
     <tr>
       <td>shortcut</td>
-      <td>See <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/RegionShortcut.html">RegionShortcut.htm</a></td>
+      <td>See <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/RegionShortcut.html">RegionShortcut</a></td>
       <td>The <code>RegionShortcut</code> for this region. Allows easy initialization of the region based on pre-defined defaults.</td>
     </tr>
     <tr>
