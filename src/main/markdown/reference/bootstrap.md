@@ -1093,7 +1093,7 @@ configuration, the schema allows a single occurrence of the
 <code>cache-listener</code> element, but, if multiple instances are
 permitted, it may contain nested bean references and inner bean
 definitions in any combination. The convention is to use the singular
-form, <code>cache-listener</code> instead of <code>cache-listeners</code>), reflecting that the most common scenario is a single instance. THis pattern can be seen in the <a href="#advanced-cache-configuration">advanced cache</a>
+form, <code>cache-listener</code> instead of <code>cache-listeners</code>, reflecting that the most common scenario is a single instance. THis pattern can be seen in the <a href="#advanced-cache-configuration">advanced cache</a>
 configuration example.
 
 #### CacheLoaders and CacheWriters
@@ -1250,23 +1250,23 @@ Spring Data for GemFire includes five Region template tags in its namespace:
   </thead>
   <tbody>
     <tr>
-      <td><code><gfe:region-template></code></td>
+      <td><code>&lt;gfe:region-template&gt;</code></td>
       <td>Defines common generic Region attributes. Extends <code>regionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code><gfe:local-region-template></code></td>
+      <td><code>&lt;gfe:local-region-template&gt;</code></td>
     <td>Defines common 'Local' Region attributes. Extends <code>localRegionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code><gfe:partitioned-region-template></code></td>
+      <td><code>&lt;gfe:partitioned-region-template&gt;</code></td>
     <td>Defines common 'PARTITION' Region attributes. Extends <code>partitionedRegionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code><gfe:replicated-region-template></code></td>
+      <td><code>&lt;gfe:replicated-region-template&gt;</code></td>
       <td>Defines common 'REPLICATE' Region attributes. Extends <code>replicatedRegionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code><gfe:client-region-template></code></td>
+      <td><code>&lt;gfe:client-region-template&gt;</code></td>
       <td>Defines common 'Client' Region attributes. Extends <code>clientRegionType</code> in the XML namespace.</td>
     </tr>
   </tbody>
