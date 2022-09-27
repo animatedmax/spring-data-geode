@@ -1522,7 +1522,7 @@ For example, to configure a PARTITION Region to overflow to disk if the
 memory size exceeds more than 512 MB, you can specify the following
 configuration:
 
-```
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithEviction">
   <gfe:eviction type="MEMORY_SIZE" threshold="512" action="OVERFLOW_TO_DISK"/>
 </gfe:partitioned-region>
@@ -2163,7 +2163,7 @@ automatic conversion for these Region operations.
 use GemFire's proprietary <code>Region.Entry</code>, such as 
 <code>entries(boolean)</code>, <code>entrySet(boolean)</code>, and
 <code>getEntry()</code> type, are not targeted for AOP advice. Additionally, , the <code>entrySet()</code> method, which returns a
-<code>Set<java.util.Map.Entry<?, ?>></code>, is not
+<code>Set&lt;java.util.Map.Entry&lt;?, ?&gt;&gt;</code>, is not
 affected.</p>
 
 The following example configuration shows how to set the `pretty-print`
