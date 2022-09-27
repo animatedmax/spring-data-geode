@@ -1859,16 +1859,9 @@ For more information, see [Distributed and Replicated Regions](https://docs.vmwa
 
 ### <a id="partitioned-region">Partitioned Region
 
-
 The Spring Data for GemFire XML namespace also supports `PARTITION` Regions.
 
-
-
-To quote the GemFire docs:
-
-
-
-"A partitioned region is a region where data is divided between peer
+A partitioned region is a region where data is divided between peer
 servers hosting the region so that each peer stores a subset of the
 data. When using a partitioned region, applications are presented with a
 logical view of the region that looks like a single map containing all
@@ -1877,25 +1870,16 @@ routed to the peer that hosts the entry that is the target of the
 operation. GemFire divides the domain of hashcodes into
 buckets. Each bucket is assigned to a specific peer, but may be
 relocated at any time to another peer to improve the
-utilization of resources across the cluster."
-
-
+utilization of resources across the cluster.
 
 A `PARTITION` Region is created by using the `partitioned-region`
 element. Its configuration options are similar to that of the
 `replicated-region` with the addition of partition-specific features,
 such as the number of redundant copies, total maximum memory, number of
-buckets, partition resolver, and so on.
-
-
+buckets, partition resolver, etc.
 
 The following example shows how to set up a `PARTITION` Region with two
 redundant copies:
-
-
-
-
-
 
 ```highlight
 <gfe:partitioned-region id="examplePartitionRegion" copies="2" total-buckets="17">
@@ -1905,160 +1889,111 @@ redundant copies:
 </gfe:partitioned-region>
 ```
 
-
-
-
-See GemFire's documentation on
-{x-data-store-docs}/developing/partitioned_regions/chapter_overview.html\[Partitioned
-Regions\] for more details.
-
-
-<div class="sect3">
+For more information, see [Partitioned Regions](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-partitioned_regions-chapter_overview.html) in the GemFire product documentation.
 
 #### Partitioned Region Attributes
 
-
 The following table offers a quick overview of configuration options
 specific to `PARTITION` Regions. These options are in addition to the
-common Region configuration options described
-[earlier](#bootstrap:region:attributes).
+common Region configuration options described in [Configuring Regions](#configuring-regions).
 
-
-<table class="tableblock frame-all grid-all stretch">
-<caption>Table 3. partitioned-region attributes</caption>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 40%" />
-<col style="width: 40%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Values</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>copies</td>
-<td>0..4</td>
-<td>The number of copies
-for each partition for high-availability. By default, no copies are
-created, meaning there is no redundancy. Each copy provides extra backup
-at the expense of extra storage.</td>
-</tr>
-<tr>
-<td>colocated-with</td>
-<td>valid region
-name</td>
-<td>The name of the
-<code>PARTITION</code> region with which this newly created
-<code>PARTITION</code> Region is collocated.</td>
-</tr>
-<tr>
-<td>local-max-memory</td>
-<td>positive
-integer</td>
-<td>The maximum amount of
-memory (in megabytes) used by the region in <strong>this</strong>
-process.</td>
-</tr>
-<tr>
-<td>total-max-memory</td>
-<td>any integer
-value</td>
-<td>The maximum amount of
-memory (in megabytes) used by the region in <strong>all</strong>
-processes.</td>
-</tr>
-<tr>
-<td>partition-listener</td>
-<td>bean name</td>
-<td>The name of the
-<code>PartitionListener</code> used by this region for handling
-partition events.</td>
-</tr>
-<tr>
-<td>partition-resolver</td>
-<td>bean name</td>
-<td>The name of the
-<code>PartitionResolver</code> used by this region for custom
-partitioning.</td>
-</tr>
-<tr>
-<td>recovery-delay</td>
-<td>any long value</td>
-<td>The delay in
-milliseconds that existing members wait before satisfying redundancy
-after another member crashes. -1 (the default) indicates that redundancy
-is not recovered after a failure.</td>
-</tr>
-<tr>
-<td>startup-recovery-delay</td>
-<td>any long value</td>
-<td>The delay in
-milliseconds that new members wait before satisfying redundancy. -1
-indicates that adding new members does not trigger redundancy recovery.
-The default is to recover redundancy immediately when a new member is
-added.</td>
-</tr>
-</tbody>
+<table>
+  <caption>Table 3. partitioned-region attributes</caption>
+  <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 60%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th class="tableblock halign-left valign-top">Name</th>
+      <th class="tableblock halign-left valign-top">Values</th>
+      <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>copies</td>
+      <td>0..4</td>
+      <td>The number of copies for each partition for high-availability. By default, no copies are created, meaning there is no redundancy. Each copy provides extra backup at the expense of extra storage.</td>
+    </tr>
+    <tr>
+      <td>colocated-with</td>
+      <td>valid region name</td>
+      <td>The name of the <code>PARTITION</code> region with which this newly created <code>PARTITION</code> Region is collocated.</td>
+    </tr>
+    <tr>
+      <td>local-max-memory</td>
+      <td>positive integer</td>
+      <td>The maximum amount of memory (in megabytes) used by the region in <strong>this</strong> process.</td>
+    </tr>
+    <tr>
+      <td>total-max-memory</td>
+      <td>any integer value</td>
+      <td>The maximum amount of memory (in megabytes) used by the region in <strong>all</strong> processes.</td>
+    </tr>
+    <tr>
+      <td>partition-listener</td>
+      <td>bean name</td>
+      <td>The name of the <code>PartitionListener</code> used by this region for handling partition events.</td>
+    </tr>
+    <tr>
+      <td>partition-resolver</td>
+      <td>bean name</td>
+      <td>The name of the <code>PartitionResolver</code> used by this region for custom partitioning.</td>
+    </tr>
+    <tr>
+      <td>recovery-delay</td>
+      <td>any long value</td>
+      <td>The delay in milliseconds that existing members wait before satisfying redundancy after another member crashes. <code>-1</code> (the default) indicates that redundancy is not recovered after a failure.</td>
+    </tr>
+    <tr>
+      <td>startup-recovery-delay</td>
+      <td>any long value</td>
+      <td>The delay in milliseconds that new members wait before satisfying redundancy. <code>-1</code> indicates that adding new members does not trigger redundancy recovery. The default is to recover redundancy immediately when a new member is added.</td>
+    </tr>
+  </tbody>
 </table>
-
-Table 3. partitioned-region attributes
-
-
 
 
 ## <a id="client-region">Client Region
 
-
 GemFire supports various deployment topologies for managing
 and distributing data. The topic of GemFire topologies is
-beyond the scope of this documentation. However, to quickly recap,
-GemFire's supported topologies can be classified as:
-peer-to-peer (p2p), client-server, and wide area network (WAN). In the
-last two configurations, it is common to declare client Regions that
-connect to a cache server.
+beyond the scope of this documentation, but GemFire's supported topologies can be classified as:
 
+* peer-to-peer (p2p)
+* client-server
+* wide area network (WAN).
 
+In the last two configurations, it is common to declare client Regions that connect to a cache server.
 
 Spring Data for GemFire offers dedicated support for each configuration through its
-[client-cache](#bootstrap:cache:client) elements: `client-region` and
-`pool`. As the names imply, `client-region` defines a client Region,
-while `pool` defines a Pool of connections used and shared by the
+[client-cache](#configuring-gemfire-clientcache) elements: `client-region` and
+`pool`. `client-region` defines a client Region,
+and `pool` defines a Pool of connections used and shared by the
 various client Regions.
-
-
 
 The following example shows a typical client Region configuration:
 
-
-
-
-
-
 ```highlight
 <bean id="myListener" class="example.CacheListener"/>
-
+  
 <!-- client Region using the default SDG gemfirePool Pool -->
 <gfe:client-region id="Example">
   <gfe:cache-listener ref="myListener"/>
 </gfe:client-region>
-
+  
 <!-- client Region using its own dedicated Pool -->
 <gfe:client-region id="AnotherExample" pool-name="myPool">
   <gfe:cache-listener ref="myListener"/>
 </gfe:client-region>
-
+  
 <!-- Pool definition -->
 <gfe:pool id="myPool" subscription-enabled="true">
   <gfe:locator host="remoteHost" port="12345"/>
 </gfe:pool>
 ```
-
-
-
 
 As with the other Region types, `client-region` supports `CacheListener`
 instances as well as a `CacheLoader` and a `CacheWriter`. It also
@@ -2067,43 +2002,18 @@ or servers. Each client Region can have its own `Pool`, or they can
 share the same one. If a Pool is not specified, then the "DEFAULT" Pool
 will be used.
 
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">In the preceding example, the <code>Pool</code> is
+<p class="note"><strong>Note</strong>: In the preceding example, the <code>Pool</code> is
 configured with a Locator. A Locator is a separate process used to
 discover cache servers and peer data members in the distributed system
 and is recommended for production systems. It is also possible to
 configure the <code>Pool</code> to connect directly to one or more cache
-servers by using the <code>server</code> element.</td>
-</tr>
-</tbody>
-</table>
-
-
+servers by using the <code>server</code> element.</p>
 
 For a full list of options to set on the client and especially on the
-`Pool`, see the Spring Data for GemFire schema
-("[\[appendix-schema\]](#appendix-schema)") and GemFire's
-documentation on
-{x-data-store-docs}/topologies_and_comm/cs_configuration/chapter_overview.html\[Client-Server
-Configuration\].
-
-
-<div class="sect3">
+`Pool`, see the [Spring Data for GemFire Schema](../appendix/appendix-schema.html) and
+[Client/Server Configuration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-topologies_and_comm-cs_configuration-chapter_overview.html) in the GemFire product documentation.
 
 #### Client Interests
-
 
 To minimize network traffic, each client can separately define its own
 'interests' policies, indicating to GemFire the data it
@@ -2111,49 +2021,35 @@ actually requires. In Spring Data for GemFire, 'interests' can be defined for ea
 client Region separately. Both key-based and regular expression-based
 interest types are supported.
 
-
-
 The following example shows both key-based and regular expression-based
 `interest` types:
-
-
-
-
-
 
 ```highlight
 <gfe:client-region id="Example" pool-name="myPool">
     <gfe:key-interest durable="true" result-policy="KEYS">
         <bean id="key" class="java.lang.String">
-             <constructor-arg value="someKey"/>
+            <constructor-arg value="someKey"/>
         </bean>
     </gfe:key-interest>
     <gfe:regex-interest pattern=".*" receive-values="false"/>
 </gfe:client-region>
 ```
 
-
-
-
-A special key, `ALL_KEYS`, means 'interest' is registered for all keys.
+A special key, `ALL_KEYS`, means that `interest` is registered for all keys.
 The same can be accomplished by using the regular expression, `".\*"`.
-
-
 
 The `<gfe:*-interest>` key and regular expression elements support three
 attributes: `durable`, `receive-values`, and `result-policy`.
 
+**durable**
 
-
-`durable` indicates whether the 'interest' policy and subscription queue
+`durable` indicates whether the `interest` policy and subscription queue
 created for the client when the client connects to one or more servers
 in the cluster is maintained across client sessions. If the client goes
 away and comes back, a `durable` subscription queue on the servers for
 the client is maintained while the client is disconnected. When the
 client reconnects, the client receives any events that occurred while
 the client was disconnected from the servers in the cluster.
-
-
 
 A subscription queue on the servers in the cluster is maintained for
 each `Pool` of connections defined in the client where a subscription
@@ -2168,40 +2064,31 @@ immediately when the client disconnects. You must decide whether your
 client should receive events that came while it was disconnected or if
 it needs to receive only the latest events after it reconnects.
 
-
+**receive-values**
 
 The `receive-values` attribute indicates whether or not the entry values
 are received for create and update events. If `true`, values are
 received. If `false`, only invalidation events are received.
 
 
+**result-policy**
 
-And finally, the 'result-policy\` is an enumeration of: `KEYS`,
+The `result-policy` is an enumeration of `KEYS`,
 `KEYS_VALUE`, and `NONE`. The default is `KEYS_VALUES`. The
 `result-policy` controls the initial dump when the client first connects
 to initialize the local cache, essentially seeding the client with
 events for all the entries that match the interest policy.
-
-
 
 Client-side interest registration does not do much good without enabling
 subscription on the `Pool`, as mentioned earlier. In fact, it is an
 error to attempt interest registration without subscription enabled. The
 following example shows how to do so:
 
-
-
-
-
-
 ```highlight
 <gfe:pool ... subscription-enabled="true">
   ...
 </gfe:pool>
 ```
-
-
-
 
 In addition to `subscription-enabled`, can you also set
 `subscription-ack-interval`, `subscription-message-tracking-timeout`,
@@ -2211,8 +2098,6 @@ by the servers in the cluster. If redundancy is greater than one, and
 the "primary" subscription queue (that is, the server) goes down, then a
 "secondary" subscription queue takes over, keeping the client from
 missing events in a HA scenario.
-
-
 
 In addition to the `Pool` settings, the server-side Regions use an
 additional attribute, `enable-subscription-conflation`, to control the
@@ -2225,28 +2110,16 @@ following example shows a Region configuration on the server, for which
 the client contains a corresponding client `[CACHING_]PROXY` Region with
 interests in keys in this server Region:
 
-
-
-
-
-
 ```highlight
 <gfe:partitioned-region name="ServerSideRegion" enable-subscription-conflation="true">
   ...
 </gfe:partitioned-region>
 ```
 
-
-
-
 To control the amount of time (in seconds) that a "durable" subscription
 queue is maintained after a client is disconnected from the servers in
 the cluster, set the `durable-client-timeout` attribute on the
 `<gfe:client-cache>` element as follows:
-
-
-
-
 
 
 ```highlight
@@ -2255,49 +2128,24 @@ the cluster, set the `durable-client-timeout` attribute on the
 </gfe:client-cache>
 ```
 
-
-
-
-A full, in-depth discussion of how client interests work and
-capabilities is beyond the scope of this document.
-
-
-
-See GemFire's documentation on
-{x-data-store-docs}/developing/events/how_client_server_distribution_works.html\[Client-to-Server
-Event Distribution\] for more details.
-
-
-
-
+For more information, see [Client-to-Server
+Event Distribution](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-events-how_client_server_distribution_works.html) in the GemFire product documentation.
 
 ### <a id="json-support">JSON Support
-
 
 GemFire has support for caching JSON documents in Regions,
 along with the ability to query stored JSON documents using the
 GemFire OQL (Object Query Language). JSON documents are stored
 internally as
-{x-data-store-javadoc}/org/apache/geode/pdx/PdxInstance.html\[PdxInstance\]
-types by using the
-{x-data-store-javadoc}/org/apache/geode/pdx/JSONFormatter.html\[JSONFormatter\]
-class to perform conversion to and from JSON documents (as a `String`).
-
-
+[PdxInstance](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxInstance.html) types by using the [JSONFormatter](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/JSONFormatter.html) class to perform conversion to and from JSON documents (as a `String`).
 
 Spring Data for GemFire provides the `<gfe-data:json-region-autoproxy/>` element to
-enable an {spring-framework-docs}/#aop-introduction\[AOP\] component to
-advise appropriate, proxied Region operations, which effectively
-encapsulates the `JSONFormatter`, thereby letting your applications work
-directly with JSON Strings.
-
-
+enable an [AOP](https://docs.spring.io/spring-framework/docs/current/reference/html/#aop-introduction) component to
+advise appropriate, proxied Region operations, which encapsulates the `JSONFormatter` and allows your applications to work directly with JSON Strings.
 
 In addition, Java objects written to JSON configured Regions are
 automatically converted to JSON using Jackson's `ObjectMapper`. When
 these values are read back, they are returned as a JSON String.
-
-
 
 By default, `<gfe-data:json-region-autoproxy/>` performs the conversion
 for all Regions. To apply this feature to selected Regions, provide a
@@ -2305,124 +2153,62 @@ comma-delimited list of Region bean IDs in the `region-refs` attribute.
 Other attributes include a `pretty-print` flag (defaults to `false`) and
 `convert-returned-collections`.
 
-
-
 Also, by default, the results of the `getAll()` and `values()` Region
 operations are converted for configured Regions. This is done by
 creating a parallel data structure in local memory. This can incur
 significant overhead for large collections, so set the
-`convert-returned-collections` to `false` if you would like to disable
+`convert-returned-collections` to `false` if you want to disable
 automatic conversion for these Region operations.
 
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">Certain Region operations (specifically those that
-use GemFire's proprietary <code>Region.Entry</code>, such as:
-<code>entries(boolean)</code>, <code>entrySet(boolean)</code> and
-<code>getEntry()</code> type) are not targeted for AOP advice. In
-addition, the <code>entrySet()</code> method (which returns a
-<code>Set<java.util.Map.Entry<?, ?>></code>) is also not
-affected.</td>
-</tr>
-</tbody>
-</table>
-
-
+<p class="note"><strong>Note</strong>: Certain Region operations that
+use GemFire's proprietary <code>Region.Entry</code>, such as 
+<code>entries(boolean)</code>, <code>entrySet(boolean)</code>, and
+<code>getEntry()</code> type, are not targeted for AOP advice. Additionally, , the <code>entrySet()</code> method, which returns a
+<code>Set<java.util.Map.Entry<?, ?>></code>, is not
+affected.</p>
 
 The following example configuration shows how to set the `pretty-print`
 and `convert-returned-collections` attributes:
-
-
-
-
-
 
 ```highlight
 <gfe-data:json-region-autoproxy region-refs="myJsonRegion" pretty-print="true" convert-returned-collections="false"/>
 ```
 
-
-
-
 This feature also works seamlessly with `GemfireTemplate` operations,
-provided that the template is declared as a Spring bean. Currently, the
+provided that the template is declared as a Spring bean. The
 native `QueryService` operations are not supported.
-
-
-
-
-
-<div class="sect1">
 
 ## <a id="configuring-an-index">Configuring an Index
 
-
-
-GemFire allows indexes (also sometimes pluralized as indices)
-to be created on Region data to improve the performance of OQL (Object
+GemFire allows indexes to be created on Region data to improve the performance of OQL (Object
 Query Language) queries.
-
-
 
 In Spring Data for GemFire, indexes are declared with the `index` element, as the
 following example shows:
-
-
-
-
-
 
 ```highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
-
-
-
-In Spring Data for GemFire's XML schema (also called the SDG XML
-namespace), `index` bean declarations are not bound to a Region, unlike
-GemFire's native `cache.xml`. Rather, they are top-level
-elements similar to `<gfe:cache>` element. This lets you declare any
+In Spring Data for GemFire's XML schema, the SDG XML
+namespace, `index` bean declarations are not bound to a Region, unlike
+GemFire's native `cache.xml`. Instead, they are top-level
+elements similar to `<gfe:cache>` element. This allows you to declare any
 number of indexes on any Region, whether they were just created or
-already exist — a significant improvement over GemFire's
-native `cache.xml` format.
-
-
+already exist.
 
 An `Index` must have a name. You can give the `Index` an explicit name
-by using the `name` attribute. Otherwise, the bean name (that is, the
-value of the `id` attribute) of the `index` bean definition is used as
+by using the `name` attribute. Otherwise, the bean name of the `index` bean definition is used as
 the `Index` name.
 
-
-
 The `expression` and `from` clause form the main components of an
-`Index`, identifying the data to index (that is, the Region identified
-in the `from` clause) along with what criteria (that is, `expression`)
+`Index`, identifying the data to index along with what criteria (`expression`)
 is used to index the data. The `expression` should be based on what
 application domain object fields are used in the predicate of
 application-defined OQL queries used to query and look up the objects
 stored in the Region.
 
-
-
 Consider the following example, which has a `lastName` property:
-
-
-
-
-
 
 ```highlight
 @Region("Customers")
@@ -2438,266 +2224,122 @@ class Customer {
 }
 ```
 
-
-
-
 Now consider the following example, which has an application-defined
 SDG Repository to query for `Customer` objects:
 
-
-
-
-
-
 ```highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
-
+  
   Customer findByLastName(String lastName);
-
+  
   ...
 }
 ```
 
 
-
-
 The SDG Repository finder/query method results in the
-following OQL statement being generated and ran:
-
-
-
-
-
+following OQL statement being generated and run:
 
 ```highlight
 SELECT * FROM /Customers c WHERE c.lastName = '$1'
 ```
 
-
-
-
 Therefore, you might want to create an `Index` with a statement similar
 to the following:
-
-
-
-
-
 
 ```highlight
 <gfe:index id="myIndex" name="CustomersLastNameIndex" expression="lastName" from="/Customers" type="HASH"/>
 ```
 
-
-
-
 The `from` clause must refer to a valid, existing Region and is how an
 `Index` gets applied to a Region. This is not specific to Spring Data for GemFire. It
 is a feature of GemFire.
 
-
-
-The `Index` `type` may be one of three enumerated values defined by
-Spring Data for GemFire's
-{sdg-javadoc}/org/springframework/data/gemfire/IndexType.html\[`IndexType`\]
-enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
-
-
+The `Index` `type` may be one of three enumerated values defined by the [IndexType](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/IndexType.html) enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
 
 Each of the enumerated values corresponds to one of the
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html\[`QueryService`\]
-`create[|Key|Hash]Index` methods invoked when the actual `Index` is to
-be created (or "defined" — you can find more on "defining" indexes in
-the next section). For instance, if the `IndexType` is `PRIMARY_KEY`,
-then the
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createKeyIndex-java.lang.String-java.lang.String-java.lang.String-\[QueryService.createKeyIndex(..)\]
+[QueryService](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html) `create[|Key|Hash]Index` methods invoked when the actual `Index` is to
+be created or defined. For example, if the `IndexType` is `PRIMARY_KEY`,
+then the [QueryService.createKeyIndex(..)](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#createKeyIndex-java.lang.String-java.lang.String-java.lang.String-)
 is invoked to create a `KEY` `Index`.
-
-
 
 The default is `FUNCTIONAL` and results in one of the
 `QueryService.createIndex(..)` methods being invoked. See the Spring Data for GemFire
 XML schema for a full set of options.
 
-
-
-For more information on indexing in GemFire, see "[Working
+For more information about indexing in GemFire, see [Working
 with
-Indexes](https://gemfire90.docs.pivotal.io/geode/developing/query_index/query_index.html)"
-in GemFire's User Guide.
-
-
+Indexes](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-query_index.html) in the GemFire product documentation.
 
 ### <a id="defining-indexs">Defining Indexes
 
-
-In addition to creating indexes up front as `Index` bean definitions are
+In addition to creating indexes as `Index` bean definitions are
 processed by Spring Data for GemFire on Spring container initialization, you may also
 define all of your application indexes prior to creating them by using
 the `define` attribute, as follows:
-
-
-
-
-
 
 ```highlight
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 
-
-
-
-When `define` is set to `true` (it defaults to `false`), it does not
-actually create the `Index` at that moment. All "defined" Indexes are
-created all at once, when the Spring `ApplicationContext` is "refreshed"
-or, to put it differently, when a `ContextRefreshedEvent` is published
-by the Spring container. Spring Data for GemFire registers itself as an
-`ApplicationListener` listening for the `ContextRefreshedEvent`. When
+When `define` is set to `true`, it does not immediately create the `Index`. All "defined" Indexes are created at the same time when the Spring `ApplicationContext`. This occurs when a `ContextRefreshedEvent` is published by the Spring container. Spring Data for GemFire registers itself as an `ApplicationListener` listening for the `ContextRefreshedEvent`. When
 fired, Spring Data for GemFire calls
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes\[`QueryService.createDefinedIndexes()`\].
+[QueryService.createDefinedIndexes()](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes).
 
-
-
-Defining indexes and creating them all at once boosts speed and
+Defining indexes and creating them at the same time boosts speed and
 efficiency when creating indexes.
 
-
-
-See "[Creating Multiple Indexes at
-Once](https://gemfire90.docs.pivotal.io/geode/developing/query_index/create_multiple_indexes.html)"
-for more details.
-
-
-
+For more information, see [Creating Multiple Indexes at Once](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-create_multiple_indexes.html) in the GemFire product documentation.
 
 ## <a id="ignoreiexists-and-override">`IgnoreIfExists` and `Override`
 
+The `ignoreIfExists` and `override` configuration options correspond to the `ignore-if-exists` and `override` attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace.
 
-Two Spring Data for GemFire `Index` configuration options warrant special mention:
-`ignoreIfExists` and `override`.
-
-
-
-These options correspond to the `ignore-if-exists` and `override`
-attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace,
-respectively.
-
-
-<div class="admonitionblock warning">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Warning
-</div></td>
-<td class="content">Make sure you absolutely understand what you are
-doing before using either of these options. These options can affect the
-performance and resources (such as memory) consumed by your application
+<p class="note warning"><strong>Warning</strong>: These options can affect the
+performance and resources such as memory consumed by your application
 at runtime. As a result, both of these options are disabled (set to
-<code>false</code>) in SDG by default.</td>
-</tr>
-</tbody>
-</table>
-
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">These options are only available in Spring Data for GemFire and
-exist to workaround known limitations with GemFire.
-GemFire has no equivalent options or functionality.</td>
-</tr>
-</tbody>
-</table>
-
-
+<code>false</code>) in SDG by default.<br>br>These options are only available in Spring Data for GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
 
 Each option significantly differs in behavior and entirely depends on
 the type of GemFire `Index` exception thrown. This also means
 that neither option has any effect if a GemFire Index-type
 exception is not thrown. These options are meant to specifically handle
 GemFire `IndexExistsException` and
-`IndexNameConflictException` instances, which can occur for various,
-sometimes obscure reasons. The exceptions have the following causes:
+`IndexNameConflictException` instances, which can occur for various reasons. The exceptions have the following causes:
 
-
-<div class="ulist">
-
-- An
-  {x-data-store-javadoc}/org/apache/geode/cache/query/IndexExistsException.html\[`IndexExistsException`\]
-  is thrown when there exists another `Index` with the same definition
+* An [IndexExistsException](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/IndexExistsException.html) is thrown when there exists another `Index` with the same definition
   but a different name when attempting to create an `Index`.
 
-- An
-  {x-data-store-javadoc}/org/apache/geode/cache/query/IndexNameConflictException.html\[`IndexNameConflictException`\]
-  is thrown when there exists another `Index` with the same name but
-  possibly different definition when attempting to create an `Index`.
+* An [IndexNameConflictException](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/IndexNameConflictException.html) is thrown when there exists another `Index` with the same name but possibly different definition when attempting to create an `Index`.
 
-
-
-Spring Data for GemFire's default behavior is to fail-fast, always. So, neither
-`Index` *Exception* are "handled" by default. These `Index` exceptions
-are wrapped in a SDG `GemfireIndexException` and rethrown. If
-you wish for Spring Data for GemFire to handle them for you, you can set either of
+Spring Data for GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a SDG `GemfireIndexException` and rethrown. If you want Spring Data for GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
-
-
-`IgnoreIfExists` always takes precedence over `Override`, primarily
-because it uses fewer resources, simply because it returns the
-"existing" `Index` in both exceptional cases.
-
-
-<div class="sect3">
+`IgnoreIfExists` always takes precedence over `Override` because it uses fewer resources. It returns the "existing" `Index` in both exception cases.
 
 #### `IgnoreIfExists` Behavior
 
-
 When an `IndexExistsException` is thrown and `ignoreIfExists` is set to
-`true` (or `<gfe:index ignore-if-exists="true">`), then the `Index` that
+`true`, or `<gfe:index ignore-if-exists="true">`, then the `Index` that
 would have been created by this `index` bean definition or declaration
-is simply ignored, and the existing `Index` is returned.
-
-
+is ignored, and the existing `Index` is returned.
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by GemFire
 itself, not SDG.
 
-
-
 However, this also means that no `Index` with the "name" specified in
 your `index` bean definition or declaration actually exists from
-GemFire's perspective (that is, with
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]).
+GemFire's perspective.
 Therefore, you should be careful when writing OQL query statements that
 use query hints, especially query hints that refer to the application
 `Index` being ignored. Those query hints must be changed.
 
-
-
 When an `IndexNameConflictException` is thrown and `ignoreIfExists` is
-set to `true` (or `<gfe:index ignore-if-exists="true">`), the `Index`
+set to `true`, or `<gfe:index ignore-if-exists="true">`, the `Index`
 that would have been created by this `index` bean definition or
 declaration is also ignored, and the "existing" `Index` is again
 returned, as when an `IndexExistsException` is thrown.
-
-
 
 However, there is more risk in returning the existing `Index` and
 ignoring the application's definition of the `Index` when an
@@ -2710,42 +2352,16 @@ data access patterns and queries in mind. However, if like-named indexes
 differ in definition, this might not be the case. Consequently, you
 should verify your `Index` names.
 
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">SDG makes a best effort to inform the user
+<p class="note"><strong>Note</strong>: SDG makes a best effort to inform the user
 when the <code>Index</code> being ignored is significantly different in
-its definition from the existing <code>Index</code>. However, in order
-for SDG to accomplish this, it must be able to find the
-existing <code>Index</code>, which is looked up by using the
-GemFire API (the only means available).</td>
-</tr>
-</tbody>
-</table>
-
-
-
-<div class="sect3">
+its definition from the existing <code>Index</code>. However, for SDG to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
+GemFire API.</p>
 
 #### `Override` Behavior
 
-
-When an `IndexExistsException` is thrown and `override` is set to `true`
-(or `<gfe:index override="true">`), the `Index` is effectively renamed.
-Remember, `IndexExistsExceptions` are thrown when multiple indexes exist
+When an `IndexExistsException` is thrown and `override` is set to `true`, or `<gfe:index override="true">`, the `Index` is effectively renamed.
+`IndexExistsExceptions` are thrown when multiple indexes exist
 that have the same definition but different names.
-
-
 
 Spring Data for GemFire can only accomplish this by using GemFire's API, by
 first removing the existing `Index` and then recreating the `Index` with
@@ -2753,23 +2369,17 @@ the new name. It is possible that either the remove or subsequent create
 invocation could fail. There is no way to execute both actions
 atomically and rollback this joint operation if either fails.
 
-
-
 However, if it succeeds, then you have the same problem as before with
 the `ignoreIfExists` option. Any existing OQL query statement using
 query hints that refer to the old `Index` by name must be changed.
 
-
-
 When an `IndexNameConflictException` is thrown and `override` is set to
-`true` (or `<gfe:index override="true">`), the existing `Index` can
+`true`, or `<gfe:index override="true">`, the existing `Index` can
 potentially be re-defined. We say "potentially" because it is possible
 for the like-named, existing `Index` to have exactly the same definition
 and name when an `IndexNameConflictException` is thrown.
 
-
-
-If so, SDG is smart and returns the existing `Index` as is,
+If so, SDG returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
 name and the definition are exactly the same. Of course, SDG
 can only accomplish this when SDG is able to find the existing
@@ -2777,20 +2387,13 @@ can only accomplish this when SDG is able to find the existing
 found, nothing happens and a SDG `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
-
-
 However, when the definition of the existing `Index` is different,
 SDG attempts to re-create the `Index` by using the `Index`
-definition specified in the `index` bean definition. Make sure this is
-what you want and make sure the `index` bean definition matches your
+definition specified in the `index` bean definition. Make sure that this is
+intended and that the `index` bean definition matches your
 expectations and application requirements.
 
-
-
-<div class="sect3">
-
 #### How Does `IndexNameConflictExceptions` Actually Happen?
-
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
@@ -2798,11 +2401,7 @@ configure GemFire (Spring Data for GemFire, GemFire Cluster
 Config, GemFire native `cache.xml`, the API, and so on). You
 should definitely prefer one configuration method and stick with it.
 
-
-
 However, when does an `IndexNameConflictException` get thrown?
-
-
 
 One particular case is an `Index` defined on a `PARTITION` Region (PR).
 When an `Index` is defined on a `PARTITION` Region (for example, `X`),
@@ -2813,28 +2412,14 @@ subsequent creation of, this `Index` by peer members is on a
 need-to-know basis (that is, by peer member hosting the same PR) is
 performed asynchronously.
 
-
-
 During this window of time, it is possible that these pending PR
-`Indexes` cannot be identified by GemFire — such as with a
-call to
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes\[`QueryService.getIndexes()`\]
-with
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndexes-org.apache.geode.cache.Region\[`QueryService.getIndexes(:Region)`\],
-or even with
-{x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndex-org.apache.geode.cache.Region-java.lang.String\[`QueryService.getIndex(:Region, indexName:String)`\].
-
-
-
-As a result, the only way for SDG or other GemFire
+`Indexes` cannot be identified by GemFire. As a result, the only way for SDG or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
 application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
 GemFire API calls do not.
-
-
 
 In any case, SDG makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
@@ -2845,28 +2430,12 @@ these index-type exceptions are thrown. Consequently, SDG can
 inspect the state of the system and act accordingly, based on your
 configuration.
 
-
-
 In all other cases, SDG embraces a fail-fast strategy.
-
-
-
-
-
-
-<div class="sect1">
 
 ## <a id="configuring-a-diskstore">Configuring a DiskStore
 
-
-
 Spring Data for GemFire supports `DiskStore` configuration and creation through the
 `disk-store` element, as the following example shows:
-
-
-
-
-
 
 ```highlight
 <gfe:disk-store id="Example" auto-compact="true" max-oplog-size="10"
@@ -2876,44 +2445,21 @@ Spring Data for GemFire supports `DiskStore` configuration and creation through 
 </gfe:disk-store>
 ```
 
-
-
-
 `DiskStore` instances are used by Regions for file system persistent
 backup and overflow of evicted entries as well as persistent backup for
 WAN Gateways. Multiple GemFire components may share the same
 `DiskStore`. Additionally, multiple file system directories may be
 defined for a single `DiskStore`, as shown in the preceding example.
 
-
-
-See GemFire's documentation for a complete explanation of
-{x-data-store-docs}/developing/storing_data_on_disk/chapter_overview.html\[Persistence
-and Overflow\] and configuration options on `DiskStore` instances.
-
-
-
-
-<div class="sect1">
+For an explanation of persistence, overflow, and configuration options on `DiskStore` instances, see [Persistence and Overflow](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-storing_data_on_disk-chapter_overview.html) in the GemFire product documentation.
 
 ## <a id="configuring-snapshot-service">Configuring the Snapshot Service
 
-
-
 Spring Data for GemFire supports cache and Region snapshots by using
-{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[GemFire's
-Snapshot Service\]. The out-of-the-box Snapshot Service support offers
-several convenient features to simplify the use of GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html\[Cache\]
-and
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[Region\]
-Snapshot Service APIs.
+GemFire's Snapshot Service. The out-of-the-box Snapshot Service support offers
+several convenient features to simplify the use of GemFire's [Cache](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/CacheSnapshotService.html) and [Region](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/RegionSnapshotService.html) Snapshot Service APIs. For more information about the Snapshot Service, see [Cache and Region Snapshots](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-cache_snapshots-chapter_overview.html)  in the GemFire product documentation.
 
-
-
-As the
-{x-data-store-docs}/managing/cache_snapshots/chapter_overview.html\[GemFire
-documentation\] explains, snapshots let you save and subsequently reload
+Snapshots let you save and subsequently reload
 the cached data later, which can be useful for moving data between
 environments, such as from production to a staging or test environment
 to reproduce data-related issues in a controlled context. You
@@ -2922,22 +2468,13 @@ definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
 to load snapshot data specific to the environment as necessary.
 
-
-
 Spring Data for GemFire's support for GemFire's Snapshot Service begins
 with the `<gfe-data:snapshot-service>` element from the `<gfe-data>` XML
 namespace.
 
-
-
 For example, you can define cache-wide snapshots to be loaded as well as
 saved by using a couple of snapshot imports and a data export
 definition, as follows:
-
-
-
-
-
 
 ```highlight
 <gfe-data:snapshot-service id="gemfireCacheSnapshotService">
@@ -2948,27 +2485,17 @@ definition, as follows:
 </gfe-data:snapshot-service>
 ```
 
-
-
-
 You can define as many imports and exports as you like. You can define
 only imports or only exports. The file locations and directory paths can
 be absolute or relative to the Spring Data for GemFire application, which is the JVM
 process's working directory.
 
-
-
 The preceding example is pretty simple, and the Snapshot Service defined
 in this case refers to the GemFire cache instance with the
 default name of `gemfireCache` (as described in [Configuring a
-Cache](#bootstrap:cache)). If you name your cache bean definition
+Cache](#configuring-cache)). If you name your cache bean definition
 something other than the default, you can use the `cache-ref` attribute
 to refer to the cache bean by name, as follows:
-
-
-
-
-
 
 ```highlight
 <gfe:cache id="myCache"/>
@@ -2978,16 +2505,8 @@ to refer to the cache bean by name, as follows:
 </gfe-data:snapshot-service>
 ```
 
-
-
-
 You can also define a Snapshot Service for a particular Region by
 specifying the `region-ref` attribute, as follows:
-
-
-
-
-
 
 ```highlight
 <gfe:partitioned-region id="Example" persistent="false" .../>
@@ -2998,94 +2517,34 @@ specifying the `region-ref` attribute, as follows:
 </gfe-data:snapshot-service>
 ```
 
-
-
-
 When the `region-ref` attribute is specified, Spring Data for GemFire's
 `SnapshotServiceFactoryBean` resolves the `region-ref` attribute value
 to a Region bean defined in the Spring container and creates a
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/RegionSnapshotService.html\[`RegionSnapshotService`\].
+[RegionSnapshotService](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/RegionSnapshotService.html).
 The snapshot import and export definitions function the same way.
 However, the `location` must refer to a file on an export.
 
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">GemFire is strict about imported snapshot
+<p class="note"><strong>Note</strong>: GemFire is strict about imported snapshot
 files actually existing before they are referenced. For exports,
 GemFire creates the snapshot file. If the snapshot file for
-export already exists, the data is overwritten.</td>
-</tr>
-</tbody>
-</table>
+export already exists, the data is overwritten.</p>
 
-
-<div class="admonitionblock tip">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Tip
-</div></td>
-<td class="content">Spring Data for GemFire includes a
-<code>suppress-import-on-init</code> attribute on the
+Spring Data for GemFire includes a <code>suppress-import-on-init</code> attribute on the
 <code><gfe-data:snapshot-service></code> element to suppress the
 configured Snapshot Service from trying to import data into the cache or
 Region on initialization. Doing so is useful, for example, when data
 exported from one Region is used to feed the import of another
-Region.</td>
-</tr>
-</tbody>
-</table>
-
-
+Region.
 
 ### <a id="snapshot-location">Snapshot Location
 
-
-With the cache-based Snapshot Service (that is, a
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html\[`CacheSnapshotService`\])
+With the cache-based Snapshot Service (that is, a [CacheSnapshotService](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/CacheSnapshotService.html))
 you would typically pass it a directory containing all the snapshot
 files to load rather than individual snapshot files, as the overloaded
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/CacheSnapshotService.html#load-java.io.File-org.apache.geode.cache.snapshot.SnapshotOptions.SnapshotFormat\[`load`\]
+[load](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/CacheSnapshotService.html#load-java.io.File-org.apache.geode.cache.snapshot.SnapshotOptions.SnapshotFormat)
 method in the `CacheSnapshotService` API indicates.
 
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr>
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">Of course, you can use the overloaded
-<code>load(:File[], :SnapshotFormat, :SnapshotOptions)</code> method to
-get specific about which snapshot files to load into the
-GemFire cache.</td>
-</tr>
-</tbody>
-</table>
-
+You can also use the overloaded <code>load(:File[], :SnapshotFormat, :SnapshotOptions)</code> method to specify which snapshot files to load into the GemFire cache.
 
 
 However, Spring Data for GemFire recognizes that a typical developer workflow might
@@ -3093,15 +2552,8 @@ be to extract and export data from one environment into several snapshot
 files, zip all of them up, and then conveniently move the zip file to
 another environment for import.
 
-
-
 Therefore, Spring Data for GemFire lets you specify a jar or zip file on import for a
 `cache`-based Snapshot Service, as follows:
-
-
-
-
-
 
 ```highlight
   <gfe-data:snapshot-service id="cacheBasedSnapshotService" cache-ref="gemfireCache">
@@ -3109,35 +2561,21 @@ Therefore, Spring Data for GemFire lets you specify a jar or zip file on import 
   </gfe-data:snapshot-service>
 ```
 
-
-
-
 Spring Data for GemFire conveniently extracts the provided zip file and treats it as
 a directory import (load).
-
-
-
 
 ### <a id="snapshot-filters">Snapshot Filters
 
 
 The real power of defining multiple snapshot imports and exports is
-realized through the use of snapshot filters. Snapshot filters implement
-GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[`SnapshotFilter`\]
+realized through the use of snapshot filters. Snapshot filters implement the 
+[SnapshotFilter](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/SnapshotFilter.html)
 interface and are used to filter Region entries for inclusion into the
 Region on import and for inclusion into the snapshot on export.
-
-
 
 Spring Data for GemFire lets you use snapshot filters on import and export by using
 the `filter-ref` attribute or an anonymous, nested bean definition, as
 the following example shows:
-
-
-
-
-
 
 ```highlight
 <gfe:cache/>
@@ -3162,41 +2600,24 @@ the following example shows:
 </gfe-data:snapshot-service>
 ```
 
-
-
-
-In addition, you can express more complex snapshot filters by using the
+Additionally, you can express more complex snapshot filters by using the
 `ComposableSnapshotFilter` class. This class implements
-GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/snapshot/SnapshotFilter.html\[SnapshotFilter\]
+the [SnapshotFilter](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/SnapshotFilter.html)
 interface as well as the
 [Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
 design pattern.
 
-
-
-In a nutshell, the
-[Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
+The Composite software
 design pattern lets you compose multiple objects of the same type and
-treat the aggregate as single instance of the object type — a powerful
-and useful abstraction.
-
-
+treat the aggregate as single instance of the object type.
 
 `ComposableSnapshotFilter` has two factory methods, `and` and `or`. They
 let you logically combine individual snapshot filters using the AND and
 OR logical operators, respectively. The factory methods take a list of
 `SnapshotFilters`.
 
-
-
 The following example shows a definition for a
 `ComposableSnapshotFilter`:
-
-
-
-
-
 
 ```highlight
 <bean id="activeUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
@@ -3211,16 +2632,8 @@ The following example shows a definition for a
 </bean>
 ```
 
-
-
-
-You could then go on to combine the `activesUsersSinceFilter` with
+You could then combine the `activesUsersSinceFilter` with
 another filter by using `or`, as follows:
-
-
-
-
-
 
 ```highlight
 <bean id="covertOrActiveUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
@@ -3234,34 +2647,22 @@ another filter by using `or`, as follows:
 </bean>
 ```
 
-
-
-
-
 ### <a id="snapshot-events">Snapshot Events
-
 
 By default, Spring Data for GemFire uses GemFire's Snapshot Services on
 startup to import data and on shutdown to export data. However, you may
 want to trigger periodic, event-based snapshots, for either import or
 export, from within your Spring application.
 
-
-
 For this purpose, Spring Data for GemFire defines two additional Spring application
 events, extending Spring's
-[`ApplicationEvent`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html)
-class for imports and exports, respectively:
+[ApplicationEvent](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html) class for imports and exports, respectively:
 `ImportSnapshotApplicationEvent` and `ExportSnapshotApplicationEvent`.
-
-
 
 The two application events can be targeted for the entire
 GemFire cache or for individual GemFire Regions. The
 constructors in these classes accept an optional Region pathname (such
 as `/Example`) as well as zero or more `SnapshotMetadata` instances.
-
-
 
 The array of `SnapshotMetadata` overrides the snapshot metadata defined
 by `<gfe-data:snapshot-import>` and `<gfe-data:snapshot-export>`
@@ -3270,70 +2671,52 @@ do not explicitly provide `SnapshotMetadata`. Each individual
 `SnapshotMetadata` instance can define its own `location` and `filters`
 properties.
 
-
-
 All snapshot service beans defined in the Spring `ApplicationContext`
 receive import and export snapshot application events. However, only
 matching Snapshot Service beans process import and export events.
-
-
 
 A Region-based `[Import|Export]SnapshotApplicationEvent` matches if the
 Snapshot Service bean defined is a `RegionSnapshotService` and its
 Region reference (as determined by the `region-ref` attribute) matches
 the Region's pathname, as specified by the snapshot application event.
 
-
-
 A Cache-based `[Import|Export]SnapshotApplicationEvent` (that is, a
 snapshot application event without a Region pathname) triggers all
 Snapshot Service beans, including any `RegionSnapshotService` beans, to
 perform either an import or export, respectively.
 
-
-
-You can use Spring's
-{spring-framework-javadoc}/org/springframework/context/ApplicationEventPublisher.html\[`ApplicationEventPublisher`\]
-interface to fire import and export snapshot application events from
-your application as follows:
-
-
-
-
-
+You can use Spring's [ApplicationEventPublisher](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEventPublisher.html) interface to fire import and export snapshot application events from your application as follows:
 
 ```highlight
 @Component
 public class ExampleApplicationComponent {
-
+  
   @Autowired
   private ApplicationEventPublisher eventPublisher;
-
+  
   @Resource(name = "Example")
   private Region<?, ?> example;
-
+  
   public void someMethod() {
-
+  
     ...
-
+  
     File dataSnapshot = new File(System.getProperty("user.dir"), "/path/to/export/data.snapshot");
-
+  
     SnapshotFilter myFilter = ...;
-
+  
     SnapshotMetadata exportSnapshotMetadata =
         new SnapshotMetadata(dataSnapshot, myFilter, null);
-
+  
     ExportSnapshotApplicationEvent exportSnapshotEvent =
         new ExportSnapshotApplicationEvent(this, example.getFullPath(), exportSnapshotMetadata)
-
+  
     eventPublisher.publishEvent(exportSnapshotEvent);
-
+  
     ...
   }
 }
 ```
-
-
 
 
 In the preceding example, only the `/Example` Region's Snapshot Service
