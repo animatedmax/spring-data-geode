@@ -152,7 +152,7 @@ following example shows:</p>
 
 Comments:
 
-1 The default namespace declaration for this XML document points to
+1. The default namespace declaration for this XML document points to
 the Spring Data for GemFire XML namespace.
 
 2. The `beans` namespace prefix declaration for Spring's
@@ -470,8 +470,7 @@ have a clean way to know when to call
 for an application to do so, which is why this "feature" of
 GemFire is not recommended for peer `Cache` applications.
 
-
-For more information about 'auto-reconnect', [Handling Forced Cache Disconnection Using Autoreconnect](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-member-reconnect.html) in the GemFire product documentation.
+For more information about `auto-reconnect`, see [Handling Forced Cache Disconnection Using Autoreconnect](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-member-reconnect.html) in the GemFire product documentation.
 
 #### Using Cluster-based Configuration
 
