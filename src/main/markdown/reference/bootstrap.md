@@ -1529,7 +1529,7 @@ configuration:
 ```
 
 <p class="note warning"><strong>Warning</strong>: Replicas cannot use <code>local destroy</code>
-eviction since that would invalidate them. For more information, see the <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire/index.html">GemFire product documentation.</p>
+eviction since that would invalidate them. For more information, see the <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire/index.html">GemFire product documentation</a>.</p>
 
 When configuring Regions for overflow, you should configure the storage
 through the `disk-store` element for maximum efficiency.
