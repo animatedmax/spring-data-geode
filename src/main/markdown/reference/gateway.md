@@ -2,53 +2,40 @@
 
 # Configuring WAN Gateways
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 WAN Gateways provides a way to synchronize GemFire Distributed
 Systems across geographic locations. Spring Data for GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## WAN Configuration in GemFire 7.0
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 In the following example, `GatewaySenders` are configured for a
 `PARTITION` Region by adding child elements (`gateway-sender` and
 `gateway-sender-ref`) to the Region. A `GatewaySender` may register
 `EventFilters` and `TransportFilters`.
 
-</div>
 
-<div class="paragraph">
 
 The following example also shows a sample configuration of an
 `AsyncEventQueue`, which must also be auto-wired into a Region (not
 shown):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="region-with-inner-gateway-sender" >
@@ -85,22 +72,16 @@ shown):
 <bean id="transport-filter" class="org.springframework.data.gemfire.example.AnotherTransportFilter"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 On the other end of a `GatewaySender` is a corresponding
 `GatewayReceiver` to receive Gateway events. The `GatewayReceiver` may
 also be configured with `EventFilters` and `TransportFilters`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
@@ -110,23 +91,16 @@ follows:
 </gfe:gateway-receiver>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See the GemFire
 {x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
 for a detailed explanation of all the configuration options.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -134,6 +108,4 @@ for a detailed explanation of all the configuration options.
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

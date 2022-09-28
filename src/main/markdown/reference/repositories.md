@@ -2,15 +2,12 @@
 
 # Spring Data for GemFire Repositories
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 Spring Data for GemFire provides support for using the Spring Data Repository
 abstraction to easily persist entities into GemFire along with
@@ -18,24 +15,18 @@ executing queries. A general introduction to the Repository programming
 model is provided
 [here](https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#repositories).
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Spring XML Configuration
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 To bootstrap Spring Data Repositories, use the `<repositories/>` element
 from the Spring Data for GemFire Data namespace, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -43,13 +34,9 @@ from the Spring Data for GemFire Data namespace, as the following example shows:
 
 Example 1. Bootstrap Spring Data for GemFire Repositories in XML
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -65,33 +52,20 @@ Example 1. Bootstrap Spring Data for GemFire Repositories in XML
 </beans>
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding configuration snippet looks for interfaces below the
 configured base package and creates Repository instances for those
 interfaces backed by a
 [`SimpleGemFireRepository`](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.html).
 
-</div>
 
 <div class="admonitionblock important">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Important
 </div></td>
 <td class="content">The bootstrap process fails unless you have your
@@ -100,33 +74,25 @@ application domain classes correctly mapped to configured Regions.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Spring Java-based Configuration
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Alternatively, many developers prefer to use Spring's
 {spring-framework-docs}/core.html#beans-java\[Java-based container
 configuration\].
 
-</div>
 
-<div class="paragraph">
 
 Using this approach, you can bootstrap Spring Data Repositories by using
 the SDG `@EnableGemfireRepositories` annotation, as the
 following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -135,13 +101,9 @@ following example shows:
 Example 2. Bootstrap Spring Data for GemFire Repositories with
 `@EnableGemfireRepositories`
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -151,15 +113,10 @@ class SpringDataApplication {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Rather than use the `basePackages` attribute, you may prefer to use the
 type-safe `basePackageClasses` attribute instead. The
@@ -170,9 +127,7 @@ no-op marker class or interface in each package that serves no purpose
 other than to identify the location of application Repositories
 referenced by this attribute.
 
-</div>
 
-<div class="paragraph">
 
 In addition to the `basePackages and basePackageClasses` attributes,
 like Spring's
@@ -187,9 +142,7 @@ on. See the
 {spring-framework-javadoc}/org/springframework/context/annotation/FilterType.html\[`FilterType`
 Javadoc\] for more details.
 
-</div>
 
-<div class="paragraph">
 
 The `@EnableGemfireRepositories` annotation also lets you specify the
 location of named OQL queries, which reside in a Java `Properties` file,
@@ -198,9 +151,7 @@ match the name of a Repository query method and the property value is
 the OQL query you want executed when the Repository query method is
 called.
 
-</div>
 
-<div class="paragraph">
 
 The `repositoryImplementationPostfix` attribute can be set to an
 alternate value (defaults to `Impl`) if your application requires one or
@@ -210,9 +161,7 @@ repository implementations\]. This feature is commonly used to extend
 the Spring Data Repository infrastructure to implement a feature not
 provided by the data store (for example, SDG).
 
-</div>
 
-<div class="paragraph">
 
 One example of where custom repository implementations are needed with
 GemFire is when performing joins. Joins are not supported by
@@ -224,34 +173,26 @@ Function. See
 [here](https://gemfire91.docs.pivotal.io/geode/developing/partitioned_regions/join_query_partitioned_regions.html)
 for more details on GemFire *Equi-Join Queries*.
 
-</div>
 
-<div class="paragraph">
 
 Many other aspects of the SDG's Repository infrastructure
 extension may be customized as well. See the
 [`@EnableGemfireRepositories`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html)
 Javadoc for more details on all configuration settings.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Executing OQL Queries
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire Repositories enable the definition of query methods to easily
 execute GemFire OQL queries against the Region the managed
 entity maps to, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -259,26 +200,18 @@ entity maps to, as the following example shows:
 
 Example 3. Sample Repository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("People")
 public class Person { … }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface PersonRepository extends CrudRepository<Person, Long> {
@@ -295,15 +228,10 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The first query method listed in the preceding example causes the
 following OQL query to be derived:
@@ -311,23 +239,18 @@ following OQL query to be derived:
 method works the same way except it returns all entities found, whereas
 the first query method expects a single result to be found.
 
-</div>
 
-<div class="paragraph">
 
 If the supported keywords are not sufficient to declare and express your
 OQL query, or the method name becomes too verbose, then you can annotate
 the query methods with `@Query` as shown on the third and fourth
 methods.
 
-</div>
 
-<div class="paragraph">
 
 The following table gives brief samples of the supported keywords that
 you can use in query methods:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 1. Supported keywords for query methods</caption>
@@ -460,25 +383,19 @@ class="tableblock halign-left valign-top"><p><code>x.active = false</code></p></
 
 Table 1. Supported keywords for query methods
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## OQL Query Extensions Using Annotations
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Many query languages, such as GemFire's OQL (Object Query
 Language), have extensions that are not directly supported by Spring
 Data Commons' Repository infrastructure.
 
-</div>
 
-<div class="paragraph">
 
 One of Spring Data Commons' Repository infrastructure goals is to
 function as the lowest common denominator to maintain support for and
@@ -489,9 +406,7 @@ Commons within their applications by reusing their existing
 application-specific Repository interfaces — a convenient and powerful
 abstraction.
 
-</div>
 
-<div class="paragraph">
 
 To support GemFire's OQL Query language extensions and
 preserve portability across different data stores, Spring Data for GemFire adds
@@ -500,9 +415,7 @@ annotations are ignored by other Spring Data Repository implementations
 (such as Spring Data JPA or Spring Data Redis) that do not have similar
 query language features.
 
-</div>
 
-<div class="paragraph">
 
 For instance, many data stores most likely do not implement
 GemFire's OQL `IMPORT` keyword. Implementing `IMPORT` as an
@@ -511,14 +424,11 @@ signature (specifically, the method 'name') does not interfere with the
 parsing infrastructure when evaluating the query method name to
 construct another data store language appropriate query.
 
-</div>
 
-<div class="paragraph">
 
 Currently, the set of GemFire OQL Query language extensions
 that are supported by Spring Data for GemFire include:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 2. Supported GemFire OQL extensions for
@@ -583,14 +493,12 @@ query-specific debugging.</p></td>
 Table 2. Supported GemFire OQL extensions for Repository query
 methods
 
-<div class="paragraph">
 
 As an example, suppose you have a `Customers` application domain class
 and corresponding GemFire Region along with a
 `CustomerRepository` and a query method to lookup `Customers` by last
 name, as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -598,13 +506,9 @@ name, as follows:
 
 Example 4. Sample Customers Repository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package ...;
@@ -623,13 +527,9 @@ public class Customer ... {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package ...;
@@ -649,40 +549,28 @@ public interface CustomerRepository extends GemfireRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding example results in the following OQL Query:
 
-</div>
 
-<div class="paragraph">
 
 `<TRACE> <HINT 'LastNameIdx'> IMPORT org.example.app.domain.Customer; SELECT * FROM /Customers x WHERE x.lastName = $1 LIMIT 10`
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's Repository extension is careful not to create conflicting
 declarations when the OQL annotation extensions are used in combination
 with the `@Query` annotation.
 
-</div>
 
-<div class="paragraph">
 
 As another example, suppose you have a raw `@Query` annotated query
 method defined in your `CustomerRepository`, as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -690,13 +578,9 @@ method defined in your `CustomerRepository`, as follows:
 
 Example 5. CustomerRepository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -711,27 +595,18 @@ public interface CustomerRepository extends GemfireRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding query method results in the following OQL query:
 
-</div>
 
-<div class="paragraph">
 
 `IMPORT org.example.app.domain.Customer; <TRACE> <HINT 'ReputationIdx'> SELECT DISTINCT * FROM /Customers x WHERE x.reputation > $1 ORDER BY c.reputation DESC LIMIT 5`
 
-</div>
 
-<div class="paragraph">
 
 The `@Limit(10)` annotation does not override the `LIMIT` explicitly
 defined in the raw query. Also, the `@Hint("CustomerIdx")` annotation
@@ -739,22 +614,12 @@ does not override the `HINT` explicitly defined in the raw query.
 Finally, the `@Trace` annotation is redundant and has no additional
 effect.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
-<td class="content"><div class="paragraph">
-<p>The <code>ReputationIdx</code> index is probably not the most
+<td class="content"><p>The <code>ReputationIdx</code> index is probably not the most
 sensible index, given the number of customers who may possibly have the
 same value for their reputation, which reduces the effectiveness of the
 index. Please choose indexes and other optimizations wisely, as an
@@ -767,19 +632,14 @@ example.</p>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Query Post Processing
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Thanks to using the Spring Data Repository abstraction, the query method
 convention for defining data store specific queries (e.g. OQL) is easy
@@ -787,15 +647,12 @@ and convenient. However, it is sometimes desirable to still want to
 inspect or even possibly modify the query generated from the Repository
 query method.
 
-</div>
 
-<div class="paragraph">
 
 Since 2.0.x, Spring Data for GemFire includes the
 `o.s.d.gemfire.repository.query.QueryPostProcessor` functional
 interface. The interface is loosely defined as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -803,13 +660,9 @@ interface. The interface is loosely defined as follows:
 
 Example 6. QueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package org.springframework.data.gemfire.repository.query;
@@ -827,15 +680,10 @@ interface QueryPostProcessor<T extends Repository, QUERY> extends Ordered {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 There are additional default methods provided that let you compose
 instances of `QueryPostProcessor` similar to how
@@ -844,9 +692,7 @@ and
 [java.util.function.Function.compose(:Function)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html#compose-java.util.function.Function-)
 work.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the `QueryPostProcessor` interface implements the
 {spring-framework-javadoc}/org/springframework/core/Ordered.html\[`org.springframework.core.Ordered`\]
@@ -854,9 +700,7 @@ interface, which is useful when multiple `QueryPostProcessors` are
 declared and registered in the Spring container and used to create a
 pipeline of processing for a group of generated query method queries.
 
-</div>
 
-<div class="paragraph">
 
 Finally, the `QueryPostProcessor` accepts type arguments corresponding
 to the type parameters, `T` and `QUERY`, respectively. Type `T` extends
@@ -865,18 +709,9 @@ the Spring Data Commons marker interface,
 We discuss this further later in this section. All `QUERY` type
 parameter arguments in Spring Data for GemFire's case are of type `java.lang.String`.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">It is useful to define the query as type
@@ -888,23 +723,18 @@ Redis).</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 You can implement this interface to receive a callback with the query
 that was generated from the application `Repository` interface method
 when the method is called.
 
-</div>
 
-<div class="paragraph">
 
 For example, you might want to log all queries from all application
 Repository interface definitions. You could do so by using the following
 `QueryPostProcessor` implementation:
 
-</div>
 
 <div class="exampleblock">
 
@@ -912,13 +742,9 @@ Repository interface definitions. You could do so by using the following
 
 Example 7. LoggingQueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -939,30 +765,22 @@ class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `LoggingQueryPostProcessor` was typed to the Spring Data
 `org.springframework.data.repository.Repository` marker interface, and,
 therefore, logs all application Repository interface query method
 generated queries.
 
-</div>
 
-<div class="paragraph">
 
 You could limit the scope of this logging to queries only from certain
 types of application Repository interfaces, such as, say, a
 `CustomerRepository`, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -970,13 +788,9 @@ types of application Repository interfaces, such as, say, a
 
 Example 8. CustomerRepository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
@@ -988,20 +802,14 @@ interface CustomerRepository extends CrudRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you could have typed the `LoggingQueryPostProcessor` specifically
 to the `CustomerRepository`, as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -1009,34 +817,23 @@ to the `CustomerRepository`, as follows:
 
 Example 9. CustomerLoggingQueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> { .. }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As a result, only queries defined in the `CustomerRepository` interface,
 such as `findByAccountNumber`, are logged.
 
-</div>
 
-<div class="paragraph">
 
 You might want to create a `QueryPostProcessor` for a specific query
 defined by a Repository query method. For example, suppose you want to
@@ -1046,7 +843,6 @@ return five results along with ordering the `Customers` by `firstName`,
 in ascending order . To do so, you can define a custom
 `QueryPostProcessor`, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -1054,13 +850,9 @@ in ascending order . To do so, you can define a custom
 
 Example 10. OrderedLimitedCustomerByLastNameQueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
@@ -1084,21 +876,15 @@ class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostPro
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While the preceding example works, you can achieve the same effect by
 using the Spring Data Repository convention provided by Spring Data for GemFire. For
 instance, the same query could be defined as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -1106,13 +892,9 @@ instance, the same query could be defined as follows:
 
 Example 11. CustomerRepository using the convention
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
@@ -1123,24 +905,17 @@ interface CustomerRepository extends CrudRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 However, if you do not have control over the application
 `CustomerRepository` interface definition, then the `QueryPostProcessor`
 (that is, `OrderedLimitedCustomerByLastNameQueryPostProcessor`) is
 convenient.
 
-</div>
 
-<div class="paragraph">
 
 If you want to ensure that the `LoggingQueryPostProcessor` always comes
 after the other application-defined `QueryPostProcessors` that may have
@@ -1148,7 +923,6 @@ bean declared and registered in the Spring `ApplicationContext`, you can
 set the `order` property by overriding the `o.s.core.Ordered.getOrder()`
 method, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -1156,13 +930,9 @@ method, as the following example shows:
 
 Example 12. Defining the `order` property
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
@@ -1182,23 +952,16 @@ class CustomerQueryPostProcessor implements QueryPostProcessor<CustomerRepositor
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This ensures that you always see the effects of the post processing
 applied by other `QueryPostProcessors` before the
 `LoggingQueryPostProcessor` logs the query.
 
-</div>
 
-<div class="paragraph">
 
 You can define as many `QueryPostProcessors` in the Spring
 `ApplicationContext` as you like and apply them in any order, to all or
@@ -1206,13 +969,9 @@ specific application Repository interfaces, and be as granular as you
 like by using the provided arguments to the `postProcess(..)` method
 callback.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -1220,6 +979,4 @@ callback.
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

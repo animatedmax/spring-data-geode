@@ -2,23 +2,18 @@
 
 # Continuous Query (CQ)
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 A powerful functionality offered by GemFire is
 {x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[Continuous
 Query\] (or CQ).
 
-</div>
 
-<div class="paragraph">
 
 In short, CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to
@@ -29,9 +24,7 @@ container**; very similar in functionality and naming to the JMS
 integration in the *Spring Framework*; in fact, users familiar with the
 JMS support in Spring, should feel right at home.
 
-</div>
 
-<div class="paragraph">
 
 Basically Spring Data for GemFire allows methods on POJOs to become end-points for
 CQ. Simply define the query and indicate the method that should be
@@ -40,18 +33,9 @@ the rest. This is very similar to Java EE's message-driven bean style,
 but without any requirement for base class or interface implementations,
 based on GemFire.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Currently, Continuous Query is only supported in
@@ -64,19 +48,14 @@ for more information.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Continuous Query Listener Container
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire simplifies creation, registration, life-cycle and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
@@ -86,9 +65,7 @@ find the concepts familiar as it is designed as close as possible to the
 support provided in the *Spring Framework* with its Message-driven POJOs
 (MDPs).
 
-</div>
 
-<div class="paragraph">
 
 The SDG `ContinuousQueryListenerContainer` acts as an event (or message)
 listener container; it is used to receive the events from the registered
@@ -103,9 +80,7 @@ business logic associated with receiving an event (and reacting to it),
 and delegate the boilerplate GemFire infrastructure concerns
 to the framework.
 
-</div>
 
-<div class="paragraph">
 
 The listener container is fully customizable. A developer can chose
 either to use the CQ thread to perform the dispatch (synchronous
@@ -117,19 +92,14 @@ executor to better serve her needs. In particular, in managed
 environments (such as app servers), it is highly recommended to pick a
 proper `TaskExecutor` to take advantage of its runtime.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## The `ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 The `ContinuousQueryListenerAdapter` class is the final component in
 Spring Data for GemFire CQ support. In a nutshell, class allows you to expose almost
@@ -139,18 +109,13 @@ Spring Data for GemFire CQ support. In a nutshell, class allows you to expose al
 to GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/query/CqListener.html\[CqListener\].
 
-</div>
 
-<div class="paragraph">
 
 Consider the following interface definition. Notice the various event
 handling methods and their parameters:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface EventDelegate {
@@ -165,13 +130,9 @@ public interface EventDelegate {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -181,29 +142,17 @@ class DefaultEventDelegate implements EventDelegate {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In particular, note how the above implementation of the `EventDelegate`
 interface has **no** GemFire dependencies at all. It truly is
 a POJO that we can and will make into an EDP via the following
 configuration.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">the class does not have to implement an interface;
@@ -213,11 +162,8 @@ contract and the implementation.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -247,20 +193,10 @@ contract and the implementation.</td>
 <beans>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The example above shows a few of the various forms
@@ -274,19 +210,14 @@ The specified method can have various argument types, the
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The example above uses the Spring Data for GemFire namespace to declare the event
 listener container and automatically register the listeners. The full
 blown, **beans** definition is displayed below:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <!-- this is the Event Driven POJO (MDP) -->
@@ -311,24 +242,17 @@ blown, **beans** definition is displayed below:
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Each time an event is received, the adapter automatically performs type
 translation between the GemFire event and the required method
 argument(s) transparently. Any exception caused by the method invocation
 is caught and handled by the container (by default, being logged).
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -336,6 +260,4 @@ is caught and handled by the container (by default, being logged).
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

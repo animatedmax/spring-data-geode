@@ -2,15 +2,12 @@
 
 # Working with GemFire Serialization
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 To improve overall performance of the GemFire In-memory Data
 Grid, GemFire supports a dedicated serialization protocol,
@@ -18,9 +15,7 @@ called PDX, that is both faster and offers more compact results over
 standard Java serialization in addition to working transparently across
 various language platforms (Java, C++, and .NET).
 
-</div>
 
-<div class="paragraph">
 
 See
 {x-data-store-docs}/developing/data_serialization/PDX_Serialization_Features.html\[PDX
@@ -28,26 +23,19 @@ Serialization Features\] and
 {x-data-store-wiki}/PDX+Serialization+Internals\[PDX Serialization
 Internals\] for more details.
 
-</div>
 
-<div class="paragraph">
 
 This chapter discusses the various ways in which Spring Data for GemFire simplifies
 and improves GemFire's custom serialization in Java.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Wiring deserialized instances
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 It is fairly common for serialized objects to have transient data.
 Transient data is often dependent on the system or environment where it
@@ -59,17 +47,13 @@ machine. For such cases, Spring Data for GemFire offers a special
 that performs wiring for each new instance created by GemFire
 during deserialization.
 
-</div>
 
-<div class="paragraph">
 
 Through such a mechanism, you can rely on the Spring container to inject
 and manage certain dependencies, making it easy to split transient from
 persistent data and have rich domain objects in a transparent manner.
 
-</div>
 
-<div class="paragraph">
 
 Spring users might find this approach similar to that of
 {spring-framework-docs}/#aop-atconfigurable\[`@Configurable`\]). The
@@ -77,25 +61,18 @@ Spring users might find this approach similar to that of
 trying to first locate a bean definition as a wiring template and
 otherwise falling back to auto-wiring.
 
-</div>
 
-<div class="paragraph">
 
 See the previous section ([\[apis:declarable\]](#apis:declarable)) for
 more details on wiring functionality.
 
-</div>
 
-<div class="paragraph">
 
 To use the SDG `Instantiator`, declare it as a bean, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="instantiator" class="org.springframework.data.gemfire.serialization.WiringInstantiator">
@@ -106,11 +83,8 @@ following example shows:
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 During the Spring container startup, once it has been initialized, the
 `Instantiator`, by default, registers itself with the GemFire
@@ -118,19 +92,14 @@ serialization system and performs wiring on all instances of
 `SomeDataSerializableClass` created by GemFire during
 deserialization.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Auto-generating Custom `Instantiators`
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 For data intensive applications, a large number of instances might be
 created on each machine as data flows in. GemFire uses
@@ -142,11 +111,8 @@ instantiate a new type (using the default constructor) without the use
 of reflection. The following example shows how to create an
 instantiator:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="instantiatorFactory" class="org.springframework.data.gemfire.serialization.InstantiatorFactoryBean">
@@ -159,11 +125,8 @@ instantiator:
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding definition automatically generates two `Instantiators` for
 two classes (`CustomTypeA` and `CustomTypeB`) and registers them with
@@ -171,13 +134,9 @@ GemFire under user ID `1025` and `1026`. The two
 `Instantiators` avoid the use of reflection and create the instances
 directly through Java code.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -185,6 +144,4 @@ directly through Java code.
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

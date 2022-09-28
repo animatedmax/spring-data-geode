@@ -2,42 +2,31 @@
 
 # Configuring an Index
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 GemFire allows indexes (also sometimes pluralized as indices)
 to be created on Region data to improve the performance of OQL (Object
 Query Language) queries.
 
-</div>
 
-<div class="paragraph">
 
 In Spring Data for GemFire, indexes are declared with the `index` element, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In Spring Data for GemFire's XML schema (also called the SDG XML
 namespace), `index` bean declarations are not bound to a Region, unlike
@@ -47,18 +36,14 @@ number of indexes on any Region, whether they were just created or
 already exist — a significant improvement over GemFire's
 native `cache.xml` format.
 
-</div>
 
-<div class="paragraph">
 
 An `Index` must have a name. You can give the `Index` an explicit name
 by using the `name` attribute. Otherwise, the bean name (that is, the
 value of the `id` attribute) of the `index` bean definition is used as
 the `Index` name.
 
-</div>
 
-<div class="paragraph">
 
 The `expression` and `from` clause form the main components of an
 `Index`, identifying the data to index (that is, the Region identified
@@ -68,17 +53,12 @@ application domain object fields are used in the predicate of
 application-defined OQL queries used to query and look up the objects
 stored in the Region.
 
-</div>
 
-<div class="paragraph">
 
 Consider the following example, which has a `lastName` property:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("Customers")
@@ -94,20 +74,14 @@ class Customer {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Now consider the following example, which has an application-defined
 SDG Repository to query for `Customer` objects:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -118,66 +92,47 @@ interface CustomerRepository extends GemfireRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The SDG Repository finder/query method results in the
 following OQL statement being generated and ran:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 SELECT * FROM /Customers c WHERE c.lastName = '$1'
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Therefore, you might want to create an `Index` with a statement similar
 to the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="myIndex" name="CustomersLastNameIndex" expression="lastName" from="/Customers" type="HASH"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `from` clause must refer to a valid, existing Region and is how an
 `Index` gets applied to a Region. This is not specific to Spring Data for GemFire. It
 is a feature of GemFire.
 
-</div>
 
-<div class="paragraph">
 
 The `Index` `type` may be one of three enumerated values defined by
 Spring Data for GemFire's
 {sdg-javadoc}/org/springframework/data/gemfire/IndexType.html\[`IndexType`\]
 enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
 
-</div>
 
-<div class="paragraph">
 
 Each of the enumerated values corresponds to one of the
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html\[`QueryService`\]
@@ -188,57 +143,42 @@ then the
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createKeyIndex-java.lang.String-java.lang.String-java.lang.String-\[QueryService.createKeyIndex(..)\]
 is invoked to create a `KEY` `Index`.
 
-</div>
 
-<div class="paragraph">
 
 The default is `FUNCTIONAL` and results in one of the
 `QueryService.createIndex(..)` methods being invoked. See the Spring Data for GemFire
 XML schema for a full set of options.
 
-</div>
 
-<div class="paragraph">
 
 For more information on indexing in GemFire, see "[Working
 with
 Indexes](https://gemfire90.docs.pivotal.io/geode/developing/query_index/query_index.html)"
 in GemFire's User Guide.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Defining Indexes
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 In addition to creating indexes up front as `Index` bean definitions are
 processed by Spring Data for GemFire on Spring container initialization, you may also
 define all of your application indexes prior to creating them by using
 the `define` attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 When `define` is set to `true` (it defaults to `false`), it does not
 actually create the `Index` at that moment. All "defined" Indexes are
@@ -249,58 +189,39 @@ by the Spring container. Spring Data for GemFire registers itself as an
 fired, Spring Data for GemFire calls
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes\[`QueryService.createDefinedIndexes()`\].
 
-</div>
 
-<div class="paragraph">
 
 Defining indexes and creating them all at once boosts speed and
 efficiency when creating indexes.
 
-</div>
 
-<div class="paragraph">
 
 See "[Creating Multiple Indexes at
 Once](https://gemfire90.docs.pivotal.io/geode/developing/query_index/create_multiple_indexes.html)"
 for more details.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## `IgnoreIfExists` and `Override`
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Two Spring Data for GemFire `Index` configuration options warrant special mention:
 `ignoreIfExists` and `override`.
 
-</div>
 
-<div class="paragraph">
 
 These options correspond to the `ignore-if-exists` and `override`
 attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace,
 respectively.
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">Make sure you absolutely understand what you are
@@ -312,18 +233,9 @@ at runtime. As a result, both of these options are disabled (set to
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">These options are only available in Spring Data for GemFire and
@@ -333,9 +245,7 @@ GemFire has no equivalent options or functionality.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Each option significantly differs in behavior and entirely depends on
 the type of GemFire `Index` exception thrown. This also means
@@ -345,7 +255,6 @@ GemFire `IndexExistsException` and
 `IndexNameConflictException` instances, which can occur for various,
 sometimes obscure reasons. The exceptions have the following causes:
 
-</div>
 
 <div class="ulist">
 
@@ -359,9 +268,7 @@ sometimes obscure reasons. The exceptions have the following causes:
   is thrown when there exists another `Index` with the same name but
   possibly different definition when attempting to create an `Index`.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's default behavior is to fail-fast, always. So, neither
 `Index` *Exception* are "handled" by default. These `Index` exceptions
@@ -369,38 +276,30 @@ are wrapped in a SDG `GemfireIndexException` and rethrown. If
 you wish for Spring Data for GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
-</div>
 
-<div class="paragraph">
 
 `IgnoreIfExists` always takes precedence over `Override`, primarily
 because it uses fewer resources, simply because it returns the
 "existing" `Index` in both exceptional cases.
 
-</div>
 
 <div class="sect2">
 
 ### `IgnoreIfExists` Behavior
 
-<div class="paragraph">
 
 When an `IndexExistsException` is thrown and `ignoreIfExists` is set to
 `true` (or `<gfe:index ignore-if-exists="true">`), then the `Index` that
 would have been created by this `index` bean definition or declaration
 is simply ignored, and the existing `Index` is returned.
 
-</div>
 
-<div class="paragraph">
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by GemFire
 itself, not SDG.
 
-</div>
 
-<div class="paragraph">
 
 However, this also means that no `Index` with the "name" specified in
 your `index` bean definition or declaration actually exists from
@@ -410,9 +309,7 @@ Therefore, you should be careful when writing OQL query statements that
 use query hints, especially query hints that refer to the application
 `Index` being ignored. Those query hints need to be changed.
 
-</div>
 
-<div class="paragraph">
 
 When an `IndexNameConflictException` is thrown and `ignoreIfExists` is
 set to `true` (or `<gfe:index ignore-if-exists="true">`), the `Index`
@@ -420,9 +317,7 @@ that would have been created by this `index` bean definition or
 declaration is also ignored, and the "existing" `Index` is again
 returned, as when an `IndexExistsException` is thrown.
 
-</div>
 
-<div class="paragraph">
 
 However, there is more risk in returning the existing `Index` and
 ignoring the application's definition of the `Index` when an
@@ -435,18 +330,9 @@ data access patterns and queries in mind. However, if like-named indexes
 differ in definition, this might not be the case. Consequently, you
 should verify your `Index` names.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">SDG makes a best effort to inform the user
@@ -459,24 +345,19 @@ GemFire API (the only means available).</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### `Override` Behavior
 
-<div class="paragraph">
 
 When an `IndexExistsException` is thrown and `override` is set to `true`
 (or `<gfe:index override="true">`), the `Index` is effectively renamed.
 Remember, `IndexExistsExceptions` are thrown when multiple indexes exist
 that have the same definition but different names.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire can only accomplish this by using GemFire's API, by
 first removing the existing `Index` and then recreating the `Index` with
@@ -484,17 +365,13 @@ the new name. It is possible that either the remove or subsequent create
 invocation could fail. There is no way to execute both actions
 atomically and rollback this joint operation if either fails.
 
-</div>
 
-<div class="paragraph">
 
 However, if it succeeds, then you have the same problem as before with
 the `ignoreIfExists` option. Any existing OQL query statement using
 query hints that refer to the old `Index` by name must be changed.
 
-</div>
 
-<div class="paragraph">
 
 When an `IndexNameConflictException` is thrown and `override` is set to
 `true` (or `<gfe:index override="true">`), the existing `Index` can
@@ -502,9 +379,7 @@ potentially be re-defined. We say "potentially" because it is possible
 for the like-named, existing `Index` to have exactly the same definition
 and name when an `IndexNameConflictException` is thrown.
 
-</div>
 
-<div class="paragraph">
 
 If so, SDG is smart and returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
@@ -514,9 +389,7 @@ can only accomplish this when SDG is able to find the existing
 found, nothing happens and a SDG `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
-</div>
 
-<div class="paragraph">
 
 However, when the definition of the existing `Index` is different,
 SDG attempts to re-create the `Index` by using the `Index`
@@ -524,15 +397,12 @@ definition specified in the `index` bean definition. Make sure this is
 what you want and make sure the `index` bean definition matches your
 expectations and application requirements.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### How Does `IndexNameConflictExceptions` Actually Happen?
 
-<div class="paragraph">
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
@@ -540,15 +410,11 @@ configure GemFire (Spring Data for GemFire, GemFire Cluster
 Config, GemFire native `cache.xml`, the API, and so on). You
 should definitely prefer one configuration method and stick with it.
 
-</div>
 
-<div class="paragraph">
 
 However, when does an `IndexNameConflictException` get thrown?
 
-</div>
 
-<div class="paragraph">
 
 One particular case is an `Index` defined on a `PARTITION` Region (PR).
 When an `Index` is defined on a `PARTITION` Region (for example, `X`),
@@ -559,9 +425,7 @@ subsequent creation of, this `Index` by peer members is on a
 need-to-know basis (that is, by peer member hosting the same PR) is
 performed asynchronously.
 
-</div>
 
-<div class="paragraph">
 
 During this window of time, it is possible that these pending PR
 `Indexes` cannot be identified by GemFire — such as with a
@@ -572,9 +436,7 @@ with
 or even with
 {x-data-store-javadoc}/org/apache/geode/cache/query/QueryService.html#getIndex-org.apache.geode.cache.Region-java.lang.String\[`QueryService.getIndex(:Region, indexName:String)`\].
 
-</div>
 
-<div class="paragraph">
 
 As a result, the only way for SDG or other GemFire
 cache client applications (not involving Spring) to know for sure is to
@@ -584,9 +446,7 @@ application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
 GemFire API calls do not.
 
-</div>
 
-<div class="paragraph">
 
 In any case, SDG makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
@@ -597,21 +457,14 @@ these index-type exceptions are thrown. Consequently, SDG can
 inspect the state of the system and act accordingly, based on your
 configuration.
 
-</div>
 
-<div class="paragraph">
 
 In all other cases, SDG embraces a fail-fast strategy.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -619,6 +472,4 @@ In all other cases, SDG embraces a fail-fast strategy.
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

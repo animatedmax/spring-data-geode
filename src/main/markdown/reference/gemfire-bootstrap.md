@@ -2,15 +2,12 @@
 
 # Bootstrapping a Spring ApplicationContext in GemFire
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 Normally, a Spring-based application [bootstraps
 GemFire](#bootstrap) by using Spring Data for GemFire's features. By
@@ -19,9 +16,7 @@ namespace, a single embedded GemFire peer `Cache` instance is
 created and initialized with default settings in the same JVM process as
 your application.
 
-</div>
 
-<div class="paragraph">
 
 However, it is sometimes necessary (perhaps as a requirement imposed by
 your IT organization) that GemFire be fully managed and
@@ -32,18 +27,9 @@ using *Gfsh*, GemFire bootstraps your Spring
 application server or a Java main class that uses Spring Boot,
 GemFire does the bootstrapping and hosts your application.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">GemFire is not an application server. In
@@ -53,19 +39,14 @@ GemFire cache configuration is concerned.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Using GemFire to Bootstrap a Spring Context Started with Gfsh
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 to bootstrap a Spring `ApplicationContext` in GemFire
 when starting a GemFire server using *Gfsh*, you must use
@@ -74,9 +55,7 @@ GemFire's
 capability. An initializer block can declare a application callback that
 is launched after the cache is initialized by GemFire.
 
-</div>
 
-<div class="paragraph">
 
 An initializer is declared within an
 {x-data-store-docs}/reference/topics/cache_xml.html#initializer\[initializer\]
@@ -87,26 +66,19 @@ XML config is needed to bootstrap a Spring `ApplicationContext`
 configured with component scanning (for example
 `<context:component-scan base-packages="…​"/>`).
 
-</div>
 
-<div class="paragraph">
 
 Fortunately, such an initializer is already conveniently provided by the
 framework: the
 {sdg-javadoc}/org/springframework/data/gemfire/support/SpringContextBootstrappingInitializer.html\[`SpringContextBootstrappingInitializer`\].
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a typical, yet minimal, configuration for
 this class inside GemFire's `cache.xml` file:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -125,11 +97,8 @@ this class inside GemFire's `cache.xml` file:
 </cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `SpringContextBootstrappingInitializer` class follows conventions
 similar to Spring's `ContextLoaderListener` class, which is used to
@@ -137,9 +106,7 @@ bootstrap a Spring `ApplicationContext` inside a web application, where
 `ApplicationContext` configuration files are specified with the
 `contextConfigLocations` Servlet context parameter.
 
-</div>
 
-<div class="paragraph">
 
 In addition, the `SpringContextBootstrappingInitializer` class can also
 be used with a `basePackages` parameter to specify a comma-separated
@@ -148,11 +115,8 @@ components. The Spring container searches these components to find and
 create Spring beans and other application components in the classpath,
 as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -171,22 +135,16 @@ as the following example shows:
 </cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, with a properly configured and constructed `CLASSPATH` and
 `cache.xml` file (shown earlier) specified as a command-line option when
 starting a GemFire server in *Gfsh*, the command-line would be
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 gfsh>start server --name=ExampleServer --log-level=config ...
@@ -194,11 +152,8 @@ gfsh>start server --name=ExampleServer --log-level=config ...
     --cache-xml-file="/path/to/geode/cache.xml"
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `application-context.xml` can be any valid Spring configuration
 metadata, including all of the SDG XML namespace elements. The
@@ -209,28 +164,21 @@ words, none of the `<gfe:cache/>` element attributes (such as
 `pdx-serializer-ref`, `lock-lease`, and others) can be specified. If
 used, these attributes are ignored.
 
-</div>
 
-<div class="paragraph">
 
 The reason for this is that GemFire itself has already created
 and initialized the cache before the initializer gets invoked. As a
 result, the cache already exists and, since it is a "singleton", it
 cannot be re-initialized or have any of its configuration augmented.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Lazy-wiring GemFire Components
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire already provides support for auto-wiring GemFire
 components (such as `CacheListeners`, `CacheLoaders`, `CacheWriters` and
@@ -240,9 +188,7 @@ in [\[apis:declarable:autowiring\]](#apis:declarable:autowiring).
 However, this works only when Spring is the one doing the bootstrapping
 (that is, when Spring bootstraps GemFire).
 
-</div>
 
-<div class="paragraph">
 
 When your Spring `ApplicationContext` is bootstrapped by
 GemFire, these GemFire application components go
@@ -252,9 +198,7 @@ GemFire calls the initializer block, which only occurs after
 all the other GemFire components (cache, Regions, and others)
 have already been created and initialized.
 
-</div>
 
-<div class="paragraph">
 
 To solve this problem, a new `LazyWiringDeclarableSupport` class was
 introduced. This new class is aware of the Spring `ApplicationContext`.
@@ -265,9 +209,7 @@ In essence, this gives your GemFire application components a
 chance to be configured and auto-wired with Spring beans defined in the
 Spring container.
 
-</div>
 
-<div class="paragraph">
 
 In order for your GemFire application components to be
 auto-wired by the Spring container, you should create an application
@@ -275,11 +217,8 @@ class that extends the `LazyWiringDeclarableSupport` and annotate any
 class member that needs to be provided as a Spring bean dependency,
 similar to the following example:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class UserDataSourceCacheLoader extends LazyWiringDeclarableSupport
@@ -292,11 +231,8 @@ public class UserDataSourceCacheLoader extends LazyWiringDeclarableSupport
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As implied in the `CacheLoader` example above, you might necessarily
 (though rarely) have defined both a Region and a `CacheListener`
@@ -305,19 +241,14 @@ access to an application Repository (or perhaps a JDBC `DataSource`
 defined in the Spring `ApplicationContext`) for loading `Users` into a
 GemFire `REPLICATE` Region on startup.
 
-</div>
 
-<div class="paragraph">
 
 CAUTION
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="paragraph">
 
 Be careful when mixing the different life-cycles of GemFire
 and the Spring container together in this manner. Not all use cases and
@@ -325,11 +256,8 @@ scenarios are supported. The GemFire `cache.xml` configuration
 would be similar to the following (which comes from SDG's test
 suite):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -360,19 +288,12 @@ suite):
 </cache>
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -380,6 +301,4 @@ suite):
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

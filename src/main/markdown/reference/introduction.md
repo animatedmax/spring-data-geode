@@ -2,16 +2,12 @@
 
 # Document Structure
 
-</div>
 
-<div id="content">
 
-<div class="paragraph">
 
 The following chapters explain the core functionality offered by
 Spring Data for GemFire:
 
-</div>
 
 <div class="ulist">
 
@@ -53,9 +49,7 @@ Spring Data for GemFire:
   distribution to illustrate the various features available in
   Spring Data for GemFire.
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -63,6 +57,4 @@ Spring Data for GemFire:
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

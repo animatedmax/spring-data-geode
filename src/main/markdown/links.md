@@ -2,9 +2,7 @@
 
 # Useful Links
 
-</div>
 
-<div id="content">
 
 <div class="ulist">
 
@@ -37,9 +35,7 @@
 - [GemFire on
   StackOverflow](https://stackoverflow.com/questions/tagged/gemfire)
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -47,6 +43,4 @@
 
 Last updated 2022-09-20 12:23:05 -0700
 
-</div>
 
-</div>

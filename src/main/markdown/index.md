@@ -12,32 +12,19 @@
 <span id="revnumber">version 2.3.9,</span> <span
 id="revdate">2022-09-20</span>
 
-</div>
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 © 2010-2022 The original authors.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Copies of this document may be made for your own use
@@ -48,32 +35,24 @@ Copyright Notice whether distributed in print or electronically.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
 # Preface
 
-<div class="paragraph">
 
 Spring Data for GemFire focuses on integrating the Spring
 Framework's powerful, non-invasive programming model and concepts with
 Apache Geode to simplify configuration and development of Java
 applications when using Apache Geode as you data management solution.
 
-</div>
 
-<div class="paragraph">
 
 This document assumes you already have a basic understanding of, and
 some familiarity with, the core Spring Framework and Apache Geode
 concepts.
 
-</div>
 
-<div class="paragraph">
 
 While every effort has been made to ensure this documentation is
 comprehensive and complete without errors, some topics are beyond the
@@ -85,61 +64,44 @@ please bring these issues to the attention of the Spring Data team by
 raising an appropriate [issue in
 JIRA](https://jira.spring.io/browse/SGF).
 
-</div>
 
 <div class="sect1">
 
 ## Introduction
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 The Spring Data for GemFire reference guide explains how to use the
 Spring Framework to configure and develop applications with Apache
 Geode. It presents the basic concepts and provides numerous examples to
 help you get started quickly.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Requirements
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire requires Java 8.0, [Spring
 Framework](https://spring.io/projects/spring-framework) 5 and [Apache
 Geode](https://geode.apache.org) 1.9.0.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## New Features
 
-<div class="sectionbody">
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
+
 Note
 </div></td>
 <td class="content">As of the 1.2.0.RELEASE, this project, formerly
@@ -151,7 +113,6 @@ and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect2">
 
@@ -188,9 +149,7 @@ and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
 - Added support in the Annotation configuration model for Off-Heap,
   Redis Adapter, and Apache Geode's new Security framework.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
@@ -215,9 +174,7 @@ and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
 
 - Updated docs.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
@@ -239,13 +196,9 @@ and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
 
 - Updated docs.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 # Reference Guide
 
@@ -253,14 +206,12 @@ and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
 
 ## Document Structure
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 The following chapters explain the core functionality offered by Spring
 Data for Apache Geode:
 
-</div>
 
 <div class="ulist">
 
@@ -304,19 +255,15 @@ Data for Apache Geode:
   the distribution to illustrate the various features available in
   Spring Data for GemFire.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Bootstrapping Apache Geode with the Spring Container
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire provides full configuration and
 initialization of the Apache Geode In-Memory Data Grid (IMDG) using the
@@ -326,18 +273,9 @@ Caches, Regions, Indexes, DiskStores, Functions, WAN Gateways,
 persistence backup, and several other Distributed System components to
 support a variety of application use cases with minimal effort.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">This section assumes basic familiarity with Apache
@@ -348,13 +286,11 @@ documentation</a>.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect2">
 
 ### Advantages of using Spring over Apache Geode `cache.xml`
 
-<div class="paragraph">
 
 Spring Data for GemFire's XML namespace supports full configuration
 of the Apache Geode In-Memory Data Grid (IMDG). The XML namespace is one
@@ -363,9 +299,7 @@ properly manage Apache Geode's lifecycle inside the Spring container.
 The other way to configure Apache Geode in a Spring context is by using
 [annotation-based configuration](#bootstrap-annotation-config).
 
-</div>
 
-<div class="paragraph">
 
 While support for Apache Geode's native `cache.xml` persists for legacy
 reasons, Apache Geode application developers who use XML configuration
@@ -379,9 +313,7 @@ Apache Geode makes extensive use of Spring's `FactoryBean` pattern to
 simplify the creation, configuration, and initialization of Apache Geode
 components.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode provides several callback interfaces, such as
 `CacheListener`, `CacheLoader`, and `CacheWriter`, that let developers
@@ -393,23 +325,18 @@ requires callbacks to implement Apache Geode's `Declarable` interface
 (see [Wiring `Declarable` Components](#apis:declarable) to see how you
 can still use `Declarables` within Spring's container).
 
-</div>
 
-<div class="paragraph">
 
 In addition, IDEs, such as the Spring Tool Suite (STS), provide
 excellent support for Spring XML namespaces, including code completion,
 pop-up annotations, and real time validation.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Using the Core Namespace
 
-<div class="paragraph">
 
 To simplify configuration, Spring Data for GemFire provides a
 dedicated XML namespace for configuring core Apache Geode components. It
@@ -418,18 +345,9 @@ is possible to configure beans directly by using Spring's standard
 the XML namespace, so there is little benefit to using raw bean
 definitions.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">For more information about XML Schema-based
@@ -440,18 +358,9 @@ in the Spring Framework reference documentation.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Spring Data Repository support uses a separate XML
@@ -462,18 +371,13 @@ Data for Apache Geode Repositories.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 To use the Spring Data for GemFire XML namespace, declare it in
 your Spring XML configuration meta-data, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -492,9 +396,7 @@ your Spring XML configuration meta-data, as the following example shows:
 </beans>
 ```
 
-</div>
 
-</div>
 
 <div class="colist arabic">
 
@@ -510,29 +412,16 @@ your Spring XML configuration meta-data, as the following example shows:
 
 4.  Example declaration using the XML namespace with the `gfe` prefix.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
-<td class="content"><div class="paragraph">
-<p>You can change the default namespace from <code>beans</code> to
+<td class="content"><p>You can change the default namespace from <code>beans</code> to
 <code>gfe</code>. This is useful for XML configuration composed mainly
 of Apache Geode components, as it avoids declaring the prefix. To do so,
 swap the namespace prefix declaration shown earlier, as the following
 example shows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
 <pre class="highlight"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;https://www.springframework.org/schema/geode&quot; &lt;!--(1)--&gt;
        xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot; &lt;!--(2)--&gt;
@@ -547,8 +436,6 @@ example shows:</p>
   &lt;cache ...&gt; &lt;!--(4)--&gt;
 
 &lt;/beans&gt;</code></pre>
-</div>
-</div>
 <div class="colist arabic">
 <ol>
 <li><p>The default namespace declaration for this XML document points to
@@ -565,15 +452,12 @@ lack of prefix since <code>gfe</code> is the default namespace.</p></li>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Using the Data Access Namespace
 
-<div class="paragraph">
 
 In addition to the core XML namespace (`gfe`), Spring Data for Apache
 Geode provides a data access XML namespace (`gfe-data`), which is
@@ -583,13 +467,11 @@ applications. This namespace currently contains support for Apache Geode
 [execution](#function-execution), as well as a `<datasource>` tag that
 offers a convenient way to connect to a Apache Geode cluster.
 
-</div>
 
 <div class="sect3">
 
 #### An Easy Way to Connect to Apache Geode
 
-<div class="paragraph">
 
 For many applications, a basic connection to a Apache Geode data grid
 using default values is sufficient. Spring Data for GemFire's
@@ -598,11 +480,8 @@ creates a `ClientCache` and connection `Pool`. In addition, it queries
 the cluster servers for all existing root Regions and creates an (empty)
 client Region proxy for each one.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:datasource>
@@ -610,11 +489,8 @@ client Region proxy for each one.
 </gfe-data:datasource>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `<datasource>` tag is syntactically similar to `<gfe:pool>`. It may
 be configured with one or more nested `locator` or `server` elements to
@@ -625,18 +501,13 @@ connected to the Locator, so they can be seamlessly referenced by Spring
 Data mapping annotations (`GemfireTemplate`) and autowired into
 application classes.
 
-</div>
 
-<div class="paragraph">
 
 Of course, you can explicitly configure client Regions. For example, if
 you want to cache data in local memory, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:datasource>
@@ -646,37 +517,23 @@ you want to cache data in local memory, as the following example shows:
 <gfe:client-region id="Example" shortcut="CACHING_PROXY"/>
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring a Cache
 
-<div class="paragraph">
 
 To use Apache Geode, you need to either create a new cache or connect to
 an existing one. With the current version of Apache Geode, you can have
 only one open cache per VM (more strictly speaking, per `ClassLoader`).
 In most cases, the cache should only be created once.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">This section describes the creation and
@@ -693,28 +550,20 @@ sections.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 A peer `Cache` with default configuration can be created with the
 following simple declaration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 During Spring container initialization, any `ApplicationContext`
 containing this cache definition registers a `CacheFactoryBean` that
@@ -724,9 +573,7 @@ or, if one does not already exist, a newly created one. Since no
 additional properties were specified, a newly created `Cache` applies
 the default cache configuration.
 
-</div>
 
-<div class="paragraph">
 
 All Spring Data for GemFire components that depend on the `Cache`
 respect this naming convention, so you need not explicitly declare the
@@ -735,21 +582,15 @@ by using the `cache-ref` attribute provided by various SDG XML namespace
 elements. Also, you can override the cache's bean name using the `id`
 attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache id="myCache"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 A Apache Geode `Cache` can be fully configured using Spring. However,
 Apache Geode's native XML configuration file, `cache.xml`, is also
@@ -758,37 +599,22 @@ configured natively, you can provide a reference to the Apache Geode XML
 configuration file by using the `cache-xml-location` attribute, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache id="cacheConfiguredWithNativeCacheXml" cache-xml-location="classpath:cache.xml"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this example, if a cache needs to be created, it uses a file named
 `cache.xml` located in the classpath root to configure it.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The configuration makes use of Spring's <a
@@ -801,28 +627,21 @@ location.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 In addition to referencing an external XML configuration file, you can
 also specify Apache Geode System
 [properties](https://geode.apache.org/docs/guide/19/reference/topics/gemfire_properties.html)
 that use any of Spring's `Properties` support features.
 
-</div>
 
-<div class="paragraph">
 
 For example, you can use the `properties` element defined in the `util`
 namespace to define `Properties` directly or load properties from a
 properties file, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -843,27 +662,15 @@ properties file, as follows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Using a properties file is recommended for externalizing
 environment-specific settings outside the application configuration.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Cache settings apply only when a new cache needs to
@@ -873,23 +680,18 @@ are ignored.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect3">
 
 #### Advanced Cache Configuration
 
-<div class="paragraph">
 
 For advanced cache configuration, the `cache` element provides a number
 of configuration options exposed as attributes or child elements, as the
 following listing shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <!--(1)-->
@@ -927,9 +729,7 @@ following listing shows:
 </gfe:cache>
 ```
 
-</div>
 
-</div>
 
 <div class="colist arabic">
 
@@ -987,13 +787,11 @@ following listing shows:
 8.  Declares a JNDI binding to enlist an external DataSource in a Apache
     Geode transaction.
 
-</div>
 
 <div class="sect4">
 
 ##### Enabling PDX Serialization
 
-<div class="paragraph">
 
 The preceding example includes a number of attributes related to Apache
 Geode's enhanced serialization framework, PDX. While a complete
@@ -1001,9 +799,7 @@ discussion of PDX is beyond the scope of this reference guide, it is
 important to note that PDX is enabled by registering a `PdxSerializer`,
 which is specified by setting the `pdx-serializer` attribute.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode provides an implementing class
 (`org.apache.geode.pdx.ReflectionBasedAutoSerializer`) that uses Java
@@ -1011,29 +807,22 @@ Reflection. However, it is common for developers to provide their own
 implementation. The value of the attribute is simply a reference to a
 Spring bean that implements the `PdxSerializer` interface.
 
-</div>
 
-<div class="paragraph">
 
 More information on serialization support can be found in [Working with
 Apache Geode Serialization](#serialization).
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### Enabling Auto-reconnect
 
-<div class="paragraph">
 
 You should be careful when setting the
 `<gfe:cache enable-auto-reconnect="[true|false*]>` attribute to `true`.
 
-</div>
 
-<div class="paragraph">
 
 Generally, 'auto-reconnect' should only be enabled in cases where Spring
 Data for Apache Geode's XML namespace is used to configure and bootstrap
@@ -1043,9 +832,7 @@ Apache Geode is used to develop and build a Apache Geode application
 that also happens to be a peer `Cache` member of the Apache Geode
 cluster.
 
-</div>
 
-<div class="paragraph">
 
 The main reason for this restriction is that most Apache Geode
 applications use references to the Apache Geode `Cache` or Regions in
@@ -1059,9 +846,7 @@ independent distributed system, the peer member shuts down and all
 Apache Geode component references (caches, Regions, and others) become
 invalid.
 
-</div>
 
-<div class="paragraph">
 
 Essentially, the current forced disconnect processing logic in each peer
 member dismantles the system from the ground up. The JGroups stack shuts
@@ -1069,9 +854,7 @@ down, the distributed system is put in a shutdown state and, finally,
 the cache is closed. Effectively, all memory references become stale and
 are lost.
 
-</div>
 
-<div class="paragraph">
 
 After being disconnected from the distributed system, a peer member
 enters a "reconnecting" state and periodically attempts to rejoin the
@@ -1082,18 +865,14 @@ caches, Regions, and other Apache Geode components are reconstructed.
 Therefore, all old references, which may have been injected into
 application by the Spring container, are now stale and no longer valid.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode makes no guarantee (even when using the Apache Geode public
 Java API) that application cache, Regions, or other component references
 are automatically refreshed by the reconnect operation. As such, Apache
 Geode applications must take care to refresh their own references.
 
-</div>
 
-<div class="paragraph">
 
 Unfortunately, there is no way to be notified of a disconnect event and,
 subsequently, a reconnect event either. If that were the case, you would
@@ -1102,22 +881,17 @@ have a clean way to know when to call
 for an application to do so, which is why this "feature" of Apache Geode
 is not recommended for peer `Cache` applications.
 
-</div>
 
-<div class="paragraph">
 
 For more information about 'auto-reconnect', see Apache Geode's [product
 documentation](https://geode.apache.org/docs/guide/19/managing/autoreconnect/member-reconnect.html).
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### Using Cluster-based Configuration
 
-<div class="paragraph">
 
 Apache Geode's Cluster Configuration Service is a convenient way for any
 peer member joining the cluster to get a "consistent view" of the
@@ -1126,9 +900,7 @@ Locator. Using the cluster-based configuration ensures the peer member's
 configuration is compatible with the Apache Geode Distributed System
 when the member joins.
 
-</div>
 
-<div class="paragraph">
 
 This feature of Spring Data for GemFire (setting the
 `use-cluster-configuration` attribute to `true`) works in the same way
@@ -1137,9 +909,7 @@ Geode configuration meta-data comes from the network through a Locator,
 as opposed to a native `cache.xml` file residing in the local file
 system.
 
-</div>
 
-<div class="paragraph">
 
 All Apache Geode native configuration metadata, whether from `cache.xml`
 or from the Cluster Configuration Service, gets applied before any
@@ -1147,37 +917,22 @@ Spring (XML) configuration metadata. As a result, Spring's config serves
 to "augment" the native Apache Geode configuration metadata and would
 most likely be specific to the application.
 
-</div>
 
-<div class="paragraph">
 
 Again, to enable this feature, specify the following in the Spring XML
 config:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache use-cluster-configuration="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">While certain Apache Geode tools, such as
@@ -1191,25 +946,19 @@ too, is not recorded.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 For more information on Apache Geode's Cluster Configuration Service,
 see the [product
 documentation](https://geode.apache.org/docs/guide/19/configuring/cluster_config/gfsh_persist.html).
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring a Apache Geode CacheServer
 
-<div class="paragraph">
 
 Spring Data for GemFire includes dedicated support for configuring```highlight
 a
@@ -1217,11 +966,8 @@ a
 allowing complete configuration through the Spring container, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1252,27 +998,15 @@ following example shows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding configuration shows the `cache-server` element and the
 many available options.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Rather than hard-coding the port, this configuration
@@ -1294,18 +1028,9 @@ machines.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">To avoid initialization problems, the
@@ -1321,15 +1046,12 @@ right away.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### <a name="configuring-gemfire-clientcache">Configuring a Apache Geode ClientCache
 
-<div class="paragraph">
 
 In addition to defining a Apache Geode peer
 [`Cache`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/Cache.html),
@@ -1341,18 +1063,13 @@ configuration and use to the Apache Geode peer [Cache](#bootstrap:cache)
 and is supported by the
 `org.springframework.data.gemfire.client.ClientCacheFactoryBean`.
 
-</div>
 
-<div class="paragraph">
 
 The simplest definition of a Apache Geode cache client using default
 configuration follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -1360,11 +1077,8 @@ configuration follows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 `client-cache` supports many of the same options as the
 [Cache](#bootstrap:cache:advanced) element. However, as opposed to a
@@ -1374,27 +1088,20 @@ a server running on `localhost` and listening to port `40404`. The
 default Pool is used by all client Regions unless the Region is
 configured to use a specific Pool.
 
-</div>
 
-<div class="paragraph">
 
 Pools can be defined with the `pool` element. This client-side Pool can
 be used to configure connectivity directly to a server for individual
 entities or for the entire cache through one or more Locators.
 
-</div>
 
-<div class="paragraph">
 
 For example, to customize the default Pool used by the `client-cache`,
 the developer needs to define a Pool and wire it to the cache
 definition, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -1406,40 +1113,30 @@ definition, as the following example shows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `<client-cache>` element also has a `ready-for-events` attribute. If
 the attribute is set to `true`, the client cache initialization includes
 a call to
 [`ClientCache.readyForEvents()`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/client/ClientCache.html#readyForEvents).
 
-</div>
 
-<div class="paragraph">
 
 [Client Region](#bootstrap:region:client) covers client-side
 configuration in more detail.
 
-</div>
 
 <div class="sect4">
 
 ##### Apache Geode's DEFAULT Pool and Spring Data for GemFire Pool Definitions
 
-<div class="paragraph">
 
 If a Apache Geode `ClientCache` is local-only, then no Pool definition
 is required. For instance, you can define the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache/>
@@ -1447,11 +1144,8 @@ is required. For instance, you can define the following:
 <gfe:client-region id="Example" shortcut="LOCAL"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this case, the "Example" Region is `LOCAL` and no data is distributed
 between the client and a server. Therefore, no Pool is necessary. This
@@ -1460,27 +1154,20 @@ Geode's
 [`ClientRegionShortcut`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/client/ClientRegionShortcut.html)
 (all `LOCAL_*` shortcuts).
 
-</div>
 
-<div class="paragraph">
 
 However, if a client Region is a (caching) proxy to a server-side
 Region, a Pool is required. In that case, there are several ways to
 define and use a Pool.
 
-</div>
 
-<div class="paragraph">
 
 When a `ClientCache`, a Pool, and a proxy-based Region are all defined
 but not explicitly identified, Spring Data for GemFire resolves the
 references automatically, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache/>
@@ -1492,11 +1179,8 @@ references automatically, as the following example shows:
 <gfe:client-region id="Example" shortcut="PROXY"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In the preceding example, the `ClientCache` is identified as
 `gemfireCache`, the Pool as `gemfirePool`, and the client Region as
@@ -1504,18 +1188,13 @@ In the preceding example, the `ClientCache` is identified as
 `DEFAULT` Pool from `gemfirePool`, and the client Region uses the
 `gemfirePool` when distributing data between the client and the server.
 
-</div>
 
-<div class="paragraph">
 
 Basically, Spring Data for GemFire resolves the preceding
 configuration to the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache id="gemfireCache" pool-name="gemfirePool"/>
@@ -1527,11 +1206,8 @@ configuration to the following:
 <gfe:client-region id="Example" cache-ref="gemfireCache" pool-name="gemfirePool" shortcut="PROXY"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode still creates a Pool called `DEFAULT`. Spring Data for
 Apache Geode causes the `DEFAULT` Pool to be initialized from the
@@ -1539,17 +1215,12 @@ Apache Geode causes the `DEFAULT` Pool to be initialized from the
 defined and client Regions are using separate Pools, or do not declare a
 Pool at all.
 
-</div>
 
-<div class="paragraph">
 
 Consider the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache pool-name="locatorPool"/>
@@ -1569,11 +1240,8 @@ Consider the following:
 <gfe:client-region id="YetAnotherExample" shortcut="LOCAL"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this setup, the Apache Geode `client-cache` `DEFAULT` pool is
 initialized from `locatorPool`, as specified by the `pool-name`
@@ -1581,34 +1249,21 @@ attribute. There is no Spring Data for GemFire-defined
 `gemfirePool`, since both Pools were explicitly identified
 (named) — `locatorPool` and `serverPool`, respectively.
 
-</div>
 
-<div class="paragraph">
 
 The "Example" Region explicitly refers to and exclusively uses the
 `serverPool`. The `AnotherExample` Region uses Apache Geode's `DEFAULT`
 Pool, which, again, was configured from the `locatorPool` based on the
 client cache bean definition's `pool-name` attribute.
 
-</div>
 
-<div class="paragraph">
 
 Finally, the `YetAnotherExample` Region does not use a Pool, because it
 is `LOCAL`.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>AnotherExample</code> Region would first
@@ -1621,18 +1276,9 @@ require the definition of an anonymous Pool bean (that is,
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">If we either changed the name of
@@ -1643,19 +1289,14 @@ preceding configuration.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring a Region
 
-<div class="paragraph">
 
 A Region is required to store and retrieve data from the cache.
 `org.apache.geode.cache.Region` is an interface extending
@@ -1665,13 +1306,10 @@ require it so the actual Region type is decoupled from the programming
 model. Typically, each Region is associated with one domain object,
 similar to a table in a relational database.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode implements the following types of Regions:
 
-</div>
 
 <div class="ulist">
 
@@ -1694,22 +1332,18 @@ Apache Geode implements the following types of Regions:
   to stay up-to-date (synchronized) with changes originating from remote
   processes that access the same server Region.
 
-</div>
 
-<div class="paragraph">
 
 For more information about the various Region types and their
 capabilities as well as configuration options, please refer to Apache
 Geode's documentation on [Region
 Types](https://geode.apache.org/docs/guide/19/developing/region_options/region_types.html).
 
-</div>
 
 <div class="sect3">
 
 #### Using an externally configured Region
 
-<div class="paragraph">
 
 To reference Regions already configured in a Apache Geode native
 `cache.xml` file, use the `lookup-region` element. Simply declare the
@@ -1717,50 +1351,32 @@ target Region name with the `name` attribute. For example, to declare a
 bean definition identified as `ordersRegion` for an existing Region
 named `Orders`, you can use the following bean definition:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:lookup-region id="ordersRegion" name="Orders"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 If `name` is not specified, the bean's `id` will be used as the name of
 the Region. The example above becomes:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <!-- lookup for a Region called 'Orders' -->
 <gfe:lookup-region id="Orders"/>
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock caution">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Caution
 </div></td>
 <td class="content">If the Region does not exist, an initialization
@@ -1770,59 +1386,43 @@ appropriate sections below.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 In the previous examples, since no cache name was explicitly defined,
 the default naming convention (`gemfireCache`) was used. Alternately,
 one can reference the cache bean with the `cache-ref` attribute:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache id="myCache"/>
 <gfe:lookup-region id="ordersRegion" name="Orders" cache-ref="myCache"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 `lookup-region` lets you retrieve existing, pre-configured Regions
 without exposing the Region semantics or setup infrastructure.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Auto Region Lookup
 
-<div class="paragraph">
 
 `auto-region-lookup` lets you import all Regions defined in a Apache
 Geode native `cache.xml` file into a Spring `ApplicationContext` when
 you use the `cache-xml-location` attribute on the `<gfe:cache>` element.
 
-</div>
 
-<div class="paragraph">
 
 For instance, consider the following `cache.xml` file:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1838,59 +1438,42 @@ For instance, consider the following `cache.xml` file:
 </cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can import the preceding `cache.xml` file as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache cache-xml-location="cache.xml"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can then use the `<gfe:lookup-region>` element (for example,
 `<gfe:lookup-region id="Parent"/>`) to reference specific Regions as
 beans in the Spring container, or you can choose to import all Regions
 defined in `cache.xml` by using the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:auto-region-lookup/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire automatically creates beans for all Apache
 Geode Regions defined in `cache.xml` that have not been explicitly added
 to the Spring container with explicit `<gfe:lookup-region>` bean
 declarations.
 
-</div>
 
-<div class="paragraph">
 
 It is important to realize that Spring Data for GemFire uses a
 Spring
@@ -1899,20 +1482,15 @@ to post-process the cache after it is both created and initialized to
 determine the Regions defined in Apache Geode to add as beans in the
 Spring `ApplicationContext`.
 
-</div>
 
-<div class="paragraph">
 
 You may inject these "auto-looked-up" Regions as you would any other
 bean defined in the Spring `ApplicationContext`, with one exception: You
 may need to define a `depends-on` association with the ‘gemfireCache'
 bean, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -1933,56 +1511,41 @@ public class ApplicationDao extends DaoSupport {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding example only applies when you use Spring's
 `component-scan` functionality.
 
-</div>
 
-<div class="paragraph">
 
 If you declare your components by using Spring XML config, then you
 would do the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean class="example.ApplicationDao" depends-on="gemfireCache"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Doing so ensures that the Apache Geode cache and all the Regions defined
 in `cache.xml` get created before any components with auto-wire
 references when using the `<gfe:auto-region-lookup>` element.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Regions
 
-<div class="paragraph">
 
 Spring Data for GemFire provides comprehensive support for
 configuring any type of Region through the following elements:
 
-</div>
 
 <div class="ulist">
 
@@ -1994,25 +1557,20 @@ configuring any type of Region through the following elements:
 
 - Client Region: `<client-region>`
 
-</div>
 
-<div class="paragraph">
 
 See the Apache Geode documentation for a comprehensive description of
 [Region
 Types](https://geode.apache.org/docs/guide/19/developing/region_options/region_types.html).
 
-</div>
 
 <div class="sect4">
 
 ##### Common Region Attributes
 
-<div class="paragraph">
 
 The following table lists the attributes available for all Region types:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 1. Common Region Attributes</caption>
@@ -2201,13 +1759,11 @@ type.</p></td>
 
 Table 1. Common Region Attributes
 
-</div>
 
 <div class="sect4">
 
 ##### `CacheListener` instances
 
-<div class="paragraph">
 
 `CacheListener` instances are registered with a Region to handle Region
 events, such as when entries are created, updated, destroyed, and so on.
@@ -2216,19 +1772,14 @@ A `CacheListener` can be any bean that implements the
 interface. A Region may have multiple listeners, declared with the
 `cache-listener` element nested in the containing `*-region` element.
 
-</div>
 
-<div class="paragraph">
 
 The following example has two declared `CacheListener's`. The first
 references a named, top-level Spring bean. The second is an anonymous
 inner bean definition.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="myListener" class="org.example.app.geode.cache.SimpleCacheListener"/>
@@ -2243,29 +1794,21 @@ inner bean definition.
 </gfe:replicated-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The following example uses an alternate form of the `cache-listener`
 element with the `ref` attribute. Doing so allows for more concise
 configuration when defining a single `CacheListener`.
 
-</div>
 
-<div class="paragraph">
 
 Note: The XML namespace allows only a single `cache-listener` element,
 so either the style shown in the preceding example or the style in the
 following example must be used.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -2277,20 +1820,11 @@ following example must be used.
 </beans>
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">Using <code>ref</code> and a nested declaration in
@@ -2301,24 +1835,13 @@ exception.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><div class="title">
 Bean Reference Conventions
-</div>
-<div class="paragraph">
 <p>The <code>cache-listener</code> element is an example of a common
 pattern used in the XML namespace anywhere Apache Geode provides a
 callback interface to be implemented to invoke custom code in
@@ -2338,23 +1861,18 @@ configuration example.</p>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### CacheLoaders and CacheWriters
 
-<div class="paragraph">
 
 Similar to `cache-listener`, the XML namespace provides `cache-loader`
 and `cache-writer` elements to register these Apache Geode components
 for a Region.
 
-</div>
 
-<div class="paragraph">
 
 A `CacheLoader` is invoked on a cache miss to let an entry be loaded
 from an external data source, such as a database. A `CacheWriter` is
@@ -2363,18 +1881,13 @@ synchronized to an external data source. The main difference is that
 Apache Geode supports, at most, a single instance of `CacheLoader` and
 `CacheWriter` per Region. However, either declaration style may be used.
 
-</div>
 
-<div class="paragraph">
 
 The following example declares a Region with both a `CacheLoader` and a
 `CacheWriter`:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -2393,11 +1906,8 @@ The following example declares a Region with both a `CacheLoader` and a
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See
 [`CacheLoader`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CacheLoader.html)
@@ -2405,17 +1915,13 @@ and
 [`CacheWriter`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CacheWriter.html)
 in the Apache Geode documentation for more details.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Compression
 
-<div class="paragraph">
 
 Apache Geode Regions may also be compressed to reduce JVM
 memory consumption and pressure to possibly avoid global GCs. When you
@@ -2426,17 +1932,12 @@ decompressed automatically when read back from the Region. Values are
 not compressed when persisted to disk or when sent over the wire to
 other peer members or clients.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a Region with compression enabled:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -2448,24 +1949,18 @@ The following example shows a Region with compression enabled:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's documentation for more information on [Region
 Compression](https://geode.apache.org/docs/guide/19/managing/region_compression/region_compression.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Off-Heap
 
-<div class="paragraph">
 
 Apache Geode Regions may also be configured to store Region values in
 off-heap memory, which is a portion of JVM memory that is not subject to
@@ -2473,19 +1968,14 @@ Garbage Collection (GC). By avoid expensive GC cycles, your application
 can spend more of its time on things that matter, like processing
 requests.
 
-</div>
 
-<div class="paragraph">
 
 Using off-heap memory is as simple as declaring the amount of memory to
 use and then enabling your Regions to use off-heap memory, as shown in
 the following configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <util:properties id="gemfireProperties">
@@ -2497,31 +1987,22 @@ the following configuration:
 <gfe:partitioned-region id="ExampleOffHeapRegion" off-heap="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can control other aspects of off-heap memory management by setting
 the following Apache Geode configuration properties using the
 `<gfe:cache>` element:s
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache critical-off-heap-percentage="90" eviction-off-heap-percentage"80"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode's `ResourceManager` will use these two threshold values
 (`critical-off-heap-percentage` & `eviction-off-heap-percentage`) to
@@ -2532,37 +2013,28 @@ old data. If the off-heap manager is unable to keep up, then the
 `ResourceManager` refuses additions to the cache until the off-heap
 memory manager has freed up an adequate amount of memory.
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's documentation for more information on [Managing Heap
 and Off-Heap
 Memory](https://geode.apache.org/docs/guide/19/managing/heap_use/heap_management.html).
 
-</div>
 
-<div class="paragraph">
 
 Specifically, read the section, [Managing Off-Heap
 Memory](https://geode.apache.org/docs/guide/19/managing/heap_use/off_heap_management.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Subregions
 
-<div class="paragraph">
 
 Spring Data for GemFire also supports Sub-Regions, allowing Regions
 to be arranged in a hierarchical relationship.
 
-</div>
 
-<div class="paragraph">
 
 For example, Apache Geode allows for a `/Customer/Address` Region and a
 different `/Employee/Address` Region. Additionally, a Sub-Region may
@@ -2573,11 +2045,8 @@ naturally declared as a child element of a Region. The Sub-Region's
 `name` attribute is the simple name. The preceding example might be
 configured as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -2591,11 +2060,8 @@ configured as follows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Note that the `Monospaced ([id])` attribute is not permitted for a
 Sub-Region. Sub-Regions are created with bean names (/Customer/Address
@@ -2604,34 +2070,26 @@ injected into other application beans, such as a `GemfireTemplate`, that
 need them by using the full path name of the Region. The full pathname
 of the Region should also be used in OQL query strings.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Region Templates
 
-<div class="paragraph">
 
 Spring Data for GemFire also supports Region templates.
 
-</div>
 
-<div class="paragraph">
 
 This feature allows developers to define common Region configuration and
 attributes once and reuse the configuration among many Region bean
 definitions declared in the Spring `ApplicationContext`.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire includes five Region template tags in its
 namespace:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 2. Region Template Tags</caption>
@@ -2686,7 +2144,6 @@ namespace.</p></td>
 
 Table 2. Region Template Tags
 
-<div class="paragraph">
 
 In addition to the tags, concrete `<gfe:*-region>` elements (along with
 the abstract `<gfe:*-region-template>` elements) have a `template`
@@ -2694,17 +2151,12 @@ attribute used to define the Region template from which the Region
 inherits its configuration. Region templates may even inherit from other
 Region templates.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows one possible configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -2747,11 +2199,8 @@ The following example shows one possible configuration:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Region templates work for Sub-Regions as well. Notice that
 'TemplateBasedPartitionRegion' extends 'PartitionRegionTemplate', which
@@ -2759,13 +2208,11 @@ extends 'ExtendedRegionTemplate', which extends 'BaseRegionTemplate'.
 Attributes and sub-elements defined in subsequent, inherited Region bean
 definitions override what is in the parent.
 
-</div>
 
 <div class="sect4">
 
 ##### How Templating Works
 
-<div class="paragraph">
 
 Spring Data for GemFire applies Region templates when the Spring
 `ApplicationContext` configuration metadata is parsed, and therefore,
@@ -2774,18 +2221,10 @@ words, parent templates must be defined before child templates. Doing so
 ensures that the proper configuration is applied, especially when
 element attributes or sub-elements are overridden.
 
-</div>
 
 <div class="admonitionblock important">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Important
 </div></td>
 <td class="content">It is equally important to remember that the Region
@@ -2797,18 +2236,9 @@ instance, it is not possible for a
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Region templates are single-inheritance.</td>
@@ -2816,15 +2246,12 @@ Note
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### Caution concerning Regions, Sub-Regions and Lookups
 
-<div class="paragraph">
 
 Previously, one of the underlying properties of the `replicated-region`,
 `partitioned-region`, `local-region`, and `client-region` elements in
@@ -2835,9 +2262,7 @@ defined in an imported Apache Geode native `cache.xml` configuration
 file. Therefore, the lookup was performed first to avoid any errors.
 This was by design and subject to change.
 
-</div>
 
-<div class="paragraph">
 
 This behavior has been altered and the default behavior is now to create
 the Region first. If the Region already exists, then the creation logic
@@ -2850,18 +2275,10 @@ attempting to create the Region. If an existing Region is found by name
 and `ignore-if-exists` is set to `true`, then the Region bean definition
 defined in Spring configuration is ignored.
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">The Spring team highly recommends that the
@@ -2880,18 +2297,10 @@ when, in fact, the existing Region definition is local only.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock important">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Important
 </div></td>
 <td class="content">Recommended Practice - Use only
@@ -2902,18 +2311,13 @@ elements to define new Regions.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Consider the following native Apache Geode `cache.xml` configuration
 file:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2933,20 +2337,14 @@ file:
 </cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Further, consider that you may have defined an application DAO as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class CustomerAccountDao extends GemDaoSupport {
@@ -2958,22 +2356,16 @@ public class CustomerAccountDao extends GemDaoSupport {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Here, we inject a reference to the `Customers/Accounts` Region in our
 application DAO. Consequently, it is not uncommon for a developer to
 define beans for some or all of these Regions in Spring XML
 configuration metadata as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2993,11 +2385,8 @@ configuration metadata as follows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `Customers/Accounts` and `Customers/Accounts/Orders` Regions are
 referenced as beans in the Spring container as `Customers/Accounts` and
@@ -3007,18 +2396,13 @@ earlier) is that it lets you reference a Sub-Region directly without
 unnecessarily defining a bean for the parent Region (`Customers`, in
 this case).
 
-</div>
 
-<div class="paragraph">
 
 Consider the following bad example, which changes the configuration
 metadata syntax to use the nested format:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:lookup-region name="Customers">
@@ -3028,21 +2412,15 @@ metadata syntax to use the nested format:
 </gfe:lookup-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Now consider another bad example which uses the top-level
 `replicated-region` element along with the `ignore-if-exists` attribute
 set to perform a lookup first:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:replicated-region name="Customers" persistent="true" ignore-if-exists="true">
@@ -3052,11 +2430,8 @@ set to perform a lookup first:
 </gfe:replicated-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The Region beans defined in the Spring `ApplicationContext` consist of
 the following:
@@ -3067,9 +2442,7 @@ broken, since no bean with name `Customers/Accounts` is actually
 defined. For this reason, you should not configure Regions as shown in
 the two preceding examples.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode is flexible in referencing both parent Regions and
 Sub-Regions with or without the leading forward slash. For example, the
@@ -3079,30 +2452,22 @@ Apache Geode is very specific when it comes to naming beans after
 Regions. It always uses the forward slash (/) to represent Sub-Regions
 (for example, `/Customers/Accounts`).
 
-</div>
 
-<div class="paragraph">
 
 Therefore, you should use the non-nested `lookup-region` syntax shown
 earlier or define direct references with a leading forward slash (/), as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:lookup-region name="/Customers/Accounts"/>
 <gfe:lookup-region name="/Customers/Accounts/Orders"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The earlier example, where the nested `replicated-region` elements were
 used to reference the Sub-Regions, shows the problem stated earlier. Are
@@ -3112,17 +2477,13 @@ native Apache Geode `cache.xml` configuration file as `REPLICATE` and
 exist before the cache bean is initialized (once the `<gfe:cache>`
 element is processed).
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Data Eviction (with Overflow)
 
-<div class="paragraph">
 
 Based on various constraints, each Region can have an eviction policy in
 place for evicting data from memory. Currently, in Apache Geode,
@@ -3131,27 +2492,20 @@ eviction applies to the Least Recently Used entry (also known as
 Evicted entries are either destroyed or paged to disk (referred to as
 "overflow to disk").
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire supports all eviction policies (entry
 count, memory, and heap usage) for PARTITION Regions, REPLICATE Regions,
 and client, local Regions by using the nested `eviction` element.
 
-</div>
 
-<div class="paragraph">
 
 For example, to configure a PARTITION Region to overflow to disk if the
 memory size exceeds more than 512 MB, you can specify the following
 configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="examplePartitionRegionWithEviction">
@@ -3159,20 +2513,11 @@ configuration:
 </gfe:partitioned-region>
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock important">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Important
 </div></td>
 <td class="content">Replicas cannot use <code>local destroy</code>
@@ -3182,43 +2527,33 @@ more information.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 When configuring Regions for overflow, you should configure the storage
 through the `disk-store` element for maximum efficiency.
 
-</div>
 
-<div class="paragraph">
 
 For a detailed description of eviction policies, see the Apache Geode
 documentation on
 [Eviction](https://geode.apache.org/docs/guide/19/developing/eviction/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Data Expiration
 
-<div class="paragraph">
 
 Apache Geode lets you control how long entries exist in the cache.
 Expiration is driven by elapsed time, as opposed to eviction, which is
 driven by the entry count or heap or memory usage. Once an entry
 expires, it may no longer be accessed from the cache.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode supports the following expiration types:
 
-</div>
 
 <div class="ulist">
 
@@ -3236,27 +2571,20 @@ Apache Geode supports the following expiration types:
   counter for a Region is reset whenever the Idle Timeout is reset for
   one of its entries.
 
-</div>
 
-<div class="paragraph">
 
 Each of these may be applied to the Region itself or to entries in the
 Region. Spring Data for GemFire provides `<region-ttl>`,
 `<region-tti>`, `<entry-ttl>`, and `<entry-tti>` Region child elements
 to specify timeout values and expiration actions.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a `PARTITION` Region with expiration values
 set:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="examplePartitionRegionWithExpiration">
@@ -3265,23 +2593,18 @@ set:
 </gfe:replicated-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 For a detailed description of expiration policies, see the Apache Geode
 documentation on
 [expiration](https://geode.apache.org/docs/guide/19/developing/expiration/chapter_overview.html).
 
-</div>
 
 <div class="sect4">
 
 ##### Annotation-based Data Expiration
 
-<div class="paragraph">
 
 With Spring Data for GemFire, you can define expiration policies
 and settings on individual Region entry values (or, to put it
@@ -3289,11 +2612,8 @@ differently, directly on application domain objects). For instance, you
 can define expiration policies on a Session-based application domain
 object as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Expiration(timeout = "1800", action = "INVALIDATE")
@@ -3302,22 +2622,16 @@ public class SessionBasedApplicationDomainObject {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can also specify expiration type specific settings on Region entries
 by using the `@IdleTimeoutExpiration` and `@TimeToLiveExpiration`
 annotations for Idle Timeout (TTI) and Time-to-Live (TTL) expiration,
 respectively, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @TimeToLiveExpiration(timeout = "3600", action = "LOCAL_DESTROY")
@@ -3328,11 +2642,8 @@ public class AnotherSessionBasedApplicationDomainObject {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Both `@IdleTimeoutExpiration` and `@TimeToLiveExpiration` take
 precedence over the generic `@Expiration` annotation when more than one
@@ -3341,42 +2652,26 @@ example. Neither `@IdleTimeoutExpiration` nor `@TimeToLiveExpiration`
 overrides the other. Rather, they compliment each other when different
 Region entry expiration policies, such as TTL and TTI, are configured.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
-<td class="content"><div class="paragraph">
-<p>All <code>@Expiration</code>-based annotations apply only to Region
+<td class="content"><p>All <code>@Expiration</code>-based annotations apply only to Region
 entry values. Expiration for a Region is not covered by Spring Data for
 Apache Geode's expiration annotation support. However, Apache Geode and
 Spring Data for GemFire do let you set Region expiration by using
 the SDG XML namespace, as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
 <pre class="highlight"><code>&lt;gfe:*-region id=&quot;Example&quot; persistent=&quot;false&quot;&gt;
   &lt;gfe:region-ttl timeout=&quot;600&quot; action=&quot;DESTROY&quot;/&gt;
   &lt;gfe:region-tti timeout=&quot;300&quot; action=&quot;INVALIDATE&quot;/&gt;
 &lt;/gfe:*-region&gt;</code></pre>
-</div>
 </div></td>
 </tr>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's `@Expiration` annotation support is
 implemented with Apache Geode's
@@ -3385,24 +2680,19 @@ interface. See Apache Geode's documentation on [configuring data
 expiration](https://geode.apache.org/docs/guide/19/developing/expiration/configuring_data_expiration.html)
 for more details
 
-</div>
 
-<div class="paragraph">
 
 The Spring Data for GemFire `AnnotationBasedExpiration` class (and
 `CustomExpiry` implementation) is responsible for processing the SDG
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
 
-</div>
 
-<div class="paragraph">
 
 To use Spring Data for GemFire to configure specific Apache Geode
 Regions to appropriately apply the expiration policy to your application
 domain objects annotated with `@Expiration`-based annotations, you must:
 
-</div>
 
 <div class="olist arabic">
 
@@ -3413,10 +2703,8 @@ domain objects annotated with `@Expiration`-based annotations, you must:
     Time-to-Live (TTL), you should use one of the factory methods in the
     `AnnotationBasedExpiration` class, as follows:
 
-    <div class="listingblock">
-
-    <div class="content">
-
+    
+    
     ``` highlight
     <bean id="ttlExpiration" class="org.springframework.data.gemfire.expiration.AnnotationBasedExpiration"
           factory-method="forTimeToLive"/>
@@ -3426,12 +2714,9 @@ domain objects annotated with `@Expiration`-based annotations, you must:
     </gfe:partitioned-region>
     ```
 
-    </div>
-
-    </div>
-
-    <div class="admonitionblock note">
-
+    
+    
+    
     <table>
     <colgroup>
     <col style="width: 50%" />
@@ -3442,8 +2727,7 @@ domain objects annotated with `@Expiration`-based annotations, you must:
     <td class="icon"><div class="title">
     Note
     </div></td>
-    <td class="content"><div class="paragraph">
-    <p>To configure Idle Timeout (TTI) Expiration instead, use the
+    <td class="content">    <p>To configure Idle Timeout (TTI) Expiration instead, use the
     <code>forIdleTimeout</code> factory method along with the
     <code>&lt;gfe:custom-entry-tti ref="ttiExpiration"/&gt;</code> element
     to set TTI.</p>
@@ -3452,8 +2736,7 @@ domain objects annotated with `@Expiration`-based annotations, you must:
     </tbody>
     </table>
 
-    </div>
-
+    
 2.  (optional) Annotate your application domain objects that are stored
     in the Region with expiration policies and custom settings by using
     one of Spring Data for GemFire's `@Expiration` annotations:
@@ -3467,11 +2750,8 @@ domain objects annotated with `@Expiration`-based annotations, you must:
     can set "default" expiration attributes on the
     `AnnotationBasedExpiration` bean by doing the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="defaultExpirationAttributes" class="org.apache.geode.cache.ExpirationAttributes">
@@ -3489,11 +2769,8 @@ domain objects annotated with `@Expiration`-based annotations, you must:
 </gfe:partitioned-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You may have noticed that Spring Data for GemFire's `@Expiration`
 annotations use a `String` as the attribute type rather than, and
@@ -3501,27 +2778,20 @@ perhaps more appropriately, being strongly typed — for example, `int`
 for 'timeout' and SDG's `ExpirationActionType` for 'action'. Why is
 that?
 
-</div>
 
-<div class="paragraph">
 
 Well, enter one of Spring Data for GemFire's other features,
 leveraging Spring's core infrastructure for configuration convenience:
 property placeholders and Spring Expression Language (SpEL) expressions.
 
-</div>
 
-<div class="paragraph">
 
 For instance, a developer can specify both the expiration 'timeout' and
 'action' by using property placeholders in the `@Expiration` annotation
 attributes, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @TimeToLiveExpiration(timeout = "${geode.region.entry.expiration.ttl.timeout}"
@@ -3531,20 +2801,14 @@ public class ExampleApplicationDomainObject {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, in your Spring XML config or in JavaConfig, you can declare the
 following beans:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <util:properties id="expirationSettings">
@@ -3556,19 +2820,14 @@ following beans:
 <context:property-placeholder properties-ref="expirationProperties"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This is convenient both when multiple application domain objects might
 share similar expiration policies and when you wish to externalize the
 configuration.
 
-</div>
 
-<div class="paragraph">
 
 However, you may want more dynamic expiration configuration determined
 by the state of the running system. This is where the power of SpEL
@@ -3578,11 +2837,8 @@ invoke methods, and so on, but the values for expiration 'timeout' and
 'action' can be strongly typed. Consider the following example (which
 builds on the preceding example):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <util:properties id="expirationSettings">
@@ -3595,20 +2851,14 @@ builds on the preceding example):
 <context:property-placeholder properties-ref="expirationProperties"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, on your application domain object, you can define a timeout and an
 action as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @TimeToLiveExpiration(timeout = "@expirationSettings['geode.region.entry.expiration.ttl.timeout']"
@@ -3618,11 +2868,8 @@ public class ExampleApplicationDomainObject {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can imagine that the 'expirationSettings' bean could be a more
 interesting and useful object than a simple instance of
@@ -3631,26 +2878,20 @@ element (`expirationSettings`) uses SpEL to base the action value on the
 actual `ExpirationAction` enumerated type, quickly leading to identified
 failures if the enumerated type ever changes.
 
-</div>
 
-<div class="paragraph">
 
 As an example, all of this has been demonstrated and tested in the
 Spring Data for GemFire test suite. See the
 [source](https://github.com/spring-projects/spring-data-geode) for
 further details.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Data Persistence
 
-<div class="paragraph">
 
 Regions can be persistent. Apache Geode ensures that all the data you
 put into a Region that is configured for persistence is written to disk
@@ -3659,29 +2900,21 @@ Doing so lets data be recovered after machine or process failure or even
 after an orderly shutdown and subsequent restart of the Apache Geode
 data node.
 
-</div>
 
-<div class="paragraph">
 
 To enable persistence with Spring Data for GemFire, set the
 `persistent` attribute to `true` on any of the `<*-region>` elements, as
 the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="examplePersitentPartitionRegion" persistent="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Persistence may also be configured by setting the `data-policy`
 attribute. To do so, set the attribute's value to one of [Apache Geode's
@@ -3689,21 +2922,15 @@ DataPolicy
 settings](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/DataPolicy.html),
 as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="anotherExamplePersistentPartitionRegion" data-policy="PERSISTENT_PARTITION"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `DataPolicy` must match the Region type and must also agree with the
 `persistent` attribute if it is also explicitly set. If the `persistent`
@@ -3711,9 +2938,7 @@ attribute is set to `false` but a persistent `DataPolicy` was specified
 (such as `PERSISTENT_REPLICATE` or `PERSISTENT_PARTITION`), an
 initialization exception is thrown.
 
-</div>
 
-<div class="paragraph">
 
 For maximum efficiency when persisting Regions, you should configure the
 storage through the `disk-store` element. The `DiskStore` is referenced
@@ -3721,35 +2946,26 @@ by using the `disk-store-ref` attribute. Additionally, the Region may
 perform disk writes synchronously or asynchronously. The following
 example shows a synchronous `DiskStore`:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="yetAnotherExamplePersistentPartitionRegion" persistent="true"
     disk-store-ref="myDiskStore" disk-synchronous="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This is discussed further in [Configuring a
 DiskStore](#bootstrap:diskstore).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Subscription Policy
 
-<div class="paragraph">
 
 Apache Geode allows configuration of [peer-to-peer (P2P) event
 messaging](https://geode.apache.org/docs/guide/19/developing/events/configure_p2p_event_messaging.html)
@@ -3759,11 +2975,8 @@ subscription policy on `REPLICATE` and `PARTITION` Regions to either
 `ALL` or `CACHE_CONTENT`. The following example shows a region with its
 subscription policy set to `CACHE_CONTENT`:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="examplePartitionRegionWithCustomSubscription">
@@ -3771,17 +2984,13 @@ subscription policy set to `CACHE_CONTENT`:
 </gfe:partitioned-region>
 ```
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Local Region
 
-<div class="paragraph">
 
 Spring Data for GemFire offers a dedicated `local-region` element
 for creating local Regions. Local Regions, as the name implies, are
@@ -3789,44 +2998,33 @@ standalone, meaning that they do not share data with any other
 distributed system member. Other than that, all common Region
 configuration options apply.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a minimal declaration (again, the example
 relies on the Spring Data for GemFire XML namespace naming
 conventions to wire the cache):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:local-region id="exampleLocalRegion"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In the preceding example, a local Region is created (if a Region by the
 same name does not already exist). The name of the Region is the same as
 the bean ID (`exampleLocalRegion`), and the bean assumes the existence
 of a Apache Geode cache named `gemfireCache`.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Replicated Region
 
-<div class="paragraph">
 
 One of the common Region types is a `REPLICATE` Region or "replica". In
 short, when a Region is configured to be a `REPLICATE`, every member
@@ -3837,56 +3035,41 @@ stage, in which it discovers other replicas and automatically copies all
 the entries. While one replica is initializing, you can still continue
 to use the other replicas.
 
-</div>
 
-<div class="paragraph">
 
 All common configuration options are available for REPLICATE Regions.
 Spring Data for GemFire offers a `replicated-region` element. The
 following example shows a minimal declaration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:replicated-region id="exampleReplica"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's documentation on [Distributed and Replicated
 Regions](https://geode.apache.org/docs/guide/19/developing/distributed_regions/chapter_overview.html)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Partitioned Region
 
-<div class="paragraph">
 
 The Spring Data for GemFire XML namespace also supports `PARTITION`
 Regions.
 
-</div>
 
-<div class="paragraph">
 
 To quote the Apache Geode docs:
 
-</div>
 
-<div class="paragraph">
 
 "A partitioned region is a region where data is divided between peer
 servers hosting the region so that each peer stores a subset of the
@@ -3899,9 +3082,7 @@ Each bucket is assigned to a specific peer, but may be relocated at any
 time to another peer to improve the utilization of resources
 across the cluster."
 
-</div>
 
-<div class="paragraph">
 
 A `PARTITION` Region is created by using the `partitioned-region`
 element. Its configuration options are similar to that of the
@@ -3909,18 +3090,13 @@ element. Its configuration options are similar to that of the
 such as the number of redundant copies, total maximum memory, number of
 buckets, partition resolver, and so on.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows how to set up a `PARTITION` Region with two
 redundant copies:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="examplePartitionRegion" copies="2" total-buckets="17">
@@ -3930,30 +3106,24 @@ redundant copies:
 </gfe:partitioned-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's documentation on [Partitioned
 Regions](https://geode.apache.org/docs/guide/19/developing/partitioned_regions/chapter_overview.html)
 for more details.
 
-</div>
 
 <div class="sect4">
 
 ##### Partitioned Region Attributes
 
-<div class="paragraph">
 
 The following table offers a quick overview of configuration options
 specific to `PARTITION` Regions. These options are in addition to the
 common Region configuration options described
 [earlier](#bootstrap:region:attributes).
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 3. partitioned-region attributes</caption>
@@ -4043,15 +3213,12 @@ added.</p></td>
 
 Table 3. partitioned-region attributes
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Client Region
 
-<div class="paragraph">
 
 Apache Geode supports various deployment topologies for managing and
 distributing data. The topic of Apache Geode topologies is beyond the
@@ -4061,9 +3228,7 @@ client-server, and wide area network (WAN). In the last two
 configurations, it is common to declare client Regions that connect to a
 cache server.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire offers dedicated support for each
 configuration through its [client-cache](#bootstrap:cache:client)
@@ -4071,17 +3236,12 @@ elements: `client-region` and `pool`. As the names imply,
 `client-region` defines a client Region, while `pool` defines a Pool of
 connections used and shared by the various client Regions.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a typical client Region configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="myListener" class="example.CacheListener"/>
@@ -4102,11 +3262,8 @@ The following example shows a typical client Region configuration:
 </gfe:pool>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As with the other Region types, `client-region` supports `CacheListener`
 instances as well as a `CacheLoader` and a `CacheWriter`. It also
@@ -4115,18 +3272,9 @@ or servers. Each client Region can have its own `Pool`, or they can
 share the same one. If a Pool is not specified, then the "DEFAULT" Pool
 will be used.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">In the preceding example, the <code>Pool</code> is
@@ -4139,9 +3287,7 @@ servers by using the <code>server</code> element.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 For a full list of options to set on the client and especially on the
 `Pool`, see the Spring Data for GemFire schema ("[Spring Data for
@@ -4149,13 +3295,11 @@ Apache Geode Schema](#appendix-schema)") and Apache Geode's
 documentation on [Client-Server
 Configuration](https://geode.apache.org/docs/guide/19/topologies_and_comm/cs_configuration/chapter_overview.html).
 
-</div>
 
 <div class="sect4">
 
 ##### Client Interests
 
-<div class="paragraph">
 
 To minimize network traffic, each client can separately define its own
 'interests' policies, indicating to Apache Geode the data it actually
@@ -4163,18 +3307,13 @@ requires. In Spring Data for GemFire, 'interests' can be defined
 for each client Region separately. Both key-based and regular
 expression-based interest types are supported.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows both key-based and regular expression-based
 `interest` types:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-region id="Example" pool-name="myPool">
@@ -4187,25 +3326,18 @@ The following example shows both key-based and regular expression-based
 </gfe:client-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 A special key, `ALL_KEYS`, means 'interest' is registered for all keys.
 The same can be accomplished by using the regular expression, `".\*"`.
 
-</div>
 
-<div class="paragraph">
 
 The `<gfe:*-interest>` key and regular expression elements support three
 attributes: `durable`, `receive-values`, and `result-policy`.
 
-</div>
 
-<div class="paragraph">
 
 `durable` indicates whether the 'interest' policy and subscription queue
 created for the client when the client connects to one or more servers
@@ -4215,9 +3347,7 @@ the client is maintained while the client is disconnected. When the
 client reconnects, the client receives any events that occurred while
 the client was disconnected from the servers in the cluster.
 
-</div>
 
-<div class="paragraph">
 
 A subscription queue on the servers in the cluster is maintained for
 each `Pool` of connections defined in the client where a subscription
@@ -4232,17 +3362,13 @@ immediately when the client disconnects. You need to decide whether your
 client should receive events that came while it was disconnected or if
 it needs to receive only the latest events after it reconnects.
 
-</div>
 
-<div class="paragraph">
 
 The `receive-values` attribute indicates whether or not the entry values
 are received for create and update events. If `true`, values are
 received. If `false`, only invalidation events are received.
 
-</div>
 
-<div class="paragraph">
 
 And finally, the 'result-policy\` is an enumeration of: `KEYS`,
 `KEYS_VALUE`, and `NONE`. The default is `KEYS_VALUES`. The
@@ -4250,20 +3376,15 @@ And finally, the 'result-policy\` is an enumeration of: `KEYS`,
 to initialize the local cache, essentially seeding the client with
 events for all the entries that match the interest policy.
 
-</div>
 
-<div class="paragraph">
 
 Client-side interest registration does not do much good without enabling
 subscription on the `Pool`, as mentioned earlier. In fact, it is an
 error to attempt interest registration without subscription enabled. The
 following example shows how to do so:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:pool ... subscription-enabled="true">
@@ -4271,11 +3392,8 @@ following example shows how to do so:
 </gfe:pool>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In addition to `subscription-enabled`, can you also set
 `subscription-ack-interval`, `subscription-message-tracking-timeout`,
@@ -4286,9 +3404,7 @@ the "primary" subscription queue (that is, the server) goes down, then a
 "secondary" subscription queue takes over, keeping the client from
 missing events in a HA scenario.
 
-</div>
 
-<div class="paragraph">
 
 In addition to the `Pool` settings, the server-side Regions use an
 additional attribute, `enable-subscription-conflation`, to control the
@@ -4301,11 +3417,8 @@ following example shows a Region configuration on the server, for which
 the client contains a corresponding client `[CACHING_]PROXY` Region with
 interests in keys in this server Region:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region name="ServerSideRegion" enable-subscription-conflation="true">
@@ -4313,22 +3426,16 @@ interests in keys in this server Region:
 </gfe:partitioned-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 To control the amount of time (in seconds) that a "durable" subscription
 queue is maintained after a client is disconnected from the servers in
 the cluster, set the `durable-client-timeout` attribute on the
 `<gfe:client-cache>` element as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache durable-client-timeout="600">
@@ -4336,34 +3443,25 @@ the cluster, set the `durable-client-timeout` attribute on the
 </gfe:client-cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 A full, in-depth discussion of how client interests work and
 capabilities is beyond the scope of this document.
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's documentation on [Client-to-Server Event
 Distribution](https://geode.apache.org/docs/guide/19/developing/events/how_client_server_distribution_works.html)
 for more details.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### JSON Support
 
-<div class="paragraph">
 
 Apache Geode has support for caching JSON documents in Regions, along
 with the ability to query stored JSON documents using the Apache Geode
@@ -4373,9 +3471,7 @@ types by using the
 [JSONFormatter](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/JSONFormatter.html)
 class to perform conversion to and from JSON documents (as a `String`).
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire provides the
 `<gfe-data:json-region-autoproxy/>` element to enable an
@@ -4384,17 +3480,13 @@ component to advise appropriate, proxied Region operations, which
 effectively encapsulates the `JSONFormatter`, thereby letting your
 applications work directly with JSON Strings.
 
-</div>
 
-<div class="paragraph">
 
 In addition, Java objects written to JSON configured Regions are
 automatically converted to JSON using Jackson's `ObjectMapper`. When
 these values are read back, they are returned as a JSON String.
 
-</div>
 
-<div class="paragraph">
 
 By default, `<gfe-data:json-region-autoproxy/>` performs the conversion
 for all Regions. To apply this feature to selected Regions, provide a
@@ -4402,9 +3494,7 @@ comma-delimited list of Region bean IDs in the `region-refs` attribute.
 Other attributes include a `pretty-print` flag (defaults to `false`) and
 `convert-returned-collections`.
 
-</div>
 
-<div class="paragraph">
 
 Also, by default, the results of the `getAll()` and `values()` Region
 operations are converted for configured Regions. This is done by
@@ -4413,18 +3503,9 @@ significant overhead for large collections, so set the
 `convert-returned-collections` to `false` if you would like to disable
 automatic conversion for these Region operations.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Certain Region operations (specifically those that
@@ -4438,71 +3519,51 @@ affected.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The following example configuration shows how to set the `pretty-print`
 and `convert-returned-collections` attributes:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:json-region-autoproxy region-refs="myJsonRegion" pretty-print="true" convert-returned-collections="false"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This feature also works seamlessly with `GemfireTemplate` operations,
 provided that the template is declared as a Spring bean. Currently, the
 native `QueryService` operations are not supported.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring an Index
 
-<div class="paragraph">
 
 Apache Geode allows indexes (also sometimes pluralized as indices) to be
 created on Region data to improve the performance of OQL (Object Query
 Language) queries.
 
-</div>
 
-<div class="paragraph">
 
 In Spring Data for GemFire, indexes are declared with the `index`
 element, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In Spring Data for GemFire's XML schema (also called the SDG XML
 namespace), `index` bean declarations are not bound to a Region, unlike
@@ -4512,18 +3573,14 @@ indexes on any Region, whether they were just created or already
 exist — a significant improvement over Apache Geode's native `cache.xml`
 format.
 
-</div>
 
-<div class="paragraph">
 
 An `Index` must have a name. You can give the `Index` an explicit name
 by using the `name` attribute. Otherwise, the bean name (that is, the
 value of the `id` attribute) of the `index` bean definition is used as
 the `Index` name.
 
-</div>
 
-<div class="paragraph">
 
 The `expression` and `from` clause form the main components of an
 `Index`, identifying the data to index (that is, the Region identified
@@ -4533,17 +3590,12 @@ application domain object fields are used in the predicate of
 application-defined OQL queries used to query and look up the objects
 stored in the Region.
 
-</div>
 
-<div class="paragraph">
 
 Consider the following example, which has a `lastName` property:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("Customers")
@@ -4559,20 +3611,14 @@ class Customer {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Now consider the following example, which has an application-defined SDG
 Repository to query for `Customer` objects:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -4583,66 +3629,47 @@ interface CustomerRepository extends GemfireRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The SDG Repository finder/query method results in the following OQL
 statement being generated and ran:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 SELECT * FROM /Customers c WHERE c.lastName = '$1'
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Therefore, you might want to create an `Index` with a statement similar
 to the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="myIndex" name="CustomersLastNameIndex" expression="lastName" from="/Customers" type="HASH"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `from` clause must refer to a valid, existing Region and is how an
 `Index` gets applied to a Region. This is not specific to Spring Data
 for Apache Geode. It is a feature of Apache Geode.
 
-</div>
 
-<div class="paragraph">
 
 The `Index` `type` may be one of three enumerated values defined by
 Spring Data for GemFire's
 [`IndexType`](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/IndexType.html)
 enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
 
-</div>
 
-<div class="paragraph">
 
 Each of the enumerated values corresponds to one of the
 [`QueryService`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html)
@@ -4653,50 +3680,38 @@ then the
 [QueryService.createKeyIndex(..)](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#createKeyIndex-java.lang.String-java.lang.String-java.lang.String-)
 is invoked to create a `KEY` `Index`.
 
-</div>
 
-<div class="paragraph">
 
 The default is `FUNCTIONAL` and results in one of the
 `QueryService.createIndex(..)` methods being invoked. See the Spring
 Data for Apache Geode XML schema for a full set of options.
 
-</div>
 
-<div class="paragraph">
 
 For more information on indexing in Apache Geode, see "[Working with
 Indexes](https://gemfire90.docs.pivotal.io/geode/developing/query_index/query_index.html)"
 in Apache Geode's User Guide.
 
-</div>
 
 <div class="sect3">
 
 #### Defining Indexes
 
-<div class="paragraph">
 
 In addition to creating indexes up front as `Index` bean definitions are
 processed by Spring Data for GemFire on Spring container
 initialization, you may also define all of your application indexes
 prior to creating them by using the `define` attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 When `define` is set to `true` (it defaults to `false`), it does not
 actually create the `Index` at that moment. All "defined" Indexes are
@@ -4707,54 +3722,37 @@ as an `ApplicationListener` listening for the `ContextRefreshedEvent`.
 When fired, Spring Data for GemFire calls
 [`QueryService.createDefinedIndexes()`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes).
 
-</div>
 
-<div class="paragraph">
 
 Defining indexes and creating them all at once boosts speed and
 efficiency when creating indexes.
 
-</div>
 
-<div class="paragraph">
 
 See "[Creating Multiple Indexes at
 Once](https://gemfire90.docs.pivotal.io/geode/developing/query_index/create_multiple_indexes.html)"
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### `IgnoreIfExists` and `Override`
 
-<div class="paragraph">
 
 Two Spring Data for GemFire `Index` configuration options warrant
 special mention: `ignoreIfExists` and `override`.
 
-</div>
 
-<div class="paragraph">
 
 These options correspond to the `ignore-if-exists` and `override`
 attributes on the `<gfe:index>` element in Spring Data for Apache
 Geode's XML namespace, respectively.
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">Make sure you absolutely understand what you are
@@ -4766,18 +3764,9 @@ at runtime. As a result, both of these options are disabled (set to
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">These options are only available in Spring Data for
@@ -4787,9 +3776,7 @@ Geode. Apache Geode has no equivalent options or functionality.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Each option significantly differs in behavior and entirely depends on
 the type of Apache Geode `Index` exception thrown. This also means that
@@ -4799,7 +3786,6 @@ not thrown. These options are meant to specifically handle Apache Geode
 can occur for various, sometimes obscure reasons. The exceptions have
 the following causes:
 
-</div>
 
 <div class="ulist">
 
@@ -4813,9 +3799,7 @@ the following causes:
   is thrown when there exists another `Index` with the same name but
   possibly different definition when attempting to create an `Index`.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's default behavior is to fail-fast, always.
 So, neither `Index` *Exception* are "handled" by default. These `Index`
@@ -4823,38 +3807,30 @@ exceptions are wrapped in a SDG `GemfireIndexException` and rethrown. If
 you wish for Spring Data for GemFire to handle them for you, you
 can set either of these `Index` bean definition options to `true`.
 
-</div>
 
-<div class="paragraph">
 
 `IgnoreIfExists` always takes precedence over `Override`, primarily
 because it uses fewer resources, simply because it returns the
 "existing" `Index` in both exceptional cases.
 
-</div>
 
 <div class="sect4">
 
 ##### `IgnoreIfExists` Behavior
 
-<div class="paragraph">
 
 When an `IndexExistsException` is thrown and `ignoreIfExists` is set to
 `true` (or `<gfe:index ignore-if-exists="true">`), then the `Index` that
 would have been created by this `index` bean definition or declaration
 is simply ignored, and the existing `Index` is returned.
 
-</div>
 
-<div class="paragraph">
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by Apache Geode
 itself, not SDG.
 
-</div>
 
-<div class="paragraph">
 
 However, this also means that no `Index` with the "name" specified in
 your `index` bean definition or declaration actually exists from Apache
@@ -4864,9 +3840,7 @@ Therefore, you should be careful when writing OQL query statements that
 use query hints, especially query hints that refer to the application
 `Index` being ignored. Those query hints need to be changed.
 
-</div>
 
-<div class="paragraph">
 
 When an `IndexNameConflictException` is thrown and `ignoreIfExists` is
 set to `true` (or `<gfe:index ignore-if-exists="true">`), the `Index`
@@ -4874,9 +3848,7 @@ that would have been created by this `index` bean definition or
 declaration is also ignored, and the "existing" `Index` is again
 returned, as when an `IndexExistsException` is thrown.
 
-</div>
 
-<div class="paragraph">
 
 However, there is more risk in returning the existing `Index` and
 ignoring the application's definition of the `Index` when an
@@ -4889,18 +3861,9 @@ data access patterns and queries in mind. However, if like-named indexes
 differ in definition, this might not be the case. Consequently, you
 should verify your `Index` names.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">SDG makes a best effort to inform the user when the
@@ -4913,24 +3876,19 @@ SDG to accomplish this, it must be able to find the existing
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### `Override` Behavior
 
-<div class="paragraph">
 
 When an `IndexExistsException` is thrown and `override` is set to `true`
 (or `<gfe:index override="true">`), the `Index` is effectively renamed.
 Remember, `IndexExistsExceptions` are thrown when multiple indexes exist
 that have the same definition but different names.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire can only accomplish this by using Apache
 Geode's API, by first removing the existing `Index` and then recreating
@@ -4938,17 +3896,13 @@ the `Index` with the new name. It is possible that either the remove or
 subsequent create invocation could fail. There is no way to execute both
 actions atomically and rollback this joint operation if either fails.
 
-</div>
 
-<div class="paragraph">
 
 However, if it succeeds, then you have the same problem as before with
 the `ignoreIfExists` option. Any existing OQL query statement using
 query hints that refer to the old `Index` by name must be changed.
 
-</div>
 
-<div class="paragraph">
 
 When an `IndexNameConflictException` is thrown and `override` is set to
 `true` (or `<gfe:index override="true">`), the existing `Index` can
@@ -4956,9 +3910,7 @@ potentially be re-defined. We say "potentially" because it is possible
 for the like-named, existing `Index` to have exactly the same definition
 and name when an `IndexNameConflictException` is thrown.
 
-</div>
 
-<div class="paragraph">
 
 If so, SDG is smart and returns the existing `Index` as is, even on
 `override`. There is no harm in this behavior, since both the name and
@@ -4968,9 +3920,7 @@ on Apache Geode's APIs. If it cannot be found, nothing happens and a SDG
 `GemfireIndexException` is thrown that wraps the
 `IndexNameConflictException`.
 
-</div>
 
-<div class="paragraph">
 
 However, when the definition of the existing `Index` is different, SDG
 attempts to re-create the `Index` by using the `Index` definition
@@ -4978,15 +3928,12 @@ specified in the `index` bean definition. Make sure this is what you
 want and make sure the `index` bean definition matches your expectations
 and application requirements.
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### How Does `IndexNameConflictExceptions` Actually Happen?
 
-<div class="paragraph">
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
@@ -4994,15 +3941,11 @@ configure Apache Geode (Spring Data for GemFire, Apache Geode
 Cluster Config, Apache Geode native `cache.xml`, the API, and so on).
 You should definitely prefer one configuration method and stick with it.
 
-</div>
 
-<div class="paragraph">
 
 However, when does an `IndexNameConflictException` get thrown?
 
-</div>
 
-<div class="paragraph">
 
 One particular case is an `Index` defined on a `PARTITION` Region (PR).
 When an `Index` is defined on a `PARTITION` Region (for example, `X`),
@@ -5013,9 +3956,7 @@ creation of, this `Index` by peer members is on a need-to-know basis
 (that is, by peer member hosting the same PR) is performed
 asynchronously.
 
-</div>
 
-<div class="paragraph">
 
 During this window of time, it is possible that these pending PR
 `Indexes` cannot be identified by Apache Geode — such as with a call to
@@ -5025,9 +3966,7 @@ with
 or even with
 [`QueryService.getIndex(:Region, indexName:String)`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#getIndex-org.apache.geode.cache.Region-java.lang.String).
 
-</div>
 
-<div class="paragraph">
 
 As a result, the only way for SDG or other Apache Geode cache client
 applications (not involving Spring) to know for sure is to attempt to
@@ -5037,9 +3976,7 @@ application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
 Apache Geode API calls do not.
 
-</div>
 
-<div class="paragraph">
 
 In any case, SDG makes a best effort and attempts to inform you what has
 happened or is happening and tell you the corrective action. Given that
@@ -5049,35 +3986,25 @@ accessible after either of these index-type exceptions are thrown.
 Consequently, SDG can inspect the state of the system and act
 accordingly, based on your configuration.
 
-</div>
 
-<div class="paragraph">
 
 In all other cases, SDG embraces a fail-fast strategy.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring a DiskStore
 
-<div class="paragraph">
 
 Spring Data for GemFire supports `DiskStore` configuration and
 creation through the `disk-store` element, as the following example
 shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:disk-store id="Example" auto-compact="true" max-oplog-size="10"
@@ -5087,11 +4014,8 @@ shows:
 </gfe:disk-store>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 `DiskStore` instances are used by Regions for file system persistent
 backup and overflow of evicted entries as well as persistent backup for
@@ -5099,24 +4023,19 @@ WAN Gateways. Multiple Apache Geode components may share the same
 `DiskStore`. Additionally, multiple file system directories may be
 defined for a single `DiskStore`, as shown in the preceding example.
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's documentation for a complete explanation of
 [Persistence and
 Overflow](https://geode.apache.org/docs/guide/19/developing/storing_data_on_disk/chapter_overview.html)
 and configuration options on `DiskStore` instances.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring the Snapshot Service
 
-<div class="paragraph">
 
 Spring Data for GemFire supports cache and Region snapshots by
 using [Apache Geode's Snapshot
@@ -5128,9 +4047,7 @@ and
 [Region](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/RegionSnapshotService.html)
 Snapshot Service APIs.
 
-</div>
 
-<div class="paragraph">
 
 As the [Apache Geode
 documentation](https://geode.apache.org/docs/guide/19/managing/cache_snapshots/chapter_overview.html)
@@ -5143,27 +4060,20 @@ definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
 to load snapshot data specific to the environment as necessary.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's support for Apache Geode's Snapshot
 Service begins with the `<gfe-data:snapshot-service>` element from the
 `<gfe-data>` XML namespace.
 
-</div>
 
-<div class="paragraph">
 
 For example, you can define cache-wide snapshots to be loaded as well as
 saved by using a couple of snapshot imports and a data export
 definition, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:snapshot-service id="gemfireCacheSnapshotService">
@@ -5174,20 +4084,15 @@ definition, as follows:
 </gfe-data:snapshot-service>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can define as many imports and exports as you like. You can define
 only imports or only exports. The file locations and directory paths can
 be absolute or relative to the Spring Data for GemFire application,
 which is the JVM process's working directory.
 
-</div>
 
-<div class="paragraph">
 
 The preceding example is pretty simple, and the Snapshot Service defined
 in this case refers to the Apache Geode cache instance with the default
@@ -5196,11 +4101,8 @@ Cache](#bootstrap:cache)). If you name your cache bean definition
 something other than the default, you can use the `cache-ref` attribute
 to refer to the cache bean by name, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache id="myCache"/>
@@ -5210,20 +4112,14 @@ to refer to the cache bean by name, as follows:
 </gfe-data:snapshot-service>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can also define a Snapshot Service for a particular Region by
 specifying the `region-ref` attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="Example" persistent="false" .../>
@@ -5234,11 +4130,8 @@ specifying the `region-ref` attribute, as follows:
 </gfe-data:snapshot-service>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 When the `region-ref` attribute is specified, Spring Data for Apache
 Geode's `SnapshotServiceFactoryBean` resolves the `region-ref` attribute
@@ -5247,18 +4140,9 @@ value to a Region bean defined in the Spring container and creates a
 The snapshot import and export definitions function the same way.
 However, the `location` must refer to a file on an export.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode is strict about imported snapshot files
@@ -5269,18 +4153,10 @@ exists, the data is overwritten.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">Spring Data for GemFire includes a
@@ -5294,13 +4170,11 @@ Region.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect3">
 
 #### Snapshot Location
 
-<div class="paragraph">
 
 With the cache-based Snapshot Service (that is, a
 [`CacheSnapshotService`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/CacheSnapshotService.html))
@@ -5309,18 +4183,9 @@ files to load rather than individual snapshot files, as the overloaded
 [`load`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/CacheSnapshotService.html#load-java.io.File-org.apache.geode.cache.snapshot.SnapshotOptions.SnapshotFormat)
 method in the `CacheSnapshotService` API indicates.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Of course, you can use the overloaded
@@ -5331,27 +4196,20 @@ cache.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 However, Spring Data for GemFire recognizes that a typical
 developer workflow might be to extract and export data from one
 environment into several snapshot files, zip all of them up, and then
 conveniently move the zip file to another environment for import.
 
-</div>
 
-<div class="paragraph">
 
 Therefore, Spring Data for GemFire lets you specify a jar or zip
 file on import for a `cache`-based Snapshot Service, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
   <gfe-data:snapshot-service id="cacheBasedSnapshotService" cache-ref="gemfireCache">
@@ -5359,24 +4217,18 @@ file on import for a `cache`-based Snapshot Service, as follows:
   </gfe-data:snapshot-service>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire conveniently extracts the provided zip file
 and treats it as a directory import (load).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Snapshot Filters
 
-<div class="paragraph">
 
 The real power of defining multiple snapshot imports and exports is
 realized through the use of snapshot filters. Snapshot filters implement
@@ -5385,19 +4237,14 @@ Apache Geode's
 interface and are used to filter Region entries for inclusion into the
 Region on import and for inclusion into the snapshot on export.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire lets you use snapshot filters on import and
 export by using the `filter-ref` attribute or an anonymous, nested bean
 definition, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache/>
@@ -5422,11 +4269,8 @@ definition, as the following example shows:
 </gfe-data:snapshot-service>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In addition, you can express more complex snapshot filters by using the
 `ComposableSnapshotFilter` class. This class implements Apache Geode's
@@ -5435,9 +4279,7 @@ interface as well as the
 [Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
 design pattern.
 
-</div>
 
-<div class="paragraph">
 
 In a nutshell, the
 [Composite](https://en.wikipedia.org/wiki/Composite_pattern) software
@@ -5445,27 +4287,20 @@ design pattern lets you compose multiple objects of the same type and
 treat the aggregate as single instance of the object type — a powerful
 and useful abstraction.
 
-</div>
 
-<div class="paragraph">
 
 `ComposableSnapshotFilter` has two factory methods, `and` and `or`. They
 let you logically combine individual snapshot filters using the AND and
 OR logical operators, respectively. The factory methods take a list of
 `SnapshotFilters`.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a definition for a
 `ComposableSnapshotFilter`:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="activeUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
@@ -5480,20 +4315,14 @@ The following example shows a definition for a
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You could then go on to combine the `activesUsersSinceFilter` with
 another filter by using `or`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="covertOrActiveUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
@@ -5507,26 +4336,20 @@ another filter by using `or`, as follows:
 </bean>
 ```
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Snapshot Events
 
-<div class="paragraph">
 
 By default, Spring Data for GemFire uses Apache Geode's Snapshot
 Services on startup to import data and on shutdown to export data.
 However, you may want to trigger periodic, event-based snapshots, for
 either import or export, from within your Spring application.
 
-</div>
 
-<div class="paragraph">
 
 For this purpose, Spring Data for GemFire defines two additional
 Spring application events, extending Spring's
@@ -5534,18 +4357,14 @@ Spring application events, extending Spring's
 class for imports and exports, respectively:
 `ImportSnapshotApplicationEvent` and `ExportSnapshotApplicationEvent`.
 
-</div>
 
-<div class="paragraph">
 
 The two application events can be targeted for the entire Apache Geode
 cache or for individual Apache Geode Regions. The constructors in these
 classes accept an optional Region pathname (such as `/Example`) as well
 as zero or more `SnapshotMetadata` instances.
 
-</div>
 
-<div class="paragraph">
 
 The array of `SnapshotMetadata` overrides the snapshot metadata defined
 by `<gfe-data:snapshot-import>` and `<gfe-data:snapshot-export>`
@@ -5554,46 +4373,35 @@ do not explicitly provide `SnapshotMetadata`. Each individual
 `SnapshotMetadata` instance can define its own `location` and `filters`
 properties.
 
-</div>
 
-<div class="paragraph">
 
 All snapshot service beans defined in the Spring `ApplicationContext`
 receive import and export snapshot application events. However, only
 matching Snapshot Service beans process import and export events.
 
-</div>
 
-<div class="paragraph">
 
 A Region-based `[Import|Export]SnapshotApplicationEvent` matches if the
 Snapshot Service bean defined is a `RegionSnapshotService` and its
 Region reference (as determined by the `region-ref` attribute) matches
 the Region's pathname, as specified by the snapshot application event.
 
-</div>
 
-<div class="paragraph">
 
 A Cache-based `[Import|Export]SnapshotApplicationEvent` (that is, a
 snapshot application event without a Region pathname) triggers all
 Snapshot Service beans, including any `RegionSnapshotService` beans, to
 perform either an import or export, respectively.
 
-</div>
 
-<div class="paragraph">
 
 You can use Spring's
 [`ApplicationEventPublisher`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationEventPublisher.html)
 interface to fire import and export snapshot application events from
 your application as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -5626,79 +4434,59 @@ public class ExampleApplicationComponent {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In the preceding example, only the `/Example` Region's Snapshot Service
 bean picks up and handles the export event, saving the filtered,
 "/Example" Region's data to the `data.snapshot` file in a sub-directory
 of the application's working directory.
 
-</div>
 
-<div class="paragraph">
 
 Using the Spring application events and messaging subsystem is a good
 way to keep your application loosely coupled. You can also use Spring's
 [Scheduling](https://docs.spring.io/spring/docs/current/spring-framework-reference/#scheduling-task-scheduler)
 services to fire snapshot application events on a periodic basis.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring the Function Service
 
-<div class="paragraph">
 
 Spring Data for GemFire provides
 [annotation](#function-annotations) support for implementing,
 registering and executing Apache Geode Functions.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire also provides XML namespace support for
 registering Apache Geode
 [Functions](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/Function.html)
 for remote function execution.
 
-</div>
 
-<div class="paragraph">
 
 See Apache Geode's
 [documentation](https://geode.apache.org/docs/guide/19/developing/function_exec/chapter_overview.html)
 for more information on the Function execution framework.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode Functions are declared as Spring beans and must implement
 the `org.apache.geode.cache.execute.Function` interface or extend
 `org.apache.geode.cache.execute.FunctionAdapter`.
 
-</div>
 
-<div class="paragraph">
 
 The namespace uses a familiar pattern to declare Functions, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:function-service>
@@ -5711,49 +4499,38 @@ following example shows:
 <bean id="function2" class="example.FunctionTwo"/>
 ```
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring WAN Gateways
 
-<div class="paragraph">
 
 WAN Gateways provides a way to synchronize Apache Geode Distributed
 Systems across geographic locations. Spring Data for GemFire
 provides XML namespace support for configuring WAN Gateways as
 illustrated in the following examples.
 
-</div>
 
 <div class="sect3">
 
 #### WAN Configuration in Apache Geode 7.0
 
-<div class="paragraph">
 
 In the following example, `GatewaySenders` are configured for a
 `PARTITION` Region by adding child elements (`gateway-sender` and
 `gateway-sender-ref`) to the Region. A `GatewaySender` may register
 `EventFilters` and `TransportFilters`.
 
-</div>
 
-<div class="paragraph">
 
 The following example also shows a sample configuration of an
 `AsyncEventQueue`, which must also be auto-wired into a Region (not
 shown):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="region-with-inner-gateway-sender" >
@@ -5790,22 +4567,16 @@ shown):
 <bean id="transport-filter" class="org.springframework.data.gemfire.example.AnotherTransportFilter"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 On the other end of a `GatewaySender` is a corresponding
 `GatewayReceiver` to receive Gateway events. The `GatewayReceiver` may
 also be configured with `EventFilters` and `TransportFilters`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
@@ -5815,65 +4586,44 @@ follows:
 </gfe:gateway-receiver>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See the Apache Geode
 [documentation](https://geode.apache.org/docs/guide/19/topologies_and_comm/multi_site_configuration/chapter_overview.html)
 for a detailed explanation of all the configuration options.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Bootstrapping Apache Geode with the Spring Container using Annotations
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire (SDG) 2.0 introduces a new annotation-based
 configuration model to configure and bootstrap Apache Geode using the
 Spring container.
 
-</div>
 
-<div class="paragraph">
 
 The primary motivation for introducing an annotation-based approach to
 the configuration of Apache Geode in a Spring context is to enable
 Spring application developers to *get up and running* as *quickly* and
 as *easily* as possible.
 
-</div>
 
-<div class="paragraph">
 
 Let's get started!
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">If you would like to get started even faster, refer
@@ -5883,20 +4633,17 @@ section.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect2">
 
 ### Introduction
 
-<div class="paragraph">
 
 Apache Geode can be difficult to setup and use correctly, given all the
 [configuration
 properties](https://geode.apache.org/docs/guide/19/reference/topics/gemfire_properties.html)
 and different configuration options:
 
-</div>
 
 <div class="ulist">
 
@@ -5910,13 +4657,10 @@ and different configuration options:
 
 - [Spring XML/Java-based configuration](#bootstrap)
 
-</div>
 
-<div class="paragraph">
 
 Further complexity arises from the different supported topologies:
 
-</div>
 
 <div class="ulist">
 
@@ -5930,16 +4674,12 @@ Further complexity arises from the different supported topologies:
   patterns](https://cwiki.apache.org/confluence/display/GEODE/Geode+Internal+Architecture?src=contextnavpagetreemode)
   (such as shared-nothing architecture).
 
-</div>
 
-<div class="paragraph">
 
 The annotation-based configuration model aims to simplify all this and
 more.
 
-</div>
 
-<div class="paragraph">
 
 The annotation-based configuration model is an alternative to XML-based
 configuration using Spring Data for GemFire's XML namespace. With
@@ -5947,18 +4687,9 @@ XML, you could use the `gfe` XML schema for configuration and the
 `gfe-data` XML schema for data access. See "[Bootstrapping Apache Geode
 with the Spring Container](#bootstrap)" for more details.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">As of SDG 2.0, the annotation-based configuration
@@ -5968,9 +4699,7 @@ components and topology.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Like Spring Boot, Spring Data for GemFire's annotation-based
 configuration model was designed as an opinionated,
@@ -5978,18 +4707,14 @@ convention-over-configuration approach for using Apache Geode. Indeed,
 this annotation-based configuration model was inspired by Spring Boot as
 well as several other Spring and Spring Data projects, collectively.
 
-</div>
 
-<div class="paragraph">
 
 By following convention, all annotations provide reasonable and sensible
 defaults for all configuration attributes. The default value for a given
 annotation attribute directly corresponds to the default value provided
 in Apache Geode for the same configuration property.
 
-</div>
 
-<div class="paragraph">
 
 The intention is to let you enable Apache Geode features or an embedded
 services by declaring the appropriate annotation on your Spring
@@ -5997,16 +4722,12 @@ services by declaring the appropriate annotation on your Spring
 unnecessarily configure a large number of properties just to use the
 feature or service.
 
-</div>
 
-<div class="paragraph">
 
 Again, *getting started*, *quickly* and as *easily*, is the primary
 objective.
 
-</div>
 
-<div class="paragraph">
 
 However, the option to customize the configuration metadata and behavior
 of Apache Geode is there if you need it, and Spring Data for Apache
@@ -6015,29 +4736,20 @@ specify the configuration attributes you wish to adjust. Also, as we
 will see later in this document, there are several ways to configure a
 Apache Geode feature or embedded service by using the annotations.
 
-</div>
 
-<div class="paragraph">
 
 You can find all the new SDG Java `Annotations` in the
 `org.springframework.data.gemfire.config.annotation` package.
 
-</div>
 
-</div>
+### <a id="configuring-gemfire-applications-with-spring"></a>Configuring GemFire Applications with Spring
 
-<div class="sect2">
-
-### Configuring Apache Geode Applications with Spring
-
-<div class="paragraph">
 
 Like all Spring Boot applications that begin by annotating the
 application class with `@SpringBootApplication`, a Spring Boot
 application can easily become a Apache Geode cache application by
 declaring any one of three main annotations:
 
-</div>
 
 <div class="ulist">
 
@@ -6047,24 +4759,18 @@ declaring any one of three main annotations:
 
 - `@CacheServerApplication`
 
-</div>
 
-<div class="paragraph">
 
 These three annotations are the Spring application developer's starting
 point when working with Apache Geode.
 
-</div>
 
-<div class="paragraph">
 
 To realize the intent behind these annotations, you must understand that
 there are two types of cache instances that can be created with Apache
 Geode: a client cache or a peer cache.
 
-</div>
 
-<div class="paragraph">
 
 You can configure a Spring Boot application as a Apache Geode cache
 client with an instance of `ClientCache`, which can communicate with an
@@ -6074,9 +4780,7 @@ architecture employed when using Apache Geode and you can make your
 Spring Boot application a cache client, with a `ClientCache` instance,
 simply by annotating it with `@ClientCacheApplication`.
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, a Spring Boot application may be a peer member of a
 Apache Geode cluster. That is, the application itself is just another
@@ -6084,9 +4788,7 @@ server in a cluster of servers that manages data. The Spring Boot
 application creates an "embedded", peer `Cache` instance when you
 annotate your application class with `@PeerCacheApplication`.
 
-</div>
 
-<div class="paragraph">
 
 By extension, a peer cache application may also serve as a `CacheServer`
 too, allowing cache clients to connect and perform data access
@@ -6095,18 +4797,9 @@ application class with `@CacheServerApplication` in place of
 `@PeerCacheApplication`, which creates a peer `Cache` instance along
 with the `CacheServer` that allows cache clients to connect.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">A Apache Geode server is not necessarily a cache
@@ -6125,24 +4818,18 @@ scope of this document.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 By way of example, if you want to create a Spring Boot cache client
 application, start with the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring-based Apache Geode `ClientCache` application
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6150,28 +4837,21 @@ Spring-based Apache Geode `ClientCache` application
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Or, if you want to create a Spring Boot application with an embedded
 peer `Cache` instance, where your application will be a server and peer
 member of a cluster (distributed system) formed by Apache Geode, start
 with the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring-based Apache Geode embedded peer `Cache` application
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6179,29 +4859,22 @@ Spring-based Apache Geode embedded peer `Cache` application
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can use the `@CacheServerApplication` annotation in
 place of `@PeerCacheApplication` to create both an embedded peer `Cache`
 instance along with a `CacheServer` running on `localhost`, listening on
 the default cache server port, `40404`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring-based Apache Geode embedded peer `Cache` application with
 `CacheServer`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6209,34 +4882,21 @@ Spring-based Apache Geode embedded peer `Cache` application with
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Client/Server Applications In-Detail
 
-<div class="paragraph">
 
 There are multiple ways that a client can connect to and communicate
 with servers in a Apache Geode cluster. The most common and recommended
 approach is to use Apache Geode Locators.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">A cache client can connect to one or more Locators
@@ -6255,18 +4915,9 @@ containing the data requested and needed by the client.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Locators are also peer members in a cluster.
@@ -6278,9 +4929,7 @@ members.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 By default, Apache Geode sets up a "DEFAULT" `Pool` connected to a
 `CacheServer` running on `localhost`, listening on port `40404` when a
@@ -6291,9 +4940,7 @@ server-side Spring Boot application with `@CacheServerApplication` and
 your client-side Spring Boot application with `@ClientCacheApplication`,
 and you are ready to go.
 
-</div>
 
-<div class="paragraph">
 
 If you prefer, you can even start your servers with Gfsh's
 `start server` command. Your Spring Boot `@ClientCacheApplication` can
@@ -6302,25 +4949,19 @@ you may prefer to configure and start your servers by using the Spring
 Data for Apache Geode approach since a properly annotated Spring Boot
 application class is far more intuitive and easier to debug.
 
-</div>
 
-<div class="paragraph">
 
 As an application developer, you will no doubt want to customize the
 "DEFAULT" `Pool` set up by Apache Geode to possibly connect to one or
 more Locators, as the following example demonstrates:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring-based Apache Geode `ClientCache` application using Locators
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6331,29 +4972,17 @@ Spring-based Apache Geode `ClientCache` application using Locators
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Along with the `locators` attribute, the `@ClientCacheApplication`
 annotation has a `servers` attribute as well. The `servers` attribute
 can be used to specify one or more nested `@Server` annotations that let
 the cache client connect directly to one or more servers, if necessary.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">You can use either the <code>locators</code> or
@@ -6363,27 +4992,16 @@ Geode).</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 You can also configure additional `Pool` instances (other than the
 "DEFAULT" `Pool` provided by Apache Geode when a `ClientCache` instance
 is created with the `@ClientCacheApplication` annotation) by using the
 `@EnablePool` and `@EnablePools` annotations.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnablePools</code> is a composite annotation
@@ -6394,25 +5012,19 @@ of the same type to be declared on a single class.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The following example uses the `@EnablePool` and `@EnablePools`
 annotations:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring-based Apache Geode `ClientCache` application using multiple named
 `Pools`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6432,11 +5044,8 @@ Spring-based Apache Geode `ClientCache` application using multiple named
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `name` attribute is the only required attribute of the `@EnablePool`
 annotation. As we will see later, the value of the `name` attribute
@@ -6445,25 +5054,19 @@ container as well as the name used to reference the corresponding
 configuration properties. It is also the name of the `Pool` registered
 and used by Apache Geode.
 
-</div>
 
-<div class="paragraph">
 
 Similarly, on the server, you can configure multiple `CacheServers` that
 a client can connect to, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring-based Apache Geode `CacheServer` application using multiple named
 `CacheServers`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6477,20 +5080,10 @@ Spring-based Apache Geode `CacheServer` application using multiple named
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Like <code>@EnablePools</code>,
@@ -6502,9 +5095,7 @@ annotation of the same type to be declared on a single class.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 One thing an observant reader may have noticed is that, in all cases,
 you have specified hard-coded values for all hostnames, ports, and
@@ -6512,29 +5103,22 @@ configuration-oriented annotation attributes. This is not ideal when the
 application gets promoted and deployed to different environments, such
 as from DEV to QA to STAGING to PROD.
 
-</div>
 
-<div class="paragraph">
 
 The next section covers how to handle dynamic configuration determined
 at runtime.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring and Bootstrapping Locators
 
-<div class="paragraph">
 
 Besides Apache Geode Cache applications, you may also create Apache
 Geode Locator applications.
 
-</div>
 
-<div class="paragraph">
 
 A Apache Geode Locator is a JVM process that allows nodes to join a
 Apache Geode cluster as peer members. Locators also enable clients to
@@ -6542,33 +5126,25 @@ discover servers in a cluster. A Locator provides meta-data to the
 clients to uniformly balance the load across the members in the cluster,
 enables single-hop data access operations, along with other things.
 
-</div>
 
-<div class="paragraph">
 
 A complete discussion of Locators is beyond the scope of this document.
 Readers are encouraged to read the Apache Geode [User
 Guide](https://geode.apache.org/docs/guide/19/topologies_and_comm/topology_concepts/how_member_discovery_works.html)
 for more details on Locators and their role in the cluster.
 
-</div>
 
-<div class="paragraph">
 
 To configure and bootstrap a standalone Locator process, do the
 following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring Boot, Apache Geode Locator Application
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6576,11 +5152,8 @@ Spring Boot, Apache Geode Locator Application
 class LocatorApplication { ... }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can start multiple Locators in your cluster. The only requirement is
 that the member name must be unique in the cluster. Use the `name`
@@ -6589,34 +5162,26 @@ Locator in the cluster accordingly. Alternatively, you can set the
 `spring.data.gemfire.locator.name` property in Spring Boot's
 `application.properties`.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, you must ensure that each Locator starts on a unique port
 if you fork multiple Locators on the same machine. Set either the `port`
 annotation attribute or the `spring.data.gemfire.locator.port` property.
 
-</div>
 
-<div class="paragraph">
 
 You may then start 1 or more Apache Geode peer cache members in the
 cluster joined by the Locator, or Locators, also configured and
 bootstrapped with Spring, like so:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring Boot, Apache Geode `CacheServer` Application joined by the
 Locator on `localhost`, port `12345`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6624,36 +5189,27 @@ Locator on `localhost`, port `12345`
 class ServerApplication { ... }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Again, you can start as many of the `ServerApplication` classes, joined
 by our Locator above, as you want. You just need to make sure the member
 is uniquely named.
 
-</div>
 
-<div class="paragraph">
 
 `@LocatorApplication` is for configuring and bootstrapping standalone,
 Apache Geode Locator application processes. This process can only be a
 Locator and nothing else. If you try to start a Locator with a cache
 instance, SDG will throw an error.
 
-</div>
 
-<div class="paragraph">
 
 If you want to simultaneously start a cache instance along with an
 embedded Locator, then you should use the `@EnableLocator` annotation
 instead.
 
-</div>
 
-<div class="paragraph">
 
 Starting an embedded Locator is convenient during development. However,
 it is highly recommended that you run standalone Locator processes in
@@ -6662,39 +5218,30 @@ down, then the cluster will remain intact, however, no new members will
 be able to join the cluster, which is important to scale-out linearly in
 order to satisfy demand.
 
-</div>
 
-<div class="paragraph">
 
 See the section on [Configuring an Embedded
 Locator](#bootstrap-annotation-config-embedded-services-locator) for
 more details.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Runtime configuration using `Configurers`
 
-<div class="paragraph">
 
 Another goal when designing the annotation-based configuration model was
 to preserve type safety in the annotation attributes. For example, if
 the configuration attribute could be expressed as an `int` (such as a
 port number), then the attribute's type should be an `int`.
 
-</div>
 
-<div class="paragraph">
 
 Unfortunately, this is not conducive to dynamic and resolvable
 configuration at runtime.
 
-</div>
 
-<div class="paragraph">
 
 One of the finer features of Spring is the ability to use property
 placeholders and SpEL expressions in properties or attributes of the
@@ -6702,18 +5249,14 @@ configuration metadata when configuring beans in the Spring container.
 However, this would require all annotation attributes to be of type
 `String`, thereby giving up type safety, which is not desirable.
 
-</div>
 
-<div class="paragraph">
 
 So, Spring Data for GemFire borrows from another commonly used
 pattern in Spring, `Configurers`. Many different `Configurer` interfaces
 are provided in Spring Web MVC, including the
 [`org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/config/annotation/ContentNegotiationConfigurer.html).
 
-</div>
 
-<div class="paragraph">
 
 The `Configurers` design pattern enables application developers to
 receive a callback to customize the configuration of a component or bean
@@ -6722,16 +5265,13 @@ configuration at runtime. One of the more common uses of this pattern is
 to supply conditional configuration based on the application's runtime
 environment.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire provides several `Configurer` callback
 interfaces to customize different aspects of the annotation-based
 configuration metadata at runtime, before the Spring managed beans that
 the annotations create are initialized:
 
-</div>
 
 <div class="ulist">
 
@@ -6755,32 +5295,24 @@ the annotations create are initialized:
 
 - `GatewaySenderConfigurer`
 
-</div>
 
-<div class="paragraph">
 
 For example, you can use the `CacheServerConfigurer` and
 `ClientCacheConfigurer` to customize the port numbers used by your
 Spring Boot `CacheServer` and `ClientCache` applications, respectively.
 
-</div>
 
-<div class="paragraph">
 
 Consider the following example from a server application:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Customizing a Spring Boot `CacheServer` application with a
 `CacheServerConfigurer`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6801,26 +5333,19 @@ class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Next, consider the following example from a client application:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Customizing a Spring Boot `ClientCache` application with a
 `ClientCacheConfigurer`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -6839,28 +5364,21 @@ class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 By using the provided `Configurers`, you can receive a callback to
 further customize the configuration that is enabled by the associated
 annotation at runtime, during startup.
 
-</div>
 
-<div class="paragraph">
 
 In addition, when the `Configurer` is declared as a bean in the Spring
 container, the bean definition can take advantage of other Spring
 container features, such as property placeholders, SpEL expressions by
 using the `@Value` annotation on factory method parameters, and so on.
 
-</div>
 
-<div class="paragraph">
 
 All `Configurers` provided by Spring Data for GemFire take two bits
 of information in the callback: the name of the bean created in the
@@ -6869,18 +5387,9 @@ used by the annotation to create and configure the Apache Geode
 component (for example, a `ClientCache` instance is created and
 configured with `ClientCacheFactoryBean`).
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">SDG <code>FactoryBeans</code> are part of the SDG
@@ -6895,9 +5404,7 @@ abstraction for convenience.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Given that a `Configurer` can be declared as a regular bean definition
 like any other POJO, you can combine different Spring configuration
@@ -6906,45 +5413,34 @@ both property placeholders and SpEL expressions. These and other nifty
 features let you create even more sophisticated and flexible
 configurations.
 
-</div>
 
-<div class="paragraph">
 
 However, `Configurers` are not the only option.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Runtime configuration using `Properties`
 
-<div class="paragraph">
 
 In addition to `Configurers`, each annotation attribute in the
 annotation-based configuration model is associated with a corresponding
 configuration property (prefixed with `spring.data.gemfire.`), which can
 be declared in a Spring Boot `application.properties` file.
 
-</div>
 
-<div class="paragraph">
 
 Building on the earlier examples, the client's `application.properties`
 file would define the following set of properties:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Client `application.properties`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 spring.data.gemfire.cache.log-level=info
@@ -6961,26 +5457,19 @@ spring.data.gemfire.pool.Neptune.servers=saturn[41414],neptune[42424]
 spring.data.gemfire.pool.Neptune.min-connections=25
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The corresponding server's `application.properties` file would define
 the following properties:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Server `application.properties`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 spring.data.gemfire.cache.log-level=info
@@ -6990,26 +5479,19 @@ spring.data.gemfire.cache.server.Saturn.port=41414
 spring.data.gemfire.cache.server.Neptune.port=41414
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you can simplify the `@ClientCacheApplication` class to the
 following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `@ClientCacheApplication` class
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7022,25 +5504,18 @@ Spring `@ClientCacheApplication` class
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Also, the `@CacheServerApplication` class becomes the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `@CacheServerApplication` class
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7053,11 +5528,8 @@ Spring `@CacheServerApplication` class
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding example shows why it is important to "name" your
 annotation-based beans (other than because it is required in certain
@@ -7066,11 +5538,8 @@ container from XML, properties, and Java. It is even possible to inject
 annotation-defined beans into an application class, for whatever
 purpose, as the following example demonstrates:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -7083,34 +5552,24 @@ class MyApplicationComponent {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Likewise, naming an annotation-defined bean lets you code a `Configurer`
 to customize a specific, "named" bean since the `beanName` is 1 of 2
 arguments passed to the callback.
 
-</div>
 
-<div class="paragraph">
 
 Oftentimes, an associated annotation attribute property takes two forms:
 a "named" property along with an "unnamed" property.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows such an arrangement:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 spring.data.gemfire.cache.server.bind-address=10.105.20.1
@@ -7119,11 +5578,8 @@ spring.data.gemfire.cache.server.Saturn...
 spring.data.gemfire.cache.server.Neptune...
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While there are three named `CacheServers` above, there is also one
 unnamed `CacheServer` property providing the default value for any
@@ -7132,61 +5588,46 @@ while "Venus" sets and overrides its own `bind-address`, "Saturn" and
 "Neptune" inherit from the "unnamed"
 `spring.data.gemfire.cache.server.bind-address` property.
 
-</div>
 
-<div class="paragraph">
 
 See an annotation's Javadoc for which annotation attributes support
 property-based configuration and whether they support "named" properties
 over default, "unnamed" properties.
 
-</div>
 
 <div class="sect3">
 
 #### `Properties` of `Properties`
 
-<div class="paragraph">
 
 In the usual Spring fashion, you can even express `Properties` in terms
 of other `Properties`, whether that is by The following example shows a
 nested property being set in an `application.properties` file:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Properties of Properties
 
-</div>
 
-<div class="content">
 
 ``` highlight
 spring.data.gemfire.cache.server.port=${gemfire.cache.server.port:40404}
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a nested property being set in Java:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Property placehodler nesting
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Bean
@@ -7197,20 +5638,11 @@ CacheServerConfigurer cacheServerPortConfigurer(
 }
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">Property placeholder nesting can be arbitrarily
@@ -7219,36 +5651,28 @@ deep.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Embedded Services
 
-<div class="paragraph">
 
 Apache Geode provides the ability to start many different embedded
 services that are required by an application, depending on the use case.
 
-</div>
 
 <div class="sect3">
 
 #### Configuring an Embedded Locator
 
-<div class="paragraph">
 
 As mentioned previously, Apache Geode Locators are used by clients to
 connect to and find servers in a cluster. In addition, new members
 joining an existing cluster use Locators to find their peers.
 
-</div>
 
-<div class="paragraph">
 
 It is often convenient for application developers as they are developing
 their Spring Boot and Spring Data for GemFire applications to
@@ -7256,18 +5680,14 @@ startup up a small cluster of two or three Apache Geode servers. Rather
 than starting a separate Locator process, you can annotate your Spring
 Boot `@CacheServerApplication` class with `@EnableLocator`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring, Apache Geode `CacheServer` application running an embedded
 Locator
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7276,11 +5696,8 @@ Locator
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `@EnableLocator` annotation starts an embedded Locator in the Spring
 Apache Geode `CacheServer` application running on `localhost`, listening
@@ -7288,33 +5705,25 @@ on the default Locator port, `10334`. You can customize the `host` (bind
 address) and `port` that the embedded Locator binds to by using the
 corresponding annotation attributes.
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can set the `@EnableLocator` attributes by setting
 the corresponding `spring.data.gemfire.locator.host` and
 `spring.data.gemfire.locator.port` properties in
 `application.properties`.
 
-</div>
 
-<div class="paragraph">
 
 Then you can start other Spring Boot `@CacheServerApplication`-enabled
 applications by connecting to this Locator with the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring, Apache Geode `CacheServer` application connecting to a Locator
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7322,11 +5731,8 @@ Spring, Apache Geode `CacheServer` application connecting to a Locator
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can even combine both application classes shown earlier into a
 single class and use your IDE to create different run profile
@@ -7334,18 +5740,14 @@ configurations to launch different instances of the same class with
 slightly modified configuration by using Java system properties, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `CacheServer` application running an embedded Locator and
 connecting to the Locator
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7363,26 +5765,19 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, for each run profile, you can set and change the following system
 properties:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 IDE run profile configuration
 
-</div>
 
-<div class="content">
 
 ``` highlight
 spring.data.gemfire.name=SpringCacheServerOne
@@ -7390,11 +5785,8 @@ spring.data.gemfire.cache.server.port=41414
 spring.profiles.active=embedded-locator
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Only 1 of the run profiles for the `ServerApplication` class should set
 the `-Dspring.profiles.active=embedded-locator` Java system property.
@@ -7402,18 +5794,9 @@ Then you can change the `..name` and `..cache.server.port` for each of
 the other run profiles and have a small cluster (distributed system) of
 Apache Geode servers running on your local system.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>@EnableLocator</code> annotation was meant
@@ -7425,22 +5808,17 @@ cluster.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 More details on how Apache Geode Locators work can be found
 [here](https://geode.apache.org/docs/guide/19/topologies_and_comm/topology_concepts/how_member_discovery_works.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring an Embedded Manager
 
-<div class="paragraph">
 
 A Apache Geode Manager is another peer member or node in the cluster
 that is responsible for cluster "management". Management involves
@@ -7448,49 +5826,37 @@ creating `Regions`, `Indexes`, `DiskStores`, among other things, along
 with monitoring the runtime operations and behavior of the cluster
 components.
 
-</div>
 
-<div class="paragraph">
 
 The Manager lets a JMX-enabled client (such as the *Gfsh* shell tool)
 connect to the Manager to manage the cluster. It is also possible to
 connect to a Manager with JDK-provided tools such as JConsole or
 JVisualVM, given that these are both JMX-enabled clients as well.
 
-</div>
 
-<div class="paragraph">
 
 Perhaps you would also like to enable the Spring
 `@CacheServerApplication` shown earlier as a Manager as well. To do so,
 annotate your Spring `@Configuration` or `@SpringBootApplication` class
 with `@EnableManager`.
 
-</div>
 
-<div class="paragraph">
 
 By default, the Manager binds to `localhost`, listening on the default
 Manager port of `1099`. Several aspects of the Manager can be configured
 with annotation attributes or the corresponding properties.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows how to create an embedded Manager in Java:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `CacheServer` application running an embedded Manager
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7509,20 +5875,14 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 With the preceding class, you can even use *Gfsh* to connect to the
 small cluster and manage it, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 $ gfsh
@@ -7547,11 +5907,8 @@ SpringCacheServerTwo   | 10.99.199.5(SpringCacheServerTwo:14844)<v1>:1025
 SpringCacheServerThree | 10.99.199.5(SpringCacheServerThree:14846)<v2>:1026
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Because we also have the embedded Locator enabled, we can connect
 indirectly to the Manager through the Locator. A Locator lets JMX
@@ -7559,36 +5916,22 @@ clients connect and find a Manager in the cluster. If none exists, the
 Locator assumes the role of a Manager. However, if no Locator exists, we
 would need to connect directly to the Manager by using the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 *Gfsh* `connect` command connecting directly to the Manager
 
-</div>
 
-<div class="content">
 
 ``` highlight
 gfsh>connect --jmx-manager=localhost[1099]
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Like the <code>@EnableLocator</code> annotation, the
@@ -7601,30 +5944,23 @@ cluster.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode management and monitoring can be found
 [here](https://geode.apache.org/docs/guide/19/managing/book_intro.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring the Embedded HTTP Server
 
-<div class="paragraph">
 
 Apache Geode is also capable of running an embedded HTTP server. The
 current implementation is backed by [Eclipse
 Jetty](https://www.eclipse.org/jetty/).
 
-</div>
 
-<div class="paragraph">
 
 The embedded HTTP server is used to host Apache Geode's Management
 (Admin) REST API (not a publicly advertised API), the [Developer REST
@@ -7632,34 +5968,26 @@ API](https://geode.apache.org/docs/guide/19/rest_apps/book_intro.html),
 and the [Pulse Monitoring Web
 Application](https://geode.apache.org/docs/guide/19/tools_modules/pulse/pulse-overview.html).
 
-</div>
 
-<div class="paragraph">
 
 However, to use any of these Apache Geode-provided web applications, you
 must have a full installation of Apache Geode installed on your system,
 and you must set the `GEODE_HOME` environment variable to your
 installation directory.
 
-</div>
 
-<div class="paragraph">
 
 To enable the embedded HTTP server, add the `@EnableHttpService`
 annotation to any `@PeerCacheApplication` or `@CacheServerApplication`
 annotated class, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `CacheServer` application running the embedded HTTP server
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7668,57 +5996,43 @@ Spring `CacheServer` application running the embedded HTTP server
 public class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 By default, the embedded HTTP server listens on port `7070` for HTTP
 client requests. Of course, you can use the annotation attributes or
 corresponding configuration properties to adjust the port as needed.
 
-</div>
 
-<div class="paragraph">
 
 Follow the earlier links for more details on HTTP support and the
 services provided.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring the Embedded Memcached Server (Gemcached)
 
-<div class="paragraph">
 
 Apache Geode also implements the Memcached protocol with the ability to
 service Memcached clients. That is, Memcached clients can connect to a
 Apache Geode cluster and perform Memcached operations as if the Apache
 Geode servers in the cluster were actual Memcached servers.
 
-</div>
 
-<div class="paragraph">
 
 To enable the embedded Memcached service, add the
 `@EnableMemcachedServer` annotation to any `@PeerCacheApplication` or
 `@CacheServerApplication` annotated class, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `CacheServer` application running an embedded Memcached server
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7727,49 +6041,36 @@ Spring `CacheServer` application running an embedded Memcached server
 public class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode's Memcached service (called "Gemcached")
 can be found
 [here](https://geode.apache.org/docs/guide/19/tools_modules/gemcached/chapter_overview.html).
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
-### Configuring Logging
+### <a id="configuring-logging"></a>Configuring Logging
 
-<div class="paragraph">
 
 Oftentimes, it is necessary to turn up logging to understand
 exactly what Apache Geode is doing and when.
 
-</div>
 
-<div class="paragraph">
 
 To enable Logging, annotate your application class with `@EnableLogging`
 and set the appropriate attributes or associated properties, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with Logging enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7778,75 +6079,55 @@ Spring `ClientCache` application with Logging enabled
 public class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While the `logLevel` attribute can be specified with all the cache-based
 application annotations (for example,
 `@ClientCacheApplication(logLevel="info")`), it is easier to customize
 logging behavior with the `@EnableLogging` annotation.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, you can configure the `log-level` by setting the
 `spring.data.gemfire.logging.level` property in
 `application.properties`.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableLogging` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLogging.html)
 for more details.
 
-</div>
 
-</div>
 
-<div class="sect2">
+### <a id="configuring-statistics"></a>Configuring Statistics
 
-### Configuring Statistics
-
-<div class="paragraph">
 
 To gain even deeper insight into Apache Geode at runtime, you can enable
 statistics. Gathering statistical data facilitates system analysis and
 troubleshooting when complex problems, which are often distributed in
 nature and where timing is a crucial factor, occur.
 
-</div>
 
-<div class="paragraph">
 
 When statistics are enabled, you can use Apache Geode's [VSD (Visual
 Statistics
 Display)](https://geode.apache.org/docs/guide/19/tools_modules/vsd/chapter_overview.html)
 tool to analyze the statistical data that is collected.
 
-</div>
 
-<div class="paragraph">
 
 To enable statistics, annotate your application class with
 `@EnableStatistics`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with Statistics enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7855,47 +6136,35 @@ Spring `ClientCache` application with Statistics enabled
 public class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Enabling statistics on a server is particularly valuable when evaluating
 performance. To do so, annotate your `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableStatistics`.
 
-</div>
 
-<div class="paragraph">
 
 You can use the `@EnableStatistics` annotation attributes or associated
 properties to customize the statistics gathering and collection process.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableStatistics` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableStatistics.html)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode's statistics can be found
 [here](https://geode.apache.org/docs/guide/19/managing/statistics/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring PDX
 
-<div class="paragraph">
 
 One of the more powerful features of Apache Geode is [PDX
 serialization](https://geode.apache.org/docs/guide/19/developing/data_serialization/gemfire_pdx_serialization.html).
@@ -7903,7 +6172,6 @@ While a complete discussion of PDX is beyond the scope of this document,
 serialization using PDX is a much better alternative to Java
 serialization, with the following benefits:
 
-</div>
 
 <div class="ulist">
 
@@ -7922,18 +6190,14 @@ serialization, with the following benefits:
   projections and predicates without the object needing to be
   de-serialized first.
 
-</div>
 
-<div class="paragraph">
 
 In general, serialization in Apache Geode is required any time data is
 transferred to or from clients and servers or between peers in a cluster
 during normal distribution and replication processes as well as when
 data is overflowed or persisted to disk.
 
-</div>
 
-<div class="paragraph">
 
 Enabling PDX serialization is much simpler than modifying all of your
 application domain object types to implement `java.io.Serializable`,
@@ -7942,24 +6206,18 @@ your application domain model or you do not have any control over the
 objects your are serializing, which is especially true when using a 3rd
 party library (e.g. think of a geo-spatial API with `Coordinate` types).
 
-</div>
 
-<div class="paragraph">
 
 To enable PDX, annotate your application class with `@EnablePdx`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with PDX enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -7968,11 +6226,8 @@ Spring `ClientCache` application with PDX enabled
 public class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Typically, an application's domain object types either implements the
 [`org.apache.geode.pdx.PdxSerializable`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxSerializable.html)
@@ -7982,26 +6237,20 @@ implementation of the
 interface to handle all the application domain object types that need to
 be serialized.
 
-</div>
 
-<div class="paragraph">
 
 Unfortunately, Apache Geode only lets one `PdxSerializer` be registered,
 which suggests that all application domain object types need to be
 handled by a single `PdxSerializer` instance. However, that is a serious
 anti-pattern and an unmaintainable practice.
 
-</div>
 
-<div class="paragraph">
 
 Even though only a single `PdxSerializer` instance can be registered
 with Apache Geode, it makes sense to create a single `PdxSerializer`
 implementation per application domain object type.
 
-</div>
 
-<div class="paragraph">
 
 By using the [Composite Software Design
 Pattern](https://en.wikipedia.org/wiki/Composite_pattern), you can
@@ -8010,9 +6259,7 @@ aggregates all of the application domain object type-specific
 `PdxSerializer` instances, but acts as a single `PdxSerializer` instance
 and register it.
 
-</div>
 
-<div class="paragraph">
 
 You can declare this composite `PdxSerializer` as a managed bean in the
 Spring container and refer to this composite `PdxSerializer` by its bean
@@ -8020,25 +6267,19 @@ name in the `@EnablePdx` annotation using the `serializerBeanName`
 attribute. Spring Data for GemFire takes care of registering it
 with Apache Geode on your behalf.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows how to create a custom composite
 `PdxSerializer`:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with PDX enabled, using a custom
 composite `PdxSerializer`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -8053,19 +6294,14 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 It is also possible to declare Apache Geode's
 [`org.apache.geode.pdx.ReflectionBasedAutoSerializer`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html)
 as a bean definition in a Spring context.
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you should use Spring Data for GemFire's more robust
 [`org.springframework.data.gemfire.mapping.MappingPdxSerializer`](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/MappingPdxSerializer.html),
@@ -8073,31 +6309,24 @@ which uses Spring Data mapping metadata and infrastructure applied to
 the serialization process for more efficient handling than reflection
 alone.
 
-</div>
 
-<div class="paragraph">
 
 Many other aspects and features of PDX can be adjusted with the
 `@EnablePdx` annotation attributes or associated configuration
 properties.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnablePdx` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnablePdx.html)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Apache Geode Properties
 
-<div class="paragraph">
 
 While many of the
 [gemfire.properties](https://geode.apache.org/docs/guide/19/reference/topics/gemfire_properties.html)
@@ -8106,27 +6335,17 @@ the SDG annotation-based configuration model, the less commonly used
 Apache Geode properties are still accessible from the
 `@EnableGemFireProperties` annotation.
 
-</div>
 
-<div class="paragraph">
 
 Annotating your application class with `@EnableGemFireProperties` is
 convenient and a nice alternative to creating a `gemfire.properties`
 file or setting Apache Geode properties as Java system properties on the
 command line when launching your application.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">We recommend that these Apache Geode properties be
@@ -8138,35 +6357,27 @@ prototyping, debugging and testing purposes.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 A few examples of some of the less common Apache Geode properties that
 you usually need not worry about include, but are not limited to:
 `ack-wait-threshold`, `disable-tcp`, `socket-buffer-size`, and others.
 
-</div>
 
-<div class="paragraph">
 
 To individually set any Apache Geode property, annotate your application
 class with `@EnableGemFireProperties` and set the Apache Geode
 properties you want to change from the default value set by Apache Geode
 with the corresponding attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with specific Apache Geode properties
 set
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -8175,11 +6386,8 @@ set
 public class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Keep in mind that some of the Apache Geode properties are
 client-specific (for example, `conflateEvents`), while others are
@@ -8187,22 +6395,17 @@ server-specific (for example `distributedSystemId`,
 `enableNetworkPartitionDetection`, `enforceUniqueHost`, `memberTimeout`,
 `redundancyZone`, and others).
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode properties can be found
 [here](https://geode.apache.org/docs/guide/19/reference/topics/gemfire_properties.html).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Regions
 
-<div class="paragraph">
 
 So far, outside of PDX, our discussion has centered around configuring
 Apache Geode's more administrative functions: creating a cache instance,
@@ -8213,9 +6416,7 @@ of them relate directly to your application. In other words, we still
 need some place to store our application data and make it generally
 available and accessible.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode organizes data in a cache into
 [Regions](https://geode.apache.org/docs/guide/19/basic_config/data_regions/chapter_overview.html).
@@ -8225,9 +6426,7 @@ makes it more conducive for building effective indexes and writing
 queries. We cover indexing
 [later](#bootstrap-annotation-config-indexes).
 
-</div>
 
-<div class="paragraph">
 
 Previously, Spring Data for GemFire users needed to explicitly
 define and declare the Regions used by their applications to store data
@@ -8236,25 +6435,19 @@ SDG's `FactoryBeans` from the API with Spring's [Java-based container
 configuration](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-java)
 or using [XML](#bootstrap:region).
 
-</div>
 
-<div class="paragraph">
 
 The following example demonstrates how to configure a Region bean in
 Java:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Example Region bean definition using Spring's Java-based container
 configuration
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Configuration
@@ -8277,26 +6470,19 @@ class GemFireConfiguration {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The following example demonstrates how to configure the same Region bean
 in XML:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Example Region bean definition using SDG's XML Namespace
 
-</div>
 
-<div class="content">
 
 ``` highlight
 <gfe:partitioned-region id="exampleRegion" name="Example" persistent="true">
@@ -8304,54 +6490,36 @@ Example Region bean definition using SDG's XML Namespace
 </gfe:partitioned-region>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While neither Java nor XML configuration is all that difficult to
 specify, either one can be cumbersome, especially if an application
 requires a large number of Regions. Many relational database-based
 applications can have hundreds or even thousands of tables.
 
-</div>
 
-<div class="paragraph">
 
 Defining and declaring all these Regions by hand would be cumbersome and
 error prone. Well, now there is a better way.
 
-</div>
 
-<div class="paragraph">
 
 Now you can define and configure Regions based on their application
 domain objects (entities) themselves. No longer do you need to
 explicitly define `Region` bean definitions in Spring configuration
 metadata, unless you require finer-grained control.
 
-</div>
 
-<div class="paragraph">
 
 To simplify Region creation, Spring Data for GemFire combines the
 use of Spring Data Repositories with the expressive power of
 annotation-based configuration using the new
 `@EnableEntityDefinedRegions` annotation.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Most Spring Data application developers should
@@ -8365,24 +6533,18 @@ Apache Geode.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 First, an application developer starts by defining the application's
 domain objects (entities), as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Application domain object type modeling a Book
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Region("Books")
@@ -8404,37 +6566,27 @@ class Book {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Next, you define a basic repository for `Books` by extending Spring Data
 Commons `org.springframework.data.repository.CrudRepository` interface,
 as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Repository for Books
 
-</div>
 
-<div class="content">
 
 ``` highlight
 interface BookRepository extends CrudRepository<Book, ISBN> { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `org.springframe.data.repository.CrudRepository` is a Data Access
 Object (DAO) providing basic data access operations (CRUD) along with
@@ -8443,9 +6595,7 @@ additional, more sophisticated queries by declaring query methods on the
 repository interface (for example,
 `List<BooK> findByAuthor(Author author);`).
 
-</div>
 
-<div class="paragraph">
 
 Under the hood, Spring Data for GemFire provides an implementation
 of your application's repository interfaces when the Spring container is
@@ -8453,9 +6603,7 @@ bootstrapped. SDG even implements the query methods you define so long
 as you follow the
 [conventions](#gemfire-repositories.executing-queries).
 
-</div>
 
-<div class="paragraph">
 
 Now, when you defined the `Book` class, you also specified the Region in
 which instances of `Book` are mapped (stored) by declaring the Spring
@@ -8465,32 +6613,24 @@ the type parameter of the repository interface (`BookRepository`, in
 this case) is not annotated with `@Region`, the name is derived from the
 simple class name of the entity type (also `Book`, in this case).
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire uses the mapping context, which contains
 mapping metadata for all the entities defined in your application, to
 determine all the Regions that are needed at runtime.
 
-</div>
 
-<div class="paragraph">
 
 To enable and use this feature, annotate the application class with
 `@EnableEntityDefinedRegions`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Entity-defined Region Configuration
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -8500,20 +6640,11 @@ Entity-defined Region Configuration
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">Creating Regions from entity classes is most useful
@@ -8525,18 +6656,9 @@ preceding example.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Currently, only entity classes explicitly annotated
@@ -8547,26 +6669,20 @@ Regions created. If an entity class is not explicitly mapped with
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 By default, the `@EnableEntityDefinedRegions` annotation scans for
 entity classes recursively, starting from the package of the
 configuration class on which the `@EnableEntityDefinedRegions`
 annotation is declared.
 
-</div>
 
-<div class="paragraph">
 
 However, it is common to limit the search during the scan by setting the
 `basePackages` attribute with the package names containing your
 application entity classes.
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can use the more type-safe `basePackageClasses`
 attribute for specifying the package to scan by setting the attribute to
@@ -8574,23 +6690,17 @@ an entity type in the package that contains the entity's class, or by
 using a non-entity placeholder class specifically created for
 identifying the package to scan.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows how to specify the entity types to scan:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Entity-defined Region Configuration using the Entity class type
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -8603,11 +6713,8 @@ Entity-defined Region Configuration using the Entity class type
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In addition to specifying where to begin the scan, like Spring's
 `@ComponentScan` annotation, you can specify `include` and `exclude`
@@ -8615,21 +6722,17 @@ filters with all the same semantics of the
 `org.springframework.context.annotation.ComponentScan.Filter`
 annotation.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableEntityDefinedRegions` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableEntityDefinedRegions.html)
 for more details.
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Type-specific Regions
 
-<div class="paragraph">
 
 Apache Geode supports many different [types of
 Regions](https://geode.apache.org/docs/guide/19/developing/region_options/region_types.html).
@@ -8638,18 +6741,9 @@ Each type corresponds to the Region's
 which determines exactly how the data in the Region will be managed
 (i.e. distributed, replicated, and so on).
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Other configuration settings (such as the Region's
@@ -8661,18 +6755,14 @@ details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 When you annotate your application domain object types with the generic
 `@Region` mapping annotation, Spring Data for GemFire decides which
 type of Region to create. SDG's default strategy takes the cache type
 into consideration when determining the type of Region to create.
 
-</div>
 
-<div class="paragraph">
 
 For example, if you declare the application as a `ClientCache` by using
 the `@ClientCacheApplication` annotation, SDG creates a client `PROXY`
@@ -8681,15 +6771,12 @@ peer `Cache` by using either the `@PeerCacheApplication` or
 `@CacheServerApplication` annotations, SDG creates a server `PARTITION`
 `Region` by default.
 
-</div>
 
-<div class="paragraph">
 
 Of course, you can always override the default when necessary. To
 override the default applied by Spring Data for GemFire, four new
 Region mapping annotations have been introduced:
 
-</div>
 
 <div class="ulist">
 
@@ -8701,18 +6788,14 @@ Region mapping annotations have been introduced:
 
 - `@ReplicateRegion`
 
-</div>
 
-<div class="paragraph">
 
 The `@ClientRegion` mapping annotation is specific to client
 applications. All of the other Region mapping annotations listed above
 can only be used in server applications that have an embedded peer
 `Cache`.
 
-</div>
 
-<div class="paragraph">
 
 It is sometimes necessary for client applications to create and use
 local-only Regions, perhaps to aggregate data from other Regions in
@@ -8726,18 +6809,9 @@ Time-To-Live (TTL) expiration policies on the Region itself. (See
 Expiration](#bootstrap-annotation-config-region-expiration)" for more on
 expiration policies.)
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Region-level Idle-Timeout (TTI) and Time-To-Live
@@ -8747,9 +6821,7 @@ entry-level TTI and TTL expiration policies.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 In any case, if you want to create a local-only client Region where the
 data is not going to be distributed back to a corresponding Region on
@@ -8757,28 +6829,21 @@ the server with the same name, you can declare the `@ClientRegion`
 mapping annotation and set the `shortcut` attribute to
 `ClientRegionShortcut.LOCAL`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with a local-only, client Region
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @ClientRegion(shortcut = ClientRegionShortcut.LOCAL)
 class ClientLocalEntityType { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 All Region type-specific annotations provide additional attributes that
 are both common across Region types as well as specific to only that
@@ -8786,22 +6851,17 @@ type of Region. For example, the `collocatedWith` and `redundantCopies`
 attributes in the `PartitionRegion` annotation apply to server-side,
 `PARTITION` Regions only.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode Region types can be found
 [here](https://geode.apache.org/docs/guide/19/developing/region_options/region_types.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configured Cluster-defined Regions
 
-<div class="paragraph">
 
 In addition to the `@EnableEntityDefinedRegions` annotation, Spring Data
 for Apache Geode also provides the inverse annotation,
@@ -8811,9 +6871,7 @@ and requirements (the most common and logical approach), alternatively,
 you can declare your Regions from the Regions already defined in the
 cluster to which your `ClientCache` application will connect.
 
-</div>
 
-<div class="paragraph">
 
 This allows you to centralize your configuration using the cluster of
 servers as the primary source of data definitions and ensure that all
@@ -8822,9 +6880,7 @@ is particularly useful when quickly scaling up a large number instances
 of the same client application to handle the increased load in a
 cloud-managed environment.
 
-</div>
 
-<div class="paragraph">
 
 The idea is, rather than the client application(s) driving the data
 dictionary, the user defines Regions using Apache Geode's *Gfsh* CLI
@@ -8833,23 +6889,17 @@ added to the cluster, they too will also have and share the same
 configuration since it is remembered by Apache Geode's *Cluster
 Configuration Service*.
 
-</div>
 
-<div class="paragraph">
 
 By way of example, a user might defined a Region in *Gfsh*, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Defining a Region with Gfsh
 
-</div>
 
-<div class="content">
 
 ``` highlight
 gfsh>create region --name=Books --type=PARTITION
@@ -8878,27 +6928,20 @@ Region | size        | 0
        | data-policy | PARTITION
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 With Apache Geode's *Cluster Configuration Service*, any additional peer
 members added to the cluster of servers to handle the increased load (on
 the backend) will also have the same configuration, for example:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Adding an additional peer member to the cluster
 
-</div>
 
-<div class="content">
 
 ``` highlight
 gfsh>list members
@@ -8956,19 +6999,14 @@ Running                  : true
 Client Connections       : 0
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As you can see, "ServerThree" now has the "Books" Region. If the any or
 all of the server go down, they will have the same configuration along
 with the "Books" Region when they come back up.
 
-</div>
 
-<div class="paragraph">
 
 On the client-side, many Book Store client application instances might
 be started to process books against the Book Store online service. The
@@ -8977,18 +7015,14 @@ the Book Store application service. Rather than have to create and
 configure each Region individually, SDG conveniently allows the client
 application Regions to be defined from the cluster, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Defining Client Regions from the Cluster with
 `@EnableClusterDefinedRegions`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -9003,20 +7037,10 @@ class BookStoreClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableClusterDefinedRegions</code> can only
@@ -9025,18 +7049,10 @@ used on the client.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">You can use the <code>clientRegionShortcut</code>
@@ -9054,24 +7070,18 @@ with custom logic based on the Region name.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Then, it becomes a simple matter to use the "Books" Region in your
 application. You can inject the "Books" Region directly, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Using the "Books" Region
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @org.springframework.stereotype.Repository
@@ -9084,27 +7094,20 @@ class BooksDataAccessObject {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Or, even define a Spring Data Repository definition based on the
 application domain type (entity), `Book`, mapped to the "Books" Region,
 as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Using the "Books" Region with a SD Repository
 
-</div>
 
-<div class="content">
 
 ``` highlight
 interface BookRepository extends CrudRepository<Book, ISBN> {
@@ -9112,25 +7115,19 @@ interface BookRepository extends CrudRepository<Book, ISBN> {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can then either inject your custom `BooksDataAccessObject` or the
 `BookRepository` into your application service components to carry out
 whatever business function required.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Eviction
 
-<div class="paragraph">
 
 Managing data with Apache Geode is an active task. Tuning is generally
 required, and you must employ a combination of features (for example,
@@ -9138,9 +7135,7 @@ both eviction and
 [expiration](#bootstrap-annotation-config-region-expiration)) to
 effectively manage your data in memory with Apache Geode.
 
-</div>
 
-<div class="paragraph">
 
 Given that Apache Geode is an In-Memory Data Grid (IMDG), data is
 managed in-memory and distributed to other nodes that participate in a
@@ -9153,9 +7148,7 @@ scale-out (rather than scaling up, which means adding more memory, more
 CPU, more disk, or more network bandwidth — basically more of every
 system resource to handle the load).
 
-</div>
 
-<div class="paragraph">
 
 Still, even with a cluster of nodes, it is usually imperative that only
 the most important data be kept in memory. Running out of memory, or
@@ -9163,33 +7156,25 @@ even venturing near full capacity, is rarely, if ever, a good thing.
 Stop-the-world GCs or worse, `OutOfMemoryErrors`, will bring your
 application to a screaming halt.
 
-</div>
 
-<div class="paragraph">
 
 So, to help manage memory and keep the most important data around,
 Apache Geode supports Least Recently Used (LRU) eviction. That is,
 Apache Geode evicts Region entries based on when those entries were last
 accessed by using the Least Recently Used algorithm.
 
-</div>
 
-<div class="paragraph">
 
 To enable eviction, annotate the application class with
 `@EnableEviction`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with eviction enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9203,26 +7188,19 @@ Spring application with eviction enabled
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Eviction policies are usually set on the Regions in the servers.
 
-</div>
 
-<div class="paragraph">
 
 As shown earlier, the `policies` attribute can specify one or more
 nested `@EvictionPolicy` annotations, with each one being individually
 catered to one or more Regions where the eviction policy needs to be
 applied.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, you can reference a custom implementation of Apache
 Geode's
@@ -9230,55 +7208,42 @@ Geode's
 interface, which can be defined as a bean in the Spring container and
 referenced by name by using the `objectSizerName` attribute.
 
-</div>
 
-<div class="paragraph">
 
 An `ObjectSizer` lets you define the criteria used to evaluate and
 determine the the size of objects stored in a Region.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableEviction` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableEviction.html)
 for a complete list of eviction configuration options.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode eviction can be found
 [here](https://geode.apache.org/docs/guide/19/developing/eviction/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Expiration
 
-<div class="paragraph">
 
 Along with [eviction](#bootstrap-annotation-config-region-eviction),
 expiration can also be used to manage memory by allowing entries stored
 in a Region to expire. Apache Geode supports both Time-to-Live (TTL) and
 Idle-Timeout (TTI) entry expiration policies.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's annotation-based expiration configuration
 is based on the [earlier and existing entry expiration annotation
 support](#bootstrap:region:expiration:annotation) added in Spring Data
 for Apache Geode version 1.5.
 
-</div>
 
-<div class="paragraph">
 
 Essentially, Spring Data for GemFire's expiration annotation
 support is based on a custom implementation of Apache Geode's
@@ -9287,14 +7252,11 @@ interface. This `o.a.g.cache.CustomExpiry` implementation inspects the
 user's application domain objects stored in a Region for the presence of
 type-level expiration annotations.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire provides the following expiration
 annotations:
 
-</div>
 
 <div class="ulist">
 
@@ -9304,24 +7266,18 @@ annotations:
 
 - `TimeToLiveExpiration`
 
-</div>
 
-<div class="paragraph">
 
 An application domain object type can be annotated with one or more of
 the expiration annotations, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Applicaton domain object specific expiration policy
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Region("Books")
@@ -9329,26 +7285,19 @@ Applicaton domain object specific expiration policy
 class Book { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 To enable expiration, annotate the application class with
 `@EnableExpiration`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with expiration enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9357,28 +7306,21 @@ Spring application with expiration enabled
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In addition to application domain object type-level expiration policies,
 you can directly and individually configure expiration policies on a
 Region by Region basis using the `@EnableExpiration` annotation, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with region-specific expiration policies
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9391,45 +7333,33 @@ Spring application with region-specific expiration policies
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding example sets expiration policies for the `Books`,
 `Customers`, and `Orders` Regions.
 
-</div>
 
-<div class="paragraph">
 
 Expiration policies are usually set on the Regions in the servers.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableExpiration` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableExpiration.html)
 for a complete list of expiration configuration options.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode expiration can be found
 [here](https://geode.apache.org/docs/guide/19/developing/expiration/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Compression
 
-<div class="paragraph">
 
 In addition to
 [eviction](#bootstrap-annotation-config-region-expiration) and
@@ -9437,9 +7367,7 @@ In addition to
 also configure your data Regions with compression to reduce memory
 consumption.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode lets you compress in memory Region values by using
 pluggable
@@ -9448,24 +7376,18 @@ or different compression codecs. Apache Geode uses Google's
 [Snappy](https://google.github.io/snappy/) compression library by
 default.
 
-</div>
 
-<div class="paragraph">
 
 To enable compression, annotate the application class with
 `@EnableCompression`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with Region compression enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9474,20 +7396,10 @@ Spring application with Region compression enabled
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Neither the <code>compressorBeanName</code> nor the
@@ -9496,34 +7408,22 @@ Note
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The `compressorBeanName` defaults to `SnappyCompressor`, enabling Apache
 Geode's
 [`SnappyCompressor`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/SnappyCompressor.html).
 
-</div>
 
-<div class="paragraph">
 
 The `regionNames` attribute is an array of Region names that specify the
 Regions that have compression enabled. By default, all Regions compress
 values if the `regionNames` attribute is not explicitly set.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">Alternatively, you can use the
@@ -9536,18 +7436,10 @@ attributes.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">To use Apache Geode's Region compression feature,
@@ -9569,38 +7461,29 @@ bean in the Spring compressor, and set the
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableCompression` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableCompression.html)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode compression can be found
 [here](https://gemfire91.docs.pivotal.io/geode/managing/region_compression.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Off-Heap Memory
 
-<div class="paragraph">
 
 Another effective means for reducing pressure on the JVM's Heap memory
 and minimizing GC activity is to use Apache Geode's off-heap memory
 support.
 
-</div>
 
-<div class="paragraph">
 
 Rather than storing Region entries on the JVM Heap, entries are stored
 in the system's main memory. Off-heap memory generally works best when
@@ -9609,24 +7492,18 @@ and do not need to be deserialized frequently, as explained in the
 Apache Geode [User
 Guide](https://geode.apache.org/docs/guide/19/managing/heap_use/off_heap_management.html).
 
-</div>
 
-<div class="paragraph">
 
 To enable off-heap, annotate the application class with
 `@EnableOffHeap`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with Off-Heap enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9635,36 +7512,23 @@ Spring application with Off-Heap enabled
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `memorySize` attribute is required. The value for the `memorySize`
 attribute specifies the amount of main memory a Region can use in either
 megabytes (`m`) or gigabytes (`g`).
 
-</div>
 
-<div class="paragraph">
 
 The `regionNames` attribute is an array of Region names that specifies
 the Regions that store entries in main memory. By default, all Regions
 use main memory if the `regionNames` attribute is not explicitly set.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">Alternatively, you can use the
@@ -9676,23 +7540,18 @@ values of these <code>@EnableOffHeap</code> annotation attributes.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableOffHeap` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableOffHeap.html)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Disk Stores
 
-<div class="paragraph">
 
 Alternatively, you can configure Regions to persist data to disk. You
 can also configure Regions to overflow data to disk when Region entries
@@ -9701,34 +7560,22 @@ overflow the data. When an explicit `DiskStore` has not been configured
 for a Region with persistence or overflow, Apache Geode uses the
 `DEFAULT` `DiskStore`.
 
-</div>
 
-<div class="paragraph">
 
 We recommend defining Region-specific `DiskStores` when persisting
 and/or overflowing data to disk.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire provides annotation support for defining
 and creating application Region `DiskStores` by annotating the
 application class with the `@EnableDiskStore` and `@EnableDiskStores`
 annotations.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content"><code>@EnableDiskStores</code> is a composite
@@ -9738,9 +7585,7 @@ annotations.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 For example, while `Book` information might mostly consist of reference
 data from some external data source (such as Amazon), `Order` data is
@@ -9749,24 +7594,18 @@ application is going to need to retain (and maybe even overflow to disk
 if the transaction volume is high enough) — or so any book publisher and
 author hopes, anyway.
 
-</div>
 
-<div class="paragraph">
 
 Using the `@EnableDiskStore` annotation, you can define and create a
 `DiskStore` as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application defining a `DiskStore`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9776,18 +7615,13 @@ Spring application defining a `DiskStore`
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Again, more than one `DiskStore` can be defined by using the composite,
 `@EnableDiskStores` annotation.
 
-</div>
 
-<div class="paragraph">
 
 As with other annotations in Spring Data for GemFire's
 annotation-based configuration model, both `@EnableDiskStore` and
@@ -9795,9 +7629,7 @@ annotation-based configuration model, both `@EnableDiskStore` and
 configuration properties to customize the `DiskStores` created at
 runtime.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the `@EnableDiskStores` annotation defines certain common
 `DiskStore` attributes that apply to all `DiskStores` created from
@@ -9807,26 +7639,20 @@ particular global setting, but the `@EnableDiskStores` annotation
 conveniently defines common configuration attributes that apply across
 all `DiskStores` aggregated by the annotation.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire also provides the `DiskStoreConfigurer`
 callback interface, which can be declared in Java configuration and used
 instead of configuration properties to customize a `DiskStore` at
 runtime, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with custom DiskStore configuration
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -9849,11 +7675,8 @@ class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See the
 [`@EnableDiskStore`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableDiskStore.html)
@@ -9862,30 +7685,23 @@ and
 annotation Javadoc for more details on the available attributes as well
 as associated configuration properties.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode Region persistence and overflow (using
 DiskStores) can be found
 [here](https://geode.apache.org/docs/guide/19/developing/storing_data_on_disk/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Indexes
 
-<div class="paragraph">
 
 There is not much use in storing data in Regions unless the data can be
 accessed.
 
-</div>
 
-<div class="paragraph">
 
 In addition to `Region.get(key)` operations, particularly when the key
 is known in advance, data is commonly retrieved by executing queries on
@@ -9894,17 +7710,13 @@ written by using the Object Query Language (OQL), and the specific data
 set that a client wishes to access is expressed in the query's predicate
 (for example, `SELECT * FROM /Books b WHERE b.author.name = 'Jon Doe'`).
 
-</div>
 
-<div class="paragraph">
 
 Generally, querying without indexes is inefficient. When executing
 queries without an index, Apache Geode performs the equivalent of a full
 table scan.
 
-</div>
 
-<div class="paragraph">
 
 Indexes are created and maintained for fields on objects used in query
 predicates to match the data of interest, as expressed by the query's
@@ -9914,26 +7726,20 @@ and
 [hash](https://geode.apache.org/docs/guide/19/developing/query_index/creating_hash_indexes.html)
 indexes, can be created.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire makes it easy to create indexes on Regions
 where the data is stored and accessed. Rather than explicitly declaring
 `Index` bean definitions by using Spring config as before, we can create
 an `Index` bean definition in Java, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Index bean definition using Java config
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Bean("BooksIsbnIndex")
@@ -9951,36 +7757,26 @@ IndexFactoryBean bookIsbnIndex(GemFireCache gemfireCache) {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, we can use [XML](#bootstrap:indexing) to create an
 `Index` bean definition, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Index bean definition using XML
 
-</div>
 
-<div class="content">
 
 ``` highlight
 <gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 However, now you can directly define indexes on the fields of your
 application domain object types for which you know will be used in query
@@ -9988,25 +7784,19 @@ predicates to speed up those queries. You can even apply indexes for OQL
 queries generated from user-defined query methods on an application's
 repository interfaces.
 
-</div>
 
-<div class="paragraph">
 
 Re-using the example `Book` entity class from earlier, we can annotate
 the fields on `Book` that we know are used in queries that we define
 with query methods in the `BookRepository` interface, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Application domain object type modeling a book using indexes
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Region("Books")
@@ -10030,11 +7820,8 @@ class Book {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In our new `Book` class definition, we annotated the `author` field with
 `@Indexed` and the `title` field with `@LuceneIndexed`. Also, the `isbn`
@@ -10044,7 +7831,6 @@ instances, and, in Spring Data for GemFire, the `@Id` annotated
 field or property is used as the key in the Region when storing the
 entry.
 
-</div>
 
 <div class="ulist">
 
@@ -10058,9 +7844,7 @@ entry.
   of an Apache Geode Lucene Index, used in text-based searches with
   Apache Geode's Lucene integration and support.
 
-</div>
 
-<div class="paragraph">
 
 When the `@Indexed` annotation is used without setting any attributes,
 the index `name`, `expression`, and `fromClause` are derived from the
@@ -10070,25 +7854,19 @@ property. The `fromClause` is derived from the `@Region` annotation on
 the domain object's class, or the simple name of the domain object class
 if the `@Region` annotation was not specified.
 
-</div>
 
-<div class="paragraph">
 
 Of course, you can explicitly set any of the `@Indexed` annotation
 attributes to override the default values provided by Spring Data for
 Apache Geode.
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Application domain object type modeling a Book with customized indexes
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Region("Books")
@@ -10112,43 +7890,32 @@ class Book {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `name` of the index, which is auto-generated when not explicitly
 set, is also used as the name of the bean registered in the Spring
 container for the index. If necessary, this index bean can even be
 injected by name into another application component.
 
-</div>
 
-<div class="paragraph">
 
 The generated name of the index follows this pattern:
 `<Region Name><Field/Property Name><Index Type>Idx`. For example, the
 name of the `author` index would be, `BooksAuthorHashIdx`.
 
-</div>
 
-<div class="paragraph">
 
 To enable indexing, annotate the application class with
 `@EnableIndexing`, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring application with Indexing enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -10158,20 +7925,10 @@ Spring application with Indexing enabled
 class ServerApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>@EnablingIndexing</code> annotation has no
@@ -10185,9 +7942,7 @@ also strongly recommend that you limit the scope of the scan.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 While Lucene queries are not (yet) supported on Spring Data for Apache
 Geode repositories, SDG does provide comprehensive
@@ -10195,14 +7950,11 @@ Geode repositories, SDG does provide comprehensive
 for Apache Geode Lucene queries by using the familiar Spring template
 design pattern.
 
-</div>
 
-<div class="paragraph">
 
 Finally, we close this section with a few extra tips to keep in mind
 when using indexes:
 
-</div>
 
 <div class="ulist">
 
@@ -10220,41 +7972,31 @@ when using indexes:
   [configured](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/RegionFactory.html#setIndexMaintenanceSynchronous-boolean-)
   as an asynchronous task.
 
-</div>
 
-<div class="paragraph">
 
 Another optimization that you can use when restarting your Spring
 application where indexes have to be rebuilt is to first define all the
 indexes up front and then create them all at once, which, in Spring Data
 for Apache Geode, happens when the Spring container is refreshed.
 
-</div>
 
-<div class="paragraph">
 
 You can define indexes up front and then create them all at once by
 setting the `define` attribute on the `@EnableIndexing` annotation to
 `true`.
 
-</div>
 
-<div class="paragraph">
 
 See ["Creating Multiple Indexes at
 Once"](https://geode.apache.org/docs/guide/19/developing/query_index/create_multiple_indexes.html)
 in Apache Geode's User Guide for more details.
 
-</div>
 
-<div class="paragraph">
 
 Creating sensible indexes is an important task, since it is possible for
 a poorly designed index to do more harm than good.
 
-</div>
 
-<div class="paragraph">
 
 See both the
 [`@Indexed`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Indexed.html)
@@ -10262,45 +8004,33 @@ annotation and
 [`@LuceneIndexed`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html)
 annotation Javadoc for complete list of configuration options.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode OQL queries can be found
 [here](https://geode.apache.org/docs/guide/19/developing/querying_basics/chapter_overview.html).
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode indexes can be found
 [here](https://geode.apache.org/docs/guide/19/developing/query_index/query_index.html).
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode Lucene queries can be found
 [here](https://geode.apache.org/docs/guide/19/tools_modules/lucene_integration.html).
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Continuous Queries
 
-<div class="paragraph">
 
 Another very important and useful feature of Apache Geode is [Continuous
 Queries](https://geode.apache.org/docs/guide/19/developing/continuous_querying/chapter_overview.html).
 
-</div>
 
-<div class="paragraph">
 
 In a world of Internet-enabled things, events and streams of data come
 from everywhere. Being able to handle and process a large stream of data
@@ -10310,9 +8040,7 @@ Being able to receive, filter, transform, analyze, and act on data in
 real time is a key differentiator and characteristic of real time
 applications.
 
-</div>
 
-<div class="paragraph">
 
 Fortunately, Apache Geode was ahead of its time in this regard. By using
 Continuous Queries (CQ), a client application can express the data or
@@ -10323,9 +8051,7 @@ used to filter or identify the data of interest. When data is changed or
 added and it matches the criteria defined in the query predicate of the
 registered CQ, the client application is notified.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire makes it easy to define and register CQs,
 along with an associated listener to handle and process CQ events
@@ -10334,26 +8060,20 @@ annotation-based configuration for CQs builds on the existing Continuous
 Query support in the [continuous query listener
 container](#apis:continuous-query).
 
-</div>
 
-<div class="paragraph">
 
 For instance, say a banking application registers interest in every
 customers' checking acccount to detect overdraft withdrawls and handle
 this event by either applying overdraft protection or notifyinfg the
 customer. Then, the application might register the following CQ:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with registered CQ and listener.
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -10368,18 +8088,13 @@ class PublisherPrintApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 To enable Continuous Queries, annotate your application class with
 `@EnableContinuousQueries`.
 
-</div>
 
-<div class="paragraph">
 
 Defining Continuous Queries consists of annotating any Spring
 `@Component`-annotated POJO class methods with the `@ContinuousQuery`
@@ -10388,18 +8103,14 @@ methods). A POJO method defined with a CQ by using the
 `@ContinuousQuery` annotation is called any time data matching the query
 predicate is added or changed.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the POJO method signature should adhere to the
 requirements outlined in the section on [the `ContinuousQueryListener`
 and the
 `ContinuousQueryListenerAdapter`](#apis:continuous-query:adapter).
 
-</div>
 
-<div class="paragraph">
 
 See the
 [`@EnableContinuousQueries`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html)
@@ -10408,46 +8119,35 @@ and
 annotation Javadoc for more details on available attributes and
 configuration settings.
 
-</div>
 
-<div class="paragraph">
 
 More details on Spring Data for GemFire's continuous query support
 can be found [here](#apis:continuous-query).
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode's Continuous Queries can be found
 [here](https://geode.apache.org/docs/guide/19/developing/continuous_querying/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Spring's Cache Abstraction
 
-<div class="paragraph">
 
 With Spring Data for GemFire, Apache Geode can be used as a caching
 provider in Spring's [cache
 abstraction](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache).
 
-</div>
 
-<div class="paragraph">
 
 In Spring's Cache Abstraction, the caching annotations (such as
 `@Cacheable`) identify the cache on which a cache lookup is performed
 before invoking a potentially expensive operation. The results of an
 application service method are cached after the operation is invoked.
 
-</div>
 
-<div class="paragraph">
 
 In Spring Data for GemFire, a Spring `Cache` corresponds directly
 to a Apache Geode Region. The Region must exist before any caching
@@ -10455,19 +8155,14 @@ annotated application service methods are called. This is true for any
 of Spring's caching annotations (that is, `@Cacheable`, `@CachePut` and
 `@CacheEvict`) that identify the cache to use in the service operation.
 
-</div>
 
-<div class="paragraph">
 
 For instance, our publisher's Point-of-Sale (PoS) application might have
 a feature to determine or lookup the `Price` of a `Book` during a sales
 transaction, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -10487,33 +8182,24 @@ class PointOfSaleService
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 To make your work easier when you use Spring Data for GemFire with
 Spring's Cache Abstraction, two new features have been added to the
 annotation-based configuration model.
 
-</div>
 
-<div class="paragraph">
 
 Consider the following Spring caching configuration:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Enabling Caching using Apache Geode as the caching provider
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @EnableCaching
@@ -10549,26 +8235,19 @@ class CachingConfiguration {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Using Spring Data for GemFire's new features, you can simplify the
 same caching configuration to the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Enabling Apache Geode Caching
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @EnableGemfireCaching
@@ -10582,20 +8261,15 @@ class CachingConfiguration {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 First, the `@EnableGemfireCaching` annotation replaces both the Spring
 `@EnableCaching` annotation and the need to declare an explicit
 `CacheManager` bean definition (named "cacheManager") in the Spring
 config.
 
-</div>
 
-<div class="paragraph">
 
 Second, the `@EnableCachingDefinedRegions` annotation, like the
 `@EnableEntityDefinedRegions` annotation described in "[Configuring
@@ -10604,9 +8278,7 @@ Spring application, caching annotated service components to identify all
 the caches that are needed by the application at runtime and creates
 Regions in Apache Geode for these caches on application startup.
 
-</div>
 
-<div class="paragraph">
 
 The Regions created are local to the application process that created
 the Regions. If the application is a peer `Cache`, the Regions exist
@@ -10614,18 +8286,9 @@ only on the application node. If the application is a `ClientCache`,
 then SDG creates client `PROXY` Regions and expects those Regions with
 the same name to already exist on the servers in the cluster.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">SDG cannot determine the cache required by a service
@@ -10635,18 +8298,10 @@ used in the operation at runtime.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">SDG also supports JCache (JSR-107) cache annotations
@@ -10658,38 +8313,29 @@ annotation to use in place of JCache caching annotations.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Refer to the ["Support for the Spring Cache
 Abstraction"](#apis:spring-cache-abstraction) section for more details
 on using Apache Geode as a caching provider in Spring's Cache
 Abstraction.
 
-</div>
 
-<div class="paragraph">
 
 More details on Spring's Cache Abstraction can be found
 [here](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Cluster Configuration Push
 
-<div class="paragraph">
 
 This may be the most exciting new feature in Spring Data for Apache
 Geode.
 
-</div>
 
-<div class="paragraph">
 
 When a client application class is annotated with
 `@EnableClusterConfiguration`, any Regions or Indexes defined and
@@ -10701,9 +8347,7 @@ the nodes in the cluster go down, they come back up with the same
 configuration as before. If a new server is added to the cluster, it
 will acquire identical configuration.
 
-</div>
 
-<div class="paragraph">
 
 In a sense, this feature is not much different than if you were to use
 *Gfsh* to manually create the Regions and Indexes on all the servers in
@@ -10713,26 +8357,20 @@ Boot application, enabled with the power of Spring Data for Apache
 Geode, already contains all the configuration metadata needed to create
 Regions and Indexes for you.
 
-</div>
 
-<div class="paragraph">
 
 When you use the Spring Data Repository abstraction, we know all the
 Regions (such as those defined by the `@Region` annotated entity
 classes) and Indexes (such as those defined by the `@Indexed`-annotated
 entity fields and properties) that your application will need.
 
-</div>
 
-<div class="paragraph">
 
 When you use Spring's Cache Abstraction, we also know all the Regions
 for all the caches identified in the caching annotations needed by your
 application's service components.
 
-</div>
 
-<div class="paragraph">
 
 Essentially, you are already telling us everything we need to know
 simply by developing your application with the Spring Framework simply
@@ -10740,9 +8378,7 @@ by using all of its API and features, whether expressed in annotation
 metadata, Java, XML or otherwise, and whether for configuration,
 mapping, or whatever the purpose.
 
-</div>
 
-<div class="paragraph">
 
 The point is, you can focus on your application's business logic while
 using the framework's features and supporting infrastructure (such as
@@ -10751,9 +8387,7 @@ Transaction Management, and so on) and Spring Data for GemFire
 takes care of all the Apache Geode plumbing required by those framework
 features on your behalf.
 
-</div>
 
-<div class="paragraph">
 
 Pushing configuration from the client to the servers in the cluster and
 having the cluster remember it is made possible in part by the use of
@@ -10764,9 +8398,7 @@ service used by *Gfsh* to record schema-related changes (for example,
 `gfsh> create region --name=Example --type=PARTITION`) issued by the
 user to the cluster from the shell.
 
-</div>
 
-<div class="paragraph">
 
 Of course, since the cluster may "remember" the prior configuration
 pushed by a client from a previous run, Spring Data for GemFire is
@@ -10774,18 +8406,9 @@ careful not to stomp on any existing Regions and Indexes already defined
 in the servers. This is especially important, for instance, when Regions
 already contain data!
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Currently, there is no option to overwrite any
@@ -10798,18 +8421,9 @@ the Regions and Indexes manually.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Unlike <em>Gfsh</em>, Spring Data for GemFire
@@ -10820,18 +8434,10 @@ client. For advanced configuration and use cases, you should use
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">To use this feature you must explicitly declare the
@@ -10841,23 +8447,17 @@ of your Spring, Apache Geode <code>ClientCache</code> application.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Consider the power expressed in the following configuration:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -10871,11 +8471,8 @@ Spring `ClientCache` application
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You instantly get a Spring Boot application with a Apache Geode
 `ClientCache` instance, Spring Data Repositories, Spring's Cache
@@ -10883,13 +8480,10 @@ Abstraction with Apache Geode as the caching provider (where Regions and
 Indexes are not only created on the client but pushed to the servers in
 the cluster).
 
-</div>
 
-<div class="paragraph">
 
 From there, you only need to do the following:
 
-</div>
 
 <div class="ulist">
 
@@ -10905,24 +8499,19 @@ From there, you only need to do the following:
 - Declare the appropriate annotations on service methods that require
   caching, transactional behavior, and so on.
 
-</div>
 
-<div class="paragraph">
 
 Nothing in this case pertains to the infrastructure and plumbing
 required in the application's back-end services (such as Apache Geode).
 Database users have similar features. Now Spring and Apache Geode
 developers do too.
 
-</div>
 
-<div class="paragraph">
 
 When combined with the following Spring Data for GemFire
 annotations, this application really starts to take flight, with very
 little effort:
 
-</div>
 
 <div class="ulist">
 
@@ -10932,47 +8521,36 @@ little effort:
 
 - `@EnableGemfireCacheTransactions`
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableClusterConfiguration` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableClusterConfiguration.html)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring SSL
 
-<div class="paragraph">
 
 Equally important to serializing data to be transferred over the wire is
 securing the data while in transit. Of course, the common way to
 accomplish this in Java is by using the Secure Sockets Extension (SSE)
 and Transport Layer Security (TLS).
 
-</div>
 
-<div class="paragraph">
 
 To enable SSL, annotate your application class with `@EnableSsl`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with SSL enabled
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -10981,44 +8559,33 @@ Spring `ClientCache` application with SSL enabled
 public class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you need to set the necessary SSL configuration attributes or
 properties: keystores, usernames/passwords, and so on.
 
-</div>
 
-<div class="paragraph">
 
 You can individually configure different Apache Geode components
 (`GATEWAY`, `HTTP`, `JMX`, `LOCATOR`, and `SERVER`) with SSL, or you can
 collectively configure them to use SSL by using the `CLUSTER` enumerated
 value.
 
-</div>
 
-<div class="paragraph">
 
 You can specify which Apache Geode components the SSL configuration
 settings should applied by using the nested `@EnableSsl` annotation,
 `components` attribute with enumerated values from the `Component` enum,
 as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with SSL enabled by component
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11027,49 +8594,37 @@ Spring `ClientCache` application with SSL enabled by component
 public class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In addition, you can also specify component-level SSL configuration
 (`ciphers`, `protocols` and `keystore`/`truststore` information) by
 using the corresponding annotation attribute or associated configuration
 properties.
 
-</div>
 
-<div class="paragraph">
 
 See the [`@EnableSsl` annotation
 Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSsl.html)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode SSL support can be found
 [here](https://geode.apache.org/docs/guide/19/managing/security/ssl_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuring Security
 
-<div class="paragraph">
 
 Without a doubt, application security is extremely important, and Spring
 Data for Apache Geode provides comprehensive support for securing both
 Apache Geode clients and servers.
 
-</div>
 
-<div class="paragraph">
 
 Recently, Apache Geode introduced a new [Integrated
 Security](https://geode.apache.org/docs/guide/19/managing/security/implementing_security.html)
@@ -11080,25 +8635,20 @@ integrates with [Apache Shiro](https://shiro.apache.org/) and can
 therefore delegate both authentication and authorization requests to
 Apache Shiro to enforce security.
 
-</div>
 
-<div class="paragraph">
 
 The remainder of this section demonstrates how Spring Data for Apache
 Geode can simplify Apache Geode's security story even further.
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Server Security
 
-<div class="paragraph">
 
 There are several different ways in which you can configure security for
 servers in a Apache Geode cluster.
 
-</div>
 
 <div class="ulist">
 
@@ -11124,9 +8674,7 @@ servers in a Apache Geode cluster.
   container for accessing your application's security metadata (that is,
   authorized users, roles, and permissions).
 
-</div>
 
-<div class="paragraph">
 
 The problem with the first approach is that you must implement your own
 `SecurityManager`, which can be quite tedious and error-prone.
@@ -11137,18 +8685,10 @@ However, that problem has already been solved by configuring and using
 Apache Shiro `Realms`, which is more universally known and non-Apache
 Geode-specific.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">See Apache Geode's security examples for <a
@@ -11162,34 +8702,26 @@ as one possible way to implement your own custom, application-specific
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The second approach, using an Apache Shiro INI file, is marginally
 better, but you still need to be familiar with the INI file format in
 the first place. Additionally, an INI file is static and not easily
 updatable at runtime.
 
-</div>
 
-<div class="paragraph">
 
 The third approach is the most ideal, since it adheres to widely known
 and industry-accepted concepts (that is, Apache Shiro's Security
 framework) and is easy to setup, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring server application using Apache Shiro
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11210,20 +8742,11 @@ class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">The configured <code>Realm</code> shown in the
@@ -11233,7 +8756,6 @@ preceding example could easily have been any of Apache Shiro's supported
 </tbody>
 </table>
 
-</div>
 
 <div class="ulist">
 
@@ -11248,23 +8770,17 @@ preceding example could easily have been any of Apache Shiro's supported
 - A `Realm` supporting the [INI
   format](https://shiro.apache.org/static/1.3.2/apidocs/org/apache/shiro/realm/text/IniRealm.html).
 
-</div>
 
-<div class="paragraph">
 
 You could even create a custom implementation of an Apache Shiro
 `Realm`.
 
-</div>
 
-<div class="paragraph">
 
 See Apache Shiro's [documentation on
 Realms](https://shiro.apache.org/realm.html) for more details.
 
-</div>
 
-<div class="paragraph">
 
 When Apache Shiro is on the `CLASSPATH` of the servers in the cluster
 and one or more Apache Shiro `Realms` have been defined as beans in the
@@ -11272,18 +8788,10 @@ Spring container, Spring Data for GemFire detects this
 configuration and uses Apache Shiro as the security provider to secure
 your Apache Geode servers when the `@EnableSecurity` annotation is used.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">You can find more information about Spring Data for
@@ -11295,43 +8803,33 @@ blog post</a>.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See the
 [`@EnableSecurity`](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableSecurity.html)
 annotation Javadoc for more details on available attributes and
 associated configuration properties.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode security can be found
 [here](https://geode.apache.org/docs/guide/19/managing/security/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuring Client Security
 
-<div class="paragraph">
 
 The security story would not be complete without discussing how to
 secure Spring-based, Apache Geode cache client applications as well.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode's process for securing a client application is, honestly,
 rather involved. In a nutshell, you need to:
 
-</div>
 
 <div class="olist arabic">
 
@@ -11346,9 +8844,7 @@ rather involved. In a nutshell, you need to:
 3.  Specify the user credentials in a proprietary, Apache Geode
     `gfsecurity.properties` file.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire simplifies all of those steps by using the
 same `@EnableSecurity` annotation that was used in the server
@@ -11360,23 +8856,17 @@ application, for instance. Simply change the SDG annotation from
 `@PeerCacheApplication` or `@CacheServerApplication` to
 `@ClientCacheApplication`, and you are done.
 
-</div>
 
-<div class="paragraph">
 
 Effectively, all you need to do on the client is the following:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring client application using `@EnableSecurity`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11385,48 +8875,32 @@ Spring client application using `@EnableSecurity`
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you can define the familiar Spring Boot `application.properties`
 file containing the required username and password, as the following
 example shows, and you are all set:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring Boot `application.properties` file with the required Security
 credentials
 
-</div>
 
-<div class="content">
 
 ``` highlight
 spring.data.gemfire.security.username=jackBlack
 spring.data.gemfire.security.password=b@cK!nB1@cK
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">By default, Spring Boot can find your
@@ -11439,38 +8913,29 @@ abstraction</a>.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See the
 [`@EnableSecurity`](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableSecurity.html)
 annotation Javadoc for more details on available attributes and
 associated configuration properties.
 
-</div>
 
-<div class="paragraph">
 
 More details on Apache Geode Security can be found
 [here](https://geode.apache.org/docs/guide/19/managing/security/chapter_overview.html).
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Configuration Tips
 
-<div class="paragraph">
 
 The following tips can help you get the most out of using the new
 annotation-based configuration model:
 
-</div>
 
 <div class="ulist">
 
@@ -11480,13 +8945,11 @@ annotation-based configuration model:
 - [Additional Configuration-based
   Annotations](#bootstrap-annotation-config-tips-undocumented-annotations)
 
-</div>
 
 <div class="sect3">
 
 #### Configuration Organization
 
-<div class="paragraph">
 
 As we saw in the section on ["Configuring Cluster Configuration
 Push"](#bootstrap-annotation-config-cluster), when many Apache Geode or
@@ -11495,23 +8958,17 @@ we begin to stack a lot of annotations on the Spring `@Configuration` or
 `@SpringBootApplication` class. In this situation, it makes sense to
 start compartmentalizing the configuration a bit.
 
-</div>
 
-<div class="paragraph">
 
 For instance, consider the following declaration:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with the kitchen sink
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11528,25 +8985,18 @@ Spring `ClientCache` application with the kitchen sink
 class ClientApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 We could break this configuration down by concern, as follows:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Spring `ClientCache` application with the kitcken sink to boot
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11582,32 +9032,25 @@ class QueriesConfiguration {
 class RepositoriesConfiguration { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While it does not matter to the Spring Framework, we generally recommend
 aiming for readability, for the sake of the next person who has to
 maintain the code (which might be you at some point in the future).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Additional Configuration-based Annotations
 
-<div class="paragraph">
 
 The following SDG Annotations were not discussed in this reference
 documentation, either because the annotation supports a deprecated
 feature of Apache Geode or because there are better, alternative ways to
 accomplishing the function that the annotation provides:
 
-</div>
 
 <div class="ulist">
 
@@ -11654,26 +9097,20 @@ accomplishing the function that the annotation provides:
   declared as beans in the Spring container, intercepting the Region
   operation and logging the event.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Conclusion
 
-<div class="paragraph">
 
 As we learned in the previous sections, Spring Data for GemFire's
 new annotation-based configuration model provides a tremendous amount of
 power. Hopefully, it lives up to its goal of making it easier for you to
 *get started quickly* and *easily* when using Apache Geode with Spring.
 
-</div>
 
-<div class="paragraph">
 
 Keep in mind that, when you use the new annotations, you can still use
 Java configuration or XML configuration. You can even combine all three
@@ -11686,28 +9123,16 @@ class. The moment you explicitly provide a bean definition that would
 otherwise be provided by Spring Data for GemFire using 1 of the
 annotations, the annotation-based configuration backs away.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
-<td class="content"><div class="paragraph">
-<p>In certain cases, you may even need to fall back to Java
+<td class="content"><p>In certain cases, you may even need to fall back to Java
 configuration, as in the <code>Configurers</code> case, to handle more
 complex or conditional configuration logic that is not easily expressed
 in or cannot be accomplished by using annotations alone. Do not be
 alarmed. This behavior is to be expected.</p>
-</div>
-<div class="paragraph">
 <p>For example, another case where you need Java or XML configuration is
 when configuring Apache Geode WAN components, which currently do not
 have any annotation configuration support. However, defining and
@@ -11723,45 +9148,29 @@ classes (recommended).</p>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The annotations were not meant to handle every situation. The
 annotations were meant to help you *get up and running* as *quickly* and
 as *easily* as possible, especially during development.
 
-</div>
 
-<div class="paragraph">
 
 We hope you will enjoy these new capabilities!
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Annotation-based Configuration Quick Start
 
-<div class="paragraph">
 
 The following sections provide an overview to the SDG annotations in
 order to get started quickly.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">All annotations provide additional configuration
@@ -11776,22 +9185,17 @@ the individual Javadoc of each annotation for more details.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect3">
 
 #### Configure a `ClientCache` Application
 
-<div class="paragraph">
 
 To configure and bootstrap a Apache Geode `ClientCache` application, use
 the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11804,41 +9208,30 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See [`@ClientCacheApplication`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/ClientCacheApplication.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Apache Geode Applications with
 Spring](#bootstrap-annotation-config-geode-applications) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure a Peer `Cache` Application
 
-<div class="paragraph">
 
 To configure and bootstrap a Apache Geode Peer `Cache` application, use
 the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11851,20 +9244,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">If you would like to enable a
@@ -11878,48 +9261,36 @@ default <code>CacheServer</code> port of <code>40404</code>.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@CacheServerApplication`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/CacheServerApplication.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@PeerCacheApplication`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/PeerCacheApplication.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Apache Geode Applications with
 Spring](#bootstrap-annotation-config-geode-applications) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure an Embedded Locator
 
-<div class="paragraph">
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableLocator` to start an
 embedded Locator bound to all NICs listening on the default Locator
 port, `10334`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -11933,20 +9304,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableLocator</code> can only be used with
@@ -11955,41 +9316,31 @@ Apache Geode server applications.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableLocator`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLocator.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring an Embedded
 Locator](#bootstrap-annotation-config-embedded-services-locator) for
 more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure an Embedded Manager
 
-<div class="paragraph">
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableManager` to start an
 embedded Manager bound to all NICs listening on the default Manager
 port, `1099`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12003,20 +9354,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableManager</code> can only be used with
@@ -12025,40 +9366,30 @@ Apache Geode server applications.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableManager`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableManager.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring an Embedded
 Manager](#bootstrap-annotation-config-embedded-services-manager) for
 more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure the Embedded HTTP Server
 
-<div class="paragraph">
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableHttpService` to start the
 embedded HTTP server (Jetty) listening on port `7070`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12072,20 +9403,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableHttpService</code> can only be used
@@ -12094,41 +9415,31 @@ with Apache Geode server applications.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableHttpService`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableHttpService.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring the Embedded HTTP
 Server](#bootstrap-annotation-config-embedded-services-http) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure the Embedded Memcached Server
 
-<div class="paragraph">
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableMemcachedServer` to start
 the embedded Memcached server (Gemcached) listening on port `11211`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12142,20 +9453,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableMemcachedServer</code> can only be used
@@ -12164,40 +9465,30 @@ with Apache Geode server applications.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableMemcachedServer`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableMemcachedServer.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring the Embedded Memcached Server
 (Gemcached)](#bootstrap-annotation-config-embedded-services-memcached)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Logging
 
-<div class="paragraph">
 
 To configure or adjust Apache Geode logging, annotate your Spring,
 Apache Geode client or server application class with `@EnableLogging`,
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12211,20 +9502,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Default <code>log-level</code> is "config". Also,
@@ -12234,39 +9515,29 @@ Apache Geode.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableLogging`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLogging.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Logging](#bootstrap-annotation-config-logging) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Statistics
 
-<div class="paragraph">
 
 To gather Apache Geode statistics at runtime, annotate your Spring,
 Apache Geode client or server application class with
 `@EnableStatistics`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12280,40 +9551,29 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableStatistics`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableStatistics.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Statistics](#bootstrap-annotation-config-statistics)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure PDX
 
-<div class="paragraph">
 
 To enable Apache Geode PDX serialization, annotate your Spring, Apache
 Geode client or server application class with `@EnablePdx`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12327,20 +9587,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode PDX Serialization is an alternative to
@@ -12351,18 +9601,9 @@ without having to implement <code>java.io.Serializable</code>.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">By default, SDG configures the
@@ -12378,38 +9619,28 @@ details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnablePdx`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnablePdx.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring PDX](#bootstrap-annotation-config-pdx) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure SSL
 
-<div class="paragraph">
 
 To enable Apache Geode SSL, annotate your Spring, Apache Geode client or
 server application class with `@EnableSsl`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12423,20 +9654,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Minimally, Apache Geode requires you to specify a
@@ -12449,18 +9670,9 @@ the <code>KeyStore</code> file if the file has been secured.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode SSL allows you to configure the
@@ -12471,38 +9683,28 @@ all components of Apache Geode use SSL with "ALL".</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableSsl`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSsl.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring SSL](#bootstrap-annotation-config-ssl) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Security
 
-<div class="paragraph">
 
 To enable Apache Geode security, annotate your Spring, Apache Geode
 client or server application class with `@EnableSecurity`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12516,20 +9718,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">On the server, you must configure access to the auth
@@ -12542,18 +9734,9 @@ Security</a> for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">On the client, you must configure a username and
@@ -12564,40 +9747,30 @@ Security</a> for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableSecurity`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSecurity.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Security](#bootstrap-annotation-config-security) for
 more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Apache Geode Properties
 
-<div class="paragraph">
 
 To configure other, low-level Apache Geode properties not covered by the
 feature-oriented, SDG configuration annotations, annotate your Spring,
 Apache Geode client or server application class with
 `@GemFireProperties`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12616,20 +9789,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Some Apache Geode properties are client-side only
@@ -12640,30 +9803,23 @@ for the appropriate use of each property.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGemFireProperties`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableGemFireProperties.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Apache Geode
 Properties](#bootstrap-annotation-config-gemfire-properties) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Caching
 
-<div class="paragraph">
 
 To use Apache Geode as a *caching provider* in Spring's [*Cache
 Abstraction*](https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#cache),
@@ -12672,11 +9828,8 @@ required by your application service components, then annotate your
 Spring, Apache Geode client or server application class with
 `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12691,20 +9844,14 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, simply go on to define the application services that require
 caching, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -12717,20 +9864,10 @@ public class BookService {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableCachingDefinedRegions</code> is
@@ -12740,47 +9877,35 @@ desire.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableCachingDefinedRegions`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableCachingDefinedRegions.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGemfireCaching`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/cache/config/EnableGemfireCaching.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Spring's Cache
 Abstraction](#bootstrap-annotation-config-caching) for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Regions, Indexes, Repositories and Entities for Persistent Applications
 
-<div class="paragraph">
 
 To make short work of creating Spring, Apache Geode persistent client or
 server applications, annotate your application class with
 `@EnableEntityDefinedRegions`, `@EnableGemfireRepositories` and
 `@EnableIndexing`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -12796,20 +9921,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>@EnableEntityDefinedRegions</code>
@@ -12821,20 +9936,15 @@ Indexes</a> for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Next, define your entity class and use the `@Region` mapping annotation
 to specify the Region in which your entity will be stored. Use the
 `@Indexed` annotation to define Indexes on entity fields used in your
 application queries, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example.app.model;
@@ -12859,20 +9969,10 @@ public class Book {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>@Region("Books")</code> entity class
@@ -12885,18 +9985,13 @@ more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Finally, define your CRUD Repository with simple queries to persist and
 access `Books`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example.app.repo;
@@ -12910,20 +10005,11 @@ public interface BookRepository extends CrudRepository {
 }
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">See <a href="#gemfire-repositories">Spring Data for
@@ -12932,81 +10018,59 @@ Apache Geode Repositories</a> for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableEntityDefinedRegions`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableEntityDefinedRegions.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGemfireRepositories`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableIndexing`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableIndexing.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@Region`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Region.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@Indexed`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Indexed.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@LuceneIndexed`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Regions](#bootstrap-annotation-config-regions) for more
 details.
 
-</div>
 
-<div class="paragraph">
 
 See [Spring Data for GemFire Repositories](#gemfire-repositories)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Client Regions from Cluster-defined Regions
 
-<div class="paragraph">
 
 Alternatively, you can define client \[\*PROXY\] Regions from Regions
 already defined in the cluster using `@EnableClusterDefinedRegions`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -13023,25 +10087,19 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See [Configured Cluster-defined
 Regions](#bootstrap-annotation-config-region-cluster-defined) for more
 details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Functions
 
-<div class="paragraph">
 
 Apache Geode Functions are useful in distributed compute scenarios where
 a potentially expensive computation requiring data can be performed in
@@ -13050,19 +10108,14 @@ efficient to bring the logic to where the data is located (stored)
 rather than requesting and fetching the data to be processed by the
 computation.
 
-</div>
 
-<div class="paragraph">
 
 Use the `@EnableGemfireFunctions` along with the `@GemfireFunction`
 annotation to enable Apache Geode Functions definitions implemented as
 methods on POJOs, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @PeerCacheApplication
@@ -13080,21 +10133,15 @@ class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Use the `@EnableGemfireFunctionExecutions` along with 1 of the Function
 calling annotations: `@OnMember`, `@OnMembers`, `@OnRegion`, `@OnServer`
 and `@OnServers`.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -13114,32 +10161,23 @@ interface CustomerRewardsFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGemfireFunctions`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/function/config/EnableGemfireFunctions.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@GemfireFunction`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/function/annotation/GemfireFunction.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGemfireFunctionExecutions`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/function/config/EnableGemfireFunctionExecutions.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@OnMember`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/function/annotation/OnMember.html),
@@ -13152,41 +10190,31 @@ Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springfra
 and [`@OnServers`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/function/annotation/OnServers.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Annotation Support for Function Execution](#function-annotations)
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Continuous Query
 
-<div class="paragraph">
 
 Real-time, event stream processing is becoming an increasingly important
 task for data-intensive applications, primarily to respond to
 user requests in a timely manner. Apache Geode Continuous Query (CQ)
 will help you achieve this rather complex task quite easily.
 
-</div>
 
-<div class="paragraph">
 
 Enable CQ by annotating your application class with
 `@EnableContinuousQueries` and define your CQs along with the associated
 event handlers, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -13199,20 +10227,14 @@ class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, define your CQs by annotating the associated handler method with
 `@ContinousQuery`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -13225,28 +10247,16 @@ class CustomerService {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Anytime an event occurs changing the `Customer` data to match the
 predicate in your continuous OQL query (CQ), the `process` method will
 be called.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode CQ is a client-side feature only.</td>
@@ -13254,37 +10264,28 @@ Note
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableContinuousQueries`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html).
 
-</div>
 
-<div class="paragraph">
 
 See [`@ContinuousQuery`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/listener/annotation/ContinuousQuery.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Continuous Query (CQ)](#apis:continuous-query) and [Configuring
 Continuous Queries](#bootstrap-annotation-config-continuous-queries) for
 more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure Cluster Configuration
 
-<div class="paragraph">
 
 When developing Spring Data applications using Apache Geode as Apache
 Geode `ClientCache` applications, it is useful during development to
@@ -13293,33 +10294,25 @@ fact, Apache Geode expects that when you have a "/Example" PROXY
 `Region` on the client, that a matching `Region` by name (i.e.
 "Example") exists in the server.
 
-</div>
 
-<div class="paragraph">
 
 You could use *Gfsh* to create every Region and Index that your
 application requires, or, you could simply push the configuration
 meta-data already expressed when developing your Spring Data application
 using Apache Geode when you run it.
 
-</div>
 
-<div class="paragraph">
 
 This is as simple as annotation your main application class with
 `@EnableClusterConfiguration(..)`:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Using `@EnableClusterConfiguration`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -13329,20 +10322,10 @@ class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Most of the time, when using a client/server
@@ -13356,18 +10339,10 @@ the server nodes in the cluster consistently.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">to use
@@ -13378,29 +10353,22 @@ application classpath.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableClusterConfiguration`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableClusterConfiguration.html).
 
-</div>
 
-<div class="paragraph">
 
 See [Configuring Cluster Configuration
 Push](#bootstrap-annotation-config-cluster) for more details.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure `GatewayReceivers`
 
-<div class="paragraph">
 
 The replication of data between different Apache Geode clusters is an
 increasingly important fault-tolerance and high-availability (HA)
@@ -13408,13 +10376,10 @@ mechanism. Apache Geode WAN replication is a mechanism that allows one
 Apache Geode cluster to replicate its data to another Apache Geode
 cluster in a reliable and fault-tolerant manner.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode WAN replication requires two components to be configured:
 
-</div>
 
 <div class="ulist">
 
@@ -13424,18 +10389,13 @@ Apache Geode WAN replication requires two components to be configured:
 - `GatewaySender` - The WAN replication component that sends data to a
   remote Apache Geode cluster's `GatewayReceiver`.
 
-</div>
 
-<div class="paragraph">
 
 To enable a `GatewayReceiver`, the application class needs to be
 annotated with `@EnableGatewayReceiver` as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @CacheServerApplication
@@ -13449,20 +10409,10 @@ annotated with `@EnableGatewayReceiver` as follows:
 class MySpringApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode <code>GatewayReceiver</code> is a
@@ -13472,31 +10422,23 @@ server-side feature only and can only be configured on a
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGatewayReceiver`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/wan/annotation/EnableGatewayReceiver.html).
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configure `GatewaySenders`
 
-<div class="paragraph">
 
 To enable `GatewaySender`, the application class needs to be annotated
 with `@EnableGatewaySenders` and `@EnableGatewaySender` as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @CacheServerApplication
@@ -13520,20 +10462,10 @@ class MySpringApplication { .. }
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode <code>GatewaySender</code> is a
@@ -13543,9 +10475,7 @@ server-side feature only and can only be configured on a
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 In the above example, the application is configured with 2 Regions,
 `Region1` and `Region2`. In addition, two `GatewaySenders` will be
@@ -13553,16 +10483,12 @@ configured to service both Regions. `GatewaySender1` will be configured
 to replicate `` Region1's data and `GatewaySender2 `` will be configured
 to replicate \`Region2's data.
 
-</div>
 
-<div class="paragraph">
 
 As demonstrated each `GatewaySender` property can be configured on each
 `EnableGatewaySender` annotation.
 
-</div>
 
-<div class="paragraph">
 
 It is also possible to have a more generic, "defaulted" properties
 approach, where all properties are configured on the
@@ -13570,11 +10496,8 @@ approach, where all properties are configured on the
 values can be set on the parent annotation and then overridden on the
 child if required, as demonstrated below:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @CacheServerApplication
@@ -13590,20 +10513,10 @@ child if required, as demonstrated below:
 class MySpringApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">When the <code>regions</code> attribute is left
@@ -13614,32 +10527,24 @@ within the application.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See [`@EnableGatewaySenders`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/wan/annotation/EnableGatewaySenders.html)
 and [`@EnableGatewaySender`
 Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/wan/annotation/EnableGatewaySender.html).
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Working with Apache Geode APIs
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Once the Apache Geode Cache and Regions have been configured, they can
 be injected and used inside application objects. This chapter describes
@@ -13647,13 +10552,11 @@ the integration with Spring's Transaction Management functionality and
 DAO exception hierarchy. This chapter also covers support for dependency
 injection of Apache Geode managed objects.
 
-</div>
 
 <div class="sect2">
 
 ### GemfireTemplate
 
-<div class="paragraph">
 
 As with many other high-level abstractions provided by Spring, Spring
 Data for Apache Geode provides a **template** to simplify Apache Geode
@@ -13662,40 +10565,29 @@ common Region operations, but also provides the capability to
 **execute** code against native Apache Geode APIs without having to deal
 with Apache Geode checked exceptions by using a `GemfireCallback`.
 
-</div>
 
-<div class="paragraph">
 
 The template class requires a Apache Geode `Region`, and once
 configured, is thread-safe and is reusable across multiple application
 classes:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="gemfireTemplate" class="org.springframework.data.gemfire.GemfireTemplate" p:region-ref="SomeRegion"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Once the template is configured, a developer can use it alongside
 `GemfireCallback` to work directly with the Apache Geode `Region`
 without having to deal with checked exceptions, threading or resource
 management concerns:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 template.execute(new GemfireCallback<Iterable<String>>() {
@@ -13713,41 +10605,31 @@ template.execute(new GemfireCallback<Iterable<String>>() {
 });
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 For accessing the full power of the Apache Geode query language, a
 developer can use the `find` and `findUnique` methods, which, compared
 to the `query` method, can execute queries across multiple Regions,
 execute projections, and the like.
 
-</div>
 
-<div class="paragraph">
 
 The `find` method should be used when the query selects multiple items
 (through `SelectResults`) and the latter, `findUnique`, as the name
 suggests, when only one object is returned.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Exception Translation
 
-<div class="paragraph">
 
 Using a new data access technology requires not only accommodating a new
 API but also handling exceptions specific to that technology.
 
-</div>
 
-<div class="paragraph">
 
 To accommodate the exception handling case, the *Spring Framework*
 provides a technology agnostic and consistent [exception
@@ -13755,9 +10637,7 @@ hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference
 that abstracts the application from proprietary, and usually "checked",
 exceptions to a set of focused runtime exceptions.
 
-</div>
 
-<div class="paragraph">
 
 As mentioned in *Spring Framework's* documentation, [Exception
 translation](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#orm-exception-translation)
@@ -13770,23 +10650,18 @@ or `<gfe:client-cache>` declaration, which acts as an exception
 translator and is automatically detected by the Spring infrastructure
 and used accordingly.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Local, Cache Transaction Management
 
-<div class="paragraph">
 
 One of the most popular features of the *Spring Framework* is
 [Transaction
 Management](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#transaction).
 
-</div>
 
-<div class="paragraph">
 
 If you are not familiar with Spring's transaction abstraction then we
 strongly recommend
@@ -13796,44 +10671,28 @@ consistent *programming model* that works transparently across multiple
 APIs and can be configured either programmatically or declaratively (the
 most popular choice).
 
-</div>
 
-<div class="paragraph">
 
 For Apache Geode, Spring Data for GemFire provides a dedicated,
 per-cache, `PlatformTransactionManager` that, once declared, allows
 Region operations to be executed atomically through Spring:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Enable Transaction Management using XML
 
-</div>
 
-<div class="content">
 
 ``` highlight
 <gfe:transaction-manager id="txManager" cache-ref="myCache"/>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The example above can be simplified even further by
@@ -13847,9 +10706,7 @@ will be used. Additionally, the transaction manager name is
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Currently, Apache Geode supports optimistic transactions with **read
 committed** isolation. Furthermore, to guarantee this isolation,
@@ -13860,17 +10717,13 @@ semantics by default, meaning a clone of the actual value is created
 each time a read is performed. This behavior can be disabled if needed
 through the `copyOnRead` property.
 
-</div>
 
-<div class="paragraph">
 
 Since a copy of the value for a given key is made when **copy on read**
 is enabled, you must subsequently call `Region.put(key, value)` inorder
 for the value to be updated, transactionally.
 
-</div>
 
-<div class="paragraph">
 
 For more information on the semantics and behavior of the underlying
 Geode transaction manager, please refer to the Geode
@@ -13879,24 +10732,19 @@ Javadoc](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache
 as well as the
 [documentation](https://geode.apache.org/docs/guide/19/developing/transactions/chapter_overview.html).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Global, JTA Transaction Management
 
-<div class="paragraph">
 
 It is also possible for Apache Geode to participate in Global, JTA-based
 transactions, such as a transaction managed by an Java EE Application
 Server (e.g. WebSphere Application Server (WAS)) using Container Managed
 Transactions (CMT) along with other JTA resources.
 
-</div>
 
-<div class="paragraph">
 
 However, unlike many other JTA "compliant" resources (e.g. JMS Message
 Brokers like ActiveMQ), Apache Geode is **not** an XA compliant
@@ -13905,9 +10753,7 @@ Resource*" in a JTA transaction (*prepare phase*) since it does not
 implement the 2-phase commit protocol, or rather does not handle
 distributed transactions.
 
-</div>
 
-<div class="paragraph">
 
 Many managed environments capable of CMT maintain support for "*Last
 Resource*", non-XA compliant resources in JTA-based transactions, though
@@ -13919,43 +10765,28 @@ one such LGPL Open Source implementation. *Narayana* refers to this as
 "*Last Resource Commit Optimization*" (LRCO). More details can be found
 [here](https://narayana.io//docs/project/index.html#d0e1859).
 
-</div>
 
-<div class="paragraph">
 
 However, whether you are using Apache Geode in a standalone environment
 with an Open Source JTA Transaction Management implementation that
 supports "*Last Resource*", or a managed environment (e.g. Java EE AS
 such as WAS), Spring Data for GemFire has you covered.
 
-</div>
 
-<div class="paragraph">
 
 There are a series of steps you must complete to properly use Apache
 Geode as a "*Last Resource*" in a JTA transaction involving more than 1
 transactional resource. Additionally, there can only be 1 non-XA
 compliant resource (e.g. Apache Geode) in such an arrangement.
 
-</div>
 
-<div class="paragraph">
 
 1\) First, you must complete Steps 1-4 in Apache Geode's documentation
 [here](https://geode.apache.org/docs/guide/19/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk).
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">#1 above is independent of your Spring [Boot] and/or
@@ -13965,9 +10796,7 @@ successfully.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 2\) Referring to Step 5 in Apache Geode's
 [documentation](https://geode.apache.org/docs/guide/19/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk),
@@ -13977,9 +10806,7 @@ the `GemFireCache`,
 property for you when using the `@EnableGemFireAsLastResource`
 annotation.
 
-</div>
 
-<div class="paragraph">
 
 However, if SDG's auto-configuration is unsuccessful in this regard,
 then you must explicitly set the `copy-on-read` attribute in the
@@ -13987,47 +10814,34 @@ then you must explicitly set the `copy-on-read` attribute in the
 `copyOnRead` property of the `CacheFactoryBean` class in JavaConfig to
 **true**. For example:
 
-</div>
 
-<div class="paragraph">
 
 `ClientCache` XML:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Set copy-on-read using XML (client)
 
-</div>
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache ... copy-on-read="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 `ClientCache` *JavaConfig*:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Set copyOnRead using JavaConfig (client)
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Bean
@@ -14041,49 +10855,35 @@ ClientCacheFactoryBean gemfireCache() {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Peer `Cache` XML:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Set copy-on-read using XML (server)
 
-</div>
 
-<div class="content">
 
 ``` highlight
 <gfe:cache ... copy-on-read="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Peer `Cache` *JavaConfig*:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Set copyOnRead using JavaConfig (server)
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Bean
@@ -14097,20 +10897,10 @@ CacheFactoryBean gemfireCache() {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Explicitly setting the <code>copy-on-read</code>
@@ -14121,9 +10911,7 @@ reads.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 3\) At this point, you **skip** Steps 6-8 in Apache Geode's
 [documentation](https://geode.apache.org/docs/guide/19/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk)
@@ -14135,17 +10923,12 @@ Management](https://docs.spring.io/spring/docs/current/spring-framework-referenc
 infrastructure and Spring Data for GemFire's
 `@EnableGemFireAsLastResource` annotation configuration does the trick.
 
-</div>
 
-<div class="paragraph">
 
 The configuration looks like this…​
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Configuration
@@ -14156,43 +10939,31 @@ class GeodeConfiguration {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The only requirements are…​
 
-</div>
 
-<div class="paragraph">
 
 3.1) The `@EnableGemFireAsLastResource` annotation must be declared on
 the same Spring `@Configuration` class where Spring's
 `@EnableTransactionManagement` annotation is also specified.
 
-</div>
 
-<div class="paragraph">
 
 3.2) The `order` attribute of the `@EnableTransactionManagement`
 annotation must be explicitly set to an integer value that is not
 `Integer.MAX_VALUE` or `Integer.MIN_VALUE` (defaults to
 `Integer.MAX_VALUE`).
 
-</div>
 
-<div class="paragraph">
 
 Of course, hopefully you are aware that you also need to configure
 Spring's `JtaTransactionManager` when using JTA transactions like so..
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Bean
@@ -14206,20 +10977,10 @@ public JtaTransactionManager transactionManager(UserTransaction userTransaction)
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The configuration in section <a
@@ -14235,17 +10996,13 @@ above.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 For more details on using *Spring's Transaction Management* with JTA,
 see
 [here](https://docs.spring.io/spring/docs/current/spring-framework-reference/#transaction-application-server-integration).
 
-</div>
 
-<div class="paragraph">
 
 Effectively, Spring Data for GemFire's
 `@EnableGemFireAsLastResource` annotation imports configuration
@@ -14254,13 +11011,10 @@ containing 2 Aspect bean definitions that handles the Apache Geode
 `o.a.g.ra.GFConnection.close()` operations at the appropriate points
 during the transactional operation.
 
-</div>
 
-<div class="paragraph">
 
 Specifically, the correct sequence of events follow:
 
-</div>
 
 <div class="olist arabic">
 
@@ -14274,33 +11028,25 @@ Specifically, the correct sequence of events follow:
 
 5.  Finally, `GFConnection.close()`
 
-</div>
 
-<div class="paragraph">
 
 This is consistent with how you, as the application developer, would
 code this manually if you had to use the JTA API + Apache Geode API
 yourself, as shown in the Apache Geode
 [example](https://geode.apache.org/docs/guide/19/developing/transactions/jca_adapter_example.html#concept_swv_z2p_wk).
 
-</div>
 
-<div class="paragraph">
 
 Thankfully, Spring does the heavy lifting for you and all you need to do
 after applying the appropriate configuration (shown above) is:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Declaring a service method as @Transactional
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -14315,48 +11061,35 @@ class MyTransactionalService {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 \#1 & \#4 above are appropriately handled for you by Spring's JTA based
 `PlatformTransactionManager` once the `@Transactional` boundary is
 entered by your application (i.e. when the
 `MyTransactionService.someTransactionalServiceMethod()` is called).
 
-</div>
 
-<div class="paragraph">
 
 \#2 & \#3 are handled by Spring Data for GemFire's new Aspects
 enabled with the `@EnableGemFireAsLastResource` annotation.
 
-</div>
 
-<div class="paragraph">
 
 \#3 of course is the responsibility of your application.
 
-</div>
 
-<div class="paragraph">
 
 Indeed, with the appropriate logging configured, you will see the
 correct sequence of events…​
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Transaction Log Output
 
-</div>
 
-<div class="content">
 
 ``` highlight
 2017-Jun-22 11:11:37 TRACE TransactionInterceptor - Getting transaction for [example.app.service.MessageService.send]
@@ -14373,46 +11106,34 @@ JSON : [{"id":"MSG0000000000","message":"SENT"}] ]
 2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionClosingAspect - Closed GemFire Connection @ [Reference [...]]
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 For more details on using Apache Geode cache-level transactions, see
 [here](#apis:transaction-management).
 
-</div>
 
-<div class="paragraph">
 
 For more details on using Apache Geode in JTA transactions, see
 [here](https://gemfire90.docs.pivotal.io/geode/developing/transactions/JTA_transactions.html).
 
-</div>
 
-<div class="paragraph">
 
 For more details on configuring Apache Geode as a "*Last Resource*", see
 [here](https://gemfire90.docs.pivotal.io/geode/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Using @TransactionalEventListener
 
-<div class="paragraph">
 
 When using transactions, it may be desirable to register a listener to
 perform certain actions before or after the transaction commits, or
 after a rollback occurs.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire makes it easy to create listeners that will
 be invoked during specific phases of a transaction with the
@@ -14421,17 +11142,13 @@ be invoked during specific phases of a transaction with the
 events published from transactional methods, during the specified
 `phase`.
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 After Transaction Commit Event Listener
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
@@ -14440,26 +11157,19 @@ public void handleAfterCommit(MyEvent event) {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Inorder for the above method to be invoked, you must publish an event
 from within your transaction, like below:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Publishing a Transactional Event
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -14480,11 +11190,8 @@ class MyTransactionalService {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `@TransactionalEventListener` annotation allows you to specify the
 transaction `phase` in which the event handler method will be invoked.
@@ -14493,59 +11200,44 @@ and `BEFORE_COMMIT`. If not specified, the `phase` defaults to
 `AFTER_COMMIT`. If you wish the listener to be called even when no
 transaction is present, you may set `fallbackExecution` to `true`.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Auto Transaction Event Publishing
 
-<div class="paragraph">
 
 As of Spring Data for GemFire `Neumann/2.3`, it is now possible to
 enable auto transaction event publishing.
 
-</div>
 
-<div class="paragraph">
 
 Using the `@EnableGemfireCacheTransactions` annotation, set the
 `enableAutoTransactionEventPublishing` attribute to **true**. The
 default is **false**.
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Enable auto transaction event publishing
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @EnableGemfireCacheTransactions(enableAutoTransactionEventPublishing = true)
 class GeodeConfiguration { ... }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you can create `@TransactionalEventListener` annotated POJO methods
 to handle transaction events during either the `AFTER_COMMIT` or
 `AFTER_ROLLBACK` transaction phases.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -14563,20 +11255,11 @@ class TransactionEventListeners {
 }
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">Only <code>TransactionPhase.AFTER_COMMIT</code> and
@@ -14594,17 +11277,13 @@ methods are called during the transaction lifecycle.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 With auto transaction event publishing, you do not need to explicitly
 call the `applicationEventPublisher.publishEvent(..)` method inside your
 application `@Transactional` `@Service` methods.
 
-</div>
 
-<div class="paragraph">
 
 However, if you still want to receive transaction events "*before
 commit*", then you must still call the
@@ -14612,23 +11291,18 @@ commit*", then you must still call the
 application `@Transactional` `@Service` methods. See the **note** above
 for more details.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Continuous Query (CQ)
 
-<div class="paragraph">
 
 A powerful functionality offered by Apache Geode is [Continuous
 Query](https://geode.apache.org/docs/guide/19/developing/continuous_querying/chapter_overview.html)
 (or CQ).
 
-</div>
 
-<div class="paragraph">
 
 In short, CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to Apache
@@ -14639,9 +11313,7 @@ container**; very similar in functionality and naming to the JMS
 integration in the *Spring Framework*; in fact, users familiar with the
 JMS support in Spring, should feel right at home.
 
-</div>
 
-<div class="paragraph">
 
 Basically Spring Data for GemFire allows methods on POJOs to become
 end-points for CQ. Simply define the query and indicate the method that
@@ -14650,18 +11322,9 @@ Apache Geode takes care of the rest. This is very similar to Java EE's
 message-driven bean style, but without any requirement for base class or
 interface implementations, based on Apache Geode.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Currently, Continuous Query is only supported in
@@ -14674,13 +11337,11 @@ for more information.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect3">
 
 #### Continuous Query Listener Container
 
-<div class="paragraph">
 
 Spring Data for GemFire simplifies creation, registration,
 life-cycle and dispatch of CQ events by taking care of the
@@ -14690,9 +11351,7 @@ behalf of the user. Users familiar with EJB and JMS should find the
 concepts familiar as it is designed as close as possible to the support
 provided in the *Spring Framework* with its Message-driven POJOs (MDPs).
 
-</div>
 
-<div class="paragraph">
 
 The SDG `ContinuousQueryListenerContainer` acts as an event (or message)
 listener container; it is used to receive the events from the registered
@@ -14707,9 +11366,7 @@ business logic associated with receiving an event (and reacting to it),
 and delegate the boilerplate Apache Geode infrastructure concerns to the
 framework.
 
-</div>
 
-<div class="paragraph">
 
 The listener container is fully customizable. A developer can chose
 either to use the CQ thread to perform the dispatch (synchronous
@@ -14721,15 +11378,12 @@ executor to better serve her needs. In particular, in managed
 environments (such as app servers), it is highly recommended to pick a
 proper `TaskExecutor` to take advantage of its runtime.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### The `ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
 
-<div class="paragraph">
 
 The `ContinuousQueryListenerAdapter` class is the final component in
 Spring Data for GemFire CQ support. In a nutshell, class allows you
@@ -14739,18 +11393,13 @@ constraints. `ContinuousQueryListenerAdapter` implements the
 to Apache Geode's
 [CqListener](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/CqListener.html).
 
-</div>
 
-<div class="paragraph">
 
 Consider the following interface definition. Notice the various event
 handling methods and their parameters:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface EventDelegate {
@@ -14765,13 +11414,9 @@ public interface EventDelegate {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -14781,29 +11426,17 @@ class DefaultEventDelegate implements EventDelegate {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In particular, note how the above implementation of the `EventDelegate`
 interface has **no** Apache Geode dependencies at all. It truly is a
 POJO that we can and will make into an EDP via the following
 configuration.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">the class does not have to implement an interface;
@@ -14813,11 +11446,8 @@ contract and the implementation.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -14847,20 +11477,10 @@ contract and the implementation.</td>
 <beans>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The example above shows a few of the various forms
@@ -14874,19 +11494,14 @@ The specified method can have various argument types, the
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The example above uses the Spring Data for GemFire namespace to
 declare the event listener container and automatically register the
 listeners. The full blown, **beans** definition is displayed below:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <!-- this is the Event Driven POJO (MDP) -->
@@ -14911,28 +11526,21 @@ listeners. The full blown, **beans** definition is displayed below:
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Each time an event is received, the adapter automatically performs type
 translation between the Apache Geode event and the required method
 argument(s) transparently. Any exception caused by the method invocation
 is caught and handled by the container (by default, being logged).
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### <a id="apis-declarable"></a>Wiring `Declarable` Components
 
-<div class="paragraph">
 
 Apache Geode XML configuration (usually referred to as `cache.xml`)
 allows **user** objects to be declared as part of the configuration.
@@ -14942,9 +11550,7 @@ configuration, each user type declared through XML must implement the
 `Declarable` interface, which allows arbitrary parameters to be passed
 to the declared class through a `Properties` instance.
 
-</div>
 
-<div class="paragraph">
 
 In this section, we describe how you can configure these pluggable
 components when defined in `cache.xml` using Spring while keeping your
@@ -14952,34 +11558,26 @@ Cache/Region configuration defined in `cache.xml`. This allows your
 pluggable components to focus on the application logic and not the
 location or creation of `DataSources` or other collaborators.
 
-</div>
 
-<div class="paragraph">
 
 However, if you are starting a green field project, it is recommended
 that you configure Cache, Region, and other pluggable Apache Geode
 components directly in Spring. This avoids inheriting from the
 `Declarable` interface or the base class presented in this section.
 
-</div>
 
-<div class="paragraph">
 
 See the following sidebar for more information on this approach.
 
-</div>
 
 <div class="sidebarblock">
 
-<div class="content">
 
 <div class="title">
 
 Eliminate `Declarable` components
 
-</div>
 
-<div class="paragraph">
 
 A developer can configure custom types entirely through Spring as
 mentioned in [Configuring a Region](#bootstrap:region). That way, a
@@ -14987,23 +11585,16 @@ developer does not have to implement the `Declarable` interface, and
 also benefits from all the features of the Spring IoC container (not
 just dependency injection but also life-cycle and instance management).
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As an example of configuring a `Declarable` component using Spring,
 consider the following declaration (taken from the `Declarable`
 [Javadoc](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/Declarable.html)):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <cache-loader>
@@ -15014,11 +11605,8 @@ consider the following declaration (taken from the `Declarable`
 </cache-loader>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 To simplify the task of parsing, converting the parameters and
 initializing the object, Spring Data for GemFire offers a base
@@ -15029,53 +11617,40 @@ advantage of this feature, the user objects need to extend
 `WiringDeclarableSupport`, which automatically locates the declaring
 `BeanFactory` and performs wiring as part of the initialization process.
 
-</div>
 
 <div class="sidebarblock">
 
-<div class="content">
 
 <div class="title">
 
 Why is a base class needed?
 
-</div>
 
-<div class="paragraph">
 
 In the current Apache Geode release there is no concept of an **object
 factory** and the types declared are instantiated and used as is. In
 other words, there is no easy way to manage object creation outside
 Apache Geode.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuration using **template** bean definitions
 
-<div class="paragraph">
 
 When used, `WiringDeclarableSupport` tries to first locate an existing
 bean definition and use that as the wiring template. Unless specified,
 the component class name will be used as an implicit bean definition
 name.
 
-</div>
 
-<div class="paragraph">
 
 Let's see how our `DBLoader` declaration would look in that case:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
@@ -15090,13 +11665,9 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <cache-loader>
@@ -15105,13 +11676,9 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 </cache-loader>
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -15129,11 +11696,8 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In the scenario above, as no parameter was specified, a bean with the
 id/name `com.company.app.DBLoader` was used as a template for wiring the
@@ -15141,11 +11705,8 @@ instance created by Apache Geode. For cases where the bean name uses a
 different convention, one can pass in the `bean-name` parameter in the
 Apache Geode configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <cache-loader>
@@ -15157,13 +11718,9 @@ Apache Geode configuration:
 </cache-loader>
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -15182,20 +11739,10 @@ Apache Geode configuration:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <strong>template</strong> bean definitions do
@@ -15205,15 +11752,12 @@ annotations, etc).</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Configuration using auto-wiring and annotations
 
-<div class="paragraph">
 
 By default, if no bean definition is found, `WiringDeclarableSupport`
 will
@@ -15224,18 +11768,10 @@ object setters and try to automatically satisfy these dependencies.
 However, a developer can also use JDK 5 annotations to provide
 additional information to the auto-wiring process.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">We strongly recommend reading the dedicated <a
@@ -15246,18 +11782,13 @@ annotations and enabling factors.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 For example, the hypothetical `DBLoader` declaration above can be
 injected with a Spring-configured `DataSource` in the following way:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
@@ -15270,13 +11801,9 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <cache-loader>
@@ -15285,13 +11812,9 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 </cache-loader>
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -15309,11 +11832,8 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 By using the JSR-330 annotations, the `CacheLoader` code has been
 simplified since the location and creation of the `DataSource` has been
@@ -15323,17 +11843,13 @@ between multiple objects or retrieved from JNDI. These aspects can
 easily be configured and changed through the Spring container without
 touching the `DBLoader` code.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Support for the Spring Cache Abstraction
 
-<div class="paragraph">
 
 Spring Data for GemFire provides an implementation of the Spring
 [Cache
@@ -15341,19 +11857,14 @@ Abstraction](https://docs.spring.io/spring/docs/current/spring-framework-referen
 to position Apache Geode as a *caching provider* in Spring's caching
 infrastructure.
 
-</div>
 
-<div class="paragraph">
 
 To use Apache Geode as a backing implementation, a "*caching provider*"
 *in Spring's Cache Abstraction*, simply add `GemfireCacheManager` to
 your configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -15379,20 +11890,10 @@ your configuration:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>cache-ref</code> attribute on the
@@ -15403,9 +11904,7 @@ default cache bean name is used (i.e. "gemfireCache"), i.e.
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 When the `GemfireCacheManager` (Singleton) bean instance is declared and
 declarative caching is enabled (either in XML with
@@ -15414,25 +11913,18 @@ declarative caching is enabled (either in XML with
 `@Cacheable`) identify the "caches" that will cache data in-memory using
 Apache Geode Regions.
 
-</div>
 
-<div class="paragraph">
 
 These caches (i.e. Regions) must exist before the caching annotations
 that use them otherwise an error will occur.
 
-</div>
 
-<div class="paragraph">
 
 By way of example, suppose you have a Customer Service application with
 a `CustomerService` application component that performs caching…​
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -15444,25 +11936,17 @@ Account createAccount(Customer customer) {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you will need the following config.
 
-</div>
 
-<div class="paragraph">
 
 XML:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -15489,19 +11973,13 @@ XML:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 JavaConfig:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Configuration
@@ -15533,38 +12011,28 @@ class ApplicationConfiguration {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Of course, you are free to choose whatever Region type you like (e.g.
 REPLICATE, PARTITION, LOCAL, etc).
 
-</div>
 
-<div class="paragraph">
 
 For more details on *Spring's Cache Abstraction*, again, please refer to
 the
 [documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#cache).
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Working with Apache Geode Serialization
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 To improve overall performance of the Apache Geode In-memory Data Grid,
 Apache Geode supports a dedicated serialization protocol, called PDX,
@@ -15572,9 +12040,7 @@ that is both faster and offers more compact results over standard Java
 serialization in addition to working transparently across various
 language platforms (Java, C++, and .NET).
 
-</div>
 
-<div class="paragraph">
 
 See [PDX Serialization
 Features](https://geode.apache.org/docs/guide/19/developing/data_serialization/PDX_Serialization_Features.html)
@@ -15582,21 +12048,17 @@ and [PDX Serialization
 Internals](https://cwiki.apache.org/confluence/display/GEODE/PDX+Serialization+Internals)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 This chapter discusses the various ways in which Spring Data for Apache
 Geode simplifies and improves Apache Geode's custom serialization in
 Java.
 
-</div>
 
 <div class="sect2">
 
 ### <a id="wiring-deserialized-instances">Wiring Deserialized Instances
 
-<div class="paragraph">
 
 It is fairly common for serialized objects to have transient data.
 Transient data is often dependent on the system or environment where it
@@ -15608,17 +12070,13 @@ machine. For such cases, Spring Data for GemFire offers a special
 that performs wiring for each new instance created by Apache Geode
 during deserialization.
 
-</div>
 
-<div class="paragraph">
 
 Through such a mechanism, you can rely on the Spring container to inject
 and manage certain dependencies, making it easy to split transient from
 persistent data and have rich domain objects in a transparent manner.
 
-</div>
 
-<div class="paragraph">
 
 Spring users might find this approach similar to that of
 [`@Configurable`](https://docs.spring.io/spring/docs/current/spring-framework-reference/#aop-atconfigurable)).
@@ -15626,25 +12084,18 @@ The `WiringInstantiator` works similarly to `WiringDeclarableSupport`,
 trying to first locate a bean definition as a wiring template and
 otherwise falling back to auto-wiring.
 
-</div>
 
-<div class="paragraph">
 
 See the previous section ([Wiring `Declarable`
 Components](#apis:declarable)) for more details on wiring functionality.
 
-</div>
 
-<div class="paragraph">
 
 To use the SDG `Instantiator`, declare it as a bean, as the following
 example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="instantiator" class="org.springframework.data.gemfire.serialization.WiringInstantiator">
@@ -15655,11 +12106,8 @@ example shows:
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 During the Spring container startup, once it has been initialized, the
 `Instantiator`, by default, registers itself with the Apache Geode
@@ -15667,15 +12115,12 @@ serialization system and performs wiring on all instances of
 `SomeDataSerializableClass` created by Apache Geode during
 deserialization.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Auto-generating Custom `Instantiators`
 
-<div class="paragraph">
 
 For data intensive applications, a large number of instances might be
 created on each machine as data flows in. Apache Geode uses reflection
@@ -15687,11 +12132,8 @@ instantiate a new type (using the default constructor) without the use
 of reflection. The following example shows how to create an
 instantiator:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="instantiatorFactory" class="org.springframework.data.gemfire.serialization.InstantiatorFactoryBean">
@@ -15704,11 +12146,8 @@ instantiator:
 </bean>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding definition automatically generates two `Instantiators` for
 two classes (`CustomTypeA` and `CustomTypeB`) and registers them with
@@ -15716,25 +12155,19 @@ Apache Geode under user ID `1025` and `1026`. The two `Instantiators`
 avoid the use of reflection and create the instances directly through
 Java code.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## POJO Mapping
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 This section covers:
 
-</div>
 
 <div class="ulist">
 
@@ -15744,13 +12177,11 @@ This section covers:
 
 - [MappingPdxSerializer](#mapping.pdx-serializer)
 
-</div>
 
 <div class="sect2">
 
 ### Object Mapping Fundamentals
 
-<div class="paragraph">
 
 This section covers the fundamentals of Spring Data object mapping,
 object creation, field and property access, mutability and immutability.
@@ -15759,15 +12190,12 @@ use the object mapping of the underlying data store (like JPA). Also be
 sure to consult the store-specific sections for store-specific object
 mapping, like indexes, customizing column or field names or the like.
 
-</div>
 
-<div class="paragraph">
 
 Core responsibility of the Spring Data object mapping is to create
 instances of domain objects and map the store-native data structures
 onto those. This means we need two fundamental steps:
 
-</div>
 
 <div class="olist arabic">
 
@@ -15775,19 +12203,16 @@ onto those. This means we need two fundamental steps:
 
 2.  Instance population to materialize all exposed properties.
 
-</div>
 
 <div class="sect3">
 
 #### Object creation
 
-<div class="paragraph">
 
 Spring Data automatically tries to detect a persistent entity's
 constructor to be used to materialize objects of that type. The
 resolution algorithm works as follows:
 
-</div>
 
 <div class="olist arabic">
 
@@ -15802,9 +12227,7 @@ resolution algorithm works as follows:
 4.  If there's a no-argument constructor, it is used. Other constructors
     will be ignored.
 
-</div>
 
-<div class="paragraph">
 
 The value resolution assumes constructor/factory method argument names
 to match the property names of the entity, i.e. the resolution will be
@@ -15814,37 +12237,28 @@ etc.). This also requires either parameter names information available
 in the class file or an `@ConstructorProperties` annotation being
 present on the constructor.
 
-</div>
 
-<div class="paragraph">
 
 The value resolution can be customized by using Spring Framework's
 `@Value` value annotation using a store-specific SpEL expression. Please
 consult the section on store specific mappings for further details.
 
-</div>
 
 <div id="mapping.object-creation.details" class="sidebarblock">
 
-<div class="content">
 
 <div class="title">
 
 Object creation internals
 
-</div>
 
-<div class="paragraph">
 
 To avoid the overhead of reflection, Spring Data object creation uses a
 factory class generated at runtime by default, which will call the
 domain classes constructor directly. I.e. for this example type:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class Person {
@@ -15852,20 +12266,14 @@ class Person {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 we will create a factory class semantically equivalent to this one at
 runtime:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class PersonObjectInstantiator implements ObjectInstantiator {
@@ -15876,17 +12284,13 @@ class PersonObjectInstantiator implements ObjectInstantiator {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This gives us a roundabout 10% performance boost over reflection. For
 the domain class to be eligible for such optimization, it needs to
 adhere to a set of constraints:
 
-</div>
 
 <div class="ulist">
 
@@ -15898,26 +12302,19 @@ adhere to a set of constraints:
 
 - the constructor to be used by Spring Data must not be private
 
-</div>
 
-<div class="paragraph">
 
 If any of these criteria match, Spring Data will fall back to entity
 instantiation via reflection.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Property population
 
-<div class="paragraph">
 
 Once an instance of the entity has been created, Spring Data populates
 all remaining persistent properties of that class. Unless already
@@ -15928,7 +12325,6 @@ all non-transient properties that have not already been populated by the
 constructor are set on the entity instance. For that we use the
 following algorithm:
 
-</div>
 
 <div class="olist arabic">
 
@@ -15948,29 +12344,22 @@ following algorithm:
 
 5.  By default, we set the field value directly.
 
-</div>
 
 <div id="mapping.property-population.details" class="sidebarblock">
 
-<div class="content">
 
 <div class="title">
 
 Property population internals
 
-</div>
 
-<div class="paragraph">
 
 Similarly to our [optimizations in object
 construction](#mapping.object-creation.details) we also use Spring Data
 runtime generated accessor classes to interact with the entity instance.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class Person {
@@ -15997,9 +12386,7 @@ class Person {
 }
 ```
 
-</div>
 
-</div>
 
 <div class="exampleblock">
 
@@ -16007,13 +12394,9 @@ class Person {
 
 Example 1. A generated Property Accessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class PersonPropertyAccessor implements PersistentPropertyAccessor {
@@ -16037,9 +12420,7 @@ class PersonPropertyAccessor implements PersistentPropertyAccessor {
 }
 ```
 
-</div>
 
-</div>
 
 <div class="colist arabic">
 
@@ -16059,19 +12440,14 @@ class PersonPropertyAccessor implements PersistentPropertyAccessor {
 4.  Using property-access allows direct method invocations without using
     `MethodHandles`.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This gives us a roundabout 25% performance boost over reflection. For
 the domain class to be eligible for such optimization, it needs to
 adhere to a set of constraints:
 
-</div>
 
 <div class="ulist">
 
@@ -16085,24 +12461,17 @@ adhere to a set of constraints:
   originating `ClassLoader`. Java 9 and newer impose certain
   limitations.
 
-</div>
 
-<div class="paragraph">
 
 By default, Spring Data attempts to use generated property accessors and
 falls back to reflection-based ones if a limitation is detected.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Let's have a look at the following entity:
 
-</div>
 
 <div class="exampleblock">
 
@@ -16110,13 +12479,9 @@ Let's have a look at the following entity:
 
 Example 2. A sample entity
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class Person {
@@ -16154,13 +12519,9 @@ class Person {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="colist arabic">
 
@@ -16202,9 +12563,7 @@ class Person {
     Data to use the factory method for object instantiation, annotate it
     with `@PersistenceCreator`.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
@@ -16247,27 +12606,21 @@ class Person {
   assignments that can best be avoided by using Lombok's
   `@AllArgsConstructor`.
 
-</div>
 
 <div class="sect4">
 
 ##### Overriding Properties
 
-<div class="paragraph">
 
 Java's allows a flexible design of domain classes where a subclass could
 define a property that is already declared with the same name in its
 superclass. Consider the following example:
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class SuperType {
@@ -16310,15 +12663,10 @@ public class SubType extends SuperType {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Both classes define a `field` using assignable types. `SubType` however
 shadows `SuperType.field`. Depending on the class design, using the
@@ -16332,15 +12680,12 @@ assignable to its super-type property type to be registered as override,
 otherwise the super-type property is considered transient. We generally
 recommend using distinct property names.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data modules generally support overridden properties holding
 different values. From a programming model perspective there are a few
 things to consider:
 
-</div>
 
 <div class="olist arabic">
 
@@ -16357,71 +12702,52 @@ things to consider:
     cannot be generally set without making any further assumptions of
     the setter implementation.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Kotlin support
 
-<div class="paragraph">
 
 Spring Data adapts specifics of Kotlin to allow object creation and
 mutation.
 
-</div>
 
 <div class="sect4">
 
 ##### Kotlin object creation
 
-<div class="paragraph">
 
 Kotlin classes are supported to be instantiated , all classes are
 immutable by default and require explicit property declarations to
 define mutable properties. Consider the following `data` class `Person`:
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 data class Person(val id: String, val name: String)
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The class above compiles to a typical class with an explicit
 constructor.We can customize this class by adding another constructor
 and annotate it with `@PersistenceCreator` to indicate a constructor
 preference:
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 data class Person(var id: String, val name: String) {
@@ -16431,15 +12757,10 @@ data class Person(var id: String, val name: String) {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Kotlin supports parameter optionality by allowing default values to be
 used if a parameter is not provided. When Spring Data detects a
@@ -16448,99 +12769,71 @@ absent if the data store does not provide a value (or simply returns
 `null`) so Kotlin can apply parameter defaulting.Consider the following
 class that applies parameter defaulting for `name`
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 data class Person(var id: String, val name: String = "unknown")
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Every time the `name` parameter is either not part of the result or its
 value is `null`, then the `name` defaults to `unknown`.
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### Property population of Kotlin data classes
 
-<div class="paragraph">
 
 In Kotlin, all classes are immutable by default and require explicit
 property declarations to define mutable properties. Consider the
 following `data` class `Person`:
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 data class Person(val id: String, val name: String)
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This class is effectively immutable. It allows creating new instances as
 Kotlin generates a `copy(…)` method that creates new object instances
 copying all property values from the existing object and applying
 property values provided as arguments to the method.
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### Kotlin Overriding Properties
 
-<div class="paragraph">
 
 Kotlin allows declaring [property
 overrides](https://kotlinlang.org/docs/inheritance.html#overriding-properties)
 to alter properties in subclasses.
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 open class SuperType(open var field: Int)
@@ -16550,29 +12843,20 @@ class SubType(override var field: Int = 1) :
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Such an arrangement renders two properties with the name `field`. Kotlin
 generates property accessors (getters and setters) for each property in
 each class. Effectively, the code looks like as follows:
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class SuperType {
@@ -16611,15 +12895,10 @@ public final class SubType extends SuperType {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Getters and setters on `SubType` set only `SubType.field` and not
 `SuperType.field`. In such an arrangement, using the constructor is the
@@ -16630,15 +12909,12 @@ create conflicts to some degree because the properties share the same
 name yet might represent two distinct values. We generally recommend
 using distinct property names.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data modules generally support overridden properties holding
 different values. From a programming model perspective there are a few
 things to consider:
 
-</div>
 
 <div class="olist arabic">
 
@@ -16654,25 +12930,19 @@ things to consider:
 3.  Using `@AccessType(PROPERTY)` cannot be used as the super-property
     cannot be set.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Entity Mapping
 
-<div class="paragraph">
 
 Spring Data for GemFire provides support to map entities that are
 stored in a Region. The mapping metadata is defined by using annotations
 on application domain classes, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -16680,13 +12950,9 @@ on application domain classes, as the following example shows:
 
 Example 3. Mapping a domain class to a Apache Geode Region
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("People")
@@ -16706,15 +12972,10 @@ public class Person {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `@Region` annotation can be used to customize the Region in which an
 instance of the `Person` class is stored. The `@Id` annotation can be
@@ -16726,18 +12987,13 @@ annotated as the constructor to be used to construct entities. In an
 application domain class with no or only a single constructor, you can
 omit the annotation.
 
-</div>
 
-<div class="paragraph">
 
 In addition to storing entities in top-level Regions, entities can be
 stored in Sub-Regions as well, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("/Users/Admin")
@@ -16751,32 +13007,25 @@ public class Guest extends User {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Be sure to use the full path of the Apache Geode Region, as defined with
 the Spring Data for GemFire XML namespace by using the `id` or
 `name` attributes of the `<*-region>` element.
 
-</div>
 
 <div class="sect3">
 
 #### Entity Mapping by Region Type
 
-<div class="paragraph">
 
 In addition to the `@Region` annotation, Spring Data for GemFire
 also recognizes type-specific Region mapping annotations:
 `@ClientRegion`, `@LocalRegion`, `@PartitionRegion`, and
 `@ReplicateRegion`.
 
-</div>
 
-<div class="paragraph">
 
 Functionally, these annotations are treated exactly the same as the
 generic `@Region` annotation in the SDG mapping infrastructure. However,
@@ -16786,34 +13035,26 @@ Apache Geode's annotation configuration model. When combined with the
 `@Configuration` annotated class, it is possible to generate Regions in
 the local cache, whether the application is a client or peer.
 
-</div>
 
-<div class="paragraph">
 
 These annotations let you be more specific about what type of Region
 your application entity class should be mapped to and also has an impact
 on the data management policies of the Region (for example,
 partition — also known as sharding — versus replicating data).
 
-</div>
 
-<div class="paragraph">
 
 Using these type-specific Region mapping annotations with the SDG
 annotation configuration model saves you from having to explicitly
 define these Regions in configuration.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Repository Mapping
 
-<div class="paragraph">
 
 As an alternative to specifying the Region in which the entity is stored
 by using the `@Region` annotation on the entity class, you can also
@@ -16821,19 +13062,14 @@ specify the `@Region` annotation on the entity's `Repository` interface.
 See [Spring Data for GemFire Repositories](#gemfire-repositories)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 However, suppose you want to store a `Person` record in multiple Apache
 Geode Regions (for example, `People` and `Customers`). Then you can
 define your corresponding `Repository` interface extensions as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("People")
@@ -16847,20 +13083,14 @@ public interface CustomerRepository extends GemfireRepository<Person, String> {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, using each Repository individually, you can store the entity in
 multiple Apache Geode Regions, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -16877,34 +13107,26 @@ class CustomerService {
   }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can even wrap the `update` service method in a Spring managed
 transaction, either as a local cache transaction or a global
 transaction.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### MappingPdxSerializer
 
-<div class="paragraph">
 
 Spring Data for GemFire provides a custom
 [`PdxSerializer`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxSerializer.html)
 implementation, called `MappingPdxSerializer`, that uses Spring Data
 mapping metadata to customize entity serialization.
 
-</div>
 
-<div class="paragraph">
 
 The serializer also lets you customize entity instantiation by using the
 Spring Data `EntityInstantiator` abstraction. By default, the serializer
@@ -16913,9 +13135,7 @@ constructor of the mapped entity. The persistence constructor is either
 the default constructor, a singly declared constructor, or a constructor
 explicitly annotated with `@PersistenceConstructor`.
 
-</div>
 
-<div class="paragraph">
 
 To provide arguments for constructor parameters, the serializer reads
 fields with the named constructor parameter, explicitly identified by
@@ -16923,7 +13143,6 @@ using Spring's `@Value` annotation, from the supplied
 [`PdxReader`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxReader.html),
 as shown in the following example:
 
-</div>
 
 <div class="exampleblock">
 
@@ -16931,13 +13150,9 @@ as shown in the following example:
 
 Example 4. Using `@Value` on entity constructor parameters
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class Person {
@@ -16948,33 +13163,24 @@ public class Person {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 An entity class annotated in this way has the "thing" field read from
 the `PdxReader` and passed as the argument value for the constructor
 parameter, `firstname`. The value for `lastName` is a Spring bean with
 the name "bean".
 
-</div>
 
-<div class="paragraph">
 
 In addition to the custom instantiation logic and strategy provided by
 `EntityInstantiators`, the `MappingPdxSerializer` also provides
 capabilities well beyond Apache Geode's own
 [`ReflectionBasedAutoSerializer`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html).
 
-</div>
 
-<div class="paragraph">
 
 While Apache Geode's `ReflectionBasedAutoSerializer` conveniently uses
 Java Reflection to populate entities and uses regular expressions to
@@ -16982,7 +13188,6 @@ identify types that should be handled (serialized and deserialized) by
 the serializer, it cannot, unlike `MappingPdxSerializer`, perform the
 following:
 
-</div>
 
 <div class="ulist">
 
@@ -16998,36 +13203,27 @@ following:
 - Allows more robust type filtering in a `null` and type-safe manner
   (for example, not limited to only expressing types with regex).
 
-</div>
 
-<div class="paragraph">
 
 We now explore each feature of the `MappingPdxSerializer` in a bit more
 detail.
 
-</div>
 
 <div class="sect3">
 
 #### Custom PdxSerializer Registration
 
-<div class="paragraph">
 
 The `MappingPdxSerializer` gives you the ability to register custom
 `PdxSerializers` based on an entity's field or property names and types.
 
-</div>
 
-<div class="paragraph">
 
 For example, suppose you have defined an entity type modeling a `User`
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example.app.security.auth.model;
@@ -17042,20 +13238,15 @@ public class User {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While the user's name probably does not require any special logic to
 serialize the value, serializing the password on the other hand might
 require additional logic to handle the sensitive nature of the field or
 property.
 
-</div>
 
-<div class="paragraph">
 
 Perhaps you want to protect the password when sending the value over the
 network, between a client and a server, beyond TLS alone, and you only
@@ -17063,7 +13254,6 @@ want to store the salted hash. When using the `MappingPdxSerializer`,
 you can register a custom `PdxSerializer` to handle the user's password,
 as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -17072,13 +13262,9 @@ as follows:
 Example 5. Registering custom `PdxSerializers` by POJO field/property
 type
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Map<?, PdxSerializer> customPdxSerializers = new HashMap<>();
@@ -17088,15 +13274,10 @@ customPdxSerializers.put(Password.class, new SaltedHashPasswordPdxSerializer());
 mappingPdxSerializer.setCustomPdxSerializers(customPdxSerializers);
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 After registering the application-defined
 `SaltedHashPasswordPdxSerializer` instance with the `Password`
@@ -17105,16 +13286,13 @@ consult the custom `PdxSerializer` to serialize and deserialize all
 `Password` objects regardless of the containing object (for example,
 `User`).
 
-</div>
 
-<div class="paragraph">
 
 However, suppose you want to customize the serialization of `Passwords`
 only on `User` objects. To do so, you can register the custom
 `PdxSerializer` for the `User` type by specifying the fully qualified
 name of the `Class's` field or property, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -17123,13 +13301,9 @@ name of the `Class's` field or property, as the following example shows:
 Example 6. Registering custom `PdxSerializers` by POJO field/property
 name
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Map<?, PdxSerializer> customPdxSerializers = new HashMap<>();
@@ -17139,32 +13313,18 @@ customPdxSerializers.put("example.app.security.auth.model.User.password", new Sa
 mappingPdxSerializer.setCustomPdxSerializers(customPdxSerializers);
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Notice the use of the fully-qualified field or property name (that is
 `example.app.security.auth.model.User.password`) as the custom
 `PdxSerializer` registration key.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">You could construct the registration key by using a
@@ -17176,15 +13336,12 @@ as explicit as possible about the semantics of registration.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Mapping ID Properties
 
-<div class="paragraph">
 
 Like Apache Geode's `ReflectionBasedAutoSerializer`, SDG's
 `MappingPdxSerializer` is also able to determine the identifier of the
@@ -17196,17 +13353,12 @@ annotation. Alternatively, any field or property named "id", not
 explicitly annotated with `@Id`, is also designated as the entity's
 identifier.
 
-</div>
 
-<div class="paragraph">
 
 For example:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class Customer {
@@ -17218,11 +13370,8 @@ class Customer {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this case, the `Customer` `id` field is marked as the identifier
 field in the PDX type metadata by using
@@ -17230,21 +13379,16 @@ field in the PDX type metadata by using
 when the `PdxSerializer.toData(..)` method is called during
 serialization.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Mapping Read-only Properties
 
-<div class="paragraph">
 
 What happens when your entity defines a read-only property?
 
-</div>
 
-<div class="paragraph">
 
 First, it is important to understand what a "read-only" property is. If
 you define a POJO by following the
@@ -17252,11 +13396,8 @@ you define a POJO by following the
 specification (as Spring does), you might define a POJO with a read-only
 property, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -17273,20 +13414,15 @@ class ApplicationDomainType {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `readOnly` property is read-only because it does not provide a
 setter method. It only has a getter method. In this case, the `readOnly`
 property (not to be confused with the `readOnly` `DomainType` field) is
 considered read-only.
 
-</div>
 
-<div class="paragraph">
 
 As a result, the `MappingPdxSerializer` will not try to set a value for
 this property when populating an instance of `ApplicationDomainType` in
@@ -17294,9 +13430,7 @@ the `PdxSerializer.fromData(:Class<ApplicationDomainType>, :PdxReader)`
 method during deserialization, particularly if a value is present in the
 PDX serialized bytes.
 
-</div>
 
-<div class="paragraph">
 
 This is useful in situations where you might be returning a view or
 projection of some entity type and you only want to set state that is
@@ -17306,21 +13440,16 @@ this feature as is appropriate for your application's use cases and
 requirements. If you want the field or property to always be written,
 simply define a setter method.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Mapping Transient Properties
 
-<div class="paragraph">
 
 Likewise, what happens when your entity defines `transient` properties?
 
-</div>
 
-<div class="paragraph">
 
 You would expect the `transient` fields or properties of your entity not
 to be serialized to PDX when serializing the entity. That is exactly
@@ -17328,9 +13457,7 @@ what happens, unlike Apache Geode's own `ReflectionBasedAutoSerializer`,
 which serializes everything accessible from the object through Java
 Reflection.
 
-</div>
 
-<div class="paragraph">
 
 The `MappingPdxSerializer` will not serialize any fields or properties
 that are qualified as being transient, either by using Java's own
@@ -17339,18 +13466,13 @@ the
 [`@Transient`](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/annotation/Transient.html)
 Spring Data annotation on either fields or properties.
 
-</div>
 
-<div class="paragraph">
 
 For example, you might define an entity with transient fields and
 properties as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -17374,32 +13496,24 @@ class Process {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Neither the `Process` `id` field nor the readable `hostname` property
 are written to PDX.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Filtering by Class Type
 
-<div class="paragraph">
 
 Similar to Apache Geode's `ReflectionBasedAutoSerializer`, SDG's
 `MappingPdxSerializer` lets you filter the types of objects that are
 serialized and deserialized.
 
-</div>
 
-<div class="paragraph">
 
 However, unlike Apache Geode's `ReflectionBasedAutoSerializer`, which
 uses complex regular expressions to express which types the serializer
@@ -17407,18 +13521,10 @@ handles, SDG's `MappingPdxSerializer` uses the much more robust
 [`java.util.function.Predicate`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html)
 interface and API to express type-matching criteria.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">If you like to use regular expressions, you can
@@ -17429,9 +13535,7 @@ expression support</a>.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The nice part about Java's `Predicate` interface is that you can compose
 `Predicates` by using convenient and appropriate API methods, including:
@@ -17440,17 +13544,12 @@ The nice part about Java's `Predicate` interface is that you can compose
 and
 [`negate()`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#negate--).
 
-</div>
 
-<div class="paragraph">
 
 The following example shows the `Predicate` API in action:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Predicate<Class<?>> customerTypes =
@@ -17465,20 +13564,10 @@ mappingPdxSerializer.setExcludeTypeFilters(
   type -> !Reference.class.getPackage(type.getPackage()); // Exclude Reference types
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Any <code>Class</code> object passed to your
@@ -17487,25 +13576,20 @@ Note
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 SDG's `MappingPdxSerializer` includes support for both include and
 exclude class type filters.
 
-</div>
 
 <div class="sect4">
 
 ##### Exclude Type Filtering
 
-<div class="paragraph">
 
 By default, SDG's `MappingPdxSerializer` registers pre-defined
 `Predicates` that filter, or exclude types from the folliowing packages:
 
-</div>
 
 <div class="ulist">
 
@@ -17517,50 +13601,39 @@ By default, SDG's `MappingPdxSerializer` registers pre-defined
 
 - `org.springframework.*`
 
-</div>
 
-<div class="paragraph">
 
 In addition, the `MappingPdxSerializer` filters `null` objects when
 calling `PdxSerializer.toData(:Object, :PdxWriter)` and `null` class
 types when calling `PdxSerializer.fromData(:Class<?>, :PdxReader)`
 methods.
 
-</div>
 
-<div class="paragraph">
 
 It is very easy to add exclusions for other class types, or an entire
 package of types, by simply defining a `Predicate` and adding it to the
 `MappingPdxSerializer` as shown earlier.
 
-</div>
 
-<div class="paragraph">
 
 The `MappingPdxSerializer.setExcludeTypeFilters(:Predicate<Class<?>>)`
 method is additive, meaning it composes your application-defined type
 filters with the existing, pre-defined type filter `Predicates`
 indicated above using the `Predicate.and(:Predicate<Class<?>>)` method.
 
-</div>
 
-<div class="paragraph">
 
 However, what if you want to include a class type (for example,
 `java.security Principal`) implicitly excluded by the exclude type
 filters? See [Include Type
 Filtering](#mapping.pdx-serializer.type-filtering.includes).
 
-</div>
 
-</div>
 
 <div class="sect4">
 
 ##### Include Type Filtering
 
-<div class="paragraph">
 
 If you want to include a class type explicitly, or override a class type
 filter that implicitly excludes a class type required by your
@@ -17571,11 +13644,8 @@ and add it to the serializer using
 `MappingPdxSerializer.setIncludeTypeFilters(:Predicate<Class<?>>)`
 method, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Predicate<Class<?>> principalTypeFilter =
@@ -17584,11 +13654,8 @@ Predicate<Class<?>> principalTypeFilter =
 mappingPdxSerializer.setIncludeTypeFilters(principalTypeFilters);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Again, the
 `MappingPdxSerializer.setIncludeTypeFilters(:Predicate<Class<?>>)`
@@ -17597,9 +13664,7 @@ and therefore composes any passed type filter using
 `Predicate.or(:Predicate<Class<?>>)`. This means you may call
 `setIncludeTypeFilters(:Predicate<Class<?>>)` as many time as necessary.
 
-</div>
 
-<div class="paragraph">
 
 When include type filters are present, then the `MappingPdxSerializer`
 makes a decision of whether to de/serialize an instance of a class type
@@ -17607,33 +13672,24 @@ when the class type is either not implicitly excluded OR when the class
 type is explicitly included, whichever returns true. Then, an instance
 of the class type will be serialized or deserialized appropriately.
 
-</div>
 
-<div class="paragraph">
 
 For example, when a type filter of `Predicate<Class<Principal>>` is
 explicitly registered as shown previously, it cancels out the implicit
 exclude type filter on `java.*` package types.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Spring Data for GemFire Repositories
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire provides support for using the Spring Data
 Repository abstraction to easily persist entities into Apache Geode
@@ -17641,19 +13697,16 @@ along with executing queries. A general introduction to the Repository
 programming model is provided
 [here](https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#repositories).
 
-</div>
 
 <div class="sect2">
 
 ### Spring XML Configuration
 
-<div class="paragraph">
 
 To bootstrap Spring Data Repositories, use the `<repositories/>` element
 from the Spring Data for GemFire Data namespace, as the following
 example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -17661,13 +13714,9 @@ example shows:
 
 Example 7. Bootstrap Spring Data for GemFire Repositories in XML
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -17683,33 +13732,20 @@ Example 7. Bootstrap Spring Data for GemFire Repositories in XML
 </beans>
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding configuration snippet looks for interfaces below the
 configured base package and creates Repository instances for those
 interfaces backed by a
 [`SimpleGemFireRepository`](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/repository/support/SimpleGemfireRepository.html).
 
-</div>
 
 <div class="admonitionblock important">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Important
 </div></td>
 <td class="content">The bootstrap process fails unless you have your
@@ -17718,29 +13754,23 @@ application domain classes correctly mapped to configured Regions.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Spring Java-based Configuration
 
-<div class="paragraph">
 
 Alternatively, many developers prefer to use Spring's [Java-based
 container
 configuration](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-java).
 
-</div>
 
-<div class="paragraph">
 
 Using this approach, you can bootstrap Spring Data Repositories by using
 the SDG `@EnableGemfireRepositories` annotation, as the following
 example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -17749,13 +13779,9 @@ example shows:
 Example 8. Bootstrap Spring Data for GemFire Repositories with
 `@EnableGemfireRepositories`
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -17765,15 +13791,10 @@ class SpringDataApplication {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Rather than use the `basePackages` attribute, you may prefer to use the
 type-safe `basePackageClasses` attribute instead. The
@@ -17784,9 +13805,7 @@ no-op marker class or interface in each package that serves no purpose
 other than to identify the location of application Repositories
 referenced by this attribute.
 
-</div>
 
-<div class="paragraph">
 
 In addition to the `basePackages and basePackageClasses` attributes,
 like Spring's
@@ -17801,9 +13820,7 @@ on. See the [`FilterType`
 Javadoc](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/FilterType.html)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 The `@EnableGemfireRepositories` annotation also lets you specify the
 location of named OQL queries, which reside in a Java `Properties` file,
@@ -17812,9 +13829,7 @@ match the name of a Repository query method and the property value is
 the OQL query you want executed when the Repository query method is
 called.
 
-</div>
 
-<div class="paragraph">
 
 The `repositoryImplementationPostfix` attribute can be set to an
 alternate value (defaults to `Impl`) if your application requires one or
@@ -17824,9 +13839,7 @@ This feature is commonly used to extend the Spring Data Repository
 infrastructure to implement a feature not provided by the data store
 (for example, SDG).
 
-</div>
 
-<div class="paragraph">
 
 One example of where custom repository implementations are needed with
 Apache Geode is when performing joins. Joins are not supported by SDG
@@ -17837,30 +13850,24 @@ be performed inside a Apache Geode Function. See
 [here](https://gemfire91.docs.pivotal.io/geode/developing/partitioned_regions/join_query_partitioned_regions.html)
 for more details on Apache Geode *Equi-Join Queries*.
 
-</div>
 
-<div class="paragraph">
 
 Many other aspects of the SDG's Repository infrastructure extension may
 be customized as well. See the
 [`@EnableGemfireRepositories`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html)
 Javadoc for more details on all configuration settings.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Executing OQL Queries
 
-<div class="paragraph">
 
 Spring Data for GemFire Repositories enable the definition of query
 methods to easily execute Apache Geode OQL queries against the Region
 the managed entity maps to, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -17868,26 +13875,18 @@ the managed entity maps to, as the following example shows:
 
 Example 9. Sample Repository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Region("People")
 public class Person { … }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface PersonRepository extends CrudRepository<Person, Long> {
@@ -17904,15 +13903,10 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The first query method listed in the preceding example causes the
 following OQL query to be derived:
@@ -17920,23 +13914,18 @@ following OQL query to be derived:
 method works the same way except it returns all entities found, whereas
 the first query method expects a single result to be found.
 
-</div>
 
-<div class="paragraph">
 
 If the supported keywords are not sufficient to declare and express your
 OQL query, or the method name becomes too verbose, then you can annotate
 the query methods with `@Query` as shown on the third and fourth
 methods.
 
-</div>
 
-<div class="paragraph">
 
 The following table gives brief samples of the supported keywords that
 you can use in query methods:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 4. Supported keywords for query methods</caption>
@@ -18069,21 +14058,17 @@ class="tableblock halign-left valign-top"><p><code>x.active = false</code></p></
 
 Table 4. Supported keywords for query methods
 
-</div>
 
 <div class="sect2">
 
 ### OQL Query Extensions Using Annotations
 
-<div class="paragraph">
 
 Many query languages, such as Apache Geode's OQL (Object Query
 Language), have extensions that are not directly supported by Spring
 Data Commons' Repository infrastructure.
 
-</div>
 
-<div class="paragraph">
 
 One of Spring Data Commons' Repository infrastructure goals is to
 function as the lowest common denominator to maintain support for and
@@ -18094,9 +14079,7 @@ Commons within their applications by reusing their existing
 application-specific Repository interfaces — a convenient and powerful
 abstraction.
 
-</div>
 
-<div class="paragraph">
 
 To support Apache Geode's OQL Query language extensions and preserve
 portability across different data stores, Spring Data for GemFire
@@ -18105,9 +14088,7 @@ annotations are ignored by other Spring Data Repository implementations
 (such as Spring Data JPA or Spring Data Redis) that do not have similar
 query language features.
 
-</div>
 
-<div class="paragraph">
 
 For instance, many data stores most likely do not implement Apache
 Geode's OQL `IMPORT` keyword. Implementing `IMPORT` as an annotation
@@ -18116,14 +14097,11 @@ Geode's OQL `IMPORT` keyword. Implementing `IMPORT` as an annotation
 infrastructure when evaluating the query method name to construct
 another data store language appropriate query.
 
-</div>
 
-<div class="paragraph">
 
 Currently, the set of Apache Geode OQL Query language extensions that
 are supported by Spring Data for GemFire include:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 5. Supported Apache Geode OQL extensions for Repository
@@ -18188,13 +14166,11 @@ query-specific debugging.</p></td>
 Table 5. Supported Apache Geode OQL extensions for Repository query
 methods
 
-<div class="paragraph">
 
 As an example, suppose you have a `Customers` application domain class
 and corresponding Apache Geode Region along with a `CustomerRepository`
 and a query method to lookup `Customers` by last name, as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18202,13 +14178,9 @@ and a query method to lookup `Customers` by last name, as follows:
 
 Example 10. Sample Customers Repository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package ...;
@@ -18227,13 +14199,9 @@ public class Customer ... {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package ...;
@@ -18253,40 +14221,28 @@ public interface CustomerRepository extends GemfireRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding example results in the following OQL Query:
 
-</div>
 
-<div class="paragraph">
 
 `<TRACE> <HINT 'LastNameIdx'> IMPORT org.example.app.domain.Customer; SELECT * FROM /Customers x WHERE x.lastName = $1 LIMIT 10`
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's Repository extension is careful not to
 create conflicting declarations when the OQL annotation extensions are
 used in combination with the `@Query` annotation.
 
-</div>
 
-<div class="paragraph">
 
 As another example, suppose you have a raw `@Query` annotated query
 method defined in your `CustomerRepository`, as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18294,13 +14250,9 @@ method defined in your `CustomerRepository`, as follows:
 
 Example 11. CustomerRepository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -18315,27 +14267,18 @@ public interface CustomerRepository extends GemfireRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding query method results in the following OQL query:
 
-</div>
 
-<div class="paragraph">
 
 `IMPORT org.example.app.domain.Customer; <TRACE> <HINT 'ReputationIdx'> SELECT DISTINCT * FROM /Customers x WHERE x.reputation > $1 ORDER BY c.reputation DESC LIMIT 5`
 
-</div>
 
-<div class="paragraph">
 
 The `@Limit(10)` annotation does not override the `LIMIT` explicitly
 defined in the raw query. Also, the `@Hint("CustomerIdx")` annotation
@@ -18343,22 +14286,12 @@ does not override the `HINT` explicitly defined in the raw query.
 Finally, the `@Trace` annotation is redundant and has no additional
 effect.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
-<td class="content"><div class="paragraph">
-<p>The <code>ReputationIdx</code> index is probably not the most
+<td class="content"><p>The <code>ReputationIdx</code> index is probably not the most
 sensible index, given the number of customers who may possibly have the
 same value for their reputation, which reduces the effectiveness of the
 index. Please choose indexes and other optimizations wisely, as an
@@ -18371,15 +14304,12 @@ example.</p>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Query Post Processing
 
-<div class="paragraph">
 
 Thanks to using the Spring Data Repository abstraction, the query method
 convention for defining data store specific queries (e.g. OQL) is easy
@@ -18387,15 +14317,12 @@ and convenient. However, it is sometimes desirable to still want to
 inspect or even possibly modify the query generated from the Repository
 query method.
 
-</div>
 
-<div class="paragraph">
 
 Since 2.0.x, Spring Data for GemFire includes the
 `o.s.d.gemfire.repository.query.QueryPostProcessor` functional
 interface. The interface is loosely defined as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18403,13 +14330,9 @@ interface. The interface is loosely defined as follows:
 
 Example 12. QueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package org.springframework.data.gemfire.repository.query;
@@ -18427,15 +14350,10 @@ interface QueryPostProcessor<T extends Repository, QUERY> extends Ordered {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 There are additional default methods provided that let you compose
 instances of `QueryPostProcessor` similar to how
@@ -18444,9 +14362,7 @@ and
 [java.util.function.Function.compose(:Function)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html#compose-java.util.function.Function-)
 work.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the `QueryPostProcessor` interface implements the
 [`org.springframework.core.Ordered`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/Ordered.html)
@@ -18454,9 +14370,7 @@ interface, which is useful when multiple `QueryPostProcessors` are
 declared and registered in the Spring container and used to create a
 pipeline of processing for a group of generated query method queries.
 
-</div>
 
-<div class="paragraph">
 
 Finally, the `QueryPostProcessor` accepts type arguments corresponding
 to the type parameters, `T` and `QUERY`, respectively. Type `T` extends
@@ -18466,18 +14380,9 @@ We discuss this further later in this section. All `QUERY` type
 parameter arguments in Spring Data for GemFire's case are of type
 `java.lang.String`.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">It is useful to define the query as type
@@ -18489,23 +14394,18 @@ Redis).</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 You can implement this interface to receive a callback with the query
 that was generated from the application `Repository` interface method
 when the method is called.
 
-</div>
 
-<div class="paragraph">
 
 For example, you might want to log all queries from all application
 Repository interface definitions. You could do so by using the following
 `QueryPostProcessor` implementation:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18513,13 +14413,9 @@ Repository interface definitions. You could do so by using the following
 
 Example 13. LoggingQueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example;
@@ -18540,30 +14436,22 @@ class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `LoggingQueryPostProcessor` was typed to the Spring Data
 `org.springframework.data.repository.Repository` marker interface, and,
 therefore, logs all application Repository interface query method
 generated queries.
 
-</div>
 
-<div class="paragraph">
 
 You could limit the scope of this logging to queries only from certain
 types of application Repository interfaces, such as, say, a
 `CustomerRepository`, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18571,13 +14459,9 @@ types of application Repository interfaces, such as, say, a
 
 Example 14. CustomerRepository
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
@@ -18589,20 +14473,14 @@ interface CustomerRepository extends CrudRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you could have typed the `LoggingQueryPostProcessor` specifically
 to the `CustomerRepository`, as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18610,34 +14488,23 @@ to the `CustomerRepository`, as follows:
 
 Example 15. CustomerLoggingQueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> { .. }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As a result, only queries defined in the `CustomerRepository` interface,
 such as `findByAccountNumber`, are logged.
 
-</div>
 
-<div class="paragraph">
 
 You might want to create a `QueryPostProcessor` for a specific query
 defined by a Repository query method. For example, suppose you want to
@@ -18647,7 +14514,6 @@ return five results along with ordering the `Customers` by `firstName`,
 in ascending order . To do so, you can define a custom
 `QueryPostProcessor`, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18655,13 +14521,9 @@ in ascending order . To do so, you can define a custom
 
 Example 16. OrderedLimitedCustomerByLastNameQueryPostProcessor
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
@@ -18685,21 +14547,15 @@ class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostPro
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 While the preceding example works, you can achieve the same effect by
 using the Spring Data Repository convention provided by Spring Data for
 Apache Geode. For instance, the same query could be defined as follows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18707,13 +14563,9 @@ Apache Geode. For instance, the same query could be defined as follows:
 
 Example 17. CustomerRepository using the convention
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
@@ -18724,24 +14576,17 @@ interface CustomerRepository extends CrudRepository<Customer, Long> {
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 However, if you do not have control over the application
 `CustomerRepository` interface definition, then the `QueryPostProcessor`
 (that is, `OrderedLimitedCustomerByLastNameQueryPostProcessor`) is
 convenient.
 
-</div>
 
-<div class="paragraph">
 
 If you want to ensure that the `LoggingQueryPostProcessor` always comes
 after the other application-defined `QueryPostProcessors` that may have
@@ -18749,7 +14594,6 @@ bean declared and registered in the Spring `ApplicationContext`, you can
 set the `order` property by overriding the `o.s.core.Ordered.getOrder()`
 method, as the following example shows:
 
-</div>
 
 <div class="exampleblock">
 
@@ -18757,13 +14601,9 @@ method, as the following example shows:
 
 Example 18. Defining the `order` property
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
@@ -18783,23 +14623,16 @@ class CustomerQueryPostProcessor implements QueryPostProcessor<CustomerRepositor
 }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 This ensures that you always see the effects of the post processing
 applied by other `QueryPostProcessors` before the
 `LoggingQueryPostProcessor` logs the query.
 
-</div>
 
-<div class="paragraph">
 
 You can define as many `QueryPostProcessors` in the Spring
 `ApplicationContext` as you like and apply them in any order, to all or
@@ -18807,29 +14640,22 @@ specific application Repository interfaces, and be as granular as you
 like by using the provided arguments to the `postProcess(..)` method
 callback.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Annotation Support for Function Execution
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire includes annotation support to simplify
 working with Apache Geode [Function
 execution](https://geode.apache.org/docs/guide/19/developing/function_exec/chapter_overview.html).
 
-</div>
 
-<div class="paragraph">
 
 Under the hood, the Apache Geode API provides classes to implement and
 register Apache Geode
@@ -18837,9 +14663,7 @@ register Apache Geode
 that are deployed on Apache Geode servers, which may then be invoked by
 other peer member applications or remotely from cache clients.
 
-</div>
 
-<div class="paragraph">
 
 Functions can execute in parallel, distributed among multiple Apache
 Geode servers in the cluster, aggregating the results using the
@@ -18850,9 +14674,7 @@ predefined scopes: on Region, on members (in groups), on servers, and
 others. The implementation and execution of remote Functions, as with
 any RPC protocol, requires some boilerplate code.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire, true to Spring's core value proposition,
 aims to hide the mechanics of remote Function execution and let you
@@ -18862,20 +14684,16 @@ the public methods of a POJO class as Apache Geode Functions along with
 the ability to invoke registered Functions (including remotely) by using
 annotated interfaces.
 
-</div>
 
 <div class="sect2">
 
 ### Implementation Versus Execution
 
-<div class="paragraph">
 
 There are two separate concerns to address: implementation and
 execution.
 
-</div>
 
-<div class="paragraph">
 
 The first is Function implementation (server-side), which must interact
 with the
@@ -18888,9 +14706,7 @@ registered with the
 [`FunctionService`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/FunctionService.html)
 under a unique ID.
 
-</div>
 
-<div class="paragraph">
 
 A cache client application invoking a Function does not depend on the
 implementation. To invoke a Function, the application instantiates an
@@ -18903,18 +14719,9 @@ to aggregate and acquire the execution results. In certain cases, a
 custom `ResultCollector` implementation is required and may be
 registered with the `Execution`.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">'Client' and 'Server' are used here in the context
@@ -18931,15 +14738,12 @@ the cluster.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Implementing a Function
 
-<div class="paragraph">
 
 Using Apache Geode APIs, the `FunctionContext` provides a runtime
 invocation context that includes the client's calling arguments and a
@@ -18952,9 +14756,7 @@ associated with the `Execution`, and so on. If the Region is a
 `PARTITION` Region, the Function should use the `PartitionRegionHelper`
 to extract the local data set.
 
-</div>
 
-<div class="paragraph">
 
 By using Spring, you can write a simple POJO and use the Spring
 container to bind one or more of your POJO's public methods to a
@@ -18964,9 +14766,7 @@ However, in the case of a Region execution, the Region data may also be
 provided (presumably the data is held in the local partition if the
 Region is a `PARTITION` Region).
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the Function may require the filter that was applied, if
 any. This suggests that the client and server share a contract for the
@@ -18978,32 +14778,23 @@ method signature includes the same sequence of calling arguments with
 which the Function was invoked after the additional parameters are
 resolved.
 
-</div>
 
-<div class="paragraph">
 
 For example, suppose the client provides a `String` and an `int` as the
 calling arguments. These are provided in the `FunctionContext` as an
 array, as the following example shows:
 
-</div>
 
-<div class="paragraph">
 
 `Object[] args = new Object[] { "test", 123 };`
 
-</div>
 
-<div class="paragraph">
 
 The Spring container should be able to bind to any method signature
 similar to the following (ignoring the return type for the moment):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public Object method1(String s1, int i2) { ... }
@@ -19015,11 +14806,8 @@ public void method5(String s1, ResultSender rs, int i2) { ... }
 public void method6(FunctionContest context) { ... }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The general rule is that once any additional arguments (that is, Region
 data and filter) are resolved, the remaining arguments must correspond
@@ -19028,9 +14816,7 @@ The method's return type must be void or a type that may be serialized
 (as a `java.io.Serializable`, `DataSerializable`, or `PdxSerializable`).
 The latter is also a requirement for the calling arguments.
 
-</div>
 
-<div class="paragraph">
 
 The Region data should normally be defined as a `Map`, to facilitate
 unit testing, but may also be of type Region, if necessary. As shown in
@@ -19038,22 +14824,17 @@ the preceding example, it is also valid to pass the `FunctionContext`
 itself or the `ResultSender` if you need to control over how the results
 are returned to the client.
 
-</div>
 
 <div class="sect3">
 
 #### Annotations for Function Implementation
 
-<div class="paragraph">
 
 The following example shows how SDG's Function annotations are used to
 expose POJO methods as Apache Geode Functions:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -19071,11 +14852,8 @@ public class ApplicationFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Note that the class itself must be registered as a Spring bean and each
 Apache Geode Function is annotated with `@GemfireFunction`. In the
@@ -19089,18 +14867,10 @@ Spring creates a wrapper instance for each method annotated with
 `@GemfireFunction`. Each wrapper instance shares the same target object
 instance to invoke the corresponding method.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">The fact that the POJO Function class is a Spring
@@ -19112,9 +14882,7 @@ necessary.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Spring creates the wrapper class and registers the Functions with Apache
 Geode's `FunctionService`. The Function ID used to register each
@@ -19122,9 +14890,7 @@ Function must be unique. By using convention, it defaults to the simple
 (unqualified) method name. The name can be explicitly defined by using
 the `id` attribute of the `@GemfireFunction` annotation.
 
-</div>
 
-<div class="paragraph">
 
 The `@GemfireFunction` annotation also provides other configuration
 attributes: `HA` and `optimizedForWrite`, which correspond to properties
@@ -19132,9 +14898,7 @@ defined by Apache Geode's
 [`Function`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/Function.html)
 interface.
 
-</div>
 
-<div class="paragraph">
 
 If the POJO Function method's return type is `void`, then the
 `hasResult` attribute is automatically set to `false`. Otherwise, if the
@@ -19145,9 +14909,7 @@ as shown in the `functionWithContext` method shown previously.
 Presumably, the intention is that you will use the `ResultSender`
 directly to send results to the caller.
 
-</div>
 
-<div class="paragraph">
 
 Finally, the `GemfireFunction` annotation supports the
 `requiredPermissions` attribute, which specifies the permissions
@@ -19157,9 +14919,7 @@ allowing you to modify the permissions as required by your application
 and/or Function UC. Each resource permission is expected to be in the
 following format: `<RESOURCE>:<OPERATION>:[Target]:[Key]`.
 
-</div>
 
-<div class="paragraph">
 
 `RESOURCE` can be 1 of the
 {data-store-javadoc\]/org/apache/geode/security/ResourcePermission.Resource.html\[`ResourcePermission.Resource`\]
@@ -19171,24 +14931,19 @@ of the
 enumerated values. And finally, optionally, `Key` is a valid Key in the
 `Target` Region if specified.
 
-</div>
 
-<div class="paragraph">
 
 The `PojoFunctionWrapper` implements Apache Geode's `Function`
 interface, binds method parameters, and invokes the target method in its
 `execute()` method. It also sends the method's return value back to the
 caller by using the `ResultSender`.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Batching Results
 
-<div class="paragraph">
 
 If the return type is an array or `Collection`, then some consideration
 must be given to how the results are returned. By default, the
@@ -19198,18 +14953,10 @@ it may incur a performance penalty. To divide the payload into smaller,
 more manageable chunks, you can set the `batchSize` attribute, as
 illustrated in `function2`, shown earlier.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">If you need more control of the
@@ -19222,44 +14969,32 @@ sends results back to the caller.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Enabling Annotation Processing
 
-<div class="paragraph">
 
 In accordance with Spring standards, you must explicitly activate
 annotation processing for `@GemfireFunction` annotations. The following
 example activates annotation processing with XML:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:annotation-driven/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The following example activates annotation processing by annotating a
 Java configuration class:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Configuration
@@ -19267,19 +15002,14 @@ Java configuration class:
 class ApplicationConfiguration { ... }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Executing a Function
 
-<div class="paragraph">
 
 A process that invokes a remote Function needs to provide the Function's
 ID, calling arguments, the execution target (`onRegion`, `onServers`,
@@ -19292,20 +15022,16 @@ results to the defined return type. This technique is similar to the way
 Spring Data for GemFire's Repository extension works. Thus, some of
 the configuration and concepts should be familiar.
 
-</div>
 
-<div class="paragraph">
 
 Generally, a single interface definition maps to multiple Function
 executions, one corresponding to each method defined in the interface.
 
-</div>
 
 <div class="sect3">
 
 #### Annotations for Function Execution
 
-<div class="paragraph">
 
 To support client-side Function execution, the following SDG Function
 annotations are provided: `@OnRegion`, `@OnServer`, `@OnServers`,
@@ -19314,9 +15040,7 @@ annotations are provided: `@OnRegion`, `@OnServer`, `@OnServers`,
 [`FunctionService`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/FunctionService.html)
 class.
 
-</div>
 
-<div class="paragraph">
 
 Each annotation exposes the appropriate attributes. These annotations
 also provide an optional `resultCollector` attribute whose value is the
@@ -19324,18 +15048,10 @@ name of a Spring bean implementing the
 [`ResultCollector`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/ResultCollector.html)
 interface to use for the execution.
 
-</div>
 
 <div class="admonitionblock caution">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Caution
 </div></td>
 <td class="content">The proxy interface binds all declared methods to
@@ -19347,17 +15063,12 @@ configuration.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The following listing shows a few examples:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @OnRegion(region="SomeRegion", resultCollector="myCollector")
@@ -19371,46 +15082,34 @@ public interface FunctionExecution {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 By default, the Function ID is the simple (unqualified) method name. The
 `@FunctionId` annotation can be used to bind this invocation to a
 different Function ID.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Enabling Annotation Processing
 
-<div class="paragraph">
 
 The client-side uses Spring's classpath component scanning capability to
 discover annotated interfaces. To enable Function execution annotation
 processing in XML, insert the following element in your XML
 configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:function-executions base-package="org.example.myapp.gemfire.functions"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `function-executions` element is provided in the `gfe-data` XML
 namespace. The `base-package` attribute is required to avoid scanning
@@ -19418,45 +15117,32 @@ the entire classpath. Additional filters can be provided as described in
 the Spring [reference
 documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-scanning-filters).
 
-</div>
 
-<div class="paragraph">
 
 Optionally, you can annotate your Java configuration class as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @EnableGemfireFunctionExecutions(basePackages = "org.example.myapp.gemfire.functions")
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Programmatic Function Execution
 
-<div class="paragraph">
 
 Using the Function execution annotated interface defined in the previous
 section, simply auto-wire your interface into an application bean that
 will invoke the Function:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -19471,17 +15157,13 @@ public class MyApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternately, you can use a Function execution template directly. In the
 following example, the `GemfireOnRegionFunctionTemplate` creates an
 `onRegion` Function `Execution`:
 
-</div>
 
 <div class="exampleblock">
 
@@ -19489,13 +15171,9 @@ following example, the `GemfireOnRegionFunctionTemplate` creates an
 
 Example 19. Using the `GemfireOnRegionFunctionTemplate`
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Set<?, ?> myFilter = getFilter();
@@ -19504,15 +15182,10 @@ GemfireOnRegionOperations template = new GemfireOnRegionFunctionTemplate(myRegio
 String result = template.executeAndExtract("someFunction", myFilter, "hello", "world", 1234);
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Internally, Function `Executions` always return a `List`.
 `executeAndExtract` assumes a singleton `List` containing the result and
@@ -19521,24 +15194,19 @@ attempts to coerce that value into the requested type. There is also an
 the Function ID. The filter argument is optional. The remaining
 arguments are a variable argument `List`.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Function Execution with PDX
 
-<div class="paragraph">
 
 When using Spring Data for GemFire's Function annotation support
 combined with Apache Geode's [PDX
 Serialization](https://geode.apache.org/docs/guide/19/developing/data_serialization/gemfire_pdx_serialization.html),
 there are a few logistical things to keep in mind.
 
-</div>
 
-<div class="paragraph">
 
 As explained earlier in this section, and by way of example, you should
 typically define Apache Geode Functions by using POJO classes annotated
@@ -19546,11 +15214,8 @@ with Spring Data for GemFire [Function
 annotations](https://docs.spring.io/spring-data-gemfire/docs/current/api/org/springframework/data/gemfire/function/annotation/package-summary.html),
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class OrderFunctions {
@@ -19561,20 +15226,10 @@ public class OrderFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>Integer</code> typed <code>count</code>
@@ -19586,17 +15241,12 @@ problem with Function executions in the context of PDX.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Your `Order` class and `OrderSource` enum might be defined as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class Order ... {
@@ -19618,20 +15268,14 @@ public enum OrderSource {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Of course, you can define a Function `Execution` interface to call the
 'process' Apache Geode server Function, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @OnServer
@@ -19640,11 +15284,8 @@ public interface OrderProcessingFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Clearly, this `process(..)` `Order` Function is being called from the
 client-side with a `ClientCache` instance (that is
@@ -19654,58 +15295,42 @@ Functions (such as `@OnMember(s)`) between peers in the cluster. Any
 form of `distribution` requires the data transmitted between client and
 server (or peers) to be serialized.
 
-</div>
 
-<div class="paragraph">
 
 Now, if you have configured Apache Geode to use PDX for serialization
 (instead of Java serialization, for instance) you can also set the
 `pdx-read-serialized` attribute to `true` in your configuration of the
 Apache Geode server(s), as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache pdx-read-serialized="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can set the `pdx-read-serialized` attribute to `true`
 for a Apache Geode cache client application, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache pdx-read-serialized="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Doing so causes all values read from the cache (that is, Regions) as
 well as information passed between client and servers (or peers) to
 remain in serialized form, including, but not limited to, Function
 arguments.
 
-</div>
 
-<div class="paragraph">
 
 Apache Geode serializes only application domain object types that you
 have specifically configured (registered) either by using Apache Geode's
@@ -19718,9 +15343,7 @@ might even want to consider using Spring Data for GemFire's
 which uses an entity's mapping metadata to determine data from the
 application domain object that is serialized to the PDX instance.
 
-</div>
 
-<div class="paragraph">
 
 What is less than apparent, though, is that Apache Geode automatically
 handles Java `Enum` types regardless of whether they are explicitly
@@ -19729,54 +15352,38 @@ using a regex pattern and the `classes` parameter or are handled by a
 "custom" Apache Geode `PdxSerializer`), despite the fact that Java
 enumerations implement `java.io.Serializable`.
 
-</div>
 
-<div class="paragraph">
 
 So, when you set `pdx-read-serialized` to `true` on Apache Geode servers
 where the Apache Geode Functions (including Spring Data for GemFire
 Function-annotated POJO classes) are registered, then you may encounter
 surprising behavior when invoking the Function `Execution`.
 
-</div>
 
-<div class="paragraph">
 
 You might pass the following arguments when invoking the Function:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 orderProcessingFunctions.process(new Order(123, customer, LocalDateTime.now(), items), OrderSource.ONLINE, 400);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 However, the Apache Geode Function on the server gets the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 process(regionData, order:PdxInstance, :PdxInstanceEnum, 400);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `Order` and `OrderSource` have been passed to the Function as [PDX
 instances](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxInstance.html).
@@ -19785,38 +15392,29 @@ which may be necessary in cases where the Apache Geode servers interact
 with multiple different clients (for example, a combination of Java
 clients and native clients, such as C/C++, C#, and others).
 
-</div>
 
-<div class="paragraph">
 
 This flies in the face of Spring Data for GemFire's strongly-typed
 Function-annotated POJO class method signatures, where you would
 reasonably expect application domain object types instead, not PDX
 serialized instances.
 
-</div>
 
-<div class="paragraph">
 
 Consequently, Spring Data for GemFire includes enhanced Function
 support to automatically convert PDX typed method arguments to the
 desired application domain object types defined by the Function method's
 signature (parameter types).
 
-</div>
 
-<div class="paragraph">
 
 However, this also requires you to explicitly register a Apache Geode
 `PdxSerializer` on Apache Geode servers where Spring Data for Apache
 Geode Function-annotated POJOs are registered and used, as the following
 example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="customPdxSerializer" class="x.y.z.gemfire.serialization.pdx.MyCustomPdxSerializer"/>
@@ -19824,11 +15422,8 @@ example shows:
 <gfe:cache pdx-serializer-ref="customPdxSerializeer" pdx-read-serialized="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can use Apache Geode's
 [`ReflectionBasedAutoSerializer`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html)
@@ -19836,19 +15431,14 @@ for convenience. Of course, we recommend that, where possible, you use a
 custom `PdxSerializer` to maintain finer-grained control over your
 serialization strategy.
 
-</div>
 
-<div class="paragraph">
 
 Finally, Spring Data for GemFire is careful not to convert your
 Function arguments if you treat your Function arguments generically or
 as one of Apache Geode's PDX types, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @GemfireFunction
@@ -19857,20 +15447,15 @@ public Object genericFunction(String value, Object domainObject, PdxInstanceEnum
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire converts PDX typed data to the
 corresponding application domain types if and only if the corresponding
 application domain types are on the classpath and the Function-annotated
 POJO method expects it.
 
-</div>
 
-<div class="paragraph">
 
 For a good example of custom, composed application-specific Apache Geode
 `PdxSerializers` as well as appropriate POJO Function parameter type
@@ -19879,69 +15464,51 @@ Geode's
 [`ClientCacheFunctionExecutionWithPdxIntegrationTest`](https://github.com/spring-projects/spring-data-gemfire/blob/%7Bversion%7D/src/test/java/org/springframework/data/gemfire/function/ClientCacheFunctionExecutionWithPdxIntegrationTest.java)
 class.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Apache Lucene Integration
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 [Apache Geode](https://geode.apache.org) integrates with [Apache
 Lucene](https://lucene.apache.org/) to let you index and search on data
 stored in Apache Geode by using Lucene queries. Search-based queries
 also include the ability to page through query results.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, Spring Data for GemFire adds support for query
 projections based on the Spring Data Commons projection infrastructure.
 This feature lets the query results be projected into first-class
 application domain types as needed by the application.
 
-</div>
 
-<div class="paragraph">
 
 A Lucene `Index` must be created before any Lucene search-based query
 can be run. A `LuceneIndex` can be created in Spring (Data for Apache
 Geode) XML config as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Additionally, Apache Lucene allows the specification of
 [analyzers](https://lucene.apache.org/core/6_5_0/core/org/apache/lucene/analysis/Analyzer.html)
 per field and can be configured as shown in the following example:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:lucene-index id="IndexTwo" lucene-service-ref="luceneService" region-path="/AnotherExample">
@@ -19958,20 +15525,15 @@ per field and can be configured as shown in the following example:
 </gfe:lucene-index>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `Map` can be specified as a top-level bean definition and referenced
 by using the `ref` attribute in the nested `<gfe:field-analyzers>`
 element, as follows:
 `<gfe-field-analyzers ref="refToTopLevelMapBeanDefinition"/>`.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire's `LuceneIndexFactoryBean` API and SDG's
 XML namespace also lets a
@@ -19980,18 +15542,13 @@ be specified when you create the `LuceneIndex`. The `LuceneSerializer`
 lets you configure the way objects are converted to Lucene documents for
 the index when the object is indexed.
 
-</div>
 
-<div class="paragraph">
 
 The following example shows how to add an `LuceneSerializer` to the
 `LuceneIndex`:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="MyLuceneSerializer" class="example.CustomLuceneSerializer"/>
@@ -20001,20 +15558,14 @@ The following example shows how to add an `LuceneSerializer` to the
 </gfe:lucene-index>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 You can specify the `LuceneSerializer` as an anonymous, nested bean
 definition as well, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:lucene-index id="IndexThree" lucene-service-ref="luceneService" region-path="/YetAnotherExample">
@@ -20024,20 +15575,14 @@ definition as well, as follows:
 </gfe:lucene-index>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can declare or define a `LuceneIndex` in Spring Java
 config, inside a `@Configuration` class, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Bean(name = "Books")
@@ -20074,41 +15619,25 @@ CustomLuceneSerializer myLuceneSerialier() {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 There are a few limitations of Apache Geode's, Apache Lucene integration
 and support.
 
-</div>
 
-<div class="paragraph">
 
 First, a `LuceneIndex` can only be created on a Apache Geode `PARTITION`
 Region.
 
-</div>
 
-<div class="paragraph">
 
 Second, all `LuceneIndexes` must be created before the Region to which
 the `LuceneIndex` applies.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">To help ensure that all declared
@@ -20128,18 +15657,14 @@ href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 It is possible that these Apache Geode restrictions will not apply in a
 future release which is why the SDG `LuceneIndexFactoryBean` API takes a
 reference to the Region directly as well, rather than just the Region
 path.
 
-</div>
 
-<div class="paragraph">
 
 This is more ideal when you want to define a `LuceneIndex` on an
 existing Region with data at a later point during the application's
@@ -20148,18 +15673,9 @@ adhere to strongly-typed objects. However, for the time being, you must
 use the `regionPath` property to specify the Region to which the
 `LuceneIndex` is applied.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Additionally, in the preceding example, note the
@@ -20173,39 +15689,30 @@ on which it applies.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Now that once we have a `LuceneIndex`, we can perform Lucene-based data
 access operations, such as queries.
 
-</div>
 
 <div class="sect2">
 
 ### Lucene Template Data Accessors
 
-<div class="paragraph">
 
 Spring Data for GemFire provides two primary templates for Lucene
 data access operations, depending on how low of a level your application
 is prepared to deal with.
 
-</div>
 
-<div class="paragraph">
 
 The `LuceneOperations` interface defines query operations by using
 Apache Geode [Lucene
 types](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/lucene/package-summary.html),
 which are defined in the following interface definition:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface LuceneOperations {
@@ -20232,20 +15739,10 @@ public interface LuceneOperations {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>[, int resultLimit]</code> indicates that
@@ -20254,9 +15751,7 @@ the <code>resultLimit</code> parameter is optional.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The operations in the `LuceneOperations` interface match the operations
 provided by the Apache Geode's
@@ -20268,17 +15763,13 @@ hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference
 particularly as many modern data access operations involve more than one
 store or repository.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, SDG's `LuceneOperations` interface can shield your
 application from interface-breaking changes introduced by the underlying
 Apache Geode or Apache Lucene APIs when they occur.
 
-</div>
 
-<div class="paragraph">
 
 However, it would be sad to offer a Lucene Data Access Object (DAO) that
 only uses Apache Geode and Apache Lucene data types (such as Apache
@@ -20287,11 +15778,8 @@ Geode's `LuceneResultStruct`). Therefore, SDG gives you the
 application concerns. The following listing shows the
 `ProjectingLuceneOperations` interface definition:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public interface ProjectingLuceneOperations {
@@ -20306,11 +15794,8 @@ public interface ProjectingLuceneOperations {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `ProjectingLuceneOperations` interface primarily uses application
 domain object types that let you work with your application data. The
@@ -20318,27 +15803,20 @@ domain object types that let you work with your application data. The
 applies the query results to instances of the given projection type by
 using the Spring Data Commons Projection infrastructure.
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the template wraps the paged Lucene query results in an
 instance of the Spring Data Commons `Page` abstraction. The same
 projection logic can still be applied to the results in the page and are
 lazily projected as each page in the collection is accessed.
 
-</div>
 
-<div class="paragraph">
 
 By way of example, suppose you have a class representing a `Person`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 class Person {
@@ -20358,20 +15836,14 @@ class Person {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Additionally, you might have a single interface to represent people as
 `Customers`, depending on your application view, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 interface Customer {
@@ -20381,19 +15853,13 @@ interface Customer {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 If I define the following `LuceneIndex`…​
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Bean
@@ -20410,74 +15876,51 @@ LuceneIndexFactoryBean personLastNameIndex(GemFireCache gemfireCache) {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then you could query for people as `Person` objects, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 List<Person> people = luceneTemplate.query("lastName: D*", "lastName", Person.class);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you could query for a `Page` of type `Customer`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Page<Customer> customers = luceneTemplate.query("lastName: D*", "lastName", 100, 20, Customer.class);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `Page` can then be used to fetch individual pages of the results, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 List<Customer> firstPage = customers.getContent();
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Conveniently, the Spring Data Commons `Page` interface also implements
 `java.lang.Iterable<T>`, making it easy to iterate over the contents.
 
-</div>
 
-<div class="paragraph">
 
 The only restriction to the Spring Data Commons Projection
 infrastructure is that the projection type must be an interface.
@@ -20487,29 +15930,22 @@ infrastructure and provide a custom
 that uses [CGLIB](https://github.com/cglib/cglib) to generate proxy
 classes as the projected entity.
 
-</div>
 
-<div class="paragraph">
 
 You can use `setProjectionFactory(:ProjectionFactory)` to set a custom
 `ProjectionFactory` on a Lucene template.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Annotation Configuration Support
 
-<div class="paragraph">
 
 Finally, Spring Data for GemFire provides annotation configuration
 support for `LuceneIndexes`.
 
-</div>
 
-<div class="paragraph">
 
 Eventually, the SDG Lucene support will finds its way into the
 Repository infrastructure extension for Apache Geode so that Lucene
@@ -20517,19 +15953,14 @@ queries can be expressed as methods on an application `Repository`
 interface, in much the same way as the [OQL
 support](#gemfire-repositories.queries.executing) works today.
 
-</div>
 
-<div class="paragraph">
 
 However, in the meantime, if you want to conveniently express
 `LuceneIndexes`, you can do so directly on your application domain
 objects, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @PartitionRegion("People")
@@ -20549,21 +15980,15 @@ class Person {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 To enable this feature, you must use SDG's annotation configuration
 support specifically with the `@EnableEntityDefineRegions` and
 `@EnableIndexing` annotations, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @PeerCacheApplication
@@ -20575,20 +16000,10 @@ class ApplicationConfiguration {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>LuceneIndexes</code> can only be created on
@@ -20598,9 +16013,7 @@ Apache Geode servers since <code>LuceneIndexes</code> only apply to
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Given our earlier definition of the `Person` class, the SDG annotation
 configuration support finds the `Person` entity class definition and
@@ -20608,21 +16021,16 @@ determines that people are stored in a `PARTITION` Region called
 "People" and that the `Person` has an OQL `Index` on `birthDate` along
 with a `LuceneIndex` on `lastName`.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Bootstrapping a Spring ApplicationContext in Apache Geode
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Normally, a Spring-based application [bootstraps Apache
 Geode](#bootstrap) by using Spring Data for GemFire's features. By
@@ -20631,9 +16039,7 @@ Geode XML namespace, a single embedded Apache Geode peer `Cache`
 instance is created and initialized with default settings in the same
 JVM process as your application.
 
-</div>
 
-<div class="paragraph">
 
 However, it is sometimes necessary (perhaps as a requirement imposed by
 your IT organization) that Apache Geode be fully managed and operated by
@@ -20644,18 +16050,9 @@ By using *Gfsh*, Apache Geode bootstraps your Spring
 application server or a Java main class that uses Spring Boot, Apache
 Geode does the bootstrapping and hosts your application.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Apache Geode is not an application server. In
@@ -20665,13 +16062,11 @@ Geode cache configuration is concerned.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect2">
 
 ### Using Apache Geode to Bootstrap a Spring Context Started with Gfsh
 
-<div class="paragraph">
 
 to bootstrap a Spring `ApplicationContext` in Apache Geode when
 starting a Apache Geode server using *Gfsh*, you must use Apache Geode's
@@ -20679,9 +16074,7 @@ starting a Apache Geode server using *Gfsh*, you must use Apache Geode's
 capability. An initializer block can declare a application callback that
 is launched after the cache is initialized by Apache Geode.
 
-</div>
 
-<div class="paragraph">
 
 An initializer is declared within an
 [initializer](https://geode.apache.org/docs/guide/19/reference/topics/cache_xml.html#initializer)
@@ -20692,26 +16085,19 @@ is needed to bootstrap a Spring `ApplicationContext` configured with
 component scanning (for example
 `<context:component-scan base-packages="…​"/>`).
 
-</div>
 
-<div class="paragraph">
 
 Fortunately, such an initializer is already conveniently provided by the
 framework: the
 [`SpringContextBootstrappingInitializer`](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/support/SpringContextBootstrappingInitializer.html).
 
-</div>
 
-<div class="paragraph">
 
 The following example shows a typical, yet minimal, configuration for
 this class inside Apache Geode's `cache.xml` file:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -20730,11 +16116,8 @@ this class inside Apache Geode's `cache.xml` file:
 </cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `SpringContextBootstrappingInitializer` class follows conventions
 similar to Spring's `ContextLoaderListener` class, which is used to
@@ -20742,9 +16125,7 @@ bootstrap a Spring `ApplicationContext` inside a web application, where
 `ApplicationContext` configuration files are specified with the
 `contextConfigLocations` Servlet context parameter.
 
-</div>
 
-<div class="paragraph">
 
 In addition, the `SpringContextBootstrappingInitializer` class can also
 be used with a `basePackages` parameter to specify a comma-separated
@@ -20753,11 +16134,8 @@ components. The Spring container searches these components to find and
 create Spring beans and other application components in the classpath,
 as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -20776,22 +16154,16 @@ as the following example shows:
 </cache>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, with a properly configured and constructed `CLASSPATH` and
 `cache.xml` file (shown earlier) specified as a command-line option when
 starting a Apache Geode server in *Gfsh*, the command-line would be as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 gfsh>start server --name=ExampleServer --log-level=config ...
@@ -20799,11 +16171,8 @@ gfsh>start server --name=ExampleServer --log-level=config ...
     --cache-xml-file="/path/to/geode/cache.xml"
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `application-context.xml` can be any valid Spring configuration
 metadata, including all of the SDG XML namespace elements. The only
@@ -20814,24 +16183,19 @@ configured by using the SDG XML namespace. In other words, none of the
 `lock-lease`, and others) can be specified. If used, these attributes
 are ignored.
 
-</div>
 
-<div class="paragraph">
 
 The reason for this is that Apache Geode itself has already created and
 initialized the cache before the initializer gets invoked. As a result,
 the cache already exists and, since it is a "singleton", it cannot be
 re-initialized or have any of its configuration augmented.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Lazy-wiring Apache Geode Components
 
-<div class="paragraph">
 
 Spring Data for GemFire already provides support for auto-wiring
 Apache Geode components (such as `CacheListeners`, `CacheLoaders`,
@@ -20842,9 +16206,7 @@ annotations](#apis:declarable:autowiring). However, this works only when
 Spring is the one doing the bootstrapping (that is, when Spring
 bootstraps Apache Geode).
 
-</div>
 
-<div class="paragraph">
 
 When your Spring `ApplicationContext` is bootstrapped by Apache Geode,
 these Apache Geode application components go unnoticed, because the
@@ -20854,9 +16216,7 @@ initializer block, which only occurs after all the other Apache Geode
 components (cache, Regions, and others) have already been created and
 initialized.
 
-</div>
 
-<div class="paragraph">
 
 To solve this problem, a new `LazyWiringDeclarableSupport` class was
 introduced. This new class is aware of the Spring `ApplicationContext`.
@@ -20867,9 +16227,7 @@ essence, this gives your Apache Geode application components a chance to
 be configured and auto-wired with Spring beans defined in the Spring
 container.
 
-</div>
 
-<div class="paragraph">
 
 In order for your Apache Geode application components to be auto-wired
 by the Spring container, you should create an application class that
@@ -20877,11 +16235,8 @@ extends the `LazyWiringDeclarableSupport` and annotate any class member
 that needs to be provided as a Spring bean dependency, similar to the
 following example:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class UserDataSourceCacheLoader extends LazyWiringDeclarableSupport
@@ -20894,11 +16249,8 @@ public class UserDataSourceCacheLoader extends LazyWiringDeclarableSupport
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 As implied in the `CacheLoader` example above, you might necessarily
 (though rarely) have defined both a Region and a `CacheListener`
@@ -20907,30 +16259,22 @@ to an application Repository (or perhaps a JDBC `DataSource` defined in
 the Spring `ApplicationContext`) for loading `Users` into a Apache Geode
 `REPLICATE` Region on startup.
 
-</div>
 
-<div class="paragraph">
 
 CAUTION
 
-</div>
 
 <div class="exampleblock">
 
-<div class="content">
 
-<div class="paragraph">
 
 Be careful when mixing the different life-cycles of Apache Geode and the
 Spring container together in this manner. Not all use cases and
 scenarios are supported. The Apache Geode `cache.xml` configuration
 would be similar to the following (which comes from SDG's test suite):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -20961,36 +16305,21 @@ would be similar to the following (which comes from SDG's test suite):
 </cache>
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Sample Applications
 
-<div class="sectionbody">
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
+
 Note
 </div></td>
 <td class="content">Sample applications are now maintained in the <a
@@ -21000,9 +16329,7 @@ Apache Geode Examples</a> repository.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The Spring Data for GemFire project also includes one sample
 application. Named "Hello World", the sample application demonstrates
@@ -21012,21 +16339,17 @@ against the data grid. It provides an excellent starting point for
 developers who are unfamiliar with the essential components or with
 Spring and Apache Geode concepts.
 
-</div>
 
-<div class="paragraph">
 
 The sample is bundled with the distribution and is Maven-based. You can
 import it into any Maven-aware IDE (such as the [Spring Tool
 Suite](https://spring.io/tools/sts)) or run them from the command-line.
 
-</div>
 
 <div class="sect2">
 
 ### Hello World
 
-<div class="paragraph">
 
 The "Hello World" sample application demonstrates the core functionality
 of the Spring Data for GemFire project. It bootstraps Apache Geode,
@@ -21035,23 +16358,13 @@ it down when the application exits. Multiple instances of the
 application can be started at the same time and work together, sharing
 data without any user intervention.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><div class="title">
 Running under Linux
-</div>
 If you experience networking problems when starting Apache Geode or the
 samples, try adding the following system property
 <code>java.net.preferIPv4Stack=true</code> to the command line (for
@@ -21062,13 +16375,11 @@ href="https://jira.spring.io/browse/SGF-28">SGF-28</a>.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="sect3">
 
 #### Starting and Stopping the Sample
 
-<div class="paragraph">
 
 The "Hello World" sample application is designed as a stand-alone Java
 application. It features a `main` class that can be started either from
@@ -21077,31 +16388,23 @@ the command line through Maven with `mvn exec:java`. If the classpath is
 properly set, you can also use `java` directly on the resulting
 artifact.
 
-</div>
 
-<div class="paragraph">
 
 To stop the sample, type `exit` at the command line or press `Ctrl+C` to
 stop the JVM and shutdown the Spring container.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Using the Sample
 
-<div class="paragraph">
 
 Once started, the sample creates a shared data grid and lets you issue
 commands against it. The output should resemble the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 INFO: Created GemFire Cache [Spring GemFire World] v. X.Y.Z
@@ -21117,20 +16420,14 @@ remove <key> - removes an entry (by key) from the grid
 ...
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 For example, to add new items to the grid, you can use the following
 commands:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 -> Bold Section qName:emphasis level:5, chunks:[put 1 unu] attrs:[role:bold]
@@ -21148,21 +16445,15 @@ null
 2
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Multiple instances can be ran at the same time. Once started, the new
 VMs automatically see the existing region and its information, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 INFO: Connected to Distributed System ['Spring GemFire World'=xxxx:56218/49320@yyyyy]
@@ -21177,11 +16468,8 @@ Hello World!
 [one, two]
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 We encourage you to experiment with the example, start (and stop) as
 many instances as you want, and run various commands in one instance and
@@ -21189,15 +16477,12 @@ see how the others react. To preserve data, at least one instance needs
 to be alive all times. If all instances are shutdown, the grid data is
 completely destroyed.
 
-</div>
 
-</div>
 
 <div class="sect3">
 
 #### Hello World Sample Explained
 
-<div class="paragraph">
 
 The "Hello World" sample uses both Spring XML and annotations for its
 configuration. The initial bootstrapping configuration is
@@ -21207,48 +16492,37 @@ scanning](https://docs.spring.io/spring/docs/current/spring-framework-reference/
 for Spring
 [components](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-annotation-config).
 
-</div>
 
-<div class="paragraph">
 
 The cache configuration defines the Apache Geode cache, a region, and
 for illustrative purposes, a `CacheListener` that acts as a logger.
 
-</div>
 
-<div class="paragraph">
 
 The main beans are `HelloWorld` and `CommandProcessor`, which rely on
 the `GemfireTemplate` to interact with the distributed fabric. Both
 classes use annotations to define their dependency and life-cycle
 callbacks.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 # Resources
 
-<div class="paragraph">
 
 In addition to this reference documentation, there are a number of other
 resources that may help you learn how to use {data-store-product-name}
 with the *Spring Framework*. These additional, third-party resources are
 enumerated in this section.
 
-</div>
 
 <div class="sect1">
 
 ## Useful Links
 
-<div class="sectionbody">
+
 
 <div class="ulist">
 
@@ -21281,11 +16555,8 @@ enumerated in this section.
 - [Apache Geode on
   StackOverflow](https://stackoverflow.com/questions/tagged/gemfire)
 
-</div>
 
-</div>
 
-</div>
 
 # Appendices
 
@@ -21293,13 +16564,12 @@ enumerated in this section.
 
 ## Appendix A: Namespace reference
 
-<div class="sectionbody">
+
 
 <div class="sect2">
 
 ### The `<repositories />` Element
 
-<div class="paragraph">
 
 The `<repositories />` element triggers the setup of the Spring Data
 repository infrastructure. The most important attribute is
@@ -21309,7 +16579,6 @@ repository interfaces. See
 The following table describes the attributes of the `<repositories />`
 element:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 6. Attributes</caption>
@@ -21368,30 +16637,25 @@ repository interface definitions should be considered. Defaults to
 
 Table 6. Attributes
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Appendix B: Populators namespace reference
 
-<div class="sectionbody">
+
 
 <div class="sect2">
 
 ### The \<populator /\> element
 
-<div class="paragraph">
 
 The `<populator />` element allows to populate the a data store via the
 Spring Data repository
 infrastructure.<sup>\[<a href="#_footnotedef_1" id="_footnoteref_1" class="footnote"
 title="View footnote.">1</a>\]</sup>
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 7. Attributes</caption>
@@ -21418,23 +16682,19 @@ with.</p></td>
 
 Table 7. Attributes
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Appendix C: Repository query keywords
 
-<div class="sectionbody">
+
 
 <div class="sect2">
 
 ### Supported query method subject keywords
 
-<div class="paragraph">
 
 The following table lists the subject keywords generally supported by
 the Spring Data repository query derivation mechanism to express the
@@ -21442,7 +16702,6 @@ predicate. Consult the store-specific documentation for the exact list
 of supported keywords, because some keywords listed here might not be
 supported in a particular store.
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 8. Query subject keywords</caption>
@@ -21511,13 +16770,11 @@ of the subject between <code>find</code> (and the other keywords) and
 
 Table 8. Query subject keywords
 
-</div>
 
 <div class="sect2">
 
 ### Supported query method predicate keywords and modifiers
 
-<div class="paragraph">
 
 The following table lists the predicate keywords generally supported by
 the Spring Data repository query derivation mechanism. However, consult
@@ -21525,7 +16782,6 @@ the store-specific documentation for the exact list of supported
 keywords, because some keywords listed here might not be supported in a
 particular store.
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 9. Query predicate keywords</caption>
@@ -21720,12 +16976,10 @@ class="tableblock halign-left valign-top"><p><code>WITHIN</code></p></td>
 
 Table 9. Query predicate keywords
 
-<div class="paragraph">
 
 In addition to filter predicates, the following list of modifiers is
 supported:
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 10. Query predicate modifier keywords</caption>
@@ -21767,41 +17021,28 @@ sorting order followed by the property path and direction (e. g.
 
 Table 10. Query predicate modifier keywords
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Appendix D: Repository query return types
 
-<div class="sectionbody">
+
 
 <div class="sect2">
 
 ### Supported Query Return Types
 
-<div class="paragraph">
 
 The following table lists the return types generally supported by Spring
 Data repositories. However, consult the store-specific documentation for
 the exact list of supported return types, because some types listed here
 might not be supported in a particular store.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Geospatial types (such as <code>GeoResult</code>,
@@ -21812,7 +17053,6 @@ define their own result wrapper types.</td>
 </tbody>
 </table>
 
-</div>
 
 <table class="tableblock frame-all grid-all stretch">
 <caption>Table 11. Query return types</caption>
@@ -22018,17 +17258,14 @@ also an infinite number of elements.</p></td>
 
 Table 11. Query return types
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## Appendix E: Spring Data for GemFire Schema
 
-<div class="sectionbody">
+
 
 <div class="ulist">
 
@@ -22038,13 +17275,9 @@ Table 11. Query return types
 - [Spring Data for GemFire Data Access Schema (`gfe-data` XML
   namespace)](https://www.springframework.org/schema/data/geode/spring-data-geode.xsd)
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footnotes">
 
@@ -22055,9 +17288,7 @@ Table 11. Query return types
 [1](#_footnoteref_1). see
 [\[repositories.create-instances.spring\]](#repositories.create-instances.spring)
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -22066,6 +17297,4 @@ Table 11. Query return types
 Version 2.3.9  
 Last updated 2022-09-20 12:54:33 -0700
 
-</div>
 
-</div>

@@ -1,35 +1,45 @@
-<div id="header">
+---
+title: Annotation-based Configuration Quick Start
+---
 
-# Annotation-based Configuration Quick Start
+<!-- 
+ Copyright (c) VMware, Inc. 2022. All rights reserved.
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ agreements. See the NOTICE file distributed with this work for additional information regarding
+ copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance with the License. You may obtain a
+ copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+-->
 
-</div>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
 
-<div id="content">
+     http://www.apache.org/licenses/LICENSE-2.0
 
-<div id="preamble">
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 
-<div class="sectionbody">
-
-<div class="paragraph">
 
 The following sections provide an overview to the SDG
 annotations to get started quickly.
 
-</div>
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">All annotations provide additional configuration
+All annotations provide additional configuration
 attributes along with associated <a
 href="#bootstrap-annotation-config-properties">properties</a> to
 conveniently customize the configuration and behavior of
@@ -37,85 +47,32 @@ GemFire at runtime. However, in general, none of the
 attributes or associated properties are required to use a particular
 GemFire feature. Simply declare the annotation to enable the
 feature and you are done. Refer to the individual Javadoc of each
-annotation for more details.</td>
-</tr>
-</tbody>
-</table>
+annotation for more details.
 
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure a `ClientCache` Application
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-clientcache-application"></a>Configure a `ClientCache` Application
 
 To configure and bootstrap a GemFire `ClientCache`
 application, use the following:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
 @ClientCacheApplication
 public class ClientApplication {
-
+  
   public static void main(String[] args) {
     SpringApplication.run(ClientApplication.class, args);
   }
 }
 ```
 
-</div>
+See [@ClientCacheApplication Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/ClientCacheApplication.html).
 
-</div>
+For more information, see [Configuring GemFire Applications with Spring](../index.html#configuring-gemfire-applications-with-spring) in _Spring Data for GemFire Reference Guide_.
 
-<div class="paragraph">
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/ClientCacheApplication.html\[`@ClientCacheApplication`
-Javadoc\].
-
-</div>
-
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-geode-applications\]](#bootstrap-annotation-config-geode-applications)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure a Peer `Cache` Application
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-peer-cache-application"></a>Configure a Peer `Cache` Application
 
 To configure and bootstrap a GemFire Peer `Cache` application,
 use the following:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -128,81 +85,30 @@ public class ServerApplication {
 }
 ```
 
-</div>
-
-</div>
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">If you would like to enable a
+If you want to enable a
 <code>CacheServer</code> that allows <code>ClientCache</code>
-applications to connect to this server, then simply replace the
+applications to connect to this server, replace the
 <code>@PeerCacheApplication</code> annotation with the
 <code>@CacheServerApplication</code> annotation. This will start a
 <code>CacheServer</code> running on "localhost", listening on the
-default <code>CacheServer</code> port of <code>40404</code>.</td>
-</tr>
-</tbody>
-</table>
+default <code>CacheServer</code> port of <code>40404</code>.
 
-</div>
 
-<div class="paragraph">
+See [@CacheServerApplication Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/CacheServerApplication.html).
+
+
 
 See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/CacheServerApplication.html\[`@CacheServerApplication`
-Javadoc\].
+[@PeerCacheApplication Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/PeerCacheApplication.html).
 
-</div>
+For more information, see [Configuring GemFire Applications with Spring](../index.html#configuring-gemfire-applications-with-spring) in _Spring Data for GemFire Reference Guide_.
 
-<div class="paragraph">
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/PeerCacheApplication.html\[`@PeerCacheApplication`
-Javadoc\].
-
-</div>
-
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-geode-applications\]](#bootstrap-annotation-config-geode-applications)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure an Embedded Locator
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-embedded-locator"></a>Configure an Embedded Locator
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableLocator` to start an
 embedded Locator bound to all NICs listening on the default Locator
 port, `10334`, as follows:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -216,68 +122,19 @@ public class ServerApplication {
 }
 ```
 
-</div>
-
-</div>
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content"><code>@EnableLocator</code> can only be used with
-GemFire server applications.</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="paragraph">
+<code>@EnableLocator</code> can only be used with GemFire server applications.
 
 See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableLocator.html\[`@EnableLocator`
-Javadoc\].
+[@EnableLocator Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLocator.html).
 
-</div>
+For more information, see _Configuring an Embedded Locator_ in [Spring Data for GemFire Reference Guide](../index.html).
 
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-embedded-services-locator\]](#bootstrap-annotation-config-embedded-services-locator)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure an Embedded Manager
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-embedded-manager"></a>Configure an Embedded Manager
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableManager` to start an
 embedded Manager bound to all NICs listening on the default Manager
 port, `1099`, as follows:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -291,67 +148,17 @@ public class ServerApplication {
 }
 ```
 
-</div>
+<code>@EnableManager</code> can only be used with GemFire server applications.
 
-</div>
+See [@EnableManager Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableManager.html).
 
-<div class="admonitionblock note">
+For more information, see _Configuring an Embedded Manager_ in [Spring Data for GemFire Reference Guide](../index.html).
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content"><code>@EnableManager</code> can only be used with
-GemFire server applications.</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="paragraph">
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableManager.html\[`@EnableManager`
-Javadoc\].
-
-</div>
-
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-embedded-services-manager\]](#bootstrap-annotation-config-embedded-services-manager)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure the Embedded HTTP Server
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-embedded-http-server"></a>Configure the Embedded HTTP Server
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableHttpService` to start the
 embedded HTTP server (Jetty) listening on port `7070`, as follows:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -364,69 +171,18 @@ public class ServerApplication {
   }
 }
 ```
+@EnableHttpService</code> can only be used with GemFire server applications.
 
-</div>
+See [@EnableHttpService Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableHttpService.html).
 
-</div>
+For more information, see _Configuring the Embedded HTTP Server_ in [Spring Data for GemFire Reference Guide](../index.html).
 
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content"><code>@EnableHttpService</code> can only be used
-with GemFire server applications.</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="paragraph">
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableHttpService.html\[`@EnableHttpService`
-Javadoc\].
-
-</div>
-
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-embedded-services-http\]](#bootstrap-annotation-config-embedded-services-http)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure the Embedded Memcached Server
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-embedded-memcached-server"></a>Configure the Embedded Memcached Server
 
 Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableMemcachedServer` to start
 the embedded Memcached server (Gemcached) listening on port `11211`, as
 follows:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -440,67 +196,17 @@ public class ServerApplication {
 }
 ```
 
-</div>
+<code>@EnableMemcachedServer</code> can only be used with GemFire server applications.
 
-</div>
+See [@EnableMemcachedServer Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableMemcachedServer.html).
 
-<div class="admonitionblock note">
+For more information, see _Configuring the Embedded Memcached Server_ in [Spring Data for GemFire Reference Guide](../index.html).
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content"><code>@EnableMemcachedServer</code> can only be used
-with GemFire server applications.</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="paragraph">
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableMemcachedServer.html\[`@EnableMemcachedServer`
-Javadoc\].
-
-</div>
-
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-embedded-services-memcached\]](#bootstrap-annotation-config-embedded-services-memcached)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure Logging
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-logging"></a>Configure Logging
 
 To configure or adjust GemFire logging, annotate your Spring,
 GemFire client or server application class with
 `@EnableLogging`, as follows:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -514,68 +220,18 @@ public class ClientApplication {
 }
 ```
 
-</div>
-
-</div>
-
-<div class="admonitionblock note">
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
-Note
-</div></td>
-<td class="content">Default <code>log-level</code> is "config". Also,
-this annotation will not adjust log levels in your application, only for
-GemFire.</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="paragraph">
+Default <code>log-level</code> is **config**. This annotation does not adjust log levels in your application and is only used for GemFire.
 
 See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableLogging.html\[`@EnableLogging`
-Javadoc\].
+[@EnableLogging Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLogging.html).
 
-</div>
+For more information, see [Configuring Logging](../index.html#configuring-logging) in _Spring Data for GemFire Reference Guide_.
 
-<div class="paragraph">
-
-See
-[\[bootstrap-annotation-config-logging\]](#bootstrap-annotation-config-logging)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure Statistics
-
-<div class="sectionbody">
-
-<div class="paragraph">
+## <a id="configure-statistics"></a>Configure Statistics
 
 To gather GemFire statistics at runtime, annotate your Spring,
 GemFire client or server application class with
 `@EnableStatistics`, as follows:
-
-</div>
-
-<div class="listingblock">
-
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -589,47 +245,22 @@ public class ClientApplication {
 }
 ```
 
-</div>
+See [@EnableStatistics Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableStatistics.html).
 
-</div>
 
-<div class="paragraph">
+For more information, see [Configuring Statistics](../index.html#configuring-logging) in _Spring Data for GemFire Reference Guide_.
 
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableStatistics.html\[`@EnableStatistics`
-Javadoc\].
+## <a id="configure-pdx"></a>Configure PDX
 
-</div>
 
-<div class="paragraph">
 
-See
-[\[bootstrap-annotation-config-statistics\]](#bootstrap-annotation-config-statistics)
-for more details.
-
-</div>
-
-</div>
-
-</div>
-
-<div class="sect1">
-
-## Configure PDX
-
-<div class="sectionbody">
-
-<div class="paragraph">
 
 To enable GemFire PDX serialization, annotate your Spring,
 GemFire client or server application class with `@EnablePdx`,
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -643,20 +274,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">GemFire PDX Serialization is an
@@ -668,18 +289,9 @@ serializable without having to implement
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">By default, SDG configures the
@@ -695,44 +307,31 @@ details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnablePdx.html\[`@EnablePdx`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-pdx\]](#bootstrap-annotation-config-pdx)
 for more details.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
+## <a id="configure-ssl"></a>Configure SSL
 
-## Configure SSL
 
-<div class="sectionbody">
 
-<div class="paragraph">
 
 To enable GemFire SSL, annotate your Spring, GemFire
 client or server application class with `@EnableSsl`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -746,20 +345,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Minimally, GemFire requires you to specify
@@ -772,18 +361,9 @@ access the <code>KeyStore</code> file if the file has been secured.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">GemFire SSL allows you to configure the
@@ -794,45 +374,32 @@ all components of GemFire use SSL with "ALL".</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableSsl.html\[`@EnableSsl`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-ssl\]](#bootstrap-annotation-config-ssl)
 for more details.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
+## <a id="configure-security"></a>Configure Security
 
-## Configure Security
 
-<div class="sectionbody">
 
-<div class="paragraph">
 
 To enable GemFire security, annotate your Spring,
 GemFire client or server application class with
 `@EnableSecurity`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -846,20 +413,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">On the server, you must configure access to the auth
@@ -872,18 +429,9 @@ for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">On the client, you must configure a username and
@@ -894,46 +442,31 @@ for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableSecurity.html\[`@EnableSecurity`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-security\]](#bootstrap-annotation-config-security)
 for more details.
 
-</div>
 
-</div>
+## <a id="configure-gemfire-properties"></a>Configure GemFire Properties
 
-</div>
 
-<div class="sect1">
 
-## Configure GemFire Properties
-
-<div class="sectionbody">
-
-<div class="paragraph">
 
 To configure other, low-level GemFire properties not covered
 by the feature-oriented, SDG configuration annotations,
 annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -952,20 +485,10 @@ public class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Some GemFire properties are client-side
@@ -977,35 +500,24 @@ the appropriate use of each property.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableGemFireProperties.html\[`@EnableGemFireProperties`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-gemfire-properties\]](#bootstrap-annotation-config-gemfire-properties)
 for more details.
 
-</div>
 
-</div>
 
-</div>
+## <a id="configure-caching"></a>Configure Caching
 
-<div class="sect1">
 
-## Configure Caching
 
-<div class="sectionbody">
-
-<div class="paragraph">
 
 To use GemFire as a *caching provider* in Spring's
 {spring-framework-docs}/integration.html#cache\[*Cache Abstraction*\],
@@ -1015,11 +527,8 @@ annotate your Spring, GemFire client or server application
 class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`,
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -1034,20 +543,14 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, simply go on to define the application services that require
 caching, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -1060,20 +563,10 @@ public class BookService {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content"><code>@EnableCachingDefinedRegions</code> is
@@ -1083,54 +576,39 @@ desire.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableCachingDefinedRegions.html\[`@EnableCachingDefinedRegions`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/cache/config/EnableGemfireCaching.html\[`@EnableGemfireCaching`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-caching\]](#bootstrap-annotation-config-caching)
 for more details.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
+## <a id="configure-regions-etc"></a>Configure Regions, Indexes, Repositories, and Entities for Persistent Applications
 
-## Configure Regions, Indexes, Repositories and Entities for Persistent Applications
 
-<div class="sectionbody">
 
-<div class="paragraph">
 
 To make short work of creating Spring, GemFire persistent
 client or server applications, annotate your application class with
 `@EnableEntityDefinedRegions`, `@EnableGemfireRepositories` and
 `@EnableIndexing`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -1146,20 +624,10 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>@EnableEntityDefinedRegions</code>
@@ -1171,20 +639,15 @@ for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Next, define your entity class and use the `@Region` mapping annotation
 to specify the Region in which your entity will be stored. Use the
 `@Indexed` annotation to define Indexes on entity fields used in your
 application queries, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example.app.model;
@@ -1209,20 +672,10 @@ public class Book {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>@Region("Books")</code> entity class
@@ -1234,18 +687,13 @@ and <a href="#mapping">[mapping]</a> for more details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Finally, define your CRUD Repository with simple queries to persist and
 access `Books`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 package example.app.repo;
@@ -1259,20 +707,11 @@ public interface BookRepository extends CrudRepository {
 }
 ```
 
-</div>
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">See <a
@@ -1282,91 +721,64 @@ details.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableEntityDefinedRegions.html\[`@EnableEntityDefinedRegions`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html\[`@EnableGemfireRepositories`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableIndexing.html\[`@EnableIndexing`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/mapping/annotation/Region.html\[`@Region`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/mapping/annotation/Indexed.html\[`@Indexed`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html\[`@LuceneIndexed`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-regions\]](#bootstrap-annotation-config-regions)
 for more details.
 
-</div>
 
-<div class="paragraph">
 
 See [\[gemfire-repositories\]](#gemfire-repositories) for more details.
 
-</div>
 
-</div>
+## <a id="configure-client-regions"></a>Configure Client Regions from Cluster-defined Regions
 
-</div>
 
-<div class="sect1">
 
-## Configure Client Regions from Cluster-defined Regions
-
-<div class="sectionbody">
-
-<div class="paragraph">
 
 Alternatively, you can define client \[\*PROXY\] Regions from Regions
 already defined in the cluster using `@EnableClusterDefinedRegions`, as
 follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @SpringBootApplication
@@ -1383,29 +795,19 @@ public class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-region-cluster-defined\]](#bootstrap-annotation-config-region-cluster-defined)
 for more details.
 
-</div>
 
-</div>
 
-</div>
+## <a id="configure-functions"></a>Configure Functions
 
-<div class="sect1">
 
-## Configure Functions
 
-<div class="sectionbody">
-
-<div class="paragraph">
 
 GemFire Functions are useful in distributed compute scenarios
 where a potentially expensive computation requiring data can be
@@ -1414,19 +816,14 @@ is more efficient to bring the logic to where the data is located
 (stored) rather than requesting and fetching the data to be processed by
 the computation.
 
-</div>
 
-<div class="paragraph">
 
 Use the `@EnableGemfireFunctions` along with the `@GemfireFunction`
 annotation to enable GemFire Functions definitions implemented
 as methods on POJOs, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @PeerCacheApplication
@@ -1444,21 +841,15 @@ class ServerApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Use the `@EnableGemfireFunctionExecutions` along with 1 of the Function
 calling annotations: `@OnMember`, `@OnMembers`, `@OnRegion`, `@OnServer`
 and `@OnServers`.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -1478,35 +869,26 @@ interface CustomerRewardsFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/function/config/EnableGemfireFunctions.html\[`@EnableGemfireFunctions`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/function/annotation/GemfireFunction.html\[`@GemfireFunction`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/function/config/EnableGemfireFunctionExecutions.html\[`@EnableGemfireFunctionExecutions`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnMember.html\[`@OnMember`
@@ -1520,44 +902,31 @@ Javadoc\], and
 {sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnServers.html\[`@OnServers`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See [\[function-annotations\]](#function-annotations) for more details.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
+## <a id="configure-continuous-query"></a>Configure Continuous Query
 
-## Configure Continuous Query
 
-<div class="sectionbody">
 
-<div class="paragraph">
 
 Real-time, event stream processing is becoming an increasingly important
 task for data-intensive applications, primarily to respond to
 user requests in a timely manner. GemFire Continuous Query
 (CQ) will help you achieve this rather complex task quite easily.
 
-</div>
 
-<div class="paragraph">
 
 Enable CQ by annotating your application class with
 `@EnableContinuousQueries` and define your CQs along with the associated
 event handlers, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -1570,20 +939,14 @@ class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Then, define your CQs by annotating the associated handler method with
 `@ContinousQuery`, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Service
@@ -1596,28 +959,16 @@ class CustomerService {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Anytime an event occurs changing the `Customer` data to match the
 predicate in your continuous OQL query (CQ), the `process` method will
 be called.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">GemFire CQ is a client-side feature
@@ -1626,43 +977,30 @@ only.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html\[`@EnableContinuousQueries`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/listener/annotation/ContinuousQuery.html\[`@ContinuousQuery`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See [\[apis:continuous-query\]](#apis:continuous-query) and
 [\[bootstrap-annotation-config-continuous-queries\]](#bootstrap-annotation-config-continuous-queries)
 for more details.
 
-</div>
 
-</div>
 
-</div>
+## <a id="configure-cluster-configurations"></a>Configure Cluster Configuration
 
-<div class="sect1">
 
-## Configure Cluster Configuration
 
-<div class="sectionbody">
-
-<div class="paragraph">
 
 When developing Spring Data applications using GemFire as
 GemFire `ClientCache` applications, it is useful during
@@ -1671,33 +1009,25 @@ client/server topology. In fact, GemFire expects that when you
 have a "/Example" PROXY `Region` on the client, that a matching `Region`
 by name (i.e. "Example") exists in the server.
 
-</div>
 
-<div class="paragraph">
 
 You could use *Gfsh* to create every Region and Index that your
 application requires, or, you could simply push the configuration
 meta-data already expressed when developing your Spring Data application
 using GemFire when you run it.
 
-</div>
 
-<div class="paragraph">
 
 This is as simple as annotation your main application class with
 `@EnableClusterConfiguration(..)`:
 
-</div>
 
-<div class="listingblock">
 
 <div class="title">
 
 Using `@EnableClusterConfiguration`
 
-</div>
 
-<div class="content">
 
 ``` highlight
 @ClientCacheApplication
@@ -1707,20 +1037,10 @@ class ClientApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Most of the time, when using a client/server
@@ -1734,18 +1054,10 @@ the server nodes in the cluster consistently.</td>
 </tbody>
 </table>
 
-</div>
 
 <div class="admonitionblock warning">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Warning
 </div></td>
 <td class="content">to use
@@ -1756,35 +1068,24 @@ application classpath.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableClusterConfiguration.html\[`@EnableClusterConfiguration`
 Javadoc\].
 
-</div>
 
-<div class="paragraph">
 
 See
 [\[bootstrap-annotation-config-cluster\]](#bootstrap-annotation-config-cluster)
 for more details.
 
-</div>
 
-</div>
 
-</div>
+## <a id="configure-gatewayreceivers"></a>Configure `GatewayReceivers`
 
-<div class="sect1">
 
-## Configure `GatewayReceivers`
 
-<div class="sectionbody">
-
-<div class="paragraph">
 
 The replication of data between different GemFire clusters is
 an increasingly important fault-tolerance and high-availability (HA)
@@ -1792,14 +1093,11 @@ mechanism. GemFire WAN replication is a mechanism that allows
 one GemFire cluster to replicate its data to another
 GemFire cluster in a reliable and fault-tolerant manner.
 
-</div>
 
-<div class="paragraph">
 
 GemFire WAN replication requires two components to be
 configured:
 
-</div>
 
 <div class="ulist">
 
@@ -1809,18 +1107,13 @@ configured:
 - `GatewaySender` - The WAN replication component that sends data to a
   remote GemFire cluster's `GatewayReceiver`.
 
-</div>
 
-<div class="paragraph">
 
 To enable a `GatewayReceiver`, the application class needs to be
 annotated with `@EnableGatewayReceiver` as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @CacheServerApplication
@@ -1834,20 +1127,10 @@ annotated with `@EnableGatewayReceiver` as follows:
 class MySpringApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">GemFire <code>GatewayReceiver</code> is a
@@ -1857,36 +1140,24 @@ server-side feature only and can only be configured on a
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/wan/annotation/EnableGatewayReceiver.html\[`@EnableGatewayReceiver`
 Javadoc\].
 
-</div>
 
-</div>
 
-</div>
+## <a id="configure-gatewaysenders"></a>Configure `GatewaySenders`
 
-<div class="sect1">
 
-## Configure `GatewaySenders`
 
-<div class="sectionbody">
-
-<div class="paragraph">
 
 To enable `GatewaySender`, the application class needs to be annotated
 with `@EnableGatewaySenders` and `@EnableGatewaySender` as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @CacheServerApplication
@@ -1910,20 +1181,10 @@ class MySpringApplication { .. }
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">GemFire <code>GatewaySender</code> is a
@@ -1933,9 +1194,7 @@ server-side feature only and can only be configured on a
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 In the above example, the application is configured with 2 Regions,
 `Region1` and `Region2`. In addition, two `GatewaySenders` will be
@@ -1943,16 +1202,12 @@ configured to service both Regions. `GatewaySender1` will be configured
 to replicate `` Region1's data and `GatewaySender2 `` will be configured
 to replicate \`Region2's data.
 
-</div>
 
-<div class="paragraph">
 
 As demonstrated each `GatewaySender` property can be configured on each
 `EnableGatewaySender` annotation.
 
-</div>
 
-<div class="paragraph">
 
 It is also possible to have a more generic, "defaulted" properties
 approach, where all properties are configured on the
@@ -1960,11 +1215,8 @@ approach, where all properties are configured on the
 values can be set on the parent annotation and then overridden on the
 child if required, as demonstrated below:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @CacheServerApplication
@@ -1980,20 +1232,10 @@ child if required, as demonstrated below:
 class MySpringApplication { .. }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">When the <code>regions</code> attribute is left
@@ -2004,9 +1246,7 @@ within the application.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 See
 {sdg-javadoc}/org/springframework/data/gemfire/wan/annotation/EnableGatewaySenders.html\[`@EnableGatewaySenders`
@@ -2014,20 +1254,4 @@ Javadoc\] and
 {sdg-javadoc}/org/springframework/data/gemfire/wan/annotation/EnableGatewaySender.html\[`@EnableGatewaySender`
 Javadoc\].
 
-</div>
 
-</div>
-
-</div>
-
-</div>
-
-<div id="footer">
-
-<div id="footer-text">
-
-Last updated 2022-09-20 10:33:13 -0700
-
-</div>
-
-</div>

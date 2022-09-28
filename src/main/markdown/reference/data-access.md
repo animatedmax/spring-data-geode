@@ -2,15 +2,12 @@
 
 # Using the Data Access Namespace
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 In addition to the core XML namespace (`gfe`), Spring Data for GemFire provides a
 data access XML namespace (`gfe-data`), which is primarily intended to
@@ -20,19 +17,14 @@ namespace currently contains support for GemFire
 [execution](#function-execution), as well as a `<datasource>` tag that
 offers a convenient way to connect to a GemFire cluster.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## An Easy Way to Connect to GemFire
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 For many applications, a basic connection to a GemFire data
 grid using default values is sufficient. Spring Data for GemFire's `<datasource>` tag
@@ -41,11 +33,8 @@ provides a simple way to access data. The data source creates a
 servers for all existing root Regions and creates an (empty) client
 Region proxy for each one.
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:datasource>
@@ -53,11 +42,8 @@ Region proxy for each one.
 </gfe-data:datasource>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `<datasource>` tag is syntactically similar to `<gfe:pool>`. It may
 be configured with one or more nested `locator` or `server` elements to
@@ -68,18 +54,13 @@ connected to the Locator, so they can be seamlessly referenced by Spring
 Data mapping annotations (`GemfireTemplate`) and autowired into
 application classes.
 
-</div>
 
-<div class="paragraph">
 
 Of course, you can explicitly configure client Regions. For example, if
 you want to cache data in local memory, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:datasource>
@@ -89,15 +70,10 @@ you want to cache data in local memory, as the following example shows:
 <gfe:client-region id="Example" shortcut="CACHING_PROXY"/>
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -105,6 +81,4 @@ you want to cache data in local memory, as the following example shows:
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

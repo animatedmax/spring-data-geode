@@ -2,24 +2,14 @@
 
 # New Features
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
+
+
 Note
 </div></td>
 <td class="content">As of the 1.2.0.RELEASE, this project, formerly
@@ -30,17 +20,14 @@ built on {x-data-store-website}[{data-store-name}].</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## New in the 2.0 Release
 
-<div class="sectionbody">
+
 
 <div class="ulist">
 
@@ -73,17 +60,14 @@ built on {x-data-store-website}[{data-store-name}].</td>
 - Added support in the Annotation configuration model for Off-Heap,
   Redis Adapter, and {data-store-name}'s new Security framework.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## New in the 2.1 Release
 
-<div class="sectionbody">
+
 
 <div class="ulist">
 
@@ -104,17 +88,14 @@ built on {x-data-store-website}[{data-store-name}].</td>
 
 - Updated docs.
 
-</div>
 
-</div>
 
-</div>
 
 <div class="sect1">
 
 ## New in the 2.2 Release
 
-<div class="sectionbody">
+
 
 <div class="ulist">
 
@@ -132,13 +113,9 @@ built on {x-data-store-website}[{data-store-name}].</td>
 
 - Updated docs.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -146,6 +123,4 @@ built on {x-data-store-website}[{data-store-name}].</td>
 
 Last updated 2022-09-21 15:45:31 -0700
 
-</div>
 
-</div>

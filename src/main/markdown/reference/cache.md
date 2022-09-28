@@ -2,15 +2,12 @@
 
 # Configuring a Cache
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 To use GemFire, you need to either create a new cache or
 connect to an existing one. With the current version of
@@ -18,18 +15,9 @@ GemFire, you can have only one open cache per VM (more
 strictly speaking, per `ClassLoader`). In most cases, the cache should
 only be created once.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">This section describes the creation and
@@ -47,28 +35,20 @@ sections.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 A peer `Cache` with default configuration can be created with the
 following simple declaration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 During Spring container initialization, any `ApplicationContext`
 containing this cache definition registers a `CacheFactoryBean` that
@@ -78,9 +58,7 @@ existing `Cache` or, if one does not already exist, a newly created one.
 Since no additional properties were specified, a newly created `Cache`
 applies the default cache configuration.
 
-</div>
 
-<div class="paragraph">
 
 All Spring Data for GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
@@ -89,21 +67,15 @@ If you prefer, you can make the dependency explicit by using the
 elements. Also, you can override the cache's bean name using the `id`
 attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache id="myCache"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 A GemFire `Cache` can be fully configured using Spring.
 However, GemFire's native XML configuration file, `cache.xml`,
@@ -112,37 +84,22 @@ needs to be configured natively, you can provide a reference to the
 GemFire XML configuration file by using the
 `cache-xml-location` attribute, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache id="cacheConfiguredWithNativeCacheXml" cache-xml-location="classpath:cache.xml"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this example, if a cache needs to be created, it uses a file named
 `cache.xml` located in the classpath root to configure it.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The configuration makes use of Spring's <a
@@ -155,28 +112,21 @@ location.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 In addition to referencing an external XML configuration file, you can
 also specify GemFire System
 {x-data-store-docs}/reference/topics/gemfire_properties.html\[properties\]
 that use any of Spring's `Properties` support features.
 
-</div>
 
-<div class="paragraph">
 
 For example, you can use the `properties` element defined in the `util`
 namespace to define `Properties` directly or load properties from a
 properties file, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -197,27 +147,15 @@ properties file, as follows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Using a properties file is recommended for externalizing
 environment-specific settings outside the application configuration.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Cache settings apply only when a new cache needs to
@@ -227,29 +165,21 @@ are ignored.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Advanced Cache Configuration
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 For advanced cache configuration, the `cache` element provides a number
 of configuration options exposed as attributes or child elements, as the
 following listing shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <!--(1)-->
@@ -287,9 +217,7 @@ following listing shows:
 </gfe:cache>
 ```
 
-</div>
 
-</div>
 
 <div class="colist arabic">
 
@@ -347,13 +275,11 @@ following listing shows:
 8.  Declares a JNDI binding to enlist an external DataSource in a
     GemFire transaction.
 
-</div>
 
 <div class="sect2">
 
 ### Enabling PDX Serialization
 
-<div class="paragraph">
 
 The preceding example includes a number of attributes related to
 GemFire's enhanced serialization framework, PDX. While a
@@ -362,9 +288,7 @@ it is important to note that PDX is enabled by registering a
 `PdxSerializer`, which is specified by setting the `pdx-serializer`
 attribute.
 
-</div>
 
-<div class="paragraph">
 
 GemFire provides an implementing class
 (`org.apache.geode.pdx.ReflectionBasedAutoSerializer`) that uses Java
@@ -372,29 +296,22 @@ Reflection. However, it is common for developers to provide their own
 implementation. The value of the attribute is simply a reference to a
 Spring bean that implements the `PdxSerializer` interface.
 
-</div>
 
-<div class="paragraph">
 
 More information on serialization support can be found in
 [\[serialization\]](#serialization).
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Enabling Auto-reconnect
 
-<div class="paragraph">
 
 You should be careful when setting the
 `<gfe:cache enable-auto-reconnect="[true|false*]>` attribute to `true`.
 
-</div>
 
-<div class="paragraph">
 
 Generally, 'auto-reconnect' should only be enabled in cases where
 Spring Data for GemFire's XML namespace is used to configure and bootstrap a new,
@@ -403,9 +320,7 @@ words, 'auto-reconnect' should not be enabled when Spring Data for GemFire is us
 develop and build a GemFire application that also happens to
 be a peer `Cache` member of the GemFire cluster.
 
-</div>
 
-<div class="paragraph">
 
 The main reason for this restriction is that most GemFire
 applications use references to the GemFire `Cache` or Regions
@@ -419,9 +334,7 @@ independent distributed system, the peer member shuts down and all
 GemFire component references (caches, Regions, and others)
 become invalid.
 
-</div>
 
-<div class="paragraph">
 
 Essentially, the current forced disconnect processing logic in each peer
 member dismantles the system from the ground up. The JGroups stack shuts
@@ -429,9 +342,7 @@ down, the distributed system is put in a shutdown state and, finally,
 the cache is closed. Effectively, all memory references become stale and
 are lost.
 
-</div>
 
-<div class="paragraph">
 
 After being disconnected from the distributed system, a peer member
 enters a "reconnecting" state and periodically attempts to rejoin the
@@ -443,9 +354,7 @@ reconstructed. Therefore, all old references, which may have been
 injected into application by the Spring container, are now stale and no
 longer valid.
 
-</div>
 
-<div class="paragraph">
 
 GemFire makes no guarantee (even when using the
 GemFire public Java API) that application cache, Regions, or
@@ -453,9 +362,7 @@ other component references are automatically refreshed by the reconnect
 operation. As such, GemFire applications must take care to
 refresh their own references.
 
-</div>
 
-<div class="paragraph">
 
 Unfortunately, there is no way to be notified of a disconnect event and,
 subsequently, a reconnect event either. If that were the case, you would
@@ -464,23 +371,18 @@ have a clean way to know when to call
 for an application to do so, which is why this "feature" of
 GemFire is not recommended for peer `Cache` applications.
 
-</div>
 
-<div class="paragraph">
 
 For more information about 'auto-reconnect', see GemFire's
 {x-data-store-docs}/managing/autoreconnect/member-reconnect.html\[product
 documentation\].
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Using Cluster-based Configuration
 
-<div class="paragraph">
 
 GemFire's Cluster Configuration Service is a convenient way
 for any peer member joining the cluster to get a "consistent view" of
@@ -489,9 +391,7 @@ a Locator. Using the cluster-based configuration ensures the peer
 member's configuration is compatible with the GemFire
 Distributed System when the member joins.
 
-</div>
 
-<div class="paragraph">
 
 This feature of Spring Data for GemFire (setting the `use-cluster-configuration`
 attribute to `true`) works in the same way as the `cache-xml-location`
@@ -499,9 +399,7 @@ attribute, except the source of the GemFire configuration
 meta-data comes from the network through a Locator, as opposed to a
 native `cache.xml` file residing in the local file system.
 
-</div>
 
-<div class="paragraph">
 
 All GemFire native configuration metadata, whether from
 `cache.xml` or from the Cluster Configuration Service, gets applied
@@ -509,37 +407,22 @@ before any Spring (XML) configuration metadata. As a result, Spring's
 config serves to "augment" the native GemFire configuration
 metadata and would most likely be specific to the application.
 
-</div>
 
-<div class="paragraph">
 
 Again, to enable this feature, specify the following in the Spring XML
 config:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache use-cluster-configuration="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">While certain GemFire tools, such as
@@ -553,41 +436,30 @@ recorded.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 For more information on GemFire's Cluster Configuration
 Service, see the
 {x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[product
 documentation\].
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Configuring a GemFire CacheServer
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Spring Data for GemFire includes dedicated support for configuring a
 {x-data-store-javadoc}/org/apache/geode/cache/server/CacheServer.html\[CacheServer\],
 allowing complete configuration through the Spring container, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -618,27 +490,15 @@ following example shows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The preceding configuration shows the `cache-server` element and the
 many available options.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">Rather than hard-coding the port, this configuration
@@ -660,18 +520,9 @@ machines.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">To avoid initialization problems, the
@@ -687,19 +538,14 @@ right away.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Configuring a GemFire ClientCache
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 In addition to defining a GemFire peer
 {x-data-store-javadoc}/org/apache/geode/cache/Cache.html\[`Cache`\],
@@ -710,18 +556,13 @@ configuration and use to the GemFire peer
 [Cache](#bootstrap:cache) and is supported by the
 `org.springframework.data.gemfire.client.ClientCacheFactoryBean`.
 
-</div>
 
-<div class="paragraph">
 
 The simplest definition of a GemFire cache client using
 default configuration follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -729,11 +570,8 @@ default configuration follows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 `client-cache` supports many of the same options as the
 [Cache](#bootstrap:cache:advanced) element. However, as opposed to a
@@ -743,27 +581,20 @@ a server running on `localhost` and listening to port `40404`. The
 default Pool is used by all client Regions unless the Region is
 configured to use a specific Pool.
 
-</div>
 
-<div class="paragraph">
 
 Pools can be defined with the `pool` element. This client-side Pool can
 be used to configure connectivity directly to a server for individual
 entities or for the entire cache through one or more Locators.
 
-</div>
 
-<div class="paragraph">
 
 For example, to customize the default Pool used by the `client-cache`,
 the developer needs to define a Pool and wire it to the cache
 definition, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <beans>
@@ -775,40 +606,30 @@ definition, as the following example shows:
 </beans>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `<client-cache>` element also has a `ready-for-events` attribute. If
 the attribute is set to `true`, the client cache initialization includes
 a call to
 {x-data-store-javadoc}/org/apache/geode/cache/client/ClientCache.html#readyForEvents\[`ClientCache.readyForEvents()`\].
 
-</div>
 
-<div class="paragraph">
 
 [\[bootstrap:region:client\]](#bootstrap:region:client) covers
 client-side configuration in more detail.
 
-</div>
 
 <div class="sect2">
 
 ### GemFire's DEFAULT Pool and Spring Data for GemFire Pool Definitions
 
-<div class="paragraph">
 
 If a GemFire `ClientCache` is local-only, then no Pool
 definition is required. For instance, you can define the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache/>
@@ -816,11 +637,8 @@ definition is required. For instance, you can define the following:
 <gfe:client-region id="Example" shortcut="LOCAL"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this case, the "Example" Region is `LOCAL` and no data is distributed
 between the client and a server. Therefore, no Pool is necessary. This
@@ -829,27 +647,20 @@ GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/client/ClientRegionShortcut.html\[`ClientRegionShortcut`\]
 (all `LOCAL_*` shortcuts).
 
-</div>
 
-<div class="paragraph">
 
 However, if a client Region is a (caching) proxy to a server-side
 Region, a Pool is required. In that case, there are several ways to
 define and use a Pool.
 
-</div>
 
-<div class="paragraph">
 
 When a `ClientCache`, a Pool, and a proxy-based Region are all defined
 but not explicitly identified, Spring Data for GemFire resolves the references
 automatically, as the following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache/>
@@ -861,11 +672,8 @@ automatically, as the following example shows:
 <gfe:client-region id="Example" shortcut="PROXY"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In the preceding example, the `ClientCache` is identified as
 `gemfireCache`, the Pool as `gemfirePool`, and the client Region as
@@ -873,18 +681,13 @@ In the preceding example, the `ClientCache` is identified as
 `DEFAULT` Pool from `gemfirePool`, and the client Region uses the
 `gemfirePool` when distributing data between the client and the server.
 
-</div>
 
-<div class="paragraph">
 
 Basically, Spring Data for GemFire resolves the preceding configuration to the
 following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache id="gemfireCache" pool-name="gemfirePool"/>
@@ -896,11 +699,8 @@ following:
 <gfe:client-region id="Example" cache-ref="gemfireCache" pool-name="gemfirePool" shortcut="PROXY"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 GemFire still creates a Pool called `DEFAULT`. Spring Data for GemFire
 causes the `DEFAULT` Pool to be initialized from the `gemfirePool`.
@@ -908,17 +708,12 @@ Doing so is useful in situations where multiple Pools are defined and
 client Regions are using separate Pools, or do not declare a Pool at
 all.
 
-</div>
 
-<div class="paragraph">
 
 Consider the following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache pool-name="locatorPool"/>
@@ -938,11 +733,8 @@ Consider the following:
 <gfe:client-region id="YetAnotherExample" shortcut="LOCAL"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 In this setup, the GemFire `client-cache` `DEFAULT` pool is
 initialized from `locatorPool`, as specified by the `pool-name`
@@ -950,34 +742,21 @@ attribute. There is no Spring Data for GemFire-defined `gemfirePool`, since both
 Pools were explicitly identified (named) — `locatorPool` and
 `serverPool`, respectively.
 
-</div>
 
-<div class="paragraph">
 
 The "Example" Region explicitly refers to and exclusively uses the
 `serverPool`. The `AnotherExample` Region uses GemFire's
 `DEFAULT` Pool, which, again, was configured from the `locatorPool`
 based on the client cache bean definition's `pool-name` attribute.
 
-</div>
 
-<div class="paragraph">
 
 Finally, the `YetAnotherExample` Region does not use a Pool, because it
 is `LOCAL`.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>AnotherExample</code> Region would first
@@ -990,18 +769,9 @@ require the definition of an anonymous Pool bean (that is,
 </tbody>
 </table>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">If we either changed the name of
@@ -1012,15 +782,10 @@ preceding configuration.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -1028,6 +793,4 @@ preceding configuration.</td>
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>

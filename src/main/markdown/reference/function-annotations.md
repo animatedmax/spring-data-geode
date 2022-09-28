@@ -2,24 +2,19 @@
 
 # Annotation Support for Function Execution
 
-</div>
 
-<div id="content">
 
-<div id="preamble">
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
+
 
 Spring Data for GemFire includes annotation support to simplify working with
 GemFire
 {x-data-store-docs}/developing/function_exec/chapter_overview.html\[Function
 execution\].
 
-</div>
 
-<div class="paragraph">
 
 Under the hood, the GemFire API provides classes to implement
 and register GemFire
@@ -28,9 +23,7 @@ that are deployed on GemFire servers, which may then be
 invoked by other peer member applications or remotely from cache
 clients.
 
-</div>
 
-<div class="paragraph">
 
 Functions can execute in parallel, distributed among multiple
 GemFire servers in the cluster, aggregating the results using
@@ -41,9 +34,7 @@ predefined scopes: on Region, on members (in groups), on servers, and
 others. The implementation and execution of remote Functions, as with
 any RPC protocol, requires some boilerplate code.
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire, true to Spring's core value proposition, aims to hide the
 mechanics of remote Function execution and let you focus on core POJO
@@ -52,26 +43,19 @@ annotations to declaratively register the public methods of a POJO class
 as GemFire Functions along with the ability to invoke
 registered Functions (including remotely) by using annotated interfaces.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Implementation Versus Execution
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 There are two separate concerns to address: implementation and
 execution.
 
-</div>
 
-<div class="paragraph">
 
 The first is Function implementation (server-side), which must interact
 with the
@@ -84,9 +68,7 @@ registered with the
 {x-data-store-javadoc}/org/apache/geode/cache/execute/FunctionService.html\[`FunctionService`\]
 under a unique ID.
 
-</div>
 
-<div class="paragraph">
 
 A cache client application invoking a Function does not depend on the
 implementation. To invoke a Function, the application instantiates an
@@ -99,18 +81,9 @@ to aggregate and acquire the execution results. In certain cases, a
 custom `ResultCollector` implementation is required and may be
 registered with the `Execution`.
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">'Client' and 'Server' are used here in the context
@@ -127,19 +100,14 @@ member of the cluster.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Implementing a Function
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Using GemFire APIs, the `FunctionContext` provides a runtime
 invocation context that includes the client's calling arguments and a
@@ -152,9 +120,7 @@ associated with the `Execution`, and so on. If the Region is a
 `PARTITION` Region, the Function should use the `PartitionRegionHelper`
 to extract the local data set.
 
-</div>
 
-<div class="paragraph">
 
 By using Spring, you can write a simple POJO and use the Spring
 container to bind one or more of your POJO's public methods to a
@@ -164,9 +130,7 @@ However, in the case of a Region execution, the Region data may also be
 provided (presumably the data is held in the local partition if the
 Region is a `PARTITION` Region).
 
-</div>
 
-<div class="paragraph">
 
 Additionally, the Function may require the filter that was applied, if
 any. This suggests that the client and server share a contract for the
@@ -178,32 +142,23 @@ method signature includes the same sequence of calling arguments with
 which the Function was invoked after the additional parameters are
 resolved.
 
-</div>
 
-<div class="paragraph">
 
 For example, suppose the client provides a `String` and an `int` as the
 calling arguments. These are provided in the `FunctionContext` as an
 array, as the following example shows:
 
-</div>
 
-<div class="paragraph">
 
 `Object[] args = new Object[] { "test", 123 };`
 
-</div>
 
-<div class="paragraph">
 
 The Spring container should be able to bind to any method signature
 similar to the following (ignoring the return type for the moment):
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public Object method1(String s1, int i2) { ... }
@@ -215,11 +170,8 @@ public void method5(String s1, ResultSender rs, int i2) { ... }
 public void method6(FunctionContest context) { ... }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The general rule is that once any additional arguments (that is, Region
 data and filter) are resolved, the remaining arguments must correspond
@@ -228,9 +180,7 @@ The method's return type must be void or a type that may be serialized
 (as a `java.io.Serializable`, `DataSerializable`, or `PdxSerializable`).
 The latter is also a requirement for the calling arguments.
 
-</div>
 
-<div class="paragraph">
 
 The Region data should normally be defined as a `Map`, to facilitate
 unit testing, but may also be of type Region, if necessary. As shown in
@@ -238,22 +188,17 @@ the preceding example, it is also valid to pass the `FunctionContext`
 itself or the `ResultSender` if you need to control over how the results
 are returned to the client.
 
-</div>
 
 <div class="sect2">
 
 ### Annotations for Function Implementation
 
-<div class="paragraph">
 
 The following example shows how SDG's Function annotations are
 used to expose POJO methods as GemFire Functions:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -271,11 +216,8 @@ public class ApplicationFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Note that the class itself must be registered as a Spring bean and each
 GemFire Function is annotated with `@GemfireFunction`. In the
@@ -289,18 +231,10 @@ Spring creates a wrapper instance for each method annotated with
 `@GemfireFunction`. Each wrapper instance shares the same target object
 instance to invoke the corresponding method.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">The fact that the POJO Function class is a Spring
@@ -312,9 +246,7 @@ necessary.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Spring creates the wrapper class and registers the Functions with
 GemFire's `FunctionService`. The Function ID used to register
@@ -322,9 +254,7 @@ each Function must be unique. By using convention, it defaults to the
 simple (unqualified) method name. The name can be explicitly defined by
 using the `id` attribute of the `@GemfireFunction` annotation.
 
-</div>
 
-<div class="paragraph">
 
 The `@GemfireFunction` annotation also provides other configuration
 attributes: `HA` and `optimizedForWrite`, which correspond to properties
@@ -332,9 +262,7 @@ defined by GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/execute/Function.html\[`Function`\]
 interface.
 
-</div>
 
-<div class="paragraph">
 
 If the POJO Function method's return type is `void`, then the
 `hasResult` attribute is automatically set to `false`. Otherwise, if the
@@ -345,9 +273,7 @@ as shown in the `functionWithContext` method shown previously.
 Presumably, the intention is that you will use the `ResultSender`
 directly to send results to the caller.
 
-</div>
 
-<div class="paragraph">
 
 Finally, the `GemfireFunction` annotation supports the
 `requiredPermissions` attribute, which specifies the permissions
@@ -357,9 +283,7 @@ allowing you to modify the permissions as required by your application
 and/or Function UC. Each resource permission is expected to be in the
 following format: `<RESOURCE>:<OPERATION>:[Target]:[Key]`.
 
-</div>
 
-<div class="paragraph">
 
 `RESOURCE` can be 1 of the
 {data-store-javadoc\]/org/apache/geode/security/ResourcePermission.Resource.html\[`ResourcePermission.Resource`\]
@@ -371,24 +295,19 @@ of the
 enumerated values. And finally, optionally, `Key` is a valid Key in the
 `Target` Region if specified.
 
-</div>
 
-<div class="paragraph">
 
 The `PojoFunctionWrapper` implements GemFire's `Function`
 interface, binds method parameters, and invokes the target method in its
 `execute()` method. It also sends the method's return value back to the
 caller by using the `ResultSender`.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Batching Results
 
-<div class="paragraph">
 
 If the return type is an array or `Collection`, then some consideration
 must be given to how the results are returned. By default, the
@@ -398,18 +317,10 @@ it may incur a performance penalty. To divide the payload into smaller,
 more manageable chunks, you can set the `batchSize` attribute, as
 illustrated in `function2`, shown earlier.
 
-</div>
 
 <div class="admonitionblock tip">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Tip
 </div></td>
 <td class="content">If you need more control of the
@@ -422,44 +333,32 @@ sends results back to the caller.</td>
 </tbody>
 </table>
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Enabling Annotation Processing
 
-<div class="paragraph">
 
 In accordance with Spring standards, you must explicitly activate
 annotation processing for `@GemfireFunction` annotations. The following
 example activates annotation processing with XML:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:annotation-driven/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The following example activates annotation processing by annotating a
 Java configuration class:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Configuration
@@ -467,23 +366,16 @@ Java configuration class:
 class ApplicationConfiguration { ... }
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Executing a Function
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 A process that invokes a remote Function needs to provide the Function's
 ID, calling arguments, the execution target (`onRegion`, `onServers`,
@@ -496,20 +388,16 @@ type. This technique is similar to the way Spring Data for GemFire's Repository
 extension works. Thus, some of the configuration and concepts should be
 familiar.
 
-</div>
 
-<div class="paragraph">
 
 Generally, a single interface definition maps to multiple Function
 executions, one corresponding to each method defined in the interface.
 
-</div>
 
 <div class="sect2">
 
 ### Annotations for Function Execution
 
-<div class="paragraph">
 
 To support client-side Function execution, the following SDG
 Function annotations are provided: `@OnRegion`, `@OnServer`,
@@ -519,9 +407,7 @@ GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/execute/FunctionService.html\[`FunctionService`\]
 class.
 
-</div>
 
-<div class="paragraph">
 
 Each annotation exposes the appropriate attributes. These annotations
 also provide an optional `resultCollector` attribute whose value is the
@@ -529,18 +415,10 @@ name of a Spring bean implementing the
 {x-data-store-javadoc}/org/apache/geode/cache/execute/ResultCollector.html\[`ResultCollector`\]
 interface to use for the execution.
 
-</div>
 
 <div class="admonitionblock caution">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Caution
 </div></td>
 <td class="content">The proxy interface binds all declared methods to
@@ -552,17 +430,12 @@ configuration.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 The following listing shows a few examples:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @OnRegion(region="SomeRegion", resultCollector="myCollector")
@@ -576,46 +449,34 @@ public interface FunctionExecution {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 By default, the Function ID is the simple (unqualified) method name. The
 `@FunctionId` annotation can be used to bind this invocation to a
 different Function ID.
 
-</div>
 
-</div>
 
 <div class="sect2">
 
 ### Enabling Annotation Processing
 
-<div class="paragraph">
 
 The client-side uses Spring's classpath component scanning capability to
 discover annotated interfaces. To enable Function execution annotation
 processing in XML, insert the following element in your XML
 configuration:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe-data:function-executions base-package="org.example.myapp.gemfire.functions"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `function-executions` element is provided in the `gfe-data` XML
 namespace. The `base-package` attribute is required to avoid scanning
@@ -623,49 +484,34 @@ the entire classpath. Additional filters can be provided as described in
 the Spring [reference
 documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-scanning-filters).
 
-</div>
 
-<div class="paragraph">
 
 Optionally, you can annotate your Java configuration class as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @EnableGemfireFunctionExecutions(basePackages = "org.example.myapp.gemfire.functions")
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Programmatic Function Execution
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 Using the Function execution annotated interface defined in the previous
 section, simply auto-wire your interface into an application bean that
 will invoke the Function:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @Component
@@ -680,17 +526,13 @@ public class MyApplication {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternately, you can use a Function execution template directly. In the
 following example, the `GemfireOnRegionFunctionTemplate` creates an
 `onRegion` Function `Execution`:
 
-</div>
 
 <div class="exampleblock">
 
@@ -698,13 +540,9 @@ following example, the `GemfireOnRegionFunctionTemplate` creates an
 
 Example 1. Using the `GemfireOnRegionFunctionTemplate`
 
-</div>
 
-<div class="content">
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 Set<?, ?> myFilter = getFilter();
@@ -713,15 +551,10 @@ GemfireOnRegionOperations template = new GemfireOnRegionFunctionTemplate(myRegio
 String result = template.executeAndExtract("someFunction", myFilter, "hello", "world", 1234);
 ```
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Internally, Function `Executions` always return a `List`.
 `executeAndExtract` assumes a singleton `List` containing the result and
@@ -730,28 +563,21 @@ attempts to coerce that value into the requested type. There is also an
 the Function ID. The filter argument is optional. The remaining
 arguments are a variable argument `List`.
 
-</div>
 
-</div>
 
-</div>
 
-<div class="sect1">
 
 ## Function Execution with PDX
 
-<div class="sectionbody">
 
-<div class="paragraph">
+
 
 When using Spring Data for GemFire's Function annotation support combined with
 GemFire's
 {x-data-store-docs}/developing/data_serialization/gemfire_pdx_serialization.html\[PDX
 Serialization\], there are a few logistical things to keep in mind.
 
-</div>
 
-<div class="paragraph">
 
 As explained earlier in this section, and by way of example, you should
 typically define GemFire Functions by using POJO classes
@@ -759,11 +585,8 @@ annotated with Spring Data for GemFire [Function
 annotations](https://docs.spring.io/spring-data-gemfire/docs/current/api/org/springframework/data/gemfire/function/annotation/package-summary.html),
 as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class OrderFunctions {
@@ -774,20 +597,10 @@ public class OrderFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="admonitionblock note">
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="icon"><div class="title">
+
 Note
 </div></td>
 <td class="content">The <code>Integer</code> typed <code>count</code>
@@ -799,17 +612,12 @@ problem with Function executions in the context of PDX.</td>
 </tbody>
 </table>
 
-</div>
 
-<div class="paragraph">
 
 Your `Order` class and `OrderSource` enum might be defined as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 public class Order ... {
@@ -831,20 +639,14 @@ public enum OrderSource {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Of course, you can define a Function `Execution` interface to call the
 'process' GemFire server Function, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @OnServer
@@ -853,11 +655,8 @@ public interface OrderProcessingFunctions {
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Clearly, this `process(..)` `Order` Function is being called from the
 client-side with a `ClientCache` instance (that is
@@ -867,58 +666,42 @@ Functions (such as `@OnMember(s)`) between peers in the cluster. Any
 form of `distribution` requires the data transmitted between client and
 server (or peers) to be serialized.
 
-</div>
 
-<div class="paragraph">
 
 Now, if you have configured GemFire to use PDX for
 serialization (instead of Java serialization, for instance) you can also
 set the `pdx-read-serialized` attribute to `true` in your configuration
 of the GemFire server(s), as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:cache pdx-read-serialized="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can set the `pdx-read-serialized` attribute to `true`
 for a GemFire cache client application, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <gfe:client-cache pdx-read-serialized="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Doing so causes all values read from the cache (that is, Regions) as
 well as information passed between client and servers (or peers) to
 remain in serialized form, including, but not limited to, Function
 arguments.
 
-</div>
 
-<div class="paragraph">
 
 GemFire serializes only application domain object types that
 you have specifically configured (registered) either by using
@@ -932,9 +715,7 @@ consider using Spring Data for GemFire's
 which uses an entity's mapping metadata to determine data from the
 application domain object that is serialized to the PDX instance.
 
-</div>
 
-<div class="paragraph">
 
 What is less than apparent, though, is that GemFire
 automatically handles Java `Enum` types regardless of whether they are
@@ -944,55 +725,39 @@ parameter or are handled by a "custom" GemFire
 `PdxSerializer`), despite the fact that Java enumerations implement
 `java.io.Serializable`.
 
-</div>
 
-<div class="paragraph">
 
 So, when you set `pdx-read-serialized` to `true` on GemFire
 servers where the GemFire Functions (including Spring Data for GemFire
 Function-annotated POJO classes) are registered, then you may encounter
 surprising behavior when invoking the Function `Execution`.
 
-</div>
 
-<div class="paragraph">
 
 You might pass the following arguments when invoking the Function:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 orderProcessingFunctions.process(new Order(123, customer, LocalDateTime.now(), items), OrderSource.ONLINE, 400);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 However, the GemFire Function on the server gets the
 following:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 process(regionData, order:PdxInstance, :PdxInstanceEnum, 400);
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 The `Order` and `OrderSource` have been passed to the Function as
 {x-data-store-javadoc}/org/apache/geode/pdx/PdxInstance.html\[PDX
@@ -1002,37 +767,28 @@ GemFire servers interact with multiple different clients (for
 example, a combination of Java clients and native clients, such as
 C/C++, C#, and others).
 
-</div>
 
-<div class="paragraph">
 
 This flies in the face of Spring Data for GemFire's strongly-typed Function-annotated
 POJO class method signatures, where you would reasonably expect
 application domain object types instead, not PDX serialized instances.
 
-</div>
 
-<div class="paragraph">
 
 Consequently, Spring Data for GemFire includes enhanced Function support to
 automatically convert PDX typed method arguments to the desired
 application domain object types defined by the Function method's
 signature (parameter types).
 
-</div>
 
-<div class="paragraph">
 
 However, this also requires you to explicitly register a
 GemFire `PdxSerializer` on GemFire servers where
 Spring Data for GemFire Function-annotated POJOs are registered and used, as the
 following example shows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 <bean id="customPdxSerializer" class="x.y.z.gemfire.serialization.pdx.MyCustomPdxSerializer"/>
@@ -1040,11 +796,8 @@ following example shows:
 <gfe:cache pdx-serializer-ref="customPdxSerializeer" pdx-read-serialized="true"/>
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Alternatively, you can use GemFire's
 {x-data-store-javadoc}/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html\[`ReflectionBasedAutoSerializer`\]
@@ -1052,19 +805,14 @@ for convenience. Of course, we recommend that, where possible, you use a
 custom `PdxSerializer` to maintain finer-grained control over your
 serialization strategy.
 
-</div>
 
-<div class="paragraph">
 
 Finally, Spring Data for GemFire is careful not to convert your Function arguments if
 you treat your Function arguments generically or as one of
 GemFire's PDX types, as follows:
 
-</div>
 
-<div class="listingblock">
 
-<div class="content">
 
 ``` highlight
 @GemfireFunction
@@ -1073,19 +821,14 @@ public Object genericFunction(String value, Object domainObject, PdxInstanceEnum
 }
 ```
 
-</div>
 
-</div>
 
-<div class="paragraph">
 
 Spring Data for GemFire converts PDX typed data to the corresponding application
 domain types if and only if the corresponding application domain types
 are on the classpath and the Function-annotated POJO method expects it.
 
-</div>
 
-<div class="paragraph">
 
 For a good example of custom, composed application-specific
 GemFire `PdxSerializers` as well as appropriate POJO Function
@@ -1093,13 +836,9 @@ parameter type handling based on the method signatures, see Spring Data for GemF
 [`ClientCacheFunctionExecutionWithPdxIntegrationTest`](https://github.com/spring-projects/spring-data-gemfire/blob/%7Brevnumber%7D/src/test/java/org/springframework/data/gemfire/function/ClientCacheFunctionExecutionWithPdxIntegrationTest.java)
 class.
 
-</div>
 
-</div>
 
-</div>
 
-</div>
 
 <div id="footer">
 
@@ -1107,6 +846,4 @@ class.
 
 Last updated 2022-09-20 10:33:13 -0700
 
-</div>
 
-</div>
