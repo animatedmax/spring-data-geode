@@ -119,7 +119,7 @@ configuration\].
 
 
 Using this approach, you can bootstrap Spring Data Repositories by using
-the SDG `@EnableGemfireRepositories` annotation, as the
+the Spring Data for GemFire `@EnableGemfireRepositories` annotation, as the
 following example shows:
 
 
@@ -188,13 +188,13 @@ more
 {spring-data-commons-docs-html}/#repositories.custom-implementations\[custom
 repository implementations\]. This feature is commonly used to extend
 the Spring Data Repository infrastructure to implement a feature not
-provided by the data store (for example, SDG).
+provided by the data store (for example, Spring Data for GemFire).
 
 
 
 One example of where custom repository implementations are needed with
 GemFire is when performing joins. Joins are not supported by
-SDG Repositories. With a GemFire `PARTITION` Region,
+Spring Data for GemFire Repositories. With a GemFire `PARTITION` Region,
 the join must be performed on collocated `PARTITION` Regions, since
 GemFire does not support "distributed" joins. In addition, the
 Equi-Join OQL Query must be performed inside a GemFire
@@ -204,7 +204,7 @@ for more details on GemFire *Equi-Join Queries*.
 
 
 
-Many other aspects of the SDG's Repository infrastructure
+Many other aspects of the Spring Data for GemFire's Repository infrastructure
 extension may be customized as well. See the
 [`@EnableGemfireRepositories`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html)
 Javadoc for more details on all configuration settings.

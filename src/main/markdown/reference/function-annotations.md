@@ -230,7 +230,7 @@ are returned to the client.
 ### Annotations for Function Implementation
 
 
-The following example shows how SDG's Function annotations are
+The following example shows how Spring Data for GemFire's Function annotations are
 used to expose POJO methods as GemFire Functions:
 
 
@@ -435,7 +435,7 @@ executions, one corresponding to each method defined in the interface.
 ### Annotations for Function Execution
 
 
-To support client-side Function execution, the following SDG
+To support client-side Function execution, the following Spring Data for GemFire
 Function annotations are provided: `@OnRegion`, `@OnServer`,
 `@OnServers`, `@OnMember`, and `@OnMembers`. These annotations
 correspond to the `Execution` implementations provided by

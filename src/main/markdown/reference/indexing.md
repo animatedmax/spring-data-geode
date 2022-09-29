@@ -64,7 +64,7 @@ following example shows:
 
 
 
-In Spring Data for GemFire's XML schema (also called the SDG XML
+In Spring Data for GemFire's XML schema (also called the Spring Data for GemFire XML
 namespace), `index` bean declarations are not bound to a Region, unlike
 GemFire's native `cache.xml`. Rather, they are top-level
 elements similar to `<gfe:cache>` element. This lets you declare any
@@ -114,7 +114,7 @@ class Customer {
 
 
 Now consider the following example, which has an application-defined
-SDG Repository to query for `Customer` objects:
+Spring Data for GemFire Repository to query for `Customer` objects:
 
 
 
@@ -131,7 +131,7 @@ interface CustomerRepository extends GemfireRepository<Customer, Long> {
 
 
 
-The SDG Repository finder/query method results in the
+The Spring Data for GemFire Repository finder/query method results in the
 following OQL statement being generated and ran:
 
 
@@ -264,7 +264,7 @@ Warning
 doing before using either of these options. These options can affect the
 performance and resources (such as memory) consumed by your application
 at runtime. As a result, both of these options are disabled (set to
-<code>false</code>) in SDG by default.</td>
+<code>false</code>) in Spring Data for GemFire by default.</td>
 </tr>
 </tbody>
 </table>
@@ -308,7 +308,7 @@ sometimes obscure reasons. The exceptions have the following causes:
 
 Spring Data for GemFire's default behavior is to fail-fast, always. So, neither
 `Index` *Exception* are "handled" by default. These `Index` exceptions
-are wrapped in a SDG `GemfireIndexException` and rethrown. If
+are wrapped in a Spring Data for GemFire `GemfireIndexException` and rethrown. If
 you wish for Spring Data for GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
@@ -333,7 +333,7 @@ is simply ignored, and the existing `Index` is returned.
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by GemFire
-itself, not SDG.
+itself, not Spring Data for GemFire.
 
 
 
@@ -371,10 +371,10 @@ should verify your `Index` names.
 
 Note
 </div></td>
-<td class="content">SDG makes a best effort to inform the user
+<td class="content">Spring Data for GemFire makes a best effort to inform the user
 when the <code>Index</code> being ignored is significantly different in
 its definition from the existing <code>Index</code>. However, in order
-for SDG to accomplish this, it must be able to find the
+for Spring Data for GemFire to accomplish this, it must be able to find the
 existing <code>Index</code>, which is looked up by using the
 GemFire API (the only means available).</td>
 </tr>
@@ -417,18 +417,18 @@ and name when an `IndexNameConflictException` is thrown.
 
 
 
-If so, SDG is smart and returns the existing `Index` as is,
+If so, Spring Data for GemFire is smart and returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
-name and the definition are exactly the same. Of course, SDG
-can only accomplish this when SDG is able to find the existing
+name and the definition are exactly the same. Of course, Spring Data for GemFire
+can only accomplish this when Spring Data for GemFire is able to find the existing
 `Index`, which is dependent on GemFire's APIs. If it cannot be
-found, nothing happens and a SDG `GemfireIndexException` is
+found, nothing happens and a Spring Data for GemFire `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
 
 
 However, when the definition of the existing `Index` is different,
-SDG attempts to re-create the `Index` by using the `Index`
+Spring Data for GemFire attempts to re-create the `Index` by using the `Index`
 definition specified in the `index` bean definition. Make sure this is
 what you want and make sure the `index` bean definition matches your
 expectations and application requirements.
@@ -474,7 +474,7 @@ or even with
 
 
 
-As a result, the only way for SDG or other GemFire
+As a result, the only way for Spring Data for GemFire or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
@@ -484,18 +484,18 @@ GemFire API calls do not.
 
 
 
-In any case, SDG makes a best effort and attempts to inform
+In any case, Spring Data for GemFire makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
 action. Given that all GemFire `QueryService.createIndex(..)`
 methods are synchronous, blocking operations, the state of
 GemFire should be consistent and accessible after either of
-these index-type exceptions are thrown. Consequently, SDG can
+these index-type exceptions are thrown. Consequently, Spring Data for GemFire can
 inspect the state of the system and act accordingly, based on your
 configuration.
 
 
 
-In all other cases, SDG embraces a fail-fast strategy.
+In all other cases, Spring Data for GemFire embraces a fail-fast strategy.
 
 
 

@@ -308,7 +308,7 @@ annotation.
 
 
 
-However, if SDG's auto-configuration is unsuccessful in this regard,
+However, if Spring Data for GemFire's auto-configuration is unsuccessful in this regard,
 then you must explicitly set the `copy-on-read` attribute in the
 `<gfe:cache>` or `<gfe:client-cache>` XML element or set the
 `copyOnRead` property of the `CacheFactoryBean` class in JavaConfig to
@@ -487,7 +487,7 @@ href="#apis:transaction-management">Local, Cache Transaction
 Management</a> does <strong>not</strong> apply here. The use of
 Spring Data for GemFire's <code>GemfireTransactionManager</code> is applicable in
 "Local-only", Cache Transactions, <strong>not</strong> "Global", JTA
-Transactions. Therefore, you do <strong>not</strong> configure the SDG
+Transactions. Therefore, you do <strong>not</strong> configure the Spring Data for GemFire
 <code>GemfireTransactionManager</code> in this case. You configure
 Spring's <code>JtaTransactionManager</code> as shown above.</td>
 </tr>
@@ -766,7 +766,7 @@ Warning
 <td class="content">Only <code>TransactionPhase.AFTER_COMMIT</code> and
 <code>TransactionPhase.AFTER_ROLLBACK</code> are supported.
 <code>TransactionPhase.BEFORE_COMMIT</code> is not supported because 1)
-SDG adapts GemFire's <code>TransactionListener</code> and
+Spring Data for GemFire adapts GemFire's <code>TransactionListener</code> and
 <code>TransactionWriter</code> interfaces to implement auto transaction
 event publishing, and 2) when GemFire's
 <code>TransactionWriter.beforeCommit(:TransactionEvent)</code> is
@@ -848,7 +848,7 @@ for more information.</td>
 
 Spring Data for GemFire simplifies creation, registration, life-cycle and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
-SDG's `ContinuousQueryListenerContainer`, which does all the heavy
+Spring Data for GemFire's `ContinuousQueryListenerContainer`, which does all the heavy
 lifting on behalf of the user. Users familiar with EJB and JMS should
 find the concepts familiar as it is designed as close as possible to the
 support provided in the *Spring Framework* with its Message-driven POJOs
@@ -856,7 +856,7 @@ support provided in the *Spring Framework* with its Message-driven POJOs
 
 
 
-The SDG `ContinuousQueryListenerContainer` acts as an event (or message)
+The Spring Data for GemFire `ContinuousQueryListenerContainer` acts as an event (or message)
 listener container; it is used to receive the events from the registered
 CQs and invoke the POJOs that are injected into it. The listener
 container is responsible for all threading of message reception and

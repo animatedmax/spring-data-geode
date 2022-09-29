@@ -90,7 +90,7 @@ applies the default cache configuration.
 All Spring Data for GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
 If you prefer, you can make the dependency explicit by using the
-`cache-ref` attribute provided by various SDG XML namespace
+`cache-ref` attribute provided by various Spring Data for GemFire XML namespace
 elements. Also, you can override the cache's bean name using the `id`
 attribute, as follows:
 

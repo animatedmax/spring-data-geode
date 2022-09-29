@@ -190,9 +190,9 @@ gfsh>start server --name=ExampleServer --log-level=config ...
 
 
 The `application-context.xml` can be any valid Spring configuration
-metadata, including all of the SDG XML namespace elements. The
+metadata, including all of the Spring Data for GemFire XML namespace elements. The
 only limitation with this approach is that a GemFire cache
-cannot be configured by using the SDG XML namespace. In other
+cannot be configured by using the Spring Data for GemFire XML namespace. In other
 words, none of the `<gfe:cache/>` element attributes (such as
 `cache-xml-location`, `properties-ref`, `critical-heap-percentage`,
 `pdx-serializer-ref`, `lock-lease`, and others) can be specified. If
@@ -217,7 +217,7 @@ cannot be re-initialized or have any of its configuration augmented.
 Spring Data for GemFire already provides support for auto-wiring GemFire
 components (such as `CacheListeners`, `CacheLoaders`, `CacheWriters` and
 so on) that are declared and created by GemFire in `cache.xml`
-by using SDG's `WiringDeclarableSupport` class, as described
+by using Spring Data for GemFire's `WiringDeclarableSupport` class, as described
 in [\[apis:declarable:autowiring\]](#apis:declarable:autowiring).
 However, this works only when Spring is the one doing the bootstrapping
 (that is, when Spring bootstraps GemFire).
@@ -287,7 +287,7 @@ CAUTION
 Be careful when mixing the different life-cycles of GemFire
 and the Spring container together in this manner. Not all use cases and
 scenarios are supported. The GemFire `cache.xml` configuration
-would be similar to the following (which comes from SDG's test
+would be similar to the following (which comes from Spring Data for GemFire's test
 suite):
 
 

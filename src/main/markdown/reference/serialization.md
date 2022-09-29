@@ -69,7 +69,7 @@ otherwise falling back to auto-wiring.
 
 For more details about wiring functionality, see [Wiring Declarable Components](../index.html#apis-declarable) in _Spring Data for GemFire Reference Guide_.
 
-To use the SDG `Instantiator`, declare it as a bean, as the
+To use the Spring Data for GemFire `Instantiator`, declare it as a bean, as the
 following example shows:
 
 ```highlight

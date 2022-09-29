@@ -909,7 +909,7 @@ Region entry expiration policies, such as TTL and TTI, are configured.
 
 All <code>@Expiration</code>-based annotations apply only to Region entry values. Expiration for a Region is not covered by Spring Data for GemFire's
 expiration annotation support. However, GemFire and Spring Data for GemFire
-do let you set Region expiration by using the SDG XML
+do let you set Region expiration by using the Spring Data for GemFire XML
 namespace, as follows:
 
 ```
@@ -923,7 +923,7 @@ Spring Data for GemFire's `@Expiration` annotation support is implemented with
 GemFire's [CustomExpiry](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CustomExpiry.html) interface. For more information, see [Configure Data Expiration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-expiration-configuring_data_expiration.html) in the GemFire product documentation.
 
 The Spring Data for GemFire `AnnotationBasedExpiration` class and `CustomExpiry`
-implementation is responsible for processing the SDG
+implementation is responsible for processing the Spring Data for GemFire
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
 
@@ -955,7 +955,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 3. (Optional) In cases where particular application domain objects have
     not been annotated with Spring Data for GemFire's `@Expiration` annotations at
     all, but the GemFire Region is configured to use
-    SDG's custom `AnnotationBasedExpiration` class to
+    Spring Data for GemFire's custom `AnnotationBasedExpiration` class to
     determine the expiration policy and settings for objects stored in
     the Region, you can set "default" expiration attributes on the
     `AnnotationBasedExpiration` bean by doing the following:
@@ -978,7 +978,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 You may have noticed that Spring Data for GemFire's `@Expiration` annotations use a
 `String` as the attribute type rather than, and perhaps more
 appropriately, being strongly typed — for example, `int` for 'timeout'
-and SDG's `ExpirationActionType` for 'action'. Why is that?
+and Spring Data for GemFire's `ExpirationActionType` for 'action'. Why is that?
 
 Well, enter one of Spring Data for GemFire's other features, leveraging Spring's core
 infrastructure for configuration convenience: property placeholders and
@@ -1276,7 +1276,7 @@ The following example shows a typical client Region configuration:
 ```highlight
 <bean id="myListener" class="example.CacheListener"/>
   
-<!-- client Region using the default SDG gemfirePool Pool -->
+<!-- client Region using the default Spring Data for GemFire gemfirePool Pool -->
 <gfe:client-region id="Example">
   <gfe:cache-listener ref="myListener"/>
 </gfe:client-region>

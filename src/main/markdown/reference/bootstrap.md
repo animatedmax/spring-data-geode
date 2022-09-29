@@ -245,7 +245,7 @@ applies the default cache configuration.
 All Spring Data for GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
 If you prefer, you can make the dependency explicit by using the
-`cache-ref` attribute provided by various SDG XML namespace
+`cache-ref` attribute provided by various Spring Data for GemFire XML namespace
 elements. Also, you can override the cache's bean name using the `id`
 attribute, as follows:
 
@@ -1611,7 +1611,7 @@ Region entry expiration policies, such as TTL and TTI, are configured.
 
 All <code>@Expiration</code>-based annotations apply only to Region entry values. Expiration for a Region is not covered by Spring Data for GemFire's
 expiration annotation support. However, GemFire and Spring Data for GemFire
-do let you set Region expiration by using the SDG XML
+do let you set Region expiration by using the Spring Data for GemFire XML
 namespace, as follows:
 
 ```
@@ -1625,7 +1625,7 @@ Spring Data for GemFire's `@Expiration` annotation support is implemented with
 GemFire's [CustomExpiry](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CustomExpiry.html) interface. For more information, see [Configure Data Expiration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-expiration-configuring_data_expiration.html) in the GemFire product documentation.
 
 The Spring Data for GemFire `AnnotationBasedExpiration` class and `CustomExpiry`
-implementation is responsible for processing the SDG
+implementation is responsible for processing the Spring Data for GemFire
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
 
@@ -1657,7 +1657,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 3. (Optional) In cases where particular application domain objects have
     not been annotated with Spring Data for GemFire's `@Expiration` annotations at
     all, but the GemFire Region is configured to use
-    SDG's custom `AnnotationBasedExpiration` class to
+    Spring Data for GemFire's custom `AnnotationBasedExpiration` class to
     determine the expiration policy and settings for objects stored in
     the Region, you can set "default" expiration attributes on the
     `AnnotationBasedExpiration` bean by doing the following:
@@ -1680,7 +1680,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 You may have noticed that Spring Data for GemFire's `@Expiration` annotations use a
 `String` as the attribute type rather than, and perhaps more
 appropriately, being strongly typed — for example, `int` for 'timeout'
-and SDG's `ExpirationActionType` for 'action'. Why is that?
+and Spring Data for GemFire's `ExpirationActionType` for 'action'. Why is that?
 
 Well, enter one of Spring Data for GemFire's other features, leveraging Spring's core
 infrastructure for configuration convenience: property placeholders and
@@ -1978,7 +1978,7 @@ The following example shows a typical client Region configuration:
 ```highlight
 <bean id="myListener" class="example.CacheListener"/>
   
-<!-- client Region using the default SDG gemfirePool Pool -->
+<!-- client Region using the default Spring Data for GemFire gemfirePool Pool -->
 <gfe:client-region id="Example">
   <gfe:cache-listener ref="myListener"/>
 </gfe:client-region>
@@ -2189,7 +2189,7 @@ following example shows:
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
-In Spring Data for GemFire's XML schema, the SDG XML
+In Spring Data for GemFire's XML schema, the Spring Data for GemFire XML
 namespace, `index` bean declarations are not bound to a Region, unlike
 GemFire's native `cache.xml`. Instead, they are top-level
 elements similar to `<gfe:cache>` element. This allows you to declare any
@@ -2224,7 +2224,7 @@ class Customer {
 ```
 
 Now consider the following example, which has an application-defined
-SDG Repository to query for `Customer` objects:
+Spring Data for GemFire Repository to query for `Customer` objects:
 
 ```highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -2236,7 +2236,7 @@ interface CustomerRepository extends GemfireRepository<Customer, Long> {
 ```
 
 
-The SDG Repository finder/query method results in the
+The Spring Data for GemFire Repository finder/query method results in the
 following OQL statement being generated and run:
 
 ```highlight
@@ -2297,7 +2297,7 @@ The `ignoreIfExists` and `override` configuration options correspond to the `ign
 <p class="note warning"><strong>Warning</strong>: These options can affect the
 performance and resources such as memory consumed by your application
 at runtime. As a result, both of these options are disabled (set to
-<code>false</code>) in SDG by default.<br>br>These options are only available in Spring Data for GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
+<code>false</code>) in Spring Data for GemFire by default.<br>br>These options are only available in Spring Data for GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
 
 Each option significantly differs in behavior and entirely depends on
 the type of GemFire `Index` exception thrown. This also means
@@ -2311,7 +2311,7 @@ GemFire `IndexExistsException` and
 
 * An [IndexNameConflictException](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/IndexNameConflictException.html) is thrown when there exists another `Index` with the same name but possibly different definition when attempting to create an `Index`.
 
-Spring Data for GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a SDG `GemfireIndexException` and rethrown. If you want Spring Data for GemFire to handle them for you, you can set either of
+Spring Data for GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a Spring Data for GemFire `GemfireIndexException` and rethrown. If you want Spring Data for GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
 `IgnoreIfExists` always takes precedence over `Override` because it uses fewer resources. It returns the "existing" `Index` in both exception cases.
@@ -2325,7 +2325,7 @@ is ignored, and the existing `Index` is returned.
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by GemFire
-itself, not SDG.
+itself, not Spring Data for GemFire.
 
 However, this also means that no `Index` with the "name" specified in
 your `index` bean definition or declaration actually exists from
@@ -2351,9 +2351,9 @@ data access patterns and queries in mind. However, if like-named indexes
 differ in definition, this might not be the case. Consequently, you
 should verify your `Index` names.
 
-<p class="note"><strong>Note</strong>: SDG makes a best effort to inform the user
+<p class="note"><strong>Note</strong>: Spring Data for GemFire makes a best effort to inform the user
 when the <code>Index</code> being ignored is significantly different in
-its definition from the existing <code>Index</code>. However, for SDG to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
+its definition from the existing <code>Index</code>. However, for Spring Data for GemFire to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
 GemFire API.</p>
 
 #### `Override` Behavior
@@ -2378,16 +2378,16 @@ potentially be re-defined. We say "potentially" because it is possible
 for the like-named, existing `Index` to have exactly the same definition
 and name when an `IndexNameConflictException` is thrown.
 
-If so, SDG returns the existing `Index` as is,
+If so, Spring Data for GemFire returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
-name and the definition are exactly the same. Of course, SDG
-can only accomplish this when SDG is able to find the existing
+name and the definition are exactly the same. Of course, Spring Data for GemFire
+can only accomplish this when Spring Data for GemFire is able to find the existing
 `Index`, which is dependent on GemFire's APIs. If it cannot be
-found, nothing happens and a SDG `GemfireIndexException` is
+found, nothing happens and a Spring Data for GemFire `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
 However, when the definition of the existing `Index` is different,
-SDG attempts to re-create the `Index` by using the `Index`
+Spring Data for GemFire attempts to re-create the `Index` by using the `Index`
 definition specified in the `index` bean definition. Make sure that this is
 intended and that the `index` bean definition matches your
 expectations and application requirements.
@@ -2412,7 +2412,7 @@ need-to-know basis (that is, by peer member hosting the same PR) is
 performed asynchronously.
 
 During this window of time, it is possible that these pending PR
-`Indexes` cannot be identified by GemFire. As a result, the only way for SDG or other GemFire
+`Indexes` cannot be identified by GemFire. As a result, the only way for Spring Data for GemFire or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
@@ -2420,16 +2420,16 @@ application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
 GemFire API calls do not.
 
-In any case, SDG makes a best effort and attempts to inform
+In any case, Spring Data for GemFire makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
 action. Given that all GemFire `QueryService.createIndex(..)`
 methods are synchronous, blocking operations, the state of
 GemFire should be consistent and accessible after either of
-these index-type exceptions are thrown. Consequently, SDG can
+these index-type exceptions are thrown. Consequently, Spring Data for GemFire can
 inspect the state of the system and act accordingly, based on your
 configuration.
 
-In all other cases, SDG embraces a fail-fast strategy.
+In all other cases, Spring Data for GemFire embraces a fail-fast strategy.
 
 ## <a id="configuring-a-diskstore"></a>Configuring a DiskStore
 

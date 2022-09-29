@@ -106,7 +106,7 @@ element, as follows:
 
 
 
-Spring Data for GemFire's `LuceneIndexFactoryBean` API and SDG's XML
+Spring Data for GemFire's `LuceneIndexFactoryBean` API and Spring Data for GemFire's XML
 namespace also lets a
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/LuceneSerializer.html\[`org.apache.geode.cache.lucene.LuceneSerializer`\]
 be specified when you create the `LuceneIndex`. The `LuceneSerializer`
@@ -213,7 +213,7 @@ Note
 </div></td>
 <td class="content">To help ensure that all declared
 <code>LuceneIndexes</code> defined in a Spring container are created
-before the Regions on which they apply, SDG includes the
+before the Regions on which they apply, Spring Data for GemFire includes the
 <code>org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>.
 You may register this Spring
 {spring-framework-javadoc}/org/springframework/beans/factory/config/BeanFactoryPostProcessor.html[<code>BeanFactoryPostProcessor</code>]
@@ -221,7 +221,7 @@ in XML config by using
 <code>&lt;bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>.
 The
 <code>o.s.d.g.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>
-may only be used when using SDG XML config. More details about
+may only be used when using Spring Data for GemFire XML config. More details about
 Spring's <code>BeanFactoryPostProcessors</code> can be found
 {spring-framework-docs}/core.html#beans-factory-extension-factory-postprocessors[here].</td>
 </tr>
@@ -231,7 +231,7 @@ Spring's <code>BeanFactoryPostProcessors</code> can be found
 
 
 It is possible that these GemFire restrictions will not apply
-in a future release which is why the SDG
+in a future release which is why the Spring Data for GemFire
 `LuceneIndexFactoryBean` API takes a reference to the Region directly as
 well, rather than just the Region path.
 
@@ -239,7 +239,7 @@ well, rather than just the Region path.
 
 This is more ideal when you want to define a `LuceneIndex` on an
 existing Region with data at a later point during the application's
-lifecycle and as requirements demand. Where possible, SDG
+lifecycle and as requirements demand. Where possible, Spring Data for GemFire
 strives to adhere to strongly-typed objects. However, for the time
 being, you must use the `regionPath` property to specify the Region to
 which the `LuceneIndex` is applied.
@@ -330,7 +330,7 @@ the <code>resultLimit</code> parameter is optional.</td>
 The operations in the `LuceneOperations` interface match the operations
 provided by the GemFire's
 {x-data-store-javadoc}/org/apache/geode/cache/lucene/LuceneQuery.html\[LuceneQuery\]
-interface. However, SDG has the added value of translating
+interface. However, Spring Data for GemFire has the added value of translating
 proprietary GemFire or Apache Lucene `Exceptions` into
 Spring's highly consistent and expressive DAO [exception
 hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#dao-exceptions),
@@ -339,7 +339,7 @@ store or repository.
 
 
 
-Additionally, SDG's `LuceneOperations` interface can shield
+Additionally, Spring Data for GemFire's `LuceneOperations` interface can shield
 your application from interface-breaking changes introduced by the
 underlying GemFire or Apache Lucene APIs when they occur.
 
@@ -347,7 +347,7 @@ underlying GemFire or Apache Lucene APIs when they occur.
 
 However, it would be sad to offer a Lucene Data Access Object (DAO) that
 only uses GemFire and Apache Lucene data types (such as
-GemFire's `LuceneResultStruct`). Therefore, SDG
+GemFire's `LuceneResultStruct`). Therefore, Spring Data for GemFire
 gives you the `ProjectingLuceneOperations` interface to remedy these
 important application concerns. The following listing shows the
 `ProjectingLuceneOperations` interface definition:
@@ -523,7 +523,7 @@ Finally, Spring Data for GemFire provides annotation configuration support for
 
 
 
-Eventually, the SDG Lucene support will finds its way into the
+Eventually, the Spring Data for GemFire Lucene support will finds its way into the
 Repository infrastructure extension for GemFire so that Lucene
 queries can be expressed as methods on an application `Repository`
 interface, in much the same way as the [OQL
@@ -559,7 +559,7 @@ class Person {
 
 
 
-To enable this feature, you must use SDG's annotation
+To enable this feature, you must use Spring Data for GemFire's annotation
 configuration support specifically with the `@EnableEntityDefineRegions`
 and `@EnableIndexing` annotations, as follows:
 
@@ -591,7 +591,7 @@ GemFire servers since <code>LuceneIndexes</code> only apply to
 
 
 
-Given our earlier definition of the `Person` class, the SDG
+Given our earlier definition of the `Person` class, the Spring Data for GemFire
 annotation configuration support finds the `Person` entity class
 definition and determines that people are stored in a `PARTITION` Region
 called "People" and that the `Person` has an OQL `Index` on `birthDate`
