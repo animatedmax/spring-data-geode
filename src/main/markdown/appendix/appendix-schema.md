@@ -35,10 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-- {spring-data-schema-location}\[Spring Data for GemFire Core Schema (`gfe` XML
-  namespace)\]
+* [Spring Data for Apache Geode Core Schema (gfe XML namespace)](https://www.springframework.org/schema/geode/spring-geode.xsd)
 
-- {spring-data-access-schema-location}\[Spring Data for GemFire Data Access Schema
-  (`gfe-data` XML namespace)\]
-
+* [Spring Data for Apache Geode Data Access Schema (gfe-data XML namespace)](https://www.springframework.org/schema/data/geode/spring-data-geode.xsd)
 

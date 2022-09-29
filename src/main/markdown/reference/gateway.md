@@ -64,7 +64,7 @@ shown):
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="region-with-inner-gateway-sender" >
     <gfe:gateway-sender remote-distributed-system-id="1">
         <gfe:event-filter>
@@ -110,7 +110,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 <gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
     <gfe:transport-filter>
         <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>

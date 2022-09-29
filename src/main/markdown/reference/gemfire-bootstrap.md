@@ -114,7 +114,7 @@ this class inside GemFire's `cache.xml` file:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="http://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -152,7 +152,7 @@ as the following example shows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="http://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -180,7 +180,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 gfsh>start server --name=ExampleServer --log-level=config ...
     --classpath="/path/to/application/classes.jar:/path/to/spring-data-geode-<major>.<minor>.<maint>.RELEASE.jar"
     --cache-xml-file="/path/to/geode/cache.xml"
@@ -254,7 +254,7 @@ similar to the following example:
 
 
 
-``` highlight
+```highlight
 public class UserDataSourceCacheLoader extends LazyWiringDeclarableSupport
     implements CacheLoader<String, User> {
 
@@ -293,7 +293,7 @@ suite):
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="http://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

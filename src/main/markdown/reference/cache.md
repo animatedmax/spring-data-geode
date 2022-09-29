@@ -70,7 +70,7 @@ following simple declaration:
 
 
 
-``` highlight
+```highlight
 <gfe:cache/>
 ```
 
@@ -97,7 +97,7 @@ attribute, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="myCache"/>
 ```
 
@@ -114,7 +114,7 @@ GemFire XML configuration file by using the
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="cacheConfiguredWithNativeCacheXml" cache-xml-location="classpath:cache.xml"/>
 ```
 
@@ -155,7 +155,7 @@ properties file, as follows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="{spring-data-schema-namespace}"
@@ -208,7 +208,7 @@ following listing shows:
 
 
 
-``` highlight
+```highlight
 <!--(1)-->
 <gfe:cache
     cache-xml-location=".."
@@ -442,7 +442,7 @@ config:
 
 
 
-``` highlight
+```highlight
 <gfe:cache use-cluster-configuration="true"/>
 ```
 
@@ -488,7 +488,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -591,7 +591,7 @@ default configuration follows:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:client-cache/>
 </beans>
@@ -623,7 +623,7 @@ definition, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:client-cache id="myCache" pool-name="myPool"/>
 
@@ -658,7 +658,7 @@ definition is required. For instance, you can define the following:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache/>
 
 <gfe:client-region id="Example" shortcut="LOCAL"/>
@@ -689,7 +689,7 @@ automatically, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache/>
 
 <gfe:pool>
@@ -716,7 +716,7 @@ following:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache id="gemfireCache" pool-name="gemfirePool"/>
 
 <gfe:pool id="gemfirePool">
@@ -742,7 +742,7 @@ Consider the following:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache pool-name="locatorPool"/>
 
 <gfe:pool id="locatorPool">

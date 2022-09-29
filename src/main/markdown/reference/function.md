@@ -70,7 +70,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:function-service>
   <gfe:function>
       <bean class="example.FunctionOne"/>

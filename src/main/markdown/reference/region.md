@@ -100,7 +100,7 @@ named `Orders`, you can use the following bean definition:
 
 
 
-``` highlight
+```highlight
 <gfe:lookup-region id="ordersRegion" name="Orders"/>
 ```
 
@@ -113,7 +113,7 @@ the Region. The example above becomes:
 
 
 
-``` highlight
+```highlight
 <!-- lookup for a Region called 'Orders' -->
 <gfe:lookup-region id="Orders"/>
 ```
@@ -141,7 +141,7 @@ one can reference the cache bean with the `cache-ref` attribute:
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="myCache"/>
 <gfe:lookup-region id="ordersRegion" name="Orders" cache-ref="myCache"/>
 ```
@@ -173,7 +173,7 @@ For instance, consider the following `cache.xml` file:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="https://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -195,7 +195,7 @@ You can import the preceding `cache.xml` file as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache cache-xml-location="cache.xml"/>
 ```
 
@@ -210,7 +210,7 @@ defined in `cache.xml` by using the following:
 
 
 
-``` highlight
+```highlight
 <gfe:auto-region-lookup/>
 ```
 
@@ -239,7 +239,7 @@ bean, as follows:
 
 
 
-``` highlight
+```highlight
 package example;
 
 import ...
@@ -272,7 +272,7 @@ would do the following:
 
 
 
-``` highlight
+```highlight
 <bean class="example.ApplicationDao" depends-on="gemfireCache"/>
 ```
 
@@ -531,7 +531,7 @@ inner bean definition.
 
 
 
-``` highlight
+```highlight
 <bean id="myListener" class="org.example.app.geode.cache.SimpleCacheListener"/>
 
 <gfe:replicated-region id="regionWithListeners">
@@ -560,7 +560,7 @@ following example must be used.
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region id="exampleReplicateRegionWithCacheListener">
     <gfe:cache-listener ref="myListener"/>
@@ -640,7 +640,7 @@ The following example declares a Region with both a `CacheLoader` and a
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region id="exampleReplicateRegionWithCacheLoaderAndCacheWriter">
     <gfe:cache-loader ref="myLoader"/>
@@ -692,7 +692,7 @@ The following example shows a Region with compression enabled:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region id="exampleReplicateRegionWithCompression">
     <gfe:compressor>
@@ -733,7 +733,7 @@ the following configuration:
 
 
 
-``` highlight
+```highlight
 <util:properties id="gemfireProperties">
     <prop key="off-heap-memory-size">200G</prop>
 </util:properties>
@@ -753,7 +753,7 @@ the following GemFire configuration properties using the
 
 
 
-``` highlight
+```highlight
 <gfe:cache critical-off-heap-percentage="90" eviction-off-heap-percentage"80"/>
 ```
 
@@ -808,7 +808,7 @@ configured as follows:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region name="Customer">
     <gfe:replicated-region name="Address"/>
@@ -919,7 +919,7 @@ The following example shows one possible configuration:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:async-event-queue id="AEQ" persistent="false" parallel="false" dispatcher-threads="4">
     <gfe:async-event-listener>
@@ -1080,7 +1080,7 @@ configuration file:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="https://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -1107,7 +1107,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 public class CustomerAccountDao extends GemDaoSupport {
 
     @Resource(name = "Customers/Accounts")
@@ -1128,7 +1128,7 @@ configuration metadata as follows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="{spring-data-schema-namespace}"
@@ -1165,7 +1165,7 @@ metadata syntax to use the nested format:
 
 
 
-``` highlight
+```highlight
 <gfe:lookup-region name="Customers">
   <gfe:lookup-region name="Accounts">
     <gfe:lookup-region name="Orders"/>
@@ -1183,7 +1183,7 @@ set to perform a lookup first:
 
 
 
-``` highlight
+```highlight
 <gfe:replicated-region name="Customers" persistent="true" ignore-if-exists="true">
   <gfe:replicated-region name="Accounts" persistent="true" ignore-if-exists="true">
     <gfe:replicated-region name="Orders" persistent="true" ignore-if-exists="true"/>
@@ -1222,7 +1222,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 <gfe:lookup-region name="/Customers/Accounts"/>
 <gfe:lookup-region name="/Customers/Accounts/Orders"/>
 ```
@@ -1270,7 +1270,7 @@ configuration:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithEviction">
   <gfe:eviction type="MEMORY_SIZE" threshold="512" action="OVERFLOW_TO_DISK"/>
 </gfe:partitioned-region>
@@ -1351,7 +1351,7 @@ set:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithExpiration">
   <gfe:region-ttl timeout="30000" action="INVALIDATE"/>
   <gfe:entry-tti timeout="600" action="LOCAL_DESTROY"/>
@@ -1379,7 +1379,7 @@ policies on a Session-based application domain object as follows:
 
 
 
-``` highlight
+```highlight
 @Expiration(timeout = "1800", action = "INVALIDATE")
 public class SessionBasedApplicationDomainObject {
   ...
@@ -1397,7 +1397,7 @@ respectively, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @TimeToLiveExpiration(timeout = "3600", action = "LOCAL_DESTROY")
 @IdleTimeoutExpiration(timeout = "1800", action = "LOCAL_INVALIDATE")
 @Expiration(timeout = "1800", action = "INVALIDATE")
@@ -1469,7 +1469,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 
     
     
-    ``` highlight
+    ```highlight
     <bean id="ttlExpiration" class="org.springframework.data.gemfire.expiration.AnnotationBasedExpiration"
           factory-method="forTimeToLive"/>
 
@@ -1517,7 +1517,7 @@ objects annotated with `@Expiration`-based annotations, you must:
 
 
 
-``` highlight
+```highlight
 <bean id="defaultExpirationAttributes" class="org.apache.geode.cache.ExpirationAttributes">
     <constructor-arg value="600"/>
     <constructor-arg value="#{T(org.apache.geode.cache.ExpirationAction).DESTROY}"/>
@@ -1556,7 +1556,7 @@ attributes, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @TimeToLiveExpiration(timeout = "${geode.region.entry.expiration.ttl.timeout}"
     action = "${geode.region.entry.expiration.ttl.action}")
 public class ExampleApplicationDomainObject {
@@ -1573,7 +1573,7 @@ following beans:
 
 
 
-``` highlight
+```highlight
 <util:properties id="expirationSettings">
   <prop key="geode.region.entry.expiration.ttl.timeout">600</prop>
   <prop key="geode.region.entry.expiration.ttl.action">INVALIDATE</prop>
@@ -1603,7 +1603,7 @@ builds on the preceding example):
 
 
 
-``` highlight
+```highlight
 <util:properties id="expirationSettings">
   <prop key="geode.region.entry.expiration.ttl.timeout">600</prop>
   <prop key="geode.region.entry.expiration.ttl.action">#{T(org.springframework.data.gemfire.expiration.ExpirationActionType).DESTROY}</prop>
@@ -1623,7 +1623,7 @@ action as follows:
 
 
 
-``` highlight
+```highlight
 @TimeToLiveExpiration(timeout = "@expirationSettings['geode.region.entry.expiration.ttl.timeout']"
     action = "@expirationSetting['geode.region.entry.expiration.ttl.action']")
 public class ExampleApplicationDomainObject {
@@ -1674,7 +1674,7 @@ shows:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePersitentPartitionRegion" persistent="true"/>
 ```
 
@@ -1689,7 +1689,7 @@ DataPolicy settings\], as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="anotherExamplePersistentPartitionRegion" data-policy="PERSISTENT_PARTITION"/>
 ```
 
@@ -1713,7 +1713,7 @@ example shows a synchronous `DiskStore`:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="yetAnotherExamplePersistentPartitionRegion" persistent="true"
     disk-store-ref="myDiskStore" disk-synchronous="true"/>
 ```
@@ -1744,7 +1744,7 @@ with its subscription policy set to `CACHE_CONTENT`:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithCustomSubscription">
   <gfe:subscription type="CACHE_CONTENT"/>
 </gfe:partitioned-region>
@@ -1774,7 +1774,7 @@ cache):
 
 
 
-``` highlight
+```highlight
 <gfe:local-region id="exampleLocalRegion"/>
 ```
 
@@ -1813,7 +1813,7 @@ shows a minimal declaration:
 
 
 
-``` highlight
+```highlight
 <gfe:replicated-region id="exampleReplica"/>
 ```
 
@@ -1868,7 +1868,7 @@ redundant copies:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegion" copies="2" total-buckets="17">
   <gfe:partition-resolver>
     <bean class="example.PartitionResolver"/>
@@ -2015,7 +2015,7 @@ The following example shows a typical client Region configuration:
 
 
 
-``` highlight
+```highlight
 <bean id="myListener" class="example.CacheListener"/>
 
 <!-- client Region using the default SDG gemfirePool Pool -->
@@ -2088,7 +2088,7 @@ The following example shows both key-based and regular expression-based
 
 
 
-``` highlight
+```highlight
 <gfe:client-region id="Example" pool-name="myPool">
     <gfe:key-interest durable="true" result-policy="KEYS">
         <bean id="key" class="java.lang.String">
@@ -2159,7 +2159,7 @@ following example shows how to do so:
 
 
 
-``` highlight
+```highlight
 <gfe:pool ... subscription-enabled="true">
   ...
 </gfe:pool>
@@ -2193,7 +2193,7 @@ interests in keys in this server Region:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region name="ServerSideRegion" enable-subscription-conflation="true">
   ...
 </gfe:partitioned-region>
@@ -2210,7 +2210,7 @@ the cluster, set the `durable-client-timeout` attribute on the
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache durable-client-timeout="600">
   ...
 </gfe:client-cache>
@@ -2302,7 +2302,7 @@ and `convert-returned-collections` attributes:
 
 
 
-``` highlight
+```highlight
 <gfe-data:json-region-autoproxy region-refs="myJsonRegion" pretty-print="true" convert-returned-collections="false"/>
 ```
 

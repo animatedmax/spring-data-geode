@@ -63,7 +63,7 @@ Region proxy for each one.
 
 
 
-``` highlight
+```highlight
 <gfe-data:datasource>
   <locator host="remotehost" port="1234"/>
 </gfe-data:datasource>
@@ -89,7 +89,7 @@ you want to cache data in local memory, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe-data:datasource>
   <locator host="remotehost" port="1234"/>
 </gfe-data:datasource>

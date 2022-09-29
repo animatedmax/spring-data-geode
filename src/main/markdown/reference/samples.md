@@ -35,25 +35,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-
-
-
-
-
-
-
-
-Note
-</div></td>
-<td class="content">Sample applications are now maintained in the <a
-href="https://github.com/spring-projects/spring-gemfire-examples">Spring
-GemFire Examples</a> repository.</td>
-</tr>
-</tbody>
-</table>
-
-
-
 The Spring Data for GemFire project also includes one sample application. Named
 "Hello World", the sample application demonstrates how to configure and
 use GemFire inside a Spring application. At run time, the
@@ -62,20 +43,11 @@ data grid. It provides an excellent starting point for developers who
 are unfamiliar with the essential components or with Spring and
 GemFire concepts.
 
-
-
 The sample is bundled with the distribution and is Maven-based. You can
 import it into any Maven-aware IDE (such as the [Spring Tool
 Suite](https://spring.io/tools/sts)) or run them from the command-line.
 
-
-
-
-
-## Hello World
-
-
-
+## <a id="hello-world"></a>The "Hello World" Sample Application
 
 The "Hello World" sample application demonstrates the core functionality
 of the Spring Data for GemFire project. It bootstraps GemFire, configures
@@ -84,28 +56,15 @@ when the application exits. Multiple instances of the application can be
 started at the same time and work together, sharing data without any
 user intervention.
 
-
-
-
-Note
-</div></td>
-<td class="content"><div class="title">
-Running under Linux
+<p class="note"><strong>Running under Linux</strong>: 
 If you experience networking problems when starting GemFire or
 the samples, try adding the following system property
 <code>java.net.preferIPv4Stack=true</code> to the command line (for
 example, <code>-Djava.net.preferIPv4Stack=true</code>). For an
 alternative (global) fix (especially on Ubuntu), see <a
-href="https://jira.spring.io/browse/SGF-28">SGF-28</a>.</td>
-</tr>
-</tbody>
-</table>
+href="https://jira.spring.io/browse/SGF-28">SGF-28</a>.</p>
 
-
-<div class="sect2">
-
-### Starting and Stopping the Sample
-
+### <a id="starting-and-stopping"></a>Starting and Stopping
 
 The "Hello World" sample application is designed as a stand-alone Java
 application. It features a `main` class that can be started either from
@@ -114,48 +73,32 @@ the command line through Maven with `mvn exec:java`. If the classpath is
 properly set, you can also use `java` directly on the resulting
 artifact.
 
-
-
-To stop the sample, type `exit` at the command line or press `Ctrl+C` to
+To stop the sample application, type `exit` at the command line or press `Ctrl+C` to
 stop the JVM and shutdown the Spring container.
 
+### <a id="using-sample-application"></a>Using the Sample Application
 
-
-<div class="sect2">
-
-### Using the Sample
-
-
-Once started, the sample creates a shared data grid and lets you issue
+Once started, the sample application creates a shared data grid and lets you issue
 commands against it. The output should resemble the following:
 
-
-
-
-``` highlight
+```highlight
 INFO: Created GemFire Cache [Spring GemFire World] v. X.Y.Z
 INFO: Created new cache region [myWorld]
 INFO: Member xxxxxx:50694/51611 connecting to region [myWorld]
 Hello World!
 Want to interact with the world ? ...
 Supported commands are:
-
+  
 get <key> - retrieves an entry (by key) from the grid
 put <key> <value> - puts a new entry into the grid
 remove <key> - removes an entry (by key) from the grid
 ...
 ```
 
-
-
-
 For example, to add new items to the grid, you can use the following
 commands:
 
-
-
-
-``` highlight
+```highlight
 -> Bold Section qName:emphasis level:5, chunks:[put 1 unu] attrs:[role:bold]
 INFO: Added [1=unu] to the cache
 null
@@ -171,17 +114,11 @@ null
 2
 ```
 
-
-
-
-Multiple instances can be ran at the same time. Once started, the new
+You can run multiple instances at the same time. Once started, the new
 VMs automatically see the existing region and its information, as the
 following example shows:
 
-
-
-
-``` highlight
+```highlight
 INFO: Connected to Distributed System ['Spring GemFire World'=xxxx:56218/49320@yyyyy]
 Hello World!
 ...
@@ -194,23 +131,15 @@ Hello World!
 [one, two]
 ```
 
-
-
-
-We encourage you to experiment with the example, start (and stop) as
+We encourage you to experiment with the example, start and stop as
 many instances as you want, and run various commands in one instance and
 see how the others react. To preserve data, at least one instance needs
-to be alive all times. If all instances are shutdown, the grid data is
+to be alive all times. If all instances are shut down, the grid data is
 completely destroyed.
 
+## <a id="explanation"></a>"Hello World" Sample Application Explained
 
-
-<div class="sect2">
-
-### Hello World Sample Explained
-
-
-The "Hello World" sample uses both Spring XML and annotations for its
+The "Hello World" sample application uses both Spring XML and annotations for its
 configuration. The initial bootstrapping configuration is
 `app-context.xml`, which includes the cache configuration defined in the
 `cache-context.xml` file and performs classpath [component
@@ -218,27 +147,10 @@ scanning](https://docs.spring.io/spring/docs/current/spring-framework-reference/
 for Spring
 [components](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-annotation-config).
 
-
-
 The cache configuration defines the GemFire cache, a region,
 and for illustrative purposes, a `CacheListener` that acts as a logger.
-
-
 
 The main beans are `HelloWorld` and `CommandProcessor`, which rely on
 the `GemfireTemplate` to interact with the distributed fabric. Both
 classes use annotations to define their dependency and life-cycle
 callbacks.
-
-
-
-
-
-
-<div id="footer">
-
-<div id="footer-text">
-
-Last updated 2022-09-20 10:33:13 -0700
-
-

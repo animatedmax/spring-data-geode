@@ -41,7 +41,7 @@ Spring Data for GemFire supports `DiskStore` configuration and creation through 
 
 
 
-``` highlight
+```highlight
 <gfe:disk-store id="Example" auto-compact="true" max-oplog-size="10"
                 queue-size="50" time-interval="9999">
     <gfe:disk-dir location="/disk/location/one" max-size="20"/>

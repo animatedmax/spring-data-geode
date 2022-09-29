@@ -57,7 +57,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
@@ -96,7 +96,7 @@ Consider the following example, which has a `lastName` property:
 
 
 
-``` highlight
+```highlight
 @Region("Customers")
 class Customer {
 
@@ -119,7 +119,7 @@ SDG Repository to query for `Customer` objects:
 
 
 
-``` highlight
+```highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
 
   Customer findByLastName(String lastName);
@@ -137,7 +137,7 @@ following OQL statement being generated and ran:
 
 
 
-``` highlight
+```highlight
 SELECT * FROM /Customers c WHERE c.lastName = '$1'
 ```
 
@@ -150,7 +150,7 @@ to the following:
 
 
 
-``` highlight
+```highlight
 <gfe:index id="myIndex" name="CustomersLastNameIndex" expression="lastName" from="/Customers" type="HASH"/>
 ```
 
@@ -209,7 +209,7 @@ the `define` attribute, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 

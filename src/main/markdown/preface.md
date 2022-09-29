@@ -40,13 +40,9 @@ non-invasive programming model and concepts with GemFire to
 simplify configuration and development of Java applications when using
 GemFire as you data management solution.
 
-
-
 This document assumes you already have a basic understanding of, and
 some familiarity with, the core Spring Framework and GemFire
 concepts.
-
-
 
 While every effort has been made to ensure this documentation is
 comprehensive and complete without errors, some topics are beyond the

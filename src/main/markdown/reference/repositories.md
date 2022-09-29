@@ -72,7 +72,7 @@ Example 1. Bootstrap Spring Data for GemFire Repositories in XML
 
 
 
-``` highlight
+```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe-data="{spring-data-access-schema-namespace}"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -139,7 +139,7 @@ Example 2. Bootstrap Spring Data for GemFire Repositories with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @EnableGemfireRepositories(basePackages = "com.example.acme.repository")
 class SpringDataApplication {
@@ -238,7 +238,7 @@ Example 3. Sample Repository
 
 
 
-``` highlight
+```highlight
 @Region("People")
 public class Person { … }
 ```
@@ -247,7 +247,7 @@ public class Person { … }
 
 
 
-``` highlight
+```highlight
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
   Person findByEmailAddress(String emailAddress);
@@ -544,7 +544,7 @@ Example 4. Sample Customers Repository
 
 
 
-``` highlight
+```highlight
 package ...;
 
 import org.springframework.data.annotation.Id;
@@ -565,7 +565,7 @@ public class Customer ... {
 
 
 
-``` highlight
+```highlight
 package ...;
 
 import org.springframework.data.gemfire.repository.GemfireRepository;
@@ -616,7 +616,7 @@ Example 5. CustomerRepository
 
 
 
-``` highlight
+```highlight
 public interface CustomerRepository extends GemfireRepository<Customer, Long> {
 
   @Trace
@@ -698,7 +698,7 @@ Example 6. QueryPostProcessor
 
 
 
-``` highlight
+```highlight
 package org.springframework.data.gemfire.repository.query;
 
 import org.springframework.core.Ordered;
@@ -780,7 +780,7 @@ Example 7. LoggingQueryPostProcessor
 
 
 
-``` highlight
+```highlight
 package example;
 
 import ...;
@@ -826,7 +826,7 @@ Example 8. CustomerRepository
 
 
 
-``` highlight
+```highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
 
   Customer findByAccountNumber(String accountNumber);
@@ -855,7 +855,7 @@ Example 9. CustomerLoggingQueryPostProcessor
 
 
 
-``` highlight
+```highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> { .. }
 ```
 
@@ -888,7 +888,7 @@ Example 10. OrderedLimitedCustomerByLastNameQueryPostProcessor
 
 
 
-``` highlight
+```highlight
 class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
 
   private final int limit;
@@ -930,7 +930,7 @@ Example 11. CustomerRepository using the convention
 
 
 
-``` highlight
+```highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
 
   @Limit(5)
@@ -968,7 +968,7 @@ Example 12. Defining the `order` property
 
 
 
-``` highlight
+```highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
 
   @Override

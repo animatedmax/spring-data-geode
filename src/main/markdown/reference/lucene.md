@@ -67,7 +67,7 @@ GemFire) XML config as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/>
 ```
 
@@ -81,7 +81,7 @@ per field and can be configured as shown in the following example:
 
 
 
-``` highlight
+```highlight
 <gfe:lucene-index id="IndexTwo" lucene-service-ref="luceneService" region-path="/AnotherExample">
     <gfe:field-analyzers>
         <map>
@@ -121,7 +121,7 @@ The following example shows how to add an `LuceneSerializer` to the
 
 
 
-``` highlight
+```highlight
 <bean id="MyLuceneSerializer" class="example.CustomLuceneSerializer"/>
 
 <gfe:lucene-index id="IndexThree" lucene-service-ref="luceneService" region-path="/YetAnotherExample">
@@ -138,7 +138,7 @@ definition as well, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:lucene-index id="IndexThree" lucene-service-ref="luceneService" region-path="/YetAnotherExample">
     <gfe:lucene-serializer>
         <bean class="example.CustomLuceneSerializer"/>
@@ -155,7 +155,7 @@ config, inside a `@Configuration` class, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Bean(name = "Books")
 @DependsOn("bookTitleIndex")
 PartitionedRegionFactoryBean<Long, Book> booksRegion(GemFireCache gemfireCache) {
@@ -288,7 +288,7 @@ types\], which are defined in the following interface definition:
 
 
 
-``` highlight
+```highlight
 public interface LuceneOperations {
 
     <K, V> List<LuceneResultStruct<K, V>> query(String query, String defaultField [, int resultLimit]
@@ -355,7 +355,7 @@ important application concerns. The following listing shows the
 
 
 
-``` highlight
+```highlight
 public interface ProjectingLuceneOperations {
 
     <T> List<T> query(String query, String defaultField [, int resultLimit], Class<T> projectionType);
@@ -392,7 +392,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 class Person {
 
     Gender gender;
@@ -419,7 +419,7 @@ Additionally, you might have a single interface to represent people as
 
 
 
-``` highlight
+```highlight
 interface Customer {
 
     String getName()
@@ -435,7 +435,7 @@ If I define the following `LuceneIndex`…​
 
 
 
-``` highlight
+```highlight
 @Bean
 LuceneIndexFactoryBean personLastNameIndex(GemFireCache gemfireCache) {
 
@@ -458,7 +458,7 @@ Then you could query for people as `Person` objects, as follows:
 
 
 
-``` highlight
+```highlight
 List<Person> people = luceneTemplate.query("lastName: D*", "lastName", Person.class);
 ```
 
@@ -471,7 +471,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 Page<Customer> customers = luceneTemplate.query("lastName: D*", "lastName", 100, 20, Customer.class);
 ```
 
@@ -484,7 +484,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 List<Customer> firstPage = customers.getContent();
 ```
 
@@ -538,7 +538,7 @@ objects, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @PartitionRegion("People")
 class Person {
 
@@ -566,7 +566,7 @@ and `@EnableIndexing` annotations, as follows:
 
 
 
-``` highlight
+```highlight
 @PeerCacheApplication
 @EnableEntityDefinedRegions
 @EnableIndexing

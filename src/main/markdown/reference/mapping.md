@@ -81,7 +81,7 @@ Example 1. Mapping a domain class to a GemFire Region
 
 
 
-``` highlight
+```highlight
 @Region("People")
 public class Person {
 
@@ -122,7 +122,7 @@ stored in Sub-Regions as well, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Region("/Users/Admin")
 public class Admin extends User {
   …
@@ -199,7 +199,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 @Region("People")
 public interface PersonRepository extends GemfireRepository<Person, String> {
 …
@@ -220,7 +220,7 @@ multiple GemFire Regions, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -284,7 +284,7 @@ Example 2. Using `@Value` on entity constructor parameters
 
 
 
-``` highlight
+```highlight
 public class Person {
 
   public Person(@Value("#root.thing") String firstName, @Value("bean") String lastName) {
@@ -355,7 +355,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.security.auth.model;
 
 public class User {
@@ -396,7 +396,7 @@ type
 
 
 
-``` highlight
+```highlight
 Map<?, PdxSerializer> customPdxSerializers = new HashMap<>();
 
 customPdxSerializers.put(Password.class, new SaltedHashPasswordPdxSerializer());
@@ -435,7 +435,7 @@ name
 
 
 
-``` highlight
+```highlight
 Map<?, PdxSerializer> customPdxSerializers = new HashMap<>();
 
 customPdxSerializers.put("example.app.security.auth.model.User.password", new SaltedHashPasswordPdxSerializer());
@@ -490,7 +490,7 @@ For example:
 
 
 
-``` highlight
+```highlight
 class Customer {
 
   @Id
@@ -529,7 +529,7 @@ property, as follows:
 
 
 
-``` highlight
+```highlight
 package example;
 
 class ApplicationDomainType {
@@ -604,7 +604,7 @@ properties as follows:
 
 
 
-``` highlight
+```highlight
 package example;
 
 class Process {
@@ -682,7 +682,7 @@ The following example shows the `Predicate` API in action:
 
 
 
-``` highlight
+```highlight
 Predicate<Class<?>> customerTypes =
   type -> Customer.class.getPackage().getName().startsWith(type.getName()); // Include all types in the same package as `Customer`
 
@@ -778,7 +778,7 @@ method, as follows:
 
 
 
-``` highlight
+```highlight
 Predicate<Class<?>> principalTypeFilter =
   type -> java.security.Principal.class.isAssignableFrom(type);
 

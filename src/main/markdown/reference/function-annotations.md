@@ -196,7 +196,7 @@ similar to the following (ignoring the return type for the moment):
 
 
 
-``` highlight
+```highlight
 public Object method1(String s1, int i2) { ... }
 public Object method2(Map<?, ?> data, String s1, int i2) { ... }
 public Object method3(String s1, Map<?, ?> data, int i2) { ... }
@@ -236,7 +236,7 @@ used to expose POJO methods as GemFire Functions:
 
 
 
-``` highlight
+```highlight
 @Component
 public class ApplicationFunctions {
 
@@ -383,7 +383,7 @@ example activates annotation processing with XML:
 
 
 
-``` highlight
+```highlight
 <gfe:annotation-driven/>
 ```
 
@@ -396,7 +396,7 @@ Java configuration class:
 
 
 
-``` highlight
+```highlight
 @Configuration
 @EnableGemfireFunctions
 class ApplicationConfiguration { ... }
@@ -473,7 +473,7 @@ The following listing shows a few examples:
 
 
 
-``` highlight
+```highlight
 @OnRegion(region="SomeRegion", resultCollector="myCollector")
 public interface FunctionExecution {
 
@@ -507,7 +507,7 @@ configuration:
 
 
 
-``` highlight
+```highlight
 <gfe-data:function-executions base-package="org.example.myapp.gemfire.functions"/>
 ```
 
@@ -527,7 +527,7 @@ Optionally, you can annotate your Java configuration class as follows:
 
 
 
-``` highlight
+```highlight
 @EnableGemfireFunctionExecutions(basePackages = "org.example.myapp.gemfire.functions")
 ```
 
@@ -549,7 +549,7 @@ will invoke the Function:
 
 
 
-``` highlight
+```highlight
 @Component
 public class MyApplication {
 
@@ -580,7 +580,7 @@ Example 1. Using the `GemfireOnRegionFunctionTemplate`
 
 
 
-``` highlight
+```highlight
 Set<?, ?> myFilter = getFilter();
 Region<?, ?> myRegion = getRegion();
 GemfireOnRegionOperations template = new GemfireOnRegionFunctionTemplate(myRegion);
@@ -624,7 +624,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 public class OrderFunctions {
 
   @GemfireFunction(...)
@@ -655,7 +655,7 @@ Your `Order` class and `OrderSource` enum might be defined as follows:
 
 
 
-``` highlight
+```highlight
 public class Order ... {
 
   private Long orderNumber;
@@ -684,7 +684,7 @@ Of course, you can define a Function `Execution` interface to call the
 
 
 
-``` highlight
+```highlight
 @OnServer
 public interface OrderProcessingFunctions {
   Order process(Order order, OrderSource orderSourceEnum, Integer count);
@@ -712,7 +712,7 @@ of the GemFire server(s), as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache pdx-read-serialized="true"/>
 ```
 
@@ -725,7 +725,7 @@ for a GemFire cache client application, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache pdx-read-serialized="true"/>
 ```
 
@@ -775,7 +775,7 @@ You might pass the following arguments when invoking the Function:
 
 
 
-``` highlight
+```highlight
 orderProcessingFunctions.process(new Order(123, customer, LocalDateTime.now(), items), OrderSource.ONLINE, 400);
 ```
 
@@ -788,7 +788,7 @@ following:
 
 
 
-``` highlight
+```highlight
 process(regionData, order:PdxInstance, :PdxInstanceEnum, 400);
 ```
 
@@ -826,7 +826,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 <bean id="customPdxSerializer" class="x.y.z.gemfire.serialization.pdx.MyCustomPdxSerializer"/>
 
 <gfe:cache pdx-serializer-ref="customPdxSerializeer" pdx-read-serialized="true"/>
@@ -850,7 +850,7 @@ GemFire's PDX types, as follows:
 
 
 
-``` highlight
+```highlight
 @GemfireFunction
 public Object genericFunction(String value, Object domainObject, PdxInstanceEnum pdxEnum) {
   // ...

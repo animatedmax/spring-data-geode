@@ -35,21 +35,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-# Preface
-
+## <a id="preface"></a>Preface
 
 Spring Data for GemFire focuses on integrating the Spring
 Framework's powerful, non-invasive programming model and concepts with
 Apache Geode to simplify configuration and development of Java
 applications when using Apache Geode as you data management solution.
 
-
-
 This document assumes you already have a basic understanding of, and
 some familiarity with, the core Spring Framework and Apache Geode
 concepts.
-
-
 
 While every effort has been made to ensure this documentation is
 comprehensive and complete without errors, some topics are beyond the
@@ -61,123 +56,29 @@ please bring these issues to the attention of the Spring Data team by
 raising an appropriate [issue in
 JIRA](https://jira.spring.io/browse/SGF).
 
-
-<div class="sect1">
-
-## Introduction
-
-
-
+## <a id="introduction"></a>Introduction
 
 The Spring Data for GemFire reference guide explains how to use the
 Spring Framework to configure and develop applications with Apache
 Geode. It presents the basic concepts and provides numerous examples to
 help you get started quickly.
 
+## <a id="requirements"></a>Requirements
+
+Spring Data for Apache Geode requires Java 8.0, Spring Framework 5 and Apache Geode 1.9.0.
+
+Spring Data for GemFire requires:
+
+* Java 8.0
+
+* [Spring Framework](https://spring.io/projects/spring-framework) 5 or later
+
+* [VMware Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/index.html) 9.10 or later
 
 
+## <a id="new-features"></a>New Features
 
-<div class="sect1">
-
-## Requirements
-
-
-
-
-Spring Data for GemFire requires Java 8.0, [Spring
-Framework](https://spring.io/projects/spring-framework) 5 and [Apache
-Geode](https://geode.apache.org) 1.9.0.
-
-
-
-
-<div class="sect1">
-
-## New Features
-
-
-
-
-
-Note
-</div></td>
-<td class="content">As of the 1.2.0.RELEASE, this project, formerly
-known as Spring GemFire, has been renamed to Spring Data for Apache
-Geode to reflect that it is now a module of the <a
-href="https://spring.io/projects/spring-data">Spring Data</a> project
-and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
-</tr>
-</tbody>
-</table>
-
-
-<div class="sect2">
-
-### New in the 2.0 Release
-
-<div class="ulist">
-
-- Upgraded to Apache Geode 9.1.1.
-
-- Upgraded to Spring Data Commons 2.0.8.RELEASE.
-
-- Upgraded to Spring Framework 5.0.7.RELEASE.
-
-- Reorganized the SDG codebase by packaging different classes and
-  components by concern.
-
-- Added extensive support for Java 8 types, particularly in the SD
-  Repository abstraction.
-
-- Changed to the Repository interface and abstraction, e.g. IDs are no
-  longer required to be `java.io.Serializable`.
-
-- Set `@EnableEntityDefinedRegions` annotation `ignoreIfExists`
-  attribute to `true` by default.
-
-- Set `@Indexed` annotation `override` attribute to `false` by default.
-
-- Renamed `@EnableIndexes` to `@EnableIndexing`.
-
-- Introduced a `InterestsBuilder` class to easily and conveniently
-  express Interests in keys and values between client and server when
-  using JavaConfig.
-
-- Added support in the Annotation configuration model for Off-Heap,
-  Redis Adapter, and Apache Geode's new Security framework.
-
-
-
-<div class="sect2">
-
-### New in the 2.1 Release
-
-<div class="ulist">
-
-- Upgraded to Apache Geode 1.9.0.
-
-- Upgraded to Spring Framework 5.1.0.RELEASE.
-
-- Upgraded to Spring Data Commons 2.1.0.RELEASE.
-
-- Added support for parallel cache/Region snapshots along with invoking
-  callbacks when loading snapshots.
-
-- Added support for registering QueryPostProcessors to customize the OQL
-  generated fro Repository query methods.
-
-- Added support for include/exclude TypeFilters in
-  o.s.d.g.mapping.MappingPdxSerializer.
-
-- Updated docs.
-
-
-
-<div class="sect2">
-
-### New in the 2.2 Release
-
-<div class="ulist">
+### <a id="release-2-2"></a>New in the 2.2 Release
 
 - Upgraded to Apache Geode 1.9.0.
 
@@ -185,32 +86,54 @@ and built on <a href="https://geode.apache.org">Apache Geode</a>.</td>
 
 - Upgraded to Spring Data Commons 2.2.0.RELEASE.
 
-- Add Annotation configuration support to configure and bootstrap Apache
-  Geode Locator applications using `@LocatorApplication`.
+- Add Annotation configuration support to configure and bootstrap Apache Geode Locator applications using `@LocatorApplication`.
 
-- Added Annotation configuration support for GatewayReceivers and
-  GatewaySenders.
+- Added Annotation configuration support for GatewayReceivers and GatewaySenders.
 
-- Updated docs.
+### <a id="release-2-1"></a>New in the 2.1 Release
 
 
+- Upgraded to Apache Geode 1.9.0.
 
+- Upgraded to Spring Framework 5.1.0.RELEASE.
 
+- Upgraded to Spring Data Commons 2.1.0.RELEASE.
 
-# Reference Guide
+- Added support for parallel cache/Region snapshots along with invoking callbacks when loading snapshots.
 
-<div class="sect1">
+- Added support for registering QueryPostProcessors to customize the OQL generated fro Repository query methods.
 
-## Document Structure
+- Added support for include/exclude TypeFilters in o.s.d.g.mapping.MappingPdxSerializer.
 
+### <a id="release-2-0"></a>New in the 2.0 Release
 
+- Upgraded to Apache Geode 9.1.1.
 
+- Upgraded to Spring Data Commons 2.0.8.RELEASE.
+
+- Upgraded to Spring Framework 5.0.7.RELEASE.
+
+- Reorganized the SDG codebase by packaging different classes and components by concern.
+
+- Added extensive support for Java 8 types, particularly in the SD Repository abstraction.
+
+- Changed to the Repository interface and abstraction, e.g. IDs are no longer required to be `java.io.Serializable`.
+
+- Set `@EnableEntityDefinedRegions` annotation `ignoreIfExists` attribute to `true` by default.
+
+- Set `@Indexed` annotation `override` attribute to `false` by default.
+
+- Renamed `@EnableIndexes` to `@EnableIndexing`.
+
+- Introduced a `InterestsBuilder` class to easily and conveniently express Interests in keys and values between client and server when using JavaConfig.
+
+- Added support in the Annotation configuration model for Off-Heap, Redis Adapter, and Apache Geode's new Security framework.
+
+## <a id="reference-guide"></a>Reference Guide
 
 The following chapters explain the core functionality offered by Spring
 Data for Apache Geode:
 
-
-<div class="ulist">
 
 - [Bootstrapping Apache Geode with the Spring Container](#bootstrap)
   describes the configuration support provided for configuring,
@@ -252,12 +175,10 @@ Data for Apache Geode:
   the distribution to illustrate the various features available in
   Spring Data for GemFire.
 
+## <a id=""></a>
 
 
-
-<div class="sect1">
-
-## Bootstrapping Apache Geode with the Spring Container
+##Bootstrapping Apache Geode with the Spring Container
 
 
 
@@ -376,7 +297,7 @@ your Spring XML configuration meta-data, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="https://www.springframework.org/schema/geode" <!--(1)--><!--(2)-->
@@ -480,7 +401,7 @@ client Region proxy for each one.
 
 
 
-``` highlight
+```highlight
 <gfe-data:datasource>
   <locator host="remotehost" port="1234"/>
 </gfe-data:datasource>
@@ -506,7 +427,7 @@ you want to cache data in local memory, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe-data:datasource>
   <locator host="remotehost" port="1234"/>
 </gfe-data:datasource>
@@ -555,7 +476,7 @@ following simple declaration:
 
 
 
-``` highlight
+```highlight
 <gfe:cache/>
 ```
 
@@ -582,7 +503,7 @@ attribute, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="myCache"/>
 ```
 
@@ -599,7 +520,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="cacheConfiguredWithNativeCacheXml" cache-xml-location="classpath:cache.xml"/>
 ```
 
@@ -640,7 +561,7 @@ properties file, as follows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="https://www.springframework.org/schema/geode"
@@ -690,7 +611,7 @@ following listing shows:
 
 
 
-``` highlight
+```highlight
 <!--(1)-->
 <gfe:cache
     cache-xml-location=".."
@@ -922,7 +843,7 @@ config:
 
 
 
-``` highlight
+```highlight
 <gfe:cache use-cluster-configuration="true"/>
 ```
 
@@ -966,7 +887,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -1068,7 +989,7 @@ configuration follows:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:client-cache/>
 </beans>
@@ -1100,7 +1021,7 @@ definition, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:client-cache id="myCache" pool-name="myPool"/>
 
@@ -1135,7 +1056,7 @@ is required. For instance, you can define the following:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache/>
 
 <gfe:client-region id="Example" shortcut="LOCAL"/>
@@ -1166,7 +1087,7 @@ references automatically, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache/>
 
 <gfe:pool>
@@ -1193,7 +1114,7 @@ configuration to the following:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache id="gemfireCache" pool-name="gemfirePool"/>
 
 <gfe:pool id="gemfirePool">
@@ -1219,7 +1140,7 @@ Consider the following:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache pool-name="locatorPool"/>
 
 <gfe:pool id="locatorPool">
@@ -1351,7 +1272,7 @@ named `Orders`, you can use the following bean definition:
 
 
 
-``` highlight
+```highlight
 <gfe:lookup-region id="ordersRegion" name="Orders"/>
 ```
 
@@ -1364,7 +1285,7 @@ the Region. The example above becomes:
 
 
 
-``` highlight
+```highlight
 <!-- lookup for a Region called 'Orders' -->
 <gfe:lookup-region id="Orders"/>
 ```
@@ -1392,7 +1313,7 @@ one can reference the cache bean with the `cache-ref` attribute:
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="myCache"/>
 <gfe:lookup-region id="ordersRegion" name="Orders" cache-ref="myCache"/>
 ```
@@ -1421,7 +1342,7 @@ For instance, consider the following `cache.xml` file:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="https://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -1443,7 +1364,7 @@ You can import the preceding `cache.xml` file as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache cache-xml-location="cache.xml"/>
 ```
 
@@ -1458,7 +1379,7 @@ defined in `cache.xml` by using the following:
 
 
 
-``` highlight
+```highlight
 <gfe:auto-region-lookup/>
 ```
 
@@ -1489,7 +1410,7 @@ bean, as follows:
 
 
 
-``` highlight
+```highlight
 package example;
 
 import ...
@@ -1522,7 +1443,7 @@ would do the following:
 
 
 
-``` highlight
+```highlight
 <bean class="example.ApplicationDao" depends-on="gemfireCache"/>
 ```
 
@@ -1778,7 +1699,7 @@ inner bean definition.
 
 
 
-``` highlight
+```highlight
 <bean id="myListener" class="org.example.app.geode.cache.SimpleCacheListener"/>
 
 <gfe:replicated-region id="regionWithListeners">
@@ -1807,7 +1728,7 @@ following example must be used.
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region id="exampleReplicateRegionWithCacheListener">
     <gfe:cache-listener ref="myListener"/>
@@ -1886,7 +1807,7 @@ The following example declares a Region with both a `CacheLoader` and a
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region id="exampleReplicateRegionWithCacheLoaderAndCacheWriter">
     <gfe:cache-loader ref="myLoader"/>
@@ -1936,7 +1857,7 @@ The following example shows a Region with compression enabled:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region id="exampleReplicateRegionWithCompression">
     <gfe:compressor>
@@ -1974,7 +1895,7 @@ the following configuration:
 
 
 
-``` highlight
+```highlight
 <util:properties id="gemfireProperties">
     <prop key="off-heap-memory-size">200G</prop>
 </util:properties>
@@ -1994,7 +1915,7 @@ the following Apache Geode configuration properties using the
 
 
 
-``` highlight
+```highlight
 <gfe:cache critical-off-heap-percentage="90" eviction-off-heap-percentage"80"/>
 ```
 
@@ -2045,7 +1966,7 @@ configured as follows:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:replicated-region name="Customer">
     <gfe:replicated-region name="Address"/>
@@ -2155,7 +2076,7 @@ The following example shows one possible configuration:
 
 
 
-``` highlight
+```highlight
 <beans>
   <gfe:async-event-queue id="AEQ" persistent="false" parallel="false" dispatcher-threads="4">
     <gfe:async-event-listener>
@@ -2316,7 +2237,7 @@ file:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="https://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -2343,7 +2264,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 public class CustomerAccountDao extends GemDaoSupport {
 
     @Resource(name = "Customers/Accounts")
@@ -2364,7 +2285,7 @@ configuration metadata as follows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="https://www.springframework.org/schema/geode"
@@ -2401,7 +2322,7 @@ metadata syntax to use the nested format:
 
 
 
-``` highlight
+```highlight
 <gfe:lookup-region name="Customers">
   <gfe:lookup-region name="Accounts">
     <gfe:lookup-region name="Orders"/>
@@ -2419,7 +2340,7 @@ set to perform a lookup first:
 
 
 
-``` highlight
+```highlight
 <gfe:replicated-region name="Customers" persistent="true" ignore-if-exists="true">
   <gfe:replicated-region name="Accounts" persistent="true" ignore-if-exists="true">
     <gfe:replicated-region name="Orders" persistent="true" ignore-if-exists="true"/>
@@ -2458,7 +2379,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 <gfe:lookup-region name="/Customers/Accounts"/>
 <gfe:lookup-region name="/Customers/Accounts/Orders"/>
 ```
@@ -2504,7 +2425,7 @@ configuration:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithEviction">
   <gfe:eviction type="MEMORY_SIZE" threshold="512" action="OVERFLOW_TO_DISK"/>
 </gfe:partitioned-region>
@@ -2583,7 +2504,7 @@ set:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithExpiration">
   <gfe:region-ttl timeout="30000" action="INVALIDATE"/>
   <gfe:entry-tti timeout="600" action="LOCAL_DESTROY"/>
@@ -2612,7 +2533,7 @@ object as follows:
 
 
 
-``` highlight
+```highlight
 @Expiration(timeout = "1800", action = "INVALIDATE")
 public class SessionBasedApplicationDomainObject {
   ...
@@ -2630,7 +2551,7 @@ respectively, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @TimeToLiveExpiration(timeout = "3600", action = "LOCAL_DESTROY")
 @IdleTimeoutExpiration(timeout = "1800", action = "LOCAL_INVALIDATE")
 @Expiration(timeout = "1800", action = "INVALIDATE")
@@ -2702,7 +2623,7 @@ domain objects annotated with `@Expiration`-based annotations, you must:
 
     
     
-    ``` highlight
+    ```highlight
     <bean id="ttlExpiration" class="org.springframework.data.gemfire.expiration.AnnotationBasedExpiration"
           factory-method="forTimeToLive"/>
 
@@ -2750,7 +2671,7 @@ domain objects annotated with `@Expiration`-based annotations, you must:
 
 
 
-``` highlight
+```highlight
 <bean id="defaultExpirationAttributes" class="org.apache.geode.cache.ExpirationAttributes">
     <constructor-arg value="600"/>
     <constructor-arg value="#{T(org.apache.geode.cache.ExpirationAction).DESTROY}"/>
@@ -2790,7 +2711,7 @@ attributes, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @TimeToLiveExpiration(timeout = "${geode.region.entry.expiration.ttl.timeout}"
     action = "${geode.region.entry.expiration.ttl.action}")
 public class ExampleApplicationDomainObject {
@@ -2807,7 +2728,7 @@ following beans:
 
 
 
-``` highlight
+```highlight
 <util:properties id="expirationSettings">
   <prop key="geode.region.entry.expiration.ttl.timeout">600</prop>
   <prop key="geode.region.entry.expiration.ttl.action">INVALIDATE</prop>
@@ -2837,7 +2758,7 @@ builds on the preceding example):
 
 
 
-``` highlight
+```highlight
 <util:properties id="expirationSettings">
   <prop key="geode.region.entry.expiration.ttl.timeout">600</prop>
   <prop key="geode.region.entry.expiration.ttl.action">#{T(org.springframework.data.gemfire.expiration.ExpirationActionType).DESTROY}</prop>
@@ -2857,7 +2778,7 @@ action as follows:
 
 
 
-``` highlight
+```highlight
 @TimeToLiveExpiration(timeout = "@expirationSettings['geode.region.entry.expiration.ttl.timeout']"
     action = "@expirationSetting['geode.region.entry.expiration.ttl.action']")
 public class ExampleApplicationDomainObject {
@@ -2906,7 +2827,7 @@ the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePersitentPartitionRegion" persistent="true"/>
 ```
 
@@ -2922,7 +2843,7 @@ as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="anotherExamplePersistentPartitionRegion" data-policy="PERSISTENT_PARTITION"/>
 ```
 
@@ -2946,7 +2867,7 @@ example shows a synchronous `DiskStore`:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="yetAnotherExamplePersistentPartitionRegion" persistent="true"
     disk-store-ref="myDiskStore" disk-synchronous="true"/>
 ```
@@ -2975,7 +2896,7 @@ subscription policy set to `CACHE_CONTENT`:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegionWithCustomSubscription">
   <gfe:subscription type="CACHE_CONTENT"/>
 </gfe:partitioned-region>
@@ -3004,7 +2925,7 @@ conventions to wire the cache):
 
 
 
-``` highlight
+```highlight
 <gfe:local-region id="exampleLocalRegion"/>
 ```
 
@@ -3041,7 +2962,7 @@ following example shows a minimal declaration:
 
 
 
-``` highlight
+```highlight
 <gfe:replicated-region id="exampleReplica"/>
 ```
 
@@ -3095,7 +3016,7 @@ redundant copies:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="examplePartitionRegion" copies="2" total-buckets="17">
   <gfe:partition-resolver>
     <bean class="example.PartitionResolver"/>
@@ -3240,7 +3161,7 @@ The following example shows a typical client Region configuration:
 
 
 
-``` highlight
+```highlight
 <bean id="myListener" class="example.CacheListener"/>
 
 <!-- client Region using the default SDG gemfirePool Pool -->
@@ -3312,7 +3233,7 @@ The following example shows both key-based and regular expression-based
 
 
 
-``` highlight
+```highlight
 <gfe:client-region id="Example" pool-name="myPool">
     <gfe:key-interest durable="true" result-policy="KEYS">
         <bean id="key" class="java.lang.String">
@@ -3383,7 +3304,7 @@ following example shows how to do so:
 
 
 
-``` highlight
+```highlight
 <gfe:pool ... subscription-enabled="true">
   ...
 </gfe:pool>
@@ -3417,7 +3338,7 @@ interests in keys in this server Region:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region name="ServerSideRegion" enable-subscription-conflation="true">
   ...
 </gfe:partitioned-region>
@@ -3434,7 +3355,7 @@ the cluster, set the `durable-client-timeout` attribute on the
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache durable-client-timeout="600">
   ...
 </gfe:client-cache>
@@ -3524,7 +3445,7 @@ and `convert-returned-collections` attributes:
 
 
 
-``` highlight
+```highlight
 <gfe-data:json-region-autoproxy region-refs="myJsonRegion" pretty-print="true" convert-returned-collections="false"/>
 ```
 
@@ -3555,7 +3476,7 @@ element, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
@@ -3594,7 +3515,7 @@ Consider the following example, which has a `lastName` property:
 
 
 
-``` highlight
+```highlight
 @Region("Customers")
 class Customer {
 
@@ -3617,7 +3538,7 @@ Repository to query for `Customer` objects:
 
 
 
-``` highlight
+```highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
 
   Customer findByLastName(String lastName);
@@ -3635,7 +3556,7 @@ statement being generated and ran:
 
 
 
-``` highlight
+```highlight
 SELECT * FROM /Customers c WHERE c.lastName = '$1'
 ```
 
@@ -3648,7 +3569,7 @@ to the following:
 
 
 
-``` highlight
+```highlight
 <gfe:index id="myIndex" name="CustomersLastNameIndex" expression="lastName" from="/Customers" type="HASH"/>
 ```
 
@@ -3703,7 +3624,7 @@ prior to creating them by using the `define` attribute, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 
@@ -4003,7 +3924,7 @@ shows:
 
 
 
-``` highlight
+```highlight
 <gfe:disk-store id="Example" auto-compact="true" max-oplog-size="10"
                 queue-size="50" time-interval="9999">
     <gfe:disk-dir location="/disk/location/one" max-size="20"/>
@@ -4072,7 +3993,7 @@ definition, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe-data:snapshot-service id="gemfireCacheSnapshotService">
   <gfe-data:snapshot-import location="/absolute/filesystem/path/to/import/fileOne.snapshot"/>
   <gfe-data:snapshot-import location="relative/filesystem/path/to/import/fileTwo.snapshot"/>
@@ -4101,7 +4022,7 @@ to refer to the cache bean by name, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache id="myCache"/>
 ...
 <gfe-data:snapshot-service id="mySnapshotService" cache-ref="myCache">
@@ -4118,7 +4039,7 @@ specifying the `region-ref` attribute, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="Example" persistent="false" .../>
 ...
 <gfe-data:snapshot-service id="gemfireCacheRegionSnapshotService" region-ref="Example">
@@ -4208,7 +4129,7 @@ file on import for a `cache`-based Snapshot Service, as follows:
 
 
 
-``` highlight
+```highlight
   <gfe-data:snapshot-service id="cacheBasedSnapshotService" cache-ref="gemfireCache">
     <gfe-data:snapshot-import location="/path/to/snapshots.zip"/>
   </gfe-data:snapshot-service>
@@ -4243,7 +4164,7 @@ definition, as the following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache/>
 
 <gfe:partitioned-region id="Admins" persistent="false"/>
@@ -4299,7 +4220,7 @@ The following example shows a definition for a
 
 
 
-``` highlight
+```highlight
 <bean id="activeUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
       factory-method="and">
   <constructor-arg index="0">
@@ -4321,7 +4242,7 @@ another filter by using `or`, as follows:
 
 
 
-``` highlight
+```highlight
 <bean id="covertOrActiveUsersSinceFilter" class="org.springframework.data.gemfire.snapshot.filter.ComposableSnapshotFilter"
       factory-method="or">
   <constructor-arg index="0">
@@ -4400,7 +4321,7 @@ your application as follows:
 
 
 
-``` highlight
+```highlight
 @Component
 public class ExampleApplicationComponent {
 
@@ -4485,7 +4406,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 <gfe:function-service>
   <gfe:function>
       <bean class="example.FunctionOne"/>
@@ -4529,7 +4450,7 @@ shown):
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="region-with-inner-gateway-sender" >
     <gfe:gateway-sender remote-distributed-system-id="1">
         <gfe:event-filter>
@@ -4575,7 +4496,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 <gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
     <gfe:transport-filter>
         <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
@@ -4828,7 +4749,7 @@ Spring-based Apache Geode `ClientCache` application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 class ClientApplication { .. }
@@ -4850,7 +4771,7 @@ Spring-based Apache Geode embedded peer `Cache` application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 class ServerApplication { .. }
@@ -4873,7 +4794,7 @@ Spring-based Apache Geode embedded peer `Cache` application with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 class ServerApplication { .. }
@@ -4960,7 +4881,7 @@ Spring-based Apache Geode `ClientCache` application using Locators
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication(locators = {
     @Locator(host = "boombox" port = 11235),
@@ -5023,7 +4944,7 @@ Spring-based Apache Geode `ClientCache` application using multiple named
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication(logLevel = "info")
 @EnablePool(name = "VenusPool", servers = @Server(host = "venus", port = 48484),
@@ -5065,7 +4986,7 @@ Spring-based Apache Geode `CacheServer` application using multiple named
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheSeverApplication(logLevel = "info", autoStartup = true, maxConnections = 100)
 @EnableCacheServer(name = "Venus", autoStartup = true,
@@ -5143,7 +5064,7 @@ Spring Boot, Apache Geode Locator Application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @LocatorApplication(port = 12345)
 class LocatorApplication { ... }
@@ -5180,7 +5101,7 @@ Locator on `localhost`, port `12345`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[12345]")
 class ServerApplication { ... }
@@ -5311,7 +5232,7 @@ Customizing a Spring Boot `CacheServer` application with a
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(name = "SpringServerApplication")
 class ServerApplication {
@@ -5344,7 +5265,7 @@ Customizing a Spring Boot `ClientCache` application with a
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 class ClientApplication {
@@ -5439,7 +5360,7 @@ Client `application.properties`
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.log-level=info
 spring.data.gemfire.pool.Venus.servers=venus[48484]
 spring.data.gemfire.pool.Venus.max-connections=200
@@ -5468,7 +5389,7 @@ Server `application.properties`
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.log-level=info
 spring.data.gemfire.cache.server.port=40404
 spring.data.gemfire.cache.server.Venus.port=43434
@@ -5490,7 +5411,7 @@ Spring `@ClientCacheApplication` class
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePools(pools = {
@@ -5514,7 +5435,7 @@ Spring `@CacheServerApplication` class
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(name = "SpringServerApplication")
 @EnableCacheServers(servers = {
@@ -5538,7 +5459,7 @@ purpose, as the following example demonstrates:
 
 
 
-``` highlight
+```highlight
 @Component
 class MyApplicationComponent {
 
@@ -5568,7 +5489,7 @@ The following example shows such an arrangement:
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.server.bind-address=10.105.20.1
 spring.data.gemfire.cache.server.Venus.bind-address=10.105.20.2
 spring.data.gemfire.cache.server.Saturn...
@@ -5609,7 +5530,7 @@ Properties of Properties
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.server.port=${gemfire.cache.server.port:40404}
 ```
 
@@ -5626,7 +5547,7 @@ Property placehodler nesting
 
 
 
-``` highlight
+```highlight
 @Bean
 CacheServerConfigurer cacheServerPortConfigurer(
     @Value("${gemfire.cache.server.port:${some.other.property:40404}}")
@@ -5686,7 +5607,7 @@ Locator
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableLocator
@@ -5722,7 +5643,7 @@ Spring, Apache Geode `CacheServer` application connecting to a Locator
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[10334]")
 class ServerApplication { .. }
@@ -5746,7 +5667,7 @@ connecting to the Locator
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[10334]")
 public class ServerApplication {
@@ -5776,7 +5697,7 @@ IDE run profile configuration
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.name=SpringCacheServerOne
 spring.data.gemfire.cache.server.port=41414
 spring.profiles.active=embedded-locator
@@ -5855,7 +5776,7 @@ Spring `CacheServer` application running an embedded Manager
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[10334]")
 public class ServerApplication {
@@ -5881,7 +5802,7 @@ small cluster and manage it, as follows:
 
 
 
-``` highlight
+```highlight
 $ gfsh
     _________________________     __
    / _____/ ______/ ______/ /____/ /
@@ -5921,7 +5842,7 @@ would need to connect directly to the Manager by using the following:
 
 
 
-``` highlight
+```highlight
 gfsh>connect --jmx-manager=localhost[1099]
 ```
 
@@ -5986,7 +5907,7 @@ Spring `CacheServer` application running the embedded HTTP server
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableHttpService
@@ -6031,7 +5952,7 @@ Spring `CacheServer` application running an embedded Memcached server
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnabledMemcachedServer
@@ -6069,7 +5990,7 @@ Spring `ClientCache` application with Logging enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableLogging(logLevel="info", logFile="/absolute/file/system/path/to/application.log)
@@ -6126,7 +6047,7 @@ Spring `ClientCache` application with Statistics enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableStatistics
@@ -6216,7 +6137,7 @@ Spring `ClientCache` application with PDX enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx
@@ -6278,7 +6199,7 @@ composite `PdxSerializer`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx(serializerBeanName = "compositePdxSerializer")
@@ -6376,7 +6297,7 @@ set
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableGemFireProperties(conflateEvents = true, socketBufferSize = 16384)
@@ -6446,7 +6367,7 @@ configuration
 
 
 
-``` highlight
+```highlight
 @Configuration
 class GemFireConfiguration {
 
@@ -6481,7 +6402,7 @@ Example Region bean definition using SDG's XML Namespace
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="exampleRegion" name="Example" persistent="true">
     ...
 </gfe:partitioned-region>
@@ -6543,7 +6464,7 @@ Application domain object type modeling a Book
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 class Book {
 
@@ -6578,7 +6499,7 @@ Repository for Books
 
 
 
-``` highlight
+```highlight
 interface BookRepository extends CrudRepository<Book, ISBN> { .. }
 ```
 
@@ -6629,7 +6550,7 @@ Entity-defined Region Configuration
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableEntityDefinedRegions(basePackages = "example.app.domain")
@@ -6699,7 +6620,7 @@ Entity-defined Region Configuration using the Entity class type
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableGemfireRepositories
@@ -6834,7 +6755,7 @@ Spring `ClientCache` application with a local-only, client Region
 
 
 
-``` highlight
+```highlight
 @ClientRegion(shortcut = ClientRegionShortcut.LOCAL)
 class ClientLocalEntityType { .. }
 ```
@@ -6898,7 +6819,7 @@ Defining a Region with Gfsh
 
 
 
-``` highlight
+```highlight
 gfsh>create region --name=Books --type=PARTITION
  Member   | Status
 --------- | --------------------------------------
@@ -6940,7 +6861,7 @@ Adding an additional peer member to the cluster
 
 
 
-``` highlight
+```highlight
 gfsh>list members
   Name    | Id
 --------- | ----------------------------------------------
@@ -7021,7 +6942,7 @@ Defining Client Regions from the Cluster with
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableClusterDefinedRegions
 class BookStoreClientApplication {
@@ -7080,7 +7001,7 @@ Using the "Books" Region
 
 
 
-``` highlight
+```highlight
 @org.springframework.stereotype.Repository
 class BooksDataAccessObject {
 
@@ -7106,7 +7027,7 @@ Using the "Books" Region with a SD Repository
 
 
 
-``` highlight
+```highlight
 interface BookRepository extends CrudRepository<Book, ISBN> {
     ...
 }
@@ -7173,7 +7094,7 @@ Spring application with eviction enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableEviction(policies = {
@@ -7276,7 +7197,7 @@ Applicaton domain object specific expiration policy
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 @TimeToLiveExpiration(timeout = 30000, action = "INVALIDATE")
 class Book { .. }
@@ -7296,7 +7217,7 @@ Spring application with expiration enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableExpiration
@@ -7319,7 +7240,7 @@ Spring application with region-specific expiration policies
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableExpiration(policies = {
@@ -7386,7 +7307,7 @@ Spring application with Region compression enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCompression(compressorBeanName = "MyCompressor", regionNames = { "Customers", "Orders" })
@@ -7502,7 +7423,7 @@ Spring application with Off-Heap enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableOffHeap(memorySize = 8192m regionNames = { "Customers", "Orders" })
@@ -7604,7 +7525,7 @@ Spring application defining a `DiskStore`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableDiskStore(name = "OrdersDiskStore", autoCompact = true, compactionThreshold = 70,
@@ -7651,7 +7572,7 @@ Spring application with custom DiskStore configuration
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableDiskStore(name = "OrdersDiskStore", autoCompact = true, compactionThreshold = 70,
@@ -7738,7 +7659,7 @@ Index bean definition using Java config
 
 
 
-``` highlight
+```highlight
 @Bean("BooksIsbnIndex")
 IndexFactoryBean bookIsbnIndex(GemFireCache gemfireCache) {
 
@@ -7768,7 +7689,7 @@ Index bean definition using XML
 
 
 
-``` highlight
+```highlight
 <gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
 ```
 
@@ -7795,7 +7716,7 @@ Application domain object type modeling a book using indexes
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 class Book {
 
@@ -7865,7 +7786,7 @@ Application domain object type modeling a Book with customized indexes
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 class Book {
 
@@ -7914,7 +7835,7 @@ Spring application with Indexing enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableEntityDefinedRegions
@@ -8072,7 +7993,7 @@ Spring `ClientCache` application with registered CQ and listener.
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication(subcriptionEnabled = true)
 @EnableContinuousQueries
@@ -8161,7 +8082,7 @@ transaction, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Service
 class PointOfSaleService
 
@@ -8198,7 +8119,7 @@ Enabling Caching using Apache Geode as the caching provider
 
 
 
-``` highlight
+```highlight
 @EnableCaching
 class CachingConfiguration {
 
@@ -8246,7 +8167,7 @@ Enabling Apache Geode Caching
 
 
 
-``` highlight
+```highlight
 @EnableGemfireCaching
 @EnableCachingDefinedRegions
 class CachingConfiguration {
@@ -8456,7 +8377,7 @@ Spring `ClientCache` application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCachingDefinedRegions
@@ -8549,7 +8470,7 @@ Spring `ClientCache` application with SSL enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl
@@ -8584,7 +8505,7 @@ Spring `ClientCache` application with SSL enabled by component
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl(components = { GATEWAY, LOCATOR, SERVER })
@@ -8720,7 +8641,7 @@ Spring server application using Apache Shiro
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableSecurity
@@ -8865,7 +8786,7 @@ Spring client application using `@EnableSecurity`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSecurity
@@ -8888,7 +8809,7 @@ credentials
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.security.username=jackBlack
 spring.data.gemfire.security.password=b@cK!nB1@cK
 ```
@@ -8967,7 +8888,7 @@ Spring `ClientCache` application with the kitchen sink
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableContinuousQueries
@@ -8995,7 +8916,7 @@ Spring `ClientCache` application with the kitcken sink to boot
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @Import({ GemFireConfiguration.class, CachingConfiguration.class,
     FunctionsConfiguration.class, QueriesConfiguration.class,
@@ -9194,7 +9115,7 @@ the following:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 public class ClientApplication {
@@ -9230,7 +9151,7 @@ the following:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 public class ServerApplication {
@@ -9289,7 +9210,7 @@ port, `10334`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableLocator
@@ -9339,7 +9260,7 @@ port, `1099`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableManager
@@ -9388,7 +9309,7 @@ embedded HTTP server (Jetty) listening on port `7070`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableHttpService
@@ -9438,7 +9359,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableMemcachedServer
@@ -9487,7 +9408,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableLogging(logLevel="trace")
@@ -9536,7 +9457,7 @@ Apache Geode client or server application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableStatistics
@@ -9572,7 +9493,7 @@ Geode client or server application class with `@EnablePdx`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx
@@ -9639,7 +9560,7 @@ server application class with `@EnableSsl`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl(components = SERVER)
@@ -9703,7 +9624,7 @@ client or server application class with `@EnableSecurity`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSecurity
@@ -9769,7 +9690,7 @@ Apache Geode client or server application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableGemFireProperties(
@@ -9828,7 +9749,7 @@ Spring, Apache Geode client or server application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCachingDefinedRegions
@@ -9850,7 +9771,7 @@ caching, as follows:
 
 
 
-``` highlight
+```highlight
 @Service
 public class BookService {
 
@@ -9904,7 +9825,7 @@ server applications, annotate your application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableEntityDefinedRegions(basePackageClasses = Book.class)
@@ -9943,7 +9864,7 @@ application queries, as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.model;
 
 import ...;
@@ -9990,7 +9911,7 @@ access `Books`, as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.repo;
 
 import ...;
@@ -10069,7 +9990,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableClusterDefinedRegions
@@ -10114,7 +10035,7 @@ methods on POJOs, as follows:
 
 
 
-``` highlight
+```highlight
 @PeerCacheApplication
 @EnableGemfireFunctions
 class ServerApplication {
@@ -10140,7 +10061,7 @@ and `@OnServers`.
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableGemfireFunctionExecutions(basePackageClasses = CustomerRewardsFunction.class)
 class ClientApplication {
@@ -10213,7 +10134,7 @@ event handlers, as follows:
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableContinuousQueries
 class ClientApplication {
@@ -10233,7 +10154,7 @@ Then, define your CQs by annotating the associated handler method with
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -10311,7 +10232,7 @@ Using `@EnableClusterConfiguration`
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableClusterConfiguration(useHttp = true)
 class ClientApplication {
@@ -10394,7 +10315,7 @@ annotated with `@EnableGatewayReceiver` as follows:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewayReceiver(manualStart = false, startPort = 10000, endPort = 11000, maximumTimeBetweenPings = 1000,
     socketBufferSize = 16384, bindAddress = "localhost",transportFilters = {"transportBean1", "transportBean2"},
@@ -10437,7 +10358,7 @@ with `@EnableGatewaySenders` and `@EnableGatewaySender` as follows:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewaySenders(gatewaySenders = {
         @EnableGatewaySender(name = "GatewaySender", manualStart = true,
@@ -10496,7 +10417,7 @@ child if required, as demonstrated below:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewaySenders(gatewaySenders = {
         @EnableGatewaySender(name = "GatewaySender", transportFilters = "transportBean1", regions = "Region2"),
@@ -10571,7 +10492,7 @@ classes:
 
 
 
-``` highlight
+```highlight
 <bean id="gemfireTemplate" class="org.springframework.data.gemfire.GemfireTemplate" p:region-ref="SomeRegion"/>
 ```
 
@@ -10586,7 +10507,7 @@ management concerns:
 
 
 
-``` highlight
+```highlight
 template.execute(new GemfireCallback<Iterable<String>>() {
 
     public Iterable<String> doInGemfire(Region region)
@@ -10682,7 +10603,7 @@ Enable Transaction Management using XML
 
 
 
-``` highlight
+```highlight
 <gfe:transaction-manager id="txManager" cache-ref="myCache"/>
 ```
 
@@ -10823,7 +10744,7 @@ Set copy-on-read using XML (client)
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache ... copy-on-read="true"/>
 ```
 
@@ -10840,7 +10761,7 @@ Set copyOnRead using JavaConfig (client)
 
 
 
-``` highlight
+```highlight
 @Bean
 ClientCacheFactoryBean gemfireCache() {
 
@@ -10865,7 +10786,7 @@ Set copy-on-read using XML (server)
 
 
 
-``` highlight
+```highlight
 <gfe:cache ... copy-on-read="true"/>
 ```
 
@@ -10882,7 +10803,7 @@ Set copyOnRead using JavaConfig (server)
 
 
 
-``` highlight
+```highlight
 @Bean
 CacheFactoryBean gemfireCache() {
 
@@ -10927,7 +10848,7 @@ The configuration looks like this…​
 
 
 
-``` highlight
+```highlight
 @Configuration
 @EnableGemFireAsLastResource
 @EnableTransactionManagement(order = 1)
@@ -10962,7 +10883,7 @@ Spring's `JtaTransactionManager` when using JTA transactions like so..
 
 
 
-``` highlight
+```highlight
 @Bean
 public JtaTransactionManager transactionManager(UserTransaction userTransaction) {
 
@@ -11045,7 +10966,7 @@ Declaring a service method as @Transactional
 
 
 
-``` highlight
+```highlight
 @Service
 class MyTransactionalService {
 
@@ -11088,7 +11009,7 @@ Transaction Log Output
 
 
 
-``` highlight
+```highlight
 2017-Jun-22 11:11:37 TRACE TransactionInterceptor - Getting transaction for [example.app.service.MessageService.send]
 
 2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionAcquiringAspect - Acquiring GemFire Connection
@@ -11147,7 +11068,7 @@ After Transaction Commit Event Listener
 
 
 
-``` highlight
+```highlight
 @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
 public void handleAfterCommit(MyEvent event) {
     // do something after transaction is committed
@@ -11168,7 +11089,7 @@ Publishing a Transactional Event
 
 
 
-``` highlight
+```highlight
 @Service
 class MyTransactionalService {
 
@@ -11221,7 +11142,7 @@ Enable auto transaction event publishing
 
 
 
-``` highlight
+```highlight
 @EnableGemfireCacheTransactions(enableAutoTransactionEventPublishing = true)
 class GeodeConfiguration { ... }
 ```
@@ -11236,7 +11157,7 @@ to handle transaction events during either the `AFTER_COMMIT` or
 
 
 
-``` highlight
+```highlight
 @Component
 class TransactionEventListeners {
 
@@ -11398,7 +11319,7 @@ handling methods and their parameters:
 
 
 
-``` highlight
+```highlight
 public interface EventDelegate {
      void handleEvent(CqEvent event);
      void handleEvent(Operation baseOp);
@@ -11415,7 +11336,7 @@ public interface EventDelegate {
 
 
 
-``` highlight
+```highlight
 package example;
 
 class DefaultEventDelegate implements EventDelegate {
@@ -11446,7 +11367,7 @@ contract and the implementation.</td>
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="https://www.springframework.org/schema/geode"
@@ -11500,7 +11421,7 @@ listeners. The full blown, **beans** definition is displayed below:
 
 
 
-``` highlight
+```highlight
 <!-- this is the Event Driven POJO (MDP) -->
 <bean id="eventListener" class="org.springframework.data.gemfire.listener.adapter.ContinuousQueryListenerAdapter">
     <constructor-arg>
@@ -11593,7 +11514,7 @@ consider the following declaration (taken from the `Declarable`
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <parameter name="URL">
@@ -11649,7 +11570,7 @@ Let's see how our `DBLoader` declaration would look in that case:
 
 
 
-``` highlight
+```highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
   private DataSource dataSource;
@@ -11666,7 +11587,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- no parameter is passed (use the bean's implicit name, which is the class name) -->
@@ -11677,7 +11598,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:p="http://www.springframework.org/schema/p"
@@ -11705,7 +11626,7 @@ Apache Geode configuration:
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- pass the bean definition template name as parameter -->
@@ -11719,7 +11640,7 @@ Apache Geode configuration:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:p="http://www.springframework.org/schema/p"
@@ -11787,7 +11708,7 @@ injected with a Spring-configured `DataSource` in the following way:
 
 
 
-``` highlight
+```highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
   // use annotations to 'mark' the needed dependencies
@@ -11802,7 +11723,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- no need to declare any parameters since the class is auto-wired -->
@@ -11813,7 +11734,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -11863,7 +11784,7 @@ your configuration:
 
 
 
-``` highlight
+```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:gfe="https://www.springframework.org/schema/geode"
@@ -11923,7 +11844,7 @@ a `CustomerService` application component that performs caching…​
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -11945,7 +11866,7 @@ XML:
 
 
 
-``` highlight
+```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:gfe="https://www.springframework.org/schema/geode"
@@ -11978,7 +11899,7 @@ JavaConfig:
 
 
 
-``` highlight
+```highlight
 @Configuration
 @EnableCaching
 class ApplicationConfiguration {
@@ -12094,7 +12015,7 @@ example shows:
 
 
 
-``` highlight
+```highlight
 <bean id="instantiator" class="org.springframework.data.gemfire.serialization.WiringInstantiator">
   <!-- DataSerializable type -->
   <constructor-arg>org.pkg.SomeDataSerializableClass</constructor-arg>
@@ -12132,7 +12053,7 @@ instantiator:
 
 
 
-``` highlight
+```highlight
 <bean id="instantiatorFactory" class="org.springframework.data.gemfire.serialization.InstantiatorFactoryBean">
   <property name="customTypes">
     <map>
@@ -12257,7 +12178,7 @@ domain classes constructor directly. I.e. for this example type:
 
 
 
-``` highlight
+```highlight
 class Person {
   Person(String firstname, String lastname) { … }
 }
@@ -12272,7 +12193,7 @@ runtime:
 
 
 
-``` highlight
+```highlight
 class PersonObjectInstantiator implements ObjectInstantiator {
 
   Object newInstance(Object... args) {
@@ -12358,7 +12279,7 @@ runtime generated accessor classes to interact with the entity instance.
 
 
 
-``` highlight
+```highlight
 class Person {
 
   private final Long id;
@@ -12395,7 +12316,7 @@ Example 1. A generated Property Accessor
 
 
 
-``` highlight
+```highlight
 class PersonPropertyAccessor implements PersistentPropertyAccessor {
 
   private static final MethodHandle firstname;              (2)
@@ -12480,7 +12401,7 @@ Example 2. A sample entity
 
 
 
-``` highlight
+```highlight
 class Person {
 
   private final @Id Long id;                                                (1)
@@ -12619,7 +12540,7 @@ superclass. Consider the following example:
 
 
 
-``` highlight
+```highlight
 public class SuperType {
 
    private CharSequence field;
@@ -12726,7 +12647,7 @@ define mutable properties. Consider the following `data` class `Person`:
 
 
 
-``` highlight
+```highlight
 data class Person(val id: String, val name: String)
 ```
 
@@ -12746,7 +12667,7 @@ preference:
 
 
 
-``` highlight
+```highlight
 data class Person(var id: String, val name: String) {
 
     @PersistenceCreator
@@ -12772,7 +12693,7 @@ class that applies parameter defaulting for `name`
 
 
 
-``` highlight
+```highlight
 data class Person(var id: String, val name: String = "unknown")
 ```
 
@@ -12801,7 +12722,7 @@ following `data` class `Person`:
 
 
 
-``` highlight
+```highlight
 data class Person(val id: String, val name: String)
 ```
 
@@ -12832,7 +12753,7 @@ to alter properties in subclasses.
 
 
 
-``` highlight
+```highlight
 open class SuperType(open var field: Int)
 
 class SubType(override var field: Int = 1) :
@@ -12855,7 +12776,7 @@ each class. Effectively, the code looks like as follows:
 
 
 
-``` highlight
+```highlight
 public class SuperType {
 
    private int field;
@@ -12951,7 +12872,7 @@ Example 3. Mapping a domain class to a Apache Geode Region
 
 
 
-``` highlight
+```highlight
 @Region("People")
 public class Person {
 
@@ -12992,7 +12913,7 @@ stored in Sub-Regions as well, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Region("/Users/Admin")
 public class Admin extends User {
   …
@@ -13068,7 +12989,7 @@ define your corresponding `Repository` interface extensions as follows:
 
 
 
-``` highlight
+```highlight
 @Region("People")
 public interface PersonRepository extends GemfireRepository<Person, String> {
 …
@@ -13089,7 +13010,7 @@ multiple Apache Geode Regions, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -13148,7 +13069,7 @@ Example 4. Using `@Value` on entity constructor parameters
 
 
 
-``` highlight
+```highlight
 public class Person {
 
   public Person(@Value("#root.thing") String firstName, @Value("bean") String lastName) {
@@ -13219,7 +13140,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.security.auth.model;
 
 public class User {
@@ -13260,7 +13181,7 @@ type
 
 
 
-``` highlight
+```highlight
 Map<?, PdxSerializer> customPdxSerializers = new HashMap<>();
 
 customPdxSerializers.put(Password.class, new SaltedHashPasswordPdxSerializer());
@@ -13299,7 +13220,7 @@ name
 
 
 
-``` highlight
+```highlight
 Map<?, PdxSerializer> customPdxSerializers = new HashMap<>();
 
 customPdxSerializers.put("example.app.security.auth.model.User.password", new SaltedHashPasswordPdxSerializer());
@@ -13354,7 +13275,7 @@ For example:
 
 
 
-``` highlight
+```highlight
 class Customer {
 
   @Id
@@ -13393,7 +13314,7 @@ property, as follows:
 
 
 
-``` highlight
+```highlight
 package example;
 
 class ApplicationDomainType {
@@ -13468,7 +13389,7 @@ properties as follows:
 
 
 
-``` highlight
+```highlight
 package example;
 
 class Process {
@@ -13545,7 +13466,7 @@ The following example shows the `Predicate` API in action:
 
 
 
-``` highlight
+```highlight
 Predicate<Class<?>> customerTypes =
   type -> Customer.class.getPackage().getName().startsWith(type.getName()); // Include all types in the same package as `Customer`
 
@@ -13641,7 +13562,7 @@ method, as follows:
 
 
 
-``` highlight
+```highlight
 Predicate<Class<?>> principalTypeFilter =
   type -> java.security.Principal.class.isAssignableFrom(type);
 
@@ -13712,7 +13633,7 @@ Example 7. Bootstrap Spring Data for GemFire Repositories in XML
 
 
 
-``` highlight
+```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe-data="https://www.springframework.org/schema/data/geode"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -13777,7 +13698,7 @@ Example 8. Bootstrap Spring Data for GemFire Repositories with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @EnableGemfireRepositories(basePackages = "com.example.acme.repository")
 class SpringDataApplication {
@@ -13873,7 +13794,7 @@ Example 9. Sample Repository
 
 
 
-``` highlight
+```highlight
 @Region("People")
 public class Person { … }
 ```
@@ -13882,7 +13803,7 @@ public class Person { … }
 
 
 
-``` highlight
+```highlight
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
   Person findByEmailAddress(String emailAddress);
@@ -14176,7 +14097,7 @@ Example 10. Sample Customers Repository
 
 
 
-``` highlight
+```highlight
 package ...;
 
 import org.springframework.data.annotation.Id;
@@ -14197,7 +14118,7 @@ public class Customer ... {
 
 
 
-``` highlight
+```highlight
 package ...;
 
 import org.springframework.data.gemfire.repository.GemfireRepository;
@@ -14248,7 +14169,7 @@ Example 11. CustomerRepository
 
 
 
-``` highlight
+```highlight
 public interface CustomerRepository extends GemfireRepository<Customer, Long> {
 
   @Trace
@@ -14328,7 +14249,7 @@ Example 12. QueryPostProcessor
 
 
 
-``` highlight
+```highlight
 package org.springframework.data.gemfire.repository.query;
 
 import org.springframework.core.Ordered;
@@ -14411,7 +14332,7 @@ Example 13. LoggingQueryPostProcessor
 
 
 
-``` highlight
+```highlight
 package example;
 
 import ...;
@@ -14457,7 +14378,7 @@ Example 14. CustomerRepository
 
 
 
-``` highlight
+```highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
 
   Customer findByAccountNumber(String accountNumber);
@@ -14486,7 +14407,7 @@ Example 15. CustomerLoggingQueryPostProcessor
 
 
 
-``` highlight
+```highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> { .. }
 ```
 
@@ -14519,7 +14440,7 @@ Example 16. OrderedLimitedCustomerByLastNameQueryPostProcessor
 
 
 
-``` highlight
+```highlight
 class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
 
   private final int limit;
@@ -14561,7 +14482,7 @@ Example 17. CustomerRepository using the convention
 
 
 
-``` highlight
+```highlight
 interface CustomerRepository extends CrudRepository<Customer, Long> {
 
   @Limit(5)
@@ -14599,7 +14520,7 @@ Example 18. Defining the `order` property
 
 
 
-``` highlight
+```highlight
 class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
 
   @Override
@@ -14790,7 +14711,7 @@ similar to the following (ignoring the return type for the moment):
 
 
 
-``` highlight
+```highlight
 public Object method1(String s1, int i2) { ... }
 public Object method2(Map<?, ?> data, String s1, int i2) { ... }
 public Object method3(String s1, Map<?, ?> data, int i2) { ... }
@@ -14830,7 +14751,7 @@ expose POJO methods as Apache Geode Functions:
 
 
 
-``` highlight
+```highlight
 @Component
 public class ApplicationFunctions {
 
@@ -14977,7 +14898,7 @@ example activates annotation processing with XML:
 
 
 
-``` highlight
+```highlight
 <gfe:annotation-driven/>
 ```
 
@@ -14990,7 +14911,7 @@ Java configuration class:
 
 
 
-``` highlight
+```highlight
 @Configuration
 @EnableGemfireFunctions
 class ApplicationConfiguration { ... }
@@ -15064,7 +14985,7 @@ The following listing shows a few examples:
 
 
 
-``` highlight
+```highlight
 @OnRegion(region="SomeRegion", resultCollector="myCollector")
 public interface FunctionExecution {
 
@@ -15098,7 +15019,7 @@ configuration:
 
 
 
-``` highlight
+```highlight
 <gfe-data:function-executions base-package="org.example.myapp.gemfire.functions"/>
 ```
 
@@ -15118,7 +15039,7 @@ Optionally, you can annotate your Java configuration class as follows:
 
 
 
-``` highlight
+```highlight
 @EnableGemfireFunctionExecutions(basePackages = "org.example.myapp.gemfire.functions")
 ```
 
@@ -15138,7 +15059,7 @@ will invoke the Function:
 
 
 
-``` highlight
+```highlight
 @Component
 public class MyApplication {
 
@@ -15169,7 +15090,7 @@ Example 19. Using the `GemfireOnRegionFunctionTemplate`
 
 
 
-``` highlight
+```highlight
 Set<?, ?> myFilter = getFilter();
 Region<?, ?> myRegion = getRegion();
 GemfireOnRegionOperations template = new GemfireOnRegionFunctionTemplate(myRegion);
@@ -15211,7 +15132,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 public class OrderFunctions {
 
   @GemfireFunction(...)
@@ -15242,7 +15163,7 @@ Your `Order` class and `OrderSource` enum might be defined as follows:
 
 
 
-``` highlight
+```highlight
 public class Order ... {
 
   private Long orderNumber;
@@ -15271,7 +15192,7 @@ Of course, you can define a Function `Execution` interface to call the
 
 
 
-``` highlight
+```highlight
 @OnServer
 public interface OrderProcessingFunctions {
   Order process(Order order, OrderSource orderSourceEnum, Integer count);
@@ -15299,7 +15220,7 @@ Apache Geode server(s), as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:cache pdx-read-serialized="true"/>
 ```
 
@@ -15312,7 +15233,7 @@ for a Apache Geode cache client application, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache pdx-read-serialized="true"/>
 ```
 
@@ -15360,7 +15281,7 @@ You might pass the following arguments when invoking the Function:
 
 
 
-``` highlight
+```highlight
 orderProcessingFunctions.process(new Order(123, customer, LocalDateTime.now(), items), OrderSource.ONLINE, 400);
 ```
 
@@ -15372,7 +15293,7 @@ However, the Apache Geode Function on the server gets the following:
 
 
 
-``` highlight
+```highlight
 process(regionData, order:PdxInstance, :PdxInstanceEnum, 400);
 ```
 
@@ -15410,7 +15331,7 @@ example shows:
 
 
 
-``` highlight
+```highlight
 <bean id="customPdxSerializer" class="x.y.z.gemfire.serialization.pdx.MyCustomPdxSerializer"/>
 
 <gfe:cache pdx-serializer-ref="customPdxSerializeer" pdx-read-serialized="true"/>
@@ -15434,7 +15355,7 @@ as one of Apache Geode's PDX types, as follows:
 
 
 
-``` highlight
+```highlight
 @GemfireFunction
 public Object genericFunction(String value, Object domainObject, PdxInstanceEnum pdxEnum) {
   // ...
@@ -15490,7 +15411,7 @@ Geode) XML config as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/>
 ```
 
@@ -15504,7 +15425,7 @@ per field and can be configured as shown in the following example:
 
 
 
-``` highlight
+```highlight
 <gfe:lucene-index id="IndexTwo" lucene-service-ref="luceneService" region-path="/AnotherExample">
     <gfe:field-analyzers>
         <map>
@@ -15544,7 +15465,7 @@ The following example shows how to add an `LuceneSerializer` to the
 
 
 
-``` highlight
+```highlight
 <bean id="MyLuceneSerializer" class="example.CustomLuceneSerializer"/>
 
 <gfe:lucene-index id="IndexThree" lucene-service-ref="luceneService" region-path="/YetAnotherExample">
@@ -15561,7 +15482,7 @@ definition as well, as follows:
 
 
 
-``` highlight
+```highlight
 <gfe:lucene-index id="IndexThree" lucene-service-ref="luceneService" region-path="/YetAnotherExample">
     <gfe:lucene-serializer>
         <bean class="example.CustomLuceneSerializer"/>
@@ -15578,7 +15499,7 @@ config, inside a `@Configuration` class, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Bean(name = "Books")
 @DependsOn("bookTitleIndex")
 PartitionedRegionFactoryBean<Long, Book> booksRegion(GemFireCache gemfireCache) {
@@ -15708,7 +15629,7 @@ which are defined in the following interface definition:
 
 
 
-``` highlight
+```highlight
 public interface LuceneOperations {
 
     <K, V> List<LuceneResultStruct<K, V>> query(String query, String defaultField [, int resultLimit]
@@ -15775,7 +15696,7 @@ application concerns. The following listing shows the
 
 
 
-``` highlight
+```highlight
 public interface ProjectingLuceneOperations {
 
     <T> List<T> query(String query, String defaultField [, int resultLimit], Class<T> projectionType);
@@ -15812,7 +15733,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 class Person {
 
     Gender gender;
@@ -15839,7 +15760,7 @@ Additionally, you might have a single interface to represent people as
 
 
 
-``` highlight
+```highlight
 interface Customer {
 
     String getName()
@@ -15855,7 +15776,7 @@ If I define the following `LuceneIndex`…​
 
 
 
-``` highlight
+```highlight
 @Bean
 LuceneIndexFactoryBean personLastNameIndex(GemFireCache gemfireCache) {
 
@@ -15878,7 +15799,7 @@ Then you could query for people as `Person` objects, as follows:
 
 
 
-``` highlight
+```highlight
 List<Person> people = luceneTemplate.query("lastName: D*", "lastName", Person.class);
 ```
 
@@ -15891,7 +15812,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 Page<Customer> customers = luceneTemplate.query("lastName: D*", "lastName", 100, 20, Customer.class);
 ```
 
@@ -15904,7 +15825,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 List<Customer> firstPage = customers.getContent();
 ```
 
@@ -15956,7 +15877,7 @@ objects, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @PartitionRegion("People")
 class Person {
 
@@ -15984,7 +15905,7 @@ support specifically with the `@EnableEntityDefineRegions` and
 
 
 
-``` highlight
+```highlight
 @PeerCacheApplication
 @EnableEntityDefinedRegions
 @EnableIndexing
@@ -16093,7 +16014,7 @@ this class inside Apache Geode's `cache.xml` file:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="http://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16131,7 +16052,7 @@ as the following example shows:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="http://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16159,7 +16080,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 gfsh>start server --name=ExampleServer --log-level=config ...
     --classpath="/path/to/application/classes.jar:/path/to/spring-data-geode-<major>.<minor>.<maint>.RELEASE.jar"
     --cache-xml-file="/path/to/geode/cache.xml"
@@ -16232,7 +16153,7 @@ following example:
 
 
 
-``` highlight
+```highlight
 public class UserDataSourceCacheLoader extends LazyWiringDeclarableSupport
     implements CacheLoader<String, User> {
 
@@ -16270,7 +16191,7 @@ would be similar to the following (which comes from SDG's test suite):
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <cache xmlns="http://geode.apache.org/schema/cache"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16400,7 +16321,7 @@ commands against it. The output should resemble the following:
 
 
 
-``` highlight
+```highlight
 INFO: Created GemFire Cache [Spring GemFire World] v. X.Y.Z
 INFO: Created new cache region [myWorld]
 INFO: Member xxxxxx:50694/51611 connecting to region [myWorld]
@@ -16423,7 +16344,7 @@ commands:
 
 
 
-``` highlight
+```highlight
 -> Bold Section qName:emphasis level:5, chunks:[put 1 unu] attrs:[role:bold]
 INFO: Added [1=unu] to the cache
 null
@@ -16449,7 +16370,7 @@ following example shows:
 
 
 
-``` highlight
+```highlight
 INFO: Connected to Distributed System ['Spring GemFire World'=xxxx:56218/49320@yyyyy]
 Hello World!
 ...

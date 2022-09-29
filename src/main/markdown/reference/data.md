@@ -68,7 +68,7 @@ classes:
 
 
 
-``` highlight
+```highlight
 <bean id="gemfireTemplate" class="org.springframework.data.gemfire.GemfireTemplate" p:region-ref="SomeRegion"/>
 ```
 
@@ -83,7 +83,7 @@ management concerns:
 
 
 
-``` highlight
+```highlight
 template.execute(new GemfireCallback<Iterable<String>>() {
 
     public Iterable<String> doInGemfire(Region region)
@@ -183,7 +183,7 @@ Enable Transaction Management using XML
 
 
 
-``` highlight
+```highlight
 <gfe:transaction-manager id="txManager" cache-ref="myCache"/>
 ```
 
@@ -326,7 +326,7 @@ Set copy-on-read using XML (client)
 
 
 
-``` highlight
+```highlight
 <gfe:client-cache ... copy-on-read="true"/>
 ```
 
@@ -343,7 +343,7 @@ Set copyOnRead using JavaConfig (client)
 
 
 
-``` highlight
+```highlight
 @Bean
 ClientCacheFactoryBean gemfireCache() {
 
@@ -368,7 +368,7 @@ Set copy-on-read using XML (server)
 
 
 
-``` highlight
+```highlight
 <gfe:cache ... copy-on-read="true"/>
 ```
 
@@ -385,7 +385,7 @@ Set copyOnRead using JavaConfig (server)
 
 
 
-``` highlight
+```highlight
 @Bean
 CacheFactoryBean gemfireCache() {
 
@@ -429,7 +429,7 @@ The configuration looks like this…​
 
 
 
-``` highlight
+```highlight
 @Configuration
 @EnableGemFireAsLastResource
 @EnableTransactionManagement(order = 1)
@@ -464,7 +464,7 @@ Spring's `JtaTransactionManager` when using JTA transactions like so..
 
 
 
-``` highlight
+```highlight
 @Bean
 public JtaTransactionManager transactionManager(UserTransaction userTransaction) {
 
@@ -545,7 +545,7 @@ Declaring a service method as @Transactional
 
 
 
-``` highlight
+```highlight
 @Service
 class MyTransactionalService {
 
@@ -588,7 +588,7 @@ Transaction Log Output
 
 
 
-``` highlight
+```highlight
 2017-Jun-22 11:11:37 TRACE TransactionInterceptor - Getting transaction for [example.app.service.MessageService.send]
 
 2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionAcquiringAspect - Acquiring GemFire Connection
@@ -649,7 +649,7 @@ After Transaction Commit Event Listener
 
 
 
-``` highlight
+```highlight
 @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
 public void handleAfterCommit(MyEvent event) {
     // do something after transaction is committed
@@ -670,7 +670,7 @@ Publishing a Transactional Event
 
 
 
-``` highlight
+```highlight
 @Service
 class MyTransactionalService {
 
@@ -725,7 +725,7 @@ Enable auto transaction event publishing
 
 
 
-``` highlight
+```highlight
 @EnableGemfireCacheTransactions(enableAutoTransactionEventPublishing = true)
 class GeodeConfiguration { ... }
 ```
@@ -740,7 +740,7 @@ to handle transaction events during either the `AFTER_COMMIT` or
 
 
 
-``` highlight
+```highlight
 @Component
 class TransactionEventListeners {
 
@@ -904,7 +904,7 @@ handling methods and their parameters:
 
 
 
-``` highlight
+```highlight
 public interface EventDelegate {
      void handleEvent(CqEvent event);
      void handleEvent(Operation baseOp);
@@ -921,7 +921,7 @@ public interface EventDelegate {
 
 
 
-``` highlight
+```highlight
 package example;
 
 class DefaultEventDelegate implements EventDelegate {
@@ -952,7 +952,7 @@ contract and the implementation.</td>
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="{spring-data-schema-namespace}"
@@ -1006,7 +1006,7 @@ blown, **beans** definition is displayed below:
 
 
 
-``` highlight
+```highlight
 <!-- this is the Event Driven POJO (MDP) -->
 <bean id="eventListener" class="org.springframework.data.gemfire.listener.adapter.ContinuousQueryListenerAdapter">
     <constructor-arg>
@@ -1102,7 +1102,7 @@ consider the following declaration (taken from the `Declarable`
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <parameter name="URL">
@@ -1158,7 +1158,7 @@ Let's see how our `DBLoader` declaration would look in that case:
 
 
 
-``` highlight
+```highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
   private DataSource dataSource;
@@ -1175,7 +1175,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- no parameter is passed (use the bean's implicit name, which is the class name) -->
@@ -1186,7 +1186,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:p="http://www.springframework.org/schema/p"
@@ -1214,7 +1214,7 @@ in the GemFire configuration:
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- pass the bean definition template name as parameter -->
@@ -1228,7 +1228,7 @@ in the GemFire configuration:
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:p="http://www.springframework.org/schema/p"
@@ -1296,7 +1296,7 @@ injected with a Spring-configured `DataSource` in the following way:
 
 
 
-``` highlight
+```highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
   // use annotations to 'mark' the needed dependencies
@@ -1311,7 +1311,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- no need to declare any parameters since the class is auto-wired -->
@@ -1322,7 +1322,7 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -1373,7 +1373,7 @@ provider*" *in Spring's Cache Abstraction*, simply add
 
 
 
-``` highlight
+```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:gfe="{spring-data-schema-namespace}"
@@ -1433,7 +1433,7 @@ a `CustomerService` application component that performs caching…​
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -1455,7 +1455,7 @@ XML:
 
 
 
-``` highlight
+```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:gfe="{spring-data-schema-namespace}"
@@ -1488,7 +1488,7 @@ JavaConfig:
 
 
 
-``` highlight
+```highlight
 @Configuration
 @EnableCaching
 class ApplicationConfiguration {

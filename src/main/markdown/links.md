@@ -35,22 +35,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+* [Spring Framework](https://spring.io/projects/spring-framework) 5 or later
 
-<div class="ulist">
+* [VMware Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/index.html) 9.10 or later
 
-- [Spring Data for GemFire Project
-  Page](https://projects.spring.io/spring-data-gemfire)
+- [Spring Data for GemFire Project Page](https://projects.spring.io/spring-data-gemfire)
 
-- [Spring Data for GemFire source
-  code](https://github.com/spring-projects/spring-data-gemfire)
+- [Spring Data for GemFire source code](https://github.com/spring-projects/spring-data-gemfire)
 
 - [Spring Data for GemFire JIRA](https://jira.spring.io/browse/SGF)
-
-- [Spring Data for GemFire on
-  StackOverflow](https://stackoverflow.com/questions/tagged/spring-data-gemfire)
-
-- [Archive of the Spring Data for GemFire Forum on Spring
-  IO](https://forum.spring.io/forum/spring-projects/data/gemfire)
 
 - {x-data-store-website}\[GemFire Home Page\]
 

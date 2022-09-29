@@ -145,7 +145,7 @@ handling methods and their parameters:
 
 
 
-``` highlight
+```highlight
 public interface EventDelegate {
      void handleEvent(CqEvent event);
      void handleEvent(Operation baseOp);
@@ -162,7 +162,7 @@ public interface EventDelegate {
 
 
 
-``` highlight
+```highlight
 package example;
 
 class DefaultEventDelegate implements EventDelegate {
@@ -193,7 +193,7 @@ contract and the implementation.</td>
 
 
 
-``` highlight
+```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe="{spring-data-schema-namespace}"
@@ -247,7 +247,7 @@ blown, **beans** definition is displayed below:
 
 
 
-``` highlight
+```highlight
 <!-- this is the Event Driven POJO (MDP) -->
 <bean id="eventListener" class="org.springframework.data.gemfire.listener.adapter.ContinuousQueryListenerAdapter">
     <constructor-arg>
