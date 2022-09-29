@@ -54,7 +54,7 @@ annotation for more details.
 To configure and bootstrap a GemFire `ClientCache`
 application, use the following:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 public class ClientApplication {
@@ -74,7 +74,7 @@ For more information, see [Configuring GemFire Applications with Spring](../inde
 To configure and bootstrap a GemFire Peer `Cache` application,
 use the following:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 public class ServerApplication {
@@ -110,7 +110,7 @@ Annotate your Spring `@PeerCacheApplication` or
 embedded Locator bound to all NICs listening on the default Locator
 port, `10334`, as follows:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableLocator
@@ -136,7 +136,7 @@ Annotate your Spring `@PeerCacheApplication` or
 embedded Manager bound to all NICs listening on the default Manager
 port, `1099`, as follows:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableManager
@@ -160,7 +160,7 @@ Annotate your Spring `@PeerCacheApplication` or
 `@CacheServerApplication` class with `@EnableHttpService` to start the
 embedded HTTP server (Jetty) listening on port `7070`, as follows:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableHttpService
@@ -184,7 +184,7 @@ Annotate your Spring `@PeerCacheApplication` or
 the embedded Memcached server (Gemcached) listening on port `11211`, as
 follows:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableMemcachedServer
@@ -208,7 +208,7 @@ To configure or adjust GemFire logging, annotate your Spring,
 GemFire client or server application class with
 `@EnableLogging`, as follows:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableLogging(logLevel="trace")
@@ -233,7 +233,7 @@ To gather GemFire statistics at runtime, annotate your Spring,
 GemFire client or server application class with
 `@EnableStatistics`, as follows:
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableStatistics
@@ -247,22 +247,15 @@ public class ClientApplication {
 
 See [@EnableStatistics Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableStatistics.html).
 
-
 For more information, see [Configuring Statistics](../index.html#configuring-logging) in _Spring Data for GemFire Reference Guide_.
 
 ## <a id="configure-pdx"></a>Configure PDX
-
-
-
 
 To enable GemFire PDX serialization, annotate your Spring,
 GemFire client or server application class with `@EnablePdx`,
 as follows:
 
-
-
-
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx
@@ -274,66 +267,30 @@ public class ClientApplication {
 }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">GemFire PDX Serialization is an
+GemFire PDX Serialization is an 
 alternative to Java Serialization with many added benefits. For one, it
 makes short work of making all of your application domain model types
 serializable without having to implement
-<code>java.io.Serializable</code>.</td>
-</tr>
-</tbody>
-</table>
+<code>java.io.Serializable</code>.
 
-
-
-
-Note
-</div></td>
-<td class="content">By default, SDG configures the
+By default, SDG configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
 out-of-the-box to properly identify application domain objects
-that need to be serialized and then perform the serialization since, the
+that need to be serialized and then perform the serialization since the
 logic in <code>MappingPdxSerializer</code> is based on Spring Data's
-mapping infrastructure. See <a
-href="#mapping.pdx-serializer">[mapping.pdx-serializer]</a> for more
-details.</td>
-</tr>
-</tbody>
-</table>
+mapping infrastructure. For more details, see [MappingPdxSerializer](../index.html#mappingpdxserializer) in _Spring Data for GemFire Reference Guide_.
 
+See [@EnablePdx Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnablePdx.html).
 
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnablePdx.html\[`@EnablePdx`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-pdx\]](#bootstrap-annotation-config-pdx)
-for more details.
-
-
-
+For more information, see [Configuring PDX](bootstrap-annotations.html#configuring-pdx) in _Bootstrapping GemFire with the Spring Container using Annotations_.
 
 ## <a id="configure-ssl"></a>Configure SSL
-
-
-
 
 To enable GemFire SSL, annotate your Spring, GemFire
 client or server application class with `@EnableSsl`, as follows:
 
-
-
-
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl(components = SERVER)
@@ -345,63 +302,29 @@ public class ClientApplication {
 }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">Minimally, GemFire requires you to specify
-a keystore &amp; truststore using the appropriate configuration
-attributes or properties. Both keystore &amp; truststore configuration
+Minimally, GemFire requires you to specify
+a keystore and truststore using the appropriate configuration
+attributes or properties. Both keystore and truststore configuration
 attributes or properties may refer to the same <code>KeyStore</code>
-file. Additionally, you will need to specify a username and password to
-access the <code>KeyStore</code> file if the file has been secured.</td>
-</tr>
-</tbody>
-</table>
+file. Additionally, you must specify a username and password to
+access the <code>KeyStore</code> file if the file has been secured.
 
-
-
-
-Note
-</div></td>
-<td class="content">GemFire SSL allows you to configure the
+GemFire SSL allows you to configure the
 specific components of the system that require TLS, such as
 client/server, Locators, Gateways, etc. Optionally, you can specify that
-all components of GemFire use SSL with "ALL".</td>
-</tr>
-</tbody>
-</table>
+all components of GemFire use SSL with `ALL`.
 
+See [@EnableSsl Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSsl.html).
 
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableSsl.html\[`@EnableSsl`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-ssl\]](#bootstrap-annotation-config-ssl)
-for more details.
-
-
-
+For more information, see [Configuring SSL](bootstrap-annotations.html#configuring-ssl) in _Bootstrapping GemFire with the Spring Container using Annotations_.
 
 ## <a id="configure-security"></a>Configure Security
-
-
-
 
 To enable GemFire security, annotate your Spring,
 GemFire client or server application class with
 `@EnableSecurity`, as follows:
 
-
-
-
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSecurity
@@ -413,62 +336,24 @@ public class ClientApplication {
 }
 ```
 
+On the server, you must configure access to the auth
+credentials. You may either implement the [SecurityManager](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/security/SecurityManager.html) interface or declare one or more Apache Shiro <code>Realms</code>. For more details, see [Configuring Server Security](bootstrap-annotations.html#configuring-server-security) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+
+On the client, you must configure a username and password. For more details, see [Configuring Client Security](bootstrap-annotations.html#configuring-client-security) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+
+See [@EnableSecurity Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSecurity.html).
 
 
-
-
-Note
-</div></td>
-<td class="content">On the server, you must configure access to the auth
-credentials. You may either implement the GemFire
-{x-data-store-javadoc}/org/apache/geode/security/SecurityManager.html[<code>SecurityManager</code>]
-interface or declare 1 or more Apache Shiro <code>Realms</code>. See <a
-href="#bootstrap-annotation-config-security-server">[bootstrap-annotation-config-security-server]</a>
-for more details.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-
-Note
-</div></td>
-<td class="content">On the client, you must configure a username and
-password. See <a
-href="#bootstrap-annotation-config-security-client">[bootstrap-annotation-config-security-client]</a>
-for more details.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableSecurity.html\[`@EnableSecurity`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-security\]](#bootstrap-annotation-config-security)
-for more details.
-
+For more information, see [Configuring Security](bootstrap-annotations.html#configuring-security) in _Bootstrapping GemFire with the Spring Container using Annotations_.
 
 ## <a id="configure-gemfire-properties"></a>Configure GemFire Properties
-
-
-
 
 To configure other, low-level GemFire properties not covered
 by the feature-oriented, SDG configuration annotations,
 annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
-
-
-
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableGemFireProperties(
@@ -485,52 +370,20 @@ public class ServerApplication {
 }
 ```
 
+Some GemFire properties are client-side only while others are server-side only. For
+the appropriate use of each property, see [gemfire.properties vars.and gfsecurity.properties: Tanzu GemFire Properties](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-reference-topics-gemfire_properties.html) in the GemFire product documentation.
 
+See [@EnableGemFireProperties Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableGemFireProperties.html).
 
-
-
-Note
-</div></td>
-<td class="content">Some GemFire properties are client-side
-only while others are server-side only. Please review the
-GemFire
-{x-data-store-docs}/reference/topics/gemfire_properties.html[docs] for
-the appropriate use of each property.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableGemFireProperties.html\[`@EnableGemFireProperties`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-gemfire-properties\]](#bootstrap-annotation-config-gemfire-properties)
-for more details.
-
-
+For more information, see [Configuring GemFire Properties](#configuring-gemfire-properties) in _Bootstrapping GemFire with the Spring Container using Annotations_.
 
 ## <a id="configure-caching"></a>Configure Caching
 
+To use GemFire as a *caching provider* in Spring's [Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache) and have SDG automatically create GemFire Regions for the caches required by your application
+service components, annotate your Spring, GemFire client, or server application
+class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`  as follows:
 
-
-
-To use GemFire as a *caching provider* in Spring's
-{spring-framework-docs}/integration.html#cache\[*Cache Abstraction*\],
-and have SDG automatically create GemFire Regions
-for the caches required by your application service components, then
-annotate your Spring, GemFire client or server application
-class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`,
-as follows:
-
-
-
-
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCachingDefinedRegions
@@ -543,113 +396,54 @@ public class ClientApplication {
 }
 ```
 
+Then define the application services that require caching as follows:
 
-
-
-Then, simply go on to define the application services that require
-caching, as follows:
-
-
-
-
-``` highlight
+```highlight
 @Service
 public class BookService {
-
+  
     @Cacheable("Books")
     public Book findBy(ISBN isbn) {
         ...
     }
 }
 ```
+<code>@EnableCachingDefinedRegions</code> is optional. You can manually define your Regions instead.
 
-
-
-
-
-Note
-</div></td>
-<td class="content"><code>@EnableCachingDefinedRegions</code> is
-optional. That is, you may manually define your Regions if you
-desire.</td>
-</tr>
-</tbody>
-</table>
-
-
+See [@EnableCachingDefinedRegions Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableCachingDefinedRegions.html).
 
 See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableCachingDefinedRegions.html\[`@EnableCachingDefinedRegions`
-Javadoc\].
+[@EnableGemfireCaching Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/cache/config/EnableGemfireCaching.html).
 
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/cache/config/EnableGemfireCaching.html\[`@EnableGemfireCaching`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-caching\]](#bootstrap-annotation-config-caching)
-for more details.
-
-
-
+For more information, see [Configuring Spring's Cache Abstraction](bootstrap-annotations.html#configuring-springs-cache-abstraction) in _Bootstrapping GemFire with the Spring Container using Annotations_.
 
 ## <a id="configure-regions-etc"></a>Configure Regions, Indexes, Repositories, and Entities for Persistent Applications
 
-
-
-
-To make short work of creating Spring, GemFire persistent
-client or server applications, annotate your application class with
-`@EnableEntityDefinedRegions`, `@EnableGemfireRepositories` and
+To quickly create Spring, GemFire persistent client, or server applications, annotate your application class with `@EnableEntityDefinedRegions`, `@EnableGemfireRepositories`, and
 `@EnableIndexing`, as follows:
 
-
-
-
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableEntityDefinedRegions(basePackageClasses = Book.class)
 @EnableGemfireRepositories(basePackageClasses = BookRepository.class)
 @EnableIndexing
 public class ClientApplication {
-
+  
   public static void main(String[] args) {
     SpringApplication.run(ClientApplication.class, args);
   }
 }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The <code>@EnableEntityDefinedRegions</code>
-annotation is required when using the <code>@EnableIndexing</code>
-annotation. See <a
-href="#bootstrap-annotation-config-region-indexes">[bootstrap-annotation-config-region-indexes]</a>
-for more details.</td>
-</tr>
-</tbody>
-</table>
-
-
+<p classs="note"><strong>Note</strong>: The <code>@EnableEntityDefinedRegions</code> annotation is required when using the <code>@EnableIndexing</code> annotation. For more details, see <a href="bootstrap-annotations.html#configuring-indexes">Configuring Indexes</a> in <em>Bootstrapping GemFire with the Spring Container using Annotations</em>.</p>
 
 Next, define your entity class and use the `@Region` mapping annotation
 to specify the Region in which your entity will be stored. Use the
 `@Indexed` annotation to define Indexes on entity fields used in your
 application queries, as follows:
 
-
-
-
-``` highlight
+```highlight
 package example.app.model;
 
 import ...;
@@ -672,10 +466,6 @@ public class Book {
 }
 ```
 
-
-
-
-
 Note
 </div></td>
 <td class="content">The <code>@Region("Books")</code> entity class
@@ -695,7 +485,7 @@ access `Books`, as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.repo;
 
 import ...;
@@ -780,7 +570,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableClusterDefinedRegions
@@ -825,7 +615,7 @@ as methods on POJOs, as follows:
 
 
 
-``` highlight
+```highlight
 @PeerCacheApplication
 @EnableGemfireFunctions
 class ServerApplication {
@@ -851,7 +641,7 @@ and `@OnServers`.
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableGemfireFunctionExecutions(basePackageClasses = CustomerRewardsFunction.class)
 class ClientApplication {
@@ -928,7 +718,7 @@ event handlers, as follows:
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableContinuousQueries
 class ClientApplication {
@@ -948,7 +738,7 @@ Then, define your CQs by annotating the associated handler method with
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -1029,7 +819,7 @@ Using `@EnableClusterConfiguration`
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableClusterConfiguration(useHttp = true)
 class ClientApplication {
@@ -1115,7 +905,7 @@ annotated with `@EnableGatewayReceiver` as follows:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewayReceiver(manualStart = false, startPort = 10000, endPort = 11000, maximumTimeBetweenPings = 1000,
     socketBufferSize = 16384, bindAddress = "localhost",transportFilters = {"transportBean1", "transportBean2"},
@@ -1159,7 +949,7 @@ with `@EnableGatewaySenders` and `@EnableGatewaySender` as follows:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewaySenders(gatewaySenders = {
         @EnableGatewaySender(name = "GatewaySender", manualStart = true,
@@ -1218,7 +1008,7 @@ child if required, as demonstrated below:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewaySenders(gatewaySenders = {
         @EnableGatewaySender(name = "GatewaySender", transportFilters = "transportBean1", regions = "Region2"),

@@ -13115,10 +13115,7 @@ transaction, either as a local cache transaction or a global
 transaction.
 
 
-
-<div class="sect2">
-
-### MappingPdxSerializer
+### <a id="mappingpdxserializer"></a>MappingPdxSerializer
 
 
 Spring Data for GemFire provides a custom

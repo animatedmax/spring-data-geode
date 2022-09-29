@@ -1591,8 +1591,7 @@ More details on GemFire's statistics can be found
 
 
 
-
-## Configuring PDX
+## <a id="configuring-pdx"></a>Configuring PDX
 
 
 
@@ -1755,8 +1754,7 @@ for more details.
 
 
 
-
-## Configuring GemFire Properties
+## <a id="configuring-gemfire-properties"></a>Configuring GemFire Properties
 
 
 
@@ -3127,9 +3125,7 @@ DiskStores) can be found
 
 
 
-<div class="sect2">
-
-### Configuring Indexes
+### <a id="configuring-indexes"></a>Configuring Indexes
 
 
 There is not much use in storing data in Regions unless the data can be
@@ -3567,9 +3563,7 @@ More details on GemFire's Continuous Queries can be found
 
 
 
-
-
-## Configuring Spring's Cache Abstraction
+## <a id="configuring-springs-cache-abstraction"></a>Configuring Spring's Cache Abstraction
 
 
 
@@ -3970,8 +3964,7 @@ for more details.
 
 
 
-
-## Configuring SSL
+## <a id="configiuring-ssl"></a>Configuring SSL
 
 
 
@@ -4058,8 +4051,7 @@ More details on GemFire SSL support can be found
 
 
 
-
-## Configuring Security
+## <a id="configuring-security"></a>Configuring Security
 
 
 
@@ -4087,8 +4079,7 @@ GemFire's security story even further.
 
 <div class="sect2">
 
-### Configuring Server Security
-
+### <a id="configuring-server-security"></a>Configuring Server Security
 
 There are several different ways in which you can configure security for
 servers in a GemFire cluster.
@@ -4260,9 +4251,7 @@ More details on GemFire security can be found
 
 
 
-<div class="sect2">
-
-### Configuring Client Security
+### <a id="configuring-client-security"></a>Configuring Client Security
 
 
 The security story would not be complete without discussing how to
