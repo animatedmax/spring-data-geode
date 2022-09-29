@@ -269,7 +269,7 @@ Spring-based GemFire `ClientCache` application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 class ClientApplication { .. }
@@ -291,7 +291,7 @@ Spring-based GemFire embedded peer `Cache` application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 class ServerApplication { .. }
@@ -314,7 +314,7 @@ Spring-based GemFire embedded peer `Cache` application with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 class ServerApplication { .. }
@@ -403,7 +403,7 @@ Spring-based GemFire `ClientCache` application using Locators
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication(locators = {
     @Locator(host = "boombox" port = 11235),
@@ -466,7 +466,7 @@ named `Pools`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication(logLevel = "info")
 @EnablePool(name = "VenusPool", servers = @Server(host = "venus", port = 48484),
@@ -508,7 +508,7 @@ named `CacheServers`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheSeverApplication(logLevel = "info", autoStartup = true, maxConnections = 100)
 @EnableCacheServer(name = "Venus", autoStartup = true,
@@ -588,7 +588,7 @@ Spring Boot, GemFire Locator Application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @LocatorApplication(port = 12345)
 class LocatorApplication { ... }
@@ -625,7 +625,7 @@ Locator on `localhost`, port `12345`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[12345]")
 class ServerApplication { ... }
@@ -758,7 +758,7 @@ Customizing a Spring Boot `CacheServer` application with a
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(name = "SpringServerApplication")
 class ServerApplication {
@@ -791,7 +791,7 @@ Customizing a Spring Boot `ClientCache` application with a
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 class ClientApplication {
@@ -888,7 +888,7 @@ Client `application.properties`
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.log-level=info
 spring.data.gemfire.pool.Venus.servers=venus[48484]
 spring.data.gemfire.pool.Venus.max-connections=200
@@ -917,7 +917,7 @@ Server `application.properties`
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.log-level=info
 spring.data.gemfire.cache.server.port=40404
 spring.data.gemfire.cache.server.Venus.port=43434
@@ -939,7 +939,7 @@ Spring `@ClientCacheApplication` class
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePools(pools = {
@@ -963,7 +963,7 @@ Spring `@CacheServerApplication` class
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(name = "SpringServerApplication")
 @EnableCacheServers(servers = {
@@ -987,7 +987,7 @@ purpose, as the following example demonstrates:
 
 
 
-``` highlight
+```highlight
 @Component
 class MyApplicationComponent {
 
@@ -1017,7 +1017,7 @@ The following example shows such an arrangement:
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.server.bind-address=10.105.20.1
 spring.data.gemfire.cache.server.Venus.bind-address=10.105.20.2
 spring.data.gemfire.cache.server.Saturn...
@@ -1058,7 +1058,7 @@ Properties of Properties
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.cache.server.port=${gemfire.cache.server.port:40404}
 ```
 
@@ -1075,7 +1075,7 @@ Property placehodler nesting
 
 
 
-``` highlight
+```highlight
 @Bean
 CacheServerConfigurer cacheServerPortConfigurer(
     @Value("${gemfire.cache.server.port:${some.other.property:40404}}")
@@ -1137,7 +1137,7 @@ Locator
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableLocator
@@ -1174,7 +1174,7 @@ Locator
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[10334]")
 class ServerApplication { .. }
@@ -1198,7 +1198,7 @@ connecting to the Locator
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[10334]")
 public class ServerApplication {
@@ -1228,7 +1228,7 @@ IDE run profile configuration
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.name=SpringCacheServerOne
 spring.data.gemfire.cache.server.port=41414
 spring.profiles.active=embedded-locator
@@ -1307,7 +1307,7 @@ Spring `CacheServer` application running an embedded Manager
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication(locators = "localhost[10334]")
 public class ServerApplication {
@@ -1333,7 +1333,7 @@ small cluster and manage it, as follows:
 
 
 
-``` highlight
+```highlight
 $ gfsh
     _________________________     __
    / _____/ ______/ ______/ /____/ /
@@ -1373,7 +1373,7 @@ would need to connect directly to the Manager by using the following:
 
 
 
-``` highlight
+```highlight
 gfsh>connect --jmx-manager=localhost[1099]
 ```
 
@@ -1438,7 +1438,7 @@ Spring `CacheServer` application running the embedded HTTP server
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableHttpService
@@ -1484,7 +1484,7 @@ Spring `CacheServer` application running an embedded Memcached server
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnabledMemcachedServer
@@ -1524,7 +1524,7 @@ Spring `ClientCache` application with Logging enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableLogging(logLevel="info", logFile="/absolute/file/system/path/to/application.log)
@@ -1585,7 +1585,7 @@ Spring `ClientCache` application with Statistics enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableStatistics
@@ -1676,7 +1676,7 @@ Spring `ClientCache` application with PDX enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx
@@ -1738,7 +1738,7 @@ composite `PdxSerializer`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx(serializerBeanName = "compositePdxSerializer")
@@ -1837,7 +1837,7 @@ properties set
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableGemFireProperties(conflateEvents = true, socketBufferSize = 16384)
@@ -1909,7 +1909,7 @@ configuration
 
 
 
-``` highlight
+```highlight
 @Configuration
 class GemFireConfiguration {
 
@@ -1944,7 +1944,7 @@ Example Region bean definition using SDG's XML Namespace
 
 
 
-``` highlight
+```highlight
 <gfe:partitioned-region id="exampleRegion" name="Example" persistent="true">
     ...
 </gfe:partitioned-region>
@@ -2005,7 +2005,7 @@ Application domain object type modeling a Book
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 class Book {
 
@@ -2040,7 +2040,7 @@ Repository for Books
 
 
 
-``` highlight
+```highlight
 interface BookRepository extends CrudRepository<Book, ISBN> { .. }
 ```
 
@@ -2091,7 +2091,7 @@ Entity-defined Region Configuration
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableEntityDefinedRegions(basePackages = "example.app.domain")
@@ -2161,7 +2161,7 @@ Entity-defined Region Configuration using the Entity class type
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableGemfireRepositories
@@ -2296,7 +2296,7 @@ Spring `ClientCache` application with a local-only, client Region
 
 
 
-``` highlight
+```highlight
 @ClientRegion(shortcut = ClientRegionShortcut.LOCAL)
 class ClientLocalEntityType { .. }
 ```
@@ -2360,7 +2360,7 @@ Defining a Region with Gfsh
 
 
 
-``` highlight
+```highlight
 gfsh>create region --name=Books --type=PARTITION
  Member   | Status
 --------- | --------------------------------------
@@ -2403,7 +2403,7 @@ Adding an additional peer member to the cluster
 
 
 
-``` highlight
+```highlight
 gfsh>list members
   Name    | Id
 --------- | ----------------------------------------------
@@ -2485,7 +2485,7 @@ Defining Client Regions from the Cluster with
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableClusterDefinedRegions
 class BookStoreClientApplication {
@@ -2544,7 +2544,7 @@ Using the "Books" Region
 
 
 
-``` highlight
+```highlight
 @org.springframework.stereotype.Repository
 class BooksDataAccessObject {
 
@@ -2570,7 +2570,7 @@ Using the "Books" Region with a SD Repository
 
 
 
-``` highlight
+```highlight
 interface BookRepository extends CrudRepository<Book, ISBN> {
     ...
 }
@@ -2637,7 +2637,7 @@ Spring application with eviction enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableEviction(policies = {
@@ -2739,7 +2739,7 @@ Applicaton domain object specific expiration policy
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 @TimeToLiveExpiration(timeout = 30000, action = "INVALIDATE")
 class Book { .. }
@@ -2759,7 +2759,7 @@ Spring application with expiration enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableExpiration
@@ -2782,7 +2782,7 @@ Spring application with region-specific expiration policies
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableExpiration(policies = {
@@ -2849,7 +2849,7 @@ Spring application with Region compression enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCompression(compressorBeanName = "MyCompressor", regionNames = { "Customers", "Orders" })
@@ -2966,7 +2966,7 @@ Spring application with Off-Heap enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableOffHeap(memorySize = 8192m regionNames = { "Customers", "Orders" })
@@ -3067,7 +3067,7 @@ Spring application defining a `DiskStore`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableDiskStore(name = "OrdersDiskStore", autoCompact = true, compactionThreshold = 70,
@@ -3113,7 +3113,7 @@ Spring application with custom DiskStore configuration
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableDiskStore(name = "OrdersDiskStore", autoCompact = true, compactionThreshold = 70,
@@ -3198,7 +3198,7 @@ Index bean definition using Java config
 
 
 
-``` highlight
+```highlight
 @Bean("BooksIsbnIndex")
 IndexFactoryBean bookIsbnIndex(GemFireCache gemfireCache) {
 
@@ -3228,7 +3228,7 @@ Index bean definition using XML
 
 
 
-``` highlight
+```highlight
 <gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
 ```
 
@@ -3255,7 +3255,7 @@ Application domain object type modeling a book using indexes
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 class Book {
 
@@ -3323,7 +3323,7 @@ Application domain object type modeling a Book with customized indexes
 
 
 
-``` highlight
+```highlight
 @Region("Books")
 class Book {
 
@@ -3372,7 +3372,7 @@ Spring application with Indexing enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableEntityDefinedRegions
@@ -3534,7 +3534,7 @@ Spring `ClientCache` application with registered CQ and listener.
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication(subcriptionEnabled = true)
 @EnableContinuousQueries
@@ -3623,7 +3623,7 @@ transaction, as the following example shows:
 
 
 
-``` highlight
+```highlight
 @Service
 class PointOfSaleService
 
@@ -3660,7 +3660,7 @@ Enabling Caching using GemFire as the caching provider
 
 
 
-``` highlight
+```highlight
 @EnableCaching
 class CachingConfiguration {
 
@@ -3708,7 +3708,7 @@ Enabling GemFire Caching
 
 
 
-``` highlight
+```highlight
 @EnableGemfireCaching
 @EnableCachingDefinedRegions
 class CachingConfiguration {
@@ -3921,7 +3921,7 @@ Spring `ClientCache` application
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCachingDefinedRegions
@@ -4014,7 +4014,7 @@ Spring `ClientCache` application with SSL enabled
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl
@@ -4049,7 +4049,7 @@ Spring `ClientCache` application with SSL enabled by component
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl(components = { GATEWAY, LOCATOR, SERVER })
@@ -4184,7 +4184,7 @@ Spring server application using Apache Shiro
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableSecurity
@@ -4328,7 +4328,7 @@ Spring client application using `@EnableSecurity`
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSecurity
@@ -4351,7 +4351,7 @@ credentials
 
 
 
-``` highlight
+```highlight
 spring.data.gemfire.security.username=jackBlack
 spring.data.gemfire.security.password=b@cK!nB1@cK
 ```
@@ -4431,7 +4431,7 @@ Spring `ClientCache` application with the kitchen sink
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableContinuousQueries
@@ -4459,7 +4459,7 @@ Spring `ClientCache` application with the kitcken sink to boot
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @Import({ GemFireConfiguration.class, CachingConfiguration.class,
     FunctionsConfiguration.class, QueriesConfiguration.class,
@@ -4667,7 +4667,7 @@ application, use the following:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 public class ClientApplication {
@@ -4704,7 +4704,7 @@ use the following:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 public class ServerApplication {
@@ -4765,7 +4765,7 @@ port, `10334`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableLocator
@@ -4816,7 +4816,7 @@ port, `1099`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableManager
@@ -4866,7 +4866,7 @@ embedded HTTP server (Jetty) listening on port `7070`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableHttpService
@@ -4917,7 +4917,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @CacheServerApplication
 @EnableMemcachedServer
@@ -4967,7 +4967,7 @@ GemFire client or server application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableLogging(logLevel="trace")
@@ -5017,7 +5017,7 @@ GemFire client or server application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableStatistics
@@ -5055,7 +5055,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnablePdx
@@ -5124,7 +5124,7 @@ client or server application class with `@EnableSsl`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSsl(components = SERVER)
@@ -5190,7 +5190,7 @@ GemFire client or server application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableSecurity
@@ -5257,7 +5257,7 @@ class with `@GemFireProperties`, as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @PeerCacheApplication
 @EnableGemFireProperties(
@@ -5319,7 +5319,7 @@ as follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableCachingDefinedRegions
@@ -5341,7 +5341,7 @@ caching, as follows:
 
 
 
-``` highlight
+```highlight
 @Service
 public class BookService {
 
@@ -5397,7 +5397,7 @@ client or server applications, annotate your application class with
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableEntityDefinedRegions(basePackageClasses = Book.class)
@@ -5436,7 +5436,7 @@ application queries, as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.model;
 
 import ...;
@@ -5483,7 +5483,7 @@ access `Books`, as follows:
 
 
 
-``` highlight
+```highlight
 package example.app.repo;
 
 import ...;
@@ -5568,7 +5568,7 @@ follows:
 
 
 
-``` highlight
+```highlight
 @SpringBootApplication
 @ClientCacheApplication
 @EnableClusterDefinedRegions
@@ -5613,7 +5613,7 @@ as methods on POJOs, as follows:
 
 
 
-``` highlight
+```highlight
 @PeerCacheApplication
 @EnableGemfireFunctions
 class ServerApplication {
@@ -5639,7 +5639,7 @@ and `@OnServers`.
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableGemfireFunctionExecutions(basePackageClasses = CustomerRewardsFunction.class)
 class ClientApplication {
@@ -5715,7 +5715,7 @@ event handlers, as follows:
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableContinuousQueries
 class ClientApplication {
@@ -5735,7 +5735,7 @@ Then, define your CQs by annotating the associated handler method with
 
 
 
-``` highlight
+```highlight
 @Service
 class CustomerService {
 
@@ -5816,7 +5816,7 @@ Using `@EnableClusterConfiguration`
 
 
 
-``` highlight
+```highlight
 @ClientCacheApplication
 @EnableClusterConfiguration(useHttp = true)
 class ClientApplication {
@@ -5901,7 +5901,7 @@ annotated with `@EnableGatewayReceiver` as follows:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewayReceiver(manualStart = false, startPort = 10000, endPort = 11000, maximumTimeBetweenPings = 1000,
     socketBufferSize = 16384, bindAddress = "localhost",transportFilters = {"transportBean1", "transportBean2"},
@@ -5945,7 +5945,7 @@ with `@EnableGatewaySenders` and `@EnableGatewaySender` as follows:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewaySenders(gatewaySenders = {
         @EnableGatewaySender(name = "GatewaySender", manualStart = true,
@@ -6004,7 +6004,7 @@ child if required, as demonstrated below:
 
 
 
-``` highlight
+```highlight
 @CacheServerApplication
 @EnableGatewaySenders(gatewaySenders = {
         @EnableGatewaySender(name = "GatewaySender", transportFilters = "transportBean1", regions = "Region2"),

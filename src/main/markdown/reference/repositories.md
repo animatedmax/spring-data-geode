@@ -51,9 +51,7 @@ model is provided
 
 
 
-
-
-## Spring XML Configuration
+## <a id="spring-xml-configuration"></a>Spring XML Configuration
 
 
 
@@ -109,10 +107,7 @@ application domain classes correctly mapped to configured Regions.</td>
 </table>
 
 
-
-
-
-## Spring Java-based Configuration
+## <a id="spring-java-based-configuration"></a>Spring Java-based Configuration
 
 
 
@@ -216,9 +211,7 @@ Javadoc for more details on all configuration settings.
 
 
 
-
-
-## Executing OQL Queries
+## <a id="executing-oql-queries"></a>Executing OQL Queries
 
 
 
@@ -419,8 +412,7 @@ Table 1. Supported keywords for query methods
 
 
 
-
-## OQL Query Extensions Using Annotations
+## <a id="oql--query-extensions-using-annotations"></a>OQL Query Extensions Using Annotations
 
 
 
@@ -668,9 +660,9 @@ example.</p>
 
 
 
+## <a id="query-post-processing"></a>Query Post Processing
 
 
-## Query Post Processing
 
 
 

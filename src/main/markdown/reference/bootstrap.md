@@ -1955,7 +1955,7 @@ common Region configuration options described in [Configuring Regions](#configur
 </table>
 
 
-## <a id="client-region"></a>Client Region
+### <a id="client-region"></a>Client Region
 
 GemFire supports various deployment topologies for managing
 and distributing data. The topic of GemFire topologies is
