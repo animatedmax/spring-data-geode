@@ -154,7 +154,7 @@ A number of limitations exist with GemFire's Apache Lucene integration and suppo
 <p class="note"><strong>Note</strong>: To help ensure that all declared
 <code>LuceneIndexes</code> defined in a Spring container are created
 before the Regions on which they apply, Spring Data for GemFire includes the
-<code>org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>. You can register this Spring <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanFactoryPostProcessor.html">BeanFactoryPostProcessor<a>in XML config by using
+<code>org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>. You can register this Spring <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanFactoryPostProcessor.html">BeanFactoryPostProcessor</a>in XML config by using
 <code>&lt;bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>. The
 <code>o.s.d.g.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>
 may only be used when using Spring Data for GemFire XML config. For more details about
