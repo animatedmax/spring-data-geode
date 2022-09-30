@@ -36,7 +36,7 @@ limitations under the License.
 -->
 
 
-The following sections provide an overview to the SDG
+The following sections provide an overview to the Spring Data for GemFire
 annotations to get started quickly.
 
 All annotations provide additional configuration
@@ -273,7 +273,7 @@ makes short work of making all of your application domain model types
 serializable without having to implement
 <code>java.io.Serializable</code>.
 
-By default, SDG configures the
+By default, Spring Data for GemFire configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
 out-of-the-box to properly identify application domain objects
@@ -349,7 +349,7 @@ For more information, see [Configuring Security](bootstrap-annotations.html#conf
 ## <a id="configure-gemfire-properties"></a>Configure GemFire Properties
 
 To configure other, low-level GemFire properties not covered
-by the feature-oriented, SDG configuration annotations,
+by the feature-oriented, Spring Data for GemFire configuration annotations,
 annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
@@ -379,7 +379,7 @@ For more information, see [Configuring GemFire Properties](#configuring-gemfire-
 
 ## <a id="configure-caching"></a>Configure Caching
 
-To use GemFire as a *caching provider* in Spring's [Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache) and have SDG automatically create GemFire Regions for the caches required by your application
+To use GemFire as a *caching provider* in Spring's [Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache) and have Spring Data for GemFire automatically create GemFire Regions for the caches required by your application
 service components, annotate your Spring, GemFire client, or server application
 class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`  as follows:
 

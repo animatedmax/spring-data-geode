@@ -36,7 +36,7 @@ limitations under the License.
 -->
 
 
-Spring Data for GemFire (SDG) 2.0 introduces a new annotation-based
+Spring Data for GemFire (Spring Data for GemFire) 2.0 introduces a new annotation-based
 configuration model to configure and bootstrap GemFire using
 the Spring container.
 
@@ -124,7 +124,7 @@ data access. See "[\[bootstrap\]](#bootstrap)" for more details.
 
 Note
 </div></td>
-<td class="content">As of SDG 2.0, the annotation-based
+<td class="content">As of Spring Data for GemFire 2.0, the annotation-based
 configuration model does not yet support the configuration of
 GemFire's WAN components and topology.</td>
 </tr>
@@ -170,7 +170,7 @@ GemFire feature or embedded service by using the annotations.
 
 
 
-You can find all the new SDG Java `Annotations` in the
+You can find all the new Spring Data for GemFire Java `Annotations` in the
 `org.springframework.data.gemfire.config.annotation` package.
 
 
@@ -643,7 +643,7 @@ is uniquely named.
 `@LocatorApplication` is for configuring and bootstrapping standalone,
 GemFire Locator application processes. This process can only
 be a Locator and nothing else. If you try to start a Locator with a
-cache instance, SDG will throw an error.
+cache instance, Spring Data for GemFire will throw an error.
 
 
 
@@ -836,8 +836,8 @@ example, a `ClientCache` instance is created and configured with
 
 Note
 </div></td>
-<td class="content">SDG <code>FactoryBeans</code> are part of
-the SDG public API and are what you would use in Spring's
+<td class="content">Spring Data for GemFire <code>FactoryBeans</code> are part of
+the Spring Data for GemFire public API and are what you would use in Spring's
 {spring-framework-docs}/core.html#beans-java[Java-based container
 configuration] if this new annotation-based configuration model were not
 provided. Indeed, the annotations themselves are using these same
@@ -1789,7 +1789,7 @@ for more details.
 While many of the
 {x-data-store-docs}/reference/topics/gemfire_properties.html\[gemfire.properties\]
 are conveniently encapsulated in and abstracted with an annotation in
-the SDG annotation-based configuration model, the less
+the Spring Data for GemFire annotation-based configuration model, the less
 commonly used GemFire properties are still accessible from the
 `@EnableGemFireProperties` annotation.
 
@@ -1890,7 +1890,7 @@ queries. We cover indexing
 
 Previously, Spring Data for GemFire users needed to explicitly define and declare the
 Regions used by their applications to store data by writing very verbose
-Spring configuration metadata, whether using SDG's
+Spring configuration metadata, whether using Spring Data for GemFire's
 `FactoryBeans` from the API with Spring's
 {spring-framework-docs}/core.html#beans-java\[Java-based container
 configuration\] or using [XML](#bootstrap:region).
@@ -1940,7 +1940,7 @@ in XML:
 
 <div class="title">
 
-Example Region bean definition using SDG's XML Namespace
+Example Region bean definition using Spring Data for GemFire's XML Namespace
 
 
 
@@ -2058,7 +2058,7 @@ repository interface (for example,
 
 Under the hood, Spring Data for GemFire provides an implementation of your
 application's repository interfaces when the Spring container is
-bootstrapped. SDG even implements the query methods you define
+bootstrapped. Spring Data for GemFire even implements the query methods you define
 so long as you follow the
 [conventions](#gemfire-repositories.executing-queries).
 
@@ -2218,17 +2218,17 @@ details.</td>
 
 When you annotate your application domain object types with the generic
 `@Region` mapping annotation, Spring Data for GemFire decides which type of Region to
-create. SDG's default strategy takes the cache type into
+create. Spring Data for GemFire's default strategy takes the cache type into
 consideration when determining the type of Region to create.
 
 
 
 For example, if you declare the application as a `ClientCache` by using
-the `@ClientCacheApplication` annotation, SDG creates a client
+the `@ClientCacheApplication` annotation, Spring Data for GemFire creates a client
 `PROXY` `Region` by default. Alternatively, if you declare the
 application as a peer `Cache` by using either the
 `@PeerCacheApplication` or `@CacheServerApplication` annotations,
-SDG creates a server `PARTITION` `Region` by default.
+Spring Data for GemFire creates a server `PARTITION` `Region` by default.
 
 
 
@@ -2472,7 +2472,7 @@ On the client-side, many Book Store client application instances might
 be started to process books against the Book Store online service. The
 "Books" Region might be 1 of many different Regions needed to implement
 the Book Store application service. Rather than have to create and
-configure each Region individually, SDG conveniently allows
+configure each Region individually, Spring Data for GemFire conveniently allows
 the client application Regions to be defined from the cluster, as
 follows:
 
@@ -3400,7 +3400,7 @@ also strongly recommend that you limit the scope of the scan.</td>
 
 
 While Lucene queries are not (yet) supported on Spring Data for GemFire repositories,
-SDG does provide comprehensive
+Spring Data for GemFire does provide comprehensive
 [support](https://docs.spring.io/spring-data-gemfire/docs/current/reference/html/#bootstrap:lucene)
 for GemFire Lucene queries by using the familiar Spring
 template design pattern.
@@ -3514,7 +3514,7 @@ the registered CQ, the client application is notified.
 
 Spring Data for GemFire makes it easy to define and register CQs, along with an
 associated listener to handle and process CQ events without all the
-cruft of GemFire's plumbing. SDG's new
+cruft of GemFire's plumbing. Spring Data for GemFire's new
 annotation-based configuration for CQs builds on the existing Continuous
 Query support in the [continuous query listener
 container](#apis:continuous-query).
@@ -3557,7 +3557,7 @@ To enable Continuous Queries, annotate your application class with
 
 Defining Continuous Queries consists of annotating any Spring
 `@Component`-annotated POJO class methods with the `@ContinuousQuery`
-annotation (in similar fashion to SDG's Function-annotated
+annotation (in similar fashion to Spring Data for GemFire's Function-annotated
 POJO methods). A POJO method defined with a CQ by using the
 `@ContinuousQuery` annotation is called any time data matching the query
 predicate is added or changed.
@@ -3742,7 +3742,7 @@ Regions in GemFire for these caches on application startup.
 The Regions created are local to the application process that created
 the Regions. If the application is a peer `Cache`, the Regions exist
 only on the application node. If the application is a `ClientCache`,
-then SDG creates client `PROXY` Regions and expects those
+then Spring Data for GemFire creates client `PROXY` Regions and expects those
 Regions with the same name to already exist on the servers in the
 cluster.
 
@@ -3751,7 +3751,7 @@ cluster.
 
 Note
 </div></td>
-<td class="content">SDG cannot determine the cache required by
+<td class="content">Spring Data for GemFire cannot determine the cache required by
 a service method using a Spring <code>CacheResolver</code> to resolve
 the cache used in the operation at runtime.</td>
 </tr>
@@ -3764,7 +3764,7 @@ the cache used in the operation at runtime.</td>
 
 Tip
 </div></td>
-<td class="content">SDG also supports JCache (JSR-107) cache
+<td class="content">Spring Data for GemFire also supports JCache (JSR-107) cache
 annotations on application service components. See the core
 {spring-framework-docs}/integration.html#cache-jsr-107[<em>Spring
 Framework Reference Guide</em>] for the equivalent Spring caching
@@ -4312,7 +4312,7 @@ In other words, the same `@EnableSecurity` annotation handles security
 for both client and server applications. This feature makes it easier
 for users when they decide to switch their applications from an
 embedded, peer `Cache` application to a `ClientCache` application, for
-instance. Simply change the SDG annotation from
+instance. Simply change the Spring Data for GemFire annotation from
 `@PeerCacheApplication` or `@CacheServerApplication` to
 `@ClientCacheApplication`, and you are done.
 
@@ -4507,7 +4507,7 @@ maintain the code (which might be you at some point in the future).
 ### Additional Configuration-based Annotations
 
 
-The following SDG Annotations were not discussed in this
+The following Spring Data for GemFire Annotations were not discussed in this
 reference documentation, either because the annotation supports a
 deprecated feature of GemFire or because there are better,
 alternative ways to accomplishing the function that the annotation
@@ -4519,7 +4519,7 @@ provides:
 - `@EnableAuth`: Enables GemFire's old authentication and
   authorization security model. (Deprecated. GemFire's new
   integrated security framework can be enabled on both clients and
-  servers by using SDG's `@EnableSecurity` annotation, as
+  servers by using Spring Data for GemFire's `@EnableSecurity` annotation, as
   described in "[Configuring
   Security](#bootstrap-annotation-config-security)".)
 
@@ -4528,7 +4528,7 @@ provides:
   metadata (such as `cache.xml` or Cluster Configuration when applied to
   a server) and automatically registers those Regions as beans in the
   Spring container. This annotation corresponds with the
-  `<gfe:auto-region-lookup>` element in SDG's XML namespace. More
+  `<gfe:auto-region-lookup>` element in Spring Data for GemFire's XML namespace. More
   details can found [here](#bootstrap:region:lookup:auto). Users should
   generally prefer Spring configuration when using Spring and
   Spring Data for GemFire. See "[Configuring
@@ -4536,13 +4536,13 @@ provides:
   Cluster Configuration Push](#bootstrap-annotation-config-cluster)"
   instead.
 
-- `@EnableBeanFactoryLocator`: Enables the SDG
+- `@EnableBeanFactoryLocator`: Enables the Spring Data for GemFire
   `GemfireBeanFactoryLocator` feature, which is only useful when using
   external configuration metadata (for example, `cache.xml`). For
   example, if you define a `CacheLoader` on a Region defined in
   `cache.xml`, you can still autowire this `CacheLoader` with, say, a
   relational database `DataSource` bean defined in Spring configuration.
-  This annotation takes advantage of this SDG
+  This annotation takes advantage of this Spring Data for GemFire
   [feature](#apis:declarable) and might be useful if you have a large
   amount of legacy configuration metadata, such as `cache.xml` files.
 
@@ -4634,7 +4634,7 @@ We hope you will enjoy these new capabilities!
 
 
 
-The following sections provide an overview to the SDG
+The following sections provide an overview to the Spring Data for GemFire
 annotations to get started quickly.
 
 
@@ -5087,7 +5087,7 @@ serializable without having to implement
 
 Note
 </div></td>
-<td class="content">By default, SDG configures the
+<td class="content">By default, Spring Data for GemFire configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
 out-of-the-box to properly identify application domain objects
@@ -5250,7 +5250,7 @@ more details.
 
 
 To configure other, low-level GemFire properties not covered
-by the feature-oriented, SDG configuration annotations,
+by the feature-oriented, Spring Data for GemFire configuration annotations,
 annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
@@ -5310,7 +5310,7 @@ details.
 
 To use GemFire as a *caching provider* in Spring's
 {spring-framework-docs}/integration.html#cache\[*Cache Abstraction*\],
-and have SDG automatically create GemFire Regions
+and have Spring Data for GemFire automatically create GemFire Regions
 for the caches required by your application service components, then
 annotate your Spring, GemFire client or server application
 class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`,
