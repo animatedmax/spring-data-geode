@@ -56,7 +56,7 @@ GemFire implements the following types of Regions:
 
 * **LOCAL**: Data only exists on the local node.
 
-* **Client**:Technically, a client Region is a LOCAL Region that acts
+* **Client**: Technically, a client Region is a LOCAL Region that acts
   as a PROXY to a REPLICATE or PARTITION Region hosted on cache servers
   in a cluster. It may hold data created or fetched locally.
   Alternately, it can be empty. Local updates are synchronized to the
