@@ -2748,6 +2748,7 @@ following example shows:
 
 <bean id="function2" class="example.FunctionTwo"/>
 ```
+
 ## <a id="configuring-wan-gateways"></a>Configuring WAN Gateways
 
 WAN Gateways provides a way to synchronize GemFire Distributed
