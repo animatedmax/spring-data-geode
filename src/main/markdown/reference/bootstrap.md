@@ -514,11 +514,6 @@ Service, see [Overview of the Cluster Configuration Service](https://docs.vmware
 Spring Data for GemFire includes dedicated support for configuring a
 [CacheServer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/server/CacheServer.html). This allows complete configuration through the Spring container, as shown in the following example:
 
-
-
-
-
-
 ```highlight
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
