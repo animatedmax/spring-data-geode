@@ -35,34 +35,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+WAN Gateways provides a way to synchronize GemFire Distributed
+Systems across geographic locations. Spring Data for GemFire provides XML namespace
+support for configuring WAN Gateways as illustrated in the following
+examples.
 
 WAN Gateways provides a way to synchronize GemFire Distributed
 Systems across geographic locations. Spring Data for GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 
-
-
-
-
-## WAN Configuration in GemFire 7.0
-
-
-
+## <a id="wan-gateway-configuration-7"></a>WAN Configuration in GemFire 7.0
 
 In the following example, `GatewaySenders` are configured for a
 `PARTITION` Region by adding child elements (`gateway-sender` and
 `gateway-sender-ref`) to the Region. A `GatewaySender` may register
 `EventFilters` and `TransportFilters`.
 
-
-
 The following example also shows a sample configuration of an
 `AsyncEventQueue`, which must also be auto-wired into a Region (not
 shown):
-
-
-
 
 ```highlight
 <gfe:partitioned-region id="region-with-inner-gateway-sender" >
@@ -94,21 +86,15 @@ shown):
         <bean class="org.springframework.data.gemfire.example.SomeTransportFilter"/>
     </gfe:transport-filter>
 </gfe:gateway-sender>
-
+  
 <bean id="event-filter" class="org.springframework.data.gemfire.example.AnotherEventFilter"/>
 <bean id="transport-filter" class="org.springframework.data.gemfire.example.AnotherTransportFilter"/>
 ```
-
-
-
 
 On the other end of a `GatewaySender` is a corresponding
 `GatewayReceiver` to receive Gateway events. The `GatewayReceiver` may
 also be configured with `EventFilters` and `TransportFilters`, as
 follows:
-
-
-
 
 ```highlight
 <gfe:gateway-receiver id="gateway-receiver" start-port="12345" end-port="23456" bind-address="192.168.0.1">
@@ -118,21 +104,5 @@ follows:
 </gfe:gateway-receiver>
 ```
 
-
-
-
-See the GemFire
-{x-data-store-docs}/topologies_and_comm/multi_site_configuration/chapter_overview.html\[documentation\]
-for a detailed explanation of all the configuration options.
-
-
-
-
-
-<div id="footer">
-
-<div id="footer-text">
-
-Last updated 2022-09-20 10:33:13 -0700
-
+For a detailed explanation of the configuration options. see [Multi-site (WAN) Configuration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-topologies_and_comm-multi_site_configuration-chapter_overview.html) in the GemFire product documentation.
 
