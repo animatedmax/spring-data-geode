@@ -37,13 +37,9 @@ limitations under the License.
 
 
 
-A powerful functionality offered by GemFire is
-{x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[Continuous
-Query\] (or CQ).
+A powerful functionality offered by GemFire is [Continuous Query](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-chapter_overview.html)(CQ).
 
-
-
-In short, CQ allows a developer to create and register an OQL query, and
+CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to
 GemFire matches the query predicate. Spring Data for GemFire provides
 dedicated support for CQs through the
@@ -52,48 +48,27 @@ container**; very similar in functionality and naming to the JMS
 integration in the *Spring Framework*; in fact, users familiar with the
 JMS support in Spring, should feel right at home.
 
-
-
-Basically Spring Data for GemFire allows methods on POJOs to become end-points for
+Spring Data for GemFire allows methods on POJOs to become end-points for
 CQ. Simply define the query and indicate the method that should be
 called to be notified when there is a match. Spring Data for GemFire takes care of
-the rest. This is very similar to Java EE's message-driven bean style,
+the rest. This is similar to Java EE's message-driven bean style,
 but without any requirement for base class or interface implementations,
 based on GemFire.
 
-
-
-
-Note
-</div></td>
-<td class="content">Currently, Continuous Query is only supported in
+<p class="note"><strong>Note</strong>: Continuous Query is only supported in
 GemFire's client/server topology. Additionally, the client
-Pool used is required to have the subscription enabled. Please refer to
-the GemFire
-{x-data-store-docs}/developing/continuous_querying/implementing_continuous_querying.html[documentation]
-for more information.</td>
-</tr>
-</tbody>
-</table>
+Pool used is required to have the subscription enabled. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-implementing_continuous_querying.htmlPlease">Implementing Continuous Querying</a>.</p>
 
 
+## <a id="continuous-query-listener-container"></a>Continuous Query Listener Container
 
-
-
-## Continuous Query Listener Container
-
-
-
-
-Spring Data for GemFire simplifies creation, registration, life-cycle and dispatch of
+Spring Data for GemFire simplifies creation, registration, life-cycle, and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
 Spring Data for GemFire's `ContinuousQueryListenerContainer`, which does all the heavy
 lifting on behalf of the user. Users familiar with EJB and JMS should
 find the concepts familiar as it is designed as close as possible to the
 support provided in the *Spring Framework* with its Message-driven POJOs
 (MDPs).
-
-
 
 The Spring Data for GemFire `ContinuousQueryListenerContainer` acts as an event (or message)
 listener container; it is used to receive the events from the registered
@@ -108,8 +83,6 @@ business logic associated with receiving an event (and reacting to it),
 and delegate the boilerplate GemFire infrastructure concerns
 to the framework.
 
-
-
 The listener container is fully customizable. A developer can chose
 either to use the CQ thread to perform the dispatch (synchronous
 delivery) or a new thread (from an existing pool) for an asynchronous
@@ -120,30 +93,17 @@ executor to better serve her needs. In particular, in managed
 environments (such as app servers), it is highly recommended to pick a
 proper `TaskExecutor` to take advantage of its runtime.
 
-
-
-
-
-## The `ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
-
-
-
+## <a id="continuousquerylistener-and-continuousquerylisteneradapter"></a>`ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
 
 The `ContinuousQueryListenerAdapter` class is the final component in
 Spring Data for GemFire CQ support. In a nutshell, class allows you to expose almost
 **any** implementing class as an EDP with minimal constraints.
 `ContinuousQueryListenerAdapter` implements the
 `ContinuousQueryListener` interface, a simple listener interface similar
-to GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/query/CqListener.html\[CqListener\].
-
-
+to [CqListener](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/CqListener.html).
 
 Consider the following interface definition. Notice the various event
 handling methods and their parameters:
-
-
-
 
 ```highlight
 public interface EventDelegate {
@@ -158,10 +118,6 @@ public interface EventDelegate {
 }
 ```
 
-
-
-
-
 ```highlight
 package example;
 
@@ -170,28 +126,12 @@ class DefaultEventDelegate implements EventDelegate {
 }
 ```
 
-
-
-
 In particular, note how the above implementation of the `EventDelegate`
-interface has **no** GemFire dependencies at all. It truly is
-a POJO that we can and will make into an EDP via the following
+interface has no GemFire dependencies. It is
+a POJO that we can and will make into an EDP using the following
 configuration.
 
-
-
-
-Note
-</div></td>
-<td class="content">the class does not have to implement an interface;
-an interface is only used to better showcase the decoupling between the
-contract and the implementation.</td>
-</tr>
-</tbody>
-</table>
-
-
-
+The class does not have to implement an interface. An interface is only used to better showcase the decoupling between the contract and the implementation.
 
 ```highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -221,31 +161,16 @@ contract and the implementation.</td>
 <beans>
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The example above shows a few of the various forms
+The example above shows a few of the various forms
 that a listener can have; at its minimum, the listener reference and the
 actual query definition are required. It's possible, however, to specify
 a name for the resulting Continuous Query (useful for monitoring) but
 also the name of the method (the default is <code>handleEvent</code>).
 The specified method can have various argument types, the
-<code>EventDelegate</code> interface lists the allowed types.</td>
-</tr>
-</tbody>
-</table>
-
-
+<code>EventDelegate</code> interface lists the allowed types.
 
 The example above uses the Spring Data for GemFire namespace to declare the event
-listener container and automatically register the listeners. The full
-blown, **beans** definition is displayed below:
-
-
-
+listener container and automatically register the listeners. The complete definition is displayed below:
 
 ```highlight
 <!-- this is the Event Driven POJO (MDP) -->
@@ -270,22 +195,8 @@ blown, **beans** definition is displayed below:
 </bean>
 ```
 
-
-
-
 Each time an event is received, the adapter automatically performs type
 translation between the GemFire event and the required method
-argument(s) transparently. Any exception caused by the method invocation
+arguments transparently. Any exception caused by the method invocation
 is caught and handled by the container (by default, being logged).
-
-
-
-
-
-<div id="footer">
-
-<div id="footer-text">
-
-Last updated 2022-09-20 10:33:13 -0700
-
 
