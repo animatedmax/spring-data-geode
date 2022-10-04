@@ -2265,7 +2265,7 @@ For more information about indexing in GemFire, see [Working
 with
 Indexes](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-query_index.html) in the GemFire product documentation.
 
-### <a id="defining-indexs"></a>Defining Indexes
+### <a id="defining-indexes"></a>Defining Indexes
 
 In addition to creating indexes as `Index` bean definitions are
 processed by Spring Data for GemFire on Spring container initialization, you may also
@@ -2285,7 +2285,7 @@ efficiency when creating indexes.
 
 For more information, see [Creating Multiple Indexes at Once](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-create_multiple_indexes.html) in the GemFire product documentation.
 
-## <a id="ignoreiexists-and-override"></a>`IgnoreIfExists` and `Override`
+### <a id="ignoreiexists-and-override"></a>`IgnoreIfExists` and `Override`
 
 The `ignoreIfExists` and `override` configuration options correspond to the `ignore-if-exists` and `override` attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace.
 
