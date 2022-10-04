@@ -1860,9 +1860,7 @@ More details on GemFire properties can be found
 
 
 
-
-
-## Configuring Regions
+## <a id="configuring-regions"></a>Configuring Regions
 
 
 
@@ -2317,9 +2315,7 @@ More details on GemFire Region types can be found
 
 
 
-<div class="sect2">
-
-### Configured Cluster-defined Regions
+### <a id="configured-cluster-defined-regions"></a>Configured Cluster-Defined Regions
 
 
 In addition to the `@EnableEntityDefinedRegions` annotation, Spring Data for GemFire

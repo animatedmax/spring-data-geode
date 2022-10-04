@@ -466,24 +466,13 @@ public class Book {
 }
 ```
 
-Note
-</div></td>
-<td class="content">The <code>@Region("Books")</code> entity class
-annotation is used by the <code>@EnableEntityDefinedRegions</code> to
-determine the Regions required by the application. See <a
-href="#bootstrap-annotation-config-region-types">[bootstrap-annotation-config-region-types]</a>
-and <a href="#mapping">[mapping]</a> for more details.</td>
-</tr>
-</tbody>
-</table>
-
-
+<p class="note"><strong>Note</strong>: The <code>@Region("Books")</code> entity class
+annotation is used by the <code>@EnableEntityDefinedRegions</code> to determine the Regions required by the application. For additional details, see <a
+href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-region-types">Configuring Type-specific Regions</a> in the <em>Spring Data for Apache Geode Reference Guide</em>
+and <a href="mapping.html#object-mapping-fundamentals">Object Mapping Fundamentals</a> in <em>POJO Mapping</em>.</p>
 
 Finally, define your CRUD Repository with simple queries to persist and
 access `Books`, as follows:
-
-
-
 
 ```highlight
 package example.app.repo;
@@ -492,83 +481,35 @@ import ...;
 
 public interface BookRepository extends CrudRepository {
 
-  List<Book> findByAuthorOrderByPublishedDesc(Author author);
+  List&lt;Book> findByAuthorOrderByPublishedDesc(Author author);
 
 }
 ```
+For more information, see [Spring Data for GemFire Repositories](repositories.html).
 
+See also the following: 
 
+* [@EnableEntityDefinedRegions Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableEntityDefinedRegions.html)
 
-<div class="admonitionblock tip">
+* [@EnableGemfireRepositories Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html).
 
+* [@EnableIndexing Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableIndexing.html)
 
-Tip
-</div></td>
-<td class="content">See <a
-href="#gemfire-repositories">[gemfire-repositories]</a> for more
-details.</td>
-</tr>
-</tbody>
-</table>
+* [@Region Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Region.html)
 
+* [@Indexed Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Indexed.html)
 
+* [@LuceneIndexed Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html)
 
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableEntityDefinedRegions.html\[`@EnableEntityDefinedRegions`
-Javadoc\].
+* [Configuring Regions](bootstrap-annotations.html#configuring-regions) in _Bootstrapping GemFire with the Spring Container using Annotations_
 
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/repository/config/EnableGemfireRepositories.html\[`@EnableGemfireRepositories`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableIndexing.html\[`@EnableIndexing`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/mapping/annotation/Region.html\[`@Region`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/mapping/annotation/Indexed.html\[`@Indexed`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html\[`@LuceneIndexed`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-regions\]](#bootstrap-annotation-config-regions)
-for more details.
-
-
-
-See [\[gemfire-repositories\]](#gemfire-repositories) for more details.
-
+* [Spring Data for GemFire Repositories](repositories.html)
 
 ## <a id="configure-client-regions"></a>Configure Client Regions from Cluster-defined Regions
-
-
-
 
 Alternatively, you can define client \[\*PROXY\] Regions from Regions
 already defined in the cluster using `@EnableClusterDefinedRegions`, as
 follows:
-
-
-
 
 ```highlight
 @SpringBootApplication
@@ -585,19 +526,10 @@ public class ClientApplication {
 }
 ```
 
-
-
-
-See
-[\[bootstrap-annotation-config-region-cluster-defined\]](#bootstrap-annotation-config-region-cluster-defined)
-for more details.
-
-
+For more information, see [Configured Cluster-Defined Regions](bootstrap-annotations.html#configured-cluster-defined-regions)
+in _Bootstrapping GemFire with the Spring Container using Annotations_.
 
 ## <a id="configure-functions"></a>Configure Functions
-
-
-
 
 GemFire Functions are useful in distributed compute scenarios
 where a potentially expensive computation requiring data can be
@@ -606,14 +538,9 @@ is more efficient to bring the logic to where the data is located
 (stored) rather than requesting and fetching the data to be processed by
 the computation.
 
-
-
 Use the `@EnableGemfireFunctions` along with the `@GemfireFunction`
 annotation to enable GemFire Functions definitions implemented
 as methods on POJOs, as follows:
-
-
-
 
 ```highlight
 @PeerCacheApplication
@@ -631,15 +558,9 @@ class ServerApplication {
 }
 ```
 
-
-
-
 Use the `@EnableGemfireFunctionExecutions` along with 1 of the Function
 calling annotations: `@OnMember`, `@OnMembers`, `@OnRegion`, `@OnServer`
 and `@OnServers`.
-
-
-
 
 ```highlight
 @ClientCacheApplication
@@ -659,64 +580,16 @@ interface CustomerRewardsFunctions {
 }
 ```
 
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/function/config/EnableGemfireFunctions.html\[`@EnableGemfireFunctions`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/function/annotation/GemfireFunction.html\[`@GemfireFunction`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/function/config/EnableGemfireFunctionExecutions.html\[`@EnableGemfireFunctionExecutions`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnMember.html\[`@OnMember`
-Javadoc\],
-{sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnMembers.html\[`@OnMembers`
-Javadoc\],
-{sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnRegion.html\[`@OnRegion`
-Javadoc\],
-{sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnServer.html\[`@OnServer`
-Javadoc\], and
-{sdg-javadoc}/org/springframework/data/gemfire/function/annotation/OnServers.html\[`@OnServers`
-Javadoc\].
-
-
-
-See [\[function-annotations\]](#function-annotations) for more details.
-
-
-
-
 ## <a id="configure-continuous-query"></a>Configure Continuous Query
-
-
-
 
 Real-time, event stream processing is becoming an increasingly important
 task for data-intensive applications, primarily to respond to
 user requests in a timely manner. GemFire Continuous Query
 (CQ) will help you achieve this rather complex task quite easily.
 
-
-
 Enable CQ by annotating your application class with
 `@EnableContinuousQueries` and define your CQs along with the associated
 event handlers, as follows:
-
-
-
 
 ```highlight
 @ClientCacheApplication
@@ -728,15 +601,8 @@ class ClientApplication {
   }
 }
 ```
-
-
-
-
 Then, define your CQs by annotating the associated handler method with
 `@ContinousQuery`, as follows:
-
-
-
 
 ```highlight
 @Service
@@ -749,48 +615,13 @@ class CustomerService {
 }
 ```
 
-
-
-
 Anytime an event occurs changing the `Customer` data to match the
 predicate in your continuous OQL query (CQ), the `process` method will
 be called.
 
-
-
-
-Note
-</div></td>
-<td class="content">GemFire CQ is a client-side feature
-only.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html\[`@EnableContinuousQueries`
-Javadoc\].
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/listener/annotation/ContinuousQuery.html\[`@ContinuousQuery`
-Javadoc\].
-
-
-
-See [\[apis:continuous-query\]](#apis:continuous-query) and
-[\[bootstrap-annotation-config-continuous-queries\]](#bootstrap-annotation-config-continuous-queries)
-for more details.
-
-
+GemFire CQ is a client-side feature only.
 
 ## <a id="configure-cluster-configurations"></a>Configure Cluster Configuration
-
-
-
 
 When developing Spring Data applications using GemFire as
 GemFire `ClientCache` applications, it is useful during
@@ -799,25 +630,15 @@ client/server topology. In fact, GemFire expects that when you
 have a "/Example" PROXY `Region` on the client, that a matching `Region`
 by name (i.e. "Example") exists in the server.
 
-
-
-You could use *Gfsh* to create every Region and Index that your
+You could use `gfsh` to create every Region and Index that your
 application requires, or, you could simply push the configuration
 meta-data already expressed when developing your Spring Data application
 using GemFire when you run it.
 
-
-
 This is as simple as annotation your main application class with
 `@EnableClusterConfiguration(..)`:
 
-
-
-<div class="title">
-
-Using `@EnableClusterConfiguration`
-
-
+**Using `@EnableClusterConfiguration`**
 
 ```highlight
 @ClientCacheApplication
@@ -826,56 +647,20 @@ class ClientApplication {
   ...
 }
 ```
-
-
-
-
-
-Note
-</div></td>
-<td class="content">Most of the time, when using a client/server
+Most of the time, when using a client/server
 topology, particularly in production environments, the servers of the
-cluster will be started using <em>Gfsh</em>. In which case, it customary
+cluster will be started using `gfsh`. In which case, it customary
 to use HTTP(S) to send the configuration metadata (e.g. Region &amp;
 Index definitions) to the cluster. When HTTP is used, the configuration
 metadata is sent to the Manager in the cluster and distributed across
-the server nodes in the cluster consistently.</td>
-</tr>
-</tbody>
-</table>
+the server nodes in the cluster consistently.
 
-
-<div class="admonitionblock warning">
-
-
-Warning
-</div></td>
-<td class="content">to use
+<p class="note"><strong>Note</strong>: To use
 <code>@EnableClusterConfiguration</code> you must declare the
 <code>org.springframework:spring-web</code> dependency in your Spring
-application classpath.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/EnableClusterConfiguration.html\[`@EnableClusterConfiguration`
-Javadoc\].
-
-
-
-See
-[\[bootstrap-annotation-config-cluster\]](#bootstrap-annotation-config-cluster)
-for more details.
-
-
+application classpath.</p>
 
 ## <a id="configure-gatewayreceivers"></a>Configure `GatewayReceivers`
-
-
-
 
 The replication of data between different GemFire clusters is
 an increasingly important fault-tolerance and high-availability (HA)
@@ -883,27 +668,17 @@ mechanism. GemFire WAN replication is a mechanism that allows
 one GemFire cluster to replicate its data to another
 GemFire cluster in a reliable and fault-tolerant manner.
 
-
-
 GemFire WAN replication requires two components to be
 configured:
 
-
-<div class="ulist">
-
-- `GatewayReceiver` - The WAN replication component that receives data
+- `GatewayReceiver`: The WAN replication component that receives data
   from a remote GemFire cluster's `GatewaySender`.
 
-- `GatewaySender` - The WAN replication component that sends data to a
+- `GatewaySender`: The WAN replication component that sends data to a
   remote GemFire cluster's `GatewayReceiver`.
 
-
-
-To enable a `GatewayReceiver`, the application class needs to be
+To enable a `GatewayReceiver`, the application class must be
 annotated with `@EnableGatewayReceiver` as follows:
-
-
-
 
 ```highlight
 @CacheServerApplication
@@ -917,37 +692,14 @@ annotated with `@EnableGatewayReceiver` as follows:
 class MySpringApplication { .. }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">GemFire <code>GatewayReceiver</code> is a
+<p class="note"><strong>Note</strong>: GemFire <code>GatewayReceiver</code> is a
 server-side feature only and can only be configured on a
-<code>CacheServer</code> or peer <code>Cache</code> node.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/wan/annotation/EnableGatewayReceiver.html\[`@EnableGatewayReceiver`
-Javadoc\].
-
-
+<code>CacheServer</code> or peer <code>Cache</code> node.</p>
 
 ## <a id="configure-gatewaysenders"></a>Configure `GatewaySenders`
 
-
-
-
-To enable `GatewaySender`, the application class needs to be annotated
+To enable `GatewaySender`, the application class must be annotated
 with `@EnableGatewaySenders` and `@EnableGatewaySender` as follows:
-
-
-
 
 ```highlight
 @CacheServerApplication
@@ -971,41 +723,24 @@ class MySpringApplication { .. }
 }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">GemFire <code>GatewaySender</code> is a
+<p class="note"><strong>Note</strong>: GemFire <code>GatewaySender</code> is a
 server-side feature only and can only be configured on a
-<code>CacheServer</code> or a peer <code>Cache</code> node.</td>
-</tr>
-</tbody>
-</table>
+<code>CacheServer</code> or a peer <code>Cache</code> node.</p>
 
-
-
-In the above example, the application is configured with 2 Regions,
-`Region1` and `Region2`. In addition, two `GatewaySenders` will be
+In the above example, the application is configured with two Regions,
+`Region1` and `Region2`. Additionally, two `GatewaySenders` will be
 configured to service both Regions. `GatewaySender1` will be configured
 to replicate `` Region1's data and `GatewaySender2 `` will be configured
 to replicate \`Region2's data.
 
-
-
-As demonstrated each `GatewaySender` property can be configured on each
+As demonstrated, each `GatewaySender` property can be configured on each
 `EnableGatewaySender` annotation.
-
-
 
 It is also possible to have a more generic, "defaulted" properties
 approach, where all properties are configured on the
-`EnableGatewaySenders` annotation. This way, a set of generic, defaulted
+`EnableGatewaySenders` annotation. In this way, a set of generic, defaulted
 values can be set on the parent annotation and then overridden on the
 child if required, as demonstrated below:
-
-
 
 
 ```highlight
@@ -1022,26 +757,7 @@ child if required, as demonstrated below:
 class MySpringApplication { .. }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">When the <code>regions</code> attribute is left
-empty or not populated, the <code>GatewaySender</code>(s) will
+<p class="note"><strong>Note</strong>: When the <code>regions</code> attribute is left
+empty or not populated, the <code>GatewaySender</code> will
 automatically attach itself to every configured <code>Region</code>
-within the application.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See
-{sdg-javadoc}/org/springframework/data/gemfire/wan/annotation/EnableGatewaySenders.html\[`@EnableGatewaySenders`
-Javadoc\] and
-{sdg-javadoc}/org/springframework/data/gemfire/wan/annotation/EnableGatewaySender.html\[`@EnableGatewaySender`
-Javadoc\].
-
-
+within the application.</p>
