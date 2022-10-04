@@ -1260,9 +1260,8 @@ annotations, etc).</td>
 
 
 
-<div class="sect2">
 
-### Configuration using auto-wiring and annotations
+### <a id="configurations-using-auto-wiring-and-annotations"></a>Configuration Using Auto-Wiring and Annotations
 
 
 By default, if no bean definition is found, `WiringDeclarableSupport`
