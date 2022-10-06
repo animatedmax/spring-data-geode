@@ -283,7 +283,7 @@ mapping infrastructure. For more details, see [MappingPdxSerializer](../index.ht
 
 See [@EnablePdx Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnablePdx.html).
 
-For more information, see [Configuring PDX](bootstrap-annotations.html#configuring-pdx) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+For more information, see [Configuring PDX](bootstrap-annotations.html#configuring-pdx) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-ssl"></a>Configure SSL
 
@@ -316,7 +316,7 @@ all components of GemFire use SSL with `ALL`.
 
 See [@EnableSsl Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSsl.html).
 
-For more information, see [Configuring SSL](bootstrap-annotations.html#configuring-ssl) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+For more information, see [Configuring SSL](bootstrap-annotations.html#configuring-ssl) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-security"></a>Configure Security
 
@@ -337,14 +337,14 @@ public class ClientApplication {
 ```
 
 On the server, you must configure access to the auth
-credentials. You may either implement the [SecurityManager](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/security/SecurityManager.html) interface or declare one or more Apache Shiro <code>Realms</code>. For more details, see [Configuring Server Security](bootstrap-annotations.html#configuring-server-security) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+credentials. You may either implement the [SecurityManager](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/security/SecurityManager.html) interface or declare one or more Apache Shiro <code>Realms</code>. For more details, see [Configuring Server Security](bootstrap-annotations.html#configuring-server-security) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
-On the client, you must configure a username and password. For more details, see [Configuring Client Security](bootstrap-annotations.html#configuring-client-security) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+On the client, you must configure a username and password. For more details, see [Configuring Client Security](bootstrap-annotations.html#configuring-client-security) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 See [@EnableSecurity Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSecurity.html).
 
 
-For more information, see [Configuring Security](bootstrap-annotations.html#configuring-security) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+For more information, see [Configuring Security](bootstrap-annotations.html#configuring-security) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-gemfire-properties"></a>Configure GemFire Properties
 
@@ -375,7 +375,7 @@ the appropriate use of each property, see [gemfire.properties vars.and gfsecurit
 
 See [@EnableGemFireProperties Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableGemFireProperties.html).
 
-For more information, see [Configuring GemFire Properties](#configuring-gemfire-properties) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+For more information, see [Configuring GemFire Properties](#configuring-gemfire-properties) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-caching"></a>Configure Caching
 
@@ -415,7 +415,7 @@ See [@EnableCachingDefinedRegions Javadoc](https://docs.spring.io/spring-data/ge
 See
 [@EnableGemfireCaching Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/cache/config/EnableGemfireCaching.html).
 
-For more information, see [Configuring Spring's Cache Abstraction](bootstrap-annotations.html#configuring-springs-cache-abstraction) in _Bootstrapping GemFire with the Spring Container using Annotations_.
+For more information, see [Configuring Spring's Cache Abstraction](bootstrap-annotations.html#configuring-springs-cache-abstraction) in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-regions-etc"></a>Configure Regions, Indexes, Repositories, and Entities for Persistent Applications
 
@@ -436,7 +436,7 @@ public class ClientApplication {
 }
 ```
 
-<p classs="note"><strong>Note</strong>: The <code>@EnableEntityDefinedRegions</code> annotation is required when using the <code>@EnableIndexing</code> annotation. For more details, see <a href="bootstrap-annotations.html#configuring-indexes">Configuring Indexes</a> in <em>Bootstrapping GemFire with the Spring Container using Annotations</em>.</p>
+<p classs="note"><strong>Note</strong>: The <code>@EnableEntityDefinedRegions</code> annotation is required when using the <code>@EnableIndexing</code> annotation. For more details, see <a href="bootstrap-annotations.html#configuring-indexes">Configuring Indexes</a> in <em>Bootstrapping GemFire with the Spring Container Using Annotations</em>.</p>
 
 Next, define your entity class and use the `@Region` mapping annotation
 to specify the Region in which your entity will be stored. Use the
@@ -501,7 +501,7 @@ See also the following:
 
 * [@LuceneIndexed Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html)
 
-* [Configuring Regions](bootstrap-annotations.html#configuring-regions) in _Bootstrapping GemFire with the Spring Container using Annotations_
+* [Configuring Regions](bootstrap-annotations.html#configuring-regions) in _Bootstrapping GemFire with the Spring Container Using Annotations_
 
 * [Spring Data for GemFire Repositories](repositories.html)
 
@@ -527,7 +527,7 @@ public class ClientApplication {
 ```
 
 For more information, see [Configured Cluster-Defined Regions](bootstrap-annotations.html#configured-cluster-defined-regions)
-in _Bootstrapping GemFire with the Spring Container using Annotations_.
+in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-functions"></a>Configure Functions
 

@@ -1817,9 +1817,9 @@ Regions. Local Regions, as the name implies, are standalone, meaning
 that they do not share data with any other distributed system member.
 Other than that, all common Region configuration options apply.
 
-The following example shows a minimal declaration (again, the example
+The following example shows a minimal declaration. The example
 relies on the Spring Data for GemFire XML namespace naming conventions to wire the
-cache):
+cache:
 
 ```highlight
 <gfe:local-region id="exampleLocalRegion"/>

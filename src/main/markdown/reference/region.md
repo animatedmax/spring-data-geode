@@ -335,7 +335,7 @@ The following table lists the attributes available for all Region types:
 ### <a id="cachelistener-instances"></a>`CacheListener` instances
 
 `CacheListener` instances are registered with a Region to handle Region
-events, such as when entries are created, updated, destroyed, and so on.
+events, such as when entries are created, updated, and destroyed.
 A `CacheListener` can be any bean that implements the
 [CacheListener](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CacheListener.html) interface. A Region may have multiple listeners, declared with the
 `cache-listener` element nested in the containing `*-region` element.
@@ -1120,9 +1120,9 @@ Regions. Local Regions, as the name implies, are standalone, meaning
 that they do not share data with any other distributed system member.
 Other than that, all common Region configuration options apply.
 
-The following example shows a minimal declaration (again, the example
+The following example shows a minimal declaration. The example
 relies on the Spring Data for GemFire XML namespace naming conventions to wire the
-cache):
+cache:
 
 ```highlight
 <gfe:local-region id="exampleLocalRegion"/>

@@ -4518,7 +4518,7 @@ for a detailed explanation of all the configuration options.
 
 <div class="sect1">
 
-## Bootstrapping Apache Geode with the Spring Container using Annotations
+## Bootstrapping Apache Geode with the Spring Container Using Annotations
 
 
 

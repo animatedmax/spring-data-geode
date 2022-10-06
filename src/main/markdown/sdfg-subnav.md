@@ -9,7 +9,7 @@
 *   [New Features](introduction/new-features.html)
 *   [Requirements](introduction/requirements.html)
 *   [Annotation-based Configuration Quick Start](reference/bootstrap-annotations-quickstart.html)
-*   [Bootstrapping GemFire with the Spring Container using Annotations](reference/bootstrap-annotations.html)
+*   [Bootstrapping GemFire with the Spring Container Using Annotations](reference/bootstrap-annotations.html)
 *   [Bootstrapping GemFire with the Spring Container](reference/bootstrap.html)
 *   [Configuring a Cache](reference/cache.html)
 *   [Continuous Query (CQ)](reference/cq-container.html)
