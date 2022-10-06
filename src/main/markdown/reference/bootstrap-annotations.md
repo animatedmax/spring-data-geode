@@ -1418,15 +1418,10 @@ mapping annotation and set the `shortcut` attribute to
 
 **Spring `ClientCache` application with a local-only, client Region**
 
-
-
 ```highlight
 @ClientRegion(shortcut = ClientRegionShortcut.LOCAL)
 class ClientLocalEntityType { .. }
 ```
-
-
-
 
 All Region type-specific annotations provide additional attributes that
 are both common across Region types as well as specific to only that
@@ -1434,15 +1429,10 @@ type of Region. For example, the `collocatedWith` and `redundantCopies`
 attributes in the `PartitionRegion` annotation apply to server-side,
 `PARTITION` Regions only.
 
-
-
-More details on GemFire Region types can be found
-{x-data-store-docs}/developing/region_options/region_types.html\[here\].
-
-
+For more details about GemFire Region types, see [Region Types](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-region_options-region_types.html)
+in the GemFire product documentation.
 
 ### <a id="configured-cluster-defined-regions"></a>Configured Cluster-Defined Regions
-
 
 In addition to the `@EnableEntityDefinedRegions` annotation, Spring Data for GemFire
 also provides the inverse annotation, `@EnableClusterDefinedRegions`.
@@ -1452,8 +1442,6 @@ and logical approach), alternatively, you can declare your Regions from
 the Regions already defined in the cluster to which your `ClientCache`
 application will connect.
 
-
-
 This allows you to centralize your configuration using the cluster of
 servers as the primary source of data definitions and ensure that all
 client applications of the cluster have a consistent configuration. This
@@ -1461,26 +1449,16 @@ is particularly useful when quickly scaling up a large number instances
 of the same client application to handle the increased load in a
 cloud-managed environment.
 
-
-
 The idea is, rather than the client application(s) driving the data
-dictionary, the user defines Regions using GemFire's *Gfsh*
+dictionary, the user defines Regions using GemFire's `gfsh`
 CLI shell tool. This has the added advantage that when additional peers
 are added to the cluster, they too will also have and share the same
 configuration since it is remembered by GemFire's *Cluster
 Configuration Service*.
 
+As an example, a user might defined a Region in `gfsh` as follows:
 
-
-By way of example, a user might defined a Region in *Gfsh*, as follows:
-
-
-
-<div class="title">
-
-Defining a Region with Gfsh
-
-
+**Defining a Region with `gfsh`**
 
 ```highlight
 gfsh>create region --name=Books --type=PARTITION
@@ -1509,29 +1487,20 @@ Region | size        | 0
        | data-policy | PARTITION
 ```
 
-
-
-
 With GemFire's *Cluster Configuration Service*, any additional
 peer members added to the cluster of servers to handle the increased
 load (on the backend) will also have the same configuration, for
 example:
 
-
-
-<div class="title">
-
-Adding an additional peer member to the cluster
-
-
+**Adding an additional peer member to the cluster**
 
 ```highlight
 gfsh>list members
   Name    | Id
 --------- | ----------------------------------------------
-Locator   | 10.0.0.121(Locator:68173:locator)<ec><v0>:1024
-ServerOne | 10.0.0.121(ServerOne:68242)<v3>:1025
-ServerTwo | 10.0.0.121(ServerTwo:68372)<v4>:1026
+Locator   | 10.0.0.121(Locator:68173:locator)&lt;ec>&lt;v0>:1024
+ServerOne | 10.0.0.121(ServerOne:68242)&lt;v3>:1025
+ServerTwo | 10.0.0.121(ServerTwo:68372)&lt;v4>:1026
 
 gfsh>start server --name=ServerThree --log-level=config --server-port=41414
 Starting a Geode Server in /Users/you/geode/cluster/ServerThree...
@@ -1556,14 +1525,14 @@ Class-Path: /Users/you/geode/cluster/apache-geode-1.2.1/lib/geode-core-1.2.1.jar
 gfsh>list members
    Name     | Id
 ----------- | ----------------------------------------------
-Locator     | 10.0.0.121(Locator:68173:locator)<ec><v0>:1024
-ServerOne   | 10.0.0.121(ServerOne:68242)<v3>:1025
-ServerTwo   | 10.0.0.121(ServerTwo:68372)<v4>:1026
-ServerThree | 10.0.0.121(ServerThree:68467)<v5>:1027
+Locator     | 10.0.0.121(Locator:68173:locator)&lt;ec>&lt;v0>:1024
+ServerOne   | 10.0.0.121(ServerOne:68242)vv3>:1025
+ServerTwo   | 10.0.0.121(ServerTwo:68372)&lt;v4>:1026
+ServerThree | 10.0.0.121(ServerThree:68467)&lt;v5>:1027
 
 gfsh>describe member --name=ServerThree
 Name        : ServerThree
-Id          : 10.0.0.121(ServerThree:68467)<v5>:1027
+Id          : 10.0.0.121(ServerThree:68467)&lt;v5>:1027
 Host        : 10.0.0.121
 Regions     : Books
 PID         : 68467
@@ -1581,31 +1550,19 @@ Running                  : true
 Client Connections       : 0
 ```
 
-
-
-
-As you can see, "ServerThree" now has the "Books" Region. If the any or
+As shown, "ServerThree" now has the "Books" Region. If the any or
 all of the server go down, they will have the same configuration along
 with the "Books" Region when they come back up.
 
-
-
 On the client-side, many Book Store client application instances might
 be started to process books against the Book Store online service. The
-"Books" Region might be 1 of many different Regions needed to implement
+"Books" Region might be one of many different Regions needed to implement
 the Book Store application service. Rather than have to create and
 configure each Region individually, Spring Data for GemFire conveniently allows
 the client application Regions to be defined from the cluster, as
 follows:
 
-
-
-<div class="title">
-
-Defining Client Regions from the Cluster with
-`@EnableClusterDefinedRegions`
-
-
+**Defining Client Regions from the Cluster with `@EnableClusterDefinedRegions`**
 
 ```highlight
 @ClientCacheApplication
@@ -1615,30 +1572,14 @@ class BookStoreClientApplication {
     public static void main(String[] args) {
         ....
     }
-
     ...
 }
 ```
+<p class="note"><strong>Note</strong>: <code>@EnableClusterDefinedRegions</code> can only
+used on the client.</p>
 
-
-
-
-
-Note
-</div></td>
-<td class="content"><code>@EnableClusterDefinedRegions</code> can only
-used on the client.</td>
-</tr>
-</tbody>
-</table>
-
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">You can use the <code>clientRegionShortcut</code>
+<p class="note"><strong>Note</strong>: 
+You can use the <code>clientRegionShortcut</code>
 annotation attribute to control the type of Region created on the
 client. By default, a client <code>PROXY</code> Region is created. Set
 <code>clientRegionShortcut</code> to
@@ -1646,78 +1587,46 @@ client. By default, a client <code>PROXY</code> Region is created. Set
 caching</em>". This setting applies to all client Regions created from
 Cluster-defined Regions. To control individual settings
 (like data policy) of the client Regions created from Regions defined on
-the Cluster, implement a
-{sdg-javadoc}/org/springframework/data/gemfire/config/annotation/RegionConfigurer.html[<code>RegionConfigurer</code>]
-with custom logic based on the Region name.</td>
-</tr>
-</tbody>
-</table>
-
-
+the Cluster, implement a <a href="https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/RegionConfigurer.html">RegionConfigurer</a>
+with custom logic based on the Region name.</p>
 
 To use the "Books" Region in your application, inject the "Books" Region directly, as follows:
 
-
-
-<div class="title">
-
-Using the "Books" Region
-
-
+**Using the "Books" Region**
 
 ```highlight
 @org.springframework.stereotype.Repository
 class BooksDataAccessObject {
 
     @Resource(name = "Books")
-    private Region<ISBN, Book> books;
+    private Region&lt;ISBN, Book> books;
 
     // implement CRUD and queries with the "Books" Region
 }
 ```
 
-
-
-
-Or, even define a Spring Data Repository definition based on the
+Or you can define a Spring Data Repository definition based on the
 application domain type (entity), `Book`, mapped to the "Books" Region,
 as follows:
 
-
-
-<div class="title">
-
-Using the "Books" Region with a SD Repository
-
-
+**Using the "Books" Region with a SD Repository**
 
 ```highlight
-interface BookRepository extends CrudRepository<Book, ISBN> {
+interface BookRepository extends CrudRepository&lt;Book, ISBN> {
     ...
 }
 ```
-
-
-
 
 You can then either inject your custom `BooksDataAccessObject` or the
 `BookRepository` into your application service components to carry out
 whatever business function required.
 
-
-
-<div class="sect2">
-
-### Configuring Eviction
-
+### <a id="configuring-eviction"></a>Configuring Eviction
 
 Managing data with GemFire is an active task. Tuning is
 generally required, and you must employ a combination of features (for
-example, both eviction and
-[expiration](#bootstrap-annotation-config-region-expiration)) to
+example, both eviction and expiration) to
 effectively manage your data in memory with GemFire.
-
-
 
 Given that GemFire is an In-Memory Data Grid (IMDG), data is
 managed in-memory and distributed to other nodes that participate in a
@@ -1730,33 +1639,21 @@ scale-out (rather than scaling up, which means adding more memory, more
 CPU, more disk, or more network bandwidth — basically more of every
 system resource to handle the load).
 
-
-
 Still, even with a cluster of nodes, it is usually imperative that only
 the most important data be kept in memory. Running out of memory, or
 even venturing near full capacity, is rarely, if ever, a good thing.
 Stop-the-world GCs or worse, `OutOfMemoryErrors`, will bring your
-application to a screaming halt.
+application to a halt.
 
-
-
-So, to help manage memory and keep the most important data around,
+To help manage memory and keep the most important data around,
 GemFire supports Least Recently Used (LRU) eviction. That is,
 GemFire evicts Region entries based on when those entries were
 last accessed by using the Least Recently Used algorithm.
 
-
-
 To enable eviction, annotate the application class with
 `@EnableEviction`, as follows:
 
-
-
-<div class="title">
-
-Spring application with eviction enabled
-
-
+**Spring application with eviction enabled**
 
 ```highlight
 @SpringBootApplication
@@ -1770,76 +1667,35 @@ Spring application with eviction enabled
 class ServerApplication { .. }
 ```
 
-
-
-
 Eviction policies are usually set on the Regions in the servers.
-
-
 
 As shown earlier, the `policies` attribute can specify one or more
 nested `@EvictionPolicy` annotations, with each one being individually
 catered to one or more Regions where the eviction policy needs to be
 applied.
 
-
-
 Additionally, you can reference a custom implementation of
-GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/util/ObjectSizer.html\[`org.apache.geode.cache.util.ObjectSizer`\]
+GemFire's [org.apache.geode.cache.util.ObjectSizer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/util/ObjectSizer.html)
 interface, which can be defined as a bean in the Spring container and
 referenced by name by using the `objectSizerName` attribute.
-
-
 
 An `ObjectSizer` lets you define the criteria used to evaluate and
 determine the the size of objects stored in a Region.
 
+For a complete list of eviction configuration options, see the
+[@EnableEviction annotation Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableEviction.html)
 
-
-See the [`@EnableEviction` annotation
-Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableEviction.html)
-for a complete list of eviction configuration options.
-
-
-
-More details on GemFire eviction can be found
-{x-data-store-docs}/developing/eviction/chapter_overview.html\[here\].
-
-
-
-<div class="sect2">
+For more details about GemFire eviction, see [Eviction](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-eviction-chapter_overview.html)
+in the GemFire product documentation.
 
 ### <a id="configuring-expiration"></a>Configuring Expiration
 
-
-Along with [eviction](#bootstrap-annotation-config-region-eviction),
+Along with [eviction](#configuring-eviction),
 expiration can also be used to manage memory by allowing entries stored
 in a Region to expire. GemFire supports both Time-to-Live
 (TTL) and Idle-Timeout (TTI) entry expiration policies.
 
-
-
-Spring Data for GemFire's annotation-based expiration configuration is based on the
-[earlier and existing entry expiration annotation
-support](#bootstrap:region:expiration:annotation) added in Spring Data for GemFire
-version 1.5.
-
-
-
-Essentially, Spring Data for GemFire's expiration annotation support is based on a
-custom implementation of GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/CustomExpiry.html\[`org.apache.geode.cache.CustomExpiry`\]
-interface. This `o.a.g.cache.CustomExpiry` implementation inspects the
-user's application domain objects stored in a Region for the presence of
-type-level expiration annotations.
-
-
-
 Spring Data for GemFire provides the following expiration annotations:
-
-
-<div class="ulist">
 
 - `Expiration`
 
@@ -1847,38 +1703,20 @@ Spring Data for GemFire provides the following expiration annotations:
 
 - `TimeToLiveExpiration`
 
-
-
 An application domain object type can be annotated with one or more of
 the expiration annotations, as follows:
 
-
-
-<div class="title">
-
-Applicaton domain object specific expiration policy
-
-
+**Application domain object specific expiration policy**
 
 ```highlight
 @Region("Books")
 @TimeToLiveExpiration(timeout = 30000, action = "INVALIDATE")
 class Book { .. }
 ```
-
-
-
-
 To enable expiration, annotate the application class with
 `@EnableExpiration`, as follows:
 
-
-
-<div class="title">
-
-Spring application with expiration enabled
-
-
+**Spring application with expiration enabled**
 
 ```highlight
 @SpringBootApplication
@@ -1887,21 +1725,12 @@ Spring application with expiration enabled
 class ServerApplication { .. }
 ```
 
-
-
-
 In addition to application domain object type-level expiration policies,
 you can directly and individually configure expiration policies on a
 Region by Region basis using the `@EnableExpiration` annotation, as
 follows:
 
-
-
-<div class="title">
-
-Spring application with region-specific expiration policies
-
-
+**Spring application with region-specific expiration policies**
 
 ```highlight
 @SpringBootApplication
@@ -1914,61 +1743,33 @@ Spring application with region-specific expiration policies
 class ServerApplication { .. }
 ```
 
-
-
-
 The preceding example sets expiration policies for the `Books`,
 `Customers`, and `Orders` Regions.
 
-
-
 Expiration policies are usually set on the Regions in the servers.
 
+For a complete list of expiration configuration options,
+see the [@EnableExpiration annotation Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableExpiration.html).
 
+For more details about GemFire expiration, see [Expiration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-expiration-chapter_overview.html)
+in the GemFire product documentation.
 
-See the [`@EnableExpiration` annotation
-Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableExpiration.html)
-for a complete list of expiration configuration options.
+### <a id="configuring-compression"></a>Configuring Compression
 
-
-
-More details on GemFire expiration can be found
-{x-data-store-docs}/developing/expiration/chapter_overview.html\[here\].
-
-
-
-<div class="sect2">
-
-### Configuring Compression
-
-
-In addition to
-[eviction](#bootstrap-annotation-config-region-expiration) and
-[expiration](#bootstrap-annotation-config-region-expiration), you can
-also configure your data Regions with compression to reduce memory
+In addition to [eviction](#configuring-eviction) and
+[expiration](#configuring-expiration), you can
+configure your data Regions with compression to reduce memory
 consumption.
 
-
-
 GemFire lets you compress in memory Region values by using
-pluggable
-{x-data-store-javadoc}/org/apache/geode/compression/Compressor.html\[`Compressors`\],
-or different compression codecs. GemFire uses Google's
-[Snappy](https://google.github.io/snappy/) compression library by
+pluggable [Compressors](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/Compressor.html),
+or different compression codecs. GemFire uses Google's [Snappy](https://google.github.io/snappy/) compression library by
 default.
-
-
 
 To enable compression, annotate the application class with
 `@EnableCompression`, as follows:
 
-
-
-<div class="title">
-
-Spring application with Region compression enabled
-
-
+**Spring application with Region compression enabled**
 
 ```highlight
 @SpringBootApplication
@@ -1977,115 +1778,56 @@ Spring application with Region compression enabled
 class ClientApplication { .. }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">Neither the <code>compressorBeanName</code> nor the
-<code>regionNames</code> attributes are required.</td>
-</tr>
-</tbody>
-</table>
-
-
+In the above example, neither the <code>compressorBeanName</code> nor the
+<code>regionNames</code> attributes are required.
 
 The `compressorBeanName` defaults to `SnappyCompressor`, enabling
-GemFire's
-{x-data-store-javadoc}/org/apache/geode/compression/SnappyCompressor.html\[`SnappyCompressor`\].
-
-
+[SnappyCompressor](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/SnappyCompressor.html).
 
 The `regionNames` attribute is an array of Region names that specify the
 Regions that have compression enabled. By default, all Regions compress
 values if the `regionNames` attribute is not explicitly set.
 
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">Alternatively, you can use the
+Alternatively, you can use the
 <code>spring.data.gemfire.cache.compression.compressor-bean-name</code>
 and <code>spring.data.gemfire.cache.compression.region-names</code>
 properties in the <code>application.properties</code> file to set and
 configure the values of these <code>@EnableCompression</code> annotation
-attributes.</td>
-</tr>
-</tbody>
-</table>
+attributes.
 
-
-<div class="admonitionblock warning">
-
-
-Warning
-</div></td>
-<td class="content">To use GemFire's Region compression
+<p class="note warning"><strong>Warning</strong>: To use GemFire's Region compression
 feature, you must include the <code>org.iq80.snappy:snappy</code>
 dependency in your application's <code>pom.xml</code> file (for Maven)
 or <code>build.gradle</code> file (for Gradle). This is necessary only
 if you use GemFire's default support for Region compression,
-which uses the
-{x-data-store-javadoc}/org/apache/geode/compression/SnappyCompressor.html[<code>SnappyCompressor</code>]
-by default. Of course, if you use another compression library, you need
-to include dependencies for that compression library on your
-application's classpath. Additionally, you need to implement
-GemFire's
-{x-data-store-javadoc}/org/apache/geode/compression/Compressor.html[<code>Compressor</code>]
+which uses the <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/SnappyCompressor.html">SnappyCompressor</a>
+by default. If you use another compression library, you must include dependencies for that compression library on your
+application's classpath. Additionally, you must implement the <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/Compressor.html">Compressor</a>]
 interface to adapt your compression library of choice, define it as a
-bean in the Spring compressor, and set the
-<code>compressorBeanName</code> to this custom bean definition.</td>
-</tr>
-</tbody>
-</table>
+bean in the Spring compressor, and set the <code>compressorBeanName</code> to this custom bean definition.</p>
 
+For more details, see the [@EnableCompression annotation Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableCompression.html).
 
+For more information about compression, see [Region Compression](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-region_compression.html)
+in the GemFire product documentation.
 
-See the [`@EnableCompression` annotation
-Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableCompression.html)
-for more details.
-
-
-
-More details on GemFire compression can be found
-[here](https://gemfire91.docs.pivotal.io/geode/managing/region_compression.html).
-
-
-
-<div class="sect2">
-
-### Configuring Off-Heap Memory
-
+### <a id="configuring-off-heap-memory"></a>Configuring Off-Heap Memory
 
 Another effective means for reducing pressure on the JVM's Heap memory
 and minimizing GC activity is to use GemFire's off-heap memory
 support.
 
-
-
 Rather than storing Region entries on the JVM Heap, entries are stored
 in the system's main memory. Off-heap memory generally works best when
 the objects being stored are uniform in size, are mostly less than 128K,
-and do not need to be deserialized frequently, as explained in the
-GemFire
-{x-data-store-docs}/managing/heap_use/off_heap_management.html\[User
-Guide\].
-
-
+and do not need to be deserialized frequently, as explained in
+[Managing Off-Heap Memory](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-heap_use-off_heap_management.html)
+in the GemFire product documentation.
 
 To enable off-heap, annotate the application class with
 `@EnableOffHeap`, as follows:
 
-
-
-<div class="title">
-
-Spring application with Off-Heap enabled
-
-
+**Spring application with Off-Heap enabled**
 
 ```highlight
 @SpringBootApplication
@@ -2094,46 +1836,23 @@ Spring application with Off-Heap enabled
 class ServerApplication { .. }
 ```
 
-
-
-
 The `memorySize` attribute is required. The value for the `memorySize`
 attribute specifies the amount of main memory a Region can use in either
 megabytes (`m`) or gigabytes (`g`).
-
-
 
 The `regionNames` attribute is an array of Region names that specifies
 the Regions that store entries in main memory. By default, all Regions
 use main memory if the `regionNames` attribute is not explicitly set.
 
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">Alternatively, you can use the
+Alternatively, you can use the
 <code>spring.data.gemfire.cache.off-heap.memory-size</code> and
 <code>spring.data.gemfire.cache.off-heap.region-names</code> properties
 in the <code>application.properties</code> file to set and configure the
-values of these <code>@EnableOffHeap</code> annotation attributes.</td>
-</tr>
-</tbody>
-</table>
+values of these <code>@EnableOffHeap</code> annotation attributes.
 
+For more details, see the [@EnableOffHeap annotation Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableOffHeap.html).
 
-
-See the [`@EnableOffHeap` annotation
-Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableOffHeap.html)
-for more details.
-
-
-
-<div class="sect2">
-
-### Configuring Disk Stores
-
+### <a id="configuring-disk-stores"></a>Configuring Disk Stores
 
 Alternatively, you can configure Regions to persist data to disk. You
 can also configure Regions to overflow data to disk when Region entries
@@ -2142,51 +1861,27 @@ overflow the data. When an explicit `DiskStore` has not been configured
 for a Region with persistence or overflow, GemFire uses the
 `DEFAULT` `DiskStore`.
 
-
-
 We recommend defining Region-specific `DiskStores` when persisting
-and/or overflowing data to disk.
-
-
+or overflowing data to disk.
 
 Spring Data for GemFire provides annotation support for defining and creating
 application Region `DiskStores` by annotating the application class with
 the `@EnableDiskStore` and `@EnableDiskStores` annotations.
 
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content"><code>@EnableDiskStores</code> is a composite
+<code>@EnableDiskStores</code> is a composite
 annotation for aggregating one or more <code>@EnableDiskStore</code>
-annotations.</td>
-</tr>
-</tbody>
-</table>
-
-
+annotations.
 
 For example, while `Book` information might mostly consist of reference
 data from some external data source (such as Amazon), `Order` data is
 most likely going to be transactional in nature and something the
-application is going to need to retain (and maybe even overflow to disk
-if the transaction volume is high enough) — or so any book publisher and
-author hopes, anyway.
-
-
+application must retain and possibly overflow to disk
+if the transaction volume is high enough.
 
 Using the `@EnableDiskStore` annotation, you can define and create a
 `DiskStore` as follows:
 
-
-
-<div class="title">
-
-Spring application defining a `DiskStore`
-
-
+**Spring application defining a `DiskStore`**
 
 ```highlight
 @SpringBootApplication
@@ -2196,20 +1891,12 @@ Spring application defining a `DiskStore`
 class ServerApplication { .. }
 ```
 
-
-
-
-Again, more than one `DiskStore` can be defined by using the composite,
+More than one `DiskStore` can be defined by using the composite,
 `@EnableDiskStores` annotation.
 
-
-
-As with other annotations in Spring Data for GemFire's annotation-based configuration
-model, both `@EnableDiskStore` and `@EnableDiskStores` have many
+Both `@EnableDiskStore` and `@EnableDiskStores` have many
 attributes along with associated configuration properties to customize
 the `DiskStores` created at runtime.
-
-
 
 Additionally, the `@EnableDiskStores` annotation defines certain common
 `DiskStore` attributes that apply to all `DiskStores` created from
@@ -2219,20 +1906,12 @@ particular global setting, but the `@EnableDiskStores` annotation
 conveniently defines common configuration attributes that apply across
 all `DiskStores` aggregated by the annotation.
 
-
-
 Spring Data for GemFire also provides the `DiskStoreConfigurer` callback interface,
 which can be declared in Java configuration and used instead of
 configuration properties to customize a `DiskStore` at runtime, as the
 following example shows:
 
-
-
-<div class="title">
-
-Spring application with custom DiskStore configuration
-
-
+**Spring application with custom DiskStore configuration**
 
 ```highlight
 @SpringBootApplication
@@ -2255,31 +1934,20 @@ class ServerApplication {
 }
 ```
 
+For more details about the available attributes as well as associated configuration properties, see:
 
+- [@EnableDiskStore Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableDiskStore.html)
 
+- [@EnableDiskStores Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableDiskStores.html)
 
-See the
-[`@EnableDiskStore`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableDiskStore.html)
-and
-[`@EnableDiskStores`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableDiskStores.html)
-annotation Javadoc for more details on the available attributes as well
-as associated configuration properties.
-
-
-
-More details on GemFire Region persistence and overflow (using
-DiskStores) can be found
-{x-data-store-docs}/developing/storing_data_on_disk/chapter_overview.html\[here\].
-
-
+For more details about Region persistence and overflow, see
+[Persistence and Overflow](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-storing_data_on_disk-chapter_overview.html)
+in the GemFire product documentation.
 
 ### <a id="configuring-indexes"></a>Configuring Indexes
 
-
 There is not much use in storing data in Regions unless the data can be
 accessed.
-
-
 
 In addition to `Region.get(key)` operations, particularly when the key
 is known in advance, data is commonly retrieved by executing queries on
@@ -2288,36 +1956,23 @@ written by using the Object Query Language (OQL), and the specific data
 set that a client wishes to access is expressed in the query's predicate
 (for example, `SELECT * FROM /Books b WHERE b.author.name = 'Jon Doe'`).
 
-
-
 Generally, querying without indexes is inefficient. When executing
 queries without an index, GemFire performs the equivalent of a
 full table scan.
 
-
-
 Indexes are created and maintained for fields on objects used in query
 predicates to match the data of interest, as expressed by the query's
 projection. Different types of indexes, such as
-{x-data-store-docs}/developing/query_index/creating_key_indexes.html\[key\]
-and
-{x-data-store-docs}/developing/query_index/creating_hash_indexes.html\[hash\]
+[key](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-creating_key_indexes.html)
+and [hash](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-creating_hash_indexes.html)
 indexes, can be created.
-
-
 
 Spring Data for GemFire makes it easy to create indexes on Regions where the data is
 stored and accessed. Rather than explicitly declaring `Index` bean
 definitions by using Spring config as before, we can create an `Index`
 bean definition in Java, as follows:
 
-
-
-<div class="title">
-
-Index bean definition using Java config
-
-
+**Index bean definition using Java config**
 
 ```highlight
 @Bean("BooksIsbnIndex")
@@ -2334,27 +1989,14 @@ IndexFactoryBean bookIsbnIndex(GemFireCache gemfireCache) {
     return bookIsbnIndex;
 }
 ```
-
-
-
-
-Alternatively, we can use [XML](#bootstrap:indexing) to create an
+Alternatively, we can use [XML](bootstrap.html#configuring-an-index) to create an
 `Index` bean definition, as follows:
 
-
-
-<div class="title">
-
-Index bean definition using XML
-
-
+**Index bean definition using XML**
 
 ```highlight
-<gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
+&lt;gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
 ```
-
-
-
 
 However, now you can directly define indexes on the fields of your
 application domain object types for which you know will be used in query
@@ -2362,19 +2004,11 @@ predicates to speed up those queries. You can even apply indexes for OQL
 queries generated from user-defined query methods on an application's
 repository interfaces.
 
-
-
 Re-using the example `Book` entity class from earlier, we can annotate
 the fields on `Book` that we know are used in queries that we define
 with query methods in the `BookRepository` interface, as follows:
 
-
-
-<div class="title">
-
-Application domain object type modeling a book using indexes
-
-
+**Application domain object type modeling a book using indexes**
 
 ```highlight
 @Region("Books")
@@ -2398,18 +2032,12 @@ class Book {
 }
 ```
 
-
-
-
 In our new `Book` class definition, we annotated the `author` field with
 `@Indexed` and the `title` field with `@LuceneIndexed`. Also, the `isbn`
 field had previously been annotated with Spring Data's `@Id` annotation,
 which identifies the field containing the unique identifier for `Book`
 instances, and, in Spring Data for GemFire, the `@Id` annotated field or property is
 used as the key in the Region when storing the entry.
-
-
-<div class="ulist">
 
 - `@Id` annotated fields or properties result in the creation of an
   GemFire `KEY` Index.
@@ -2421,8 +2049,6 @@ used as the key in the Region when storing the entry.
   of an GemFire Lucene Index, used in text-based searches with
   GemFire's Lucene integration and support.
 
-
-
 When the `@Indexed` annotation is used without setting any attributes,
 the index `name`, `expression`, and `fromClause` are derived from the
 field or property of the class on which the `@Indexed` annotation has
@@ -2431,18 +2057,10 @@ property. The `fromClause` is derived from the `@Region` annotation on
 the domain object's class, or the simple name of the domain object class
 if the `@Region` annotation was not specified.
 
-
-
-Of course, you can explicitly set any of the `@Indexed` annotation
+You can explicitly set any of the `@Indexed` annotation
 attributes to override the default values provided by Spring Data for GemFire.
 
-
-
-<div class="title">
-
-Application domain object type modeling a Book with customized indexes
-
-
+**Application domain object type modeling a Book with customized indexes**
 
 ```highlight
 @Region("Books")
@@ -3708,7 +3326,7 @@ and
 {spring-framework-javadoc}/org/springframework/context/annotation/ImportResource.html\[`@ImportResource`\]
 annotations on a Spring `@Configuration` or `@SpringBootApplication`
 class. The moment you explicitly provide a bean definition that would
-otherwise be provided by Spring Data for GemFire using 1 of the annotations, the
+otherwise be provided by Spring Data for GemFire using one of the annotations, the
 annotation-based configuration backs away.
 
 

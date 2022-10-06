@@ -558,7 +558,7 @@ class ServerApplication {
 }
 ```
 
-Use the `@EnableGemfireFunctionExecutions` along with 1 of the Function
+Use the `@EnableGemfireFunctionExecutions` along with one of the Function
 calling annotations: `@OnMember`, `@OnMembers`, `@OnRegion`, `@OnServer`
 and `@OnServers`.
 

@@ -275,7 +275,7 @@ implementation that supports "*Last Resource*", or a managed environment
 
 There are a series of steps you must complete to properly use
 GemFire as a "*Last Resource*" in a JTA transaction involving
-more than 1 transactional resource. Additionally, there can only be 1
+more than one transactional resource. Additionally, there can only be 1
 non-XA compliant resource (e.g. GemFire) in such an
 arrangement.
 
@@ -503,7 +503,7 @@ see
 
 
 Effectively, Spring Data for GemFire's `@EnableGemFireAsLastResource` annotation
-imports configuration containing 2 Aspect bean definitions that handles
+imports configuration containing two Aspect bean definitions that handles
 the GemFire `o.a.g.ra.GFConnectionFactory.getConnection()` and
 `o.a.g.ra.GFConnection.close()` operations at the appropriate points
 during the transactional operation.
