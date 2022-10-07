@@ -2170,19 +2170,9 @@ in the GemFire product documentation.
 For more details about GemFire Lucene queries, see [Apache Lucene® Integration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-tools_modules-lucene_integration.html)
 in the GemFire product documentation.
 
+## <a id="configuring-continuous-queries"></a>Configuring Continuous Queries
 
-
-
-## Configuring Continuous Queries
-
-
-
-
-Another very important and useful feature of GemFire is
-{x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[Continuous
-Queries\].
-
-
+Another very important and useful feature of GemFire is [Continuous Queries](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-chapter_overview.html).
 
 In a world of Internet-enabled things, events and streams of data come
 from everywhere. Being able to handle and process a large stream of data
@@ -2191,8 +2181,6 @@ requirement for many applications. One example is self-driving vehicles.
 Being able to receive, filter, transform, analyze, and act on data in
 real time is a key differentiator and characteristic of real time
 applications.
-
-
 
 Fortunately, GemFire was ahead of its time in this regard. By
 using Continuous Queries (CQ), a client application can express the data
@@ -2203,29 +2191,18 @@ is used to filter or identify the data of interest. When data is changed
 or added and it matches the criteria defined in the query predicate of
 the registered CQ, the client application is notified.
 
-
-
 Spring Data for GemFire makes it easy to define and register CQs, along with an
 associated listener to handle and process CQ events without all the
 cruft of GemFire's plumbing. Spring Data for GemFire's new
 annotation-based configuration for CQs builds on the existing Continuous
-Query support in the [continuous query listener
-container](#apis:continuous-query).
-
-
+Query support in the [continuous query listener container](cq-container.html).
 
 For instance, say a banking application registers interest in every
-customers' checking acccount to detect overdraft withdrawls and handle
-this event by either applying overdraft protection or notifyinfg the
+customers' checking account to detect overdraft withdrawals and handle
+this event by either applying overdraft protection or notifying the
 customer. Then, the application might register the following CQ:
 
-
-
-<div class="title">
-
-Spring `ClientCache` application with registered CQ and listener.
-
-
+**Spring `ClientCache` application with registered CQ and listener**
 
 ```highlight
 @SpringBootApplication
@@ -2233,20 +2210,15 @@ Spring `ClientCache` application with registered CQ and listener.
 @EnableContinuousQueries
 class PublisherPrintApplication {
 
-    @ContinuousQuery(name = "OverdraftProtection", query = "SELECT * FROM /CheckingAccount ca WHERE ca.balance < 0.0")
+    @ContinuousQuery(name = "OverdraftProtection", query = "SELECT * FROM /CheckingAccount ca WHERE ca.balance &le; 0.0")
     void handleOverdraft(CqEvent event) {
         // Quick!!! Put more money into the checking account or notify the customer of the checking account!
     }
 }
 ```
 
-
-
-
 To enable Continuous Queries, annotate your application class with
 `@EnableContinuousQueries`.
-
-
 
 Defining Continuous Queries consists of annotating any Spring
 `@Component`-annotated POJO class methods with the `@ContinuousQuery`
@@ -2255,51 +2227,30 @@ POJO methods). A POJO method defined with a CQ by using the
 `@ContinuousQuery` annotation is called any time data matching the query
 predicate is added or changed.
 
-
-
 Additionally, the POJO method signature should adhere to the
-requirements outlined in the section on [the `ContinuousQueryListener`
-and the
-`ContinuousQueryListenerAdapter`](#apis:continuous-query:adapter).
+requirements outlined in 
+[`ContinuousQueryListener` and `ContinuousQueryListenerAdapter`](cq-container.html#continuousquerylistener-and-continuousquerylisteneradapter).
 
+For more details about available attributes and configuration settings, see the following annotation Javadocs:
 
+* [@EnableContinuousQueries](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html)
 
-See the
-[`@EnableContinuousQueries`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html)
-and
-[`@ContinuousQuery`](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html)
-annotation Javadoc for more details on available attributes and
-configuration settings.
+* [@ContinuousQuery](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableContinuousQueries.html)
 
+For more information about continuous query support, see [Continuous Query (CQ)](cq-container.html).
 
-
-More details on Spring Data for GemFire's continuous query support can be found
-[here](#apis:continuous-query).
-
-
-
-More details on GemFire's Continuous Queries can be found
-{x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[here\].
-
-
+For more information about Continuous Querying in GemFire, see [Continuous Querying](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-chapter_overview.html)
+in the GemFire product documentation.
 
 ## <a id="configuring-springs-cache-abstraction"></a>Configuring Spring's Cache Abstraction
 
-
-
-
 With Spring Data for GemFire, GemFire can be used as a caching provider in
-Spring's {spring-framework-docs}/integration.html#cache\[cache
-abstraction\].
+[cache abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache).
 
-
-
-In Spring's Cache Abstraction, the caching annotations (such as
+In Cache Abstraction, the caching annotations (such as
 `@Cacheable`) identify the cache on which a cache lookup is performed
 before invoking a potentially expensive operation. The results of an
 application service method are cached after the operation is invoked.
-
-
 
 In Spring Data for GemFire, a Spring `Cache` corresponds directly to a
 GemFire Region. The Region must exist before any caching
@@ -2307,14 +2258,9 @@ annotated application service methods are called. This is true for any
 of Spring's caching annotations (that is, `@Cacheable`, `@CachePut` and
 `@CacheEvict`) that identify the cache to use in the service operation.
 
-
-
-For instance, our publisher's Point-of-Sale (PoS) application might have
+For example, our publisher's Point-of-Sale (PoS) application might have
 a feature to determine or lookup the `Price` of a `Book` during a sales
 transaction, as the following example shows:
-
-
-
 
 ```highlight
 @Service
@@ -2334,24 +2280,13 @@ class PointOfSaleService
 }
 ```
 
-
-
-
 To make your work easier when you use Spring Data for GemFire with Spring's Cache
 Abstraction, two new features have been added to the annotation-based
 configuration model.
 
-
-
 Consider the following Spring caching configuration:
 
-
-
-<div class="title">
-
-Enabling Caching using GemFire as the caching provider
-
-
+**Enabling Caching using GemFire as the caching provider**
 
 ```highlight
 @EnableCaching
@@ -2368,10 +2303,10 @@ class CachingConfiguration {
   }
 
   @Bean("BookPricesCache")
-  ReplicatedRegionFactoryBean<Book, Price> bookPricesRegion(GemFireCache gemfireCache) {
+  ReplicatedRegionFactoryBean&lt;Book, Price> bookPricesRegion(GemFireCache gemfireCache) {
 
-    ReplicatedRegionFactoryBean<Book, Price> bookPricesRegion =
-        new ReplicatedRegionFactoryBean<>();
+    ReplicatedRegionFactoryBean&lt;Book, Price> bookPricesRegion =
+        new ReplicatedRegionFactoryBean&lt;>();
 
     bookPricesRegion.setCache(gemfireCache);
     bookPricesRegion.setClose(false);
@@ -2387,19 +2322,10 @@ class CachingConfiguration {
 }
 ```
 
-
-
-
-Using Spring Data for GemFire's new features, you can simplify the same caching
+Using Spring Data for GemFire's features, you can simplify the same caching
 configuration to the following:
 
-
-
-<div class="title">
-
-Enabling GemFire Caching
-
-
+**Enabling GemFire Caching**
 
 ```highlight
 @EnableGemfireCaching
@@ -2413,24 +2339,16 @@ class CachingConfiguration {
 }
 ```
 
-
-
-
 First, the `@EnableGemfireCaching` annotation replaces both the Spring
 `@EnableCaching` annotation and the need to declare an explicit
 `CacheManager` bean definition (named "cacheManager") in the Spring
 config.
 
-
-
 Second, the `@EnableCachingDefinedRegions` annotation, like the
-`@EnableEntityDefinedRegions` annotation described in "[Configuring
-Regions](#bootstrap-annotation-config-regions)", inspects the entire
+`@EnableEntityDefinedRegions` annotation described in [Configuring Regions](#configuring-regions), inspects the entire
 Spring application, caching annotated service components to identify all
 the caches that are needed by the application at runtime and creates
 Regions in GemFire for these caches on application startup.
-
-
 
 The Regions created are local to the application process that created
 the Regions. If the application is a peer `Cache`, the Regions exist
@@ -2439,57 +2357,28 @@ then Spring Data for GemFire creates client `PROXY` Regions and expects those
 Regions with the same name to already exist on the servers in the
 cluster.
 
-
-
-
-Note
-</div></td>
-<td class="content">Spring Data for GemFire cannot determine the cache required by
+<p class="note"><strong>Note</strong>: 
+Spring Data for GemFire cannot determine the cache required by
 a service method using a Spring <code>CacheResolver</code> to resolve
-the cache used in the operation at runtime.</td>
-</tr>
-</tbody>
-</table>
+the cache used in the operation at runtime.</p>
 
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">Spring Data for GemFire also supports JCache (JSR-107) cache
-annotations on application service components. See the core
-{spring-framework-docs}/integration.html#cache-jsr-107[<em>Spring
-Framework Reference Guide</em>] for the equivalent Spring caching
-annotation to use in place of JCache caching annotations.</td>
-</tr>
-</tbody>
-</table>
+<p class="note"><strong>Tip</strong>: <td class="content">Spring Data for GemFire also supports JCache (JSR-107) cache
+annotations on application service components. For the equivalent Spring caching
+annotation to use in place of JCache caching annotations,
+see <a href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-configurers">JCache (JSR-107) Annotations</a>
+in the core
+<em>Spring Framework Reference Guide</em>.</p>
 
 
 
-Refer to the ["Support for the Spring Cache
-Abstraction"](#apis:spring-cache-abstraction) section for more details
-on using GemFire as a caching provider in Spring's Cache
-Abstraction.
+For more details about using GemFire as a caching provider in Spring's Cache
+Abstraction, see [Support for the Spring Cache Abstraction](data.html#support-for-spring-cache-abstraction)
+in _Working with GemFire APIs_. 
 
+For more information about Spring's Cache Abstraction, see
+[Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache).
 
-
-More details on Spring's Cache Abstraction can be found
-{spring-framework-docs}/integration.html#cache\[here\].
-
-
-
-
-
-## Configuring Cluster Configuration Push
-
-
-
-
-This may be the most exciting new feature in Spring Data for GemFire.
-
-
+## <a id="configuring-cluster-configuration-push"></a>Configuring Cluster Configuration Push
 
 When a client application class is annotated with
 `@EnableClusterConfiguration`, any Regions or Indexes defined and
@@ -2501,37 +2390,27 @@ using HTTP. If all the nodes in the cluster go down, they come back up
 with the same configuration as before. If a new server is added to the
 cluster, it will acquire identical configuration.
 
-
-
 In a sense, this feature is not much different than if you were to use
-*Gfsh* to manually create the Regions and Indexes on all the servers in
+`gfsh` to manually create the Regions and Indexes on all the servers in
 the cluster. Except that now, with Spring Data for GemFire, you no longer need to use
-*Gfsh* to create Regions and Indexes. Your Spring Boot application,
+`gfsh` to create Regions and Indexes. Your Spring Boot application,
 enabled with the power of Spring Data for GemFire, already contains all the
 configuration metadata needed to create Regions and Indexes for you.
-
-
 
 When you use the Spring Data Repository abstraction, we know all the
 Regions (such as those defined by the `@Region` annotated entity
 classes) and Indexes (such as those defined by the `@Indexed`-annotated
 entity fields and properties) that your application will need.
 
-
-
 When you use Spring's Cache Abstraction, we also know all the Regions
 for all the caches identified in the caching annotations needed by your
 application's service components.
-
-
 
 Essentially, you are already telling us everything we need to know
 simply by developing your application with the Spring Framework simply
 by using all of its API and features, whether expressed in annotation
 metadata, Java, XML or otherwise, and whether for configuration,
 mapping, or whatever the purpose.
-
-
 
 The point is, you can focus on your application's business logic while
 using the framework's features and supporting infrastructure (such as
@@ -2544,75 +2423,36 @@ behalf.
 
 Pushing configuration from the client to the servers in the cluster and
 having the cluster remember it is made possible in part by the use of
-GemFire's
-{x-data-store-docs}/configuring/cluster_config/gfsh_persist.html\[Cluster
-Configuration\] service. GemFire's Cluster Configuration
-service is also the same service used by *Gfsh* to record schema-related
-changes (for example,
-`gfsh> create region --name=Example --type=PARTITION`) issued by the
+GemFire's [Cluster Configuration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-configuring-cluster_config-gfsh_persist.html)
+service. GemFire's Cluster Configuration service is the same service used by `gfsh` to record schema-related issued by the
 user to the cluster from the shell.
 
-
-
-Of course, since the cluster may "remember" the prior configuration
+Since the cluster may "remember" the prior configuration
 pushed by a client from a previous run, Spring Data for GemFire is careful not to
 stomp on any existing Regions and Indexes already defined in the
 servers. This is especially important, for instance, when Regions
-already contain data!
+already contain data.
 
 
-
-
-Note
-</div></td>
-<td class="content">Currently, there is no option to overwrite any
+<p class="note"><strong>Note</strong>: There is no option to overwrite any
 existing Region or Index definitions. To re-create a Region or Index,
-you must use <em>Gfsh</em> to first destroy the Region or Index and then
+you must use <code>gfsh</code> to first destroy the Region or Index and then
 restart the client application so that configuration is pushed up to the
-server again. Alternatively, you can use <em>Gfsh</em> to (re-)define
-the Regions and Indexes manually.</td>
-</tr>
-</tbody>
-</table>
+server again. Alternatively, you can use <code>gfsh</code> to redefine
+the Regions and Indexes manually.</p>
 
-
-
-
-Note
-</div></td>
-<td class="content">Unlike <em>Gfsh</em>, Spring Data for GemFire supports the
+Unlike `gfsh`, Spring Data for GemFire supports the
 creation of Regions and Indexes only on the servers from a client. For
-advanced configuration and use cases, you should use <em>Gfsh</em> to
-manage the (server-side) cluster.</td>
-</tr>
-</tbody>
-</table>
+advanced configuration and use cases, you should use `gfsh` to
+manage the server-side cluster.</p>
 
-
-<div class="admonitionblock warning">
-
-
-Warning
-</div></td>
-<td class="content">To use this feature you must explicitly declare the
+<p class="note"><strong>Note</strong>: To use this feature you must explicitly declare the
 <code>org.springframework:spring-web</code> dependency on the classpath
-of your Spring, GemFire <code>ClientCache</code>
-application.</td>
-</tr>
-</tbody>
-</table>
-
-
+of your Spring, GemFire <code>ClientCache</code> application.</p>
 
 Consider the power expressed in the following configuration:
 
-
-
-<div class="title">
-
-Spring `ClientCache` application
-
-
+**Spring `ClientCache` application**
 
 ```highlight
 @SpringBootApplication
@@ -2626,21 +2466,13 @@ Spring `ClientCache` application
 class ClientApplication { .. }
 ```
 
-
-
-
 You instantly get a Spring Boot application with a GemFire
 `ClientCache` instance, Spring Data Repositories, Spring's Cache
 Abstraction with GemFire as the caching provider (where
 Regions and Indexes are not only created on the client but pushed to the
 servers in the cluster).
 
-
-
-From there, you only need to do the following:
-
-
-<div class="ulist">
+From there, do the following:
 
 - Define the application's domain model objects annotated with mapping
   and index annotations.
@@ -2654,20 +2486,13 @@ From there, you only need to do the following:
 - Declare the appropriate annotations on service methods that require
   caching, transactional behavior, and so on.
 
-
-
 Nothing in this case pertains to the infrastructure and plumbing
 required in the application's back-end services (such as
 GemFire). Database users have similar features. Now Spring and
 GemFire developers do too.
 
-
-
 When combined with the following Spring Data for GemFire annotations, this
 application really starts to take flight, with very little effort:
-
-
-<div class="ulist">
 
 - `@EnableContinuousQueries`
 
@@ -2675,37 +2500,19 @@ application really starts to take flight, with very little effort:
 
 - `@EnableGemfireCacheTransactions`
 
-
-
-See the [`@EnableClusterConfiguration` annotation
-Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableClusterConfiguration.html)
-for more details.
-
-
-
+For more details, see the [@EnableClusterConfiguration annotation Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableClusterConfiguration.html).
 
 ## <a id="configiuring-ssl"></a>Configuring SSL
-
-
-
 
 Equally important to serializing data to be transferred over the wire is
 securing the data while in transit. Of course, the common way to
 accomplish this in Java is by using the Secure Sockets Extension (SSE)
 and Transport Layer Security (TLS).
 
-
-
 To enable SSL, annotate your application class with `@EnableSsl`, as
 follows:
 
-
-
-<div class="title">
-
-Spring `ClientCache` application with SSL enabled
-
-
+**Spring `ClientCache` application with SSL enabled**
 
 ```highlight
 @SpringBootApplication
@@ -2714,33 +2521,20 @@ Spring `ClientCache` application with SSL enabled
 public class ClientApplication { .. }
 ```
 
-
-
-
 Then you need to set the necessary SSL configuration attributes or
 properties: keystores, usernames/passwords, and so on.
-
-
 
 You can individually configure different GemFire components
 (`GATEWAY`, `HTTP`, `JMX`, `LOCATOR`, and `SERVER`) with SSL, or you can
 collectively configure them to use SSL by using the `CLUSTER` enumerated
 value.
 
-
-
 You can specify which GemFire components the SSL configuration
 settings should applied by using the nested `@EnableSsl` annotation,
 `components` attribute with enumerated values from the `Component` enum,
 as follows:
 
-
-
-<div class="title">
-
-Spring `ClientCache` application with SSL enabled by component
-
-
+**Spring `ClientCache` application with SSL enabled by component**
 
 ```highlight
 @SpringBootApplication
@@ -2749,63 +2543,35 @@ Spring `ClientCache` application with SSL enabled by component
 public class ClientApplication { .. }
 ```
 
-
-
-
-In addition, you can also specify component-level SSL configuration
+Additionally, you can specify component-level SSL configuration
 (`ciphers`, `protocols` and `keystore`/`truststore` information) by
 using the corresponding annotation attribute or associated configuration
 properties.
 
+For more details, see the [@EnableSsl annotation Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSsl.html).
 
-
-See the [`@EnableSsl` annotation
-Javadoc](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableSsl.html)
-for more details.
-
-
-
-More details on GemFire SSL support can be found
-{x-data-store-docs}/managing/security/ssl_overview.html\[here\].
-
-
-
+For more details about GemFire SSL support, see [SSL](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-security-ssl_overview.html).
 
 ## <a id="configuring-security"></a>Configuring Security
 
-
-
-
-Without a doubt, application security is extremely important, and
+Application security is important, and
 Spring Data for GemFire provides comprehensive support for securing both
 GemFire clients and servers.
 
-
-
-Recently, GemFire introduced a new
-{x-data-store-docs}/managing/security/implementing_security.html\[Integrated
-Security\] framework (replacing its old authentication and authorization
-security model) for handling authentication and authorization. One of
+GemFire includes an [Integrated Security](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-security-implementing_security.html)
+framework for handling authentication and authorization. One of
 the main features and benefits of this new security framework is that it
 integrates with [Apache Shiro](https://shiro.apache.org/) and can
 therefore delegate both authentication and authorization requests to
 Apache Shiro to enforce security.
 
-
-
 The remainder of this section demonstrates how Spring Data for GemFire can simplify
 GemFire's security story even further.
-
-
-<div class="sect2">
 
 ### <a id="configuring-server-security"></a>Configuring Server Security
 
 There are several different ways in which you can configure security for
 servers in a GemFire cluster.
-
-
-<div class="ulist">
 
 - Implement the GemFire
   `org.apache.geode.security.SecurityManager` interface and set
@@ -2813,22 +2579,20 @@ servers in a GemFire cluster.
   application `SecurityManager` implementation using the fully qualified
   class name. Alternatively, users can construct and initialize an
   instance of their `SecurityManager` implementation and set it with the
-  {x-data-store-javadoc}/org/apache/geode/cache/CacheFactory.html#setSecurityManager-org.apache.geode.security.SecurityManager\[CacheFactory.setSecurityManager(:SecurityManager)\]
+  [CacheFactory.setSecurityManager(:SecurityManager)](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CacheFactory.html#setSecurityManager-org.apache.geode.security.SecurityManager)
   method when creating a GemFire peer `Cache`.
 
 - Create an Apache Shiro
-  [`shiro.ini`](https://shiro.apache.org/configuration.html) file with
+  [shiro.ini](https://shiro.apache.org/configuration.html) file with
   the users, roles, and permissions defined for your application and
   then set the GemFire `security-shiro-init` property to refer
   to this `shiro.ini` file, which must be available in the `CLASSPATH`.
 
 - Using only Apache Shiro, annotate your Spring Boot application class
   with Spring Data for GemFire's new `@EnableSecurity` annotation and define one or
-  more Apache Shiro [`Realms`](https://shiro.apache.org/realm.html) as
+  more Apache Shiro [Realms](https://shiro.apache.org/realm.html) as
   beans in the Spring container for accessing your application's
   security metadata (that is, authorized users, roles, and permissions).
-
-
 
 The problem with the first approach is that you must implement your own
 `SecurityManager`, which can be quite tedious and error-prone.
@@ -2839,43 +2603,16 @@ However, that problem has already been solved by configuring and using
 Apache Shiro `Realms`, which is more universally known and
 non-GemFire-specific.
 
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">See GemFire's security examples for
-{x-data-store-docs}/managing/security/authentication_examples.html[Authentication]
-and
-{x-data-store-docs}/managing/security/authorization_example.html[Authorization]
-as one possible way to implement your own custom, application-specific
-<code>SecurityManager</code>. However, we strongly recommend
-<strong>against</strong> doing so.</td>
-</tr>
-</tbody>
-</table>
-
-
-
 The second approach, using an Apache Shiro INI file, is marginally
 better, but you still need to be familiar with the INI file format in
 the first place. Additionally, an INI file is static and not easily
 updatable at runtime.
 
-
-
 The third approach is the most ideal, since it adheres to widely known
 and industry-accepted concepts (that is, Apache Shiro's Security
 framework) and is easy to setup, as the following example shows:
 
-
-
-<div class="title">
-
-Spring server application using Apache Shiro
-
-
+**Spring server application using Apache Shiro**
 
 ```highlight
 @SpringBootApplication
@@ -2896,22 +2633,8 @@ class ServerApplication {
 }
 ```
 
-
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">The configured <code>Realm</code> shown in the
-preceding example could easily have been any of Apache Shiro's supported
-<code>Realms</code>:</td>
-</tr>
-</tbody>
-</table>
-
-
-<div class="ulist">
+The configured `Realm` shown in the preceding example could have been any of Apache Shiro's supported
+`Realms`:
 
 - [ActiveDirectory](https://shiro.apache.org/static/1.3.2/apidocs/org/apache/shiro/realm/activedirectory/package-frame.html)
 
@@ -2921,20 +2644,11 @@ preceding example could easily have been any of Apache Shiro's supported
 
 - [LDAP](https://shiro.apache.org/static/1.3.2/apidocs/org/apache/shiro/realm/ldap/package-frame.html)
 
-- A `Realm` supporting the [INI
-  format](https://shiro.apache.org/static/1.3.2/apidocs/org/apache/shiro/realm/text/IniRealm.html).
+- A `Realm` supporting the [INI format](https://shiro.apache.org/static/1.3.2/apidocs/org/apache/shiro/realm/text/IniRealm.html).
 
+You could also create a custom implementation of an Apache Shiro `Realm`.
 
-
-You could even create a custom implementation of an Apache Shiro
-`Realm`.
-
-
-
-See Apache Shiro's [documentation on
-Realms](https://shiro.apache.org/realm.html) for more details.
-
-
+For more information, see [Apache Shiro Realms](https://shiro.apache.org/realm.html) in the Apache Shiro documentation.
 
 When Apache Shiro is on the `CLASSPATH` of the servers in the cluster
 and one or more Apache Shiro `Realms` have been defined as beans in the
@@ -2942,62 +2656,26 @@ Spring container, Spring Data for GemFire detects this configuration and uses Ap
 Shiro as the security provider to secure your GemFire servers
 when the `@EnableSecurity` annotation is used.
 
+For more details about available attributes and associated configuration properties, see
+the [@EnableSecurity](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableSecurity.html)
+annotation Javadoc.
 
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">You can find more information about Spring Data for GemFire's
-support for GemFire's new integrated security framework using
-Apache Shiro in this <a
-href="https://spring.io/blog/2016/11/10/spring-data-geode-1-0-0-incubating-release-released">spring.io
-blog post</a>.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See the
-[`@EnableSecurity`](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableSecurity.html)
-annotation Javadoc for more details on available attributes and
-associated configuration properties.
-
-
-
-More details on GemFire security can be found
-{x-data-store-docs}/managing/security/chapter_overview.html\[here\].
-
-
+For more details about GemFire security, see [Security](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-security-chapter_overview.html)
+in the GemFire product documentation.
 
 ### <a id="configuring-client-security"></a>Configuring Client Security
-
 
 The security story would not be complete without discussing how to
 secure Spring-based, GemFire cache client applications as
 well.
 
+To secure a client application you must:
 
+1. Provide an implementation of the [org.apache.geode.security.AuthInitialize](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/security/AuthInitialize.html) interface.
 
-GemFire's process for securing a client application is,
-honestly, rather involved. In a nutshell, you need to:
+2. Set the GemFire `security-client-auth-init` (System) property to refer to the custom, application-provided `AuthInitialize` interface.
 
-
-<div class="olist arabic">
-
-1.  Provide an implementation of the
-    {x-data-store-javadoc}/org/apache/geode/security/AuthInitialize.html\[`org.apache.geode.security.AuthInitialize`\]
-    interface.
-
-2.  Set the GemFire `security-client-auth-init` (System)
-    property to refer to the custom, application-provided
-    `AuthInitialize` interface.
-
-3.  Specify the user credentials in a proprietary, GemFire
-    `gfsecurity.properties` file.
-
-
+3. Specify the user credentials in a proprietary, GemFire `gfsecurity.properties` file.
 
 Spring Data for GemFire simplifies all of those steps by using the same
 `@EnableSecurity` annotation that was used in the server applications.
@@ -3009,17 +2687,9 @@ instance. Simply change the Spring Data for GemFire annotation from
 `@PeerCacheApplication` or `@CacheServerApplication` to
 `@ClientCacheApplication`, and you are done.
 
-
-
 Effectively, all you need to do on the client is the following:
 
-
-
-<div class="title">
-
-Spring client application using `@EnableSecurity`
-
-
+**Spring client application using `@EnableSecurity`**
 
 ```highlight
 @SpringBootApplication
@@ -3028,101 +2698,49 @@ Spring client application using `@EnableSecurity`
 class ClientApplication { .. }
 ```
 
-
-
-
 Then you can define the familiar Spring Boot `application.properties`
 file containing the required username and password, as the following
-example shows, and you are all set:
+example shows.
 
-
-
-<div class="title">
-
-Spring Boot `application.properties` file with the required Security
-credentials
-
-
+**Spring Boot `application.properties` file with the required Security credentials**
 
 ```highlight
 spring.data.gemfire.security.username=jackBlack
 spring.data.gemfire.security.password=b@cK!nB1@cK
 ```
 
+By default, Spring Boot can find your
+`code>application.properties` file when it is placed in the root
+of the application's `CLASSPATH`. Spring supports
+many ways to locate resources by using its resource abstraction.
 
+For more details about available attributes and associated configuration properties, see the
+[@EnableSecurity](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableSecurity.html)
+annotation Javadoc.
 
-<div class="admonitionblock tip">
+For more details about GemFire security, see [Security](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-security-chapter_overview.html)
+in the GemFire product documentation.
 
-
-Tip
-</div></td>
-<td class="content">By default, Spring Boot can find your
-<code>application.properties</code> file when it is placed in the root
-of the application's <code>CLASSPATH</code>. Of course, Spring supports
-many ways to locate resources by using its
-{spring-framework-docs}/core.html#resources[Resource abstraction].</td>
-</tr>
-</tbody>
-</table>
-
-
-
-See the
-[`@EnableSecurity`](https://docs.spring.io/spring-data/gemfire/docs/current/api/index.html?org/springframework/data/gemfire/config/annotation/EnableSecurity.html)
-annotation Javadoc for more details on available attributes and
-associated configuration properties.
-
-
-
-More details on GemFire Security can be found
-{x-data-store-docs}/managing/security/chapter_overview.html\[here\].
-
-
-
-
-
-
-## Configuration Tips
-
-
-
+## <a id="configuration-tips"></a>Configuration Tips
 
 The following tips can help you get the most out of using the new
 annotation-based configuration model:
 
+- [Configuration Organization](#configuration-organization)
 
-<div class="ulist">
+- [Additional Configuration-based Annotations](#additional-configuration-based-annotations)
 
-- [Configuration
-  Organization](#bootstrap-annotation-config-tips-organization)
+### <a id="configuration-organization"></a>Configuration Organization
 
-- [Additional Configuration-based
-  Annotations](#bootstrap-annotation-config-tips-undocumented-annotations)
-
-
-<div class="sect2">
-
-### Configuration Organization
-
-
-As we saw in the section on ["Configuring Cluster Configuration
-Push"](#bootstrap-annotation-config-cluster), when many
+As stated in [Configuring Cluster Configuration Push](#configuring-cluster-configuration-push), when many
 GemFire or Spring Data for GemFire features are enabled by using
 annotations, we begin to stack a lot of annotations on the Spring
 `@Configuration` or `@SpringBootApplication` class. In this situation,
 it makes sense to start compartmentalizing the configuration a bit.
 
-
-
 For instance, consider the following declaration:
 
-
-
-<div class="title">
-
-Spring `ClientCache` application with the kitchen sink
-
-
+**Spring `ClientCache` application with the kitchen sink**
 
 ```highlight
 @SpringBootApplication
@@ -3139,18 +2757,9 @@ Spring `ClientCache` application with the kitchen sink
 class ClientApplication { .. }
 ```
 
-
-
-
 We could break this configuration down by concern, as follows:
 
-
-
-<div class="title">
-
-Spring `ClientCache` application with the kitcken sink to boot
-
-
+**Spring `ClientCache` application with the kitchen sink to boot**
 
 ```highlight
 @SpringBootApplication
@@ -3186,19 +2795,7 @@ class QueriesConfiguration {
 class RepositoriesConfiguration { .. }
 ```
 
-
-
-
-While it does not matter to the Spring Framework, we generally recommend
-aiming for readability, for the sake of the next person who has to
-maintain the code (which might be you at some point in the future).
-
-
-
-<div class="sect2">
-
-### Additional Configuration-based Annotations
-
+### <a id="additional-configuration-based-annotations"></a>Additional Configuration-based Annotations
 
 The following Spring Data for GemFire Annotations were not discussed in this
 reference documentation, either because the annotation supports a
@@ -3206,28 +2803,22 @@ deprecated feature of GemFire or because there are better,
 alternative ways to accomplishing the function that the annotation
 provides:
 
-
-<div class="ulist">
-
 - `@EnableAuth`: Enables GemFire's old authentication and
   authorization security model. (Deprecated. GemFire's new
   integrated security framework can be enabled on both clients and
   servers by using Spring Data for GemFire's `@EnableSecurity` annotation, as
-  described in "[Configuring
-  Security](#bootstrap-annotation-config-security)".)
+  described in [Configuring Security](#configuring-security)".)
 
 - `@EnableAutoRegionLookup`: Not recommended. Essentially, this
   annotation supports finding Regions defined in external configuration
   metadata (such as `cache.xml` or Cluster Configuration when applied to
   a server) and automatically registers those Regions as beans in the
   Spring container. This annotation corresponds with the
-  `<gfe:auto-region-lookup>` element in Spring Data for GemFire's XML namespace. More
-  details can found [here](#bootstrap:region:lookup:auto). Users should
-  generally prefer Spring configuration when using Spring and
-  Spring Data for GemFire. See "[Configuring
-  Regions](#bootstrap-annotation-config-regions)" and "[Configuring
-  Cluster Configuration Push](#bootstrap-annotation-config-cluster)"
-  instead.
+  `<gfe:auto-region-lookup>` element in Spring Data for GemFire's XML namespace.
+  For more details, see [Auto Region Lookup](#auto-region-lookup) in _Configuring a Region_.
+  Users should generally prefer Spring configuration when using Spring and
+  Spring Data for GemFire. See "[Configuring Regions](#configuring-regions) and
+  [Configuring Cluster Configuration Push](#configuring-cluster-configuration-push instead.
 
 - `@EnableBeanFactoryLocator`: Enables the Spring Data for GemFire
   `GemfireBeanFactoryLocator` feature, which is only useful when using
@@ -3236,17 +2827,17 @@ provides:
   `cache.xml`, you can still autowire this `CacheLoader` with, say, a
   relational database `DataSource` bean defined in Spring configuration.
   This annotation takes advantage of this Spring Data for GemFire
-  [feature](#apis:declarable) and might be useful if you have a large
+  [declarable feature](data.html#wiring-declarable-components)
+  and might be useful if you have a large
   amount of legacy configuration metadata, such as `cache.xml` files.
 
 - `@EnableGemFireAsLastResource`: Discussed in [Global - JTA Transaction
-  Management](#apis:global-transaction-management) with
+  Management](data.html#global-jta-transaction-management) with
   GemFire.
 
 - `@EnableMcast`: Enables GemFire's old peer discovery
   mechanism that uses UDP-based multi-cast networking. (*Deprecated*.
-  Use GemFire Locators instead. See "[Configuring an Embedded
-  Locator](#bootstrap-annotation-config-embedded-services-locator)".
+  Use GemFire Locators instead. See [Configuring an Embedded Locator](#configuring-an-embedded-locator).
 
 - `@EnableRegionDataAccessTracing`: Useful for debugging purposes. This
   annotation enables tracing for all data access operations performed on
@@ -3254,15 +2845,7 @@ provides:
   declared as beans in the Spring container, intercepting the Region
   operation and logging the event.
 
-
-
-
-
-
-## Conclusion
-
-
-
+## <a id="conclusion"></a>Conclusion
 
 As we learned in the previous sections, Spring Data for GemFire's new
 annotation-based configuration model provides a tremendous amount of
@@ -3270,21 +2853,15 @@ power. Hopefully, it lives up to its goal of making it easier for you to
 *get started quickly* and *easily* when using GemFire with
 Spring.
 
-
-
-Keep in mind that, when you use the new annotations, you can still use
+When you use the new annotations, you can still use
 Java configuration or XML configuration. You can even combine all three
 approaches by using Spring's
-{spring-framework-javadoc}/org/springframework/context/annotation/Import.html\[`@Import`\]
-and
-{spring-framework-javadoc}/org/springframework/context/annotation/ImportResource.html\[`@ImportResource`\]
+[@Import](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html)
+and [@ImportResource](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ImportResource.html)
 annotations on a Spring `@Configuration` or `@SpringBootApplication`
 class. The moment you explicitly provide a bean definition that would
 otherwise be provided by Spring Data for GemFire using one of the annotations, the
-annotation-based configuration backs away.
-
-
-
+annotation-based configuration is disabled.
 
 Note
 </div></td>
@@ -3308,17 +2885,7 @@ classes (recommended).</p>
 </tbody>
 </table>
 
-
-
 The annotations were not meant to handle every situation. The
 annotations were meant to help you *get up and running* as *quickly* and
 as *easily* as possible, especially during development.
-
-
-
-We hope you will enjoy these new capabilities!
-
-
-
-
 

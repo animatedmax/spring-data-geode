@@ -232,8 +232,7 @@ Javadoc\] as well as the
 
 
 
-
-## Global, JTA Transaction Management
+## <a id="global-jta-transaction-management"></a>Global - JTA Transaction Management
 
 
 
@@ -1041,8 +1040,7 @@ is caught and handled by the container (by default, being logged).
 
 
 
-
-## Wiring `Declarable` Components
+## <a id="wiring-declarable-components"></a>Wiring `Declarable` Components
 
 
 
@@ -1352,8 +1350,7 @@ touching the `DBLoader` code.
 
 
 
-
-## Support for the Spring Cache Abstraction
+## <a id="support-for-spring-cache-abstraction"></a>Support for the Spring Cache Abstraction
 
 
 
