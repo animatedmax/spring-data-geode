@@ -2078,15 +2078,11 @@ class Book {
 
   private Publisher publisher;
 
-  @LuceneIndexed(name = "BookTitleIndex", destory = true)
+  @LuceneIndexed(name = "BookTitleIndex", destroy = true)
   private String title;
 
 }
 ```
-
-
-
-
 The `name` of the index, which is auto-generated when not explicitly
 set, is also used as the name of the bean registered in the Spring
 container for the index. If necessary, this index bean can even be
@@ -2095,21 +2091,13 @@ injected by name into another application component.
 
 
 The generated name of the index follows this pattern:
-`<Region Name><Field/Property Name><Index Type>Idx`. For example, the
+`&lt;Region Name>&lt;Field/Property Name>&lt;Index Type>Idx`. For example, the
 name of the `author` index would be, `BooksAuthorHashIdx`.
-
-
 
 To enable indexing, annotate the application class with
 `@EnableIndexing`, as follows:
 
-
-
-<div class="title">
-
-Spring application with Indexing enabled
-
-
+**Spring application with Indexing enabled**
 
 ```highlight
 @SpringBootApplication
@@ -2119,38 +2107,22 @@ Spring application with Indexing enabled
 class ServerApplication { .. }
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The <code>@EnablingIndexing</code> annotation has no
+<p class="note"><strong>Note</strong>: The <code>@EnablingIndexing</code> annotation has no
 effect unless the <code>@EnableEntityDefinedRegions</code> is also
 declared. Essentially, indexes are defined from fields or properties on
 the entity class types, and entity classes must be scanned to inspect
 the entity's fields and properties for the presence of index
 annotations. Without this scan, index annotations cannot be found. We
-also strongly recommend that you limit the scope of the scan.</td>
-</tr>
-</tbody>
-</table>
+also strongly recommend that you limit the scope of the scan.</p>
 
 
-
-While Lucene queries are not (yet) supported on Spring Data for GemFire repositories,
-Spring Data for GemFire does provide comprehensive
-[support](https://docs.spring.io/spring-data-gemfire/docs/current/reference/html/#bootstrap:lucene)
-for GemFire Lucene queries by using the familiar Spring
+While Lucene queries are not supported on Spring Data for GemFire repositories,
+Spring Data for GemFire does provide comprehensive [support](lucene.html)
+for GemFire Lucene queries by using the Spring
 template design pattern.
-
-
 
 Finally, we close this section with a few extra tips to keep in mind
 when using indexes:
-
-
-<div class="ulist">
 
 - While OQL indexes are not required to execute OQL Queries, Lucene
   Indexes are required to execute Lucene text-based searches.
@@ -2162,59 +2134,41 @@ when using indexes:
 - You also need to be aware of the overhead associated in maintaining
   indexes, particularly since an index is stored exclusively in memory
   and especially when Region entries are updated. Index "maintenance"
-  can be
-  {x-data-store-javadoc}/org/apache/geode/cache/RegionFactory.html#setIndexMaintenanceSynchronous-boolean-\[configured\]
+  can be [configured](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/RegionFactory.html#setIndexMaintenanceSynchronous-boolean-)
   as an asynchronous task.
-
-
 
 Another optimization that you can use when restarting your Spring
 application where indexes have to be rebuilt is to first define all the
 indexes up front and then create them all at once, which, in Spring Data for GemFire,
 happens when the Spring container is refreshed.
 
-
-
 You can define indexes up front and then create them all at once by
 setting the `define` attribute on the `@EnableIndexing` annotation to
 `true`.
 
-
-
-See
-{x-data-store-docs}/developing/query_index/create_multiple_indexes.html\["Creating
-Multiple Indexes at Once"\] in GemFire's User Guide for more
-details.
-
-
+For more details, see [Creating Multiple Indexes at Once](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-create_multiple_indexes.html)
+in the GemFire product documentation.
 
 Creating sensible indexes is an important task, since it is possible for
 a poorly designed index to do more harm than good.
 
+For a complete list of configuration options, see:
 
+* [@Indexed](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Indexed.html)
+annotation
 
-See both the
-[`@Indexed`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/mapping/annotation/Indexed.html)
-annotation and
-[`@LuceneIndexed`](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html)
-annotation Javadoc for complete list of configuration options.
+* [@LuceneIndexed](https://docs.spring.io/spring-data/gemfire/docs/current/api/org/springframework/data/gemfire/mapping/annotation/LuceneIndexed.html)
+annotation Javadoc
 
+For more details about GemFire OQL queries, see [Querying](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-querying_basics-chapter_overview.html)
+in the GemFire product documentation.
 
+For more details about GemFire indexes, see
+see [Working with Indexes](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-query_index.html)
+in the GemFire product documentation.
 
-More details on GemFire OQL queries can be found
-{x-data-store-docs}/developing/querying_basics/chapter_overview.html\[here\].
-
-
-
-More details on GemFire indexes can be found
-{x-data-store-docs}/developing/query_index/query_index.html\[here\].
-
-
-
-More details on GemFire Lucene queries can be found
-{x-data-store-docs}/tools_modules/lucene_integration.html\[here\].
-
-
+For more details about GemFire Lucene queries, see [Apache Lucene® Integration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-tools_modules-lucene_integration.html)
+in the GemFire product documentation.
 
 
 
