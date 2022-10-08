@@ -43,14 +43,7 @@ describes the integration with Spring's Transaction Management
 functionality and DAO exception hierarchy. This chapter also covers
 support for dependency injection of GemFire managed objects.
 
-
-
-
-
-## GemfireTemplate
-
-
-
+## <a id="gemfiretemplate"></a>GemfireTemplate
 
 As with many other high-level abstractions provided by Spring,
 Spring Data for GemFire provides a **template** to simplify GemFire data
@@ -59,29 +52,18 @@ Region operations, but also provides the capability to **execute** code
 against native GemFire APIs without having to deal with
 GemFire checked exceptions by using a `GemfireCallback`.
 
-
-
 The template class requires a GemFire `Region`, and once
 configured, is thread-safe and is reusable across multiple application
 classes:
-
-
-
 
 ```highlight
 <bean id="gemfireTemplate" class="org.springframework.data.gemfire.GemfireTemplate" p:region-ref="SomeRegion"/>
 ```
 
-
-
-
 Once the template is configured, a developer can use it alongside
 `GemfireCallback` to work directly with the GemFire `Region`
 without having to deal with checked exceptions, threading or resource
 management concerns:
-
-
-
 
 ```highlight
 template.execute(new GemfireCallback<Iterable<String>>() {
@@ -99,44 +81,28 @@ template.execute(new GemfireCallback<Iterable<String>>() {
 });
 ```
 
-
-
-
 For accessing the full power of the GemFire query language, a
 developer can use the `find` and `findUnique` methods, which, compared
 to the `query` method, can execute queries across multiple Regions,
 execute projections, and the like.
 
-
-
 The `find` method should be used when the query selects multiple items
 (through `SelectResults`) and the latter, `findUnique`, as the name
 suggests, when only one object is returned.
 
-
-
-
-
-## Exception Translation
-
-
-
+## <a id="exception-translation"></a>Exception Translation
 
 Using a new data access technology requires not only accommodating a new
 API but also handling exceptions specific to that technology.
 
-
-
 To accommodate the exception handling case, the *Spring Framework*
 provides a technology agnostic and consistent [exception
-hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#dao-exceptions)
+hierarchy](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#dao-exceptions)
 that abstracts the application from proprietary, and usually "checked",
 exceptions to a set of focused runtime exceptions.
 
-
-
-As mentioned in *Spring Framework's* documentation, [Exception
-translation](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#orm-exception-translation)
+As mentioned in the Spring Framework documentation, [Exception
+translation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#orm-exception-translation)
 can be applied transparently to your Data Access Objects (DAO) through
 the use of the `@Repository` annotation and AOP by defining a
 `PersistenceExceptionTranslationPostProcessor` bean. The same exception
@@ -146,67 +112,34 @@ long as the `CacheFactoryBean` is declared, e.g. using either a
 exception translator and is automatically detected by the Spring
 infrastructure and used accordingly.
 
+## <a id="local-cache-transaction-management"></a>Local, Cache Transaction Management
 
+One of the most popular features of the Spring Framework is
+[Transaction Management](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction).
 
-
-
-## Local, Cache Transaction Management
-
-
-
-
-One of the most popular features of the *Spring Framework* is
-[Transaction
-Management](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#transaction).
-
-
-
-If you are not familiar with Spring's transaction abstraction then we
-strongly recommend
-[reading](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#transaction-motivation)
-about *Spring's Transaction Management* infrastructure as it offers a
-consistent *programming model* that works transparently across multiple
-APIs and can be configured either programmatically or declaratively (the
-most popular choice).
-
-
+For more information about Spring's transaction abstraction, see
+[Advantages of the Spring Framework’s Transaction Support Model](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-motivation)
+in the Spring documentation.
 
 For GemFire, Spring Data for GemFire provides a dedicated, per-cache,
 `PlatformTransactionManager` that, once declared, allows Region
 operations to be executed atomically through Spring:
 
-
-
-<div class="title">
-
-Enable Transaction Management using XML
-
-
+**Enable Transaction Management using XML**
 
 ```highlight
 <gfe:transaction-manager id="txManager" cache-ref="myCache"/>
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The example above can be simplified even further by
+<p class="note"><strong>Note</strong>: The example above can be simplified even further by
 eliminating the <code>cache-ref</code> attribute if the
 GemFire cache is defined under the default name,
 <code>gemfireCache</code>. As with the other Spring Data for GemFire namespace
 elements, if the cache bean name is not configured, the aforementioned
 naming convention will be used. Additionally, the transaction manager
-name is "gemfireTransactionManager" if not explicitly specified.</td>
-</tr>
-</tbody>
-</table>
+name is "gemfireTransactionManager" if not explicitly specified.</p>
 
-
-
-Currently, GemFire supports optimistic transactions with
+GemFire supports optimistic transactions with
 **read committed** isolation. Furthermore, to guarantee this isolation,
 developers should avoid making **in-place** changes that manually modify
 values present in the cache. To prevent this from happening, the
@@ -215,34 +148,22 @@ semantics by default, meaning a clone of the actual value is created
 each time a read is performed. This behavior can be disabled if needed
 through the `copyOnRead` property.
 
-
-
 Since a copy of the value for a given key is made when **copy on read**
 is enabled, you must subsequently call `Region.put(key, value)` inorder
 for the value to be updated, transactionally.
 
+For more information about the semantics and behavior of the underlying
+Geode transaction manager, see:
 
-
-For more information on the semantics and behavior of the underlying
-Geode transaction manager, please refer to the Geode
-{x-data-store-javadoc}/org/apache/geode/cache/CacheTransactionManager.html\[CacheTransactionManager
-Javadoc\] as well as the
-{x-data-store-docs}/developing/transactions/chapter_overview.html\[documentation\].
-
-
-
+* [CacheTransactionManager Javadoc](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CacheTransactionManager.html)
+* [Transactions](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-transactions-chapter_overview.html) in the GemFire product documentation
 
 ## <a id="global-jta-transaction-management"></a>Global - JTA Transaction Management
-
-
-
 
 It is also possible for GemFire to participate in Global,
 JTA-based transactions, such as a transaction managed by an Java EE
 Application Server (e.g. WebSphere Application Server (WAS)) using
 Container Managed Transactions (CMT) along with other JTA resources.
-
-
 
 However, unlike many other JTA "compliant" resources (e.g. JMS Message
 Brokers like ActiveMQ), GemFire is **not** an XA compliant
@@ -251,26 +172,16 @@ Resource*" in a JTA transaction (*prepare phase*) since it does not
 implement the 2-phase commit protocol, or rather does not handle
 distributed transactions.
 
-
-
 Many managed environments capable of CMT maintain support for "*Last
 Resource*", non-XA compliant resources in JTA-based transactions, though
-it is not actually required in the JTA spec. More information on what a
-non-XA compliant, "*Last Resource*" means can be found in Red Hat's
-[documentation](https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/5/html/Administration_And_Configuration_Guide/lrco-overview.html).
-In fact, Red Hat's JBoss project, [Narayana](https://narayana.io/) is
-one such LGPL Open Source implementation. *Narayana* refers to this as
-"*Last Resource Commit Optimization*" (LRCO). More details can be found
-[here](https://narayana.io//docs/project/index.html#d0e1859).
-
-
+it is not actually required in the JTA spec. For more information about what a
+non-XA compliant, "Last Resource" means, see [Last Resource Commit Optimization (LRCO)](https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/5/html/administration_and_configuration_guide/lrco-overview)
+in the Red Hat documentation.
 
 However, whether you are using GemFire in a standalone
 environment with an Open Source JTA Transaction Management
 implementation that supports "*Last Resource*", or a managed environment
 (e.g. Java EE AS such as WAS), Spring Data for GemFire has you covered.
-
-
 
 There are a series of steps you must complete to properly use
 GemFire as a "*Last Resource*" in a JTA transaction involving
@@ -278,69 +189,29 @@ more than one transactional resource. Additionally, there can only be 1
 non-XA compliant resource (e.g. GemFire) in such an
 arrangement.
 
+1\. First, you must complete Steps 1-4 in [JTA Global Transactions with Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-reference-archive_transactions-JTA_transactions.html).
+This is independent of your Spring [Boot] and/or [Data for GemFire] application and must be completed
+successfully.
 
-
-1\) First, you must complete Steps 1-4 in GemFire's
-documentation
-{apache-geode-docs}/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk\[here\].
-
-
-
-
-Note
-</div></td>
-<td class="content">#1 above is independent of your Spring [Boot] and/or
-[Data for GemFire] application and must be completed
-successfully.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-2\) Referring to Step 5 in GemFire's
-{apache-geode-docs}/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk\[documentation\],
+2\. Referring to Step 5 in GemFire's [JTA Global Transactions with Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-reference-archive_transactions-JTA_transactions.html),
 Spring Data for GemFire's Annotation support will attempt to set the `GemFireCache`,
-{x-data-store-javadoc}/org/apache/geode/cache/GemFireCache.html#setCopyOnRead-boolean-\[`copyOnRead`\]
-property for you when using the `@EnableGemFireAsLastResource`
-annotation.
-
-
-
-However, if Spring Data for GemFire's auto-configuration is unsuccessful in this regard,
+[copyOnRead](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/GemFireCache.html#setCopyOnRead-boolean-)
+property for you when using the `@EnableGemFireAsLastResource` annotation.f Spring Data for GemFire's auto-configuration is unsuccessful in this regard,
 then you must explicitly set the `copy-on-read` attribute in the
 `<gfe:cache>` or `<gfe:client-cache>` XML element or set the
 `copyOnRead` property of the `CacheFactoryBean` class in JavaConfig to
 **true**. For example:
 
-
-
 `ClientCache` XML:
 
-
-
-<div class="title">
-
-Set copy-on-read using XML (client)
-
-
+** Set copy-on-read using XML (client)**
 
 ```highlight
 <gfe:client-cache ... copy-on-read="true"/>
 ```
-
-
-
-
 `ClientCache` *JavaConfig*:
 
-
-
-<div class="title">
-
-Set copyOnRead using JavaConfig (client)
-
-
+**Set copyOnRead using JavaConfig (client)**
 
 ```highlight
 @Bean
@@ -354,35 +225,16 @@ ClientCacheFactoryBean gemfireCache() {
 }
 ```
 
-
-
-
 Peer `Cache` XML:
 
-
-
-<div class="title">
-
-Set copy-on-read using XML (server)
-
-
+**Set copy-on-read using XML (server)**
 
 ```highlight
 <gfe:cache ... copy-on-read="true"/>
 ```
-
-
-
-
 Peer `Cache` *JavaConfig*:
 
-
-
-<div class="title">
-
-Set copyOnRead using JavaConfig (server)
-
-
+**Set copyOnRead using JavaConfig (server)**
 
 ```highlight
 @Bean
@@ -396,37 +248,19 @@ CacheFactoryBean gemfireCache() {
 }
 ```
 
+<p class="note"><strong>Note</strong>: Explicitly setting the <code>copy-on-read</code>
+attribute or the <code>copyOnRead</code> property unnecessary. Enabling transaction management takes cae of copying on
+reads.</p>
 
-
-
-
-Note
-</div></td>
-<td class="content">Explicitly setting the <code>copy-on-read</code>
-attribute or the <code>copyOnRead</code> property is really not
-necessary. Enabling transaction management takes case of copying on
-reads.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-3\) At this point, you **skip** Steps 6-8 in GemFire's
-{apache-geode-docs}/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk\[documentation\]
-and let *Spring Data Geode* work its magic. All you need to do is
-annotate your Spring `@Configuration` class with Spring Data for GemFire's **new**
+3\. Skip Steps 6-8 in GemFire's
+[JTA Global Transactions with Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-reference-archive_transactions-JTA_transactions.html).
+Annotate your Spring `@Configuration` class with Spring Data for GemFire's
 `@EnableGemFireAsLastResource` annotation and a combination of Spring's
-{spring-framework-docs}/#transaction\[Transaction Management\]
+[Transaction Management](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction)
 infrastructure and Spring Data for GemFire's `@EnableGemFireAsLastResource`
-annotation configuration does the trick.
+annotation configuration completes the task.
 
-
-
-The configuration looks like this…​
-
-
-
+The configuration looks like this:
 
 ```highlight
 @Configuration
@@ -437,30 +271,21 @@ class GeodeConfiguration {
 }
 ```
 
+The only requirements are:
 
-
-
-The only requirements are…​
-
-
-
-3.1) The `@EnableGemFireAsLastResource` annotation must be declared on
+3.1 The `@EnableGemFireAsLastResource` annotation must be declared on
 the same Spring `@Configuration` class where Spring's
 `@EnableTransactionManagement` annotation is also specified.
 
 
 
-3.2) The `order` attribute of the `@EnableTransactionManagement`
+3.2 The `order` attribute of the `@EnableTransactionManagement`
 annotation must be explicitly set to an integer value that is not
 `Integer.MAX_VALUE` or `Integer.MIN_VALUE` (defaults to
 `Integer.MAX_VALUE`).
 
 
-
-Of course, hopefully you are aware that you also need to configure
-Spring's `JtaTransactionManager` when using JTA transactions like so..
-
-
+You must also configure Spring's `JtaTransactionManager` when using JTA transactions as follows:
 
 
 ```highlight
@@ -474,32 +299,15 @@ public JtaTransactionManager transactionManager(UserTransaction userTransaction)
    return transactionManager;
 }
 ```
-
-
-
-
-
-Note
-</div></td>
-<td class="content">The configuration in section <a
-href="#apis:transaction-management">Local, Cache Transaction
-Management</a> does <strong>not</strong> apply here. The use of
+<p class="note"><strong>Note</strong>: 
+The configuration in section <a
+href="#local-cache-transaction-management">Local, Cache Transaction Management</a> does
+not apply in this case. The use of
 Spring Data for GemFire's <code>GemfireTransactionManager</code> is applicable in
 "Local-only", Cache Transactions, <strong>not</strong> "Global", JTA
-Transactions. Therefore, you do <strong>not</strong> configure the Spring Data for GemFire
-<code>GemfireTransactionManager</code> in this case. You configure
-Spring's <code>JtaTransactionManager</code> as shown above.</td>
-</tr>
-</tbody>
-</table>
-
-
-
-For more details on using *Spring's Transaction Management* with JTA,
-see
-{spring-framework-docs}/#transaction-application-server-integration\[here\].
-
-
+Transactions. Therefore, do not configure the Spring Data for GemFire
+<code>GemfireTransactionManager</code> in this case. Instead, configure
+Spring's <code>JtaTransactionManager</code> as shown above.</p>
 
 Effectively, Spring Data for GemFire's `@EnableGemFireAsLastResource` annotation
 imports configuration containing two Aspect bean definitions that handles
@@ -507,42 +315,21 @@ the GemFire `o.a.g.ra.GFConnectionFactory.getConnection()` and
 `o.a.g.ra.GFConnection.close()` operations at the appropriate points
 during the transactional operation.
 
-
-
 Specifically, the correct sequence of events follow:
 
+1. `jtaTransation.begin()`
 
-<div class="olist arabic">
+2. `GFConnectionFactory.getConnection()`
 
-1.  `jtaTransation.begin()`
+3. Call the application's `@Transactional` service method
 
-2.  `GFConnectionFactory.getConnection()`
+4. Either `jtaTransaction.commit()` or `jtaTransaction.rollback()`
 
-3.  Call the application's `@Transactional` service method
+5. Finally, `GFConnection.close()`
 
-4.  Either `jtaTransaction.commit()` or `jtaTransaction.rollback()`
+After applying the appropriate configuration, shown above:
 
-5.  Finally, `GFConnection.close()`
-
-
-
-This is consistent with how you, as the application developer, would
-code this manually if you had to use the JTA API + GemFire API
-yourself, as shown in the GemFire
-{apache-geode-docs}/developing/transactions/jca_adapter_example.html#concept_swv_z2p_wk\[example\].
-
-
-
-Thankfully, Spring does the heavy lifting for you and all you need to do
-after applying the appropriate configuration (shown above) is:
-
-
-
-<div class="title">
-
-Declaring a service method as @Transactional
-
-
+**Declaring a service method as @Transactional**
 
 ```highlight
 @Service
@@ -557,35 +344,20 @@ class MyTransactionalService {
 }
 ```
 
-
-
-
 \#1 & \#4 above are appropriately handled for you by Spring's JTA based
 `PlatformTransactionManager` once the `@Transactional` boundary is
 entered by your application (i.e. when the
 `MyTransactionService.someTransactionalServiceMethod()` is called).
 
-
-
 \#2 & \#3 are handled by Spring Data for GemFire's new Aspects enabled with the
 `@EnableGemFireAsLastResource` annotation.
 
+\#3 is the responsibility of your application.
 
+With the appropriate logging configured, you will see the
+correct sequence of events:
 
-\#3 of course is the responsibility of your application.
-
-
-
-Indeed, with the appropriate logging configured, you will see the
-correct sequence of events…​
-
-
-
-<div class="title">
-
-Transaction Log Output
-
-
+**Transaction Log Output**
 
 ```highlight
 2017-Jun-22 11:11:37 TRACE TransactionInterceptor - Getting transaction for [example.app.service.MessageService.send]
@@ -602,37 +374,11 @@ JSON : [{"id":"MSG0000000000","message":"SENT"}] ]
 2017-Jun-22 11:11:37 TRACE GemFireAsLastResourceConnectionClosingAspect - Closed GemFire Connection @ [Reference [...]]
 ```
 
+## <a id="using-transactionaleventlistener"></a>Using @TransactionalEventListener
 
-
-
-For more details on using GemFire cache-level transactions,
-see [here](#apis:transaction-management).
-
-
-
-For more details on using GemFire in JTA transactions, see
-[here](https://gemfire90.docs.pivotal.io/geode/developing/transactions/JTA_transactions.html).
-
-
-
-For more details on configuring GemFire as a "*Last
-Resource*", see
-[here](https://gemfire90.docs.pivotal.io/geode/developing/transactions/JTA_transactions.html#concept_csy_vfb_wk).
-
-
-
-
-
-## Using @TransactionalEventListener
-
-
-
-
-When using transactions, it may be desirable to register a listener to
+When using transactions, you may want to register a listener to
 perform certain actions before or after the transaction commits, or
 after a rollback occurs.
-
-
 
 Spring Data for GemFire makes it easy to create listeners that will be invoked during
 specific phases of a transaction with the `@TransactionalEventListener`
@@ -640,13 +386,7 @@ annotation. Methods annotated with `@TransactionalEventListener` (as
 shown below) will be notified of events published from transactional
 methods, during the specified `phase`.
 
-
-
-<div class="title">
-
-After Transaction Commit Event Listener
-
-
+**After Transaction Commit Event Listener**
 
 ```highlight
 @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
@@ -655,19 +395,10 @@ public void handleAfterCommit(MyEvent event) {
 }
 ```
 
+For the above method to be invoked, you must publish an event
+from within your transaction, as in the following example:
 
-
-
-Inorder for the above method to be invoked, you must publish an event
-from within your transaction, like below:
-
-
-
-<div class="title">
-
-Publishing a Transactional Event
-
-
+**Publishing a Transactional Event**
 
 ```highlight
 @Service
@@ -688,9 +419,6 @@ class MyTransactionalService {
 }
 ```
 
-
-
-
 The `@TransactionalEventListener` annotation allows you to specify the
 transaction `phase` in which the event handler method will be invoked.
 Options include: `AFTER_COMMIT`, `AFTER_COMPLETION`, `AFTER_ROLLBACK`,
@@ -698,46 +426,24 @@ and `BEFORE_COMMIT`. If not specified, the `phase` defaults to
 `AFTER_COMMIT`. If you wish the listener to be called even when no
 transaction is present, you may set `fallbackExecution` to `true`.
 
+## <a id="auto-transaction-event-publishing"></a>Auto Transaction Event Publishing
 
-
-
-
-## Auto Transaction Event Publishing
-
-
-
-
-As of Spring Data for GemFire `Neumann/2.3`, it is now possible to enable auto
-transaction event publishing.
-
-
+You can enable auto transaction event publishing.
 
 Using the `@EnableGemfireCacheTransactions` annotation, set the
 `enableAutoTransactionEventPublishing` attribute to **true**. The
 default is **false**.
 
-
-
-<div class="title">
-
-Enable auto transaction event publishing
-
-
+**Enable auto transaction event publishing**
 
 ```highlight
 @EnableGemfireCacheTransactions(enableAutoTransactionEventPublishing = true)
 class GeodeConfiguration { ... }
 ```
 
-
-
-
 Then you can create `@TransactionalEventListener` annotated POJO methods
 to handle transaction events during either the `AFTER_COMMIT` or
 `AFTER_ROLLBACK` transaction phases.
-
-
-
 
 ```highlight
 @Component
@@ -755,35 +461,21 @@ class TransactionEventListeners {
 }
 ```
 
-
-
-<div class="admonitionblock warning">
-
-
-Warning
-</div></td>
-<td class="content">Only <code>TransactionPhase.AFTER_COMMIT</code> and
+<p class="note warning"><strong>Warning</strong>: Only <code>TransactionPhase.AFTER_COMMIT</code> and
 <code>TransactionPhase.AFTER_ROLLBACK</code> are supported.
-<code>TransactionPhase.BEFORE_COMMIT</code> is not supported because 1)
+<code>TransactionPhase.BEFORE_COMMIT</code> is not supported because
 Spring Data for GemFire adapts GemFire's <code>TransactionListener</code> and
 <code>TransactionWriter</code> interfaces to implement auto transaction
-event publishing, and 2) when GemFire's
+event publishing, and when GemFire's
 <code>TransactionWriter.beforeCommit(:TransactionEvent)</code> is
 called, it is already after the
 <code>AbstractPlatformTransactionManager.triggerBeforeCommit(:TransactionStatus)</code>
 call where <code>@TranactionalEventListener</code> annotated POJO
-methods are called during the transaction lifecycle.</td>
-</tr>
-</tbody>
-</table>
-
-
+methods are called during the transaction lifecycle.</p>
 
 With auto transaction event publishing, you do not need to explicitly
 call the `applicationEventPublisher.publishEvent(..)` method inside your
 application `@Transactional` `@Service` methods.
-
-
 
 However, if you still want to receive transaction events "*before
 commit*", then you must still call the
@@ -791,22 +483,14 @@ commit*", then you must still call the
 application `@Transactional` `@Service` methods. See the **note** above
 for more details.
 
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+## <a id="continuous-query"></a>Continuous Query (CQ)
 
 
+A powerful functionality offered by GemFire is [Continuous Query](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-chapter_overview.html)(CQ).
 
-
-## Continuous Query (CQ)
-
-
-
-
-A powerful functionality offered by GemFire is
-{x-data-store-docs}/developing/continuous_querying/chapter_overview.html\[Continuous
-Query\] (or CQ).
-
-
-
-In short, CQ allows a developer to create and register an OQL query, and
+CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to
 GemFire matches the query predicate. Spring Data for GemFire provides
 dedicated support for CQs through the
@@ -815,45 +499,26 @@ container**; very similar in functionality and naming to the JMS
 integration in the *Spring Framework*; in fact, users familiar with the
 JMS support in Spring, should feel right at home.
 
-
-
-Basically Spring Data for GemFire allows methods on POJOs to become end-points for
+Spring Data for GemFire allows methods on POJOs to become end-points for
 CQ. Simply define the query and indicate the method that should be
 called to be notified when there is a match. Spring Data for GemFire takes care of
-the rest. This is very similar to Java EE's message-driven bean style,
+the rest. This is similar to Java EE's message-driven bean style,
 but without any requirement for base class or interface implementations,
 based on GemFire.
 
-
-
-
-Note
-</div></td>
-<td class="content">Currently, Continuous Query is only supported in
+<p class="note"><strong>Note</strong>: Continuous Query is only supported in
 GemFire's client/server topology. Additionally, the client
-Pool used is required to have the subscription enabled. Please refer to
-the GemFire
-{x-data-store-docs}/developing/continuous_querying/implementing_continuous_querying.html[documentation]
-for more information.</td>
-</tr>
-</tbody>
-</table>
+Pool used is required to have the subscription enabled. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-implementing_continuous_querying.htmlPlease">Implementing Continuous Querying</a>.</p>
 
+### <a id="continuous-query-listener-container"></a>Continuous Query Listener Container
 
-<div class="sect2">
-
-### Continuous Query Listener Container
-
-
-Spring Data for GemFire simplifies creation, registration, life-cycle and dispatch of
+Spring Data for GemFire simplifies creation, registration, life-cycle, and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
 Spring Data for GemFire's `ContinuousQueryListenerContainer`, which does all the heavy
 lifting on behalf of the user. Users familiar with EJB and JMS should
 find the concepts familiar as it is designed as close as possible to the
 support provided in the *Spring Framework* with its Message-driven POJOs
 (MDPs).
-
-
 
 The Spring Data for GemFire `ContinuousQueryListenerContainer` acts as an event (or message)
 listener container; it is used to receive the events from the registered
@@ -868,8 +533,6 @@ business logic associated with receiving an event (and reacting to it),
 and delegate the boilerplate GemFire infrastructure concerns
 to the framework.
 
-
-
 The listener container is fully customizable. A developer can chose
 either to use the CQ thread to perform the dispatch (synchronous
 delivery) or a new thread (from an existing pool) for an asynchronous
@@ -880,28 +543,17 @@ executor to better serve her needs. In particular, in managed
 environments (such as app servers), it is highly recommended to pick a
 proper `TaskExecutor` to take advantage of its runtime.
 
-
-
-<div class="sect2">
-
-### The `ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
-
+### <a id="continuousquerylistener-and-continuousquerylisteneradapter"></a>`ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
 
 The `ContinuousQueryListenerAdapter` class is the final component in
 Spring Data for GemFire CQ support. In a nutshell, class allows you to expose almost
 **any** implementing class as an EDP with minimal constraints.
 `ContinuousQueryListenerAdapter` implements the
 `ContinuousQueryListener` interface, a simple listener interface similar
-to GemFire's
-{x-data-store-javadoc}/org/apache/geode/cache/query/CqListener.html\[CqListener\].
-
-
+to [CqListener](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/CqListener.html).
 
 Consider the following interface definition. Notice the various event
 handling methods and their parameters:
-
-
-
 
 ```highlight
 public interface EventDelegate {
@@ -916,10 +568,6 @@ public interface EventDelegate {
 }
 ```
 
-
-
-
-
 ```highlight
 package example;
 
@@ -928,28 +576,12 @@ class DefaultEventDelegate implements EventDelegate {
 }
 ```
 
-
-
-
 In particular, note how the above implementation of the `EventDelegate`
-interface has **no** GemFire dependencies at all. It truly is
-a POJO that we can and will make into an EDP via the following
+interface has no GemFire dependencies. It is
+a POJO that we can and will make into an EDP using the following
 configuration.
 
-
-
-
-Note
-</div></td>
-<td class="content">the class does not have to implement an interface;
-an interface is only used to better showcase the decoupling between the
-contract and the implementation.</td>
-</tr>
-</tbody>
-</table>
-
-
-
+The class does not have to implement an interface. An interface is only used to better showcase the decoupling between the contract and the implementation.
 
 ```highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -979,31 +611,16 @@ contract and the implementation.</td>
 <beans>
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The example above shows a few of the various forms
+The example above shows a few of the various forms
 that a listener can have; at its minimum, the listener reference and the
 actual query definition are required. It's possible, however, to specify
 a name for the resulting Continuous Query (useful for monitoring) but
 also the name of the method (the default is <code>handleEvent</code>).
 The specified method can have various argument types, the
-<code>EventDelegate</code> interface lists the allowed types.</td>
-</tr>
-</tbody>
-</table>
-
-
+<code>EventDelegate</code> interface lists the allowed types.
 
 The example above uses the Spring Data for GemFire namespace to declare the event
-listener container and automatically register the listeners. The full
-blown, **beans** definition is displayed below:
-
-
-
+listener container and automatically register the listeners. The complete definition is displayed below:
 
 ```highlight
 <!-- this is the Event Driven POJO (MDP) -->
@@ -1028,22 +645,12 @@ blown, **beans** definition is displayed below:
 </bean>
 ```
 
-
-
-
 Each time an event is received, the adapter automatically performs type
 translation between the GemFire event and the required method
-argument(s) transparently. Any exception caused by the method invocation
+arguments transparently. Any exception caused by the method invocation
 is caught and handled by the container (by default, being logged).
 
-
-
-
-
 ## <a id="wiring-declarable-components"></a>Wiring `Declarable` Components
-
-
-
 
 GemFire XML configuration (usually referred to as `cache.xml`)
 allows **user** objects to be declared as part of the configuration.
@@ -1054,51 +661,27 @@ must implement the `Declarable` interface, which allows arbitrary
 parameters to be passed to the declared class through a `Properties`
 instance.
 
-
-
 In this section, we describe how you can configure these pluggable
 components when defined in `cache.xml` using Spring while keeping your
 Cache/Region configuration defined in `cache.xml`. This allows your
 pluggable components to focus on the application logic and not the
 location or creation of `DataSources` or other collaborators.
 
-
-
 However, if you are starting a green field project, it is recommended
 that you configure Cache, Region, and other pluggable GemFire
 components directly in Spring. This avoids inheriting from the
 `Declarable` interface or the base class presented in this section.
 
-
-
-See the following sidebar for more information on this approach.
-
-
-<div class="sidebarblock">
-
-
-<div class="title">
-
-Eliminate `Declarable` components
-
-
+**Eliminate `Declarable` components**
 
 A developer can configure custom types entirely through Spring as
-mentioned in [\[bootstrap:region\]](#bootstrap:region). That way, a
+mentioned in [Configuring a Regions](#region.html). That way, a
 developer does not have to implement the `Declarable` interface, and
 also benefits from all the features of the Spring IoC container (not
 just dependency injection but also life-cycle and instance management).
 
-
-
-
-
 As an example of configuring a `Declarable` component using Spring,
-consider the following declaration (taken from the `Declarable`
-{x-data-store-javadoc}/org/apache/geode/cache/Declarable.html\[Javadoc\]):
-
-
-
+consider the following declaration.
 
 ```highlight
 <cache-loader>
@@ -1109,9 +692,6 @@ consider the following declaration (taken from the `Declarable`
 </cache-loader>
 ```
 
-
-
-
 To simplify the task of parsing, converting the parameters and
 initializing the object, Spring Data for GemFire offers a base class
 (`WiringDeclarableSupport`) that allows GemFire user objects
@@ -1121,40 +701,19 @@ advantage of this feature, the user objects need to extend
 `WiringDeclarableSupport`, which automatically locates the declaring
 `BeanFactory` and performs wiring as part of the initialization process.
 
+**Why is a base class needed?**
 
-<div class="sidebarblock">
+In GemFire, there is no concept of an **object factory** and the types declared are instantiated and used as
+is. In other words, there is no easy way to manage object creation outside of GemFire.
 
-
-<div class="title">
-
-Why is a base class needed?
-
-
-
-In the current GemFire release there is no concept of an
-**object factory** and the types declared are instantiated and used as
-is. In other words, there is no easy way to manage object creation
-outside GemFire.
-
-
-
-
-<div class="sect2">
-
-### Configuration using **template** bean definitions
-
+### <a id="configuration-using-template-bean-definitions"></a>Configuration using **template** bean definitions
 
 When used, `WiringDeclarableSupport` tries to first locate an existing
 bean definition and use that as the wiring template. Unless specified,
 the component class name will be used as an implicit bean definition
 name.
 
-
-
 Let's see how our `DBLoader` declaration would look in that case:
-
-
-
 
 ```highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
@@ -1169,20 +728,12 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 }
 ```
 
-
-
-
-
 ```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- no parameter is passed (use the bean's implicit name, which is the class name) -->
 </cache-loader>
 ```
-
-
-
-
 
 ```highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1200,17 +751,11 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 </beans>
 ```
 
-
-
-
 In the scenario above, as no parameter was specified, a bean with the
 id/name `com.company.app.DBLoader` was used as a template for wiring the
 instance created by GemFire. For cases where the bean name
 uses a different convention, one can pass in the `bean-name` parameter
 in the GemFire configuration:
-
-
-
 
 ```highlight
 <cache-loader>
@@ -1221,10 +766,6 @@ in the GemFire configuration:
    </parameter>
 </cache-loader>
 ```
-
-
-
-
 
 ```highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1243,55 +784,23 @@ in the GemFire configuration:
 </beans>
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The <strong>template</strong> bean definitions do
+<p class="note"><strong>Note</strong>: The <strong>template</strong> bean definitions do
 not have to be declared in XML. Any format is allowed (Groovy,
-annotations, etc).</td>
-</tr>
-</tbody>
-</table>
-
-
-
+annotations, etc).</p>
 
 ### <a id="configurations-using-auto-wiring-and-annotations"></a>Configuration Using Auto-Wiring and Annotations
 
 
-By default, if no bean definition is found, `WiringDeclarableSupport`
-will
-[autowire](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-autowire)
+By default, if no bean definition is found, `WiringDeclarableSupport` will
+[autowire](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Autowire.html)
 the declaring instance. This means that unless any dependency injection
 **metadata** is offered by the instance, the container will find the
 object setters and try to automatically satisfy these dependencies.
 However, a developer can also use JDK 5 annotations to provide
 additional information to the auto-wiring process.
 
-
-<div class="admonitionblock tip">
-
-
-Tip
-</div></td>
-<td class="content">We strongly recommend reading the dedicated <a
-href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-annotation-config">chapter</a>
-in the Spring documentation for more information on the supported
-annotations and enabling factors.</td>
-</tr>
-</tbody>
-</table>
-
-
-
 For example, the hypothetical `DBLoader` declaration above can be
 injected with a Spring-configured `DataSource` in the following way:
-
-
-
 
 ```highlight
 class DBLoader extends WiringDeclarableSupport implements CacheLoader {
@@ -1304,20 +813,12 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 }
 ```
 
-
-
-
-
 ```highlight
 <cache-loader>
    <class-name>com.company.app.DBLoader</class-name>
    <!-- no need to declare any parameters since the class is auto-wired -->
 </cache-loader>
 ```
-
-
-
-
 
 ```highlight
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1335,9 +836,6 @@ class DBLoader extends WiringDeclarableSupport implements CacheLoader {
 </beans>
 ```
 
-
-
-
 By using the JSR-330 annotations, the `CacheLoader` code has been
 simplified since the location and creation of the `DataSource` has been
 externalized and the user code is concerned only with the loading
@@ -1346,28 +844,16 @@ between multiple objects or retrieved from JNDI. These aspects can
 easily be configured and changed through the Spring container without
 touching the `DBLoader` code.
 
-
-
-
-
 ## <a id="support-for-spring-cache-abstraction"></a>Support for the Spring Cache Abstraction
 
-
-
-
-Spring Data for GemFire provides an implementation of the Spring [Cache
-Abstraction](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#cache)
+Spring Data for GemFire provides an implementation of the Spring
+[Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache)
 to position GemFire as a *caching provider* in Spring's
 caching infrastructure.
 
-
-
 To use GemFire as a backing implementation, a "*caching
-provider*" *in Spring's Cache Abstraction*, simply add
+provider*" *in Spring's Cache Abstraction*, add
 `GemfireCacheManager` to your configuration:
-
-
-
 
 ```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -1393,21 +879,10 @@ provider*" *in Spring's Cache Abstraction*, simply add
 </beans>
 ```
 
-
-
-
-
-Note
-</div></td>
-<td class="content">The <code>cache-ref</code> attribute on the
+<p class="note"><strong>Note</strong>: The <code>cache-ref</code> attribute on the
 <code>CacheManager</code> bean definition is not necessary if the
 default cache bean name is used (i.e. "gemfireCache"), i.e.
-<code>&lt;gfe:cache&gt;</code> without an explicit ID.</td>
-</tr>
-</tbody>
-</table>
-
-
+<code>&lt;gfe:cache&gt;</code> without an explicit ID.</p>
 
 When the `GemfireCacheManager` (Singleton) bean instance is declared and
 declarative caching is enabled (either in XML with
@@ -1416,18 +891,11 @@ declarative caching is enabled (either in XML with
 `@Cacheable`) identify the "caches" that will cache data in-memory using
 GemFire Regions.
 
-
-
 These caches (i.e. Regions) must exist before the caching annotations
 that use them otherwise an error will occur.
 
-
-
 By way of example, suppose you have a Customer Service application with
 a `CustomerService` application component that performs caching…​
-
-
-
 
 ```highlight
 @Service
@@ -1439,17 +907,9 @@ Account createAccount(Customer customer) {
 }
 ```
 
-
-
-
 Then you will need the following config.
 
-
-
 XML:
-
-
-
 
 ```highlight
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -1476,13 +936,7 @@ XML:
 </beans>
 ```
 
-
-
-
 JavaConfig:
-
-
-
 
 ```highlight
 @Configuration
@@ -1514,26 +968,4 @@ class ApplicationConfiguration {
 }
 ```
 
-
-
-
-Of course, you are free to choose whatever Region type you like (e.g.
-REPLICATE, PARTITION, LOCAL, etc).
-
-
-
-For more details on *Spring's Cache Abstraction*, again, please refer to
-the
-[documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#cache).
-
-
-
-
-
-<div id="footer">
-
-<div id="footer-text">
-
-Last updated 2022-09-21 12:51:53 -0700
-
-
+You can choose whatever Region type you like (e.g. REPLICATE, PARTITION, LOCAL, etc).
