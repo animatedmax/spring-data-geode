@@ -24,6 +24,5 @@
     *   [Configuring an Index](reference/indexing.html)
     *   [Configuring a Region](reference/region.html)
     *   [Configuring the Snapshot Service](reference/snapshot.html)
-    *   [Links](links.html)
     *   [Spring Data for GemFire Schema](appendix/appendix-schema.md)
 
