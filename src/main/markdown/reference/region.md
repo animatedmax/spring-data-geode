@@ -306,7 +306,7 @@ The following table lists the attributes available for all Region types:
     </tr>
     <tr>
       <td>persistent</td>
-      <td>*boolean (default: <code>false</code>)</td>
+      <td>boolean (default: <code>false</code>)</td>
       <td>Determines whether the region persists entries to local disk (disk store).</td>
     </tr>
     <tr>
@@ -322,7 +322,7 @@ The following table lists the attributes available for all Region types:
     <tr>
       <td>template</td>
       <td>The name of a region template.</td>
-      <td>A reference to a bean created through one of the <code>*region-template</code> elements.</td>
+      <td>A reference to a bean created through one of the <code>region-template</code> elements.</td>
     </tr>
     <tr>
       <td>value-constraint</td>
