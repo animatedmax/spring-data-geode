@@ -44,7 +44,7 @@ the configuration of GemFire in a Spring context is to enable
 Spring application developers to *get up and running* as *quickly* and
 as *easily* as possible.
 
-<p class="note"><strong>Tip</strong>: To get started more quickly, see <a href="bootstap-annotations-quickstart.html">Annotation-based Configuration Quick Start</a>.
+<p class="note"><strong>Tip</strong>: To get started more quickly, see <a href="bootstrap-annotations-quickstart.html">Annotation-based Configuration Quick Start</a>.
 </p>
 
 ## <a id="introduction"></a>Introduction
