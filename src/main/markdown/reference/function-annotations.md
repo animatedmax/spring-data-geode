@@ -137,10 +137,10 @@ similar to the following (ignoring the return type for the moment):
 
 ```highlight
 public Object method1(String s1, int i2) { ... }
-public Object method2(Map&le;?, ?&gt; data, String s1, int i2) { ... }
-public Object method3(String s1, Map&le;?, ?&gt; data, int i2) { ... }
-public Object method4(String s1, Map&le;?, ?&gt; data, Set&le;?&gt; filter, int i2) { ... }
-public void method4(String s1, Set&le;?&gt; filter, int i2, Region&le;?,?&gt; data) { ... }
+public Object method2(Map≤?, ?> data, String s1, int i2) { ... }
+public Object method3(String s1, Map≤?, ?> data, int i2) { ... }
+public Object method4(String s1, Map≤?, ?> data, Set≤?> filter, int i2) { ... }
+public void method4(String s1, Set≤?> filter, int i2, Region≤?,?> data) { ... }
 public void method5(String s1, ResultSender rs, int i2) { ... }
 public void method6(FunctionContest context) { ... }
 ```
@@ -168,10 +168,10 @@ used to expose POJO methods as GemFire Functions:
 public class ApplicationFunctions {
 
    @GemfireFunction
-   public String function1(String value, @RegionData Map?, ?&gt; data, int i2) { ... }
+   public String function1(String value, @RegionData Map?, ?> data, int i2) { ... }
 
    @GemfireFunction(id = "myFunction", batchSize=100, HA=true, optimizedForWrite=true)
-   public List<String> function2(String value, @RegionData Map&le;?, ?&gt; data, int i2, @Filter Set&le;?&gt; keys) { ... }
+   public List<String> function2(String value, @RegionData Map≤?, ?> data, int i2, @Filter Set≤?> keys) { ... }
 
    @GemfireFunction(hasResult=true)
    public void functionWithContext(FunctionContext functionContext) { ... }
@@ -304,8 +304,7 @@ correspond to the `Execution` implementations provided by the [FunctionService](
 
 Each annotation exposes the appropriate attributes. These annotations
 also provide an optional `resultCollector` attribute whose value is the
-name of a Spring bean implementing the [ResultCollector]
-(https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/ResultCollector.html) interface to use for the execution.
+name of a Spring bean implementing the [ResultCollector](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/ResultCollector.html) interface to use for the execution.
 
 
 
@@ -383,8 +382,8 @@ following example, the `GemfireOnRegionFunctionTemplate` creates an
 
 
 ```highlight
-Set&le;?, ?&gt;> myFilter = getFilter();
-Region&le;?, ?&gt; myRegion = getRegion();
+Set≤?, ?>> myFilter = getFilter();
+Region≤?, ?> myRegion = getRegion();
 GemfireOnRegionOperations template = new GemfireOnRegionFunctionTemplate(myRegion);
 String result = template.executeAndExtract("someFunction", myFilter, "hello", "world", 1234);
 ```
