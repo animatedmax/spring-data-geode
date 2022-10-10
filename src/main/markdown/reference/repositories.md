@@ -48,7 +48,7 @@ from the Spring Data for GemFire Data namespace, as the following example shows:
 **Example 1. Bootstrap Spring Data for GemFire Repositories in XML**
 
 ```highlight
-&lt;beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:gfe-data="{spring-data-access-schema-namespace}"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
@@ -58,7 +58,7 @@ from the Spring Data for GemFire Data namespace, as the following example shows:
 
   <gfe-data:repositories base-package="com.example.acme.repository"/>
 
-&lt;/beans>
+</beans>
 ```
 
 The preceding configuration snippet looks for interfaces below the
@@ -188,17 +188,17 @@ you can use in query methods:
     <tr>
       <td><p><code>GreaterThan</code></p></td>
       <td><p><code>findByAgeGreaterThan(int age)</code></p></td>
-      <td><p><code>x.age &gt; $1</code></p></td>
+      <td><p><code>x.age > $1</code></p></td>
     </tr>
     <tr>
       <td><p><code>GreaterThanEqual</code></p></td>
       <td><p><code>findByAgeGreaterThanEqual(int age)</code></p></td>
-      <td><p><code>x.age &gt;= $1</code></p></td>
+      <td><p><code>x.age >= $1</code></p></td>
     </tr>
     <tr>
       <td><p><code>LessThan</code></p></td>
       <td><p><code>findByAgeLessThan(int age)</code></p></td>
-      <td><p><code>x.age &lt; $1</code></p></td>
+      <td><p><code>x.age < $1</code></p></td>
     </tr>
     <tr>
       <td><p><code>LessThanEqual</code></p></td>
@@ -217,12 +217,12 @@ you can use in query methods:
     </tr>
     <tr>
       <td><p><code>In</code></p></td>
-      <td><p><code>findByFirstnameIn(Collection&lt;String&gt; x)</code></p></td>
+      <td><p><code>findByFirstnameIn(Collection<String> x)</code></p></td>
       <td><p><code>x.firstname IN SET $1</code></p></td>
     </tr>
     <tr>
       <td><p><code>NotIn</code></p></td>
-      <td><p><code>findByFirstnameNotIn(Collection&lt;String&gt; x)</code></p></td>
+      <td><p><code>findByFirstnameNotIn(Collection<String> x)</code></p></td>
       <td><p><code>x.firstname NOT IN SET $1</code></p></td>
     </tr>
     <tr>
@@ -257,8 +257,6 @@ you can use in query methods:
     </tr>
   </tbody>
 </table>
-
-Table 1. Supported keywords for query methods
 
 ## <a id="oql--query-extensions-using-annotations"></a>OQL Query Extensions Using Annotations
 
@@ -447,7 +445,7 @@ import org.springframework.data.repository.query.QueryMethod;
 import ...;
 
 @FunctionalInterface
-interface QueryPostProcessor&lt;T extends Repository, QUERY> extends Ordered {
+interface QueryPostProcessor<T extends Repository, QUERY> extends Ordered {
 
   QUERY postProcess(QueryMethod queryMethod, QUERY query, Object... arguments);
 
@@ -496,7 +494,7 @@ package example;
 
 import ...;
 
-class LoggingQueryPostProcessor implements QueryPostProcessor&lt;Repository, String> {
+class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
 
   private Logger logger = Logger.getLogger("someLoggerName");
 
@@ -522,11 +520,11 @@ types of application Repository interfaces, such as a
 **Example 8. CustomerRepository**
 
 ```highlight
-interface CustomerRepository extends CrudRepository&lt;Customer, Long> {
+interface CustomerRepository extends CrudRepository<Customer, Long> {
 
   Customer findByAccountNumber(String accountNumber);
 
-  List&lt;Customer> findByLastNameLike(String lastName);
+  List<Customer> findByLastNameLike(String lastName);
 
 }
 ```
@@ -537,7 +535,7 @@ to the `CustomerRepository`, as follows:
 **Example 9. CustomerLoggingQueryPostProcessor**
 
 ```highlight
-class LoggingQueryPostProcessor implements QueryPostProcessor&lt;CustomerRepository, String> { .. }
+class LoggingQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> { .. }
 ```
 
 As a result, only queries defined in the `CustomerRepository` interface,
@@ -554,7 +552,7 @@ in ascending order . To do so, you can define a custom
 **Example 10. OrderedLimitedCustomerByLastNameQueryPostProcessor**
 
 ```highlight
-class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor&lt;CustomerRepository, String> {
+class OrderedLimitedCustomerByLastNameQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
 
   private final int limit;
 
@@ -582,10 +580,10 @@ example, the same query could be defined as follows:
 **Example 11. CustomerRepository using the convention**
 
 ```highlight
-interface CustomerRepository extends CrudRepository&lt;Customer, Long> {
+interface CustomerRepository extends CrudRepository<Customer, Long> {
 
   @Limit(5)
-  List&lt;Customer> findDistinctByLastNameLikeOrderByFirstNameDesc(String lastName);
+  List<Customer> findDistinctByLastNameLikeOrderByFirstNameDesc(String lastName);
 
 }
 ```
@@ -604,7 +602,7 @@ method, as the following example shows:
 **Example 12. Defining the `order` property**
 
 ```highlight
-class LoggingQueryPostProcessor implements QueryPostProcessor&lt;Repository, String> {
+class LoggingQueryPostProcessor implements QueryPostProcessor<Repository, String> {
 
   @Override
   int getOrder() {
@@ -612,7 +610,7 @@ class LoggingQueryPostProcessor implements QueryPostProcessor&lt;Repository, Str
   }
 }
 
-class CustomerQueryPostProcessor implements QueryPostProcessor&lt;CustomerRepository, String> {
+class CustomerQueryPostProcessor implements QueryPostProcessor<CustomerRepository, String> {
 
   @Override
   int getOrder() {
