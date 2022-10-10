@@ -879,7 +879,7 @@ provider*" *in Spring's Cache Abstraction*, add
 <p class="note"><strong>Note</strong>: The <code>cache-ref</code> attribute on the
 <code>CacheManager</code> bean definition is not necessary if the
 default cache bean name is used (i.e. "gemfireCache"), i.e.
-<code>&lt;gfe:cache&gt;</code> without an explicit ID.</p>
+<code><gfe:cache&gt;</code> without an explicit ID.</p>
 
 When the `GemfireCacheManager` (Singleton) bean instance is declared and
 declarative caching is enabled (either in XML with
