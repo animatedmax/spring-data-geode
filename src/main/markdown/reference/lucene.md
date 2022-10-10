@@ -36,8 +36,7 @@ limitations under the License.
 -->
 
 [Vmware Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/index.html)
-integrates with [Apache
-Lucene](https://lucene.apache.org/) to let you index and search data
+integrates with [Apache Lucene](https://lucene.apache.org/) to let you index and search data
 stored in GemFire by using Lucene queries. Search-based
 queries also include the ability to page through query results.
 
@@ -51,7 +50,7 @@ can be run. A `LuceneIndex` can be created in Spring Data for
 GemFire XML config as follows:
 
 ```highlight
-&lt;gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/&gt;
+<gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/>
 ```
 
 Additionally, Apache Lucene allows the specification of
@@ -80,7 +79,7 @@ element, as follows:
 
 
 Spring Data for GemFire's `LuceneIndexFactoryBean` API and Spring Data for GemFire's XML
-namespace also allows you to specify a [org.apache.geode.cache.lucene.LuceneSerializer`](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/lucene/LuceneSerializer.html)
+namespace also allows you to specify a [org.apache.geode.cache.lucene.LuceneSerializer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/lucene/LuceneSerializer.html)
 when you create the `LuceneIndex`. The `LuceneSerializer`
 allows you to configure the way objects are converted to Lucene documents for
 the index when the object is indexed.
