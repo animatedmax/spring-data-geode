@@ -1245,23 +1245,23 @@ Spring Data for GemFire includes five Region template tags in its namespace:
   </thead>
   <tbody>
     <tr>
-      <td><code>&lt;gfe:region-template&gt;</code></td>
+      <td><code><gfe:region-template&gt;</code></td>
       <td>Defines common generic Region attributes. Extends <code>regionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code>&lt;gfe:local-region-template&gt;</code></td>
+      <td><code><gfe:local-region-template&gt;</code></td>
     <td>Defines common 'Local' Region attributes. Extends <code>localRegionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code>&lt;gfe:partitioned-region-template&gt;</code></td>
+      <td><code><gfe:partitioned-region-template&gt;</code></td>
     <td>Defines common 'PARTITION' Region attributes. Extends <code>partitionedRegionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code>&lt;gfe:replicated-region-template&gt;</code></td>
+      <td><code><gfe:replicated-region-template&gt;</code></td>
       <td>Defines common 'REPLICATE' Region attributes. Extends <code>replicatedRegionType</code> in the XML namespace.</td>
     </tr>
     <tr>
-      <td><code>&lt;gfe:client-region-template&gt;</code></td>
+      <td><code><gfe:client-region-template&gt;</code></td>
       <td>Defines common 'Client' Region attributes. Extends <code>clientRegionType</code> in the XML namespace.</td>
     </tr>
   </tbody>
@@ -2158,7 +2158,7 @@ automatic conversion for these Region operations.
 use GemFire's proprietary <code>Region.Entry</code>, such as 
 <code>entries(boolean)</code>, <code>entrySet(boolean)</code>, and
 <code>getEntry()</code> type, are not targeted for AOP advice. Additionally, , the <code>entrySet()</code> method, which returns a
-<code>Set&lt;java.util.Map.Entry&lt;?, ?&gt;&gt;</code>, is not
+<code>Set<java.util.Map.Entry<?, ?&gt;&gt;</code>, is not
 affected.</p>
 
 The following example configuration shows how to set the `pretty-print`

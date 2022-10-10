@@ -2,9 +2,8 @@
 
 *   [Landing Page](landing-page.html)
 *   [Preface](preface.html)
-*   [Introduction](introduction/introduction.html)
-    *   [Requirements](introduction/requirements.html)
-    *   [New Features](introduction/new-features.html)
+*   [Requirements](introduction/requirements.html)
+*   [New Features](introduction/new-features.html)
 *   [Reference Documentation Structure](reference/introduction.html)
     *   [Annotation-based Configuration Quick Start](reference/bootstrap-annotations-quickstart.html)
     *   [Bootstrapping GemFire with the Spring Container](reference/bootstrap.html)

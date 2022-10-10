@@ -716,7 +716,7 @@ as follows:
 **Example 5. Registering custom `PdxSerializers` by POJO field/property type**
 
 ```highlight
-Map&lt;?, PdxSerializer> customPdxSerializers = new HashMap&lt;&gt;();
+Map<?, PdxSerializer> customPdxSerializers = new HashMap<&gt;();
 
 customPdxSerializers.put(Password.class, new SaltedHashPasswordPdxSerializer());
 
@@ -738,7 +738,7 @@ name of the `Class's` field or property, as the following example shows:
 **Example 6. Registering custom `PdxSerializers` by POJO field/property name**
 
 ```highlight
-Map&lt;?, PdxSerializer> customPdxSerializers = new HashMap&lt;&gt;();
+Map<?, PdxSerializer> customPdxSerializers = new HashMap<&gt;();
 
 customPdxSerializers.put("example.app.security.auth.model.User.password", new SaltedHashPasswordPdxSerializer());
 
@@ -902,7 +902,7 @@ Using Java's `Predicate` interface, you can compose
 The following example shows the `Predicate` API in action:
 
 ```highlight
-Predicate&lt;Class?>> customerTypes =
+Predicate<Class?>> customerTypes =
   type -&gt; Customer.class.getPackage().getName().startsWith(type.getName()); // Include all types in the same package as `Customer`
 
 Predicate includedTypes = customerTypes
@@ -942,10 +942,10 @@ You can add exclusions for other class types, or an entire
 package of types, by defining a `Predicate` and adding it to the
 `MappingPdxSerializer` as shown earlier.
 
-The `MappingPdxSerializer.setExcludeTypeFilters(:Predicate&lt;Class&le;?&gt;&gt;>)`
+The `MappingPdxSerializer.setExcludeTypeFilters(:Predicate<Class&le;?&gt;&gt;>)`
 method is additive, meaning it composes your application-defined type
 filters with the existing, pre-defined type filter `Predicates`
-indicated above using the `Predicate.and(:Predicate&lt;Class&le;?&gt;&gt;)` method.
+indicated above using the `Predicate.and(:Predicate<Class&le;?&gt;&gt;)` method.
 
 #### Include Type Filtering
 
@@ -955,24 +955,24 @@ application (for example, `java.security.Principal`, which is excluded
 by default with the `java.*` package exclude type filter on
 `MappingPdxSerializer`), then define the appropriate `Predicate`
 and add it to the serializer using
-`MappingPdxSerializer.setIncludeTypeFilters(:Predicate&lt;Class&le;?&gt;&gt;)`
+`MappingPdxSerializer.setIncludeTypeFilters(:Predicate<Class&le;?&gt;&gt;)`
 method, as follows:
 
 
 
 
 ```highlight
-Predicate&lt;Class&le;?&gt;&gt; principalTypeFilter =
+Predicate<Class&le;?&gt;&gt; principalTypeFilter =
   type -> java.security.Principal.class.isAssignableFrom(type);
 
 mappingPdxSerializer.setIncludeTypeFilters(principalTypeFilters);
 ```
 
-The `MappingPdxSerializer.setIncludeTypeFilters(:Predicate&lt;Class&le;?&gt;&gt;)`
-method, like `setExcludeTypeFilters(:Predicate&lt;Class&le;?&gt;&gt;)`, is additive
+The `MappingPdxSerializer.setIncludeTypeFilters(:Predicate<Class&le;?&gt;&gt;)`
+method, like `setExcludeTypeFilters(:Predicate<Class&le;?&gt;&gt;)`, is additive
 and therefore composes any passed type filter using
-`Predicate.or(:Predicate&lt;Class&le;?&gt;&gt;)`. You can call
-`setIncludeTypeFilters(:Predicate&lt;Class&le;?&gt;&gt;)` as many time as necessary.
+`Predicate.or(:Predicate<Class&le;?&gt;&gt;)`. You can call
+`setIncludeTypeFilters(:Predicate<Class&le;?&gt;&gt;)` as many time as necessary.
 
 When include type filters are present, then the `MappingPdxSerializer`
 makes a decision of whether to de/serialize an instance of a class type
@@ -980,7 +980,7 @@ when the class type is either not implicitly excluded OR when the class
 type is explicitly included, whichever returns true. Then, an instance
 of the class type will be serialized or deserialized appropriately.
 
-For example, when a type filter of `Predicate&lt;Class&lt;Principal&gt;&gt;` is
+For example, when a type filter of `Predicate<Class<Principal&gt;&gt;` is
 explicitly registered as shown previously, it cancels out the implicit
 exclude type filter on `java.*` package types.
 
