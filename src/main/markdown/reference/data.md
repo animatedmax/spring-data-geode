@@ -204,7 +204,7 @@ then you must explicitly set the `copy-on-read` attribute in the
 
 `ClientCache` XML:
 
-** Set copy-on-read using XML (client)**
+**Set copy-on-read using XML (client)**
 
 ```highlight
 <gfe:client-cache ... copy-on-read="true"/>
