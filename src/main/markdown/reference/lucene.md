@@ -157,7 +157,8 @@ before the Regions on which they apply, Spring Data for GemFire includes the
 <code>&lt;bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>. The
 <code>o.s.d.g.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>
 may only be used when using Spring Data for GemFire XML config. For more details about
-Spring's <code>BeanFactoryPostProcessors</code>, see [](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-factory-postprocessors).</p>
+Spring's <code>BeanFactoryPostProcessors</code>, see <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-factory-postprocessors">Customizing Configuration Metadata with a BeanFactoryPostProcessor</a>
+in the Spring Framework documentation.</p>
 
 In the preceding example, the
 presence of Spring's <code>@DependsOn</code> annotation on the
