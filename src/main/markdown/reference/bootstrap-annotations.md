@@ -1275,7 +1275,7 @@ Object (DAO) providing basic data access operations (CRUD) along with
 support for simple queries (such as `findById(..)`). You can define
 additional, more sophisticated queries by declaring query methods on the
 repository interface (for example,
-`List<BooK> findByAuthor(Author author);`).
+`List<Book> findByAuthor(Author author);`).
 
 Under the hood, Spring Data for GemFire provides an implementation of your
 application's repository interfaces when the Spring container is
