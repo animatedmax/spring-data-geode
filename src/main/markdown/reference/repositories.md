@@ -329,7 +329,7 @@ include the following:
     <tr>
       <td><a href="https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_additional-query_debugging.html">TRACE</a></td>
       <td><code>@Trace</code></td>
-      <td><p>Enable OQL query-specific debugging.</td>
+      <td>Enable OQL query-specific debugging.</td>
       <td>N/A</td>
     </tr>
   </tbody>
