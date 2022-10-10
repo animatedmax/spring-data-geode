@@ -311,7 +311,7 @@ and used by GemFire.
 
 On the server, you can configure multiple `CacheServers` that a client can connect to as follows:
 
-**Spring-based GemFire `CacheServer` application using multiple named `CacheServers`
+**Spring-based GemFire `CacheServer` application using multiple named `CacheServers`**
 
 ```highlight
 @SpringBootApplication
