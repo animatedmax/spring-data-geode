@@ -491,7 +491,7 @@ import ...;
 
 public interface BookRepository extends CrudRepository {
 
-  List&lt;Book> findByAuthorOrderByPublishedDesc(Author author);
+  List<Book> findByAuthorOrderByPublishedDesc(Author author);
 
 }
 ```
@@ -660,7 +660,7 @@ class ClientApplication {
 Most of the time, when using a client/server
 topology, particularly in production environments, the servers of the
 cluster will be started using `gfsh`. In which case, it customary
-to use HTTP(S) to send the configuration metadata (e.g. Region &amp;
+to use HTTP(S) to send the configuration metadata (e.g. Region and
 Index definitions) to the cluster. When HTTP is used, the configuration
 metadata is sent to the Manager in the cluster and distributed across
 the server nodes in the cluster consistently.
@@ -740,8 +740,8 @@ server-side feature only and can only be configured on a
 In the above example, the application is configured with two Regions,
 `Region1` and `Region2`. Additionally, two `GatewaySenders` will be
 configured to service both Regions. `GatewaySender1` will be configured
-to replicate `` Region1's data and `GatewaySender2 `` will be configured
-to replicate \`Region2's data.
+to replicate `Region1`'s data and `GatewaySender2` will be configured
+to replicate `Region2`'s data.
 
 As demonstrated, each `GatewaySender` property can be configured on each
 `EnableGatewaySender` annotation.
