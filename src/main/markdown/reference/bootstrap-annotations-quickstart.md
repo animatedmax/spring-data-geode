@@ -67,7 +67,8 @@ public class ClientApplication {
 
 See [@ClientCacheApplication Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/ClientCacheApplication.html).
 
-For more information, see [Configuring GemFire Applications with Spring](../index.html#configuring-gemfire-applications-with-spring) in _Spring Data for GemFire Reference Guide_.
+For more information, see [Configuring GemFire Applications with Spring](bootstrap-annotations.html#configuring-with-spring)
+in _ Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-peer-cache-application"></a>Configure a Peer `Cache` Application
 
@@ -101,7 +102,8 @@ See [@CacheServerApplication Javadoc](https://docs.spring.io/spring-data/geode/d
 See
 [@PeerCacheApplication Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/PeerCacheApplication.html).
 
-For more information, see [Configuring GemFire Applications with Spring](../index.html#configuring-gemfire-applications-with-spring) in _Spring Data for GemFire Reference Guide_.
+For more information, see [Configuring GemFire Applications with Spring](bootstrap-annotations.html#configuring-with-spring)
+in _ Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-embedded-locator"></a>Configure an Embedded Locator
 
@@ -127,7 +129,8 @@ public class ServerApplication {
 See
 [@EnableLocator Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLocator.html).
 
-For more information, see _Configuring an Embedded Locator_ in [Spring Data for GemFire Reference Guide](../index.html).
+For more information, see [Configuring an Embedded Locator](bootstrap-annotations.html#configuring-an-embedded-locator) in
+__Bootstrapping GemFire with the Spring Container Using Annotations_._
 
 ## <a id="configure-embedded-manager"></a>Configure an Embedded Manager
 
@@ -152,7 +155,8 @@ public class ServerApplication {
 
 See [@EnableManager Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableManager.html).
 
-For more information, see _Configuring an Embedded Manager_ in [Spring Data for GemFire Reference Guide](../index.html).
+For more information, see [Configuring an Embedded Manager](bootstrap-annotations.html#configuring-an-embedded-manager)
+in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-embedded-http-server"></a>Configure the Embedded HTTP Server
 
@@ -175,7 +179,8 @@ public class ServerApplication {
 
 See [@EnableHttpService Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableHttpService.html).
 
-For more information, see _Configuring the Embedded HTTP Server_ in [Spring Data for GemFire Reference Guide](../index.html).
+For more information, see [>Configuring the Embedded HTTP Server](boostrap-annotations.html#configuring-the-embedded-http-server)
+in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-embedded-memcached-server"></a>Configure the Embedded Memcached Server
 
@@ -200,7 +205,8 @@ public class ServerApplication {
 
 See [@EnableMemcachedServer Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableMemcachedServer.html).
 
-For more information, see _Configuring the Embedded Memcached Server_ in [Spring Data for GemFire Reference Guide](../index.html).
+For more information, see [Configuring the Embedded Memcached Server (Gemcached)](bootstrap-annotations.html#configuring-the-embedded-memcached-server)
+in _Bootstrapping GemFire with the Spring Container Using Annotations.
 
 ## <a id="configure-logging"></a>Configure Logging
 
@@ -225,7 +231,8 @@ Default <code>log-level</code> is **config**. This annotation does not adjust lo
 See
 [@EnableLogging Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableLogging.html).
 
-For more information, see [Configuring Logging](../index.html#configuring-logging) in _Spring Data for GemFire Reference Guide_.
+For more information, see [Configuring Logging](bootstrap-annotations.html#configuring-logging)
+_Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-statistics"></a>Configure Statistics
 
@@ -247,7 +254,8 @@ public class ClientApplication {
 
 See [@EnableStatistics Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableStatistics.html).
 
-For more information, see [Configuring Statistics](../index.html#configuring-logging) in _Spring Data for GemFire Reference Guide_.
+For more information, see [Configuring Statistics](bootstrap-annotations.html#configuring-statistics)
+_Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-pdx"></a>Configure PDX
 
@@ -279,7 +287,9 @@ model types, which does not require any special configuration
 out-of-the-box to properly identify application domain objects
 that need to be serialized and then perform the serialization since the
 logic in <code>MappingPdxSerializer</code> is based on Spring Data's
-mapping infrastructure. For more details, see [MappingPdxSerializer](../index.html#mappingpdxserializer) in _Spring Data for GemFire Reference Guide_.
+mapping infrastructure.
+For more details, see [MappingPdxSerializer](mapping.html#mappingpdxserializer)
+in _POJO Mapping_.
 
 See [@EnablePdx Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnablePdx.html).
 

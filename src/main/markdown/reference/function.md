@@ -35,7 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire provides [annotation](../index.html#function-annotations) support for
+Spring Data for GemFire provides [annotation](function-annotations.html) support for
 implementing, registering and executing GemFire Functions.
 
 Spring Data for GemFire also provides XML namespace support for registering

@@ -67,7 +67,8 @@ Spring users might find this approach similar to that of [@Configurable](https:/
 trying to first locate a bean definition as a wiring template and
 otherwise falling back to auto-wiring.
 
-For more details about wiring functionality, see [Wiring Declarable Components](../index.html#apis-declarable) in _Spring Data for GemFire Reference Guide_.
+For more details about wiring functionality, see [Wiring `Declarable` Components](data.html#wiring-declarable-components)
+in _Working with GemFire APIs_.
 
 To use the Spring Data for GemFire `Instantiator`, declare it as a bean, as the
 following example shows:

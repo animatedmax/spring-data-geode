@@ -1266,7 +1266,7 @@ beyond the scope of this documentation, but GemFire's supported topologies can b
 In the last two configurations, it is common to declare client Regions that connect to a cache server.
 
 Spring Data for GemFire offers dedicated support for each configuration through its
-[client-cache](#configuring-gemfire-clientcache) elements: `client-region` and
+[client-cache](cache.html#configuring-gemfire-clientcache) elements: `client-region` and
 `pool`. `client-region` defines a client Region,
 and `pool` defines a Pool of connections used and shared by the
 various client Regions.

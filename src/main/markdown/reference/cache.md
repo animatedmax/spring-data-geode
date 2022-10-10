@@ -48,7 +48,7 @@ member can also be used in stand-alone applications and integration
 tests. However, in typical production systems, most application
 processes act as cache clients, creating a <code>ClientCache</code>
 instance instead. This is described in the <a
-href="../index.html#configuring-gemfire-clientcache">Configuring a GemFire
+href="#configuring-gemfire-clientcache">Configuring a GemFire
 ClientCache</a> and <a href="#client-region">Client Region</a>
 sections.</p>
 
@@ -240,8 +240,9 @@ Reflection. However, it is common for developers to provide their own
 implementation. The value of the attribute is simply a reference to a
 Spring bean that implements the `PdxSerializer` interface.
 
-More information on serialization support can be found in
-[Wiring Deserialized Instances](../index.html#wiring-deserialized-instances) in the _Spring Data for GemFire Reference Guide_.
+For more information about serialization support, see
+[Wiring deserialized instances](serialization.html#wiring-deserialized-instances)
+in _Working with GemFire Serialization_.
 
 ### <a id="enabling-auto-reconnect"></a>Enabling Auto-reconnect
 

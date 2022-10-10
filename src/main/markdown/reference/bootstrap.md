@@ -74,7 +74,8 @@ configure these callbacks as normal Spring beans and inject them into
 GemFire components. This is a significant improvement over
 native `cache.xml`, which provides relatively limited configuration
 options and requires callbacks to implement GemFire's
-`Declarable` interface. For information about continuing to use `Declarables` within Spring's container, see [Wiring Declarable Components](../index.html#apis-declarable) in _Spring Data for GemFire Reference Guide_.
+`Declarable` interface. For information about continuing to use `Declarables` within Spring's container, see [Wiring `Declarable` Components](data.html#wiring-declarable-components)
+in _Working with GemFire APIs_.
 
 In addition, IDEs, such as the Spring Tool Suite (STS), provide
 support for Spring XML namespaces, including code completion,
@@ -222,9 +223,7 @@ peer-to-peer (P2P) topologies and cache servers. A <code>Cache</code>
 member can also be used in stand-alone applications and integration
 tests. However, in typical production systems, most application
 processes act as cache clients, creating a <code>ClientCache</code>
-instance instead. This is described in the <a
-href="../index.html#configuring-gemfire-clientcache">Configuring a GemFire
-ClientCache</a> and <a href="#client-region">Client Region</a>
+instance instead. This is described in the <a href="#configuring-gemfire-clientcache">Configuring a GemFire ClientCache</a> and <a href="#client-region">Client Region</a>
 sections.</p>
 
 You can create a peer `Cache` with default configuration with the
@@ -415,8 +414,9 @@ Reflection. However, it is common for developers to provide their own
 implementation. The value of the attribute is simply a reference to a
 Spring bean that implements the `PdxSerializer` interface.
 
-More information on serialization support can be found in
-[Wiring Deserialized Instances](../index.html#wiring-deserialized-instances) in the _Spring Data for GemFire Reference Guide_.
+For more information about serialization support, see
+[Wiring deserialized instances](serialization.html#wiring-deserialized-instances)
+in _Working with GemFire Serialization_.
 
 #### Enabling Auto-reconnect
 
@@ -2723,7 +2723,7 @@ way to keep your application loosely coupled. You can also use Spring's
 
 ## <a id="configuring-function-service"></a>Configuring the Function Service
 
-Spring Data for GemFire provides [annotation](../index.html#function-annotations) support for
+Spring Data for GemFire provides [annotation](#function-annotations.html) support for
 implementing, registering and executing GemFire Functions.
 
 Spring Data for GemFire also provides XML namespace support for registering

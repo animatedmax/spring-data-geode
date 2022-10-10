@@ -1,5 +1,5 @@
 ---
-title: Documentation Structure
+title: Reference Documentation Structure
 ---
 
 <!-- 
