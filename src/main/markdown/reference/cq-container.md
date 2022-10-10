@@ -37,7 +37,7 @@ limitations under the License.
 
 
 
-A powerful functionality offered by GemFire is [Continuous Query](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-chapter_overview.html)(CQ).
+A powerful functionality offered by GemFire is [Continuous Query](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-continuous_querying-chapter_overview.html) (CQ).
 
 CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to
