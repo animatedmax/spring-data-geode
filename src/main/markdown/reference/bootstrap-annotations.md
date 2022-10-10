@@ -846,9 +846,9 @@ Successfully connected to: [host=10.99.199.5, port=1099]
 gfsh>list members
          Name          | Id
 ---------------------- | ----------------------------------------------------
-SpringCacheServerOne   | 10.99.199.5(SpringCacheServerOne:14842)&lt;ec>&lt;v0>:1024
-SpringCacheServerTwo   | 10.99.199.5(SpringCacheServerTwo:14844)&lt;v1>:1025
-SpringCacheServerThree | 10.99.199.5(SpringCacheServerThree:14846)&lt;v2>:1026
+SpringCacheServerOne   | 10.99.199.5(SpringCacheServerOne:14842)<ec><v0>:1024
+SpringCacheServerTwo   | 10.99.199.5(SpringCacheServerTwo:14844)<v1>:1025
+SpringCacheServerThree | 10.99.199.5(SpringCacheServerThree:14846)<v2>:1026
 ```
 
 Because we also have the embedded Locator enabled, we can connect
@@ -1185,8 +1185,8 @@ class GemFireConfiguration {
   @Bean("Example")
   PartitionedRegionFactoryBean exampleRegion(GemFireCache gemfireCache) {
 
-      PartitionedRegionFactoryBean&lt;Long, Example> exampleRegion =
-          new PartitionedRegionFactoryBean&le;>();
+      PartitionedRegionFactoryBean<Long, Example> exampleRegion =
+          new PartitionedRegionFactoryBean≤>();
 
       exampleRegion.setCache(gemfireCache);
       exampleRegion.setClose(false);
@@ -1205,9 +1205,9 @@ in XML:
 **Example Region bean definition using Spring Data for GemFire's XML Namespace**
 
 ```highlight
-&lt;gfe:partitioned-region id="exampleRegion" name="Example" persistent="true">
+<gfe:partitioned-region id="exampleRegion" name="Example" persistent="true">
     ...
-&lt;/gfe:partitioned-region>
+</gfe:partitioned-region>
 ```
 
 While neither Java nor XML configuration is all that difficult to
@@ -1267,7 +1267,7 @@ as follows:
 **Repository for Books**
 
 ```highlight
-interface BookRepository extends CrudRepository&lt;Book, ISBN> { .. }
+interface BookRepository extends CrudRepository<Book, ISBN> { .. }
 ```
 
 The `org.springframe.data.repository.CrudRepository` is a Data Access
@@ -1275,7 +1275,7 @@ Object (DAO) providing basic data access operations (CRUD) along with
 support for simple queries (such as `findById(..)`). You can define
 additional, more sophisticated queries by declaring query methods on the
 repository interface (for example,
-`List&lt;BooK> findByAuthor(Author author);`).
+`List<BooK> findByAuthor(Author author);`).
 
 Under the hood, Spring Data for GemFire provides an implementation of your
 application's repository interfaces when the Spring container is
@@ -1498,9 +1498,9 @@ example:
 gfsh>list members
   Name    | Id
 --------- | ----------------------------------------------
-Locator   | 10.0.0.121(Locator:68173:locator)&lt;ec>&lt;v0>:1024
-ServerOne | 10.0.0.121(ServerOne:68242)&lt;v3>:1025
-ServerTwo | 10.0.0.121(ServerTwo:68372)&lt;v4>:1026
+Locator   | 10.0.0.121(Locator:68173:locator)<ec><v0>:1024
+ServerOne | 10.0.0.121(ServerOne:68242)<v3>:1025
+ServerTwo | 10.0.0.121(ServerTwo:68372)<v4>:1026
 
 gfsh>start server --name=ServerThree --log-level=config --server-port=41414
 Starting a Geode Server in /Users/you/geode/cluster/ServerThree...
@@ -1525,14 +1525,14 @@ Class-Path: /Users/you/geode/cluster/apache-geode-1.2.1/lib/geode-core-1.2.1.jar
 gfsh>list members
    Name     | Id
 ----------- | ----------------------------------------------
-Locator     | 10.0.0.121(Locator:68173:locator)&lt;ec>&lt;v0>:1024
+Locator     | 10.0.0.121(Locator:68173:locator)<ec><v0>:1024
 ServerOne   | 10.0.0.121(ServerOne:68242)vv3>:1025
-ServerTwo   | 10.0.0.121(ServerTwo:68372)&lt;v4>:1026
-ServerThree | 10.0.0.121(ServerThree:68467)&lt;v5>:1027
+ServerTwo   | 10.0.0.121(ServerTwo:68372)<v4>:1026
+ServerThree | 10.0.0.121(ServerThree:68467)<v5>:1027
 
 gfsh>describe member --name=ServerThree
 Name        : ServerThree
-Id          : 10.0.0.121(ServerThree:68467)&lt;v5>:1027
+Id          : 10.0.0.121(ServerThree:68467)<v5>:1027
 Host        : 10.0.0.121
 Regions     : Books
 PID         : 68467
@@ -1599,7 +1599,7 @@ To use the "Books" Region in your application, inject the "Books" Region directl
 class BooksDataAccessObject {
 
     @Resource(name = "Books")
-    private Region&lt;ISBN, Book> books;
+    private Region<ISBN, Book> books;
 
     // implement CRUD and queries with the "Books" Region
 }
@@ -1612,7 +1612,7 @@ as follows:
 **Using the "Books" Region with a SD Repository**
 
 ```highlight
-interface BookRepository extends CrudRepository&lt;Book, ISBN> {
+interface BookRepository extends CrudRepository<Book, ISBN> {
     ...
 }
 ```
@@ -1802,7 +1802,7 @@ or <code>build.gradle</code> file (for Gradle). This is necessary only
 if you use GemFire's default support for Region compression,
 which uses the <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/SnappyCompressor.html">SnappyCompressor</a>
 by default. If you use another compression library, you must include dependencies for that compression library on your
-application's classpath. Additionally, you must implement the <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/Compressor.html">Compressor</a>]
+application's classpath. Additionally, you must implement the <a href="https://geode.apache.org/releases/latest/javadoc/org/apache/geode/compression/Compressor.html">Compressor</a>
 interface to adapt your compression library of choice, define it as a
 bean in the Spring compressor, and set the <code>compressorBeanName</code> to this custom bean definition.</p>
 
@@ -1995,7 +1995,7 @@ Alternatively, we can use [XML](bootstrap.html#configuring-an-index) to create a
 **Index bean definition using XML**
 
 ```highlight
-&lt;gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
+<gfe:index id="BooksIsbnIndex" expression="isbn" from="/Books" type="KEY"/>
 ```
 
 However, now you can directly define indexes on the fields of your
@@ -2091,7 +2091,7 @@ injected by name into another application component.
 
 
 The generated name of the index follows this pattern:
-`&lt;Region Name>&lt;Field/Property Name>&lt;Index Type>Idx`. For example, the
+`<Region Name><Field/Property Name><Index Type>Idx`. For example, the
 name of the `author` index would be, `BooksAuthorHashIdx`.
 
 To enable indexing, annotate the application class with
@@ -2210,7 +2210,7 @@ customer. Then, the application might register the following CQ:
 @EnableContinuousQueries
 class PublisherPrintApplication {
 
-    @ContinuousQuery(name = "OverdraftProtection", query = "SELECT * FROM /CheckingAccount ca WHERE ca.balance &le; 0.0")
+    @ContinuousQuery(name = "OverdraftProtection", query = "SELECT * FROM /CheckingAccount ca WHERE ca.balance ≤ 0.0")
     void handleOverdraft(CqEvent event) {
         // Quick!!! Put more money into the checking account or notify the customer of the checking account!
     }
@@ -2303,10 +2303,10 @@ class CachingConfiguration {
   }
 
   @Bean("BookPricesCache")
-  ReplicatedRegionFactoryBean&lt;Book, Price> bookPricesRegion(GemFireCache gemfireCache) {
+  ReplicatedRegionFactoryBean<Book, Price> bookPricesRegion(GemFireCache gemfireCache) {
 
-    ReplicatedRegionFactoryBean&lt;Book, Price> bookPricesRegion =
-        new ReplicatedRegionFactoryBean&lt;>();
+    ReplicatedRegionFactoryBean<Book, Price> bookPricesRegion =
+        new ReplicatedRegionFactoryBean<>();
 
     bookPricesRegion.setCache(gemfireCache);
     bookPricesRegion.setClose(false);
@@ -2818,7 +2818,7 @@ provides:
   For more details, see [Auto Region Lookup](#auto-region-lookup) in _Configuring a Region_.
   Users should generally prefer Spring configuration when using Spring and
   Spring Data for GemFire. See "[Configuring Regions](#configuring-regions) and
-  [Configuring Cluster Configuration Push](#configuring-cluster-configuration-push instead.
+  [Configuring Cluster Configuration Push](#configuring-cluster-configuration-push) instead.
 
 - `@EnableBeanFactoryLocator`: Enables the Spring Data for GemFire
   `GemfireBeanFactoryLocator` feature, which is only useful when using
