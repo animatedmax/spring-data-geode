@@ -893,11 +893,9 @@ Using Java's `Predicate` interface, you can compose
 
 * [and(:Predicate)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#and-java.util.function.Predicate-)
 
-* 
-[or(:Predicate)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#or-java.util.function.Predicate-)
+* [or(:Predicate)](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#or-java.util.function.Predicate-)
 
-* 
-[negate()](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#negate--).
+* [negate()](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#negate--)
 
 The following example shows the `Predicate` API in action:
 
