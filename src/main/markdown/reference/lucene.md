@@ -51,7 +51,7 @@ can be run. A `LuceneIndex` can be created in Spring Data for
 GemFire XML config as follows:
 
 ```highlight
-<gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/&gt;
+&lt;gfe:lucene-index id="IndexOne" fields="fieldOne, fieldTwo" region-path="/Example"/&gt;
 ```
 
 Additionally, Apache Lucene allows the specification of
@@ -155,7 +155,7 @@ A number of limitations exist with GemFire's Apache Lucene integration and suppo
 <code>LuceneIndexes</code> defined in a Spring container are created
 before the Regions on which they apply, Spring Data for GemFire includes the
 <code>org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>. You can register this Spring <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanFactoryPostProcessor.html">BeanFactoryPostProcessor</a>in XML config by using
-<code><bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>. The
+<code>&lt;bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>. The
 <code>o.s.d.g.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>
 may only be used when using Spring Data for GemFire XML config. For more details about
 Spring's <code>BeanFactoryPostProcessors</code>, see [](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-factory-postprocessors).</p>
