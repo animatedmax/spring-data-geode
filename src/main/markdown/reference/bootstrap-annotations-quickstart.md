@@ -206,7 +206,7 @@ public class ServerApplication {
 See [@EnableMemcachedServer Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableMemcachedServer.html).
 
 For more information, see [Configuring the Embedded Memcached Server (Gemcached)](bootstrap-annotations.html#configuring-the-embedded-memcached-server)
-in _Bootstrapping GemFire with the Spring Container Using Annotations.
+in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-logging"></a>Configure Logging
 
