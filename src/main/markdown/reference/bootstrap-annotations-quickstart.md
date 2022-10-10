@@ -179,7 +179,7 @@ public class ServerApplication {
 
 See [@EnableHttpService Javadoc](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/config/annotation/EnableHttpService.html).
 
-For more information, see [>Configuring the Embedded HTTP Server](boostrap-annotations.html#configuring-the-embedded-http-server)
+For more information, see [>Configuring the Embedded HTTP Server](bootstrap-annotations.html#configuring-the-embedded-http-server)
 in _Bootstrapping GemFire with the Spring Container Using Annotations_.
 
 ## <a id="configure-embedded-memcached-server"></a>Configure the Embedded Memcached Server
