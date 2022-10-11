@@ -35,10 +35,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire provides [annotation](function-annotations.html) support for
+Spring Data for VMware GemFire provides [annotation](function-annotations.html) support for
 implementing, registering and executing GemFire Functions.
 
-Spring Data for GemFire also provides XML namespace support for registering
+Spring Data for VMware GemFire also provides XML namespace support for registering
 GemFire [Functions](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/Function.html) for remote function execution.
 
 For more information about the Function execution framework, see [Function Execution](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-function_exec-chapter_overview.html) in the GemFire product documentation.

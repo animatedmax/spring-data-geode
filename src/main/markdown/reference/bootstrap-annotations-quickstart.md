@@ -36,7 +36,7 @@ limitations under the License.
 -->
 
 
-The following sections provide an overview to the Spring Data for GemFire
+The following sections provide an overview to the Spring Data for VMware GemFire
 annotations to get started quickly.
 
 All annotations provide additional configuration
@@ -281,7 +281,7 @@ makes short work of making all of your application domain model types
 serializable without having to implement
 <code>java.io.Serializable</code>.
 
-By default, Spring Data for GemFire configures the
+By default, Spring Data for VMware GemFire configures the
 <code>MappingPdxSerializer</code> to serialize your application domain
 model types, which does not require any special configuration
 out-of-the-box to properly identify application domain objects
@@ -359,7 +359,7 @@ For more information, see [Configuring Security](bootstrap-annotations.html#conf
 ## <a id="configure-gemfire-properties"></a>Configure GemFire Properties
 
 To configure other, low-level GemFire properties not covered
-by the feature-oriented, Spring Data for GemFire configuration annotations,
+by the feature-oriented, Spring Data for VMware GemFire configuration annotations,
 annotate your Spring, GemFire client or server application
 class with `@GemFireProperties`, as follows:
 
@@ -389,7 +389,7 @@ For more information, see [Configuring GemFire Properties](#configuring-gemfire-
 
 ## <a id="configure-caching"></a>Configure Caching
 
-To use GemFire as a *caching provider* in Spring's [Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache) and have Spring Data for GemFire automatically create GemFire Regions for the caches required by your application
+To use GemFire as a *caching provider* in Spring's [Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache) and have Spring Data for VMware GemFire automatically create GemFire Regions for the caches required by your application
 service components, annotate your Spring, GemFire client, or server application
 class with `@EnableGemfireCaching` and `@EnableCachingDefinedRegions`  as follows:
 
@@ -495,7 +495,7 @@ public interface BookRepository extends CrudRepository {
 
 }
 ```
-For more information, see [Spring Data for GemFire Repositories](repositories.html).
+For more information, see [Spring Data for VMware GemFire Repositories](repositories.html).
 
 See also the following: 
 
@@ -513,7 +513,7 @@ See also the following:
 
 * [Configuring Regions](bootstrap-annotations.html#configuring-regions) in _Bootstrapping GemFire with the Spring Container Using Annotations_
 
-* [Spring Data for GemFire Repositories](repositories.html)
+* [Spring Data for VMware GemFire Repositories](repositories.html)
 
 ## <a id="configure-client-regions"></a>Configure Client Regions from Cluster-defined Regions
 

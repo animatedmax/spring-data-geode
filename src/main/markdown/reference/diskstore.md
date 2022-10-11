@@ -34,7 +34,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-Spring Data for GemFire supports `DiskStore` configuration and creation through the
+Spring Data for VMware GemFire supports `DiskStore` configuration and creation through the
 `disk-store` element, as the following example shows:
 
 ```highlight

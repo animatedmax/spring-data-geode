@@ -35,7 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire includes annotation support to simplify working with
+Spring Data for VMware GemFire includes annotation support to simplify working with
 GemFire [Function execution](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-function_exec-chapter_overview.html).
 
 
@@ -54,9 +54,9 @@ predefined scopes: on Region, on members (in groups), on servers, and
 others. The implementation and execution of remote Functions, as with
 any RPC protocol, requires some boilerplate code.
 
-Spring Data for GemFire, true to Spring's core value proposition, aims to hide the
+Spring Data for VMware GemFire, true to Spring's core value proposition, aims to hide the
 mechanics of remote Function execution and let you focus on core POJO
-programming and business logic. To this end, Spring Data for GemFire introduces
+programming and business logic. To this end, Spring Data for VMware GemFire introduces
 annotations to declaratively register the public methods of a POJO class
 as GemFire Functions along with the ability to invoke
 registered Functions (including remotely) by using annotated interfaces.
@@ -160,7 +160,7 @@ are returned to the client.
 
 ### <a id="annotations-for-function-implementation"></a>Annotations for Function Implementation
 
-The following example shows how Spring Data for GemFire's Function annotations are
+The following example shows how Spring Data for VMware GemFire's Function annotations are
 used to expose POJO methods as GemFire Functions:
 
 ```highlight
@@ -277,11 +277,11 @@ class ApplicationConfiguration { ... }
 A process that invokes a remote Function needs to provide the Function's
 ID, calling arguments, the execution target (`onRegion`, `onServers`,
 `onServer`, `onMember`, or `onMembers`) and (optionally) a filter set.
-By using Spring Data for GemFire, all you need do is define an interface supported by
+By using Spring Data for VMware GemFire, all you need do is define an interface supported by
 annotations. Spring creates a dynamic proxy for the interface, which
 uses the `FunctionService` to create an `Execution`, invoke the
 `Execution`, and (if necessary) coerce the results to the defined return
-type. This technique is similar to the way Spring Data for GemFire's Repository
+type. This technique is similar to the way Spring Data for VMware GemFire's Repository
 extension works. Thus, some of the configuration and concepts should be
 familiar.
 
@@ -290,7 +290,7 @@ executions, one corresponding to each method defined in the interface.
 
 ### <a id="annotations-for-function-execution"></a>Annotations for Function Execution
 
-To support client-side Function execution, the following Spring Data for GemFire
+To support client-side Function execution, the following Spring Data for VMware GemFire
 Function annotations are provided: 
 
 * `@OnRegion`
@@ -397,12 +397,12 @@ arguments are a variable argument `List`.
 
 ## <a id="function-execution-with-pdx"></a>Function Execution with PDX
 
-When using Spring Data for GemFire's Function annotation support combined with
+When using Spring Data for VMware GemFire's Function annotation support combined with
 GemFire's [PDX Serialization](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-data_serialization-gemfire_pdx_serialization.html), there are a few logistical things to keep in mind.
 
 As explained earlier in this section, and by way of example, you should
 typically define GemFire Functions by using POJO classes
-annotated with Spring Data for GemFire [Function
+annotated with Spring Data for VMware GemFire [Function
 annotations](https://docs.spring.io/spring-data-gemfire/docs/current/api/org/springframework/data/gemfire/function/annotation/package-summary.html),
 as follows:
 
@@ -486,8 +486,8 @@ you have specifically configured (registered) either by using
 [ReflectionBasedAutoSerializer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html),
 or specifically (and recommended) by using a "custom" GemFire
 [PdxSerializer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxSerializer.html).
-If you use Spring Data for GemFire's Repository extension, you might even want to
-consider using Spring Data for GemFire's [MappingPdxSerializer](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/MappingPdxSerializer.html),
+If you use Spring Data for VMware GemFire's Repository extension, you might even want to
+consider using Spring Data for VMware GemFire's [MappingPdxSerializer](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/MappingPdxSerializer.html),
 which uses an entity's mapping metadata to determine data from the
 application domain object that is serialized to the PDX instance.
 
@@ -500,7 +500,7 @@ parameter or are handled by a "custom" GemFire
 `java.io.Serializable`.
 
 So, when you set `pdx-read-serialized` to `true` on GemFire
-servers where the GemFire Functions (including Spring Data for GemFire
+servers where the GemFire Functions (including Spring Data for VMware GemFire
 Function-annotated POJO classes) are registered, then you may encounter
 surprising behavior when invoking the Function `Execution`.
 
@@ -524,18 +524,18 @@ GemFire servers interact with multiple different clients (for
 example, a combination of Java clients and native clients, such as
 C/C++, C#, and others).
 
-This flies in the face of Spring Data for GemFire's strongly-typed Function-annotated
+This flies in the face of Spring Data for VMware GemFire's strongly-typed Function-annotated
 POJO class method signatures, where you would reasonably expect
 application domain object types instead, not PDX serialized instances.
 
-Consequently, Spring Data for GemFire includes enhanced Function support to
+Consequently, Spring Data for VMware GemFire includes enhanced Function support to
 automatically convert PDX typed method arguments to the desired
 application domain object types defined by the Function method's
 signature (parameter types).
 
 However, this also requires you to explicitly register a
 GemFire `PdxSerializer` on GemFire servers where
-Spring Data for GemFire Function-annotated POJOs are registered and used, as the
+Spring Data for VMware GemFire Function-annotated POJOs are registered and used, as the
 following example shows:
 
 ```highlight
@@ -548,7 +548,7 @@ Alternatively, you can use GemFire's [ReflectionBasedAutoSerializer](https://geo
 custom `PdxSerializer` to maintain finer-grained control over your
 serialization strategy when possible.
 
-Finally, Spring Data for GemFire is careful not to convert your Function arguments if
+Finally, Spring Data for VMware GemFire is careful not to convert your Function arguments if
 you treat your Function arguments generically or as one of
 GemFire's PDX types, as follows:
 
@@ -559,6 +559,6 @@ public Object genericFunction(String value, Object domainObject, PdxInstanceEnum
 }
 ```
 
-Spring Data for GemFire converts PDX typed data to the corresponding application
+Spring Data for VMware GemFire converts PDX typed data to the corresponding application
 domain types if and only if the corresponding application domain types
 are on the classpath and the Function-annotated POJO method expects it.

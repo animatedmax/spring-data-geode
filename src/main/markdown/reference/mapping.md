@@ -498,7 +498,7 @@ things to consider:
 
 ## <a id="entity-mapping"></a>Entity Mapping
 
-Spring Data for GemFire provides support to map entities that are
+Spring Data for VMware GemFire provides support to map entities that are
 stored in a Region. The mapping metadata is defined by using annotations
 on application domain classes, as the following example shows:
 
@@ -547,18 +547,18 @@ public class Guest extends User {
 }
 ```
 Be sure to use the full path of the GemFire Region, as defined with
-the Spring Data for GemFire XML namespace by using the `id` or
+the Spring Data for VMware GemFire XML namespace by using the `id` or
 `name` attributes of the `<*-region>` element.
 
 ### <a id="entity-mapping-by-region-type"></a>Entity Mapping by Region Type
 
-In addition to the `@Region` annotation, Spring Data for GemFire
+In addition to the `@Region` annotation, Spring Data for VMware GemFire
 also recognizes type-specific Region mapping annotations:
 `@ClientRegion`, `@LocalRegion`, `@PartitionRegion`, and
 `@ReplicateRegion`.
 
 Functionally, these annotations are treated exactly the same as the
-generic `@Region` annotation in the Spring Data for GemFire mapping infrastructure. However,
+generic `@Region` annotation in the Spring Data for VMware GemFire mapping infrastructure. However,
 these additional mapping annotations are useful in Spring Data for
 Apache Geode's annotation configuration model. When combined with the
 `@EnableEntityDefinedRegions` configuration annotation on a Spring
@@ -570,7 +570,7 @@ your application entity class should be mapped to and also has an impact
 on the data management policies of the Region (for example,
 partition — also known as sharding — versus replicating data).
 
-Using these type-specific Region mapping annotations with the Spring Data for GemFire
+Using these type-specific Region mapping annotations with the Spring Data for VMware GemFire
 annotation configuration model saves you from having to explicitly
 define these Regions in configuration.
 
@@ -579,7 +579,7 @@ define these Regions in configuration.
 As an alternative to specifying the Region in which the entity is stored
 by using the `@Region` annotation on the entity class, you can also
 specify the `@Region` annotation on the entity's `Repository` interface.
-See [Spring Data for GemFire Repositories](#gemfire-repositories)
+See [Spring Data for VMware GemFire Repositories](#gemfire-repositories)
 for more details.
 
 However, suppose you want to store a `Person` record in multiple Apache
@@ -623,7 +623,7 @@ transaction.
 ### <a id="mappingpdxserializer"></a>MappingPdxSerializer
 
 
-Spring Data for GemFire provides a custom
+Spring Data for VMware GemFire provides a custom
 [PdxSerializer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxSerializer.html)
 implementation, called `MappingPdxSerializer`, that uses Spring Data
 mapping metadata to customize entity serialization.
@@ -756,7 +756,7 @@ this over the example shown earlier. The preceding example is as explicit as pos
 
 ### <a id="mapping-id-properties"></a>Mapping ID Properties
 
-Like GemFire's `ReflectionBasedAutoSerializer`, Spring Data for GemFire's
+Like GemFire's `ReflectionBasedAutoSerializer`, Spring Data for VMware GemFire's
 `MappingPdxSerializer` is also able to determine the identifier of the
 entity. However, `MappingPdxSerializer` does so by using Spring Data's
 mapping metadata, specifically by finding the entity property designated
@@ -875,13 +875,13 @@ are written to PDX.
 
 ### <a id="filtering-by-class-type"></a>
 
-Similar to `ReflectionBasedAutoSerializer`, Spring Data for GemFire's
+Similar to `ReflectionBasedAutoSerializer`, Spring Data for VMware GemFire's
 `MappingPdxSerializer` lets you filter the types of objects that are
 serialized and deserialized.
 
 However, unlike `ReflectionBasedAutoSerializer`, which
 uses complex regular expressions to express which types the serializer
-handles, Spring Data for GemFire's `MappingPdxSerializer` uses the much more robust
+handles, Spring Data for VMware GemFire's `MappingPdxSerializer` uses the much more robust
 [java.util.function.Predicate](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html) interface and API to express type-matching criteria.
 
 You can implement a <code>Predicate</code> using Java's <a
@@ -915,12 +915,12 @@ mappingPdxSerializer.setExcludeTypeFilters(
 <p class="note"><strong>Note</strong>: Any <code>Class</code> object passed to your
 <code>Predicate</code> is guaranteed not to be <code>null</code>.</p>
 
-Spring Data for GemFire's `MappingPdxSerializer` includes support for both include and
+Spring Data for VMware GemFire's `MappingPdxSerializer` includes support for both include and
 exclude class type filters.
 
 #### Exclude Type Filtering
 
-By default, Spring Data for GemFire's `MappingPdxSerializer` registers pre-defined
+By default, Spring Data for VMware GemFire's `MappingPdxSerializer` registers pre-defined
 `Predicates` that filter, or exclude types from the following packages:
 
 - `java.*`

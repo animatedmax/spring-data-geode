@@ -70,7 +70,7 @@ limitations under the License.
 
 - Upgraded to Spring Framework 5.0.7.RELEASE.
 
-- Reorganized the Spring Data for GemFire codebase by packaging different classes and components by concern.
+- Reorganized the Spring Data for VMware GemFire codebase by packaging different classes and components by concern.
 
 - Added extensive support for Java 8 types, particularly in the SD Repository abstraction.
 

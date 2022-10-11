@@ -35,7 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire (Spring Data for GemFire) 2.0 introduces a new annotation-based
+Spring Data for VMware GemFire (Spring Data for VMware GemFire) 2.0 introduces a new annotation-based
 configuration model to configure and bootstrap GemFire using
 the Spring container.
 
@@ -76,7 +76,7 @@ The annotation-based configuration model aims to simplify all this and
 more.
 
 The annotation-based configuration model is an alternative to XML-based
-configuration using Spring Data for GemFire's XML namespace. With XML, you could use
+configuration using Spring Data for VMware GemFire's XML namespace. With XML, you could use
 the `gfe` XML schema for configuration and the `gfe-data` XML schema for
 data access. For more details. see [Bootstrapping GemFire with the Spring Container](bootstrap.html).
 
@@ -84,7 +84,7 @@ data access. For more details. see [Bootstrapping GemFire with the Spring Contai
 configuration model does not support the configuration of
 GemFire's WAN components and topology.</p>
 
-Like Spring Boot, Spring Data for GemFire's annotation-based configuration model was
+Like Spring Boot, Spring Data for VMware GemFire's annotation-based configuration model was
 designed as an opinionated, convention-over-configuration approach for
 using GemFire. Indeed, this annotation-based configuration
 model was inspired by Spring Boot as well as several other Spring and
@@ -105,13 +105,13 @@ Again, *getting started*, *quickly* and as *easily*, is the primary
 objective.
 
 However, the option to customize the configuration metadata and behavior
-of GemFire is there if you need it, and Spring Data for GemFire's
+of GemFire is there if you need it, and Spring Data for VMware GemFire's
 annotation-based configuration quietly backs away. You need only specify
 the configuration attributes you wish to adjust. Also, as we will see
 later in this document, there are several ways to configure a
 GemFire feature or embedded service by using the annotations.
 
-You can find all the new Spring Data for GemFire Java `Annotations` in the
+You can find all the new Spring Data for VMware GemFire Java `Annotations` in the
 `org.springframework.data.gemfire.config.annotation` package.
 
 ## <a id="configuring-with-spring"></a>Configuring GemFire Applications with Spring
@@ -244,7 +244,7 @@ If you prefer, you can  start your servers with the `gfsh start server` command.
 Your Spring Boot `@ClientCacheApplication` can
 still connect to the server regardless of how it was started. However,
 you may prefer to configure and start your servers by using the
-Spring Data for GemFire approach since a properly annotated Spring Boot application
+Spring Data for VMware GemFire approach since a properly annotated Spring Boot application
 class is far more intuitive and easier to debug.
 
 You can customize the "DEFAULT" `Pool` set up by GemFire to possibly connect to one
@@ -394,7 +394,7 @@ by our Locator above, as long as each member is uniquely named.
 `@LocatorApplication` is for configuring and bootstrapping standalone,
 GemFire Locator application processes. This process can only
 be a Locator and nothing else. If you try to start a Locator with a
-cache instance, Spring Data for GemFire will throw an error.
+cache instance, Spring Data for VMware GemFire will throw an error.
 
 To simultaneously start a cache instance along with an
 embedded Locator, then you should use the `@EnableLocator` annotation
@@ -425,7 +425,7 @@ configuration metadata when configuring beans in the Spring container.
 However, this would require all annotation attributes to be of type
 `String`, thereby giving up type safety, which is not desirable.
 
-So, Spring Data for GemFire borrows from another commonly used pattern in Spring,
+So, Spring Data for VMware GemFire borrows from another commonly used pattern in Spring,
 `Configurers`. Many different `Configurer` interfaces are provided in
 Spring Web MVC, including the
 [org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/config/annotation/ContentNegotiationConfigurer.html).
@@ -437,7 +437,7 @@ configuration at runtime. One of the more common uses of this pattern is
 to supply conditional configuration based on the application's runtime
 environment.
 
-Spring Data for GemFire provides several `Configurer` callback interfaces to
+Spring Data for VMware GemFire provides several `Configurer` callback interfaces to
 customize different aspects of the annotation-based configuration
 metadata at runtime, before the Spring managed beans that the
 annotations create are initialized:
@@ -519,15 +519,15 @@ container, the bean definition can take advantage of other Spring
 container features, such as property placeholders and SpEL expressions by
 using the `@Value` annotation on factory method parameters.
 
-All `Configurers` provided by Spring Data for GemFire take two bits of information in
+All `Configurers` provided by Spring Data for VMware GemFire take two bits of information in
 the callback: the name of the bean created in the Spring container by
 the annotation and a reference to the `FactoryBean` used by the
 annotation to create and configure the GemFire component (for
 example, a `ClientCache` instance is created and configured with
 `ClientCacheFactoryBean`).
 
-<p class="note"><strong>Note</strong>: Spring Data for GemFire <code>FactoryBeans</code> are part of
-the Spring Data for GemFire public API and are what you would use in Spring's
+<p class="note"><strong>Note</strong>: Spring Data for VMware GemFire <code>FactoryBeans</code> are part of
+the Spring Data for VMware GemFire public API and are what you would use in Spring's
 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java">Java-based container configuration</a>
 if this new annotation-based configuration model were not
 provided. The annotations themselves use these same
@@ -697,7 +697,7 @@ to connect to and find servers in a cluster. Additionally, new members
 joining an existing cluster use Locators to find their peers.
 
 It is often convenient for application developers as they are developing
-their Spring Boot and Spring Data for GemFire applications to startup up a small
+their Spring Boot and Spring Data for VMware GemFire applications to startup up a small
 cluster of two or three GemFire servers. Rather than starting
 a separate Locator process, you can annotate your Spring Boot
 `@CacheServerApplication` class with `@EnableLocator`, as follows:
@@ -1065,7 +1065,7 @@ and register it.
 You can declare this composite `PdxSerializer` as a managed bean in the
 Spring container and refer to this composite `PdxSerializer` by its bean
 name in the `@EnablePdx` annotation using the `serializerBeanName`
-attribute. Spring Data for GemFire takes care of registering it with
+attribute. Spring Data for VMware GemFire takes care of registering it with
 GemFire on your behalf.
 
 The following example shows how to create a custom composite
@@ -1090,7 +1090,7 @@ It is also possible to declare GemFire's
 [org.apache.geode.pdx.ReflectionBasedAutoSerializer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/ReflectionBasedAutoSerializer.html)
 as a bean definition in a Spring context.
 
-Alternatively, you should use Spring Data for GemFire's more robust
+Alternatively, you should use Spring Data for VMware GemFire's more robust
 [org.springframework.data.gemfire.mapping.MappingPdxSerializer](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/mapping/MappingPdxSerializer.html),
 which uses Spring Data mapping metadata and infrastructure applied to
 the serialization process for more efficient handling than reflection
@@ -1106,7 +1106,7 @@ For more details, see the [@EnablePdx annotation Javadoc](https://docs.spring.io
 
 While many of the `gemfire.properties`
 are encapsulated in and abstracted with an annotation in
-the Spring Data for GemFire annotation-based configuration model, the less
+the Spring Data for VMware GemFire annotation-based configuration model, the less
 commonly used GemFire properties are still accessible from the
 `@EnableGemFireProperties` annotation.
 
@@ -1166,9 +1166,9 @@ Generally, a Region should only store a single type of object, which
 makes it more conducive for building effective indexes and writing
 queries.
 
-Previously, Spring Data for GemFire users needed to explicitly define and declare the
+Previously, Spring Data for VMware GemFire users needed to explicitly define and declare the
 Regions used by their applications to store data by writing very verbose
-Spring configuration metadata, whether using Spring Data for GemFire's
+Spring configuration metadata, whether using Spring Data for VMware GemFire's
 `FactoryBeans` from the API with Spring's
 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java">Java-based container configuration</a>
 or using [XML](region.html).
@@ -1202,7 +1202,7 @@ class GemFireConfiguration {
 The following example demonstrates how to configure the same Region bean
 in XML:
 
-**Example Region bean definition using Spring Data for GemFire's XML Namespace**
+**Example Region bean definition using Spring Data for VMware GemFire's XML Namespace**
 
 ```highlight
 <gfe:partitioned-region id="exampleRegion" name="Example" persistent="true">
@@ -1223,14 +1223,14 @@ domain objects (entities) themselves. No longer do you need to
 explicitly define `Region` bean definitions in Spring configuration
 metadata, unless you require finer-grained control.
 
-To simplify Region creation, Spring Data for GemFire combines the use of Spring Data
+To simplify Region creation, Spring Data for VMware GemFire combines the use of Spring Data
 Repositories with the expressive power of annotation-based configuration
 using the new `@EnableEntityDefinedRegions` annotation.
 
 <p class="note"><strong>Note</strong>: Most Spring Data application developers should
 already be familiar with the
 <a href="https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#repositories">Spring Data Repository abstraction</a>
-and Spring Data for GemFire's <a
+and Spring Data for VMware GemFire's <a
 href=repositories.html>implementation/extension</a>, which has
 been specifically customized to optimize data access operations for
 GemFire.</p>
@@ -1277,21 +1277,21 @@ additional, more sophisticated queries by declaring query methods on the
 repository interface (for example,
 `List<Book> findByAuthor(Author author);`).
 
-Under the hood, Spring Data for GemFire provides an implementation of your
+Under the hood, Spring Data for VMware GemFire provides an implementation of your
 application's repository interfaces when the Spring container is
-bootstrapped. Spring Data for GemFire even implements the query methods you define
+bootstrapped. Spring Data for VMware GemFire even implements the query methods you define
 so long as you follow the
 [conventions](https://docs.spring.io/spring-data/geode/docs/current/reference/html/#gemfire-repositories.executing-queries).
 
 Now, when you defined the `Book` class, you also specified the Region in
 which instances of `Book` are mapped (stored) by declaring the
-Spring Data for GemFire mapping annotation, `@Region` on the entity's type. Of
+Spring Data for VMware GemFire mapping annotation, `@Region` on the entity's type. Of
 course, if the entity type (`Book`, in this case) referenced in the type
 parameter of the repository interface (`BookRepository`, in this case)
 is not annotated with `@Region`, the name is derived from the simple
 class name of the entity type (also `Book`, in this case).
 
-Spring Data for GemFire uses the mapping context, which contains mapping metadata for
+Spring Data for VMware GemFire uses the mapping context, which contains mapping metadata for
 all the entities defined in your application, to determine all the
 Regions that are needed at runtime.
 
@@ -1309,7 +1309,7 @@ class ClientApplication { .. }
 ```
 
 Creating Regions from entity classes is most useful
-when using Spring Data Repositories in your application. Spring Data for GemFire's
+when using Spring Data Repositories in your application. Spring Data for VMware GemFire's
 Repository support is enabled with the
 <code>@EnableGemfireRepositories</code> annotation, as shown in the
 preceding example.
@@ -1369,19 +1369,19 @@ For details, see [Storage and Distribution Options](https://docs.vmware.com/en/V
 in the GemFire product documentation.
 
 When you annotate your application domain object types with the generic
-`@Region` mapping annotation, Spring Data for GemFire decides which type of Region to
-create. Spring Data for GemFire's default strategy takes the cache type into
+`@Region` mapping annotation, Spring Data for VMware GemFire decides which type of Region to
+create. Spring Data for VMware GemFire's default strategy takes the cache type into
 consideration when determining the type of Region to create.
 
 For example, if you declare the application as a `ClientCache` by using
-the `@ClientCacheApplication` annotation, Spring Data for GemFire creates a client
+the `@ClientCacheApplication` annotation, Spring Data for VMware GemFire creates a client
 `PROXY` `Region` by default. Alternatively, if you declare the
 application as a peer `Cache` by using either the
 `@PeerCacheApplication` or `@CacheServerApplication` annotations,
-Spring Data for GemFire creates a server `PARTITION` `Region` by default.
+Spring Data for VMware GemFire creates a server `PARTITION` `Region` by default.
 
 You can always override the default when necessary. To
-override the default applied by Spring Data for GemFire, four new Region mapping
+override the default applied by Spring Data for VMware GemFire, four new Region mapping
 annotations have been introduced:
 
 - `@ClientRegion`
@@ -1434,7 +1434,7 @@ in the GemFire product documentation.
 
 ### <a id="configured-cluster-defined-regions"></a>Configured Cluster-Defined Regions
 
-In addition to the `@EnableEntityDefinedRegions` annotation, Spring Data for GemFire
+In addition to the `@EnableEntityDefinedRegions` annotation, Spring Data for VMware GemFire
 also provides the inverse annotation, `@EnableClusterDefinedRegions`.
 Rather than basing your Regions on the entity classes defined and driven
 from your application use cases (UC) and requirements (the most common
@@ -1558,7 +1558,7 @@ On the client-side, many Book Store client application instances might
 be started to process books against the Book Store online service. The
 "Books" Region might be one of many different Regions needed to implement
 the Book Store application service. Rather than have to create and
-configure each Region individually, Spring Data for GemFire conveniently allows
+configure each Region individually, Spring Data for VMware GemFire conveniently allows
 the client application Regions to be defined from the cluster, as
 follows:
 
@@ -1695,7 +1695,7 @@ expiration can also be used to manage memory by allowing entries stored
 in a Region to expire. GemFire supports both Time-to-Live
 (TTL) and Idle-Timeout (TTI) entry expiration policies.
 
-Spring Data for GemFire provides the following expiration annotations:
+Spring Data for VMware GemFire provides the following expiration annotations:
 
 - `Expiration`
 
@@ -1864,7 +1864,7 @@ for a Region with persistence or overflow, GemFire uses the
 We recommend defining Region-specific `DiskStores` when persisting
 or overflowing data to disk.
 
-Spring Data for GemFire provides annotation support for defining and creating
+Spring Data for VMware GemFire provides annotation support for defining and creating
 application Region `DiskStores` by annotating the application class with
 the `@EnableDiskStore` and `@EnableDiskStores` annotations.
 
@@ -1906,7 +1906,7 @@ particular global setting, but the `@EnableDiskStores` annotation
 conveniently defines common configuration attributes that apply across
 all `DiskStores` aggregated by the annotation.
 
-Spring Data for GemFire also provides the `DiskStoreConfigurer` callback interface,
+Spring Data for VMware GemFire also provides the `DiskStoreConfigurer` callback interface,
 which can be declared in Java configuration and used instead of
 configuration properties to customize a `DiskStore` at runtime, as the
 following example shows:
@@ -1967,7 +1967,7 @@ projection. Different types of indexes, such as
 and [hash](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-query_index-creating_hash_indexes.html)
 indexes, can be created.
 
-Spring Data for GemFire makes it easy to create indexes on Regions where the data is
+Spring Data for VMware GemFire makes it easy to create indexes on Regions where the data is
 stored and accessed. Rather than explicitly declaring `Index` bean
 definitions by using Spring config as before, we can create an `Index`
 bean definition in Java, as follows:
@@ -2036,7 +2036,7 @@ In our new `Book` class definition, we annotated the `author` field with
 `@Indexed` and the `title` field with `@LuceneIndexed`. Also, the `isbn`
 field had previously been annotated with Spring Data's `@Id` annotation,
 which identifies the field containing the unique identifier for `Book`
-instances, and, in Spring Data for GemFire, the `@Id` annotated field or property is
+instances, and, in Spring Data for VMware GemFire, the `@Id` annotated field or property is
 used as the key in the Region when storing the entry.
 
 - `@Id` annotated fields or properties result in the creation of an
@@ -2058,7 +2058,7 @@ the domain object's class, or the simple name of the domain object class
 if the `@Region` annotation was not specified.
 
 You can explicitly set any of the `@Indexed` annotation
-attributes to override the default values provided by Spring Data for GemFire.
+attributes to override the default values provided by Spring Data for VMware GemFire.
 
 **Application domain object type modeling a Book with customized indexes**
 
@@ -2116,8 +2116,8 @@ annotations. Without this scan, index annotations cannot be found. We
 also strongly recommend that you limit the scope of the scan.</p>
 
 
-While Lucene queries are not supported on Spring Data for GemFire repositories,
-Spring Data for GemFire does provide comprehensive [support](lucene.html)
+While Lucene queries are not supported on Spring Data for VMware GemFire repositories,
+Spring Data for VMware GemFire does provide comprehensive [support](lucene.html)
 for GemFire Lucene queries by using the Spring
 template design pattern.
 
@@ -2139,7 +2139,7 @@ when using indexes:
 
 Another optimization that you can use when restarting your Spring
 application where indexes have to be rebuilt is to first define all the
-indexes up front and then create them all at once, which, in Spring Data for GemFire,
+indexes up front and then create them all at once, which, in Spring Data for VMware GemFire,
 happens when the Spring container is refreshed.
 
 You can define indexes up front and then create them all at once by
@@ -2191,9 +2191,9 @@ is used to filter or identify the data of interest. When data is changed
 or added and it matches the criteria defined in the query predicate of
 the registered CQ, the client application is notified.
 
-Spring Data for GemFire makes it easy to define and register CQs, along with an
+Spring Data for VMware GemFire makes it easy to define and register CQs, along with an
 associated listener to handle and process CQ events without all the
-cruft of GemFire's plumbing. Spring Data for GemFire's new
+cruft of GemFire's plumbing. Spring Data for VMware GemFire's new
 annotation-based configuration for CQs builds on the existing Continuous
 Query support in the [continuous query listener container](cq-container.html).
 
@@ -2222,7 +2222,7 @@ To enable Continuous Queries, annotate your application class with
 
 Defining Continuous Queries consists of annotating any Spring
 `@Component`-annotated POJO class methods with the `@ContinuousQuery`
-annotation (in similar fashion to Spring Data for GemFire's Function-annotated
+annotation (in similar fashion to Spring Data for VMware GemFire's Function-annotated
 POJO methods). A POJO method defined with a CQ by using the
 `@ContinuousQuery` annotation is called any time data matching the query
 predicate is added or changed.
@@ -2244,7 +2244,7 @@ in the GemFire product documentation.
 
 ## <a id="configuring-springs-cache-abstraction"></a>Configuring Spring's Cache Abstraction
 
-With Spring Data for GemFire, GemFire can be used as a caching provider in
+With Spring Data for VMware GemFire, GemFire can be used as a caching provider in
 [cache abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache).
 
 In Cache Abstraction, the caching annotations (such as
@@ -2252,7 +2252,7 @@ In Cache Abstraction, the caching annotations (such as
 before invoking a potentially expensive operation. The results of an
 application service method are cached after the operation is invoked.
 
-In Spring Data for GemFire, a Spring `Cache` corresponds directly to a
+In Spring Data for VMware GemFire, a Spring `Cache` corresponds directly to a
 GemFire Region. The Region must exist before any caching
 annotated application service methods are called. This is true for any
 of Spring's caching annotations (that is, `@Cacheable`, `@CachePut` and
@@ -2280,7 +2280,7 @@ class PointOfSaleService
 }
 ```
 
-To make your work easier when you use Spring Data for GemFire with Spring's Cache
+To make your work easier when you use Spring Data for VMware GemFire with Spring's Cache
 Abstraction, two new features have been added to the annotation-based
 configuration model.
 
@@ -2322,7 +2322,7 @@ class CachingConfiguration {
 }
 ```
 
-Using Spring Data for GemFire's features, you can simplify the same caching
+Using Spring Data for VMware GemFire's features, you can simplify the same caching
 configuration to the following:
 
 **Enabling GemFire Caching**
@@ -2353,16 +2353,16 @@ Regions in GemFire for these caches on application startup.
 The Regions created are local to the application process that created
 the Regions. If the application is a peer `Cache`, the Regions exist
 only on the application node. If the application is a `ClientCache`,
-then Spring Data for GemFire creates client `PROXY` Regions and expects those
+then Spring Data for VMware GemFire creates client `PROXY` Regions and expects those
 Regions with the same name to already exist on the servers in the
 cluster.
 
 <p class="note"><strong>Note</strong>: 
-Spring Data for GemFire cannot determine the cache required by
+Spring Data for VMware GemFire cannot determine the cache required by
 a service method using a Spring <code>CacheResolver</code> to resolve
 the cache used in the operation at runtime.</p>
 
-<p class="note"><strong>Tip</strong>: <td class="content">Spring Data for GemFire also supports JCache (JSR-107) cache
+<p class="note"><strong>Tip</strong>: <td class="content">Spring Data for VMware GemFire also supports JCache (JSR-107) cache
 annotations on application service components. For the equivalent Spring caching
 annotation to use in place of JCache caching annotations,
 see <a href="https://docs.spring.io/spring-data/geode/docs/current/reference/html/#bootstrap-annotation-config-configurers">JCache (JSR-107) Annotations</a>
@@ -2392,9 +2392,9 @@ cluster, it will acquire identical configuration.
 
 In a sense, this feature is not much different than if you were to use
 `gfsh` to manually create the Regions and Indexes on all the servers in
-the cluster. Except that now, with Spring Data for GemFire, you no longer need to use
+the cluster. Except that now, with Spring Data for VMware GemFire, you no longer need to use
 `gfsh` to create Regions and Indexes. Your Spring Boot application,
-enabled with the power of Spring Data for GemFire, already contains all the
+enabled with the power of Spring Data for VMware GemFire, already contains all the
 configuration metadata needed to create Regions and Indexes for you.
 
 When you use the Spring Data Repository abstraction, we know all the
@@ -2415,7 +2415,7 @@ mapping, or whatever the purpose.
 The point is, you can focus on your application's business logic while
 using the framework's features and supporting infrastructure (such as
 Spring's Cache Abstraction, Spring Data Repositories, Spring's
-Transaction Management, and so on) and Spring Data for GemFire takes care of all the
+Transaction Management, and so on) and Spring Data for VMware GemFire takes care of all the
 GemFire plumbing required by those framework features on your
 behalf.
 
@@ -2428,7 +2428,7 @@ service. GemFire's Cluster Configuration service is the same service used by `gf
 user to the cluster from the shell.
 
 Since the cluster may "remember" the prior configuration
-pushed by a client from a previous run, Spring Data for GemFire is careful not to
+pushed by a client from a previous run, Spring Data for VMware GemFire is careful not to
 stomp on any existing Regions and Indexes already defined in the
 servers. This is especially important, for instance, when Regions
 already contain data.
@@ -2441,7 +2441,7 @@ restart the client application so that configuration is pushed up to the
 server again. Alternatively, you can use <code>gfsh</code> to redefine
 the Regions and Indexes manually.</p>
 
-Unlike `gfsh`, Spring Data for GemFire supports the
+Unlike `gfsh`, Spring Data for VMware GemFire supports the
 creation of Regions and Indexes only on the servers from a client. For
 advanced configuration and use cases, you should use `gfsh` to
 manage the server-side cluster.</p>
@@ -2491,7 +2491,7 @@ required in the application's back-end services (such as
 GemFire). Database users have similar features. Now Spring and
 GemFire developers do too.
 
-When combined with the following Spring Data for GemFire annotations, this
+When combined with the following Spring Data for VMware GemFire annotations, this
 application really starts to take flight, with very little effort:
 
 - `@EnableContinuousQueries`
@@ -2555,7 +2555,7 @@ For more details about GemFire SSL support, see [SSL](https://docs.vmware.com/en
 ## <a id="configuring-security"></a>Configuring Security
 
 Application security is important, and
-Spring Data for GemFire provides comprehensive support for securing both
+Spring Data for VMware GemFire provides comprehensive support for securing both
 GemFire clients and servers.
 
 GemFire includes an [Integrated Security](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-security-implementing_security.html)
@@ -2565,7 +2565,7 @@ integrates with [Apache Shiro](https://shiro.apache.org/) and can
 therefore delegate both authentication and authorization requests to
 Apache Shiro to enforce security.
 
-The remainder of this section demonstrates how Spring Data for GemFire can simplify
+The remainder of this section demonstrates how Spring Data for VMware GemFire can simplify
 GemFire's security story even further.
 
 ### <a id="configuring-server-security"></a>Configuring Server Security
@@ -2589,7 +2589,7 @@ servers in a GemFire cluster.
   to this `shiro.ini` file, which must be available in the `CLASSPATH`.
 
 - Using only Apache Shiro, annotate your Spring Boot application class
-  with Spring Data for GemFire's new `@EnableSecurity` annotation and define one or
+  with Spring Data for VMware GemFire's new `@EnableSecurity` annotation and define one or
   more Apache Shiro [Realms](https://shiro.apache.org/realm.html) as
   beans in the Spring container for accessing your application's
   security metadata (that is, authorized users, roles, and permissions).
@@ -2652,7 +2652,7 @@ For more information, see [Apache Shiro Realms](https://shiro.apache.org/realm.h
 
 When Apache Shiro is on the `CLASSPATH` of the servers in the cluster
 and one or more Apache Shiro `Realms` have been defined as beans in the
-Spring container, Spring Data for GemFire detects this configuration and uses Apache
+Spring container, Spring Data for VMware GemFire detects this configuration and uses Apache
 Shiro as the security provider to secure your GemFire servers
 when the `@EnableSecurity` annotation is used.
 
@@ -2677,13 +2677,13 @@ To secure a client application you must:
 
 3. Specify the user credentials in a proprietary, GemFire `gfsecurity.properties` file.
 
-Spring Data for GemFire simplifies all of those steps by using the same
+Spring Data for VMware GemFire simplifies all of those steps by using the same
 `@EnableSecurity` annotation that was used in the server applications.
 In other words, the same `@EnableSecurity` annotation handles security
 for both client and server applications. This feature makes it easier
 for users when they decide to switch their applications from an
 embedded, peer `Cache` application to a `ClientCache` application, for
-instance. Simply change the Spring Data for GemFire annotation from
+instance. Simply change the Spring Data for VMware GemFire annotation from
 `@PeerCacheApplication` or `@CacheServerApplication` to
 `@ClientCacheApplication`, and you are done.
 
@@ -2733,7 +2733,7 @@ annotation-based configuration model:
 ### <a id="configuration-organization"></a>Configuration Organization
 
 As stated in [Configuring Cluster Configuration Push](#configuring-cluster-configuration-push), when many
-GemFire or Spring Data for GemFire features are enabled by using
+GemFire or Spring Data for VMware GemFire features are enabled by using
 annotations, we begin to stack a lot of annotations on the Spring
 `@Configuration` or `@SpringBootApplication` class. In this situation,
 it makes sense to start compartmentalizing the configuration a bit.
@@ -2797,7 +2797,7 @@ class RepositoriesConfiguration { .. }
 
 ### <a id="additional-configuration-based-annotations"></a>Additional Configuration-based Annotations
 
-The following Spring Data for GemFire Annotations were not discussed in this
+The following Spring Data for VMware GemFire Annotations were not discussed in this
 reference documentation, either because the annotation supports a
 deprecated feature of GemFire or because there are better,
 alternative ways to accomplishing the function that the annotation
@@ -2806,7 +2806,7 @@ provides:
 - `@EnableAuth`: Enables GemFire's old authentication and
   authorization security model. (Deprecated. GemFire's new
   integrated security framework can be enabled on both clients and
-  servers by using Spring Data for GemFire's `@EnableSecurity` annotation, as
+  servers by using Spring Data for VMware GemFire's `@EnableSecurity` annotation, as
   described in [Configuring Security](#configuring-security)".)
 
 - `@EnableAutoRegionLookup`: Not recommended. Essentially, this
@@ -2814,19 +2814,19 @@ provides:
   metadata (such as `cache.xml` or Cluster Configuration when applied to
   a server) and automatically registers those Regions as beans in the
   Spring container. This annotation corresponds with the
-  `<gfe:auto-region-lookup>` element in Spring Data for GemFire's XML namespace.
+  `<gfe:auto-region-lookup>` element in Spring Data for VMware GemFire's XML namespace.
   For more details, see [Auto Region Lookup](#auto-region-lookup) in _Configuring a Region_.
   Users should generally prefer Spring configuration when using Spring and
-  Spring Data for GemFire. See "[Configuring Regions](#configuring-regions) and
+  Spring Data for VMware GemFire. See "[Configuring Regions](#configuring-regions) and
   [Configuring Cluster Configuration Push](#configuring-cluster-configuration-push) instead.
 
-- `@EnableBeanFactoryLocator`: Enables the Spring Data for GemFire
+- `@EnableBeanFactoryLocator`: Enables the Spring Data for VMware GemFire
   `GemfireBeanFactoryLocator` feature, which is only useful when using
   external configuration metadata (for example, `cache.xml`). For
   example, if you define a `CacheLoader` on a Region defined in
   `cache.xml`, you can still autowire this `CacheLoader` with, say, a
   relational database `DataSource` bean defined in Spring configuration.
-  This annotation takes advantage of this Spring Data for GemFire
+  This annotation takes advantage of this Spring Data for VMware GemFire
   [declarable feature](data.html#wiring-declarable-components)
   and might be useful if you have a large
   amount of legacy configuration metadata, such as `cache.xml` files.
@@ -2847,7 +2847,7 @@ provides:
 
 ## <a id="conclusion"></a>Conclusion
 
-As we learned in the previous sections, Spring Data for GemFire's new
+As we learned in the previous sections, Spring Data for VMware GemFire's new
 annotation-based configuration model provides a tremendous amount of
 power. Hopefully, it lives up to its goal of making it easier for you to
 *get started quickly* and *easily* when using GemFire with
@@ -2860,7 +2860,7 @@ approaches by using Spring's
 and [@ImportResource](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ImportResource.html)
 annotations on a Spring `@Configuration` or `@SpringBootApplication`
 class. The moment you explicitly provide a bean definition that would
-otherwise be provided by Spring Data for GemFire using one of the annotations, the
+otherwise be provided by Spring Data for VMware GemFire using one of the annotations, the
 annotation-based configuration is disabled.
 
 Note

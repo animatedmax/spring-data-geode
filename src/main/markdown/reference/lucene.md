@@ -40,7 +40,7 @@ integrates with [Apache Lucene](https://lucene.apache.org/) to let you index and
 stored in GemFire by using Lucene queries. Search-based
 queries also include the ability to page through query results.
 
-Additionally, Spring Data for GemFire adds support for query projections based on the
+Additionally, Spring Data for VMware GemFire adds support for query projections based on the
 Spring Data Commons projection infrastructure. This feature lets the
 query results be projected into first-class application domain types as
 needed by the application.
@@ -78,7 +78,7 @@ element, as follows:
 `<gfe-field-analyzers ref="refToTopLevelMapBeanDefinition"/>`.
 
 
-Spring Data for GemFire's `LuceneIndexFactoryBean` API and Spring Data for GemFire's XML
+Spring Data for VMware GemFire's `LuceneIndexFactoryBean` API and Spring Data for VMware GemFire's XML
 namespace also allows you to specify a [org.apache.geode.cache.lucene.LuceneSerializer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/lucene/LuceneSerializer.html)
 when you create the `LuceneIndex`. The `LuceneSerializer`
 allows you to configure the way objects are converted to Lucene documents for
@@ -152,11 +152,11 @@ A number of limitations exist with GemFire's Apache Lucene integration and suppo
 
 <p class="note"><strong>Note</strong>: To help ensure that all declared
 <code>LuceneIndexes</code> defined in a Spring container are created
-before the Regions on which they apply, Spring Data for GemFire includes the
+before the Regions on which they apply, Spring Data for VMware GemFire includes the
 <code>org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>. You can register this Spring <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanFactoryPostProcessor.html">BeanFactoryPostProcessor</a>in XML config by using
 <code>&lt;bean class="org.springframework.data.gemfire.config.support.LuceneIndexRegionBeanFactoryPostProcessor"/&gt;</code>. The
 <code>o.s.d.g.config.support.LuceneIndexRegionBeanFactoryPostProcessor</code>
-may only be used when using Spring Data for GemFire XML config. For more details about
+may only be used when using Spring Data for VMware GemFire XML config. For more details about
 Spring's <code>BeanFactoryPostProcessors</code>, see <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-factory-postprocessors">Customizing Configuration Metadata with a BeanFactoryPostProcessor</a>
 in the Spring Framework documentation.</p>
 
@@ -173,7 +173,7 @@ access operations such as queries.
 
 ## <a id="lucene-template-data-accessors"></a>Lucene Template Data Accessors
 
-Spring Data for GemFire provides two primary templates for Lucene data access
+Spring Data for VMware GemFire provides two primary templates for Lucene data access
 operations, depending on how low of a level your application is prepared
 to deal with.
 
@@ -211,20 +211,20 @@ the <code>resultLimit</code> parameter is optional.
 
 The operations in the `LuceneOperations` interface match the operations
 provided by the [LuceneQuery](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/lucene/LuceneQuery.html)
-interface. However, Spring Data for GemFire has the added value of translating
+interface. However, Spring Data for VMware GemFire has the added value of translating
 proprietary GemFire or Apache Lucene `Exceptions` into
 Spring's highly consistent and expressive DAO [exception
 hierarchy](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#dao-exceptions),
 particularly as many modern data access operations involve more than one
 store or repository.
 
-Additionally, Spring Data for GemFire's `LuceneOperations` interface can shield
+Additionally, Spring Data for VMware GemFire's `LuceneOperations` interface can shield
 your application from interface-breaking changes introduced by the
 underlying GemFire or Apache Lucene APIs when they occur.
 
 However, it would be sad to offer a Lucene Data Access Object (DAO) that
 only uses GemFire and Apache Lucene data types (such as
-GemFire's `LuceneResultStruct`). Therefore, Spring Data for GemFire
+GemFire's `LuceneResultStruct`). Therefore, Spring Data for VMware GemFire
 gives you the `ProjectingLuceneOperations` interface to remedy these
 important application concerns. The following listing shows the
 `ProjectingLuceneOperations` interface definition:
@@ -339,7 +339,7 @@ You can use `setProjectionFactory(:ProjectionFactory)` to set a custom
 
 ## <a id="annotation-configuration-support"></a>Annotation Configuration Support
 
-Finally, Spring Data for GemFire provides annotation configuration support for
+Finally, Spring Data for VMware GemFire provides annotation configuration support for
 `LuceneIndexes`.
 
 You can express `LuceneIndexes` directly on your application domain
@@ -363,7 +363,7 @@ class Person {
 }
 ```
 
-To enable this feature, you must use Spring Data for GemFire's annotation
+To enable this feature, you must use Spring Data for VMware GemFire's annotation
 configuration support specifically with the `@EnableEntityDefineRegions`
 and `@EnableIndexing` annotations, as follows:
 
@@ -381,7 +381,7 @@ class ApplicationConfiguration {
 GemFire servers because <code>LuceneIndexes</code> only apply to
 <code>PARTITION</code> Regions.
 
-Given the earlier definition of the `Person` class, the Spring Data for GemFire
+Given the earlier definition of the `Person` class, the Spring Data for VMware GemFire
 annotation configuration support finds the `Person` entity class
 definition and determines that people are stored in a `PARTITION` Region
 called "People" and that the `Person` has an OQL `Index` on `birthDate`

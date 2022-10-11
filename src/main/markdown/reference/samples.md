@@ -35,7 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-The Spring Data for GemFire project also includes one sample application. Named
+The Spring Data for VMware GemFire project also includes one sample application. Named
 "Hello World", the sample application demonstrates how to configure and
 use GemFire inside a Spring application. At run time, the
 sample offers a shell that lets you run various commands against the
@@ -50,7 +50,7 @@ Suite](https://spring.io/tools/sts)) or run them from the command-line.
 ## <a id="hello-world"></a>The "Hello World" Sample Application
 
 The "Hello World" sample application demonstrates the core functionality
-of the Spring Data for GemFire project. It bootstraps GemFire, configures
+of the Spring Data for VMware GemFire project. It bootstraps GemFire, configures
 it, executes arbitrary commands against the cache, and shuts it down
 when the application exits. Multiple instances of the application can be
 started at the same time and work together, sharing data without any

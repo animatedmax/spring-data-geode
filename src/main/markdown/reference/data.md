@@ -46,7 +46,7 @@ support for dependency injection of GemFire managed objects.
 ## <a id="gemfiretemplate"></a>GemfireTemplate
 
 As with many other high-level abstractions provided by Spring,
-Spring Data for GemFire provides a **template** to simplify GemFire data
+Spring Data for VMware GemFire provides a **template** to simplify GemFire data
 access operations. The class provides several methods containing common
 Region operations, but also provides the capability to **execute** code
 against native GemFire APIs without having to deal with
@@ -121,7 +121,7 @@ For more information about Spring's transaction abstraction, see
 [Advantages of the Spring Framework’s Transaction Support Model](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-motivation)
 in the Spring documentation.
 
-For GemFire, Spring Data for GemFire provides a dedicated, per-cache,
+For GemFire, Spring Data for VMware GemFire provides a dedicated, per-cache,
 `PlatformTransactionManager` that, once declared, allows Region
 operations to be executed atomically through Spring:
 
@@ -134,7 +134,7 @@ operations to be executed atomically through Spring:
 <p class="note"><strong>Note</strong>: The example above can be simplified even further by
 eliminating the <code>cache-ref</code> attribute if the
 GemFire cache is defined under the default name,
-<code>gemfireCache</code>. As with the other Spring Data for GemFire namespace
+<code>gemfireCache</code>. As with the other Spring Data for VMware GemFire namespace
 elements, if the cache bean name is not configured, the aforementioned
 naming convention will be used. Additionally, the transaction manager
 name is "gemfireTransactionManager" if not explicitly specified.</p>
@@ -181,7 +181,7 @@ in the Red Hat documentation.
 However, whether you are using GemFire in a standalone
 environment with an Open Source JTA Transaction Management
 implementation that supports "*Last Resource*", or a managed environment
-(e.g. Java EE AS such as WAS), Spring Data for GemFire has you covered.
+(e.g. Java EE AS such as WAS), Spring Data for VMware GemFire has you covered.
 
 There are a series of steps you must complete to properly use
 GemFire as a "*Last Resource*" in a JTA transaction involving
@@ -194,9 +194,9 @@ This is independent of your Spring [Boot] and/or [Data for GemFire] application 
 successfully.
 
 2\. Referring to Step 5 in GemFire's [JTA Global Transactions with Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-reference-archive_transactions-JTA_transactions.html),
-Spring Data for GemFire's Annotation support will attempt to set the `GemFireCache`,
+Spring Data for VMware GemFire's Annotation support will attempt to set the `GemFireCache`,
 [copyOnRead](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/GemFireCache.html#setCopyOnRead-boolean-)
-property for you when using the `@EnableGemFireAsLastResource` annotation.f Spring Data for GemFire's auto-configuration is unsuccessful in this regard,
+property for you when using the `@EnableGemFireAsLastResource` annotation.f Spring Data for VMware GemFire's auto-configuration is unsuccessful in this regard,
 then you must explicitly set the `copy-on-read` attribute in the
 `<gfe:cache>` or `<gfe:client-cache>` XML element or set the
 `copyOnRead` property of the `CacheFactoryBean` class in JavaConfig to
@@ -254,10 +254,10 @@ reads.</p>
 
 3\. Skip Steps 6-8 in GemFire's
 [JTA Global Transactions with Tanzu GemFire](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-reference-archive_transactions-JTA_transactions.html).
-Annotate your Spring `@Configuration` class with Spring Data for GemFire's
+Annotate your Spring `@Configuration` class with Spring Data for VMware GemFire's
 `@EnableGemFireAsLastResource` annotation and a combination of Spring's
 [Transaction Management](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction)
-infrastructure and Spring Data for GemFire's `@EnableGemFireAsLastResource`
+infrastructure and Spring Data for VMware GemFire's `@EnableGemFireAsLastResource`
 annotation configuration completes the task.
 
 The configuration looks like this:
@@ -303,13 +303,13 @@ public JtaTransactionManager transactionManager(UserTransaction userTransaction)
 The configuration in section <a
 href="#local-cache-transaction-management">Local, Cache Transaction Management</a> does
 not apply in this case. The use of
-Spring Data for GemFire's <code>GemfireTransactionManager</code> is applicable in
+Spring Data for VMware GemFire's <code>GemfireTransactionManager</code> is applicable in
 "Local-only", Cache Transactions, <strong>not</strong> "Global", JTA
-Transactions. Therefore, do not configure the Spring Data for GemFire
+Transactions. Therefore, do not configure the Spring Data for VMware GemFire
 <code>GemfireTransactionManager</code> in this case. Instead, configure
 Spring's <code>JtaTransactionManager</code> as shown above.</p>
 
-Effectively, Spring Data for GemFire's `@EnableGemFireAsLastResource` annotation
+Effectively, Spring Data for VMware GemFire's `@EnableGemFireAsLastResource` annotation
 imports configuration containing two Aspect bean definitions that handles
 the GemFire `o.a.g.ra.GFConnectionFactory.getConnection()` and
 `o.a.g.ra.GFConnection.close()` operations at the appropriate points
@@ -349,7 +349,7 @@ class MyTransactionalService {
 entered by your application (i.e. when the
 `MyTransactionService.someTransactionalServiceMethod()` is called).
 
-\#2 & \#3 are handled by Spring Data for GemFire's new Aspects enabled with the
+\#2 & \#3 are handled by Spring Data for VMware GemFire's new Aspects enabled with the
 `@EnableGemFireAsLastResource` annotation.
 
 \#3 is the responsibility of your application.
@@ -380,7 +380,7 @@ When using transactions, you may want to register a listener to
 perform certain actions before or after the transaction commits, or
 after a rollback occurs.
 
-Spring Data for GemFire makes it easy to create listeners that will be invoked during
+Spring Data for VMware GemFire makes it easy to create listeners that will be invoked during
 specific phases of a transaction with the `@TransactionalEventListener`
 annotation. Methods annotated with `@TransactionalEventListener` (as
 shown below) will be notified of events published from transactional
@@ -464,7 +464,7 @@ class TransactionEventListeners {
 <p class="note warning"><strong>Warning</strong>: Only <code>TransactionPhase.AFTER_COMMIT</code> and
 <code>TransactionPhase.AFTER_ROLLBACK</code> are supported.
 <code>TransactionPhase.BEFORE_COMMIT</code> is not supported because
-Spring Data for GemFire adapts GemFire's <code>TransactionListener</code> and
+Spring Data for VMware GemFire adapts GemFire's <code>TransactionListener</code> and
 <code>TransactionWriter</code> interfaces to implement auto transaction
 event publishing, and when GemFire's
 <code>TransactionWriter.beforeCommit(:TransactionEvent)</code> is
@@ -489,16 +489,16 @@ A powerful functionality offered by GemFire is [Continuous Query](https://docs.v
 
 CQ allows a developer to create and register an OQL query, and
 then automatically be notified when new data that gets added to
-GemFire matches the query predicate. Spring Data for GemFire provides
+GemFire matches the query predicate. Spring Data for VMware GemFire provides
 dedicated support for CQs through the
 `org.springframework.data.gemfire.listener` package and its **listener
 container**; very similar in functionality and naming to the JMS
 integration in the *Spring Framework*; in fact, users familiar with the
 JMS support in Spring, should feel right at home.
 
-Spring Data for GemFire allows methods on POJOs to become end-points for
+Spring Data for VMware GemFire allows methods on POJOs to become end-points for
 CQ. Simply define the query and indicate the method that should be
-called to be notified when there is a match. Spring Data for GemFire takes care of
+called to be notified when there is a match. Spring Data for VMware GemFire takes care of
 the rest. This is similar to Java EE's message-driven bean style,
 but without any requirement for base class or interface implementations,
 based on GemFire.
@@ -509,15 +509,15 @@ Pool used is required to have the subscription enabled. For more information, se
 
 ### <a id="continuous-query-listener-container"></a>Continuous Query Listener Container
 
-Spring Data for GemFire simplifies creation, registration, life-cycle, and dispatch of
+Spring Data for VMware GemFire simplifies creation, registration, life-cycle, and dispatch of
 CQ events by taking care of the infrastructure around CQ with the use of
-Spring Data for GemFire's `ContinuousQueryListenerContainer`, which does all the heavy
+Spring Data for VMware GemFire's `ContinuousQueryListenerContainer`, which does all the heavy
 lifting on behalf of the user. Users familiar with EJB and JMS should
 find the concepts familiar as it is designed as close as possible to the
 support provided in the *Spring Framework* with its Message-driven POJOs
 (MDPs).
 
-The Spring Data for GemFire `ContinuousQueryListenerContainer` acts as an event (or message)
+The Spring Data for VMware GemFire `ContinuousQueryListenerContainer` acts as an event (or message)
 listener container; it is used to receive the events from the registered
 CQs and invoke the POJOs that are injected into it. The listener
 container is responsible for all threading of message reception and
@@ -543,7 +543,7 @@ proper `TaskExecutor` to take advantage of its runtime.
 ### <a id="continuousquerylistener-and-continuousquerylisteneradapter"></a>`ContinuousQueryListener` and `ContinuousQueryListenerAdapter`
 
 The `ContinuousQueryListenerAdapter` class is the final component in
-Spring Data for GemFire CQ support. In a nutshell, class allows you to expose almost
+Spring Data for VMware GemFire CQ support. In a nutshell, class allows you to expose almost
 **any** implementing class as an EDP with minimal constraints.
 `ContinuousQueryListenerAdapter` implements the
 `ContinuousQueryListener` interface, a simple listener interface similar
@@ -616,7 +616,7 @@ also the name of the method (the default is <code>handleEvent</code>).
 The specified method can have various argument types, the
 <code>EventDelegate</code> interface lists the allowed types.
 
-The example above uses the Spring Data for GemFire namespace to declare the event
+The example above uses the Spring Data for VMware GemFire namespace to declare the event
 listener container and automatically register the listeners. The complete definition is displayed below:
 
 ```highlight
@@ -690,7 +690,7 @@ consider the following declaration.
 ```
 
 To simplify the task of parsing, converting the parameters and
-initializing the object, Spring Data for GemFire offers a base class
+initializing the object, Spring Data for VMware GemFire offers a base class
 (`WiringDeclarableSupport`) that allows GemFire user objects
 to be wired through a **template** bean definition or, in case that is
 missing, perform auto-wiring through the Spring IoC container. To take
@@ -843,7 +843,7 @@ touching the `DBLoader` code.
 
 ## <a id="support-for-spring-cache-abstraction"></a>Support for the Spring Cache Abstraction
 
-Spring Data for GemFire provides an implementation of the Spring
+Spring Data for VMware GemFire provides an implementation of the Spring
 [Cache Abstraction](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache)
 to position GemFire as a *caching provider* in Spring's
 caching infrastructure.

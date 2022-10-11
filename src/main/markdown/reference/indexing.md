@@ -38,14 +38,14 @@ limitations under the License.
 GemFire allows indexes to be created on Region data to improve the performance of OQL (Object
 Query Language) queries.
 
-In Spring Data for GemFire, indexes are declared with the `index` element, as the
+In Spring Data for VMware GemFire, indexes are declared with the `index` element, as the
 following example shows:
 
 ```highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
-In Spring Data for GemFire's XML schema, the Spring Data for GemFire XML
+In Spring Data for VMware GemFire's XML schema, the Spring Data for VMware GemFire XML
 namespace, `index` bean declarations are not bound to a Region, unlike
 GemFire's native `cache.xml`. Instead, they are top-level
 elements similar to `<gfe:cache>` element. This allows you to declare any
@@ -80,7 +80,7 @@ class Customer {
 ```
 
 Now consider the following example, which has an application-defined
-Spring Data for GemFire Repository to query for `Customer` objects:
+Spring Data for VMware GemFire Repository to query for `Customer` objects:
 
 ```highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -92,7 +92,7 @@ interface CustomerRepository extends GemfireRepository<Customer, Long> {
 ```
 
 
-The Spring Data for GemFire Repository finder/query method results in the
+The Spring Data for VMware GemFire Repository finder/query method results in the
 following OQL statement being generated and run:
 
 ```highlight
@@ -107,7 +107,7 @@ to the following:
 ```
 
 The `from` clause must refer to a valid, existing Region and is how an
-`Index` gets applied to a Region. This is not specific to Spring Data for GemFire. It
+`Index` gets applied to a Region. This is not specific to Spring Data for VMware GemFire. It
 is a feature of GemFire.
 
 The `Index` `type` may be one of three enumerated values defined by the [IndexType](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/IndexType.html) enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
@@ -119,7 +119,7 @@ then the [QueryService.createKeyIndex(..)](https://geode.apache.org/releases/lat
 is invoked to create a `KEY` `Index`.
 
 The default is `FUNCTIONAL` and results in one of the
-`QueryService.createIndex(..)` methods being invoked. See the Spring Data for GemFire
+`QueryService.createIndex(..)` methods being invoked. See the Spring Data for VMware GemFire
 XML schema for a full set of options.
 
 For more information about indexing in GemFire, see [Working
@@ -129,7 +129,7 @@ Indexes](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developin
 ## <a id="defining-indexes"></a>Defining Indexes
 
 In addition to creating indexes as `Index` bean definitions are
-processed by Spring Data for GemFire on Spring container initialization, you may also
+processed by Spring Data for VMware GemFire on Spring container initialization, you may also
 define all of your application indexes prior to creating them by using
 the `define` attribute, as follows:
 
@@ -137,8 +137,8 @@ the `define` attribute, as follows:
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 
-When `define` is set to `true`, it does not immediately create the `Index`. All "defined" Indexes are created at the same time when the Spring `ApplicationContext`. This occurs when a `ContextRefreshedEvent` is published by the Spring container. Spring Data for GemFire registers itself as an `ApplicationListener` listening for the `ContextRefreshedEvent`. When
-fired, Spring Data for GemFire calls
+When `define` is set to `true`, it does not immediately create the `Index`. All "defined" Indexes are created at the same time when the Spring `ApplicationContext`. This occurs when a `ContextRefreshedEvent` is published by the Spring container. Spring Data for VMware GemFire registers itself as an `ApplicationListener` listening for the `ContextRefreshedEvent`. When
+fired, Spring Data for VMware GemFire calls
 [QueryService.createDefinedIndexes()](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes).
 
 Defining indexes and creating them at the same time boosts speed and
@@ -148,12 +148,12 @@ For more information, see [Creating Multiple Indexes at Once](https://docs.vmwar
 
 ## <a id="ignoreiexists-and-override"></a>`IgnoreIfExists` and `Override`
 
-The `ignoreIfExists` and `override` configuration options correspond to the `ignore-if-exists` and `override` attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace.
+The `ignoreIfExists` and `override` configuration options correspond to the `ignore-if-exists` and `override` attributes on the `<gfe:index>` element in Spring Data for VMware GemFire's XML namespace.
 
 <p class="note warning"><strong>Warning</strong>: These options can affect the
 performance and resources such as memory consumed by your application
 at runtime. As a result, both of these options are disabled (set to
-<code>false</code>) in Spring Data for GemFire by default.<br>br>These options are only available in Spring Data for GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
+<code>false</code>) in Spring Data for VMware GemFire by default.<br>br>These options are only available in Spring Data for VMware GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
 
 Each option significantly differs in behavior and entirely depends on
 the type of GemFire `Index` exception thrown. This also means
@@ -167,7 +167,7 @@ GemFire `IndexExistsException` and
 
 * An [IndexNameConflictException](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/IndexNameConflictException.html) is thrown when there exists another `Index` with the same name but possibly different definition when attempting to create an `Index`.
 
-Spring Data for GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a Spring Data for GemFire `GemfireIndexException` and rethrown. If you want Spring Data for GemFire to handle them for you, you can set either of
+Spring Data for VMware GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a Spring Data for VMware GemFire `GemfireIndexException` and rethrown. If you want Spring Data for VMware GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
 `IgnoreIfExists` always takes precedence over `Override` because it uses fewer resources. It returns the "existing" `Index` in both exception cases.
@@ -181,7 +181,7 @@ is ignored, and the existing `Index` is returned.
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by GemFire
-itself, not Spring Data for GemFire.
+itself, not Spring Data for VMware GemFire.
 
 However, this also means that no `Index` with the "name" specified in
 your `index` bean definition or declaration actually exists from
@@ -207,9 +207,9 @@ data access patterns and queries in mind. However, if like-named indexes
 differ in definition, this might not be the case. Consequently, you
 should verify your `Index` names.
 
-<p class="note"><strong>Note</strong>: Spring Data for GemFire makes a best effort to inform the user
+<p class="note"><strong>Note</strong>: Spring Data for VMware GemFire makes a best effort to inform the user
 when the <code>Index</code> being ignored is significantly different in
-its definition from the existing <code>Index</code>. However, for Spring Data for GemFire to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
+its definition from the existing <code>Index</code>. However, for Spring Data for VMware GemFire to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
 GemFire API.</p>
 
 ### <a id="override-behavior"></a>`Override` Behavior
@@ -218,7 +218,7 @@ When an `IndexExistsException` is thrown and `override` is set to `true`, or `<g
 `IndexExistsExceptions` are thrown when multiple indexes exist
 that have the same definition but different names.
 
-Spring Data for GemFire can only accomplish this by using GemFire's API, by
+Spring Data for VMware GemFire can only accomplish this by using GemFire's API, by
 first removing the existing `Index` and then recreating the `Index` with
 the new name. It is possible that either the remove or subsequent create
 invocation could fail. There is no way to execute both actions
@@ -234,16 +234,16 @@ potentially be re-defined. We say "potentially" because it is possible
 for the like-named, existing `Index` to have exactly the same definition
 and name when an `IndexNameConflictException` is thrown.
 
-If so, Spring Data for GemFire returns the existing `Index` as is,
+If so, Spring Data for VMware GemFire returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
-name and the definition are exactly the same. Of course, Spring Data for GemFire
-can only accomplish this when Spring Data for GemFire is able to find the existing
+name and the definition are exactly the same. Of course, Spring Data for VMware GemFire
+can only accomplish this when Spring Data for VMware GemFire is able to find the existing
 `Index`, which is dependent on GemFire's APIs. If it cannot be
-found, nothing happens and a Spring Data for GemFire `GemfireIndexException` is
+found, nothing happens and a Spring Data for VMware GemFire `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
 However, when the definition of the existing `Index` is different,
-Spring Data for GemFire attempts to re-create the `Index` by using the `Index`
+Spring Data for VMware GemFire attempts to re-create the `Index` by using the `Index`
 definition specified in the `index` bean definition. Make sure that this is
 intended and that the `index` bean definition matches your
 expectations and application requirements.
@@ -252,7 +252,7 @@ expectations and application requirements.
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
-configure GemFire (Spring Data for GemFire, GemFire Cluster
+configure GemFire (Spring Data for VMware GemFire, GemFire Cluster
 Config, GemFire native `cache.xml`, the API, and so on). You
 should definitely prefer one configuration method and stick with it.
 
@@ -268,7 +268,7 @@ need-to-know basis (that is, by peer member hosting the same PR) is
 performed asynchronously.
 
 During this window of time, it is possible that these pending PR
-`Indexes` cannot be identified by GemFire. As a result, the only way for Spring Data for GemFire or other GemFire
+`Indexes` cannot be identified by GemFire. As a result, the only way for Spring Data for VMware GemFire or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
@@ -276,13 +276,13 @@ application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
 GemFire API calls do not.
 
-In any case, Spring Data for GemFire makes a best effort and attempts to inform
+In any case, Spring Data for VMware GemFire makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
 action. Given that all GemFire `QueryService.createIndex(..)`
 methods are synchronous, blocking operations, the state of
 GemFire should be consistent and accessible after either of
-these index-type exceptions are thrown. Consequently, Spring Data for GemFire can
+these index-type exceptions are thrown. Consequently, Spring Data for VMware GemFire can
 inspect the state of the system and act accordingly, based on your
 configuration.
 
-In all other cases, Spring Data for GemFire embraces a fail-fast strategy.
+In all other cases, Spring Data for VMware GemFire embraces a fail-fast strategy.

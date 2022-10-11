@@ -1,5 +1,5 @@
 ---
-title:  Spring Data for GemFire 2.3 Documentation
+title:  Spring Data for VMware GemFire 2.3 Documentation
 ---
 
 <!-- 
@@ -35,13 +35,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire focuses on integrating the Spring Framework's powerful, non-invasive programming model and concepts with GemFire to simplify configuration and development of Java applications when using GemFire as your data management solution.
+Spring Data for VMware GemFire focuses on integrating the Spring Framework's powerful, non-invasive programming model and concepts with GemFire to simplify configuration and development of Java applications when using GemFire as your data management solution.
 
 ## <a id="setup"></a>Setup
 
-Spring Data for GemFire and Spring Boot Data for GemFire are the Spring dependencies to use when developing applications for GemFire. This guide is intended to help you set up and start using Spring Data for GemFire and Spring Boot Data for GemFire.
+Spring Data for VMware GemFire and Spring Boot Data for GemFire are the Spring dependencies to use when developing applications for GemFire. This guide is intended to help you set up and start using Spring Data for VMware GemFire and Spring Boot Data for GemFire.
 
-The Spring Data for GemFire dependencies are available from the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth). Access to the Pivotal Commercial Maven Repository requires a one-time registration step to create an account.
+The Spring Data for VMware GemFire dependencies are available from the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth). Access to the Pivotal Commercial Maven Repository requires a one-time registration step to create an account.
 
 1. In a browser, navigate to the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth).
 
@@ -110,7 +110,7 @@ The Spring Data for GemFire dependencies are available from the [Pivotal Commerc
 
 9. After you have set up the repository and credentials, add the Spring dependencies needed for your application. The `springDataGemFireVersion` and `springBootDataGemFireVersion` variables are property placeholders for the dependency versions.
 
-    * **Spring Data for GemFire**
+    * **Spring Data for VMware GemFire**
 
         * **Maven**
 
@@ -152,7 +152,7 @@ Your application is now ready to connect with your GemFire instance.
 
 All reference documentation currently corresponds with the reference documentation for [Spring Data Geode](https://spring.io/projects/spring-data-geode#learn) and [Spring Boot Data Geode](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/).
 
-## <a id="release-notes"></a>Spring Data for GemFire Release Notes 
+## <a id="release-notes"></a>Spring Data for VMware GemFire Release Notes 
 
 ### <a id="release-2-2"></a>v2.2 Release Notes 
 
@@ -188,7 +188,7 @@ All reference documentation currently corresponds with the reference documentati
 
 * Upgraded to Spring Framework 5.0.7.RELEASE.
 
-* Reorganized the Spring Data for GemFire codebase by packaging different classes and components by concern.
+* Reorganized the Spring Data for VMware GemFire codebase by packaging different classes and components by concern.
 
 * Added extensive support for Java 8 types, particularly in the SD Repository abstraction.
 

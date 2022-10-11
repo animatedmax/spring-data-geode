@@ -35,7 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire provides full configuration and initialization of the
+Spring Data for VMware GemFire provides full configuration and initialization of the
 GemFire In-Memory Data Grid (IMDG) using the Spring Inversion of Control (IoC)
 container. The framework includes several classes to help simplify the
 configuration of GemFire components, including: Caches,
@@ -48,7 +48,7 @@ about GemFire, see the [GemFire product documentation](https://docs.vmware.com/e
 
 ## <a id="advantages"></a>Advantages of using Spring over GemFire `cache.xml`
 
-Spring Data for GemFire's XML namespace supports full configuration of the
+Spring Data for VMware GemFire's XML namespace supports full configuration of the
 GemFire In-Memory Data Grid (IMDG). The XML namespace is one
 of two ways to configure GemFire in a Spring context
 to properly manage GemFire's lifecycle inside the Spring
@@ -63,7 +63,7 @@ advantage of the many features that Spring has to offer, such as
 modular XML configuration, property placeholders and overrides, SpEL
 ([Spring Expression
 Language](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#expressions)), and environment profiles. Behind the XML namespace,
-Spring Data for GemFire makes extensive use of Spring's `FactoryBean` pattern to
+Spring Data for VMware GemFire makes extensive use of Spring's `FactoryBean` pattern to
 simplify the creation, configuration, and initialization of
 GemFire components.
 
@@ -83,7 +83,7 @@ pop-up annotations, and real time validation.
 
 ## <a id="using-core-namespace"></a>Using the Core Namespace
 
-To simplify configuration, Spring Data for GemFire provides a dedicated XML namespace
+To simplify configuration, Spring Data for VMware GemFire provides a dedicated XML namespace
 for configuring core GemFire components. You can
 configure beans directly by using Spring's standard `<bean>` definition.
 All bean properties are exposed through the XML namespace, which minimizes the need to use
@@ -93,10 +93,10 @@ For more information about XML Schema-based configuration in Spring, see the
 [Appendix](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#appendix) in the Spring Framework reference documentation.
 
 <p class="note"><strong>Note</strong>: Spring Data Repository support uses a separate XML
-namespace. For more information about configuring Spring Data for GemFire Repositories, see
-<a href="repositories.html">Spring Data for GemFire Repositories.</a></p>
+namespace. For more information about configuring Spring Data for VMware GemFire Repositories, see
+<a href="repositories.html">Spring Data for VMware GemFire Repositories.</a></p>
 
-To use the Spring Data for GemFire XML namespace, declare it in your Spring XML
+To use the Spring Data for VMware GemFire XML namespace, declare it in your Spring XML
 configuration meta-data, as the following example shows:
 
 ```highlight
@@ -118,11 +118,11 @@ configuration meta-data, as the following example shows:
 
 Comments:
 
-1. Spring Data for GemFire XML namespace prefix. This reference documentation uses `gfe`.
+1. Spring Data for VMware GemFire XML namespace prefix. This reference documentation uses `gfe`.
 
 2. The XML namespace prefix is mapped to the URI.
 
-3. The XML namespace URI location. Although the location in this example points to an external valid address, Spring resolves the schema locally because the address is included in the Spring Data for GemFire library.
+3. The XML namespace URI location. Although the location in this example points to an external valid address, Spring resolves the schema locally because the address is included in the Spring Data for VMware GemFire library.
 
 4. Example declaration using the XML namespace with the `gfe` prefix.
 
@@ -154,7 +154,7 @@ following example shows:</p>
 Comments:
 
 1. The default namespace declaration for this XML document points to
-the Spring Data for GemFire XML namespace.
+the Spring Data for VMware GemFire XML namespace.
 
 2. The `beans` namespace prefix declaration for Spring's
 raw bean definitions.
@@ -166,7 +166,7 @@ was set as the default namespace.
 
 ## <a id="using-data-accesscore-namespace"></a>Using the Data Access Namespace
 
-In addition to the core XML namespace (`gfe`), Spring Data for GemFire provides a
+In addition to the core XML namespace (`gfe`), Spring Data for VMware GemFire provides a
 data access XML namespace (`gfe-data`), which is primarily intended to
 simplify the development of GemFire client applications. This
 namespace currently contains support for [GemFire
@@ -177,7 +177,7 @@ offers a convenient way to connect to a GemFire cluster.
 ### <a id="connect-to-gemfire"></a>An Easy Way to Connect to GemFire
 
 For many applications, a basic connection to a GemFire data
-grid using default values is sufficient. Spring Data for GemFire's `<datasource>` tag
+grid using default values is sufficient. Spring Data for VMware GemFire's `<datasource>` tag
 provides a simple way to access data. The data source creates a
 `ClientCache` and connection `Pool`. In addition, it queries the cluster
 servers for all existing root Regions and creates an empty client
@@ -241,10 +241,10 @@ existing `Cache` or, if one does not already exist, a newly created one.
 Since no additional properties were specified, a newly created `Cache`
 applies the default cache configuration.
 
-All Spring Data for GemFire components that depend on the `Cache` respect this naming
+All Spring Data for VMware GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
 If you prefer, you can make the dependency explicit by using the
-`cache-ref` attribute provided by various Spring Data for GemFire XML namespace
+`cache-ref` attribute provided by various Spring Data for VMware GemFire XML namespace
 elements. Also, you can override the cache's bean name using the `id`
 attribute, as follows:
 
@@ -424,8 +424,8 @@ You should be careful when setting the
 `<gfe:cache enable-auto-reconnect="[true|false*]">` attribute to `true`.
 
 Generally, `auto-reconnect` should only be enabled in cases where
-Spring Data for GemFire's XML namespace is used to configure and bootstrap a new,
-non-application GemFire server added to a cluster. 'auto-reconnect' should not be enabled when Spring Data for GemFire is used to
+Spring Data for VMware GemFire's XML namespace is used to configure and bootstrap a new,
+non-application GemFire server added to a cluster. 'auto-reconnect' should not be enabled when Spring Data for VMware GemFire is used to
 develop and build a GemFire application that also happens to
 be a peer `Cache` member of the GemFire cluster.
 
@@ -481,7 +481,7 @@ a Locator. Using the cluster-based configuration ensures the peer
 member's configuration is compatible with the GemFire
 Distributed System when the member joins.
 
-This feature of Spring Data for GemFire (setting the `use-cluster-configuration`
+This feature of Spring Data for VMware GemFire (setting the `use-cluster-configuration`
 attribute to `true`) works in the same way as the `cache-xml-location`
 attribute, except the source of the GemFire configuration
 meta-data comes from the network through a Locator, as opposed to a
@@ -502,7 +502,7 @@ config:
 <p class="note"><strong>Note</strong>: While certain GemFire tools, such as
 <code>gfsh</code>, have their actions "recorded" when schema-like changes
 are made (for example, <code>gfsh>create region --name=Example --type=PARTITION</code>),
-Spring Data for GemFire's configuration metadata is not recorded. The same is true
+Spring Data for VMware GemFire's configuration metadata is not recorded. The same is true
 when using GemFire's public Java API directly. It, too, is not
 recorded.</p>
 
@@ -511,7 +511,7 @@ Service, see [Overview of the Cluster Configuration Service](https://docs.vmware
 
 ### <a id="configuring-gemfire-cacheserver"></a>Configuring a GemFire CacheServer
 
-Spring Data for GemFire includes dedicated support for configuring a
+Spring Data for VMware GemFire includes dedicated support for configuring a
 [CacheServer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/server/CacheServer.html). This allows complete configuration through the Spring container, as shown in the following example:
 
 ```highlight
@@ -563,7 +563,7 @@ properties from the main codebase, easing deployment across multiple
 machines.
 
 To avoid initialization problems, the
-<code>CacheServer</code> started by Spring Data for GemFire starts
+<code>CacheServer</code> started by Spring Data for VMware GemFire starts
 <strong>after</strong> the Spring container has been fully initialized.
 Doing so lets potential Regions, listeners, writers or instantiators
 that are defined declaratively to be fully initialized and registered
@@ -576,7 +576,7 @@ immediately.
 
 In addition to defining a GemFire peer
 [Cache](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/Cache.html),
-Spring Data for GemFire also supports the definition of a GemFire
+Spring Data for VMware GemFire also supports the definition of a GemFire
 [ClientCache](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/client/ClientCache.html)
 in a Spring container. A `ClientCache` definition is similar in
 configuration and use to the GemFire peer
@@ -626,7 +626,7 @@ a call to
 [Client Region](#client-region) describes client-side
 configuration in more detail.
 
-#### GemFire's DEFAULT Pool and Spring Data for GemFire Pool Definitions
+#### GemFire's DEFAULT Pool and Spring Data for VMware GemFire Pool Definitions
 
 If a GemFire `ClientCache` is local-only, then no Pool
 definition is required. For instance, you can define the following:
@@ -648,7 +648,7 @@ Region, a Pool is required. In that case, there are several ways to
 define and use a Pool.
 
 When a `ClientCache`, a Pool, and a proxy-based Region are all defined
-but not explicitly identified, Spring Data for GemFire resolves the references
+but not explicitly identified, Spring Data for VMware GemFire resolves the references
 automatically, as shown in the following example:
 
 ```highlight
@@ -667,7 +667,7 @@ In this example, the `ClientCache` is identified as
 `DEFAULT` Pool from `gemfirePool`, and the client Region uses the
 `gemfirePool` when distributing data between the client and the server.
 
-Basically, Spring Data for GemFire resolves the preceding configuration to the
+Basically, Spring Data for VMware GemFire resolves the preceding configuration to the
 following:
 
 ```highlight
@@ -680,7 +680,7 @@ following:
 <gfe:client-region id="Example" cache-ref="gemfireCache" pool-name="gemfirePool" shortcut="PROXY"/>
 ```
 
-GemFire still creates a Pool named `DEFAULT`. Spring Data for GemFire
+GemFire still creates a Pool named `DEFAULT`. Spring Data for VMware GemFire
 causes the `DEFAULT` Pool to be initialized from the `gemfirePool`.
 Doing so is useful in situations where multiple Pools are defined and
 client Regions are using separate Pools, or do not declare a Pool at
@@ -708,7 +708,7 @@ Consider the following:
 
 In this example, the GemFire `client-cache` `DEFAULT` pool is
 initialized from `locatorPool`, as specified by the `pool-name`
-attribute. There is no Spring Data for GemFire-defined `gemfirePool`, since both
+attribute. There is no Spring Data for VMware GemFire-defined `gemfirePool`, since both
 Pools were explicitly identified (named) as `locatorPool` and
 `serverPool`, respectively.
 
@@ -838,11 +838,11 @@ defined in `cache.xml` by using the following:
 <gfe:auto-region-lookup/>
 ```
 
-Spring Data for GemFire automatically creates beans for all GemFire Regions
+Spring Data for VMware GemFire automatically creates beans for all GemFire Regions
 defined in `cache.xml` that have not been explicitly added to the Spring
 container with explicit `<gfe:lookup-region>` bean declarations.
 
-Note that Spring Data for GemFire uses a Spring
+Note that Spring Data for VMware GemFire uses a Spring
 [BeanPostProcessor](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanPostProcessor.html)
 to post-process the cache after it is both created and initialized to
 determine the Regions defined in GemFire to add as beans in
@@ -888,7 +888,7 @@ references when using the `<gfe:auto-region-lookup>` element.
 
 ### <a id="configuring-regions"></a>Configuring Regions
 
-Spring Data for GemFire provides comprehensive support for configuring any type of
+Spring Data for VMware GemFire provides comprehensive support for configuring any type of
 Region through the following elements:
 
 * LOCAL Region: `<local-region>`
@@ -1193,7 +1193,7 @@ For more information, see [Managing Off-Heap Memory](https://docs.vmware.com/en/
 
 ### <a id="subregions"></a>Subregions
 
-Spring Data for GemFire supports Sub-Regions, allowing Regions to be arranged in
+Spring Data for VMware GemFire supports Sub-Regions, allowing Regions to be arranged in
 a hierarchical relationship.
 
 For example, GemFire allows for a `/Customer/Address` Region
@@ -1226,13 +1226,13 @@ of the Region should also be used in OQL query strings.
 
 ### <a id="region-templates"></a>Region Templates
 
-Spring Data for GemFire supports Region templates.
+Spring Data for VMware GemFire supports Region templates.
 
 This feature allows developers to define common Region configuration and
 attributes once and reuse the configuration among many Region bean
 definitions declared in the Spring `ApplicationContext`.
 
-Spring Data for GemFire includes five Region template tags in its namespace:
+Spring Data for VMware GemFire includes five Region template tags in its namespace:
 
 
 <table>
@@ -1323,7 +1323,7 @@ definitions override what exists in the parent.
 
 #### How Templating Works
 
-Spring Data for GemFire applies Region templates when the Spring `ApplicationContext`
+Spring Data for VMware GemFire applies Region templates when the Spring `ApplicationContext`
 configuration metadata is parsed, and therefore, Region templates must
 be declared in the order of inheritance. In other words, parent
 templates must be defined before child templates. Doing so ensures that
@@ -1339,7 +1339,7 @@ example, a <code><gfe:replicated-region></code> cannot inherit from a
 
 Previously, one of the underlying properties of the `replicated-region`,
 `partitioned-region`, `local-region`, and `client-region` elements in
-the Spring Data for GemFire XML namespace was to perform a lookup first before
+the Spring Data for VMware GemFire XML namespace was to perform a lookup first before
 attempting to create a Region. This was done in case the Region already
 existed, which would be the case if the Region was defined in an
 imported GemFire native `cache.xml` configuration file.
@@ -1349,7 +1349,7 @@ by design and subject to change.
 This behavior has been altered and the default behavior is now to create
 the Region first. If the Region already exists, then the creation logic
 fails-fast and an appropriate exception is thrown. However, much like
-the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the Spring Data for GemFire
+the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the Spring Data for VMware GemFire
 `<gfe:*-region>` XML namespace elements now include a `ignore-if-exists`
 attribute, which reinstates the old behavior by first performing a
 lookup of an existing Region identified by name before attempting to
@@ -1478,7 +1478,7 @@ the two preceding examples.
 GemFire is flexible in referencing both parent Regions and
 Sub-Regions with or without the leading forward slash. For example, the
 parent can be referenced as `/Customers` or `Customers` and the child as
-`/Customers/Accounts` or `Customers/Accounts`. However, Spring Data for GemFire is
+`/Customers/Accounts` or `Customers/Accounts`. However, Spring Data for VMware GemFire is
 very specific when it comes to naming beans after Regions. It always
 uses the forward slash (/) to represent Sub-Regions (for example,
 `/Customers/Accounts`).
@@ -1509,7 +1509,7 @@ eviction applies to the Least Recently Used entry (also known as
 Evicted entries are either destroyed or paged to disk (referred to as
 "overflow to disk").
 
-Spring Data for GemFire supports all eviction policies (entry count, memory, and heap
+Spring Data for VMware GemFire supports all eviction policies (entry count, memory, and heap
 usage) for PARTITION Regions, REPLICATE Regions, and client, local
 Regions by using the nested `eviction` element.
 
@@ -1555,7 +1555,7 @@ GemFire supports the following expiration types:
   one of its entries.
 
 Each of these expiration types may be applied to the Region itself or to entries in the
-Region. Spring Data for GemFire provides `<region-ttl>`, `<region-tti>`,
+Region. Spring Data for VMware GemFire provides `<region-ttl>`, `<region-tti>`,
 `<entry-ttl>`, and `<entry-tti>` Region child elements to specify
 timeout values and expiration actions.
 
@@ -1573,7 +1573,7 @@ For a detailed description of expiration policies, see [Expiration](https://docs
 
 #### Annotation-based Data Expiration
 
-With Spring Data for GemFire, you can define expiration policies and settings on
+With Spring Data for VMware GemFire, you can define expiration policies and settings on
 individual Region entry values (or, to put it differently, directly on
 application domain objects). For instance, you can define expiration
 policies on a Session-based application domain object as follows:
@@ -1604,9 +1604,9 @@ example. Neither `@IdleTimeoutExpiration` nor `@TimeToLiveExpiration`
 overrides the other. Rather, they compliment each other when different
 Region entry expiration policies, such as TTL and TTI, are configured.
 
-All <code>@Expiration</code>-based annotations apply only to Region entry values. Expiration for a Region is not covered by Spring Data for GemFire's
-expiration annotation support. However, GemFire and Spring Data for GemFire
-do let you set Region expiration by using the Spring Data for GemFire XML
+All <code>@Expiration</code>-based annotations apply only to Region entry values. Expiration for a Region is not covered by Spring Data for VMware GemFire's
+expiration annotation support. However, GemFire and Spring Data for VMware GemFire
+do let you set Region expiration by using the Spring Data for VMware GemFire XML
 namespace, as follows:
 
 ```
@@ -1616,15 +1616,15 @@ namespace, as follows:
 </gfe:*-region>
 ```
 
-Spring Data for GemFire's `@Expiration` annotation support is implemented with
+Spring Data for VMware GemFire's `@Expiration` annotation support is implemented with
 GemFire's [CustomExpiry](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CustomExpiry.html) interface. For more information, see [Configure Data Expiration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-expiration-configuring_data_expiration.html) in the GemFire product documentation.
 
-The Spring Data for GemFire `AnnotationBasedExpiration` class and `CustomExpiry`
-implementation is responsible for processing the Spring Data for GemFire
+The Spring Data for VMware GemFire `AnnotationBasedExpiration` class and `CustomExpiry`
+implementation is responsible for processing the Spring Data for VMware GemFire
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
 
-To use Spring Data for GemFire to configure specific GemFire Regions to
+To use Spring Data for VMware GemFire to configure specific GemFire Regions to
 appropriately apply the expiration policy to your application domain
 objects annotated with `@Expiration`-based annotations, you must:
 
@@ -1646,13 +1646,13 @@ objects annotated with `@Expiration`-based annotations, you must:
     
 2. (Optional) Annotate your application domain objects that are stored
     in the Region with expiration policies and custom settings by using
-    one of Spring Data for GemFire's `@Expiration` annotations: `@Expiration`,
+    one of Spring Data for VMware GemFire's `@Expiration` annotations: `@Expiration`,
     `@IdleTimeoutExpiration`, or `@TimeToLiveExpiration`
 
 3. (Optional) In cases where particular application domain objects have
-    not been annotated with Spring Data for GemFire's `@Expiration` annotations at
+    not been annotated with Spring Data for VMware GemFire's `@Expiration` annotations at
     all, but the GemFire Region is configured to use
-    Spring Data for GemFire's custom `AnnotationBasedExpiration` class to
+    Spring Data for VMware GemFire's custom `AnnotationBasedExpiration` class to
     determine the expiration policy and settings for objects stored in
     the Region, you can set "default" expiration attributes on the
     `AnnotationBasedExpiration` bean by doing the following:
@@ -1672,12 +1672,12 @@ objects annotated with `@Expiration`-based annotations, you must:
     </gfe:partitioned-region>
     ```
 
-You may have noticed that Spring Data for GemFire's `@Expiration` annotations use a
+You may have noticed that Spring Data for VMware GemFire's `@Expiration` annotations use a
 `String` as the attribute type rather than, and perhaps more
 appropriately, being strongly typed — for example, `int` for 'timeout'
-and Spring Data for GemFire's `ExpirationActionType` for 'action'. Why is that?
+and Spring Data for VMware GemFire's `ExpirationActionType` for 'action'. Why is that?
 
-Well, enter one of Spring Data for GemFire's other features, leveraging Spring's core
+Well, enter one of Spring Data for VMware GemFire's other features, leveraging Spring's core
 infrastructure for configuration convenience: property placeholders and
 Spring Expression Language (SpEL) expressions.
 
@@ -1748,7 +1748,7 @@ actual `ExpirationAction` enumerated type, quickly leading to identified
 failures if the enumerated type ever changes.
 
 As an example, all of this has been demonstrated and tested in the
-Spring Data for GemFire test suite. For details, see the [Spring Data](https://github.com/spring-projects/spring-data-geode) repository in GitHub.
+Spring Data for VMware GemFire test suite. For details, see the [Spring Data](https://github.com/spring-projects/spring-data-geode) repository in GitHub.
 
 ### <a id="data-persistence"></a>Data Persistence
 
@@ -1759,7 +1759,7 @@ Doing so lets data be recovered after machine or process failure or even
 after an orderly shutdown and subsequent restart of the
 GemFire data node.
 
-To enable persistence with Spring Data for GemFire, set the `persistent` attribute to
+To enable persistence with Spring Data for VMware GemFire, set the `persistent` attribute to
 `true` on any of the `<*-region>` elements, as the following example
 shows:
 
@@ -1799,7 +1799,7 @@ For more information, see [Configuring a DiskStore](#configuring-a-diskstore).
 
 GemFire allows configuration of [peer-to-peer
 (P2P) event messaging](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-events-configure_p2p_event_messaging.html) to control the entry events that the Region
-receives. Spring Data for GemFire provides the `<gfe:subscription/>` sub-element to
+receives. Spring Data for VMware GemFire provides the `<gfe:subscription/>` sub-element to
 set the subscription policy on `REPLICATE` and `PARTITION` Regions to
 either `ALL` or `CACHE_CONTENT`. The following example shows a region
 with its subscription policy set to `CACHE_CONTENT`:
@@ -1812,13 +1812,13 @@ with its subscription policy set to `CACHE_CONTENT`:
 
 ### <a id="local-region"></a>Local Region
 
-Spring Data for GemFire offers a dedicated `local-region` element for creating local
+Spring Data for VMware GemFire offers a dedicated `local-region` element for creating local
 Regions. Local Regions, as the name implies, are standalone, meaning
 that they do not share data with any other distributed system member.
 Other than that, all common Region configuration options apply.
 
 The following example shows a minimal declaration. The example
-relies on the Spring Data for GemFire XML namespace naming conventions to wire the
+relies on the Spring Data for VMware GemFire XML namespace naming conventions to wire the
 cache:
 
 ```highlight
@@ -1842,7 +1842,7 @@ the entries. While one replica is initializing, you can still continue
 to use the other replicas.
 
 All common configuration options are available for REPLICATE Regions.
-Spring Data for GemFire offers a `replicated-region` element. The following example
+Spring Data for VMware GemFire offers a `replicated-region` element. The following example
 shows a minimal declaration:
 
 ```highlight
@@ -1853,7 +1853,7 @@ For more information, see [Distributed and Replicated Regions](https://docs.vmwa
 
 ### <a id="partitioned-region"></a>Partitioned Region
 
-The Spring Data for GemFire XML namespace also supports `PARTITION` Regions.
+The Spring Data for VMware GemFire XML namespace also supports `PARTITION` Regions.
 
 A partitioned region is a region where data is divided between peer
 servers hosting the region so that each peer stores a subset of the
@@ -1962,7 +1962,7 @@ beyond the scope of this documentation, but GemFire's supported topologies can b
 
 In the last two configurations, it is common to declare client Regions that connect to a cache server.
 
-Spring Data for GemFire offers dedicated support for each configuration through its
+Spring Data for VMware GemFire offers dedicated support for each configuration through its
 [client-cache](#configuring-gemfire-clientcache) elements: `client-region` and
 `pool`. `client-region` defines a client Region,
 and `pool` defines a Pool of connections used and shared by the
@@ -1973,7 +1973,7 @@ The following example shows a typical client Region configuration:
 ```highlight
 <bean id="myListener" class="example.CacheListener"/>
   
-<!-- client Region using the default Spring Data for GemFire gemfirePool Pool -->
+<!-- client Region using the default Spring Data for VMware GemFire gemfirePool Pool -->
 <gfe:client-region id="Example">
   <gfe:cache-listener ref="myListener"/>
 </gfe:client-region>
@@ -2004,14 +2004,14 @@ configure the <code>Pool</code> to connect directly to one or more cache
 servers by using the <code>server</code> element.</p>
 
 For a full list of options to set on the client and especially on the
-`Pool`, see the [Spring Data for GemFire Schema](../appendix/appendix-schema.html) and
+`Pool`, see the [Spring Data for VMware GemFire Schema](../appendix/appendix-schema.html) and
 [Client/Server Configuration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-topologies_and_comm-cs_configuration-chapter_overview.html) in the GemFire product documentation.
 
 #### Client Interests
 
 To minimize network traffic, each client can separately define its own
 'interests' policies, indicating to GemFire the data it
-actually requires. In Spring Data for GemFire, 'interests' can be defined for each
+actually requires. In Spring Data for VMware GemFire, 'interests' can be defined for each
 client Region separately. Both key-based and regular expression-based
 interest types are supported.
 
@@ -2133,7 +2133,7 @@ GemFire OQL (Object Query Language). JSON documents are stored
 internally as
 [PdxInstance](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxInstance.html) types by using the [JSONFormatter](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/JSONFormatter.html) class to perform conversion to and from JSON documents (as a `String`).
 
-Spring Data for GemFire provides the `<gfe-data:json-region-autoproxy/>` element to
+Spring Data for VMware GemFire provides the `<gfe-data:json-region-autoproxy/>` element to
 enable an [AOP](https://docs.spring.io/spring-framework/docs/current/reference/html/#aop-introduction) component to
 advise appropriate, proxied Region operations, which encapsulates the `JSONFormatter` and allows your applications to work directly with JSON Strings.
 
@@ -2177,14 +2177,14 @@ native `QueryService` operations are not supported.
 GemFire allows indexes to be created on Region data to improve the performance of OQL (Object
 Query Language) queries.
 
-In Spring Data for GemFire, indexes are declared with the `index` element, as the
+In Spring Data for VMware GemFire, indexes are declared with the `index` element, as the
 following example shows:
 
 ```highlight
 <gfe:index id="myIndex" expression="someField" from="/SomeRegion" type="HASH"/>
 ```
 
-In Spring Data for GemFire's XML schema, the Spring Data for GemFire XML
+In Spring Data for VMware GemFire's XML schema, the Spring Data for VMware GemFire XML
 namespace, `index` bean declarations are not bound to a Region, unlike
 GemFire's native `cache.xml`. Instead, they are top-level
 elements similar to `<gfe:cache>` element. This allows you to declare any
@@ -2219,7 +2219,7 @@ class Customer {
 ```
 
 Now consider the following example, which has an application-defined
-Spring Data for GemFire Repository to query for `Customer` objects:
+Spring Data for VMware GemFire Repository to query for `Customer` objects:
 
 ```highlight
 interface CustomerRepository extends GemfireRepository<Customer, Long> {
@@ -2231,7 +2231,7 @@ interface CustomerRepository extends GemfireRepository<Customer, Long> {
 ```
 
 
-The Spring Data for GemFire Repository finder/query method results in the
+The Spring Data for VMware GemFire Repository finder/query method results in the
 following OQL statement being generated and run:
 
 ```highlight
@@ -2246,7 +2246,7 @@ to the following:
 ```
 
 The `from` clause must refer to a valid, existing Region and is how an
-`Index` gets applied to a Region. This is not specific to Spring Data for GemFire. It
+`Index` gets applied to a Region. This is not specific to Spring Data for VMware GemFire. It
 is a feature of GemFire.
 
 The `Index` `type` may be one of three enumerated values defined by the [IndexType](https://docs.spring.io/spring-data/geode/docs/current/api/org/springframework/data/gemfire/IndexType.html) enumeration: `FUNCTIONAL`, `HASH`, and `PRIMARY_KEY`.
@@ -2258,7 +2258,7 @@ then the [QueryService.createKeyIndex(..)](https://geode.apache.org/releases/lat
 is invoked to create a `KEY` `Index`.
 
 The default is `FUNCTIONAL` and results in one of the
-`QueryService.createIndex(..)` methods being invoked. See the Spring Data for GemFire
+`QueryService.createIndex(..)` methods being invoked. See the Spring Data for VMware GemFire
 XML schema for a full set of options.
 
 For more information about indexing in GemFire, see [Working
@@ -2268,7 +2268,7 @@ Indexes](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developin
 ### <a id="defining-indexes"></a>Defining Indexes
 
 In addition to creating indexes as `Index` bean definitions are
-processed by Spring Data for GemFire on Spring container initialization, you may also
+processed by Spring Data for VMware GemFire on Spring container initialization, you may also
 define all of your application indexes prior to creating them by using
 the `define` attribute, as follows:
 
@@ -2276,8 +2276,8 @@ the `define` attribute, as follows:
 <gfe:index id="myDefinedIndex" expression="someField" from="/SomeRegion" define="true"/>
 ```
 
-When `define` is set to `true`, it does not immediately create the `Index`. All "defined" Indexes are created at the same time when the Spring `ApplicationContext`. This occurs when a `ContextRefreshedEvent` is published by the Spring container. Spring Data for GemFire registers itself as an `ApplicationListener` listening for the `ContextRefreshedEvent`. When
-fired, Spring Data for GemFire calls
+When `define` is set to `true`, it does not immediately create the `Index`. All "defined" Indexes are created at the same time when the Spring `ApplicationContext`. This occurs when a `ContextRefreshedEvent` is published by the Spring container. Spring Data for VMware GemFire registers itself as an `ApplicationListener` listening for the `ContextRefreshedEvent`. When
+fired, Spring Data for VMware GemFire calls
 [QueryService.createDefinedIndexes()](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/QueryService.html#createDefinedIndexes).
 
 Defining indexes and creating them at the same time boosts speed and
@@ -2287,12 +2287,12 @@ For more information, see [Creating Multiple Indexes at Once](https://docs.vmwar
 
 ### <a id="ignoreiexists-and-override"></a>`IgnoreIfExists` and `Override`
 
-The `ignoreIfExists` and `override` configuration options correspond to the `ignore-if-exists` and `override` attributes on the `<gfe:index>` element in Spring Data for GemFire's XML namespace.
+The `ignoreIfExists` and `override` configuration options correspond to the `ignore-if-exists` and `override` attributes on the `<gfe:index>` element in Spring Data for VMware GemFire's XML namespace.
 
 <p class="note warning"><strong>Warning</strong>: These options can affect the
 performance and resources such as memory consumed by your application
 at runtime. As a result, both of these options are disabled (set to
-<code>false</code>) in Spring Data for GemFire by default.<br>br>These options are only available in Spring Data for GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
+<code>false</code>) in Spring Data for VMware GemFire by default.<br>br>These options are only available in Spring Data for VMware GemFire and exist to workaround known limitations with GemFire. GemFire has no equivalent options or functionality.</p>
 
 Each option significantly differs in behavior and entirely depends on
 the type of GemFire `Index` exception thrown. This also means
@@ -2306,7 +2306,7 @@ GemFire `IndexExistsException` and
 
 * An [IndexNameConflictException](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/query/IndexNameConflictException.html) is thrown when there exists another `Index` with the same name but possibly different definition when attempting to create an `Index`.
 
-Spring Data for GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a Spring Data for GemFire `GemfireIndexException` and rethrown. If you want Spring Data for GemFire to handle them for you, you can set either of
+Spring Data for VMware GemFire's default behavior is fail-fast strategy. Neither of the above `Index` exceptions are handled by default. These `Index` exceptions are wrapped in a Spring Data for VMware GemFire `GemfireIndexException` and rethrown. If you want Spring Data for VMware GemFire to handle them for you, you can set either of
 these `Index` bean definition options to `true`.
 
 `IgnoreIfExists` always takes precedence over `Override` because it uses fewer resources. It returns the "existing" `Index` in both exception cases.
@@ -2320,7 +2320,7 @@ is ignored, and the existing `Index` is returned.
 
 There is little consequence in returning the existing `Index`, since the
 `index` bean definition is the same, as determined by GemFire
-itself, not Spring Data for GemFire.
+itself, not Spring Data for VMware GemFire.
 
 However, this also means that no `Index` with the "name" specified in
 your `index` bean definition or declaration actually exists from
@@ -2346,9 +2346,9 @@ data access patterns and queries in mind. However, if like-named indexes
 differ in definition, this might not be the case. Consequently, you
 should verify your `Index` names.
 
-<p class="note"><strong>Note</strong>: Spring Data for GemFire makes a best effort to inform the user
+<p class="note"><strong>Note</strong>: Spring Data for VMware GemFire makes a best effort to inform the user
 when the <code>Index</code> being ignored is significantly different in
-its definition from the existing <code>Index</code>. However, for Spring Data for GemFire to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
+its definition from the existing <code>Index</code>. However, for Spring Data for VMware GemFire to accomplish this, it must be able to find the existing <code>Index</code>, which is found using the
 GemFire API.</p>
 
 #### `Override` Behavior
@@ -2357,7 +2357,7 @@ When an `IndexExistsException` is thrown and `override` is set to `true`, or `<g
 `IndexExistsExceptions` are thrown when multiple indexes exist
 that have the same definition but different names.
 
-Spring Data for GemFire can only accomplish this by using GemFire's API, by
+Spring Data for VMware GemFire can only accomplish this by using GemFire's API, by
 first removing the existing `Index` and then recreating the `Index` with
 the new name. It is possible that either the remove or subsequent create
 invocation could fail. There is no way to execute both actions
@@ -2373,16 +2373,16 @@ potentially be re-defined. We say "potentially" because it is possible
 for the like-named, existing `Index` to have exactly the same definition
 and name when an `IndexNameConflictException` is thrown.
 
-If so, Spring Data for GemFire returns the existing `Index` as is,
+If so, Spring Data for VMware GemFire returns the existing `Index` as is,
 even on `override`. There is no harm in this behavior, since both the
-name and the definition are exactly the same. Of course, Spring Data for GemFire
-can only accomplish this when Spring Data for GemFire is able to find the existing
+name and the definition are exactly the same. Of course, Spring Data for VMware GemFire
+can only accomplish this when Spring Data for VMware GemFire is able to find the existing
 `Index`, which is dependent on GemFire's APIs. If it cannot be
-found, nothing happens and a Spring Data for GemFire `GemfireIndexException` is
+found, nothing happens and a Spring Data for VMware GemFire `GemfireIndexException` is
 thrown that wraps the `IndexNameConflictException`.
 
 However, when the definition of the existing `Index` is different,
-Spring Data for GemFire attempts to re-create the `Index` by using the `Index`
+Spring Data for VMware GemFire attempts to re-create the `Index` by using the `Index`
 definition specified in the `index` bean definition. Make sure that this is
 intended and that the `index` bean definition matches your
 expectations and application requirements.
@@ -2391,7 +2391,7 @@ expectations and application requirements.
 
 It is probably not all that uncommon for `IndexExistsExceptions` to be
 thrown, especially when multiple configuration sources are used to
-configure GemFire (Spring Data for GemFire, GemFire Cluster
+configure GemFire (Spring Data for VMware GemFire, GemFire Cluster
 Config, GemFire native `cache.xml`, the API, and so on). You
 should definitely prefer one configuration method and stick with it.
 
@@ -2407,7 +2407,7 @@ need-to-know basis (that is, by peer member hosting the same PR) is
 performed asynchronously.
 
 During this window of time, it is possible that these pending PR
-`Indexes` cannot be identified by GemFire. As a result, the only way for Spring Data for GemFire or other GemFire
+`Indexes` cannot be identified by GemFire. As a result, the only way for Spring Data for VMware GemFire or other GemFire
 cache client applications (not involving Spring) to know for sure is to
 attempt to create the `Index`. If it fails with either an
 `IndexNameConflictException` or even an `IndexExistsException`, the
@@ -2415,20 +2415,20 @@ application knows there is a problem. This is because the `QueryService`
 `Index` creation waits on pending `Index` definitions, whereas the other
 GemFire API calls do not.
 
-In any case, Spring Data for GemFire makes a best effort and attempts to inform
+In any case, Spring Data for VMware GemFire makes a best effort and attempts to inform
 you what has happened or is happening and tell you the corrective
 action. Given that all GemFire `QueryService.createIndex(..)`
 methods are synchronous, blocking operations, the state of
 GemFire should be consistent and accessible after either of
-these index-type exceptions are thrown. Consequently, Spring Data for GemFire can
+these index-type exceptions are thrown. Consequently, Spring Data for VMware GemFire can
 inspect the state of the system and act accordingly, based on your
 configuration.
 
-In all other cases, Spring Data for GemFire embraces a fail-fast strategy.
+In all other cases, Spring Data for VMware GemFire embraces a fail-fast strategy.
 
 ## <a id="configuring-a-diskstore"></a>Configuring a DiskStore
 
-Spring Data for GemFire supports `DiskStore` configuration and creation through the
+Spring Data for VMware GemFire supports `DiskStore` configuration and creation through the
 `disk-store` element, as the following example shows:
 
 ```highlight
@@ -2449,7 +2449,7 @@ For an explanation of persistence, overflow, and configuration options on `DiskS
 
 ## <a id="configuring-snapshot-service"></a>Configuring the Snapshot Service
 
-Spring Data for GemFire supports cache and Region snapshots by using
+Spring Data for VMware GemFire supports cache and Region snapshots by using
 GemFire's Snapshot Service. The out-of-the-box Snapshot Service support offers
 several convenient features to simplify the use of GemFire's [Cache](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/CacheSnapshotService.html) and [Region](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/RegionSnapshotService.html) Snapshot Service APIs. For more information about the Snapshot Service, see [Cache and Region Snapshots](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-managing-cache_snapshots-chapter_overview.html)  in the GemFire product documentation.
 
@@ -2457,12 +2457,12 @@ Snapshots let you save and subsequently reload
 the cached data later, which can be useful for moving data between
 environments, such as from production to a staging or test environment
 to reproduce data-related issues in a controlled context. You
-can combine Spring Data for GemFire's Snapshot Service support with [Spring's bean
+can combine Spring Data for VMware GemFire's Snapshot Service support with [Spring's bean
 definition
 profiles](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-definition-profiles)
 to load snapshot data specific to the environment as necessary.
 
-Spring Data for GemFire's support for GemFire's Snapshot Service begins
+Spring Data for VMware GemFire's support for GemFire's Snapshot Service begins
 with the `<gfe-data:snapshot-service>` element from the `<gfe-data>` XML
 namespace.
 
@@ -2481,7 +2481,7 @@ definition, as follows:
 
 You can define as many imports and exports as you like. You can define
 only imports or only exports. The file locations and directory paths can
-be absolute or relative to the Spring Data for GemFire application, which is the JVM
+be absolute or relative to the Spring Data for VMware GemFire application, which is the JVM
 process's working directory.
 
 The preceding example is pretty simple, and the Snapshot Service defined
@@ -2511,7 +2511,7 @@ specifying the `region-ref` attribute, as follows:
 </gfe-data:snapshot-service>
 ```
 
-When the `region-ref` attribute is specified, Spring Data for GemFire's
+When the `region-ref` attribute is specified, Spring Data for VMware GemFire's
 `SnapshotServiceFactoryBean` resolves the `region-ref` attribute value
 to a Region bean defined in the Spring container and creates a
 [RegionSnapshotService](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/snapshot/RegionSnapshotService.html).
@@ -2523,7 +2523,7 @@ files actually existing before they are referenced. For exports,
 GemFire creates the snapshot file. If the snapshot file for
 export already exists, the data is overwritten.</p>
 
-Spring Data for GemFire includes a <code>suppress-import-on-init</code> attribute on the
+Spring Data for VMware GemFire includes a <code>suppress-import-on-init</code> attribute on the
 <code><gfe-data:snapshot-service></code> element to suppress the
 configured Snapshot Service from trying to import data into the cache or
 Region on initialization. Doing so is useful, for example, when data
@@ -2541,12 +2541,12 @@ method in the `CacheSnapshotService` API indicates.
 You can also use the overloaded <code>load(:File[], :SnapshotFormat, :SnapshotOptions)</code> method to specify which snapshot files to load into the GemFire cache.
 
 
-However, Spring Data for GemFire recognizes that a typical developer workflow might
+However, Spring Data for VMware GemFire recognizes that a typical developer workflow might
 be to extract and export data from one environment into several snapshot
 files, zip all of them up, and then conveniently move the zip file to
 another environment for import.
 
-Therefore, Spring Data for GemFire lets you specify a jar or zip file on import for a
+Therefore, Spring Data for VMware GemFire lets you specify a jar or zip file on import for a
 `cache`-based Snapshot Service, as follows:
 
 ```highlight
@@ -2555,7 +2555,7 @@ Therefore, Spring Data for GemFire lets you specify a jar or zip file on import 
   </gfe-data:snapshot-service>
 ```
 
-Spring Data for GemFire conveniently extracts the provided zip file and treats it as
+Spring Data for VMware GemFire conveniently extracts the provided zip file and treats it as
 a directory import (load).
 
 ### <a id="snapshot-filters"></a>Snapshot Filters
@@ -2567,7 +2567,7 @@ realized through the use of snapshot filters. Snapshot filters implement the
 interface and are used to filter Region entries for inclusion into the
 Region on import and for inclusion into the snapshot on export.
 
-Spring Data for GemFire lets you use snapshot filters on import and export by using
+Spring Data for VMware GemFire lets you use snapshot filters on import and export by using
 the `filter-ref` attribute or an anonymous, nested bean definition, as
 the following example shows:
 
@@ -2643,12 +2643,12 @@ another filter by using `or`, as follows:
 
 ### <a id="snapshot-events"></a>Snapshot Events
 
-By default, Spring Data for GemFire uses GemFire's Snapshot Services on
+By default, Spring Data for VMware GemFire uses GemFire's Snapshot Services on
 startup to import data and on shutdown to export data. However, you may
 want to trigger periodic, event-based snapshots, for either import or
 export, from within your Spring application.
 
-For this purpose, Spring Data for GemFire defines two additional Spring application
+For this purpose, Spring Data for VMware GemFire defines two additional Spring application
 events, extending Spring's
 [ApplicationEvent](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html) class for imports and exports, respectively:
 `ImportSnapshotApplicationEvent` and `ExportSnapshotApplicationEvent`.
@@ -2723,10 +2723,10 @@ way to keep your application loosely coupled. You can also use Spring's
 
 ## <a id="configuring-function-service"></a>Configuring the Function Service
 
-Spring Data for GemFire provides [annotation](#function-annotations.html) support for
+Spring Data for VMware GemFire provides [annotation](#function-annotations.html) support for
 implementing, registering and executing GemFire Functions.
 
-Spring Data for GemFire also provides XML namespace support for registering
+Spring Data for VMware GemFire also provides XML namespace support for registering
 GemFire [Functions](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/execute/Function.html) for remote function execution.
 
 For more information about the Function execution framework, see [Function Execution](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-function_exec-chapter_overview.html) in the GemFire product documentation.
@@ -2752,7 +2752,7 @@ following example shows:
 ## <a id="configuring-wan-gateways"></a>Configuring WAN Gateways
 
 WAN Gateways provides a way to synchronize GemFire Distributed
-Systems across geographic locations. Spring Data for GemFire provides XML namespace
+Systems across geographic locations. Spring Data for VMware GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 

@@ -35,7 +35,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-Spring Data for GemFire focuses on integrating the Spring Framework's powerful,
+Spring Data for VMware GemFire focuses on integrating the Spring Framework's powerful,
 non-invasive programming model and concepts with GemFire to
 simplify configuration and development of Java applications when using
 GemFire as you data management solution.

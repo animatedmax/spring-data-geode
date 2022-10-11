@@ -43,7 +43,7 @@ various language platforms (Java, C++, and .NET).
 
 For more details, see [PDX Serialization Features](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.10/tgf/GUID-developing-data_serialization-gemfire_pdx_serialization.html).
 
-This topic discusses the ways in which Spring Data for GemFire simplifies
+This topic discusses the ways in which Spring Data for VMware GemFire simplifies
 and improves GemFire's custom serialization in Java.
 
 ## <a id="wiring-deserialized-instances"></a>Wiring deserialized instances
@@ -53,7 +53,7 @@ Transient data is often dependent on the system or environment where it
 lives at a certain point in time. For instance, a `DataSource` is
 environment specific. Serializing such information is useless and
 potentially even dangerous, since it is local to a certain VM or
-machine. For such cases, Spring Data for GemFire offers a special
+machine. For such cases, Spring Data for VMware GemFire offers a special
 [Instantiator](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/Instantiator.html)
 that performs wiring for each new instance created by GemFire
 during deserialization.
@@ -70,7 +70,7 @@ otherwise falling back to auto-wiring.
 For more details about wiring functionality, see [Wiring `Declarable` Components](data.html#wiring-declarable-components)
 in _Working with GemFire APIs_.
 
-To use the Spring Data for GemFire `Instantiator`, declare it as a bean, as the
+To use the Spring Data for VMware GemFire `Instantiator`, declare it as a bean, as the
 following example shows:
 
 ```highlight
@@ -94,7 +94,7 @@ For data intensive applications, a large number of instances might be
 created on each machine as data flows in. GemFire uses
 reflection to create new types, but, for some scenarios, this might
 prove to be expensive. As always, it is good to perform profiling to
-quantify whether this is the case or not. For such cases, Spring Data for GemFire
+quantify whether this is the case or not. For such cases, Spring Data for VMware GemFire
 allows the automatic generation of `Instatiator` classes, which
 instantiate a new type (using the default constructor) without the use
 of reflection. The following example shows how to create an

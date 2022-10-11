@@ -36,12 +36,12 @@ limitations under the License.
 -->
 
 WAN Gateways provides a way to synchronize GemFire Distributed
-Systems across geographic locations. Spring Data for GemFire provides XML namespace
+Systems across geographic locations. Spring Data for VMware GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 
 WAN Gateways provides a way to synchronize GemFire Distributed
-Systems across geographic locations. Spring Data for GemFire provides XML namespace
+Systems across geographic locations. Spring Data for VMware GemFire provides XML namespace
 support for configuring WAN Gateways as illustrated in the following
 examples.
 

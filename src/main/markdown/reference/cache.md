@@ -67,10 +67,10 @@ existing `Cache` or, if one does not already exist, a newly created one.
 Since no additional properties were specified, a newly created `Cache`
 applies the default cache configuration.
 
-All Spring Data for GemFire components that depend on the `Cache` respect this naming
+All Spring Data for VMware GemFire components that depend on the `Cache` respect this naming
 convention, so you need not explicitly declare the `Cache` dependency.
 If you prefer, you can make the dependency explicit by using the
-`cache-ref` attribute provided by various Spring Data for GemFire XML namespace
+`cache-ref` attribute provided by various Spring Data for VMware GemFire XML namespace
 elements. Also, you can override the cache's bean name using the `id`
 attribute, as follows:
 
@@ -250,8 +250,8 @@ You should be careful when setting the
 `<gfe:cache enable-auto-reconnect="[true|false*]">` attribute to `true`.
 
 Generally, `auto-reconnect` should only be enabled in cases where
-Spring Data for GemFire's XML namespace is used to configure and bootstrap a new,
-non-application GemFire server added to a cluster. 'auto-reconnect' should not be enabled when Spring Data for GemFire is used to
+Spring Data for VMware GemFire's XML namespace is used to configure and bootstrap a new,
+non-application GemFire server added to a cluster. 'auto-reconnect' should not be enabled when Spring Data for VMware GemFire is used to
 develop and build a GemFire application that also happens to
 be a peer `Cache` member of the GemFire cluster.
 
@@ -307,7 +307,7 @@ a Locator. Using the cluster-based configuration ensures the peer
 member's configuration is compatible with the GemFire
 Distributed System when the member joins.
 
-This feature of Spring Data for GemFire (setting the `use-cluster-configuration`
+This feature of Spring Data for VMware GemFire (setting the `use-cluster-configuration`
 attribute to `true`) works in the same way as the `cache-xml-location`
 attribute, except the source of the GemFire configuration
 meta-data comes from the network through a Locator, as opposed to a
@@ -328,7 +328,7 @@ config:
 <p class="note"><strong>Note</strong>: While certain GemFire tools, such as
 <code>gfsh</code>, have their actions "recorded" when schema-like changes
 are made (for example, <code>gfsh>create region --name=Example --type=PARTITION</code>),
-Spring Data for GemFire's configuration metadata is not recorded. The same is true
+Spring Data for VMware GemFire's configuration metadata is not recorded. The same is true
 when using GemFire's public Java API directly. It, too, is not
 recorded.</p>
 
@@ -337,7 +337,7 @@ Service, see [Overview of the Cluster Configuration Service](https://docs.vmware
 
 ## <a id="configuring-gemfire-cacheserver"></a>Configuring a GemFire CacheServer
 
-Spring Data for GemFire includes dedicated support for configuring a
+Spring Data for VMware GemFire includes dedicated support for configuring a
 [CacheServer](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/server/CacheServer.html). This allows complete configuration through the Spring container, as shown in the following example:
 
 ```highlight
@@ -389,7 +389,7 @@ properties from the main codebase, easing deployment across multiple
 machines.
 
 To avoid initialization problems, the
-<code>CacheServer</code> started by Spring Data for GemFire starts
+<code>CacheServer</code> started by Spring Data for VMware GemFire starts
 <strong>after</strong> the Spring container has been fully initialized.
 Doing so lets potential Regions, listeners, writers or instantiators
 that are defined declaratively to be fully initialized and registered
@@ -402,7 +402,7 @@ immediately.
 
 In addition to defining a GemFire peer
 [Cache](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/Cache.html),
-Spring Data for GemFire also supports the definition of a GemFire
+Spring Data for VMware GemFire also supports the definition of a GemFire
 [ClientCache](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/client/ClientCache.html)
 in a Spring container. A `ClientCache` definition is similar in
 configuration and use to the GemFire peer
@@ -452,7 +452,7 @@ a call to
 [Client Region](#client-region) describes client-side
 configuration in more detail.
 
-### <a id="default-pool"></a>GemFire's DEFAULT Pool and Spring Data for GemFire Pool Definitions
+### <a id="default-pool"></a>GemFire's DEFAULT Pool and Spring Data for VMware GemFire Pool Definitions
 
 If a GemFire `ClientCache` is local-only, then no Pool
 definition is required. For instance, you can define the following:
@@ -474,7 +474,7 @@ Region, a Pool is required. In that case, there are several ways to
 define and use a Pool.
 
 When a `ClientCache`, a Pool, and a proxy-based Region are all defined
-but not explicitly identified, Spring Data for GemFire resolves the references
+but not explicitly identified, Spring Data for VMware GemFire resolves the references
 automatically, as shown in the following example:
 
 ```highlight
@@ -493,7 +493,7 @@ In this example, the `ClientCache` is identified as
 `DEFAULT` Pool from `gemfirePool`, and the client Region uses the
 `gemfirePool` when distributing data between the client and the server.
 
-Basically, Spring Data for GemFire resolves the preceding configuration to the
+Basically, Spring Data for VMware GemFire resolves the preceding configuration to the
 following:
 
 ```highlight
@@ -506,7 +506,7 @@ following:
 <gfe:client-region id="Example" cache-ref="gemfireCache" pool-name="gemfirePool" shortcut="PROXY"/>
 ```
 
-GemFire still creates a Pool named `DEFAULT`. Spring Data for GemFire
+GemFire still creates a Pool named `DEFAULT`. Spring Data for VMware GemFire
 causes the `DEFAULT` Pool to be initialized from the `gemfirePool`.
 Doing so is useful in situations where multiple Pools are defined and
 client Regions are using separate Pools, or do not declare a Pool at
@@ -534,7 +534,7 @@ Consider the following:
 
 In this example, the GemFire `client-cache` `DEFAULT` pool is
 initialized from `locatorPool`, as specified by the `pool-name`
-attribute. There is no Spring Data for GemFire-defined `gemfirePool`, since both
+attribute. There is no Spring Data for VMware GemFire-defined `gemfirePool`, since both
 Pools were explicitly identified (named) as `locatorPool` and
 `serverPool`, respectively.
 

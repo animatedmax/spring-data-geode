@@ -141,11 +141,11 @@ defined in `cache.xml` by using the following:
 <gfe:auto-region-lookup/>
 ```
 
-Spring Data for GemFire automatically creates beans for all GemFire Regions
+Spring Data for VMware GemFire automatically creates beans for all GemFire Regions
 defined in `cache.xml` that have not been explicitly added to the Spring
 container with explicit `<gfe:lookup-region>` bean declarations.
 
-Note that Spring Data for GemFire uses a Spring
+Note that Spring Data for VMware GemFire uses a Spring
 [BeanPostProcessor](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanPostProcessor.html)
 to post-process the cache after it is both created and initialized to
 determine the Regions defined in GemFire to add as beans in
@@ -191,7 +191,7 @@ references when using the `<gfe:auto-region-lookup>` element.
 
 ## <a id="configuring-regions"></a>Configuring Regions
 
-Spring Data for GemFire provides comprehensive support for configuring any type of
+Spring Data for VMware GemFire provides comprehensive support for configuring any type of
 Region through the following elements:
 
 * LOCAL Region: `<local-region>`
@@ -496,7 +496,7 @@ For more information, see [Managing Off-Heap Memory](https://docs.vmware.com/en/
 
 ## <a id="subregions"></a>Subregions
 
-Spring Data for GemFire supports Sub-Regions, allowing Regions to be arranged in
+Spring Data for VMware GemFire supports Sub-Regions, allowing Regions to be arranged in
 a hierarchical relationship.
 
 For example, GemFire allows for a `/Customer/Address` Region
@@ -529,13 +529,13 @@ of the Region should also be used in OQL query strings.
 
 ## <a id="region-templates"></a>Region Templates
 
-Spring Data for GemFire supports Region templates.
+Spring Data for VMware GemFire supports Region templates.
 
 This feature allows developers to define common Region configuration and
 attributes once and reuse the configuration among many Region bean
 definitions declared in the Spring `ApplicationContext`.
 
-Spring Data for GemFire includes five Region template tags in its namespace:
+Spring Data for VMware GemFire includes five Region template tags in its namespace:
 
 
 <table>
@@ -626,7 +626,7 @@ definitions override what exists in the parent.
 
 ### <a id="how-templating-works"></a>How Templating Works
 
-Spring Data for GemFire applies Region templates when the Spring `ApplicationContext`
+Spring Data for VMware GemFire applies Region templates when the Spring `ApplicationContext`
 configuration metadata is parsed, and therefore, Region templates must
 be declared in the order of inheritance. In other words, parent
 templates must be defined before child templates. Doing so ensures that
@@ -642,7 +642,7 @@ example, a <code><gfe:replicated-region></code> cannot inherit from a
 
 Previously, one of the underlying properties of the `replicated-region`,
 `partitioned-region`, `local-region`, and `client-region` elements in
-the Spring Data for GemFire XML namespace was to perform a lookup first before
+the Spring Data for VMware GemFire XML namespace was to perform a lookup first before
 attempting to create a Region. This was done in case the Region already
 existed, which would be the case if the Region was defined in an
 imported GemFire native `cache.xml` configuration file.
@@ -652,7 +652,7 @@ by design and subject to change.
 This behavior has been altered and the default behavior is now to create
 the Region first. If the Region already exists, then the creation logic
 fails-fast and an appropriate exception is thrown. However, much like
-the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the Spring Data for GemFire
+the `CREATE TABLE IF NOT EXISTS …​` DDL syntax, the Spring Data for VMware GemFire
 `<gfe:*-region>` XML namespace elements now include a `ignore-if-exists`
 attribute, which reinstates the old behavior by first performing a
 lookup of an existing Region identified by name before attempting to
@@ -781,7 +781,7 @@ the two preceding examples.
 GemFire is flexible in referencing both parent Regions and
 Sub-Regions with or without the leading forward slash. For example, the
 parent can be referenced as `/Customers` or `Customers` and the child as
-`/Customers/Accounts` or `Customers/Accounts`. However, Spring Data for GemFire is
+`/Customers/Accounts` or `Customers/Accounts`. However, Spring Data for VMware GemFire is
 very specific when it comes to naming beans after Regions. It always
 uses the forward slash (/) to represent Sub-Regions (for example,
 `/Customers/Accounts`).
@@ -812,7 +812,7 @@ eviction applies to the Least Recently Used entry (also known as
 Evicted entries are either destroyed or paged to disk (referred to as
 "overflow to disk").
 
-Spring Data for GemFire supports all eviction policies (entry count, memory, and heap
+Spring Data for VMware GemFire supports all eviction policies (entry count, memory, and heap
 usage) for PARTITION Regions, REPLICATE Regions, and client, local
 Regions by using the nested `eviction` element.
 
@@ -858,7 +858,7 @@ GemFire supports the following expiration types:
   one of its entries.
 
 Each of these expiration types may be applied to the Region itself or to entries in the
-Region. Spring Data for GemFire provides `<region-ttl>`, `<region-tti>`,
+Region. Spring Data for VMware GemFire provides `<region-ttl>`, `<region-tti>`,
 `<entry-ttl>`, and `<entry-tti>` Region child elements to specify
 timeout values and expiration actions.
 
@@ -876,7 +876,7 @@ For a detailed description of expiration policies, see [Expiration](https://docs
 
 ### <a id="annotation-based-data-expiration"></a>Annotation-Based Data Expiration
 
-With Spring Data for GemFire, you can define expiration policies and settings on
+With Spring Data for VMware GemFire, you can define expiration policies and settings on
 individual Region entry values (or, to put it differently, directly on
 application domain objects). For instance, you can define expiration
 policies on a Session-based application domain object as follows:
@@ -907,9 +907,9 @@ example. Neither `@IdleTimeoutExpiration` nor `@TimeToLiveExpiration`
 overrides the other. Rather, they compliment each other when different
 Region entry expiration policies, such as TTL and TTI, are configured.
 
-All <code>@Expiration</code>-based annotations apply only to Region entry values. Expiration for a Region is not covered by Spring Data for GemFire's
-expiration annotation support. However, GemFire and Spring Data for GemFire
-do let you set Region expiration by using the Spring Data for GemFire XML
+All <code>@Expiration</code>-based annotations apply only to Region entry values. Expiration for a Region is not covered by Spring Data for VMware GemFire's
+expiration annotation support. However, GemFire and Spring Data for VMware GemFire
+do let you set Region expiration by using the Spring Data for VMware GemFire XML
 namespace, as follows:
 
 ```
@@ -919,15 +919,15 @@ namespace, as follows:
 </gfe:*-region>
 ```
 
-Spring Data for GemFire's `@Expiration` annotation support is implemented with
+Spring Data for VMware GemFire's `@Expiration` annotation support is implemented with
 GemFire's [CustomExpiry](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/cache/CustomExpiry.html) interface. For more information, see [Configure Data Expiration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-expiration-configuring_data_expiration.html) in the GemFire product documentation.
 
-The Spring Data for GemFire `AnnotationBasedExpiration` class and `CustomExpiry`
-implementation is responsible for processing the Spring Data for GemFire
+The Spring Data for VMware GemFire `AnnotationBasedExpiration` class and `CustomExpiry`
+implementation is responsible for processing the Spring Data for VMware GemFire
 `@Expiration` annotations and applying the expiration policy
 configuration appropriately for Region entry expiration on request.
 
-To use Spring Data for GemFire to configure specific GemFire Regions to
+To use Spring Data for VMware GemFire to configure specific GemFire Regions to
 appropriately apply the expiration policy to your application domain
 objects annotated with `@Expiration`-based annotations, you must:
 
@@ -949,13 +949,13 @@ objects annotated with `@Expiration`-based annotations, you must:
     
 2. (Optional) Annotate your application domain objects that are stored
     in the Region with expiration policies and custom settings by using
-    one of Spring Data for GemFire's `@Expiration` annotations: `@Expiration`,
+    one of Spring Data for VMware GemFire's `@Expiration` annotations: `@Expiration`,
     `@IdleTimeoutExpiration`, or `@TimeToLiveExpiration`
 
 3. (Optional) In cases where particular application domain objects have
-    not been annotated with Spring Data for GemFire's `@Expiration` annotations at
+    not been annotated with Spring Data for VMware GemFire's `@Expiration` annotations at
     all, but the GemFire Region is configured to use
-    Spring Data for GemFire's custom `AnnotationBasedExpiration` class to
+    Spring Data for VMware GemFire's custom `AnnotationBasedExpiration` class to
     determine the expiration policy and settings for objects stored in
     the Region, you can set "default" expiration attributes on the
     `AnnotationBasedExpiration` bean by doing the following:
@@ -975,12 +975,12 @@ objects annotated with `@Expiration`-based annotations, you must:
     </gfe:partitioned-region>
     ```
 
-You may have noticed that Spring Data for GemFire's `@Expiration` annotations use a
+You may have noticed that Spring Data for VMware GemFire's `@Expiration` annotations use a
 `String` as the attribute type rather than, and perhaps more
 appropriately, being strongly typed — for example, `int` for 'timeout'
-and Spring Data for GemFire's `ExpirationActionType` for 'action'. Why is that?
+and Spring Data for VMware GemFire's `ExpirationActionType` for 'action'. Why is that?
 
-Well, enter one of Spring Data for GemFire's other features, leveraging Spring's core
+Well, enter one of Spring Data for VMware GemFire's other features, leveraging Spring's core
 infrastructure for configuration convenience: property placeholders and
 Spring Expression Language (SpEL) expressions.
 
@@ -1051,7 +1051,7 @@ actual `ExpirationAction` enumerated type, quickly leading to identified
 failures if the enumerated type ever changes.
 
 As an example, all of this has been demonstrated and tested in the
-Spring Data for GemFire test suite. For details, see the [Spring Data](https://github.com/spring-projects/spring-data-geode) repository in GitHub.
+Spring Data for VMware GemFire test suite. For details, see the [Spring Data](https://github.com/spring-projects/spring-data-geode) repository in GitHub.
 
 ## <a id="data-persistence"></a>Data Persistence
 
@@ -1062,7 +1062,7 @@ Doing so lets data be recovered after machine or process failure or even
 after an orderly shutdown and subsequent restart of the
 GemFire data node.
 
-To enable persistence with Spring Data for GemFire, set the `persistent` attribute to
+To enable persistence with Spring Data for VMware GemFire, set the `persistent` attribute to
 `true` on any of the `<*-region>` elements, as the following example
 shows:
 
@@ -1102,7 +1102,7 @@ For more information, see [Configuring a DiskStore](#configuring-a-diskstore).
 
 GemFire allows configuration of [peer-to-peer
 (P2P) event messaging](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-developing-events-configure_p2p_event_messaging.html) to control the entry events that the Region
-receives. Spring Data for GemFire provides the `<gfe:subscription/>` sub-element to
+receives. Spring Data for VMware GemFire provides the `<gfe:subscription/>` sub-element to
 set the subscription policy on `REPLICATE` and `PARTITION` Regions to
 either `ALL` or `CACHE_CONTENT`. The following example shows a region
 with its subscription policy set to `CACHE_CONTENT`:
@@ -1115,13 +1115,13 @@ with its subscription policy set to `CACHE_CONTENT`:
 
 ## <a id="local-region"></a>Local Region
 
-Spring Data for GemFire offers a dedicated `local-region` element for creating local
+Spring Data for VMware GemFire offers a dedicated `local-region` element for creating local
 Regions. Local Regions, as the name implies, are standalone, meaning
 that they do not share data with any other distributed system member.
 Other than that, all common Region configuration options apply.
 
 The following example shows a minimal declaration. The example
-relies on the Spring Data for GemFire XML namespace naming conventions to wire the
+relies on the Spring Data for VMware GemFire XML namespace naming conventions to wire the
 cache:
 
 ```highlight
@@ -1145,7 +1145,7 @@ the entries. While one replica is initializing, you can still continue
 to use the other replicas.
 
 All common configuration options are available for REPLICATE Regions.
-Spring Data for GemFire offers a `replicated-region` element. The following example
+Spring Data for VMware GemFire offers a `replicated-region` element. The following example
 shows a minimal declaration:
 
 ```highlight
@@ -1156,7 +1156,7 @@ For more information, see [Distributed and Replicated Regions](https://docs.vmwa
 
 ## <a id="partitioned-region"></a>Partitioned Region
 
-The Spring Data for GemFire XML namespace also supports `PARTITION` Regions.
+The Spring Data for VMware GemFire XML namespace also supports `PARTITION` Regions.
 
 A partitioned region is a region where data is divided between peer
 servers hosting the region so that each peer stores a subset of the
@@ -1265,7 +1265,7 @@ beyond the scope of this documentation, but GemFire's supported topologies can b
 
 In the last two configurations, it is common to declare client Regions that connect to a cache server.
 
-Spring Data for GemFire offers dedicated support for each configuration through its
+Spring Data for VMware GemFire offers dedicated support for each configuration through its
 [client-cache](cache.html#configuring-gemfire-clientcache) elements: `client-region` and
 `pool`. `client-region` defines a client Region,
 and `pool` defines a Pool of connections used and shared by the
@@ -1276,7 +1276,7 @@ The following example shows a typical client Region configuration:
 ```highlight
 <bean id="myListener" class="example.CacheListener"/>
   
-<!-- client Region using the default Spring Data for GemFire gemfirePool Pool -->
+<!-- client Region using the default Spring Data for VMware GemFire gemfirePool Pool -->
 <gfe:client-region id="Example">
   <gfe:cache-listener ref="myListener"/>
 </gfe:client-region>
@@ -1307,14 +1307,14 @@ configure the <code>Pool</code> to connect directly to one or more cache
 servers by using the <code>server</code> element.</p>
 
 For a full list of options to set on the client and especially on the
-`Pool`, see the [Spring Data for GemFire Schema](../appendix/appendix-schema.html) and
+`Pool`, see the [Spring Data for VMware GemFire Schema](../appendix/appendix-schema.html) and
 [Client/Server Configuration](https://docs.vmware.com/en/VMware-Tanzu-GemFire/9.15/tgf/GUID-topologies_and_comm-cs_configuration-chapter_overview.html) in the GemFire product documentation.
 
 ### <a id="client-interests"></a>
 
 To minimize network traffic, each client can separately define its own
 'interests' policies, indicating to GemFire the data it
-actually requires. In Spring Data for GemFire, 'interests' can be defined for each
+actually requires. In Spring Data for VMware GemFire, 'interests' can be defined for each
 client Region separately. Both key-based and regular expression-based
 interest types are supported.
 
@@ -1436,7 +1436,7 @@ GemFire OQL (Object Query Language). JSON documents are stored
 internally as
 [PdxInstance](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/PdxInstance.html) types by using the [JSONFormatter](https://geode.apache.org/releases/latest/javadoc/org/apache/geode/pdx/JSONFormatter.html) class to perform conversion to and from JSON documents (as a `String`).
 
-Spring Data for GemFire provides the `<gfe-data:json-region-autoproxy/>` element to
+Spring Data for VMware GemFire provides the `<gfe-data:json-region-autoproxy/>` element to
 enable an [AOP](https://docs.spring.io/spring-framework/docs/current/reference/html/#aop-introduction) component to
 advise appropriate, proxied Region operations, which encapsulates the `JSONFormatter` and allows your applications to work directly with JSON Strings.
 

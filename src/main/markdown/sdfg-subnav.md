@@ -1,4 +1,4 @@
-# Spring Data for GemFire Documentation
+# Spring Data for VMware GemFire Documentation
 
 *   [Version 2.3](landing-page.html)
 *   [Preface](preface.html)
@@ -11,7 +11,7 @@
     *   [Working with GemFire APIs](reference/data.html)
     *   [Working with GemFire Serialization](reference/serialization.html)
     *   [POJO Mapping](reference/mapping.html)
-    *   [Spring Data for GemFire Repositories](reference/repositories.html)
+    *   [Spring Data for VMware GemFire Repositories](reference/repositories.html)
     *   [Annotation Support for Function Execution](reference/function-annotations.html)
     *   [Apache Lucene Integration](reference/lucene.html)
     *   [Bootstrapping a Spring ApplicationContext in GemFire](reference/gemfire-bootstrap.html)
@@ -24,5 +24,5 @@
     *   [Configuring an Index](reference/indexing.html)
     *   [Configuring a Region](reference/region.html)
     *   [Configuring the Snapshot Service](reference/snapshot.html)
-    *   [Spring Data for GemFire Schema](appendix/appendix-schema.md)
+    *   [Spring Data for VMware GemFire Schema](appendix/appendix-schema.md)
 

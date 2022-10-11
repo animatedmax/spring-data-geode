@@ -36,7 +36,7 @@ limitations under the License.
 -->
 
 The following chapters explain the core functionality offered by
-Spring Data for GemFire:
+Spring Data for VMware GemFire:
 
 
 - [Bootstrapping GemFire with the Spring Container](bootstrap.html) describes the configuration support provided for configuring, initializing, and accessing GemFire Caches, Regions, and related distributed system components.
@@ -47,7 +47,7 @@ Spring Data for GemFire:
 
 - [POJO Mapping](mapping.html) describes persistence mapping for POJOs stored in GemFire using Spring Data.
 
-- [Spring Data for GemFire Repositories](repositories.html) describes how to create and use Spring Data Repositories to access data stored in GemFire by using basic CRUD and simple query operations.
+- [Spring Data for VMware GemFire Repositories](repositories.html) describes how to create and use Spring Data Repositories to access data stored in GemFire by using basic CRUD and simple query operations.
 
 - [Annotation Support for Function Execution](function-annotations.html) describes how to create and use GemFire Functions by using annotations to perform distributed computations where the data lives.
 
@@ -55,4 +55,4 @@ Spring Data for GemFire:
 
 - [Bootstrapping a Spring ApplicationContext in GemFire](gemfire-bootstrap.html) describes how to configure and bootstrap a Spring `ApplicationContext` running in an GemFire server using `gfsh`.
 
-- [Sample Applications](samples.html) describes the examples provided with the distribution to illustrate the various features available in Spring Data for GemFire.
+- [Sample Applications](samples.html) describes the examples provided with the distribution to illustrate the various features available in Spring Data for VMware GemFire.
