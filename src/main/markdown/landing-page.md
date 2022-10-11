@@ -1,5 +1,5 @@
 ---
-title:  Spring Data for GemFire
+title:  Spring Data for GemFire 2.3 Documentation
 ---
 
 <!-- 
