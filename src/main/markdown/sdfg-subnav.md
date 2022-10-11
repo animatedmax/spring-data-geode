@@ -1,6 +1,6 @@
 # Spring Data for GemFire Documentation
 
-*   [Landing Page](landing-page.html)
+*   [Version 2.3](landing-page.html)
 *   [Preface](preface.html)
 *   [Requirements](introduction/requirements.html)
 *   [New Features](introduction/new-features.html)
