@@ -139,9 +139,9 @@ Your Spring Boot application is now ready to connect with your GemFire instance.
 
 To enable additional functionality, such as Spring Boot Actuator or Spring Session, declare any of the following modules in your .pom or .gradle file (in addition to the `spring-gemfire-starter` dependency):
 
-* `spring-gemfire-starter-actuator-[GemFire Version]:[Spring Boot Major.Minor]`
-* `spring-gemfire-starter-logging-[GemFire Version]:[Spring Boot Major.Minor]`
-* `spring-gemfire-starter-session-[GemFire Version]:[Spring Boot Major.Minor]`
+* `spring-gemfire-starter-actuator-[GEMFIRE VERSION]:[Spring Boot MAJOR.MINOR]`
+* `spring-gemfire-starter-logging-[GEMFIRE VERSION]:[Spring Boot MAJOR.MINOR]`
+* `spring-gemfire-starter-session-[GEMFIRE VERSION]:[Spring Boot MAJOR.MINOR]`
 
 
 ## <a id="reference-guide"></a>Reference Guide

@@ -115,31 +115,32 @@ To add Spring Session for VMware GemFire to a project:
 
     **For Spring Boot Applications**
 
-        The `<artifactId>` should match the **major.minor** version of GemFire that your application is connecting with. For example, if you are using GemFire version 9.15.1, then the `artifactId` will be `spring-data-gemfire-9.15`.
+    The `<artifactId>` should match the **major.minor** version of GemFire that your application is connecting with. For example, if you are using GemFire version 9.15.1, then the `artifactId` will be `spring-data-gemfire-9.15`.
 
-        The `<version>` should match the **major.minor** version of Spring Boot that your application is using. For example, if you are using Spring Boot version 2.7.4, then the `version` will be `2.7.0`.
-        * **Maven**
+    The `<version>` should match the **major.minor** version of Spring Boot that your application is using. For example, if you are using Spring Boot version 2.7.4, then the `version` will be `2.7.0`.
+    * **Maven**
 
-            ```
-            <dependency>
-                <groupId>com.vmware.gemfire</groupId>
-                <artifactId>spring-gemfire-starter-session-[GEMFIRE VERSION]</artifactId>
-                <version>[Spring Boot MAJOR.MINOR Version]</version>
-            </dependency>
-            ```
+        ```
+        <dependency>
+            <groupId>com.vmware.gemfire</groupId>
+            <artifactId>spring-gemfire-starter-session-[GEMFIRE VERSION]</artifactId>
+            <version>[Spring Boot MAJOR.MINOR Version]</version>
+        </dependency>
+        ```
 
-        * **Gradle**
+    * **Gradle**
 
-            ```
-            implementation "com.vmware.gemfire:spring-gemfire-starter-session-[GemFire Version]:[Spring Boot MAJOR.MINOR Version]"
-            ```
+        ```
+        implementation "com.vmware.gemfire:spring-gemfire-starter-session-[GemFire Version]:[Spring Boot MAJOR.MINOR Version]"
+        ```
 
     **For Spring Data Applications**
 
-        The `<artifactId>` should match the **major.minor version of GemFire that your application is connecting with.  For example, if you are using GemFire version 9.15.1, then the `artifactId` will be `spring-data-gemfire-9.15`.
+    The `<artifactId>` should match the **major.minor version of GemFire that your application is connecting with.  For example, if you are using GemFire version 9.15.1, then the `artifactId` will be `spring-data-gemfire-9.15`.
 
-        The `<version>` should match the **major.minor** version of Spring Data that your application is using. For example, if you are using Spring Data version 2.7.4, then the `version` will be `2.7.0`  The **patch** version does not correlate with the patch version of Spring Session, and is updated independently with each Spring Session for VMware GemFire release.
-        * **Maven**
+    The `<version>` should match the **major.minor** version of Spring Data that your application is using. For example, if you are using Spring Data version 2.7.4, then the `version` will be `2.7.0`  The **patch** version does not correlate with the patch version of Spring Session, and is updated independently with each Spring Session for VMware GemFire release.
+
+    * **Maven**
 
         <dependency>
             <groupId>com.vmware.gemfire</groupId>
@@ -147,12 +148,11 @@ To add Spring Session for VMware GemFire to a project:
             <version>[Spring Boot MAJOR.MINOR Version]</version>
         </dependency>
 
-        * **Gradle**
+    * **Gradle**
 
-            ```
-            implementation "com.vmware.gemfire:spring-session-gemfire-[GEMFIRE VERSION]:[Spring Boot MAJOR.MINOR Version]"
-            ```
-
+        ```
+        implementation "com.vmware.gemfire:spring-session-gemfire-[GEMFIRE VERSION]:[Spring Boot MAJOR.MINOR Version]"
+        ```
 
 Your Spring Boot application is now ready to connect with your GemFire instance.
 
