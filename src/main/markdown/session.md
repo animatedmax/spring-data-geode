@@ -101,7 +101,6 @@ To add Spring Session for VMware GemFire to a project:
             </servers>
         </settings>
         ```
-        Replace `MY-USERNAME@example` and `MY-DECRYPTED-PASSWORD` with your Pivotal Commercial Maven Repository credentials.
 
     * **Gradle**
 
@@ -139,11 +138,13 @@ To add Spring Session for VMware GemFire to a project:
     The `<version>` should match the **major.minor** version of Spring Data that your application is using. For example, if you are using Spring Data version 2.7.4, then the `version` will be `2.7.0`  The **patch** version does not correlate with the patch version of Spring Session, and is updated independently with each Spring Session for VMware GemFire release.
 
     * **Maven**
+        ```
         <dependency>
             <groupId>com.vmware.gemfire</groupId>
             <artifactId>spring-session-gemfire-[GEMFIRE VERSION]</artifactId>
             <version>[Spring Boot MAJOR.MINOR Version]</version>
         </dependency>
+        ```
 
     * **Gradle**
         ```

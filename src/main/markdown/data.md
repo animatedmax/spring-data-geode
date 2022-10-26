@@ -101,7 +101,6 @@ To add Spring Data for VMware GemFire to a project:
             </servers>
         </settings>
         ```
-        Replace `MY-USERNAME@example` and `MY-DECRYPTED-PASSWORD` with your Pivotal Commercial Maven Repository credentials.
 
     * **Gradle**
 
