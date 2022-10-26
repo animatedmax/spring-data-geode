@@ -1,5 +1,5 @@
 ---
-title:  Spring Boot for VMware GemFire 2.7.0 Documentation
+title:  Spring Session for VMware GemFire 2.7.0 Documentation
 ---
 
 <!-- 
