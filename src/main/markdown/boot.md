@@ -1,5 +1,5 @@
 ---
-title:  Spring Boot for VMware GemFire 2.7.0 Documentation
+title: Add Spring Boot for VMware GemFire to a Project
 ---
 
 <!-- 
@@ -34,10 +34,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-
-Spring Boot for VMware GemFire provides the convenience of Spring Boot's <em>convention over configuration</em> approach by using <em>auto-configuration</em> with Spring Framework's powerful abstractions and highly consistent programming model to simplify the development of VMware GemFire applications.
-
-Spring Boot for VMware GemFire provides developers with a consistent experience whether building and running Spring Boot VMware GemFire applications locally or in a managed environment, such as with [VMware Tanzu Application Service (TAS)](https://tanzu.vmware.com/tanzu) or on Kubernetes.
 
 This reference guide explains how to add the Spring Boot for VMware GemFire dependency to your project. Once the dependency has been added, refer to the [Spring Boot for Apache Geode Reference Guide](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/) for in-depth information about on using the dependency.
 

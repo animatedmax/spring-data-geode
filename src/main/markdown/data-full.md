@@ -1,5 +1,5 @@
 ---
-title: Add Spring Session for VMware GemFire to a Project
+title:  Spring Data for VMware GemFire 2.7.0 Documentation
 ---
 
 <!-- 
@@ -35,15 +35,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-This reference guide explains how to add the Spring Session for VMware GemFire dependency to your Spring Boot or Spring Data project. Once the dependency has been added, refer to the [Spring Boot for Apache Geode Reference Guide](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/) and [Spring Session](https://docs.spring.io/spring-session-data-geode/docs/current/reference/html5/)for in-depth information about using the dependency.
+Spring Data for VMware GemFire brings the full power of the Spring Framework to your VMware GemFire applications.
 
-## <a id="add-to-project"></a>Add Spring Session for VMware GemFire to a Project
+The primary goal of the Spring Data for VMware GemFire project is to make it easier to build highly scalable Spring powered applications using VMware GemFire for distributed data management.
 
-The Spring Session for VMware GemFire dependency is available from the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth). Access to the Pivotal Commercial Maven Repository requires a one-time registration step to create an account.
+This reference guide explains how to add the Spring Data for VMware GemFire dependency to your project. Once the dependency has been added, refer to the [Spring Data for Apache Geode Reference Guide](https://docs.spring.io/spring-data/geode/docs/current/reference/html/) for in-depth information about using the dependency.
 
-Spring Session for VMware GemFire requires users to add the GemFire repository to their projects.
+## <a id="add-to-project"></a>Add Spring Data for VMware GemFire to a Project
 
-To add Spring Session for VMware GemFire to a project:
+The Spring Data for VMware GemFire dependencies are available from the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth). Access to the Pivotal Commercial Maven Repository requires a one-time registration step to create an account.
+
+Spring Data for VMware GemFire requires users to add the GemFire repository to their projects.
+
+To add Spring Data for VMware GemFire to a project:
 
 1. In a browser, navigate to the [Pivotal Commercial Maven Repository](https://commercial-repo.pivotal.io/login/auth).
 
@@ -106,58 +110,30 @@ To add Spring Session for VMware GemFire to a project:
         gemfireRepoPassword=MY-DECRYPTED-PASSWORD
         ```
 
-9. After you have set up the repository and credentials, add the Spring Session for VMware GemFire dependency to your application.
-
-    **For Spring Boot Applications**
+9. After you have set up the repository and credentials, add the Spring Data for VMware GemFire dependency to your application.
 
     The `<artifactId>` should match the **major.minor** version of GemFire that your application is connecting with. For example, if you are using GemFire version 9.15.1, then the `artifactId` will be `spring-data-gemfire-9.15`.
 
-    The `<version>` should match the **major.minor** version of Spring Boot that your application is using. For example, if you are using Spring Boot version 2.7.4, then the `version` will be `2.7.0`.
+    The `<version>` should match the **major.minor** version of Spring Data that your application is using. For example, if you are using Spring Data version 2.7.3, then the `version` will be `2.7.0`.  The **patch** version does not correlate with the patch version of Spring Data, and is updated independently with each Spring Data for VMware GemFire release.
+
     * **Maven**
+
         ```
         <dependency>
             <groupId>com.vmware.gemfire</groupId>
-            <artifactId>spring-gemfire-starter-session-[GEMFIRE VERSION]</artifactId>
-            <version>[Spring Boot MAJOR.MINOR Version]</version>
+            <artifactId>spring-data-gemfire-[GEMFIRE VERSION]</artifactId>
+            <version>[Spring Data MAJOR.MINOR Version]</version>
         </dependency>
         ```
 
     * **Gradle**
+
         ```
-        implementation "com.vmware.gemfire:spring-gemfire-starter-session-[GemFire Version]:[Spring Boot MAJOR.MINOR Version]"
+        implementation "com.vmware.gemfire:spring-data-gemfire-[GEMFIRE VERSION]:[Spring Data MAJOR.MINOR Version]"
         ```
-
-    **For Spring Data Applications**
-
-    The `<artifactId>` should match the **major.minor version of GemFire that your application is connecting with.  For example, if you are using GemFire version 9.15.1, then the `artifactId` will be `spring-data-gemfire-9.15`.
-
-    The `<version>` should match the **major.minor** version of Spring Data that your application is using. For example, if you are using Spring Data version 2.7.4, then the `version` will be `2.7.0`  The **patch** version does not correlate with the patch version of Spring Session, and is updated independently with each Spring Session for VMware GemFire release.
-
-    * **Maven**
-        ```
-        <dependency>
-            <groupId>com.vmware.gemfire</groupId>
-            <artifactId>spring-session-gemfire-[GEMFIRE VERSION]</artifactId>
-            <version>[Spring Boot MAJOR.MINOR Version]</version>
-        </dependency>
-        ```
-
-    * **Gradle**
-        ```
-        implementation "com.vmware.gemfire:spring-session-gemfire-[GEMFIRE VERSION]:[Spring Boot MAJOR.MINOR Version]"
-        ```
-
-Your Spring Boot application is now ready to connect with your GemFire instance.
-
-### <a id="modules"></a>Modules
-
-To enable additional functionality, such as Spring Boot Actuator or Spring Session, declare any of the following modules in your .pom or .gradle file (in addition to the `spring-gemfire-starter` dependency):
-
-* `spring-gemfire-starter-actuator-[GemFire Version]:[Spring Boot Major.Minor]`
-* `spring-gemfire-starter-logging-[GemFire Version]:[Spring Boot Major.Minor]`
-* `spring-gemfire-starter-session-[GemFire Version]:[Spring Boot Major.Minor]`
-
+ 
+Your application is now ready to connect with your GemFire instance.
 
 ## <a id="reference-guide"></a>Reference Guide
 
-For further information, refer to the [Spring Boot for Apache Geode Reference Guide](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/) and [Spring Session](https://docs.spring.io/spring-session-data-geode/docs/current/reference/html5/) reference documentation.
+For further information, refer to the [Spring Data for Apache Geode Reference Guide](https://docs.spring.io/spring-data/geode/docs/current/reference/html/).

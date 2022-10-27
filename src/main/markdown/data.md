@@ -1,5 +1,5 @@
 ---
-title:  Spring Data for VMware GemFire 2.7.0 Documentation
+title: Add Spring Data for VMware GemFire to a Project
 ---
 
 <!-- 
@@ -34,10 +34,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-
-Spring Data for VMware GemFire brings the full power of the Spring Framework to your VMware GemFire applications.
-
-The primary goal of the Spring Data for VMware GemFire project is to make it easier to build highly scalable Spring powered applications using VMware GemFire for distributed data management.
 
 This reference guide explains how to add the Spring Data for VMware GemFire dependency to your project. Once the dependency has been added, refer to the [Spring Data for Apache Geode Reference Guide](https://docs.spring.io/spring-data/geode/docs/current/reference/html/) for in-depth information about using the dependency.
 

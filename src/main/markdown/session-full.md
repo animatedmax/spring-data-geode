@@ -1,5 +1,5 @@
 ---
-title: Add Spring Session for VMware GemFire to a Project
+title:  Spring Session for VMware GemFire 2.7.0 Documentation
 ---
 
 <!-- 
@@ -34,6 +34,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
+
+Spring Session for VMware GemFire provides an implementation of the core [Spring Session](https://spring.io/projects/spring-session) framework using VMware GemFire to manage a user's _Session_ information by leveraging Spring Data for VMware GemFire.
+
+By integrating with VMware GemFire, you have the full power of this technology (_Strong Consistency_, _Low Latency_, _High Availability_, _Resiliency_, etc.) at your fingertips in your Spring Boot or Spring Data applications.
 
 This reference guide explains how to add the Spring Session for VMware GemFire dependency to your Spring Boot or Spring Data project. Once the dependency has been added, refer to the [Spring Boot for Apache Geode Reference Guide](https://docs.spring.io/spring-boot-data-geode-build/current/reference/html5/) and [Spring Session](https://docs.spring.io/spring-session-data-geode/docs/current/reference/html5/)for in-depth information about using the dependency.
 
