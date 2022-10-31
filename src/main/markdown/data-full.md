@@ -1,5 +1,5 @@
 ---
-title:  Spring Data for VMware GemFire 2.7.0 Documentation
+title:  Spring Data for VMware GemFire Quick Start
 ---
 
 <!-- 
